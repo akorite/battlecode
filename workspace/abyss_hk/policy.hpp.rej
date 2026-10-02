@@ -1,0 +1,99 @@
+--- policy.hpp	2026-10-01 13:25:41.466894591 +0000
++++ policy.hpp	2026-10-01 16:04:43.000000000 +0000
+@@ -42,7 +42,9 @@
+     Choice decide() {
+         Board const& b = w_.board;
+         L_ = w_.t.length;
+-        grower_ = isGrower(w_.init.id, L_);
++        queen_ = w_.init.id == w_.champId();
++        hiding_ = p_.queenHide && queen_ && w_.t.round < p_.queenHideUntil;
++        grower_ = isGrower(w_.init.id, L_) && !hiding_;
+         feedHead_ = -1;
+         // A fresh child's setup can eat most of its first turn late in the game:
+         // then play a lean one-step turn.
+@@ -53,17 +55,27 @@
+         else noFriendFields();
+         buildSquadTargets();
+ 
+-        // End-game feeding (see Params::feedRound).
+-        if (w_.t.round >= p_.feedRound && w_.t.round < p_.feedStop && L_ <= p_.feedMaxLen) {
++        // End-game feeding (see Params::feedRound). Under the hide doctrine
++        // feeders wake earlier (queenFeedRound) and walk to the queen at the
++        // closer queenFeedMargin; before feedRound the queen is the only target.
++        int feedAt = p_.queenHide ? std::min(p_.feedRound, p_.queenFeedRound) : p_.feedRound;
++        if (!queen_ && w_.t.round >= feedAt && w_.t.round < p_.feedStop && L_ <= p_.feedMaxLen) {
+             int bestLen = L_ + p_.feedMargin - 1;
+-            for (World::Seen const& s : w_.others)
+-                if (!isEnemy(s) && s.visible > bestLen) {
+-                    bestLen = s.visible;
+-                    feedHead_ = s.head;
+-                }
++            if (w_.t.round >= p_.feedRound) {
++                for (World::Seen const& s : w_.others)
++                    if (!isEnemy(s) && s.visible > bestLen) {
++                        bestLen = s.visible;
++                        feedHead_ = s.head;
++                    }
++            }
+             // The queen is the win condition: feed her ahead of any longer dragon.
++            // Under hide-and-feed she comes out of hiding at queenHideLen (2), so a
++            // length-delta margin would bar every feeder; instead feed her once she
++            // reaches queenFeedMargin — she banks the pearls.
++            int qMargin = p_.queenHide ? p_.queenFeedMargin : p_.feedMargin;
+             for (World::Seen const& s : w_.others)
+-                if (!isEnemy(s) && s.id == w_.champId() && s.visible > L_ + p_.feedMargin - 1) {
++                if (!isEnemy(s) && s.id == w_.champId() &&
++                    (p_.queenHide ? s.visible >= qMargin : s.visible > L_ + qMargin - 1)) {
+                     feedHead_ = s.head;
+                     break;
+                 }
+@@ -622,18 +636,24 @@
+             if (dd != INF) value += p_.wEscort * gp(std::abs(dd + k - p_.escortRing));
+             if (why.empty()) why = "escort";
+         }
++        if (hiding_) {
++            // Small and hidden: stay inside the swarm's cover.
++            int fd = friendDist_[dest];
++            if (fd != INF) value += p_.wHideFriend * gp(fd + k);
++            if (why.empty()) why = "hide";
++        }
+ 
+         double danger = 0;
+         int enemyLen = 0;
+         bool huntNext = false;
+-        double mult = grower_ ? p_.growerDanger : survival() ? p_.survivalDanger : 1.0;
+-        if (w_.init.id == w_.champId()) mult *= p_.queenDanger;
++        double mult = (grower_ || hiding_) ? p_.growerDanger : survival() ? p_.survivalDanger : 1.0;
++        if (queen_) mult *= p_.queenDanger;
+         if (lateGame()) mult *= 2.0;
+         int enemyId = -1;
+         if (nextToEnemyHead(dest, enemyLen, huntNext, enemyId)) {
+             // Parking next to an enemy head hands it the choice (and the drops). Only a
+             // trade we would take anyway, with the local numbers, makes that acceptable.
+-            bool wanted = !grower_ && (huntNext || tradeOk(newL, enemyLen) ||
++            bool wanted = !grower_ && !queen_ && (huntNext || tradeOk(newL, enemyLen) ||
+                                      (enemyId == w_.enemyQueen() && newL + p_.queenTradeSlack >= enemyLen));
+             double favour = 1.0;
+             if (p_.exposureMode == 0) favour = wanted ? 0.0 : 1.0;
+@@ -721,13 +741,19 @@
+     bool trySplit(Choice& out, Choice const& bestMove) {
+         Board const& b = w_.board;
+         if (w_.t.units >= w_.init.unitLimit || !w_.bodyKnown()) return false;
+-        if (bestMove.eat || bestMove.why == "trade" || bestMove.why == "defend" || bestMove.why == "slay") return false;
++        // The hiding queen buds even on eating turns: pearls are for the swarm.
++        if ((bestMove.eat && !hiding_) || bestMove.why == "trade" || bestMove.why == "defend" || bestMove.why == "slay") return false;
+         for (Hunt const& h : hunts_)
+             if (h.job == Job::Attack) return false;  // attackers stay whole and committed
+ 
+         int n = 0;
+         if (w_.t.round >= p_.feedRound) return false;  // feeding phase: consolidate, never split
+-        if (grower_) {
++        if (hiding_) {
++            // Bud everything above queenHideLen into a worker, staying small.
++            // Both sides keep >= 2 (MIN_SIZE), so she must reach len 4 first.
++            if (L_ < p_.queenHideLen + 2) return false;
++            n = L_ - p_.queenHideLen;
++        } else if (grower_) {
+             if (lateGame()) return false;  // the longest dragon decides the tiebreak
+             // The queen's own length decides the game: stop budding workers from
+             // her body once the economy phase ends.

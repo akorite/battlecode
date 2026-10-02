@@ -1,0 +1,17 @@
+You are the FEED lane for a UNSW Battlecode 2026 'Abyss' C++ bot (game.battlecode.au). Slay Queen rules: lowest-id dragon per team = QUEEN (champId() = init.id & 1); r500 winner = longer queen (dead queen = 0), tie -> longest dragon -> total length. Free steps/turn = ceil(L/4).
+
+Setup:
+1. Download the workspace bundle: ATTACHMENT link at the bottom of this prompt. `mkdir -p ~/battlecode && tar -xzf ~/attachments/*/bc_workspace6.tgz -C ~/battlecode`.
+2. `uv tool install unswbc` if missing. `workspace/abyss_st` = CURRENT LADDER TIP (v99). NEVER submit, NEVER open PRs, BC_DEBUG off in shipped variants (instrumented diagnostic builds fine).
+3. Match: `python3 tooling/match.py --bots A B --maps schooltime,autarky,stronghold --seeds N --tag T --jobs 5` from ~/battlecode. Stats: `python3 tooling/gstats.py results/<tag>/replays/*.replay`. Manual builds need `rm ~/.cache/unswbc/wasmbots/<bot>-*.wasm` after header edits. ONE batch at a time (jobs 5).
+4. `knowledge/17_deadends.md` lists ~25 already-rejected changes — read first; do NOT retest.
+
+PROBLEM: external steering analysis of 34 ranked replays found the r500 loss signature is an UNDERFED QUEEN: our end-queen length 11 vs opponents' 17 vs winner benchmark ~29 (WHQ archetype runs ~51 suicides/game → 34.7-length queen). Our suicides: 0/game. The existing feed mechanism only arms at feedRound (~r400): dragons ≥feedMargin that can see/hear a longer teammate suicide INTO its neck, feeding it pearls. It fires too late and too thin to build a 25+ queen.
+
+Your task — build the corpse economy that feeds the QUEEN:
+1. STUDY the existing feed code first: policy.hpp ~lines 66-135 (feedAt/feedMargin/feedDist/feedHead_/feedHeard_ + the 'feed' Choice that suicides into a longer teammate's neck) and Params feedRound/feedStop/feedMargin/feedDist/feedMaxLen/queenFeedRound/queenFeedMargin/queenHideLen/queenHideUntil/queenHide in common.hpp.
+2. Design: mid/late-game (say r200+), expendable swarm dragons (short, low-value) should suicide near the queen — INSIDE her patrol orbit — so the pearls land where she feeds. WHQ's numbers: ~20+ suicides/g all inside queen orbit. Options: arm the existing feed path earlier for queen-feeding specifically (role-2 beacon tells everyone where she is); or a dedicated orbit-feed behavior (fly to within ~3-5 tiles of her, die there). Watch out for: feeding must not bleed the swarm mid-game (still need ~30+ alive for the mass war), must not feed when our queen is dead (then feed the LONGEST dragon instead), and the queen's orbit must keep ≥2 exits (don't wall her in — deaths adjacent to her can block her).
+3. Local A/B gate vs abyss_st on schooltime,autarky,stronghold,slithery_fight (maps reaching r500): need end-queen length ≥ 18 AND W/L ≥ parity (suicide feeders must not cost the mass war). Instrument and report queenMaxLen + suicides/g deltas, not just W/L.
+4. One change at a time, ≤3 batches per variant, exact commands+seeds in the report so the orchestrator can re-verify on its box. Terse final report + tarball of keepable variants.
+
+ATTACHMENT:"https://app.devin.ai/attachments/3598d20f-64a1-468d-82a6-156a8a8f77a9/bc_workspace6.tgz"

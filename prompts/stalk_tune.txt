@@ -1,0 +1,27 @@
+You are the STALK-TUNE lane for a UNSW Battlecode 2026 'Abyss' C++ bot (game.battlecode.au). Slay Queen rules: lowest-id dragon per team = QUEEN (champId() = init.id & 1); r500 winner = longer queen (dead queen = 0), tie -> longest dragon -> total length. Free steps/turn = ceil(L/4).
+
+Setup:
+1. Download the workspace bundle: ATTACHMENT link at the bottom of this prompt. `mkdir -p ~/battlecode && tar -xzf ~/attachments/*/bc_workspace5.tgz -C ~/battlecode`.
+2. `uv tool install unswbc` if missing. `workspace/abyss_st` = CURRENT LADDER TIP (v99 = v98 + assassin squad). `workspace/abyss_hd2` = v98 = st minus the assassin code. NEVER submit, NEVER open PRs, BC_DEBUG off.
+3. Match: `python3 tooling/match.py --bots A B --maps trauma,slithery_fight,autarky --seeds N --tag T --jobs 5`. Stats: `python3 tooling/gstats.py results/<tag>/replays/*.replay`. wasm cache: match.py clears it per batch; manual builds need `rm ~/.cache/unswbc/wasmbots/<bot>-*.wasm` after header edits. Run ONE match.py batch at a time.
+4. `knowledge/17_deadends.md` lists ~22 already-rejected single changes — read it first.
+
+CONTEXT: v99 added an "assassin squad" to abyss_hd2 (diff is entirely in common.hpp + policy.hpp of abyss_st — read it first):
+- Params: assassinMaxAge=5 (report freshness rounds), assassinMaxDist=16, assassinCount=3 (squad size), assassinForce=0.5 (combined-length ratio needed), assassinForage=0.3 (pearl pull while on mission), wAssassin=3.0 (pull weight), assassinFogMult=3.0.
+- assignAssassin(): freshest queen-flagged heard-enemy report picks target cell; nearest assassinCount swarm dragons within assassinMaxDist with combined length >= rep.len*assassinForce go on mission. On mission: pearl x0.3, wAssassin pull toward cell (live enemy-queen sight overrides), unconditional h2h into enemy queen, fog x3; reverts when report stales.
+
+These params were never swept — guessed values. Your task: tune them.
+
+1. Baseline sanity (fast): confirm abyss_st vs abyss_hd2 reproduces ~+5 net on trauma+slithery (seeds 0-4 both sides, 20 games) in YOUR environment before tuning — if it doesn't, STOP and report the mismatch.
+2. Sweep each param ONE AT A TIME vs abyss_st (30 games, maps trauma+slithery_fight+autarky, seeds 0-4 both sides):
+   - assassinCount in {2, 4, 5}
+   - assassinMaxDist in {10, 24}
+   - assassinForce in {0.3, 0.8}
+   - assassinMaxAge in {3, 9}
+   Pick the best value per param by W-L (>=60% = win), then test the best-of combination once vs abyss_st.
+3. Watch for the failure mode: assassins strip the queen screen / swarm mass and lose you games vs hd2 on maps with no queen reports (assassin squad should be inert then — verify no regression on autarky which has fewer reports).
+4. Report per test: W-L per map + total, gstats deltas (splits, alive@499, longestDragon, queenLen, enemy queen death round if tracked). Deliverable = report markdown + tarball of the best tuned variant attached to your final message, with exact commands.
+
+Constraints: one change at a time; never stack unverified changes; honest negatives are fine — if all params are inert ~50%, say so with data.
+
+ATTACHMENT:"https://app.devin.ai/attachments/54c4581c-e7e9-4320-a1ba-68ed25af161c/bc_workspace5.tgz"

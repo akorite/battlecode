@@ -1,0 +1,8 @@
+results/
+replays/
+ladder_replays/
+*.replay
+*.tgz
+*.wasm
+__pycache__/
+.DS_Store

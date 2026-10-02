@@ -1,0 +1,837 @@
+{
+  "format_version": 1,
+  "source_repository": "overyonder/the-loong-game-private",
+  "source_base_revision": "7f8b053c200949e3dad2be0ce34a612f91e1b179",
+  "policy": "Public files are releases of their private sources, simplified to leave out private infrastructure. Each entry records the public file's hash and, where known, the source's revision and hash. Changes originate in the private source.",
+  "files": [
+    {
+      "source": "replays/viewer/replay.capnp",
+      "path": "replays/viewer/replay.capnp",
+      "sha256": "1a33f9285b3561fd97e8183d11b47004801046b4474d0a3a4fae430dbb2c6200",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "1a33f9285b3561fd97e8183d11b47004801046b4474d0a3a4fae430dbb2c6200"
+    },
+    {
+      "source": "replays/viewer/board_drawing.odin",
+      "path": "replays/viewer/board_drawing.odin",
+      "sha256": "64c2535903fdcf940b33779cb2ff757c3714301b18e15843a1b53b2d18bf2ab2",
+      "source_revision": "f07d08640254d0167ebd4b33d51578b8e63a3cd4",
+      "source_sha256": "64c2535903fdcf940b33779cb2ff757c3714301b18e15843a1b53b2d18bf2ab2"
+    },
+    {
+      "source": "replays/viewer/controls.odin",
+      "path": "replays/viewer/controls.odin",
+      "sha256": "6cf5075737762be71d2f31e3bf34b06766d45214432bdae1c2b5abceb173d7d8",
+      "source_revision": "f07d08640254d0167ebd4b33d51578b8e63a3cd4",
+      "source_sha256": "6cf5075737762be71d2f31e3bf34b06766d45214432bdae1c2b5abceb173d7d8"
+    },
+    {
+      "source": "replays/viewer/inspector_drawing.odin",
+      "path": "replays/viewer/inspector_drawing.odin",
+      "sha256": "bf5d928eea818a77420bcce12367967a022fbe52107e25424a6a737b8aa777dd",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "bf5d928eea818a77420bcce12367967a022fbe52107e25424a6a737b8aa777dd"
+    },
+    {
+      "source": "replays/viewer/main.odin",
+      "path": "replays/viewer/main.odin",
+      "sha256": "672966696f638488124f8737f78aa7b2e40344580385ee48dd26daa2f971f99a",
+      "source_revision": "f07d08640254d0167ebd4b33d51578b8e63a3cd4",
+      "source_sha256": "b597a738c6788503a17b2ff2c16c794161a014d7f5a90978427978be0924a7d1"
+    },
+    {
+      "source": "replays/viewer/palette.odin",
+      "path": "replays/viewer/palette.odin",
+      "sha256": "9ba42105e551e73a7b0b17c5c58926fc3c78d1be41b65056188b256584cd476b",
+      "source_revision": "f07d08640254d0167ebd4b33d51578b8e63a3cd4",
+      "source_sha256": "9ba42105e551e73a7b0b17c5c58926fc3c78d1be41b65056188b256584cd476b"
+    },
+    {
+      "source": "replays/viewer/types.odin",
+      "path": "replays/viewer/types.odin",
+      "sha256": "80e8789494c76a52b1c94e55f2c5a6937d9f47f3fd0a0510feb98a14a41c4a1e",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "80e8789494c76a52b1c94e55f2c5a6937d9f47f3fd0a0510feb98a14a41c4a1e"
+    },
+    {
+      "source": "commands/match.just",
+      "path": "just/match.just",
+      "sha256": "5323368d475e9a531ae2738dcd855f0df01f3de17cae58bdccecac99129b3123"
+    },
+    {
+      "source": "evaluation/mapgen.py",
+      "path": "harness/mapgen.py",
+      "sha256": "16ea78a94f1b1cf12fa65b7d12b032c275a441129f89737688c1a94f285e8b3a",
+      "source_revision": "fdee26bc185ae7341cc5b375e6262d8e4dd31222",
+      "source_sha256": "c078051e200280816e206b8aeabbb2d624aff9b52f95ccbbf519c81454c7118b"
+    },
+    {
+      "source": "commands/checks.just",
+      "path": "just/checks.just",
+      "sha256": "1d0c44a8b35ef7753ea2fb272386cdeccd0712860f55b5fdf57835026fb7c3bb",
+      "source_revision": "a9500dda86c9220d055b056417e3e7e20db18452",
+      "source_sha256": "96be26fca053555e8175f87f61b6bbe9c9e15f95d4ae35c0b9195c06e2049284",
+      "recipe_sources": [
+        {
+          "recipe": "test-verdict",
+          "source": "justfile",
+          "source_revision": "15c7ef5bd0f02731a557efaf5209bae89c9adbc9"
+        }
+      ]
+    },
+    {
+      "source": "replays/viewer/annotations.odin",
+      "path": "replays/viewer/annotations.odin",
+      "sha256": "b850cf141c136b0041b314e324a90dea411ef805e1cbb29bde586edb2882b9b9",
+      "source_revision": "f07d08640254d0167ebd4b33d51578b8e63a3cd4",
+      "source_sha256": "aa6683c500efda8af5e8e428ec547ddf15c1dbe6b25956a9c9f7163cc4cf62e9"
+    },
+    {
+      "source": "replays/viewer/typography.odin",
+      "path": "replays/viewer/typography.odin",
+      "sha256": "ddbecf997156c8e3194c458fda681e5bbd009bd53080c13ca8c398c6e5688ef6",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "ddbecf997156c8e3194c458fda681e5bbd009bd53080c13ca8c398c6e5688ef6"
+    },
+    {
+      "source": "replays/viewer/fonts/DejaVuSans.ttf",
+      "path": "replays/viewer/fonts/DejaVuSans.ttf",
+      "sha256": "58568c88a01b80dfc056daca3eeafd434a0380df1a48dda53f0de0d716109bbd",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "58568c88a01b80dfc056daca3eeafd434a0380df1a48dda53f0de0d716109bbd"
+    },
+    {
+      "source": "replays/viewer/fonts/LICENSE",
+      "path": "replays/viewer/fonts/LICENSE",
+      "sha256": "f88d5294af5a772f9114eb385009e3478d62b21f3e5bbc34d159d328047c8867",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "f88d5294af5a772f9114eb385009e3478d62b21f3e5bbc34d159d328047c8867"
+    },
+    {
+      "source": "evaluation/zig_judge/build.zig",
+      "path": "harness/zig_judge/build.zig",
+      "sha256": "8be66d7a307d919222ecf8a0ffdaacfb7a4e5cb4ff842b8c816c72cfa51cf7d1",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "8be66d7a307d919222ecf8a0ffdaacfb7a4e5cb4ff842b8c816c72cfa51cf7d1"
+    },
+    {
+      "source": "evaluation/zig_judge/build.zig.zon",
+      "path": "harness/zig_judge/build.zig.zon",
+      "sha256": "0122af0f54958f54eb30f192845d94a755496beffa316ed34bdcbda25f5be3c4",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "0122af0f54958f54eb30f192845d94a755496beffa316ed34bdcbda25f5be3c4"
+    },
+    {
+      "source": "evaluation/zig_judge/harness.py",
+      "path": "harness/zig_judge/harness.py",
+      "sha256": "12bb23b1235c87a67673ed2f2d8c0e72109ed0d4c8ed75fa460d38638a72a10d",
+      "source_revision": "a9a373156b80ee75dc7c810b7c05cc27eb5ad00c",
+      "source_sha256": "81dd35d2c29e6e002a5291caa5a2ed6ef0ffccff89a492924e78f3ea95b0f497"
+    },
+    {
+      "source": "evaluation/zig_judge/src/batch.zig",
+      "path": "harness/zig_judge/src/batch.zig",
+      "sha256": "173493871ee653343ebedf04bc5fe34ab131fde3177587db71672b1c5be45773",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "173493871ee653343ebedf04bc5fe34ab131fde3177587db71672b1c5be45773"
+    },
+    {
+      "source": "evaluation/zig_judge/src/bot.zig",
+      "path": "harness/zig_judge/src/bot.zig",
+      "sha256": "2e7e914289f8e17ab39faf0bc8df8acccf3e93a4508a5bd2eb9026c88471b56b",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "45ee51a0e434927484ce61e3a5df376e99161cfd5118f43e8607718524614fe4"
+    },
+    {
+      "source": "evaluation/zig_judge/src/engine.zig",
+      "path": "harness/zig_judge/src/engine.zig",
+      "sha256": "ccef587cd74ebd5864737f9dcafeb319d01077ecd76069eece40af1c159f5b7b",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "ccef587cd74ebd5864737f9dcafeb319d01077ecd76069eece40af1c159f5b7b"
+    },
+    {
+      "source": "evaluation/zig_judge/src/framer.zig",
+      "path": "harness/zig_judge/src/framer.zig",
+      "sha256": "e7f5068bb87d2a5d02744b96fdbd09342592a3a57495b8031b39a534be332cab",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "e7f5068bb87d2a5d02744b96fdbd09342592a3a57495b8031b39a534be332cab"
+    },
+    {
+      "source": "evaluation/zig_judge/src/game.zig",
+      "path": "harness/zig_judge/src/game.zig",
+      "sha256": "5ade622b084a0761c1cbac2109d452a5ef57ca3b845cfb385769f476aed190a0",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "8b911bd03bde0faa908ddea3d8e645242ca9a02813c107db995c847469d0cbe8"
+    },
+    {
+      "source": "evaluation/zig_judge/src/inspection.zig",
+      "path": "harness/zig_judge/src/inspection.zig",
+      "sha256": "23f7d02642a6c5010023557720c93d41716ac720cd053275bb2a72acf183dccd",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "23f7d02642a6c5010023557720c93d41716ac720cd053275bb2a72acf183dccd"
+    },
+    {
+      "source": "evaluation/zig_judge/src/main.zig",
+      "path": "harness/zig_judge/src/main.zig",
+      "sha256": "076c4a99fad6788371f0a8c4c1819f09ff551df7ddba36d3884fcd1ab3bc796c",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "3565a0fe2d0bbd3dca02d15f2cc147d3995d0eac103c155a57afa393515acfa7"
+    },
+    {
+      "source": "evaluation/zig_judge/src/sync.zig",
+      "path": "harness/zig_judge/src/sync.zig",
+      "sha256": "afd2679da547533ece5cfd1e322ac69919268fa29d7fbfc9516dd9f982ba52da",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "afd2679da547533ece5cfd1e322ac69919268fa29d7fbfc9516dd9f982ba52da"
+    },
+    {
+      "source": "evaluation/zig_judge/src/wasmtime.zig",
+      "path": "harness/zig_judge/src/wasmtime.zig",
+      "sha256": "e10ab2d8a39d8cbd6c5c39dbbe201633aa641e073eeac236eb0c25df0bcc0900",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "e10ab2d8a39d8cbd6c5c39dbbe201633aa641e073eeac236eb0c25df0bcc0900"
+    },
+    {
+      "source": "evaluation/parallel.py",
+      "path": "harness/parallel.py",
+      "sha256": "638c1861f81637b487dc799a9916e2f3474abea0e05b40aabc8ae0a31e59e505",
+      "source_revision": "a9500dda86c9220d055b056417e3e7e20db18452",
+      "source_sha256": "2533030adb8dcb69917b61a85b686c556c86911953730711b7c3c4bd955f6e00"
+    },
+    {
+      "source": "evaluation/toolkit.py",
+      "path": "harness/toolkit.py",
+      "sha256": "8e2f35d796d2161c34d643c81475f96bae559b6112d2545d8a3f534e97df8ecf",
+      "source_revision": "a9500dda86c9220d055b056417e3e7e20db18452",
+      "source_sha256": "0f1f45c6b0c9ba65d3585720a0d483984b5ca5d62a8640d8472b1d19b46a8678"
+    },
+    {
+      "source": "gamedata/columns.nim",
+      "path": "gamedata/columns.nim",
+      "sha256": "39502672a7ebccaf0792ca923983766bb893e05986da8ed6e091357fab444844",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "39502672a7ebccaf0792ca923983766bb893e05986da8ed6e091357fab444844"
+    },
+    {
+      "source": "gamedata/capnp_replay.nim",
+      "path": "gamedata/capnp_replay.nim",
+      "sha256": "f7b45299f98415c3a71a18fbd3ee554e7f0a44b3fbf89cf601fd4d6fac701801",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "dbd4ffde7f6379b2224e54dff2d3f447b20e29c8497c86474b7bc26384cf2fee"
+    },
+    {
+      "source": "gamedata/gzip_inflate.nim",
+      "path": "gamedata/gzip_inflate.nim",
+      "sha256": "679fe1e3f85062318e95f492ed65a3705738eda9405b872ef2c068275e038043",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "07965a0f4adcf1a96c1daaf02005c39460bf0ba90139264811e57314ca6cff47"
+    },
+    {
+      "source": "gamedata/sha256.nim",
+      "path": "gamedata/sha256.nim",
+      "sha256": "a5ad4abe67415e57eca6cb5ef3d2de0132ddd2c09fcc8048b8af736d100c2b4e",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "a5ad4abe67415e57eca6cb5ef3d2de0132ddd2c09fcc8048b8af736d100c2b4e"
+    },
+    {
+      "source": "gamedata/result.nim",
+      "path": "gamedata/result.nim",
+      "sha256": "34d9489412d17ab71dfe7ba5d67d05260cf2e5c295bab384829e889804dabdef",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "62aac6a55e40414d5943f175ef6cc8157b1d58816578354bd601c4ae721a2eb1"
+    },
+    {
+      "source": "gamedata/decode.nim",
+      "path": "gamedata/decode.nim",
+      "sha256": "9820c4254a7dee0f4bfad9d1f7710f1ee86a095cf9df83257e19cb08f8395805",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "9e966f1ba4da4ef6c320fa23dd1002717d84c7048bd375d40a0562276285e10c"
+    },
+    {
+      "source": "gamedata/gamedata.nim",
+      "path": "gamedata/gamedata.nim",
+      "sha256": "5bbef2c8b6ec3f44965ff0c776c8070d0c3f7acdea98c6167050a9a786c15b8f",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "765ad259b5c975f030aea913296756d797c4dc9de9c148bc931b6376cf763de5"
+    },
+    {
+      "source": "gamedata/format.md",
+      "path": "gamedata/format.md",
+      "sha256": "63723f57df33754fafb225d68322ae630c4d40832e6be0bfea4bb590eed3df07",
+      "source_revision": "7f4dee97ce1ec7bf39771232a84c727c889a664a",
+      "source_sha256": "b3e2d32f3db4f8deafd7e9d1ca8269016051d7397b03a9d1e246b186728156d4"
+    },
+    {
+      "source": "evaluation/report/report.nim",
+      "path": "harness/report/report.nim",
+      "sha256": "cc4003537398bdbaeeea22c5aeebf89aee6957280add1e7b1bc546aeefd5afc8",
+      "source_revision": "c71ccbd513f905e2d33e2a002b529083af4e8bfb",
+      "source_sha256": "b97dd25a35f430611d927db4173edab3558e4986a332a918338519758394f34c"
+    },
+    {
+      "source": "evaluation/report/rating.nim",
+      "path": "harness/report/rating.nim",
+      "sha256": "92ac1d6098b2daf4957ba9bb814ff1afc08323d2735bf80adc3289f9ecc4d9d1",
+      "source_revision": "0d3df8a2d339547804887f92944bca0e6683eb3d",
+      "source_sha256": "92ac1d6098b2daf4957ba9bb814ff1afc08323d2735bf80adc3289f9ecc4d9d1"
+    },
+    {
+      "source": "evaluation/report/records.nim",
+      "path": "harness/report/records.nim",
+      "sha256": "9d11087b6ebbde2b9580dad37029268f3de21cac22436fe5c9b0e509b0e99d4c",
+      "source_revision": "0d3df8a2d339547804887f92944bca0e6683eb3d",
+      "source_sha256": "5fd8fe4e0e7b14c145c0712c4b871970b327fe6df392b0ca393b6fb59f91ebd1"
+    },
+    {
+      "source": "evaluation/report/summary.nim",
+      "path": "harness/report/summary.nim",
+      "sha256": "568a3dce0c224197ce32d61ff037352c6afaca266f6f48db631b95111d845847",
+      "source_revision": "c8122226aca835b7bdb8e2b0963ab22f853652ba",
+      "source_sha256": "57ad51dd3c6276ca9bab1b85f99f25945871db37cf3bfa67c17435c86cae5bd5"
+    },
+    {
+      "source": "evaluation/report/maps.nim",
+      "path": "harness/report/maps.nim",
+      "sha256": "c6fff3e4cba43ae866d94daf8c1d1dc9922a3eb13bde4ae5fa66c2e734fdaad3",
+      "source_revision": "0d3df8a2d339547804887f92944bca0e6683eb3d",
+      "source_sha256": "2c7aab7f7a15f0ccfcec8073be57cd69a578c901926a7f36771ca9bec18728dd"
+    },
+    {
+      "source": "evaluation/batch.py",
+      "path": "harness/batch.py",
+      "sha256": "aa1a483cdae69671c4000367ff57e0947f5b2a140b0f972adc4909e9db1881e9",
+      "source_revision": "43dd002ec5fb8c516f1a46c5d44578acef81e93e",
+      "source_sha256": "3c629323a6216de77e686283424de7e95ed08d9a60c2d93ae3940391bdff044f"
+    },
+    {
+      "source": "evaluation/loong_report.py",
+      "path": "harness/loong_report.py",
+      "sha256": "12026f9f1d8a40c02b240ce9a77f8b37ba0a8bf24084720e97eed2686d219bdf",
+      "source_revision": "6e591cc3a44e6635e38843ff1b9e848dc564d9a8",
+      "source_sha256": "1af5f353424db111148baef2b592b94e5c4a03c8602616d106f0d79092ae04e2"
+    },
+    {
+      "source": "evaluation/tournament.py",
+      "path": "harness/tournament.py",
+      "sha256": "c55d298bac6badbb8d8e4711723158077aeaef07c2de32156f14c4c9adc9c9b5",
+      "source_revision": "43dd002ec5fb8c516f1a46c5d44578acef81e93e",
+      "source_sha256": "a57d6c7b7d15cf3e8cf21e46e25dd11e80ea85e7a24863e3ac561b2a8b6d4749"
+    },
+    {
+      "source": "evaluation/ladder.py",
+      "path": "harness/ladder.py",
+      "sha256": "b0b0c87290253f0fddf543721f6930ae6470ac3d452e08acab92d900e366e818",
+      "source_revision": "a9a373156b80ee75dc7c810b7c05cc27eb5ad00c",
+      "source_sha256": "cdd6b0cd2f1acc107aaec2a8ae20209e3780777a276b4c76c035edabff2e54d4"
+    },
+    {
+      "source": "replays/collection.nim",
+      "path": "replays/collection.nim",
+      "sha256": "0989c65b1f616bccf89a71c2966b14ebb9436e2ba083c4c68adbcd2d5371375b",
+      "source_revision": "ec9cf7a131e52bc81aa7e4eaaa801f592728091d",
+      "source_sha256": "915f0e66686a9c7df6255d9f02624ca6bda400832f019d997a88677a068cf634"
+    },
+    {
+      "source": "replays/sqlite.nim",
+      "path": "replays/sqlite.nim",
+      "sha256": "8a2e168f24af3c1f2abd5d1c9886858ee51211862f468dd166104bba3f52912e",
+      "source_revision": "6e591cc3a44e6635e38843ff1b9e848dc564d9a8",
+      "source_sha256": "8a2e168f24af3c1f2abd5d1c9886858ee51211862f468dd166104bba3f52912e"
+    },
+    {
+      "source": "commands/evaluation.just",
+      "path": "just/evaluation.just",
+      "sha256": "de75bf5fa8f8ac725d563aeb63812c9d6812e3ae1ade43af7802a8c5d3968b80",
+      "source_revision": "43dd002ec5fb8c516f1a46c5d44578acef81e93e",
+      "source_sha256": "24ca0f5bffa77bcdb53bf8e9d6399931e540ce682f302ddb94e153a05ef8bd04",
+      "recipe_sources": [
+        {
+          "recipe": "mapgen",
+          "source_revision": "0d3df8a2d339547804887f92944bca0e6683eb3d"
+        },
+        {
+          "recipe": "verdict",
+          "source_revision": "3b80cf01e620c557d1e557a4b70b7041cbd57cee"
+        },
+        {
+          "recipe": "report",
+          "source_revision": "3b80cf01e620c557d1e557a4b70b7041cbd57cee"
+        },
+        {
+          "recipe": "tools-build",
+          "source": "justfile",
+          "source_revision": "d83a5577424d1810d2f32e2b8d9ff69a95e32222"
+        },
+        {
+          "recipe": "round-robin",
+          "source_revision": "4ca8b1bd74cca367bde995ce823240320f509c34"
+        },
+        {
+          "recipe": "batch",
+          "source_revision": "4ca8b1bd74cca367bde995ce823240320f509c34"
+        },
+        {
+          "recipe": "ladder",
+          "source_revision": "4ca8b1bd74cca367bde995ce823240320f509c34"
+        },
+        {
+          "recipe": "judge-fidelity",
+          "source_revision": "4ca8b1bd74cca367bde995ce823240320f509c34"
+        }
+      ]
+    },
+    {
+      "source": "commands/inspection.just",
+      "path": "just/inspection.just",
+      "sha256": "2b9408714803058a1d1070137b45378058ae524f0998e53da9ea42dd6769a8cf",
+      "source_revision": "3b80cf01e620c557d1e557a4b70b7041cbd57cee",
+      "source_sha256": "dc815a9d00ee55f56c2f08eb60393ac46e146d95bf7f751fc276e55a4e37e1fd",
+      "recipe_sources": [
+        {
+          "recipe": "decode",
+          "source_revision": "3b80cf01e620c557d1e557a4b70b7041cbd57cee"
+        },
+        {
+          "recipe": "deaths",
+          "source_revision": "3b80cf01e620c557d1e557a4b70b7041cbd57cee"
+        },
+        {
+          "recipe": "sample-replays",
+          "source_revision": "3b80cf01e620c557d1e557a4b70b7041cbd57cee"
+        },
+        {
+          "recipe": "viewer-build",
+          "source": "flake.nix",
+          "source_revision": "60ca6f51146089be5284517a0578502bb79ea5b8"
+        }
+      ]
+    },
+    {
+      "source": "evaluation/compare.py",
+      "path": "harness/compare.py",
+      "sha256": "180aca3249b7ebb78fad0309071b4f45b18a4e4f5819d45ac7ce475d3fe845c6",
+      "source_revision": "15c7ef5bd0f02731a557efaf5209bae89c9adbc9",
+      "source_sha256": "bdf8d9479ecaa71bab97d3719e5f4487c08c1e2829ec428292059b9306db0959"
+    },
+    {
+      "source": "evaluation/report/verdict.nim",
+      "path": "harness/report/verdict.nim",
+      "sha256": "fc06b6cb9300177bf7c829c864d06dded8029d05e2d6e73f28501b1be59d62c0",
+      "source_revision": "8432a2fd1e9e2e448d6eea1ebf42d263d1fbd2cd",
+      "source_sha256": "16d62fc54d98aa56b60c69f03d989c14ff7e3260153fdcc0c8a0a7b54b8c1ee3"
+    },
+    {
+      "source": "evaluation/tests/compare.py",
+      "path": "harness/tests/compare.py",
+      "sha256": "b4a64fb3318e5c482bf7ac437002e44af0ab4f1c51a8c991b249454ae39d3705",
+      "source_revision": "15c7ef5bd0f02731a557efaf5209bae89c9adbc9",
+      "source_sha256": "2df691d52079475aa55d81010182dc950a87dbfb00e9371aa852e1b848daec1b"
+    },
+    {
+      "source": "evaluation/report/tests/verdict.nim",
+      "path": "harness/report/tests/verdict.nim",
+      "sha256": "2fca8e164bb4b1e5d51fc75c715bb6cb5d18927341f70a5db3794d18c7da0bc4",
+      "source_revision": "15c7ef5bd0f02731a557efaf5209bae89c9adbc9",
+      "source_sha256": "2fca8e164bb4b1e5d51fc75c715bb6cb5d18927341f70a5db3794d18c7da0bc4"
+    },
+    {
+      "source": "evaluation/zig_judge/src/run.zig",
+      "path": "harness/zig_judge/src/run.zig",
+      "sha256": "4f44ca5b05835376242a9f459d06fc95ea93be1295144ab13d47fc3b2a0dbd9b",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "ef0c9c4ab4f5a25f0bc686065db628e0c7774f8d8ebfa1ebdcecb77ccf214905"
+    },
+    {
+      "source": "evaluation/zig_judge/src/metering.zig",
+      "path": "harness/zig_judge/src/metering.zig",
+      "sha256": "9cb1098d2dcd1ab836c391efc3899537dd3d5fcc9c74a5f9f82595e8d8cd4b41",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "9cb1098d2dcd1ab836c391efc3899537dd3d5fcc9c74a5f9f82595e8d8cd4b41"
+    },
+    {
+      "source": "evaluation/zig_judge/fidelity.py",
+      "path": "harness/zig_judge/fidelity.py",
+      "sha256": "31c713d5b3615d6f815f5f575d24bf87f2f2e67cfeeba0549fa44ce1c9ec5e45",
+      "source_revision": "43dd002ec5fb8c516f1a46c5d44578acef81e93e",
+      "source_sha256": "482bc8a5339a28185e78d8e2bf5fda46d434aa24202f9fbcb0d838d7cf9108b8"
+    },
+    {
+      "source": "replays/viewer/README.md",
+      "path": "replays/viewer/README.md",
+      "sha256": "61f6e37920d0369f84e9575bf9c5eba4beca96a4a36700872d5c86cd4dbb3468",
+      "source_revision": "f07d08640254d0167ebd4b33d51578b8e63a3cd4",
+      "source_sha256": "5b79f56bfaa71c9221abd1dd24c6713888d395257aba84bb9ddbc19f2ce73408"
+    },
+    {
+      "source": "replays/viewer/accuracy.odin",
+      "path": "replays/viewer/accuracy.odin",
+      "sha256": "1e3b776e04720b0fb104d0c4be9a754b9d80c13d48b01dbea477df397db5f896",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "1e3b776e04720b0fb104d0c4be9a754b9d80c13d48b01dbea477df397db5f896"
+    },
+    {
+      "source": "replays/viewer/belief_map.odin",
+      "path": "replays/viewer/belief_map.odin",
+      "sha256": "10fe5c88825298374334475156e5b5aad4dfe6340c2ae2580ec5bd4c2fa52bb0",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "10fe5c88825298374334475156e5b5aad4dfe6340c2ae2580ec5bd4c2fa52bb0"
+    },
+    {
+      "source": "replays/viewer/beliefs.odin",
+      "path": "replays/viewer/beliefs.odin",
+      "sha256": "99253ad8b4f01e31fc69839c5a69e7bf53d8611bdcb42a1d3595feb17a3254bb",
+      "source_revision": "f07d08640254d0167ebd4b33d51578b8e63a3cd4",
+      "source_sha256": "99253ad8b4f01e31fc69839c5a69e7bf53d8611bdcb42a1d3595feb17a3254bb"
+    },
+    {
+      "source": "replays/viewer/board_replay.odin",
+      "path": "replays/viewer/board_replay.odin",
+      "sha256": "50c126a04b07f9024bcaf48ec5fb26376c40d8bc151e2d5456054b4901c7aa32",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "d7797e3d92f4c3a1205da97f1134b7b2398f00554ccde450d8fde46de151a1f3"
+    },
+    {
+      "source": "replays/viewer/breakdown.odin",
+      "path": "replays/viewer/breakdown.odin",
+      "sha256": "20977c536574961dc0a8c99380282c864de2faae937c925bbbbc12f7344b533c",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "20977c536574961dc0a8c99380282c864de2faae937c925bbbbc12f7344b533c"
+    },
+    {
+      "source": "replays/viewer/columns.odin",
+      "path": "replays/viewer/columns.odin",
+      "sha256": "c95e7bbdd905fc71a712c6934ff4ec3e79210c270e6eec7306625d077e864788",
+      "source_revision": "f07d08640254d0167ebd4b33d51578b8e63a3cd4",
+      "source_sha256": "407c32754d3d835ef408123d2de37c1e7ab985e95362e315addeafa8e0c148ea"
+    },
+    {
+      "source": "replays/viewer/consensus.odin",
+      "path": "replays/viewer/consensus.odin",
+      "sha256": "c3e02b27237b1ec77789e34f950f2c5b49cb63a8f2e9d58428e631de4c4dc1d0",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "c3e02b27237b1ec77789e34f950f2c5b49cb63a8f2e9d58428e631de4c4dc1d0"
+    },
+    {
+      "source": "replays/viewer/diagnostic_tables.odin",
+      "path": "replays/viewer/diagnostic_tables.odin",
+      "sha256": "e73b3d8ff8fb489f61dfa8d2be4a0fc924860a6f83e70969a3f636a083986e20",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "e73b3d8ff8fb489f61dfa8d2be4a0fc924860a6f83e70969a3f636a083986e20"
+    },
+    {
+      "source": "replays/viewer/diagnostics.md",
+      "path": "replays/viewer/diagnostics.md",
+      "sha256": "0ebac59f8a88b1e3ccbec68b2472a746597877390c7c0a4c451b11501425f84e",
+      "source_revision": "f07d08640254d0167ebd4b33d51578b8e63a3cd4",
+      "source_sha256": "c1919fa255616d6255b7585b99cfc511fb9ce79daae132066d0bd38848d4c209"
+    },
+    {
+      "source": "replays/viewer/evaluation.odin",
+      "path": "replays/viewer/evaluation.odin",
+      "sha256": "10a5d9d72df32bb9345337fb7ebc123791a4acfd3945978af3a58aa8415cf81c",
+      "source_revision": "f07d08640254d0167ebd4b33d51578b8e63a3cd4",
+      "source_sha256": "10a5d9d72df32bb9345337fb7ebc123791a4acfd3945978af3a58aa8415cf81c"
+    },
+    {
+      "source": "replays/viewer/game_data.odin",
+      "path": "replays/viewer/game_data.odin",
+      "sha256": "f2fdacb6e3a8083a812cbd3e14450d0413dd50c81f2ba721bf85b77994fe6258",
+      "source_revision": "f07d08640254d0167ebd4b33d51578b8e63a3cd4",
+      "source_sha256": "abfca8b0792b4010647025e4ca3a52885bc06c009b6b3465782dc5c8f109dafd"
+    },
+    {
+      "source": "replays/viewer/gizmo_inspector.odin",
+      "path": "replays/viewer/gizmo_inspector.odin",
+      "sha256": "00285aecaaaecd774378161f46c801c08f51dba750e399398ed1c5549cbc73c3",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "00285aecaaaecd774378161f46c801c08f51dba750e399398ed1c5549cbc73c3"
+    },
+    {
+      "source": "replays/viewer/gizmos.odin",
+      "path": "replays/viewer/gizmos.odin",
+      "sha256": "05d4f603031667f4a5cdae57e9b3ba5e64eb1e1a2f6292a43e4006de86bacf2e",
+      "source_revision": "f07d08640254d0167ebd4b33d51578b8e63a3cd4",
+      "source_sha256": "05d4f603031667f4a5cdae57e9b3ba5e64eb1e1a2f6292a43e4006de86bacf2e"
+    },
+    {
+      "source": "replays/viewer/issues.odin",
+      "path": "replays/viewer/issues.odin",
+      "sha256": "4d3de57a9c4e6d255f14b9be11343731661e80aff9334033289042754e21cde5",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "4d3de57a9c4e6d255f14b9be11343731661e80aff9334033289042754e21cde5"
+    },
+    {
+      "source": "replays/viewer/judge_points.odin",
+      "path": "replays/viewer/judge_points.odin",
+      "sha256": "2e7a89aba99e3f4de7f6e700f0614429d1322635a945e3977250cd01dcdbe1c1",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "2e7a89aba99e3f4de7f6e700f0614429d1322635a945e3977250cd01dcdbe1c1"
+    },
+    {
+      "source": "replays/viewer/mental_map.odin",
+      "path": "replays/viewer/mental_map.odin",
+      "sha256": "0e3d6ba3cfde24952543c1bf94c25d7b19d5630a4bf2fd352f6c141e26935022",
+      "source_revision": "f07d08640254d0167ebd4b33d51578b8e63a3cd4",
+      "source_sha256": "0e3d6ba3cfde24952543c1bf94c25d7b19d5630a4bf2fd352f6c141e26935022"
+    },
+    {
+      "source": "replays/viewer/objective_inspector.odin",
+      "path": "replays/viewer/objective_inspector.odin",
+      "sha256": "0f53846fe03fe961694dfae8743b51189e911b9aa4d8194b3a4f737faaad7677",
+      "source_revision": "f07d08640254d0167ebd4b33d51578b8e63a3cd4",
+      "source_sha256": "0f53846fe03fe961694dfae8743b51189e911b9aa4d8194b3a4f737faaad7677"
+    },
+    {
+      "source": "replays/viewer/position.odin",
+      "path": "replays/viewer/position.odin",
+      "sha256": "a2cd280b7a777725765d11b59ad145698d2aa6ecb8cef1e89e42c49a9a2781c3",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "a2cd280b7a777725765d11b59ad145698d2aa6ecb8cef1e89e42c49a9a2781c3"
+    },
+    {
+      "source": "replays/viewer/radio.odin",
+      "path": "replays/viewer/radio.odin",
+      "sha256": "62f06f6fa7844a840f9b1013a0adbe1a4d5ae8809315a3de41b306b84143920d",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "62f06f6fa7844a840f9b1013a0adbe1a4d5ae8809315a3de41b306b84143920d"
+    },
+    {
+      "source": "replays/viewer/recovery_stream.odin",
+      "path": "replays/viewer/recovery_stream.odin",
+      "sha256": "8b2684b3a5930d9e116e416a276489f09bddd7667e7565aac5536c1331f4a1e2",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "58692ae255ab571b0a6251ebf207848aedf005f4665e98b9a48f433a6db9adec"
+    },
+    {
+      "source": "replays/viewer/references/battlecode-eval/.gitignore",
+      "path": "replays/viewer/references/battlecode-eval/.gitignore",
+      "sha256": "848236e22c0a0631ebea0844a686cdb03baad8eacd69594df697f6a32b1ae46e",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "848236e22c0a0631ebea0844a686cdb03baad8eacd69594df697f6a32b1ae46e"
+    },
+    {
+      "source": "replays/viewer/references/battlecode-eval/LICENSE",
+      "path": "replays/viewer/references/battlecode-eval/LICENSE",
+      "sha256": "2cd6a320cf6b6fe4c6b274a77cca9141fb0dd30dbe9a41bebed820ac8185372c",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "2cd6a320cf6b6fe4c6b274a77cca9141fb0dd30dbe9a41bebed820ac8185372c"
+    },
+    {
+      "source": "replays/viewer/references/battlecode-eval/README.md",
+      "path": "replays/viewer/references/battlecode-eval/README.md",
+      "sha256": "6cc6a666bcf54bc3033cbe7b9ee37ddb04df67f300b4abf8a8d3e3a6e029540e",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "6cc6a666bcf54bc3033cbe7b9ee37ddb04df67f300b4abf8a8d3e3a6e029540e"
+    },
+    {
+      "source": "replays/viewer/references/battlecode-eval/bceval/__init__.py",
+      "path": "replays/viewer/references/battlecode-eval/bceval/__init__.py",
+      "sha256": "118141202867437f10cbe62a9e5148167e045287703db4777e82aac4e1ed0481",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "118141202867437f10cbe62a9e5148167e045287703db4777e82aac4e1ed0481"
+    },
+    {
+      "source": "replays/viewer/references/battlecode-eval/bceval/__main__.py",
+      "path": "replays/viewer/references/battlecode-eval/bceval/__main__.py",
+      "sha256": "8bf993cfcb85dc815de46a81fb227584e5050828e568005cc18e8009abaeb984",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "8bf993cfcb85dc815de46a81fb227584e5050828e568005cc18e8009abaeb984"
+    },
+    {
+      "source": "replays/viewer/references/battlecode-eval/bceval/features.py",
+      "path": "replays/viewer/references/battlecode-eval/bceval/features.py",
+      "sha256": "44960c22c82ec66a1dcd3c1cbb623685dfa8819deb5f00176a6e9129908da245",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "44960c22c82ec66a1dcd3c1cbb623685dfa8819deb5f00176a6e9129908da245"
+    },
+    {
+      "source": "replays/viewer/references/battlecode-eval/bceval/mapdata.py",
+      "path": "replays/viewer/references/battlecode-eval/bceval/mapdata.py",
+      "sha256": "0a84caa0e2b5e283257ec7c9317a0a7cbff0cfd14590f3c77322e3c9a2e12ffa",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "0a84caa0e2b5e283257ec7c9317a0a7cbff0cfd14590f3c77322e3c9a2e12ffa"
+    },
+    {
+      "source": "replays/viewer/references/battlecode-eval/bceval/model.json",
+      "path": "replays/viewer/references/battlecode-eval/bceval/model.json",
+      "sha256": "6cf898c349076dee18f345bbcfdc03ca36457d3633ccac0aaf30b6db7be31403",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "6cf898c349076dee18f345bbcfdc03ca36457d3633ccac0aaf30b6db7be31403"
+    },
+    {
+      "source": "replays/viewer/references/battlecode-eval/bceval/replay.capnp",
+      "path": "replays/viewer/references/battlecode-eval/bceval/replay.capnp",
+      "sha256": "811bbacd5702f887c67b76aaace5aa6997b87bb96246452f686f268a20e2d90f",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "811bbacd5702f887c67b76aaace5aa6997b87bb96246452f686f268a20e2d90f"
+    },
+    {
+      "source": "replays/viewer/references/battlecode-eval/bceval/replay.py",
+      "path": "replays/viewer/references/battlecode-eval/bceval/replay.py",
+      "sha256": "27a56646c105523c6daf63e12037f964eb450f1c177a321147392df2166e4f07",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "27a56646c105523c6daf63e12037f964eb450f1c177a321147392df2166e4f07"
+    },
+    {
+      "source": "replays/viewer/references/battlecode-eval/bceval/score.py",
+      "path": "replays/viewer/references/battlecode-eval/bceval/score.py",
+      "sha256": "adb0666ee51fe50bc48e332aab729160f2331cc55b07bfaf97eb1b6f04dfea72",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "adb0666ee51fe50bc48e332aab729160f2331cc55b07bfaf97eb1b6f04dfea72"
+    },
+    {
+      "source": "replays/viewer/references/battlecode-eval/pyproject.toml",
+      "path": "replays/viewer/references/battlecode-eval/pyproject.toml",
+      "sha256": "64dc10cd32b10edf3b3c02323de626d0ec6c3cf635a59e4a1d4466b3223d4e7d",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "64dc10cd32b10edf3b3c02323de626d0ec6c3cf635a59e4a1d4466b3223d4e7d"
+    },
+    {
+      "source": "replays/viewer/retained_gizmos.odin",
+      "path": "replays/viewer/retained_gizmos.odin",
+      "sha256": "c62ec0f3d293520337e51027f2d0de52d226a130f2ffc82de991ae63b6a883ac",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "c62ec0f3d293520337e51027f2d0de52d226a130f2ffc82de991ae63b6a883ac"
+    },
+    {
+      "source": "replays/viewer/scroll_sections.odin",
+      "path": "replays/viewer/scroll_sections.odin",
+      "sha256": "8ba6642f4ca4a3525b6ff00585a096153ee2a998d53e16734b91c82f8e271b8a",
+      "source_revision": "f07d08640254d0167ebd4b33d51578b8e63a3cd4",
+      "source_sha256": "8ba6642f4ca4a3525b6ff00585a096153ee2a998d53e16734b91c82f8e271b8a"
+    },
+    {
+      "source": "replays/viewer/turn_playback.odin",
+      "path": "replays/viewer/turn_playback.odin",
+      "sha256": "d7d7265c2ae9858e2556c0a73c3d755bf318df7bca2172ef2c59c84858793ea3",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "d7d7265c2ae9858e2556c0a73c3d755bf318df7bca2172ef2c59c84858793ea3"
+    },
+    {
+      "source": "replays/recovery/decisions.nim",
+      "path": "replays/recovery/decisions.nim",
+      "sha256": "96482172e691213a3144a5e1204617df51784a83c45b3fbe131886e71297a66f",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "68dbbf0d27c83f1611290fdfab893ed7add4b7844f68d2f8803c739ed98853cd"
+    },
+    {
+      "source": "replays/recovery/game_facts.nim",
+      "path": "replays/recovery/game_facts.nim",
+      "sha256": "97b9347cbdad0f83d8a3fa8f7f39b2095d82e78a9356f9810d9b84785c40d875",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "1c2ebc90157e94621ab3781b632ed33d2beec2110b7b2996be35f820422c0cf2"
+    },
+    {
+      "source": "replays/recovery/gizmos.nim",
+      "path": "replays/recovery/gizmos.nim",
+      "sha256": "d8ce77c8f7c31edf888ac864352c860680e609cc414e3a4accc03a4dc6c2371f",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "16fe79744ea2b7ae43fa64a41792fb0ed6e107fb5190a3e72ae80aa44177fb43"
+    },
+    {
+      "source": "replays/recovery/recover.nim",
+      "path": "replays/recovery/recover.nim",
+      "sha256": "22c3953f4975aad16c7c47334f4ead5b538e70b4606114b6a20cd73d136a4595",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "d27757596b612444a227862ac0202864571ce1b1b6c5a9d40a533b55e605edbc"
+    },
+    {
+      "source": "replays/recovery/registry.nim",
+      "path": "replays/recovery/registry.nim",
+      "sha256": "d234a74ff6dc539c9bab0016776f763aefca2310998a9ee65bc1432d1d9df7fc",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "daf0592de64d0012d1f8a2bdb4ee430e7e91695460adde29dd406cf43f8f3673"
+    },
+    {
+      "source": "replays/recovery/serve.nim",
+      "path": "replays/recovery/serve.nim",
+      "sha256": "2f826cd7f5c3f34e2ee4a867ec12ac8c6d32dace7b811fe5bcec10a46f7c5497",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "14988397e1705067fc6bca3e6376fd1f6ec86da6c33ceef548fd91d30b032818"
+    },
+    {
+      "source": "gamedata/README.md",
+      "path": "gamedata/README.md",
+      "sha256": "1a98046c825c909ec0745241a7695e8d97d2a7637e922223a6888955c92956a9",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "3b84ca1123cc179be162a720dc7bd597c9efb3a5f5cc85bd5c0c3f70d2d0a502"
+    },
+    {
+      "source": "gamedata/board.nim",
+      "path": "gamedata/board.nim",
+      "sha256": "acf0a40d176141c8ff3c1e5fa527a1e6130096309e6eba0fce983234b48b9875",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "9f6313c7ce16934b0f321d5dc6ef8a3cfc09296316f243dacbe9888bf5bfc00b"
+    },
+    {
+      "source": "gamedata/observations.nim",
+      "path": "gamedata/observations.nim",
+      "sha256": "b7f112433ee56f0e76f19db1fbca51f50f948b91bde0ace486607d2e3882a9ad",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "b7f112433ee56f0e76f19db1fbca51f50f948b91bde0ace486607d2e3882a9ad"
+    },
+    {
+      "source": "gamedata/replay_board.nim",
+      "path": "gamedata/replay_board.nim",
+      "sha256": "f34aa31195126e2403f92d77e8ec0c512ef9b397b543216aba1f005e83036867",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "be2b36f728c0d2657331872da9d9a77b70a7e0af390827a1495d1ad20dc50d44"
+    },
+    {
+      "source": "runtime/gizmos.h",
+      "path": "runtime/gizmos.h",
+      "sha256": "a087290b48a405d29303d7c821580a8a1998b553305f2803ec74adc4db97e0e3",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "2f5658d64e15d828e2ade3f0493f358b5c44695607ce708f5eff8460964a9aeb"
+    },
+    {
+      "source": "runtime/gizmos.nim",
+      "path": "runtime/gizmos.nim",
+      "sha256": "c5d0e13f5d76ff8e8c29405a3ac758bfa7103393ad0e81af2581907ec514bdbd",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "62ce4baed620348aec735d07749a6d06bc2a2c9b8523debef2ccc8ce90bd6a90"
+    },
+    {
+      "source": "runtime/diagnostic_descriptions.nim",
+      "path": "runtime/diagnostic_descriptions.nim",
+      "sha256": "360a59f4f81d280e623085b35612f4563d27033d7fe22bc6d44a5461a6593d2f",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "360a59f4f81d280e623085b35612f4563d27033d7fe22bc6d44a5461a6593d2f"
+    },
+    {
+      "source": "runtime/helper.c",
+      "path": "runtime/helper.c",
+      "sha256": "b1aaceb218a7e9b8968e721c73642778ef8213b4e2f00f5e8f2c25e8f6ce8872",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "b1aaceb218a7e9b8968e721c73642778ef8213b4e2f00f5e8f2c25e8f6ce8872"
+    },
+    {
+      "source": "runtime/helper.h",
+      "path": "runtime/helper.h",
+      "sha256": "e3137ac211864468b94e12098bfbe7ff58699f4c1a59a25cf6a830c6429c21d7",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "e3137ac211864468b94e12098bfbe7ff58699f4c1a59a25cf6a830c6429c21d7"
+    },
+    {
+      "source": "runtime/entry.c",
+      "path": "runtime/points.c",
+      "sha256": "b7f4da8d5d7c7448c8eaef661f0828f3c496040b61bc8aeea1d4338ab04961b9",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "13ef9e50761852ee2180705c5db1a10ce9a1066889a71c099611b9e15440beb9"
+    },
+    {
+      "source": "replays/viewer/build_registry.py",
+      "path": "harness/build_registry.py",
+      "sha256": "4a973eb378ec532bedefdb09ce6014e3650bccca47cc4fd7122417c7c146da56",
+      "source_revision": "bebdab69ad3f77346c66355988d09dd6ed7673d0",
+      "source_sha256": "1b590f77d26b9e1c1f1abf7173cffaa90d906c14ff56c2206a32bb1cd0bb5e0a"
+    },
+    {
+      "source": "replays/viewer/knowledge.odin",
+      "path": "replays/viewer/knowledge.odin",
+      "sha256": "7bffe985ab247922c8512806163d92d289595b3ab9bb263615a8f979daf39d55",
+      "source_revision": "f07d08640254d0167ebd4b33d51578b8e63a3cd4",
+      "source_sha256": "bdb29a6183c93dce3aa2feb156bbbc787cdb842991243c70a68844d8873dc953"
+    }
+  ]
+}

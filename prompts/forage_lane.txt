@@ -1,0 +1,27 @@
+You are the FORAGE lane for a UNSW Battlecode 2026 'Abyss' C++ bot (game.battlecode.au). Slay Queen rules: lowest-id dragon per team = QUEEN (champId() = init.id & 1); r500 winner = longer queen (dead queen = 0), tie -> longest dragon -> total length. Free steps/turn = ceil(L/4).
+
+Setup:
+1. Download the workspace bundle: ATTACHMENT link at the bottom of this prompt. `mkdir -p ~/battlecode && tar -xzf ~/attachments/*/bc_workspace5.tgz -C ~/battlecode`.
+2. `uv tool install unswbc` if missing. `workspace/abyss_st` = CURRENT LADDER TIP (v99). `workspace/abyss_hd2` = v98 (st minus assassin code). NEVER submit, NEVER open PRs, BC_DEBUG off in shipped variants (instrumented diagnostic builds are fine).
+3. Match: `python3 tooling/match.py --bots A B --maps devil,trophy,portals --seeds N --tag T --jobs 5` from ~/battlecode. Stats: `python3 tooling/gstats.py results/<tag>/replays/*.replay`. Manual builds need `rm ~/.cache/unswbc/wasmbots/<bot>-*.wasm` after header edits. ONE batch at a time (jobs 5) — more starves CPU into 900s timeouts.
+4. `knowledge/17_deadends.md` lists ~25 already-rejected changes — read it first; do NOT retest.
+
+PROBLEM (new diagnosis from ranked replays): on small killbox maps (devil 512t, trophy 625t) vs real opponents we lose by ECONOMY EXCLUSION, not combat micro:
+- m847054 Devil: eliminated r117 — we ate 37 pearls vs their 260, peaked 5 alive vs their 43. Our dragons didn't die fast (18 deaths) — they STARVED.
+- m847053 Trophy: same shape — 70 vs 196 pearls, peak 12 vs 45, eliminated r145.
+- In self-play BOTH sides stall at ~5 alive until ~r20 then one breaks out — the pressure-vs-response asymmetry can't be reproduced locally. A hyper-breed variant of our own bot (max splits, no veto) got ELIMINATED at r73 vs v99 — raw split volume is NOT the answer; the winner's advantage is children surviving + dragons reaching food.
+
+Hypotheses to test (in rough priority):
+1. CONTESTED-FOOD AVERSION: our foragers may skip pearls near enemies (danger weights / pocket-fear / wDanger) while opponents eat them. Instrument: count pearls skipped vs eaten by enemy-distance bucket (BC_DEBUG tags). If confirmed: when starving (units < budAlive or pearl rate low), reduce danger aversion for EATING specifically (never for movement).
+2. CLUSTERING TAX: escort/assassin/mission pulls concentrate dragons near our queen instead of spreading to food — measure per-dragon pearl intake by role (grower/worker/assassin/escort) on devil.
+3. BOXED-FORAGE: dragons that can't reach food because enemy/ally bodies block paths — check whether our pathfinding re-plans around congestion or stalls.
+4. STARVATION RAMP: after eating, L grows so freeSteps grows — check if we mis-sequence (eat when we should split, split when we should eat) in the r10-40 window.
+
+Deliverables:
+- FORAGE_REPORT.md: which hypothesis dominates on your own instrumented measurements + ranked-replay stats (replays live in ~/battlecode/ladder_replays/ already: m847053, m847054, m847279 — Devil/Trophy/Schooltime losses and their full gstats).
+- If a fix emerges: diff variant(s), local A/B vs abyss_st on devil,trophy,portals proving ZERO regression (parity is acceptable — the change targets a situation self-play can't show), plus forage-metric improvements. Anything worse than parity = deadend, log it.
+- A tarball of any keepable variants.
+
+Constraints: one change at a time; your env can differ from the orchestrator's — report exact commands + seeds so results can be verified on the main box. Do NOT spend >3 batches per variant. Terse final report via your final message.
+
+ATTACHMENT:"https://app.devin.ai/attachments/54c4581c-e7e9-4320-a1ba-68ed25af161c/bc_workspace5.tgz"

@@ -1,0 +1,24 @@
+You are the CHILD-SURVIVAL lane for a UNSW Battlecode 2026 'Abyss' C++ bot (game.battlecode.au). Slay Queen rules: lowest-id dragon per team = QUEEN (champId() = init.id & 1); r500 winner = longer queen (dead queen = 0), tie -> longest dragon -> total length. Free steps/turn = ceil(L/4).
+
+Setup:
+1. Download the workspace bundle: ATTACHMENT link at the bottom of this prompt. `mkdir -p ~/battlecode && tar -xzf ~/attachments/*/bc_workspace5.tgz -C ~/battlecode`.
+2. `uv tool install unswbc` if missing. `workspace/abyss_st` = CURRENT LADDER TIP (v99 = v98 + assassin squad). `workspace/abyss_hd2` = v98, its parent. NEVER submit, NEVER open PRs, BC_DEBUG off in shipped variants (a BC_DEBUG-instrumented diagnostic variant is fine for measurement).
+3. Match: `python3 tooling/match.py --bots A B --maps schooltime,trauma,slithery_fight --seeds N --tag T --jobs 5`. Stats: `python3 tooling/gstats.py results/<tag>/replays/*.replay`. wasm cache: match.py clears it per batch; manual builds need `rm ~/.cache/unswbc/wasmbots/<bot>-*.wasm` after header edits. Run ONE match.py batch at a time (jobs 5) — more starves the CPU and games hit the 900s timeout.
+4. `knowledge/17_deadends.md` lists ~22 already-rejected single changes — read it first; do NOT retest those.
+
+PROBLEM: another lane's death-mix instrumentation found ~60% of ALL dragon deaths are hitWall (~77/game) + hitSelf (~69/game), vs hitHeadToHead ~62 and hitOtherBody ~32. Children are boxing/walling themselves — this is the suspected dominant loss channel vs top teams (we plateau ~45 alive, elites ~64; per-dragon intake is at parity, so losses of mass are deaths not food).
+
+Your task — cut self-inflicted (hitWall/hitSelf) deaths without regressing:
+1. DIAGNOSE first: instrument where/when wall+self deaths happen (which round phases, which move types — 2-step free moves vs sprint, near maze walls vs open pocket sears, newborns vs veterans). gstats already reports deaths by reason per game; add BC_DEBUG tags around the movement code paths if you need move-level attribution. Verify the instrumented build is behavior-neutral before trusting its numbers.
+2. Then iterate fixes in `workspace/abyss_cs` (copy of abyss_st), ONE change at a time, each A/B'd vs abyss_st on schooltime+trauma+slithery_fight (seeds 0-4 both sides, 30 games). Candidate directions:
+   - movement scoring: price entrapment — a step whose resulting cell has fewer open exits / is a pocket mouth should score worse (check whether pocket/pocketFear terms already cover self-created pockets vs map pockets);
+   - 2-step lookahead: the second free step may walk a dragon deeper into a box the first step created — check if step 2 scores against post-step-1 state or stale state;
+   - tail/body self-collision: predict own-body occupancy next round for the split-child vs parent (the child may be born adjacent to where the parent moves);
+   - split positioning: don't birth a child into a cell that walls the parent, or vice versa;
+   - worst-case fallback: when all moves lose body length, prefer the one that delays death rather than the "least bad" (check what the code actually does in that branch).
+3. Report per change: W-L record per map and total, gstats deltas (deaths by reason, alive@499, splits, longestDragon, queenLen), and the mechanism (why it should work). Ship bar: >=60% combined or a decisive map-scoped edge >=65% with a credible mechanism. Side-lock: schooltime/slithery seeds are side-locked — report SAME-SIDE metric deltas too, they're the honest comparator.
+4. Deliverable = a report markdown + tarball of your best variant(s) attached to your final message. Include the exact commands you ran so I can reproduce.
+
+Constraints: keep diffs minimal and single-concern; never stack unverified changes; if everything plateaus ~50%, report that honestly with the data — a clean negative is a valuable result.
+
+ATTACHMENT:"https://app.devin.ai/attachments/54c4581c-e7e9-4320-a1ba-68ed25af161c/bc_workspace5.tgz"

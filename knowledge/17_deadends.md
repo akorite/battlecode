@@ -88,3 +88,14 @@ Verified facts mined from ranked replays (v98, ~28 games):
 - KEEPERS for next session to verify: abyss_crowd (wCrowd ally-occupied penalty, 19-11=63%) and abyss_combat (same penalty exempt at contact, 20-10=67%) — staged in workspace/. Both vs abyss_st base — rebase onto v99/current tip before A/B.
 - Deadend: f1 roomy-flood veto 12-18; f4 tighter gate inconclusive.
 - Suffocation feasibility: reachable via exit-count denial on enemy-adjacent dests (fights f2's anti-clustering for same cells).
+
+## 2026-10-03 (v102 flagship session, kvmrun harness, engine 1.2.7)
+
+- **All earlier local A/Bs that touched queen logic are suspect.** In self-play both bots used the 0xC0A1 sonar tag, so each side read the enemy's beacons. World::observe set `ourQueen = sid` from any beacon with sid <= 1, so the enemy queen's beacon demoted ours (Colosseum s101 r8: q=1 to q=0). Also, champId fell back to `init.id & 1`, which is wrong for team B on most maps. The crowd/combat/qd/queen-feed results above were measured under both bugs. abyss_v102 keys the tag on the team (0xD1B0 for A, 0xE283 for B) and fixes queen identity at start() from the dragon's own id.
+- forage: friend sharing (0.25 and 0.5): adjacent take fell 5 points in a 20-game screen. DROPPED.
+- forage: eatBonus 2.0 and skipAdj=0: flat. DROPPED.
+- forage: queenBrawlSplit (queen splits 2+2 at r0 on brawl maps): devil s103 side A collapses (eaten by r30: 10 vs 17), and the bundle went 1-7 on devil. DROPPED.
+- forage: budEatFirst: pocketEatLen + budEatFirst was worse than pocketEatLen alone on r60 metrics. budMultBrawl: inert on devil s103. DROPPED.
+- forage KEPT: pocketEatLen=3. A dragon of length <= 3 next to a free pearl skipped it because the eating tile paid wPocket 1.5 (one onward exit or fewer), which beat eatBonus 1.0. Trophy s101 r29 id9 shows it. Adjacent take rose from 0.62 to 0.72 (80 small games), with W/L flat. In v102 the queen is exempt, because the mid check showed queen length at end of 1.5 vs 3.6 without the exemption.
+- harness: champion relay ages decoded to the bucket's lower middle (4-7 to 6, 8-15 to 12), so a relayed age hit a fixed point around 13 and a dead queen's evidence never expired (the ghost queen). Fixed in v102: decode to the bucket's upper bound, add +1 per hop, and drop queen evidence when her cell is in view and empty.
+- harness: absolute --cand paths put slashes into kmatch replay names, and every game showed FAIL. Use workspace-relative names.

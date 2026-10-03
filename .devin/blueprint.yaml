@@ -1,0 +1,38 @@
+# Battlecode match toolchain: reproduces the local kmatch pipeline so any
+# session (or devin-queue worker) can run games without re-deriving the setup.
+initialize:
+  - name: venv (unswbc 1.2.7 + ziglang)
+    run: python3 -m venv ~/.venv-bc && ~/.venv-bc/bin/pip install -q unswbc==1.2.7 ziglang
+  - name: wabt wasm2c (prebuilt)
+    run: mkdir -p ~/bc-tools/wabt && curl -LsSf https://github.com/WebAssembly/wabt/releases/download/1.0.42/wabt-1.0.42-linux-x64.tar.gz | tar xz -C ~/bc-tools/wabt --strip-components=1
+  - name: simde headers
+    run: git clone --depth 1 -q https://github.com/simd-everywhere/simde ~/bc-tools/simde
+  - name: zig-cc clang shim for kvmrun
+    run: mkdir -p ~/bc-tools/bin && printf '#!/bin/sh\nexec "$HOME/.venv-bc/bin/python" -m ziglang cc "$@"\n' > ~/bc-tools/bin/clang && chmod +x ~/bc-tools/bin/clang
+  - name: kvmrun
+    run: git clone --depth 1 -q https://github.com/Kicky1618/kvmrun ~/kvmrun
+  - name: match env vars
+    run: |
+      echo "KVMRUN=$HOME/kvmrun" >> $ENVRC
+      echo "BC_PY=$HOME/.venv-bc/bin/python" >> $ENVRC
+      echo "UNSWBC_PKG=$HOME/.venv-bc/lib/python3.12/site-packages" >> $ENVRC
+      echo "WABT_BIN=$HOME/bc-tools/wabt/bin" >> $ENVRC
+      echo "SIMDE_INC=$HOME/bc-tools/simde" >> $ENVRC
+      echo "KVMRUN_CC=$HOME/bc-tools/bin/clang" >> $ENVRC
+      echo "PATH=$HOME/bc-tools/bin:$HOME/bc-tools/wabt/bin:$PATH" >> $ENVRC
+knowledge:
+  - name: match
+    contents: |
+      # worktree at ~/bc on the PR branch; queue at ~/queue on devin-queue
+      # one pair (both sides): python3 tooling/kmatch.py run --cand A --base B --maps arena --seeds 1 --jobs 1 --tag smoke
+      # aggregate: python3 tooling/kmatch.py summary results/<tag>
+  - name: maps
+    contents: |
+      # kmatch presets: small (10), mid (6), big (12), std (16), all (22)
+      # map files: $UNSWBC_PKG/unswbc/templates/maps/*.map
+  - name: notes
+    contents: |
+      # IMPORTANT: engine/engine/docs.md in this repo is STALE (pre-Oct-1 sprint rules).
+      # Current rules = game.battlecode.au/docs: first ceil(L/4) MOVE steps free, +1 segment per extra step.
+      # Sonar tag is team-keyed (0xC0A1^0x1111/^0x2222) - never test pre-keyed bots vs keyed ones.
+      # Never run more than ~6 concurrent kvmrun games; deterministic per (map,seed,bots).

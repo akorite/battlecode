@@ -62,7 +62,7 @@ def main():
     ap.add_argument('--n', type=int, default=1)
     ap.add_argument('--each', type=int, default=4)
     ap.add_argument('--ranked', action='store_true')
-    ap.add_argument('--out', default='/home/ubuntu/battlecode/ladder_replays')
+    ap.add_argument('--out', default=os.path.join(os.environ.get('BC_REPO', os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), 'ladder_replays'))
     ap.add_argument('--wait', type=int, default=900)
     a = ap.parse_args()
 

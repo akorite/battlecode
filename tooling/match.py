@@ -9,7 +9,9 @@ Writes replays to results/<tag>/replays/ and prints per-game + aggregate lines.
 import argparse, glob, json, os, subprocess, sys, time
 from concurrent.futures import ThreadPoolExecutor
 
-WS = '/home/ubuntu/battlecode/workspace'
+BC = os.environ.get('BC_REPO', os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+WS = os.path.join(BC, 'workspace')
+UNSWBC = os.environ.get('UNSWBC', os.path.expanduser('~/.local/bin/unswbc'))
 ALL_MAPS = ['arena', 'autarky', 'big_empty', 'Colosseum', 'default', 'devil',
             'dilemma', 'portals', 'queen_of_spades', 'schooltime',
             'slithery_fight', 'stronghold', 'trauma', 'trophy', 'default_small']
@@ -31,7 +33,7 @@ def run_one(args):
     mapname, side, seed, bots, outdir = args
     bots2 = bots if side == 0 else bots[::-1]
     out = os.path.join(outdir, f'{mapname}-s{seed}-{"-".join(bots2)}.replay')
-    cmd = ['/home/ubuntu/.local/bin/unswbc', 'run', f'maps/{mapname}.map',
+    cmd = [UNSWBC, 'run', f'maps/{mapname}.map',
            *bots2, '--sandbox', '--seed', str(seed), '-o', out]
     t0 = time.time()
     p = subprocess.run(cmd, cwd=WS, capture_output=True, text=True, timeout=900)
@@ -55,7 +57,7 @@ def main():
 
     maps = ALL_MAPS if a.maps == 'all' else a.maps.split(',')
     fresh_bots(a.bots)
-    outdir = f'/home/ubuntu/battlecode/results/{a.tag}'
+    outdir = os.path.join(BC, 'results', a.tag)
     os.makedirs(os.path.join(outdir, 'replays'), exist_ok=True)
     jobs = []
     for m in maps:

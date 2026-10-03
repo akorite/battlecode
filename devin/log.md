@@ -107,3 +107,14 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
   (covers seen-kelp first steps + path[0], not just own-body).
   Submitted: replaces v106's protection with strictly more coverage.
 - git tag pending at activation.
+
+## ~23:45 UTC — v112 self-challenges (user: call battles ourselves)
+
+- Fired 8 ranked (Nitronics/JKS/1234/Sarvottam) + ~8 unranked (top-3)
+  battles via tooling/challenge.py post. ~28 games.
+- Mid-results: 6W-8L. Portals W×3 vs ranked teams (v104-zero map → flip!),
+  Devil 2/2, weakhold W vs Sarvottam. Autarky 0/3, Trauma L, TD L.
+- **m995333 Schooltime: id0 deaths = NONE — guard held on ladder.**
+  Loss was pure endgame attrition (queen alive all game).
+- Still bleeding: queen H2H/wall mid-game on some wins (survivable),
+  early r0-5 swarm hitWall on big maps.

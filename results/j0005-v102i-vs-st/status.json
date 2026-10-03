@@ -1,0 +1,138 @@
+{
+ "state": "done",
+ "worker": "devin-loozxb",
+ "job_version": 1,
+ "bot_commit": "cefe70b08cfca4adab4c401d582b2d93c23af9fe",
+ "kvmrun_commit": "45452bd43a308ee4cb6818c3c036a2a2b4165394",
+ "unswbc_version": "1.2.7",
+ "opponents": {
+  "abyss_st": {
+   "cand_wins": 108,
+   "games": 176,
+   "draws": 8,
+   "per_map": {
+    "Colosseum": {
+     "wins": 5,
+     "draws": 0,
+     "games": 8
+    },
+    "arena": {
+     "wins": 4,
+     "draws": 0,
+     "games": 8
+    },
+    "australia": {
+     "wins": 6,
+     "draws": 0,
+     "games": 8
+    },
+    "autarky": {
+     "wins": 3,
+     "draws": 0,
+     "games": 8
+    },
+    "big_empty": {
+     "wins": 5,
+     "draws": 0,
+     "games": 8
+    },
+    "default": {
+     "wins": 3,
+     "draws": 0,
+     "games": 8
+    },
+    "default_small": {
+     "wins": 7,
+     "draws": 0,
+     "games": 8
+    },
+    "devil": {
+     "wins": 5,
+     "draws": 0,
+     "games": 8
+    },
+    "dilemma": {
+     "wins": 0,
+     "draws": 8,
+     "games": 8
+    },
+    "islands": {
+     "wins": 2,
+     "draws": 0,
+     "games": 8
+    },
+    "maze": {
+     "wins": 8,
+     "draws": 0,
+     "games": 8
+    },
+    "portals": {
+     "wins": 7,
+     "draws": 0,
+     "games": 8
+    },
+    "queen_of_spades": {
+     "wins": 5,
+     "draws": 0,
+     "games": 8
+    },
+    "schooltime": {
+     "wins": 4,
+     "draws": 0,
+     "games": 8
+    },
+    "slithery_fight": {
+     "wins": 6,
+     "draws": 0,
+     "games": 8
+    },
+    "stripes": {
+     "wins": 4,
+     "draws": 0,
+     "games": 8
+    },
+    "stronghold": {
+     "wins": 8,
+     "draws": 0,
+     "games": 8
+    },
+    "tower_defense": {
+     "wins": 4,
+     "draws": 0,
+     "games": 8
+    },
+    "trauma": {
+     "wins": 7,
+     "draws": 0,
+     "games": 8
+    },
+    "trophy": {
+     "wins": 4,
+     "draws": 0,
+     "games": 8
+    },
+    "unsw": {
+     "wins": 7,
+     "draws": 0,
+     "games": 8
+    },
+    "weakhold": {
+     "wins": 4,
+     "draws": 0,
+     "games": 8
+    }
+   }
+  }
+ },
+ "timeouts": 0,
+ "control": {
+  "cand": "abyss_st",
+  "base": "starter",
+  "maps": "small",
+  "seeds": 1,
+  "result": "20-0",
+  "timeouts": 0,
+  "note": "from session start"
+ },
+ "notes": "v102 63.6% vs st (108W/8D/60L, score 112, pair CI [58.0,69.3]). stronghold 8/8, trauma+unsw+Colosseum+QoS 7/8, dilemma 5W+3D unbeaten; weak: weakhold 2/8, maze+stripes 3/8. queenLen@end 2.09 vs 0.99. All draws were mutual eliminations on dilemma."
+}

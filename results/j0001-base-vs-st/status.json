@@ -1,0 +1,115 @@
+{
+ "state": "done",
+ "worker": "devin-loozxb",
+ "job_version": 1,
+ "bot_commit": "cc65778b8e7393851ed2e164b4f44d921e3422a7",
+ "kvmrun_commit": "45452bd43a308ee4cb6818c3c036a2a2b4165394",
+ "unswbc_version": "1.2.7",
+ "opponents": {
+  "abyss_st": {
+   "cand_wins": 90,
+   "games": 176,
+   "draws": 0,
+   "per_map": {
+    "Colosseum": {
+     "wins": 4,
+     "games": 8
+    },
+    "arena": {
+     "wins": 4,
+     "games": 8
+    },
+    "australia": {
+     "wins": 4,
+     "games": 8
+    },
+    "autarky": {
+     "wins": 3,
+     "games": 8
+    },
+    "big_empty": {
+     "wins": 3,
+     "games": 8
+    },
+    "default": {
+     "wins": 5,
+     "games": 8
+    },
+    "default_small": {
+     "wins": 4,
+     "games": 8
+    },
+    "devil": {
+     "wins": 3,
+     "games": 8
+    },
+    "dilemma": {
+     "wins": 8,
+     "games": 8
+    },
+    "islands": {
+     "wins": 3,
+     "games": 8
+    },
+    "maze": {
+     "wins": 4,
+     "games": 8
+    },
+    "portals": {
+     "wins": 4,
+     "games": 8
+    },
+    "queen_of_spades": {
+     "wins": 3,
+     "games": 8
+    },
+    "schooltime": {
+     "wins": 4,
+     "games": 8
+    },
+    "slithery_fight": {
+     "wins": 7,
+     "games": 8
+    },
+    "stripes": {
+     "wins": 5,
+     "games": 8
+    },
+    "stronghold": {
+     "wins": 4,
+     "games": 8
+    },
+    "tower_defense": {
+     "wins": 4,
+     "games": 8
+    },
+    "trauma": {
+     "wins": 3,
+     "games": 8
+    },
+    "trophy": {
+     "wins": 3,
+     "games": 8
+    },
+    "unsw": {
+     "wins": 4,
+     "games": 8
+    },
+    "weakhold": {
+     "wins": 4,
+     "games": 8
+    }
+   }
+  }
+ },
+ "timeouts": 0,
+ "control": {
+  "cand": "abyss_st",
+  "base": "starter",
+  "maps": "small",
+  "seeds": 1,
+  "result": "20-0",
+  "timeouts": 0
+ },
+ "notes": "51.1% overall (90-86). dilemma 100% and slithery_fight 87.5% positive; queen_of_spades/trophy/autarky/devil/islands/trauma/big_empty at 37.5% negative. All games decisive, no timeouts. Side attribution spot-checked x3."
+}

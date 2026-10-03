@@ -1,0 +1,12 @@
+{
+ "id": "j0015-ts-vs-v102",
+ "version": 1,
+ "bot_commit": "8f3b6d66931070e0764916c0a3b9e6ea59bca10b",
+ "cand": "abyss_v102_ts",
+ "opponents": ["abyss_v102"],
+ "maps": "std",
+ "seeds": 3,
+ "seed_start": 8000,
+ "priority": 18,
+ "note": "Lane: tail-strike fear for the queen (enemy head within its own visible length of her dest => a U-turn child could spawn adjacent and ram). Metrics that matter: queen dead(any)/game and qNonRam vs flagship, then W/L."
+}

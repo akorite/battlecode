@@ -1,49 +1,43 @@
-# STATE — autonomous ladder iteration (2026-10-03)
+# STATE — ladder iteration (updated ~23:20 UTC Oct 3)
 
-## Goal
-Top-20 ladder rating on game.battlecode.au (team Cognoscenti id 351) before qualifiers snapshot 10 Oct 2026.
+## Ladder
+- Team 351 "Cognoscenti". Goal: top-20 (~1955 Elo) by Oct 10 qualifiers.
+- **LIVE: v112 (sub 16175, building→active) = v108 + wallguard.** Guard
+  redirects any provably-fatal first step (seen-kelp edge OR own body) to a
+  free exit; covers single-step and path[0]. Strict superset of v106's guard.
+- v106 record before v112: 4W-6L ranked; losses corridor maps; zero
+  schooltime drawn so guard unverified on ladder.
 
-## Ladder state (live, API-verified)
-- Rank 136 / Elo ~1479. Top-20 cutoff ~1955 → ~480 Elo gap, 7 days.
-- LIVE bot: **abyss_v106** (submission 16084, activated ~18:40 UTC).
-  Ranked so far: 5 matches, 1W-4L — too early for verdict (need 60+).
-- v104 retired (79W/1D/99L = 43.8%); v105 = known regression, never submit.
-- Loss survey (96 losses): queen death precedes ~every elimination; mid-game
-  h2h (12) + hitWall (9) biggest buckets; r0-5 schooltime suicides 6; 0 timeouts.
+## Honest-gate scoreboard (kmatch.py, 22-map pool, seeds 2, both sides)
+- v108 vs v104: 47.7% — parity, current clean base
+- v112 vs v104: 48.9% — parity + wallguard = free insurance → SUBMITTED
+- v110 (v108+wh2): 40.0% — DEAD (wh2 unproven-veto pins queen on foggy maps)
+- v111 (v108+swarmTrap): 36.9% — DEAD (corridor-pocket veto bleeds islands/
+  slithery/weakhold)
+- v109 (v108+wh2+pearl): 42.0% — DEAD
+- Honest baseline: v104 = 48.6% vs cf, 38.9% vs combat
 
-## Harness facts (learned today)
-- kvmrun runner = ONE embedded bot pair; --name-a/--name-b cosmetic labels only.
-  Old gate_v10X.sh wins phase mislabeled the second matchup + faked side-swaps.
-  Verify any runner: `strings $RUNNER | grep bota_`. **kmatch.py is the honest
-  harness** (builds reversed-seat runners for real both-sides).
-- Map pool on ladder incl. weakhold, tower_defense, stripes, trauma, maze,
-  islands, unsw, australia — all in unswbc templates/maps (kmatch BC_MAPS).
-- wasm cache stamps ONLY .cpp — header edits reuse stale wasm. Fresh dir names.
-- Replay dl: fetch 302 Location WITHOUT auth. battles API = latest-100.
-- BC_KEY at ~/.unswbc/keys.json — never print/commit.
+## Lanes (4 workers)
+- pearl (d74f44be, devin/pearl): forage-first opening; v2 = 52.8% vs combat,
+  52.1% vs v104; v3 gating (hunts restored). Needs map-gating vs big maps.
+- whfix (d50d6e85, devin/whfix): wh2 bounced — unproven veto over-fires;
+  iterate maze-gated or tighter bound, full-pool gate ≥50% + no 0/4.
+- starve (c85884d3, devin/starve): swarmTrap bounced — needs conveyor-vs-
+  survivable-pocket discrimination or deadend writeup.
+- qsiege (64ec12ca, devin/qsiege): NEW — mid-game queen encirclement deaths
+  (H2H/hitWall r50-450, all-4-exits-blocked). Pick ONE fix: exit-freedom
+  scoring / convergence trigger / pocket-depth limit.
+- losssurvey (d1bd4e24): done, terminated.
 
-## Version pipeline
-- v106 (guard): LIVE, collecting ladder record.
-- v107 (v106+wh1): FAILED gate (31%) — wh1 unproven veto pinned queen on open maps.
-- v108 (v106 + unified trapped-fallback rank): gate clean vs cf 45.6% (68g),
-  deaths baseline-only. Combat check running (gate-v108-combat, kmatch honest).
-- **v109 (v108 + wh2 + pearl)** — merged from two worker lanes:
-  wh2 = queen trap scan treats fog as wall + frontier discriminator
-  (trapSeenOnly=1, trapSafeCells=12, trapFrontier=2; weakhold pockets fixed,
-  no open-map pin; 54.2% vs v104 wh/td/trauma; 0 own wall deaths).
-  pearl = forage-first opening (openUntil=48, openDanger 1.0, openQueenDanger
-  1.8, openQueenKeep 3; +13.9pp vs combat, parity cf, +14% pearls@30;
-  kept regressions stripes/devil/default/qos small-n).
-  Status: compiles, deaths gate = baseline pattern only. kmatch gates running:
-  gate-v109-cf then gate-v109-combat (22 maps × 2 seeds × both sides).
+## Harness facts
+- kmatch.py = honest A/B (paired seats). gate_v10X.sh = single embedded pair,
+  wins-phase labels wrong for 2nd opponent — do not use.
+- `strings runner | grep bota_` reveals embedded pair dirs.
+- unswbc CLI at ~/.venv-bc/bin/unswbc; API via unswbc.api.request(key).
+- Edge seen-flag = fog of war; unseen edges model open (kind=0) → hitWall.
+- Death histogram: hitWall 2174, hitSelf 1734, H2H 1513 — all 1-step moves.
 
-## Lanes / workers
-- me (integrator): merge, gate, submit, review.
-- whfix worker (d50d6e85…): DONE — abyss_wh2 shipped on devin/whfix.
-- pearl worker (d74f44be…): DONE — abyss_pearl v2 shipped on devin/pearl.
-- losssurvey: DONE.
-
-## Next 3 actions
-1. v109 gates → if ≥v104 baseline vs cf+combat: submit v109 (git-tag), leave v106 verdict to its 60-game review.
-2. Log v108/v109 results + v106 ladder table in devin/log.md.
-3. Backlog: mid-game queen-defense (12 losses), hitWall pathing (9), stripes/devil openings, caged-queen, ally-aware exits.
+## Next
+- v112 ladder review at 60+ ranked games (from activation ~23:15).
+- Integrate pearl v3 or qsiege fix, whichever passes first.
+- Backlog: stripes/devil openings, mid-game H2H defense tuning, STATUS.md.

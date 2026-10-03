@@ -16,10 +16,12 @@ wasm cache hashes only .cpp files, so header edits would otherwise be served
 stale.
 
 Environment (defaults in brackets):
-  KVMRUN      kvmrun checkout                  [/home/user/kvmrun]
-  BC_PY       python with unswbc 1.2.7         [/home/user/.venv-bc/bin/python]
-  BC_MAPS     map dir (upstream 1.2.7 maps)    [/home/user/bc-upstream/maps]
-  UNSWBC_PKG, WABT_BIN, SIMDE_INC              see kvmrun README
+  KVMRUN      kvmrun checkout                  [~/kvmrun]
+  BC_PY       python with unswbc 1.2.7         [~/.venv-bc/bin/python]
+  UNSWBC_PKG  site-packages holding unswbc     [BC_PY's venv]
+  BC_MAPS     map dir                          [UNSWBC_PKG/unswbc/templates/maps, = upstream 1.2.7 maps]
+  WABT_BIN, SIMDE_INC                          [~/bc-tools/... if present, else kvmrun's own search]
+  BC_BOTCACHE staged bot copies                [~/.cache/bcbots]
 """
 import argparse
 import concurrent.futures as cf
@@ -38,12 +40,24 @@ import time
 HERE = pathlib.Path(__file__).resolve().parent
 REPO = HERE.parent
 WS = REPO / 'workspace'
-KVMRUN = pathlib.Path(os.environ.get('KVMRUN', '/home/user/kvmrun'))
-BC_PY = os.environ.get('BC_PY', '/home/user/.venv-bc/bin/python')
-MAPS = pathlib.Path(os.environ.get('BC_MAPS', '/home/user/bc-upstream/maps'))
-os.environ.setdefault('UNSWBC_PKG', '/home/user/.venv-bc/lib/python3.11/site-packages')
-os.environ.setdefault('WABT_BIN', '/home/user/bc-tools/wabt/bin')
-os.environ.setdefault('SIMDE_INC', '/home/user/bc-tools/simde')
+HOME = pathlib.Path.home()
+KVMRUN = pathlib.Path(os.environ.get('KVMRUN', HOME / 'kvmrun'))
+BC_PY = os.environ.get('BC_PY', str(HOME / '.venv-bc' / 'bin' / 'python'))
+
+
+def _site_packages():
+    # the venv BC_PY belongs to: <venv>/lib/python3.*/site-packages
+    venv = pathlib.Path(BC_PY).absolute().parent.parent  # no resolve(): venv python is a symlink
+    hits = sorted(venv.glob('lib/python3*/site-packages'))
+    return str(hits[0]) if hits else ''
+
+
+os.environ.setdefault('UNSWBC_PKG', _site_packages())
+for var, guess in (('WABT_BIN', HOME / 'bc-tools' / 'wabt' / 'bin'),
+                   ('SIMDE_INC', HOME / 'bc-tools' / 'simde')):
+    if var not in os.environ and guess.is_dir():
+        os.environ[var] = str(guess)  # else kvmrun searches PATH / system include dirs
+MAPS = pathlib.Path(os.environ.get('BC_MAPS', pathlib.Path(os.environ['UNSWBC_PKG']) / 'unswbc' / 'templates' / 'maps'))
 BOTCACHE = pathlib.Path(os.environ.get('BC_BOTCACHE', pathlib.Path.home() / '.cache' / 'bcbots'))
 
 # Small maps are where we lose by elimination (our-games report section 3), so

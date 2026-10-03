@@ -55,7 +55,7 @@ def main():
     ap.add_argument('--name', default='')
     ap.add_argument('--pages', type=int, default=3)
     ap.add_argument('--n', type=int, default=20)
-    ap.add_argument('--out', default='/home/ubuntu/battlecode/ladder_replays')
+    ap.add_argument('--out', default=os.path.join(os.environ.get('BC_REPO', os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), 'ladder_replays'))
     a = ap.parse_args()
 
     if a.cmd == 'matches':

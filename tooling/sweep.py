@@ -10,7 +10,7 @@ Multiple overrides comma-separated: --variant 'wSpace=1.2,wDanger=2.0'
 """
 import argparse, os, re, shutil, subprocess, sys, json, glob
 
-BC = '/home/ubuntu/battlecode'
+BC = os.environ.get('BC_REPO', os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 WS = os.path.join(BC, 'workspace')
 
 def main():

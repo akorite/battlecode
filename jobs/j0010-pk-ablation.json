@@ -1,0 +1,12 @@
+{
+  "id": "j0010-pk-ablation",
+  "version": 1,
+  "bot_commit": "1c73b1e0e18312c26190d736bf83059b80fdf04f",
+  "cand": "abyss_v102",
+  "base": "abyss_v102_champk",
+  "maps": "std",
+  "seeds": 3,
+  "seed_start": 8000,
+  "priority": 20,
+  "note": "Ablation: flagship abyss_v102 vs the same bot with pocketEatLen off (abyss_v102_champk). Both use the keyed tag. Prices the forage pocket fix alone. Report per map."
+}

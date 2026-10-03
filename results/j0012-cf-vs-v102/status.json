@@ -1,0 +1,87 @@
+{
+ "state": "done",
+ "worker": "devin-wkr3c",
+ "job_version": 1,
+ "bot_commit": "25968a557302c86f2c88b4d2437a784606924ca4",
+ "kvmrun_commit": "45452bd43a308ee4cb6818c3c036a2a2b4165394",
+ "unswbc_version": "1.2.7",
+ "opponents": {
+  "abyss_v102": {
+   "cand_wins": 34,
+   "games": 72,
+   "draws": 4,
+   "per_map": {
+    "autarky": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "portals": {
+     "wins": 1,
+     "draws": 4,
+     "games": 6
+    },
+    "default": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "trauma": {
+     "wins": 2,
+     "draws": 0,
+     "games": 6
+    },
+    "stronghold": {
+     "wins": 5,
+     "draws": 0,
+     "games": 6
+    },
+    "maze": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "schooltime": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "slithery_fight": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "islands": {
+     "wins": 1,
+     "draws": 0,
+     "games": 6
+    },
+    "big_empty": {
+     "wins": 2,
+     "draws": 0,
+     "games": 6
+    },
+    "australia": {
+     "wins": 2,
+     "draws": 0,
+     "games": 6
+    },
+    "unsw": {
+     "wins": 6,
+     "draws": 0,
+     "games": 6
+    }
+   }
+  }
+ },
+ "timeouts": 0,
+ "control": {
+  "cand": "abyss_st",
+  "base": "starter",
+  "maps": "small",
+  "seeds": 1,
+  "cand_wins": 20,
+  "games": 20
+ },
+ "notes": "spot-checked winner==candSide on all 72 games: 0 mismatches; no timeouts; max game 254s. Consolidation DID happen (alive@499 8.3 vs 25.6, longest 32.6 vs 28.9) but W/L stayed 50.0% (34 wins + 4 draws of 72)."
+}

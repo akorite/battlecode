@@ -1,0 +1,45 @@
+## abyss_v102 vs abyss_cf: 192 games
+             map    n   score   win%       game CI  pairs W/S/L        pair CI
+       Colosseum   12     6.0  50.0% [25.4, 74.6]    0/  0/0    [50.0, 50.0]
+           arena   12     5.0  41.7% [19.3, 68.0]    0/  0/0    [33.3, 50.0]
+   default_small   12     9.0  75.0% [46.8, 91.1]    0/  0/0    [66.7, 83.3]
+           devil   12     8.0  66.7% [39.1, 86.2]    0/  0/0    [66.7, 66.7]
+         dilemma   12     8.0  66.7% [39.1, 86.2]    0/  0/0    [66.7, 66.7]
+ queen_of_spades   12     5.0  41.7% [19.3, 68.0]    0/  0/0    [ 0.0, 83.3]
+         stripes   12     6.0  50.0% [25.4, 74.6]    0/  0/0    [50.0, 50.0]
+   tower_defense   12     7.0  58.3% [32.0, 80.7]    0/  0/0    [50.0, 66.7]
+          trophy   12     6.0  50.0% [25.4, 74.6]    0/  0/0    [50.0, 50.0]
+        weakhold   12     6.0  50.0% [25.4, 74.6]    0/  0/0    [33.3, 66.7]
+         autarky   12     6.0  50.0% [25.4, 74.6]    0/  0/0    [33.3, 66.7]
+         default   12     9.0  75.0% [46.8, 91.1]    0/  0/0    [66.7, 83.3]
+            maze   12    10.0  83.3% [55.2, 95.3]    0/  0/0    [83.3, 83.3]
+         portals   12    11.0  91.7% [64.6, 98.5]    0/  0/0    [83.3,100.0]
+      stronghold   12    12.0 100.0% [75.7,100.0]    0/  0/0    [100.0,100.0]
+          trauma   12     6.0  50.0% [25.4, 74.6]    0/  0/0    [16.7, 83.3]
+           SMALL  120    66.0  55.0% [46.1, 63.6]    0/  0/0    [46.7, 62.5]
+             BIG   72    54.0  75.0% [63.9, 83.6]    0/  0/0    [59.7, 87.5]
+             ALL  192   120.0  62.5% [55.5, 69.0]    0/  0/0    [54.2, 70.3]
+    ALL-unlocked  156    96.0  61.5% [53.7, 68.8]    0/  0/0    [53.8, 69.2]
+    map-weighted               62.5%  (each map equal weight; ALL-unlocked drops devil, portals, queen_of_spades, schooltime, slithery_fight)
+
+per-game metrics, cand vs base (means):
+                     alive at r499:   6.075 vs  17.337  (n=80)
+       longest at end (r500 games):  20.562 vs  10.575  (n=80)
+     queen len at end (r500 games):   3.175 vs   1.688  (n=80)
+         queen alive at end (r500):   0.287 vs   0.287  (n=80)
+            pearls per dragon-turn:   0.091 vs   0.084  (n=192)
+         adjacent free pearl taken:   0.758 vs   0.624  (n=192)
+             ... no enemy head <=3:   0.756 vs   0.628  (n=192)
+         queen non-ram deaths/game:   0.370 vs   0.255  (n=192)
+            queen dead (any) /game:   0.740 vs   0.760  (n=192)
+       deaths/game: wall+self+body:  48.479 vs  43.203  (n=192)
+         deaths/game: head-to-head:  16.078 vs  16.089  (n=192)
+  in-reach queen kill rate, dist 1:   1.000 vs   1.000  (opps 20 vs 11)
+  in-reach queen kill rate, dist 2:   0.889 vs   0.750  (opps 36 vs 24)
+ in-reach queen kill rate, dist 3+:   0.409 vs   0.353  (opps 93 vs 102)
+queen kept after theirs died (cand):   0.400  (34/85; won 67.0)
+queen kept after theirs died (base):   0.330  (30/91; won 51.0)
+   small maps: pearls eaten by r60:  28.858 vs  24.717  (n=120)
+         small maps: splits by r60:  10.350 vs   9.083  (n=120)
+          small maps: alive at r50:   6.131 vs   5.364  (n=120)
+   r500 games: 80, eliminations: 112, mean secs/game 40

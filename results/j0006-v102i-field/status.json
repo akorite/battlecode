@@ -1,0 +1,226 @@
+{
+ "opponents": {
+  "abyss_cf": {
+   "cand_wins": 36,
+   "games": 64,
+   "draws": 4,
+   "per_map": {
+    "Colosseum": {
+     "wins": 2,
+     "games": 4
+    },
+    "arena": {
+     "wins": 2,
+     "games": 4
+    },
+    "autarky": {
+     "wins": 1,
+     "games": 4
+    },
+    "default": {
+     "wins": 4,
+     "games": 4
+    },
+    "default_small": {
+     "wins": 3,
+     "games": 4
+    },
+    "devil": {
+     "wins": 2,
+     "games": 4
+    },
+    "dilemma": {
+     "wins": 0,
+     "games": 4
+    },
+    "maze": {
+     "wins": 3,
+     "games": 4
+    },
+    "portals": {
+     "wins": 4,
+     "games": 4
+    },
+    "queen_of_spades": {
+     "wins": 1,
+     "games": 4
+    },
+    "stripes": {
+     "wins": 2,
+     "games": 4
+    },
+    "stronghold": {
+     "wins": 4,
+     "games": 4
+    },
+    "tower_defense": {
+     "wins": 2,
+     "games": 4
+    },
+    "trauma": {
+     "wins": 2,
+     "games": 4
+    },
+    "trophy": {
+     "wins": 2,
+     "games": 4
+    },
+    "weakhold": {
+     "wins": 2,
+     "games": 4
+    }
+   }
+  },
+  "abyss_b2": {
+   "cand_wins": 42,
+   "games": 64,
+   "draws": 0,
+   "per_map": {
+    "Colosseum": {
+     "wins": 2,
+     "games": 4
+    },
+    "arena": {
+     "wins": 2,
+     "games": 4
+    },
+    "autarky": {
+     "wins": 3,
+     "games": 4
+    },
+    "default": {
+     "wins": 1,
+     "games": 4
+    },
+    "default_small": {
+     "wins": 3,
+     "games": 4
+    },
+    "devil": {
+     "wins": 2,
+     "games": 4
+    },
+    "dilemma": {
+     "wins": 4,
+     "games": 4
+    },
+    "maze": {
+     "wins": 4,
+     "games": 4
+    },
+    "portals": {
+     "wins": 4,
+     "games": 4
+    },
+    "queen_of_spades": {
+     "wins": 2,
+     "games": 4
+    },
+    "stripes": {
+     "wins": 2,
+     "games": 4
+    },
+    "stronghold": {
+     "wins": 4,
+     "games": 4
+    },
+    "tower_defense": {
+     "wins": 2,
+     "games": 4
+    },
+    "trauma": {
+     "wins": 3,
+     "games": 4
+    },
+    "trophy": {
+     "wins": 2,
+     "games": 4
+    },
+    "weakhold": {
+     "wins": 2,
+     "games": 4
+    }
+   }
+  },
+  "abyss_combat": {
+   "cand_wins": 40,
+   "games": 64,
+   "draws": 0,
+   "per_map": {
+    "Colosseum": {
+     "wins": 2,
+     "games": 4
+    },
+    "arena": {
+     "wins": 1,
+     "games": 4
+    },
+    "autarky": {
+     "wins": 2,
+     "games": 4
+    },
+    "default": {
+     "wins": 4,
+     "games": 4
+    },
+    "default_small": {
+     "wins": 3,
+     "games": 4
+    },
+    "devil": {
+     "wins": 4,
+     "games": 4
+    },
+    "dilemma": {
+     "wins": 2,
+     "games": 4
+    },
+    "maze": {
+     "wins": 3,
+     "games": 4
+    },
+    "portals": {
+     "wins": 3,
+     "games": 4
+    },
+    "queen_of_spades": {
+     "wins": 2,
+     "games": 4
+    },
+    "stripes": {
+     "wins": 2,
+     "games": 4
+    },
+    "stronghold": {
+     "wins": 4,
+     "games": 4
+    },
+    "tower_defense": {
+     "wins": 3,
+     "games": 4
+    },
+    "trauma": {
+     "wins": 1,
+     "games": 4
+    },
+    "trophy": {
+     "wins": 2,
+     "games": 4
+    },
+    "weakhold": {
+     "wins": 2,
+     "games": 4
+    }
+   }
+  }
+ },
+ "timeouts": 0,
+ "state": "done",
+ "worker": "devin-wkr4d",
+ "job_version": 1,
+ "bot_commit": "cefe70b08cfca4adab4c401d582b2d93c23af9fe",
+ "kvmrun_commit": "45452bd43a308ee4cb6818c3c036a2a2b4165394",
+ "unswbc_version": "1.2.7",
+ "control": null,
+ "notes": "61.5% overall (118-70, 4 draws). abyss_cf: 36-24+4d. abyss_b2: 42-22. abyss_combat: 40-24. all games decisive, no timeouts. Side attribution spot-checked x3."
+}

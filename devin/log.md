@@ -130,3 +130,10 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
   td 2/4→4/4. wh4 mechanism confirmed in merged form.
 - Self-challenge tally for v112: ~11W-12L; Portals W×3 vs ranked (flip),
   Devil 2/2, Australia + Slithery W; Schooltime guard held (0 id0 deaths).
+
+## ~00:35 UTC — v113 ACTIVE (sub 16183); challenge quota note
+
+- v113 building→active. Self-challenge batch 2 partially fired:
+  ranked vs Nitronics + JKS (10 games), unranked 1 more; then 429:
+  per-hour start cap (~4 games left; refills ~33min) + 120 req/min.
+  Queue remaining batch after refill.

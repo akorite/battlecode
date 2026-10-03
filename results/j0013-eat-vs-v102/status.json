@@ -1,0 +1,106 @@
+{
+ "state": "done",
+ "worker": "devin-qkmtwr",
+ "job_version": 1,
+ "bot_commit": "25968a557302c86f2c88b4d2437a784606924ca4",
+ "unswbc_version": "1.2.7",
+ "opponents": {
+  "abyss_v102": {
+   "cand_wins": 44,
+   "games": 96,
+   "draws": 3,
+   "per_map": {
+    "dilemma": {
+     "wins": 3,
+     "draws": 3,
+     "games": 6
+    },
+    "trophy": {
+     "wins": 1,
+     "draws": 0,
+     "games": 6
+    },
+    "devil": {
+     "wins": 2,
+     "draws": 0,
+     "games": 6
+    },
+    "Colosseum": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "queen_of_spades": {
+     "wins": 4,
+     "draws": 0,
+     "games": 6
+    },
+    "tower_defense": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "stripes": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "arena": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "weakhold": {
+     "wins": 4,
+     "draws": 0,
+     "games": 6
+    },
+    "default": {
+     "wins": 1,
+     "draws": 0,
+     "games": 6
+    },
+    "default_small": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "portals": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "trauma": {
+     "wins": 4,
+     "draws": 0,
+     "games": 6
+    },
+    "autarky": {
+     "wins": 2,
+     "draws": 0,
+     "games": 6
+    },
+    "stronghold": {
+     "wins": 4,
+     "draws": 0,
+     "games": 6
+    },
+    "maze": {
+     "wins": 1,
+     "draws": 0,
+     "games": 6
+    }
+   }
+  }
+ },
+ "timeouts": 0,
+ "control": {
+  "cand": "abyss_st",
+  "base": "starter",
+  "maps": "small",
+  "seeds": 1,
+  "cand_wins": 20,
+  "games": 20
+ },
+ "notes": "eatBonus 1.0->2.0: 50.5% score (47W+3D/96) NEUTRAL -> drop. Mechanism failed: adjQuietAte 0.760 vs 0.759 unchanged; small-map eaten60 worse 28.8 vs 32.7. Adjacent-pearl skips are not weight-driven."
+}

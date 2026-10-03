@@ -99,3 +99,11 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
   certainly fatal with any free exit, else no-op. Gate vs v104 running.
 - Queen-siege losses (mid-game H2H/hitWall encirclement) remain the biggest
   open loss class — next lane after guards settle.
+
+## ~23:15 UTC — v112 SUBMITTED (id 16175)
+
+- v112 gate vs v104: **48.9%** (43/88) — parity with v108's 47.7%, no
+  regression; wallguard is a strict superset of v106's live selfguard
+  (covers seen-kelp first steps + path[0], not just own-body).
+  Submitted: replaces v106's protection with strictly more coverage.
+- git tag pending at activation.

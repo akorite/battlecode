@@ -1,0 +1,34 @@
+{
+ "version": 1,
+ "id": "j0019-v104-vs-v102+st",
+ "priority": 18,
+ "bot": "abyss_v104",
+ "bot_commit": "232c0805d2862fc0a84a708829406a44ce222edd",
+ "tag": "abyss_v104",
+ "opponents": [
+  "abyss_v102",
+  "abyss_st"
+ ],
+ "setup": "workspace/abyss_v104",
+ "setup_commit": "232c0805d2862fc0a84a708829406a44ce222edd",
+ "maps": "all",
+ "seeds": [
+  9500,
+  9501,
+  9502,
+  9503
+ ],
+ "both_sides": true,
+ "replays": false,
+ "control": {
+  "bot": "abyss_st",
+  "opponent": "abyss_starter",
+  "maps": [
+   "arena"
+  ],
+  "seeds": [
+   30
+  ],
+  "both_sides": true
+ }
+}

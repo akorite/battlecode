@@ -1,0 +1,105 @@
+=== opponent: abyss_v102 ===
+## abyss_v102_qk vs abyss_v102: 132 games
+             map    n   score   win%       game CI  pairs W/S/L        pair CI
+       Colosseum    6     3.0  50.0% [18.8, 81.2]    0/  3/0    [50.0, 50.0]
+           arena    6     4.0  66.7% [30.0, 90.3]    1/  2/0    [50.0,100.0]
+   default_small    6     3.0  50.0% [18.8, 81.2]    0/  3/0    [50.0, 50.0]
+           devil    6     3.0  50.0% [18.8, 81.2]    0/  3/0    [50.0, 50.0]
+         dilemma    6     3.0  50.0% [18.8, 81.2]    0/  3/0    [50.0, 50.0]
+ queen_of_spades    6     4.0  66.7% [30.0, 90.3]    1/  2/0    [50.0,100.0]
+         stripes    6     2.0  33.3% [ 9.7, 70.0]    0/  2/1    [ 0.0, 50.0]
+   tower_defense    6     5.0  83.3% [43.6, 97.0]    2/  1/0    [50.0,100.0]
+          trophy    6     3.0  50.0% [18.8, 81.2]    0/  3/0    [50.0, 50.0]
+        weakhold    6     1.0  16.7% [ 3.0, 56.4]    0/  1/2    [ 0.0, 50.0]
+       australia    6     4.0  66.7% [30.0, 90.3]    1/  2/0    [50.0,100.0]
+         autarky    6     1.0  16.7% [ 3.0, 56.4]    0/  1/2    [ 0.0, 50.0]
+       big_empty    6     4.0  66.7% [30.0, 90.3]    1/  2/0    [50.0,100.0]
+         default    6     1.0  16.7% [ 3.0, 56.4]    0/  1/2    [ 0.0, 50.0]
+         islands    6     2.0  33.3% [ 9.7, 70.0]    1/  0/2    [ 0.0,100.0]
+            maze    6     5.0  83.3% [43.6, 97.0]    2/  1/0    [50.0,100.0]
+         portals    6     2.5  41.7% [13.9, 75.9]    0/  3/0    [25.0, 50.0]
+      schooltime    6     0.0   0.0% [ 0.0, 39.0]    0/  0/3    [ 0.0,  0.0]
+  slithery_fight    6     4.0  66.7% [30.0, 90.3]    2/  0/1    [ 0.0,100.0]
+      stronghold    6     4.0  66.7% [30.0, 90.3]    2/  0/1    [ 0.0,100.0]
+          trauma    6     3.0  50.0% [18.8, 81.2]    1/  1/1    [ 0.0,100.0]
+            unsw    6     1.0  16.7% [ 3.0, 56.4]    0/  1/2    [ 0.0, 50.0]
+           SMALL   60    31.0  51.7% [39.3, 63.8]    4/ 23/3    [43.3, 60.0]
+             BIG   72    31.5  43.8% [32.9, 55.2]   10/ 12/14   [31.2, 57.6]
+             ALL  132    62.5  47.3% [39.0, 55.8]   14/ 35/17   [39.4, 55.3]
+    ALL-unlocked  102    49.0  48.0% [38.6, 57.6]   11/ 27/13   [39.2, 56.9]
+    map-weighted               47.3%  (each map equal weight; ALL-unlocked drops devil, portals, queen_of_spades, schooltime, slithery_fight)
+
+per-game metrics, cand vs base (means):
+                     alive at r499:  14.905 vs  15.324  (n=74)
+       longest at end (r500 games):  25.284 vs  26.216  (n=74)
+     queen len at end (r500 games):   2.000 vs   2.243  (n=74)
+         queen alive at end (r500):   0.149 vs   0.243  (n=74)
+            pearls per dragon-turn:   0.089 vs   0.092  (n=132)
+         adjacent free pearl taken:   0.747 vs   0.757  (n=132)
+             ... no enemy head <=3:   0.746 vs   0.762  (n=132)
+         queen non-ram deaths/game:   0.386 vs   0.371  (n=132)
+            queen dead (any) /game:   0.841 vs   0.788  (n=132)
+       deaths/game: wall+self+body:  81.621 vs  87.152  (n=132)
+         deaths/game: head-to-head:  58.939 vs  59.394  (n=132)
+  in-reach queen kill rate, dist 1:   1.000 vs   1.000  (opps 6 vs 17)
+  in-reach queen kill rate, dist 2:   1.000 vs   0.581  (opps 21 vs 43)
+ in-reach queen kill rate, dist 3+:   1.000 vs   0.205  (opps 27 vs 78)
+queen kept after theirs died (cand):   0.210  (13/62; won 40.5)
+queen kept after theirs died (base):   0.323  (20/62; won 44.5)
+   small maps: pearls eaten by r60:  34.350 vs  32.233  (n=60)
+         small maps: splits by r60:  12.017 vs  11.050  (n=60)
+          small maps: alive at r50:   7.061 vs   6.286  (n=60)
+   r500 games: 74, eliminations: 58, mean secs/game 97
+
+=== opponent: abyss_st ===
+## abyss_v102_qk vs abyss_st: 132 games
+             map    n   score   win%       game CI  pairs W/S/L        pair CI
+       Colosseum    6     4.0  66.7% [30.0, 90.3]    1/  2/0    [50.0,100.0]
+           arena    6     3.0  50.0% [18.8, 81.2]    0/  3/0    [50.0, 50.0]
+   default_small    6     4.0  66.7% [30.0, 90.3]    1/  2/0    [50.0,100.0]
+           devil    6     3.0  50.0% [18.8, 81.2]    0/  3/0    [50.0, 50.0]
+         dilemma    6     3.0  50.0% [18.8, 81.2]    0/  3/0    [50.0, 50.0]
+ queen_of_spades    6     4.0  66.7% [30.0, 90.3]    1/  2/0    [50.0,100.0]
+         stripes    6     3.0  50.0% [18.8, 81.2]    1/  1/1    [ 0.0,100.0]
+   tower_defense    6     5.0  83.3% [43.6, 97.0]    2/  1/0    [50.0,100.0]
+          trophy    6     5.0  83.3% [43.6, 97.0]    2/  1/0    [50.0,100.0]
+        weakhold    6     1.0  16.7% [ 3.0, 56.4]    0/  1/2    [ 0.0, 50.0]
+       australia    6     5.0  83.3% [43.6, 97.0]    2/  1/0    [50.0,100.0]
+         autarky    6     1.0  16.7% [ 3.0, 56.4]    0/  1/2    [ 0.0, 50.0]
+       big_empty    6     3.0  50.0% [18.8, 81.2]    1/  1/1    [ 0.0,100.0]
+         default    6     3.0  50.0% [18.8, 81.2]    1/  1/1    [ 0.0,100.0]
+         islands    6     5.0  83.3% [43.6, 97.0]    2/  1/0    [50.0,100.0]
+            maze    6     6.0 100.0% [61.0,100.0]    3/  0/0    [100.0,100.0]
+         portals    6     6.0 100.0% [61.0,100.0]    3/  0/0    [100.0,100.0]
+      schooltime    6     0.0   0.0% [ 0.0, 39.0]    0/  0/3    [ 0.0,  0.0]
+  slithery_fight    6     3.0  50.0% [18.8, 81.2]    0/  3/0    [50.0, 50.0]
+      stronghold    6     6.0 100.0% [61.0,100.0]    3/  0/0    [100.0,100.0]
+          trauma    6     4.0  66.7% [30.0, 90.3]    1/  2/0    [50.0,100.0]
+            unsw    6     4.0  66.7% [30.0, 90.3]    1/  2/0    [50.0,100.0]
+           SMALL   60    35.0  58.3% [45.7, 69.9]    8/ 19/3    [48.3, 68.3]
+             BIG   72    46.0  63.9% [52.4, 74.0]   17/ 12/7    [51.4, 75.0]
+             ALL  132    81.0  61.4% [52.8, 69.2]   25/ 31/10   [52.3, 69.7]
+    ALL-unlocked  102    65.0  63.7% [54.1, 72.4]   21/ 23/7    [54.9, 72.5]
+    map-weighted               61.4%  (each map equal weight; ALL-unlocked drops devil, portals, queen_of_spades, schooltime, slithery_fight)
+
+per-game metrics, cand vs base (means):
+                     alive at r499:  16.211 vs  30.053  (n=76)
+       longest at end (r500 games):  24.408 vs  15.763  (n=76)
+     queen len at end (r500 games):   1.500 vs   0.816  (n=76)
+         queen alive at end (r500):   0.132 vs   0.211  (n=76)
+            pearls per dragon-turn:   0.087 vs   0.087  (n=132)
+         adjacent free pearl taken:   0.749 vs   0.644  (n=132)
+             ... no enemy head <=3:   0.744 vs   0.653  (n=132)
+         queen non-ram deaths/game:   0.439 vs   0.394  (n=132)
+            queen dead (any) /game:   0.841 vs   0.818  (n=132)
+       deaths/game: wall+self+body:  86.515 vs  85.856  (n=132)
+         deaths/game: head-to-head:  59.265 vs  59.053  (n=132)
+  in-reach queen kill rate, dist 1:   1.000 vs   1.000  (opps 3 vs 8)
+  in-reach queen kill rate, dist 2:   1.000 vs   0.625  (opps 18 vs 32)
+ in-reach queen kill rate, dist 3+:   1.000 vs   0.208  (opps 28 vs 101)
+queen kept after theirs died (cand):   0.210  (13/62; won 46.5)
+queen kept after theirs died (base):   0.262  (16/61; won 35.5)
+   small maps: pearls eaten by r60:  35.333 vs  29.817  (n=60)
+         small maps: splits by r60:  12.550 vs  10.067  (n=60)
+          small maps: alive at r50:   7.388 vs   5.837  (n=60)
+   r500 games: 76, eliminations: 56, mean secs/game 100

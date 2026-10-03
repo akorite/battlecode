@@ -1,0 +1,255 @@
+{
+ "state": "done",
+ "worker": "devin-wkr2b",
+ "job_version": 1,
+ "bot_commit": "99ee7b48dcf2189a3b956ead03964626b3533405",
+ "kvmrun_commit": "45452bd43a308ee4cb6818c3c036a2a2b4165394",
+ "unswbc_version": "1.2.7",
+ "opponents": {
+  "abyss_v102": {
+   "cand_wins": 59,
+   "games": 132,
+   "draws": 7,
+   "per_map": {
+    "Colosseum": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "arena": {
+     "wins": 4,
+     "draws": 0,
+     "games": 6
+    },
+    "australia": {
+     "wins": 4,
+     "draws": 0,
+     "games": 6
+    },
+    "autarky": {
+     "wins": 1,
+     "draws": 0,
+     "games": 6
+    },
+    "big_empty": {
+     "wins": 4,
+     "draws": 0,
+     "games": 6
+    },
+    "default": {
+     "wins": 1,
+     "draws": 0,
+     "games": 6
+    },
+    "default_small": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "devil": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "dilemma": {
+     "wins": 0,
+     "draws": 6,
+     "games": 6
+    },
+    "islands": {
+     "wins": 2,
+     "draws": 0,
+     "games": 6
+    },
+    "maze": {
+     "wins": 5,
+     "draws": 0,
+     "games": 6
+    },
+    "portals": {
+     "wins": 2,
+     "draws": 1,
+     "games": 6
+    },
+    "queen_of_spades": {
+     "wins": 4,
+     "draws": 0,
+     "games": 6
+    },
+    "schooltime": {
+     "wins": 0,
+     "draws": 0,
+     "games": 6
+    },
+    "slithery_fight": {
+     "wins": 4,
+     "draws": 0,
+     "games": 6
+    },
+    "stripes": {
+     "wins": 2,
+     "draws": 0,
+     "games": 6
+    },
+    "stronghold": {
+     "wins": 4,
+     "draws": 0,
+     "games": 6
+    },
+    "tower_defense": {
+     "wins": 5,
+     "draws": 0,
+     "games": 6
+    },
+    "trauma": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "trophy": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "unsw": {
+     "wins": 1,
+     "draws": 0,
+     "games": 6
+    },
+    "weakhold": {
+     "wins": 1,
+     "draws": 0,
+     "games": 6
+    }
+   }
+  },
+  "abyss_st": {
+   "cand_wins": 78,
+   "games": 132,
+   "draws": 6,
+   "per_map": {
+    "Colosseum": {
+     "wins": 4,
+     "draws": 0,
+     "games": 6
+    },
+    "arena": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "australia": {
+     "wins": 5,
+     "draws": 0,
+     "games": 6
+    },
+    "autarky": {
+     "wins": 1,
+     "draws": 0,
+     "games": 6
+    },
+    "big_empty": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "default": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "default_small": {
+     "wins": 4,
+     "draws": 0,
+     "games": 6
+    },
+    "devil": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "dilemma": {
+     "wins": 0,
+     "draws": 6,
+     "games": 6
+    },
+    "islands": {
+     "wins": 5,
+     "draws": 0,
+     "games": 6
+    },
+    "maze": {
+     "wins": 6,
+     "draws": 0,
+     "games": 6
+    },
+    "portals": {
+     "wins": 6,
+     "draws": 0,
+     "games": 6
+    },
+    "queen_of_spades": {
+     "wins": 4,
+     "draws": 0,
+     "games": 6
+    },
+    "schooltime": {
+     "wins": 0,
+     "draws": 0,
+     "games": 6
+    },
+    "slithery_fight": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "stripes": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "stronghold": {
+     "wins": 6,
+     "draws": 0,
+     "games": 6
+    },
+    "tower_defense": {
+     "wins": 5,
+     "draws": 0,
+     "games": 6
+    },
+    "trauma": {
+     "wins": 4,
+     "draws": 0,
+     "games": 6
+    },
+    "trophy": {
+     "wins": 5,
+     "draws": 0,
+     "games": 6
+    },
+    "unsw": {
+     "wins": 4,
+     "draws": 0,
+     "games": 6
+    },
+    "weakhold": {
+     "wins": 1,
+     "draws": 0,
+     "games": 6
+    }
+   }
+  }
+ },
+ "timeouts": 0,
+ "control": {
+  "cand": "abyss_st",
+  "base": "starter",
+  "maps": "small",
+  "seeds": 1,
+  "result": "20-0",
+  "timeouts": 0,
+  "note": "from session start"
+ },
+ "notes": "qk 47.3% vs flagship v102 (59W/7D/66L, score 62.5, pair CI [39.4,55.3]); 61.4% vs live st (78W/6D/48L, score 81, pair CI [52.3,69.7]). vs v102: maze 6/6, tower_defense+stronghold+unsw 4-5/6, schooltime 0/6, weakhold+autarky+default 1/6. vs st: maze+portals+stronghold 6/6, australia+islands+trauma+trophy+tower_defense 5/6, schooltime 0/6, weakhold+autarky 1/6. slayKill: qk converts every in-reach queen kill (dist2 1.000, dist3+ 1.000 vs ~0.6/0.2 base). 264 games, 0 FAILs, side attribution verified all games. Draws: mostly dilemma mutual eliminations + a few roundLimit."
+}

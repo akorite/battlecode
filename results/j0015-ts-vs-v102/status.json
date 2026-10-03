@@ -1,0 +1,98 @@
+{
+ "state": "done",
+ "worker": "devin-qkmtwr",
+ "job_version": 1,
+ "bot_commit": "8f3b6d66931070e0764916c0a3b9e6ea59bca10b",
+ "unswbc_version": "1.2.7",
+ "opponents": {
+  "abyss_v102": {
+   "cand_wins": 42,
+   "games": 96,
+   "draws": 8,
+   "per_map": {
+    "dilemma": {
+     "wins": 0,
+     "draws": 6,
+     "games": 6
+    },
+    "queen_of_spades": {
+     "wins": 4,
+     "draws": 0,
+     "games": 6
+    },
+    "trophy": {
+     "wins": 2,
+     "draws": 0,
+     "games": 6
+    },
+    "devil": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "Colosseum": {
+     "wins": 2,
+     "draws": 0,
+     "games": 6
+    },
+    "stripes": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "arena": {
+     "wins": 1,
+     "draws": 0,
+     "games": 6
+    },
+    "tower_defense": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "weakhold": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "portals": {
+     "wins": 2,
+     "draws": 2,
+     "games": 6
+    },
+    "default_small": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "default": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "trauma": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "autarky": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "stronghold": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "maze": {
+     "wins": 4,
+     "draws": 0,
+     "games": 6
+    }
+   }
+  }
+ },
+ "timeouts": 0,
+ "notes": "wTailStrike=2.0 queen-fear: W/L 47.9% neutral BUT all queen mechanisms improved: qNonRam 0.354 vs 0.417, queenAlive@end 0.261 vs 0.217, dist-2 kill rate 0.812 vs 0.583, dist3+ 0.560 vs 0.302. Mechanism-positive, W/L-neutral -> merge candidate per combination policy."
+}

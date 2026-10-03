@@ -1,0 +1,12 @@
+{
+ "id": "j0016-seal-vs-v102",
+ "version": 1,
+ "bot_commit": "aac44f29876f30e79ecf3cb583f5cd844e473dbc",
+ "cand": "abyss_v102_seal",
+ "opponents": ["abyss_v102"],
+ "maps": "small",
+ "seeds": 3,
+ "seed_start": 8500,
+ "priority": 17,
+ "note": "Lane: self-seal spread pressure (wCrowd=0.8 on dests beside 2+ allied bodies). ~75% of trapped-death blockers are allied bodies. Small maps only where scrums happen. Metrics: deaths wall+self+body vs flagship, alive@r50, then W/L."
+}

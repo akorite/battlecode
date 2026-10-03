@@ -1,0 +1,234 @@
+{
+ "state": "done",
+ "worker": "devin-loozxb",
+ "job_version": 1,
+ "bot_commit": "cc65778b8e7393851ed2e164b4f44d921e3422a7",
+ "kvmrun_commit": "45452bd43a308ee4cb6818c3c036a2a2b4165394",
+ "unswbc_version": "1.2.7",
+ "opponents": {
+  "abyss_cf": {
+   "cand_wins": 61,
+   "games": 96,
+   "draws": 0,
+   "per_map": {
+    "Colosseum": {
+     "wins": 3,
+     "games": 6
+    },
+    "arena": {
+     "wins": 5,
+     "games": 6
+    },
+    "autarky": {
+     "wins": 3,
+     "games": 6
+    },
+    "default": {
+     "wins": 5,
+     "games": 6
+    },
+    "default_small": {
+     "wins": 4,
+     "games": 6
+    },
+    "devil": {
+     "wins": 4,
+     "games": 6
+    },
+    "dilemma": {
+     "wins": 6,
+     "games": 6
+    },
+    "maze": {
+     "wins": 3,
+     "games": 6
+    },
+    "portals": {
+     "wins": 3,
+     "games": 6
+    },
+    "queen_of_spades": {
+     "wins": 4,
+     "games": 6
+    },
+    "stripes": {
+     "wins": 3,
+     "games": 6
+    },
+    "stronghold": {
+     "wins": 2,
+     "games": 6
+    },
+    "tower_defense": {
+     "wins": 3,
+     "games": 6
+    },
+    "trauma": {
+     "wins": 6,
+     "games": 6
+    },
+    "trophy": {
+     "wins": 4,
+     "games": 6
+    },
+    "weakhold": {
+     "wins": 3,
+     "games": 6
+    }
+   }
+  },
+  "abyss_b2": {
+   "cand_wins": 50,
+   "games": 96,
+   "draws": 0,
+   "per_map": {
+    "Colosseum": {
+     "wins": 3,
+     "games": 6
+    },
+    "arena": {
+     "wins": 5,
+     "games": 6
+    },
+    "autarky": {
+     "wins": 2,
+     "games": 6
+    },
+    "default": {
+     "wins": 2,
+     "games": 6
+    },
+    "default_small": {
+     "wins": 2,
+     "games": 6
+    },
+    "devil": {
+     "wins": 3,
+     "games": 6
+    },
+    "dilemma": {
+     "wins": 6,
+     "games": 6
+    },
+    "maze": {
+     "wins": 2,
+     "games": 6
+    },
+    "portals": {
+     "wins": 3,
+     "games": 6
+    },
+    "queen_of_spades": {
+     "wins": 2,
+     "games": 6
+    },
+    "stripes": {
+     "wins": 3,
+     "games": 6
+    },
+    "stronghold": {
+     "wins": 4,
+     "games": 6
+    },
+    "tower_defense": {
+     "wins": 3,
+     "games": 6
+    },
+    "trauma": {
+     "wins": 3,
+     "games": 6
+    },
+    "trophy": {
+     "wins": 4,
+     "games": 6
+    },
+    "weakhold": {
+     "wins": 3,
+     "games": 6
+    }
+   }
+  },
+  "abyss_combat": {
+   "cand_wins": 56,
+   "games": 96,
+   "draws": 0,
+   "per_map": {
+    "Colosseum": {
+     "wins": 3,
+     "games": 6
+    },
+    "arena": {
+     "wins": 5,
+     "games": 6
+    },
+    "autarky": {
+     "wins": 1,
+     "games": 6
+    },
+    "default": {
+     "wins": 6,
+     "games": 6
+    },
+    "default_small": {
+     "wins": 3,
+     "games": 6
+    },
+    "devil": {
+     "wins": 5,
+     "games": 6
+    },
+    "dilemma": {
+     "wins": 6,
+     "games": 6
+    },
+    "maze": {
+     "wins": 3,
+     "games": 6
+    },
+    "portals": {
+     "wins": 3,
+     "games": 6
+    },
+    "queen_of_spades": {
+     "wins": 4,
+     "games": 6
+    },
+    "stripes": {
+     "wins": 3,
+     "games": 6
+    },
+    "stronghold": {
+     "wins": 3,
+     "games": 6
+    },
+    "tower_defense": {
+     "wins": 4,
+     "games": 6
+    },
+    "trauma": {
+     "wins": 3,
+     "games": 6
+    },
+    "trophy": {
+     "wins": 2,
+     "games": 6
+    },
+    "weakhold": {
+     "wins": 2,
+     "games": 6
+    }
+   }
+  }
+ },
+ "timeouts": 0,
+ "control": {
+  "cand": "abyss_st",
+  "base": "starter",
+  "maps": "small",
+  "seeds": 1,
+  "result": "20-0",
+  "timeouts": 0,
+  "note": "from session start"
+ },
+ "notes": "v102_base vs field: cf 63.5%, b2 52.1%, combat 58.3%. dilemma 6/6 vs all three; arena 5/6 vs all three. Weakest vs b2 on autarky/default/default_small/queen_of_spades/maze (2/6) and vs combat on autarky (1/6). All decisive, no timeouts."
+}

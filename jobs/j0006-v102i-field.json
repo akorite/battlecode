@@ -1,0 +1,12 @@
+{
+  "id": "j0006-v102i-field",
+  "version": 1,
+  "bot_commit": "cefe70b08cfca4adab4c401d582b2d93c23af9fe",
+  "cand": "abyss_v102",
+  "opponents": ["abyss_cf", "abyss_b2", "abyss_combat"],
+  "maps": "std",
+  "seeds": 2,
+  "seed_start": 5500,
+  "priority": 15,
+  "note": "Interim flagship abyss_v102 vs a varied field of older bots. Report per map and per opponent."
+}

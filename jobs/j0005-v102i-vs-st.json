@@ -1,0 +1,12 @@
+{
+  "id": "j0005-v102i-vs-st",
+  "version": 1,
+  "bot_commit": "cefe70b08cfca4adab4c401d582b2d93c23af9fe",
+  "cand": "abyss_v102",
+  "base": "abyss_st",
+  "maps": "all",
+  "seeds": 4,
+  "seed_start": 4000,
+  "priority": 30,
+  "note": "Interim flagship abyss_v102 (champ + pocketEatLen + team-keyed sonar + ghost-queen fix) vs the live bot. Report per map. kmatch summary at this commit also prints a pair-level CI; please paste its full output into summary.txt."
+}

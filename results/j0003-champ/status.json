@@ -1,0 +1,131 @@
+{
+ "state": "done",
+ "worker": "devin-loozxb",
+ "job_version": 1,
+ "bot_commit": "0ccfcc242530c05d4ed861058bccddc89c89ce94",
+ "kvmrun_commit": "45452bd43a308ee4cb6818c3c036a2a2b4165394",
+ "unswbc_version": "1.2.7",
+ "opponents": {
+  "abyss_v102_base": {
+   "cand_wins": 46,
+   "games": 72,
+   "draws": 0,
+   "per_map": {
+    "australia": {
+     "wins": 4,
+     "games": 6
+    },
+    "autarky": {
+     "wins": 4,
+     "games": 6
+    },
+    "big_empty": {
+     "wins": 3,
+     "games": 6
+    },
+    "default": {
+     "wins": 3,
+     "games": 6
+    },
+    "islands": {
+     "wins": 4,
+     "games": 6
+    },
+    "maze": {
+     "wins": 3,
+     "games": 6
+    },
+    "portals": {
+     "wins": 6,
+     "games": 6
+    },
+    "schooltime": {
+     "wins": 3,
+     "games": 6
+    },
+    "slithery_fight": {
+     "wins": 3,
+     "games": 6
+    },
+    "stronghold": {
+     "wins": 6,
+     "games": 6
+    },
+    "trauma": {
+     "wins": 3,
+     "games": 6
+    },
+    "unsw": {
+     "wins": 4,
+     "games": 6
+    }
+   }
+  },
+  "abyss_st": {
+   "cand_wins": 46,
+   "games": 72,
+   "draws": 0,
+   "per_map": {
+    "australia": {
+     "wins": 4,
+     "games": 6
+    },
+    "autarky": {
+     "wins": 4,
+     "games": 6
+    },
+    "big_empty": {
+     "wins": 4,
+     "games": 6
+    },
+    "default": {
+     "wins": 3,
+     "games": 6
+    },
+    "islands": {
+     "wins": 4,
+     "games": 6
+    },
+    "maze": {
+     "wins": 4,
+     "games": 6
+    },
+    "portals": {
+     "wins": 6,
+     "games": 6
+    },
+    "schooltime": {
+     "wins": 3,
+     "games": 6
+    },
+    "slithery_fight": {
+     "wins": 3,
+     "games": 6
+    },
+    "stronghold": {
+     "wins": 5,
+     "games": 6
+    },
+    "trauma": {
+     "wins": 3,
+     "games": 6
+    },
+    "unsw": {
+     "wins": 3,
+     "games": 6
+    }
+   }
+  }
+ },
+ "timeouts": 0,
+ "control": {
+  "cand": "abyss_st",
+  "base": "starter",
+  "maps": "small",
+  "seeds": 1,
+  "result": "20-0",
+  "timeouts": 0,
+  "note": "from session start"
+ },
+ "notes": "champ 63.9% vs both v102_base and abyss_st (46/72 each). portals 6/6 and stronghold 6/6 + 5/6 cleanest; schooltime/slithery/trauma 3/6. All decisive, no timeouts. alive@end lower (18.4 vs 34.6 vs base) but longest 23.7 vs 18.5 - champion concentration working as designed."
+}

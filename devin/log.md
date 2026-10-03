@@ -21,3 +21,23 @@
   sparse, every dest looks unproven, queen pinned. Bounced to whfix worker for
   frontier-bounded iteration (abyss_wh2).
 - Deaths phase still clean: zero new r0-5 self-deaths vs v104 baseline.
+
+## 2026-10-03 ~20:05 UTC — gate forensics + v109 merge
+
+**Runner-pair discovery (IMPORTANT harness correction):** kvmrun runner binaries
+embed ONE bot pair; `--name-a/--name-b` are cosmetic labels. gate_v10X.sh's wins
+phase ran one runner for BOTH cf and combat → whichever opponent wasn't embedded
+was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
+45.6% vs cf over 68 games (≥ v104's 44% baseline), deaths clean. The -a/-b
+"sides" were extra seeds, not seat swaps. kmatch.py is the honest harness
+(builds reversed-seat pairs). Always verify: `strings $RUNNER | grep bota_`.
+- v108: deaths identical to baseline; 45.6% vs cf (68g). Queued behind v106.
+- v106 ladder: 5 ranked matches 1W-4L (early). Tracker: tooling/v106track.py.
+- Workers landed: abyss_wh2 (trapSeenOnly+frontier, weakhold pockets fixed,
+  no open-map pin; 54.2% vs v104 on wh/td/trauma) and abyss_pearl v2
+  (forage-first opening; +13.9pp vs combat, parity cf, +14% pearls@30;
+  kept regressions: stripes/devil/default/qos small-n).
+- **abyss_v109 = v108 + wh2 + pearl** merged (disjoint hunks; kParams:
+  trapSeenOnly=1, openUntil=48, openQueenKeep=3, openQueenDanger=1.8).
+  Compiles; deaths gate clean (baseline pattern only).
+  Honest kmatch gates running: gate-v109-cf (22 ladder maps), then combat.

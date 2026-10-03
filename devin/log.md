@@ -56,3 +56,20 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
 - New worker c85884d3: weakhold starvation dive (alive@499 ~2 vs 21).
 - v106 ladder: ~3W-4L ranked at 9 matches (Slithery/TD losses are endgame
   attrition, not guard failures — guard held, no r0-5 schooltime deaths).
+
+## ~21:40 UTC — v110 also regresses; wh2 isolated as the bleeder; starve → v111
+
+- v110 (v108+wh2) vs v104 honest: **40.0%** (34/85) — same big-map collapse
+  as v109 (BIG 28.9%; trauma/stronghold/slithery/portals/autarky/default 0/4).
+- v108 vs v104 honest: **47.7%** (41/86, parity within CI) → the ~8pp bleed
+  is wh2's unproven veto, not pearl (pearl only added noise on top).
+  Mechanism: trapSeenOnly makes fog a wall → unproven veto over-fires on
+  big foggy boards → queen pinned; plus mid-game queen hitSelf on trauma.
+- whfix worker (d50d6e85) bounced: iterate veto to be maze-gated or die.
+- starve worker landed `abyss_starve` (devin/starve): swarmTrap=1 — non-queen
+  dragons on maze maps get deadEnd scan (seenOnly=false → proven-closed
+  only), veto exhausted && !cycle && cells <= trapSafeCells. weakhold
+  16.7→33.3% vs cf, 66.7→100% vs v104, controls flat; cost eaten60 -2-3.
+  Base was its own v109 reconstruction → transplanted to **abyss_v111**
+  (v108 + swarmTrap only, maze_ → kelpFraction inline since v108 lacks
+  pearl's maze_ flag). Honest 22-map gate running (gate-v111-v104).

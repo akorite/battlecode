@@ -1,0 +1,73 @@
+{
+ "state": "done",
+ "worker": "devin-loozxb",
+ "job_version": 2,
+ "bot_commit": "d3eeca0ab61f10febbea5825e7375b33ae2d92f1",
+ "kvmrun_commit": "45452bd43a308ee4cb6818c3c036a2a2b4165394",
+ "unswbc_version": "1.2.7",
+ "opponents": {
+  "abyss_v102": {
+   "cand_wins": 25,
+   "games": 54,
+   "draws": 0,
+   "per_map": {
+    "australia": {
+     "wins": 2,
+     "draws": 0,
+     "games": 6
+    },
+    "big_empty": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "islands": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "maze": {
+     "wins": 4,
+     "draws": 0,
+     "games": 6
+    },
+    "schooltime": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "slithery_fight": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "stronghold": {
+     "wins": 2,
+     "draws": 0,
+     "games": 6
+    },
+    "trauma": {
+     "wins": 2,
+     "draws": 0,
+     "games": 6
+    },
+    "unsw": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    }
+   }
+  }
+ },
+ "timeouts": 0,
+ "control": {
+  "cand": "abyss_st",
+  "base": "starter",
+  "maps": "small",
+  "seeds": 1,
+  "result": "20-0",
+  "timeouts": 0,
+  "note": "from session start"
+ },
+ "notes": "mapadapt 46.3% vs v102 (25W/29L/0D). Only maze positive (4/6); australia/stronghold/trauma 2/6. queenLen@end 3.04 vs 3.85 - the plan switch cost the queen. All 54 games went r499 roundLimit, zero eliminations. No timeouts."
+}

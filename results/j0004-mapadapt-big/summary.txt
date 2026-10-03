@@ -1,0 +1,33 @@
+## abyss_v102_mapadapt vs abyss_v102: 54 games
+             map    n   score   win%       game CI  pairs W/S/L        pair CI
+       australia    6     2.0  33.3% [ 9.7, 70.0]    0/  2/1    [ 0.0, 50.0]
+       big_empty    6     3.0  50.0% [18.8, 81.2]    0/  3/0    [50.0, 50.0]
+         islands    6     3.0  50.0% [18.8, 81.2]    0/  3/0    [50.0, 50.0]
+            maze    6     4.0  66.7% [30.0, 90.3]    1/  2/0    [50.0,100.0]
+      schooltime    6     3.0  50.0% [18.8, 81.2]    0/  3/0    [50.0, 50.0]
+  slithery_fight    6     3.0  50.0% [18.8, 81.2]    1/  1/1    [ 0.0,100.0]
+      stronghold    6     2.0  33.3% [ 9.7, 70.0]    0/  2/1    [ 0.0, 50.0]
+          trauma    6     2.0  33.3% [ 9.7, 70.0]    0/  2/1    [ 0.0, 50.0]
+            unsw    6     3.0  50.0% [18.8, 81.2]    0/  3/0    [50.0, 50.0]
+             ALL   54    25.0  46.3% [33.7, 59.4]    2/ 21/4    [37.0, 55.6]
+    ALL-unlocked   42    19.0  45.2% [31.2, 60.1]    1/ 17/3    [35.7, 54.8]
+    map-weighted               46.3%  (each map equal weight; ALL-unlocked drops devil, portals, queen_of_spades, schooltime, slithery_fight)
+
+per-game metrics, cand vs base (means):
+                     alive at r499:  19.852 vs  18.611  (n=54)
+       longest at end (r500 games):  32.130 vs  29.389  (n=54)
+     queen len at end (r500 games):   3.037 vs   3.852  (n=54)
+         queen alive at end (r500):   0.259 vs   0.278  (n=54)
+            pearls per dragon-turn:   0.067 vs   0.063  (n=54)
+         adjacent free pearl taken:   0.734 vs   0.736  (n=54)
+             ... no enemy head <=3:   0.735 vs   0.738  (n=54)
+         queen non-ram deaths/game:   0.444 vs   0.444  (n=54)
+            queen dead (any) /game:   0.741 vs   0.722  (n=54)
+       deaths/game: wall+self+body: 181.685 vs 171.815  (n=54)
+         deaths/game: head-to-head: 119.481 vs 119.444  (n=54)
+  in-reach queen kill rate, dist 1:   1.000 vs   1.000  (opps 3 vs 3)
+  in-reach queen kill rate, dist 2:   0.636 vs   0.667  (opps 11 vs 12)
+ in-reach queen kill rate, dist 3+:   0.179 vs   0.385  (opps 28 vs 13)
+queen kept after theirs died (cand):   0.130  (3/23; won 13.0)
+queen kept after theirs died (base):   0.200  (4/20; won 12.0)
+   r500 games: 54, eliminations: 0, mean secs/game 157

@@ -6,7 +6,7 @@
   "opponents": ["abyss_cf", "abyss_b2", "abyss_combat"],
   "maps": "std",
   "seeds": 2,
-  "seed_start": 5500,
+  "seed_start": 7000,
   "priority": 15,
   "note": "Interim flagship abyss_v102 vs a varied field of older bots. Report per map and per opponent."
 }

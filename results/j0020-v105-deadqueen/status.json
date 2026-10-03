@@ -1,0 +1,97 @@
+{
+ "state": "done",
+ "worker": "devin-wkr1a",
+ "job_version": 1,
+ "bot_commit": "bb583352bbd52731c6a64d8db0a2d6a2bf7d865c",
+ "kvmrun_commit": "45452bd43a308ee4cb6818c3c036a2a2b4165394",
+ "unswbc_version": "1.2.7",
+ "opponents": {
+  "abyss_v104": {
+   "cand_wins": 14,
+   "games": 36,
+   "draws": 2,
+   "per_map": {
+    "Colosseum": {
+     "wins": 2,
+     "draws": 0,
+     "games": 6
+    },
+    "autarky": {
+     "wins": 1,
+     "draws": 0,
+     "games": 6
+    },
+    "default": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "queen_of_spades": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "schooltime": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "weakhold": {
+     "wins": 2,
+     "draws": 2,
+     "games": 6
+    }
+   }
+  },
+  "abyss_st": {
+   "cand_wins": 16,
+   "games": 36,
+   "draws": 0,
+   "per_map": {
+    "Colosseum": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "autarky": {
+     "wins": 5,
+     "draws": 0,
+     "games": 6
+    },
+    "default": {
+     "wins": 4,
+     "draws": 0,
+     "games": 6
+    },
+    "queen_of_spades": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "schooltime": {
+     "wins": 0,
+     "draws": 0,
+     "games": 6
+    },
+    "weakhold": {
+     "wins": 1,
+     "draws": 0,
+     "games": 6
+    }
+   }
+  }
+ },
+ "timeouts": 0,
+ "control": {
+  "cand": "abyss_st",
+  "base": "starter",
+  "maps": "arena",
+  "seeds": [
+   31
+  ],
+  "result": "2-0",
+  "timeouts": 0,
+  "note": "job spec said abyss_starter; ran starter (no abyss_starter dir at this commit)"
+ },
+ "notes": "v105 (v104 + dead-queen early consolidation) REGRESSES on this map set (seeds 9700-9702): 41.7% vs v104 (15/36), 44.4% vs st (16/36). Per-map in summary.txt. Control abyss_st vs starter arena s31: 2-0. No timeouts. Replays kept locally in ~/bc/results/j0020-v105-deadqueen__*/replays/ (job said replays:true; not pushed per protocol)."
+}

@@ -11,6 +11,7 @@ Metrics per side (A/B), tied to the blockers in analysis/our-games/report.md:
   slayOpp1/2/3, slayKill1/2/3           dragon-turns with the enemy queen in vision and a free path
                                         within reach ceil(L/4)+L-2 (by path length, 3 = 3+),
                                         and how many ended with her dead that turn
+  eaten30                               pearls by round 30 (pearl lane)
   eaten60, splits60, alive50            opening race (blocker 4)
 Replay parsing follows analysis/our-games/scripts/an.py and forage2.py.
 """
@@ -182,6 +183,8 @@ def analyze(path):
                 occ.add(h)
                 if h in pend:
                     T[team[i]]['eaten'] += 1
+                    if rnd <= 30:
+                        T[team[i]]['eaten30'] += 1
                     if rnd <= 60:
                         T[team[i]]['eaten60'] += 1
                     if i == queen[team[i]]:

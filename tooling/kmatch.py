@@ -28,6 +28,7 @@ import concurrent.futures as cf
 import hashlib
 import json
 import math
+import random
 import os
 import pathlib
 import re
@@ -170,6 +171,23 @@ def wilson(w, n, z=1.96):
     return ((c - s) / d, (c + s) / d)
 
 
+def pair_ci(units, B=2000, z=1.96):
+    """CI on the mean of per-pair scores (W=1, split=0.5, L=0; an unpaired game counts as its own unit).
+    Games in a pair share a seed and map, so they are not independent; resampling pairs respects that.
+    Percentile bootstrap with a fixed RNG so summaries are reproducible."""
+    n = len(units)
+    if n == 0:
+        return (0, 1)
+    if n == 1:
+        return (0, 1)
+    rng = random.Random(12345)
+    ms = sorted(sum(rng.choice(units) for _ in range(n)) / n for _ in range(B))
+    return (ms[int(0.025 * B)], ms[int(0.975 * B) - 1])
+
+
+SIDE_LOCKED = {'queen_of_spades', 'devil', 'portals', 'schooltime', 'slithery_fight'}
+
+
 def mean(xs):
     xs = [x for x in xs if x is not None]
     return sum(xs) / len(xs) if xs else float('nan')
@@ -188,7 +206,7 @@ def summary(dirs, out=sys.stdout):
     maps = sorted({g['map'] for g in G}, key=lambda m: (m not in SMALL, m))
     pr = lambda *x: print(*x, file=out)
     pr(f'## {cand} vs {base}: {len(G)} games')
-    pr(f'{"map":>16} {"n":>4} {"score":>7} {"win%":>6} {"95% CI":>13}  {"pairs W/S/L":>11}')
+    pr(f'{"map":>16} {"n":>4} {"score":>7} {"win%":>6} {"game CI":>13}  {"pairs W/S/L":>11}  {"pair CI":>13}')
 
     def line(name, gs):
         n = len(gs)
@@ -200,8 +218,10 @@ def summary(dirs, out=sys.stdout):
         full = [v for v in pairs.values() if len(v) == 2]
         pw = sum(1 for v in full if sum(v) == 2)
         pl = sum(1 for v in full if sum(v) == 0)
+        units = [sum(v) / len(v) for v in pairs.values()]
+        plo, phi = pair_ci(units)
         pr(f'{name:>16} {n:>4} {w:>7.1f} {100 * w / n:>5.1f}% [{100 * lo:4.1f},{100 * hi:5.1f}]  '
-           f'{pw:>3}/{len(full) - pw - pl}/{pl}')
+           f'{pw:>3}/{len(full) - pw - pl:>3}/{pl:<3}  [{100 * plo:4.1f},{100 * phi:5.1f}]')
     for m in maps:
         line(m, [g for g in G if g['map'] == m])
     sm = [g for g in G if g['map'] in SMALL]
@@ -210,6 +230,14 @@ def summary(dirs, out=sys.stdout):
         line('SMALL', sm)
         line('BIG', bg)
     line('ALL', G)
+    un = [g for g in G if g['map'] not in SIDE_LOCKED]
+    if 0 < len(un) < len(G):
+        line('ALL-unlocked', un)
+    pm = {}
+    for g in G:
+        pm.setdefault(g['map'], []).append(g['candWin'])
+    pr(f'{"map-weighted":>16} {"":>4} {"":>7} {100 * mean([sum(v) / len(v) for v in pm.values()]):>5.1f}%  '
+       f'(each map equal weight; ALL-unlocked drops {", ".join(sorted(SIDE_LOCKED))})')
     pr('\nper-game metrics, cand vs base (means):')
     r500 = [g for g in G if g['rounds'] >= 499]
     elim = [g for g in G if g['map'] in SMALL]

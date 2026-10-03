@@ -137,3 +137,14 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
   ranked vs Nitronics + JKS (10 games), unranked 1 more; then 429:
   per-hour start cap (~4 games left; refills ~33min) + 120 req/min.
   Queue remaining batch after refill.
+
+## ~00:55 UTC — queen-death census (v112+v113 self-challenges, ~40 games)
+
+- id0 deaths: 13 games, reasons: H2H×6, hitWall×4, hitSelf×2, hitOtherBody×1.
+  None at r1-5 earliest was r7 (Default win anyway). r33+ for the rest —
+  mid-game combat attrition, exactly the qsiege lane target.
+- Guard tracking: schooltime 2/2 games with ZERO queen deaths (was ~80%
+  r1 suicide before the guard).
+- New lanes: autarky (13f9c332) spawned — 0/4-0/6 everywhere, worst map.
+  whfix terminated post-wh4-ship.
+- v113 challenges so far 4W-7L; quota refills ~30min for next batch.

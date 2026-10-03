@@ -1,0 +1,15 @@
+{
+  "id": "j0011-qk-vs-flagship",
+  "version": 1,
+  "bot_commit": "1d47a406c3e02f6a26f62e8c9d6bf06e69ee9f19",
+  "cand": "abyss_v102_qk",
+  "opponents": [
+    "abyss_v102",
+    "abyss_st"
+  ],
+  "maps": "all",
+  "seeds": 3,
+  "seed_start": 5000,
+  "priority": 29,
+  "note": "Queen-kill lane on the flagship: abyss_v102_qk = abyss_v102 + slayQueen (in-reach enemy-queen kills) + protectLead (survival mode once their queen is confirmed dead) + round-keyed sonar stamps + queen dead-end veto. Sonar protocols differ per side (static team tag vs round stamps) so each team hears only itself — no cross-talk either direction. Report per map and per opponent; kmatch summary prints pair CI and slay metrics (slayOpp/slayKill)."
+}

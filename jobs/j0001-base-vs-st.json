@@ -1,0 +1,12 @@
+{
+  "id": "j0001-base-vs-st",
+  "version": 1,
+  "bot_commit": "cc65778b8e7393851ed2e164b4f44d921e3422a7",
+  "cand": "abyss_v102_base",
+  "base": "abyss_st",
+  "maps": "all",
+  "seeds": 4,
+  "seed_start": 1000,
+  "priority": 10,
+  "note": "Queen-identity fix vs live bot, all 22 maps, both sides per seed (kmatch does this). Local result so far: 61% small (n=80), 67% mid (n=24). Report per map. Big 64x64 maps take several minutes per game; that is expected."
+}

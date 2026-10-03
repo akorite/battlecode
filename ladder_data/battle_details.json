@@ -1,0 +1,6096 @@
+{
+ "978868": {
+  "match": {
+   "id": 978868,
+   "teamAId": 420,
+   "teamBId": 351,
+   "mapId": 9,
+   "ranked": false,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "running",
+   "winner": null,
+   "scoresA": null,
+   "scoresB": null,
+   "views": 0,
+   "seriesId": "02a0f901-14b7-49a7-b793-68b806b1d37f",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T17:24:31.784Z",
+   "startedAt": "2026-10-03T17:24:31.985Z",
+   "completedAt": null,
+   "log": null,
+   "seed": null
+  },
+  "mapName": "Schooltime",
+  "teamAName": "That's That, and This is This",
+  "teamBName": "Cognoscenti",
+  "teamAElo": 1367,
+  "teamBElo": 1469,
+  "games": [
+   {
+    "id": 978868,
+    "status": "running",
+    "winner": null,
+    "hasReplay": false,
+    "mapName": "Schooltime"
+   },
+   {
+    "id": 978869,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Portals"
+   },
+   {
+    "id": 978870,
+    "status": "running",
+    "winner": null,
+    "hasReplay": false,
+    "mapName": "Slithery Fight"
+   },
+   {
+    "id": 978871,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Queen Of Spades"
+   },
+   {
+    "id": 978872,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Stripes"
+   },
+   {
+    "id": 978873,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Default"
+   },
+   {
+    "id": 978874,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   },
+   {
+    "id": 978875,
+    "status": "running",
+    "winner": null,
+    "hasReplay": false,
+    "mapName": "Islands"
+   },
+   {
+    "id": 978876,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Trophy"
+   },
+   {
+    "id": 978877,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Maze"
+   }
+  ],
+  "wait": {
+   "ahead": 0,
+   "ms": 12456
+  }
+ },
+ "978577": {
+  "match": {
+   "id": 978577,
+   "teamAId": 351,
+   "teamBId": 1012,
+   "mapId": 7,
+   "ranked": true,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "a",
+   "scoresA": 25,
+   "scoresB": 0,
+   "views": 0,
+   "seriesId": "335fdb91-5b6b-4419-b2bf-87c4397e5147",
+   "eloChangeA": -2,
+   "eloChangeB": 1,
+   "requestedAt": "2026-10-03T17:18:35.029Z",
+   "startedAt": "2026-10-03T17:18:35.811Z",
+   "completedAt": "2026-10-03T17:18:41.480Z",
+   "log": null,
+   "seed": "13cb865dfeff0e56"
+  },
+  "mapName": "Queen Of Spades",
+  "teamAName": "Cognoscenti",
+  "teamBName": "404 Not Found",
+  "teamAElo": 1469,
+  "teamBElo": 1384,
+  "games": [
+   {
+    "id": 978577,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Queen Of Spades"
+   },
+   {
+    "id": 978578,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Slithery Fight"
+   },
+   {
+    "id": 978579,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Default"
+   },
+   {
+    "id": 978580,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Prisoners Dilemma"
+   },
+   {
+    "id": 978581,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Autarky"
+   }
+  ],
+  "wait": null
+ },
+ "978254": {
+  "match": {
+   "id": 978254,
+   "teamAId": 1092,
+   "teamBId": 351,
+   "mapId": 11,
+   "ranked": true,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "a",
+   "scoresA": 78,
+   "scoresB": 0,
+   "views": 0,
+   "seriesId": "903733a1-812f-432d-85af-e645195d2bb6",
+   "eloChangeA": -4,
+   "eloChangeB": 8,
+   "requestedAt": "2026-10-03T17:13:28.989Z",
+   "startedAt": "2026-10-03T17:13:30.399Z",
+   "completedAt": "2026-10-03T17:13:36.089Z",
+   "log": null,
+   "seed": "d1f2ee9129a2a554"
+  },
+  "mapName": "Trophy",
+  "teamAName": "so-lonely",
+  "teamBName": "Cognoscenti",
+  "teamAElo": 1424,
+  "teamBElo": 1469,
+  "games": [
+   {
+    "id": 978254,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Trophy"
+   },
+   {
+    "id": 978255,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Australia"
+   },
+   {
+    "id": 978256,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Schooltime"
+   },
+   {
+    "id": 978257,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Maze"
+   },
+   {
+    "id": 978258,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Slithery Fight"
+   }
+  ],
+  "wait": null
+ },
+ "978112": {
+  "match": {
+   "id": 978112,
+   "teamAId": 420,
+   "teamBId": 351,
+   "mapId": 9,
+   "ranked": false,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "a",
+   "scoresA": 29,
+   "scoresB": 465,
+   "views": 0,
+   "seriesId": "45ca3314-6fbb-4ceb-8e0c-4d3469649884",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T17:11:49.500Z",
+   "startedAt": "2026-10-03T17:11:49.722Z",
+   "completedAt": "2026-10-03T17:14:54.577Z",
+   "log": null,
+   "seed": "3205357c8054eeb5"
+  },
+  "mapName": "Schooltime",
+  "teamAName": "That's That, and This is This",
+  "teamBName": "Cognoscenti",
+  "teamAElo": 1367,
+  "teamBElo": 1469,
+  "games": [
+   {
+    "id": 978112,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Schooltime"
+   },
+   {
+    "id": 978113,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Portals"
+   },
+   {
+    "id": 978114,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Slithery Fight"
+   },
+   {
+    "id": 978115,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Queen Of Spades"
+   },
+   {
+    "id": 978116,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Stripes"
+   },
+   {
+    "id": 978117,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Default"
+   },
+   {
+    "id": 978118,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   },
+   {
+    "id": 978119,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Islands"
+   },
+   {
+    "id": 978120,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Trophy"
+   },
+   {
+    "id": 978121,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Maze"
+   }
+  ],
+  "wait": null
+ },
+ "976497": {
+  "match": {
+   "id": 976497,
+   "teamAId": 420,
+   "teamBId": 351,
+   "mapId": 9,
+   "ranked": false,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "a",
+   "scoresA": 29,
+   "scoresB": 231,
+   "views": 0,
+   "seriesId": "c6fc50c3-aee8-4945-b33d-6cd5c4d8e214",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T16:40:38.440Z",
+   "startedAt": "2026-10-03T16:40:38.998Z",
+   "completedAt": "2026-10-03T16:42:56.123Z",
+   "log": null,
+   "seed": "2418bd278028dd64"
+  },
+  "mapName": "Schooltime",
+  "teamAName": "That's That, and This is This",
+  "teamBName": "Cognoscenti",
+  "teamAElo": 1367,
+  "teamBElo": 1469,
+  "games": [
+   {
+    "id": 976497,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Schooltime"
+   },
+   {
+    "id": 976498,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Portals"
+   },
+   {
+    "id": 976499,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Slithery Fight"
+   },
+   {
+    "id": 976500,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Queen Of Spades"
+   },
+   {
+    "id": 976501,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Stripes"
+   },
+   {
+    "id": 976502,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Default"
+   },
+   {
+    "id": 976503,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   },
+   {
+    "id": 976504,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Islands"
+   },
+   {
+    "id": 976505,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Trophy"
+   },
+   {
+    "id": 976506,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Maze"
+   }
+  ],
+  "wait": null
+ },
+ "976477": {
+  "match": {
+   "id": 976477,
+   "teamAId": 371,
+   "teamBId": 351,
+   "mapId": 20,
+   "ranked": true,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 74,
+   "scoresB": 10,
+   "views": 0,
+   "seriesId": "26765b10-2ef5-4580-83ec-4243128d8823",
+   "eloChangeA": -3,
+   "eloChangeB": 3,
+   "requestedAt": "2026-10-03T16:40:19.968Z",
+   "startedAt": "2026-10-03T16:40:20.472Z",
+   "completedAt": "2026-10-03T16:40:36.314Z",
+   "log": null,
+   "seed": "3d2284fdf53bdad7"
+  },
+  "mapName": "Portals",
+  "teamAName": "LOOPING THE FUNCTIONS",
+  "teamBName": "Cognoscenti",
+  "teamAElo": 1269,
+  "teamBElo": 1469,
+  "games": [
+   {
+    "id": 976477,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Portals"
+   },
+   {
+    "id": 976478,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Australia"
+   },
+   {
+    "id": 976479,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Autarky"
+   },
+   {
+    "id": 976480,
+    "status": "draw",
+    "winner": null,
+    "hasReplay": true,
+    "mapName": "weakhold"
+   },
+   {
+    "id": 976481,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   }
+  ],
+  "wait": null
+ },
+ "976237": {
+  "match": {
+   "id": 976237,
+   "teamAId": 489,
+   "teamBId": 351,
+   "mapId": 34,
+   "ranked": false,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 0,
+   "scoresB": 482,
+   "views": 0,
+   "seriesId": "28b64cf1-df9b-4b3a-b489-e1cdb4ad8c10",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T16:34:20.074Z",
+   "startedAt": "2026-10-03T16:34:20.585Z",
+   "completedAt": "2026-10-03T16:37:08.962Z",
+   "log": null,
+   "seed": "16b6f7d2a3fd3c7f"
+  },
+  "mapName": "Around UNSW",
+  "teamAName": "Magnetar",
+  "teamBName": "Cognoscenti",
+  "teamAElo": 806,
+  "teamBElo": 1469,
+  "games": [
+   {
+    "id": 976237,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Around UNSW"
+   },
+   {
+    "id": 976238,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Australia"
+   },
+   {
+    "id": 976239,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Autarky"
+   },
+   {
+    "id": 976240,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Default"
+   },
+   {
+    "id": 976241,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Devil"
+   },
+   {
+    "id": 976242,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Islands"
+   },
+   {
+    "id": 976243,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Maze"
+   },
+   {
+    "id": 976244,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Portals"
+   },
+   {
+    "id": 976245,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Prisoners Dilemma"
+   },
+   {
+    "id": 976246,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Queen Of Spades"
+   },
+   {
+    "id": 976247,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Schooltime"
+   },
+   {
+    "id": 976248,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Slithery Fight"
+   },
+   {
+    "id": 976249,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Stripes"
+   },
+   {
+    "id": 976250,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   },
+   {
+    "id": 976251,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Trauma"
+   },
+   {
+    "id": 976252,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Trophy"
+   },
+   {
+    "id": 976253,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "weakhold"
+   }
+  ],
+  "wait": null
+ },
+ "975918": {
+  "match": {
+   "id": 975918,
+   "teamAId": 420,
+   "teamBId": 351,
+   "mapId": 9,
+   "ranked": false,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "a",
+   "scoresA": 269,
+   "scoresB": 178,
+   "views": 0,
+   "seriesId": "359d03b9-3019-4619-b0a4-3f81f7535c84",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T16:28:12.067Z",
+   "startedAt": "2026-10-03T16:28:13.007Z",
+   "completedAt": "2026-10-03T16:31:13.334Z",
+   "log": null,
+   "seed": "f77831714b893897"
+  },
+  "mapName": "Schooltime",
+  "teamAName": "That's That, and This is This",
+  "teamBName": "Cognoscenti",
+  "teamAElo": 1367,
+  "teamBElo": 1469,
+  "games": [
+   {
+    "id": 975918,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Schooltime"
+   },
+   {
+    "id": 975919,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Portals"
+   },
+   {
+    "id": 975920,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Slithery Fight"
+   },
+   {
+    "id": 975921,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Queen Of Spades"
+   },
+   {
+    "id": 975922,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Stripes"
+   },
+   {
+    "id": 975923,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Default"
+   },
+   {
+    "id": 975924,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   },
+   {
+    "id": 975925,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Islands"
+   },
+   {
+    "id": 975926,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Trophy"
+   },
+   {
+    "id": 975927,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Maze"
+   }
+  ],
+  "wait": null
+ },
+ "975291": {
+  "match": {
+   "id": 975291,
+   "teamAId": 420,
+   "teamBId": 351,
+   "mapId": 9,
+   "ranked": false,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "a",
+   "scoresA": 196,
+   "scoresB": 279,
+   "views": 0,
+   "seriesId": "bb7476f5-d141-4e13-a495-f11cd55b89f9",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T16:15:26.379Z",
+   "startedAt": "2026-10-03T16:15:26.883Z",
+   "completedAt": "2026-10-03T16:19:38.870Z",
+   "log": null,
+   "seed": "903382a940af1183"
+  },
+  "mapName": "Schooltime",
+  "teamAName": "That's That, and This is This",
+  "teamBName": "Cognoscenti",
+  "teamAElo": 1367,
+  "teamBElo": 1469,
+  "games": [
+   {
+    "id": 975291,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Schooltime"
+   },
+   {
+    "id": 975292,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Portals"
+   },
+   {
+    "id": 975293,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Slithery Fight"
+   },
+   {
+    "id": 975294,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Queen Of Spades"
+   },
+   {
+    "id": 975295,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Stripes"
+   },
+   {
+    "id": 975296,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Default"
+   },
+   {
+    "id": 975297,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   },
+   {
+    "id": 975298,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Islands"
+   },
+   {
+    "id": 975299,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Trophy"
+   },
+   {
+    "id": 975300,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Maze"
+   }
+  ],
+  "wait": null
+ },
+ "975176": {
+  "match": {
+   "id": 975176,
+   "teamAId": 1092,
+   "teamBId": 351,
+   "mapId": 28,
+   "ranked": true,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "a",
+   "scoresA": 34,
+   "scoresB": 0,
+   "views": 0,
+   "seriesId": "1ccca4c5-8544-470a-b7fc-b2dabc5482e2",
+   "eloChangeA": -2,
+   "eloChangeB": 5,
+   "requestedAt": "2026-10-03T16:13:19.111Z",
+   "startedAt": "2026-10-03T16:13:19.993Z",
+   "completedAt": "2026-10-03T16:13:59.875Z",
+   "log": null,
+   "seed": "7f13b9a2065d6e0e"
+  },
+  "mapName": "weakhold",
+  "teamAName": "so-lonely",
+  "teamBName": "Cognoscenti",
+  "teamAElo": 1424,
+  "teamBElo": 1469,
+  "games": [
+   {
+    "id": 975176,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "weakhold"
+   },
+   {
+    "id": 975177,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Slithery Fight"
+   },
+   {
+    "id": 975178,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Schooltime"
+   },
+   {
+    "id": 975179,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Prisoners Dilemma"
+   },
+   {
+    "id": 975180,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Autarky"
+   }
+  ],
+  "wait": null
+ },
+ "974916": {
+  "match": {
+   "id": 974916,
+   "teamAId": 1092,
+   "teamBId": 351,
+   "mapId": 7,
+   "ranked": true,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "a",
+   "scoresA": 29,
+   "scoresB": 0,
+   "views": 0,
+   "seriesId": "329e49af-b2c0-4024-9f69-c4b3ee4c738f",
+   "eloChangeA": 18,
+   "eloChangeB": -43,
+   "requestedAt": "2026-10-03T16:08:42.830Z",
+   "startedAt": "2026-10-03T16:09:17.273Z",
+   "completedAt": "2026-10-03T16:09:23.406Z",
+   "log": null,
+   "seed": "7935c919efca8f64"
+  },
+  "mapName": "Queen Of Spades",
+  "teamAName": "so-lonely",
+  "teamBName": "Cognoscenti",
+  "teamAElo": 1424,
+  "teamBElo": 1469,
+  "games": [
+   {
+    "id": 974916,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Queen Of Spades"
+   },
+   {
+    "id": 974917,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Schooltime"
+   },
+   {
+    "id": 974918,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Trauma"
+   },
+   {
+    "id": 974919,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Stripes"
+   },
+   {
+    "id": 974920,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Around UNSW"
+   }
+  ],
+  "wait": null
+ },
+ "973897": {
+  "match": {
+   "id": 973897,
+   "teamAId": 782,
+   "teamBId": 351,
+   "mapId": 31,
+   "ranked": false,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "a",
+   "scoresA": 93,
+   "scoresB": 111,
+   "views": 0,
+   "seriesId": "8cc30eee-d36d-458a-806e-ea0b737ae3b6",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T15:52:17.658Z",
+   "startedAt": "2026-10-03T15:52:18.372Z",
+   "completedAt": "2026-10-03T15:54:27.029Z",
+   "log": null,
+   "seed": "c306a996abd77374"
+  },
+  "mapName": "Maze",
+  "teamAName": "WaterCandle",
+  "teamBName": "Cognoscenti",
+  "teamAElo": 1746,
+  "teamBElo": 1469,
+  "games": [
+   {
+    "id": 973897,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Maze"
+   },
+   {
+    "id": 973898,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   },
+   {
+    "id": 973899,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "weakhold"
+   },
+   {
+    "id": 973900,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Australia"
+   },
+   {
+    "id": 973901,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Islands"
+   },
+   {
+    "id": 973902,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Stripes"
+   },
+   {
+    "id": 973903,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Around UNSW"
+   },
+   {
+    "id": 973904,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Devil"
+   },
+   {
+    "id": 973905,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Queen Of Spades"
+   },
+   {
+    "id": 973906,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Default"
+   }
+  ],
+  "wait": null
+ },
+ "973116": {
+  "match": {
+   "id": 973116,
+   "teamAId": 351,
+   "teamBId": 529,
+   "mapId": 30,
+   "ranked": true,
+   "skinA": "Jiaolong",
+   "skinB": "Vatulele Prawn",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 148,
+   "scoresB": 139,
+   "views": 0,
+   "seriesId": "f918cd89-298a-4658-93a4-52053608058c",
+   "eloChangeA": -37,
+   "eloChangeB": 6,
+   "requestedAt": "2026-10-03T15:35:31.645Z",
+   "startedAt": "2026-10-03T15:35:32.189Z",
+   "completedAt": "2026-10-03T15:38:34.375Z",
+   "log": null,
+   "seed": "21d103a57e66b7f5"
+  },
+  "mapName": "Islands",
+  "teamAName": "Cognoscenti",
+  "teamBName": "meowest",
+  "teamAElo": 1469,
+  "teamBElo": 1658,
+  "games": [
+   {
+    "id": 973116,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Islands"
+   },
+   {
+    "id": 973117,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Schooltime"
+   },
+   {
+    "id": 973118,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Trauma"
+   },
+   {
+    "id": 973119,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Stripes"
+   },
+   {
+    "id": 973120,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   }
+  ],
+  "wait": null
+ },
+ "971553": {
+  "match": {
+   "id": 971553,
+   "teamAId": 351,
+   "teamBId": 835,
+   "mapId": 28,
+   "ranked": true,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 5,
+   "scoresB": 78,
+   "views": 0,
+   "seriesId": "b923c8e0-f5e2-428e-84eb-ca3277cc3689",
+   "eloChangeA": 21,
+   "eloChangeB": -14,
+   "requestedAt": "2026-10-03T15:10:30.325Z",
+   "startedAt": "2026-10-03T15:10:56.445Z",
+   "completedAt": "2026-10-03T15:11:17.375Z",
+   "log": null,
+   "seed": "52689759a4d35314"
+  },
+  "mapName": "weakhold",
+  "teamAName": "Cognoscenti",
+  "teamBName": "\u5929\u5929\u5f00\u5fc3 :(",
+  "teamAElo": 1469,
+  "teamBElo": 1654,
+  "games": [
+   {
+    "id": 971553,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "weakhold"
+   },
+   {
+    "id": 971554,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Default"
+   },
+   {
+    "id": 971555,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Stripes"
+   },
+   {
+    "id": 971556,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   },
+   {
+    "id": 971557,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Queen Of Spades"
+   }
+  ],
+  "wait": null
+ },
+ "971118": {
+  "match": {
+   "id": 971118,
+   "teamAId": 1092,
+   "teamBId": 351,
+   "mapId": 7,
+   "ranked": true,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "a",
+   "scoresA": 71,
+   "scoresB": 0,
+   "views": 0,
+   "seriesId": "442f73ad-8ac6-4276-aad8-ee374baf9c21",
+   "eloChangeA": -2,
+   "eloChangeB": 3,
+   "requestedAt": "2026-10-03T15:04:53.621Z",
+   "startedAt": "2026-10-03T15:04:54.128Z",
+   "completedAt": "2026-10-03T15:05:19.527Z",
+   "log": null,
+   "seed": "e66499551efe2d4e"
+  },
+  "mapName": "Queen Of Spades",
+  "teamAName": "so-lonely",
+  "teamBName": "Cognoscenti",
+  "teamAElo": 1424,
+  "teamBElo": 1469,
+  "games": [
+   {
+    "id": 971118,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Queen Of Spades"
+   },
+   {
+    "id": 971119,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Around UNSW"
+   },
+   {
+    "id": 971120,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Portals"
+   },
+   {
+    "id": 971121,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Trauma"
+   },
+   {
+    "id": 971122,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   }
+  ],
+  "wait": null
+ },
+ "970343": {
+  "match": {
+   "id": 970343,
+   "teamAId": 782,
+   "teamBId": 351,
+   "mapId": 31,
+   "ranked": false,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 0,
+   "scoresB": 151,
+   "views": 0,
+   "seriesId": "7a04c1c9-71be-4620-bd63-304324b6b1af",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:52:12.579Z",
+   "startedAt": "2026-10-03T14:52:13.034Z",
+   "completedAt": "2026-10-03T14:54:59.837Z",
+   "log": null,
+   "seed": "9eec1ee956cd538a"
+  },
+  "mapName": "Maze",
+  "teamAName": "WaterCandle",
+  "teamBName": "Cognoscenti",
+  "teamAElo": 1746,
+  "teamBElo": 1469,
+  "games": [
+   {
+    "id": 970343,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Maze"
+   },
+   {
+    "id": 970344,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   },
+   {
+    "id": 970345,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "weakhold"
+   },
+   {
+    "id": 970346,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Australia"
+   },
+   {
+    "id": 970347,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Islands"
+   },
+   {
+    "id": 970348,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Stripes"
+   },
+   {
+    "id": 970349,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Around UNSW"
+   },
+   {
+    "id": 970350,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Devil"
+   },
+   {
+    "id": 970351,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Queen Of Spades"
+   },
+   {
+    "id": 970352,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Default"
+   }
+  ],
+  "wait": null
+ },
+ "969287": {
+  "match": {
+   "id": 969287,
+   "teamAId": 351,
+   "teamBId": 213,
+   "mapId": 34,
+   "ranked": false,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 274,
+   "scoresB": 225,
+   "views": 0,
+   "seriesId": "5984d5a5-114a-4768-9c5e-0f3ddcc45064",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:39.227Z",
+   "startedAt": "2026-10-03T14:35:39.948Z",
+   "completedAt": "2026-10-03T14:43:18.023Z",
+   "log": null,
+   "seed": "daf4d615f3cf06d6"
+  },
+  "mapName": "Around UNSW",
+  "teamAName": "Cognoscenti",
+  "teamBName": "Sponge(Albert and Bob)",
+  "teamAElo": 1469,
+  "teamBElo": 2272,
+  "games": [
+   {
+    "id": 969287,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Around UNSW"
+   }
+  ],
+  "wait": null
+ },
+ "969285": {
+  "match": {
+   "id": 969285,
+   "teamAId": 351,
+   "teamBId": 213,
+   "mapId": 34,
+   "ranked": false,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 202,
+   "scoresB": 224,
+   "views": 0,
+   "seriesId": "cc7357f1-33b3-41ed-93b4-7eb066f46d5f",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:37.836Z",
+   "startedAt": "2026-10-03T14:35:38.478Z",
+   "completedAt": "2026-10-03T14:42:18.928Z",
+   "log": null,
+   "seed": "517dfee148cc6779"
+  },
+  "mapName": "Around UNSW",
+  "teamAName": "Cognoscenti",
+  "teamBName": "Sponge(Albert and Bob)",
+  "teamAElo": 1469,
+  "teamBElo": 2272,
+  "games": [
+   {
+    "id": 969285,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Around UNSW"
+   }
+  ],
+  "wait": null
+ },
+ "969326": {
+  "match": {
+   "id": 969326,
+   "teamAId": 351,
+   "teamBId": 842,
+   "mapId": 21,
+   "ranked": false,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 54,
+   "scoresB": 420,
+   "views": 0,
+   "seriesId": "8da003c3-f09b-4a87-bb9c-b6c135b260ae",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:50.504Z",
+   "startedAt": "2026-10-03T14:35:51.398Z",
+   "completedAt": "2026-10-03T14:40:15.927Z",
+   "log": null,
+   "seed": "97255927f80d73c8"
+  },
+  "mapName": "Slithery Fight",
+  "teamAName": "Cognoscenti",
+  "teamBName": "horse",
+  "teamAElo": 1469,
+  "teamBElo": 2166,
+  "games": [
+   {
+    "id": 969326,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Slithery Fight"
+   }
+  ],
+  "wait": null
+ },
+ "969339": {
+  "match": {
+   "id": 969339,
+   "teamAId": 351,
+   "teamBId": 952,
+   "mapId": 29,
+   "ranked": false,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 159,
+   "scoresB": 248,
+   "views": 0,
+   "seriesId": "ad81a5b6-ce08-4f44-bdef-8bf1057bd400",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:59.941Z",
+   "startedAt": "2026-10-03T14:36:01.843Z",
+   "completedAt": "2026-10-03T14:39:21.652Z",
+   "log": null,
+   "seed": "bf7ddc60e4812ade"
+  },
+  "mapName": "Australia",
+  "teamAName": "Cognoscenti",
+  "teamBName": "Cache me outside",
+  "teamAElo": 1469,
+  "teamBElo": 2099,
+  "games": [
+   {
+    "id": 969339,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Australia"
+   }
+  ],
+  "wait": null
+ },
+ "969288": {
+  "match": {
+   "id": 969288,
+   "teamAId": 351,
+   "teamBId": 213,
+   "mapId": 31,
+   "ranked": false,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 149,
+   "scoresB": 167,
+   "views": 0,
+   "seriesId": "26947c5d-5161-4c93-995d-8361f5d5f72d",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:40.768Z",
+   "startedAt": "2026-10-03T14:35:40.923Z",
+   "completedAt": "2026-10-03T14:38:15.261Z",
+   "log": null,
+   "seed": "6528157dbaca062c"
+  },
+  "mapName": "Maze",
+  "teamAName": "Cognoscenti",
+  "teamBName": "Sponge(Albert and Bob)",
+  "teamAElo": 1469,
+  "teamBElo": 2272,
+  "games": [
+   {
+    "id": 969288,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Maze"
+   }
+  ],
+  "wait": null
+ },
+ "969343": {
+  "match": {
+   "id": 969343,
+   "teamAId": 351,
+   "teamBId": 55,
+   "mapId": 30,
+   "ranked": false,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 0,
+   "scoresB": 239,
+   "views": 0,
+   "seriesId": "167c4678-3179-4471-917b-f97ac34804c6",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:36:03.353Z",
+   "startedAt": "2026-10-03T14:36:06.095Z",
+   "completedAt": "2026-10-03T14:37:58.452Z",
+   "log": null,
+   "seed": "659dcaa86cc9c19d"
+  },
+  "mapName": "Islands",
+  "teamAName": "Cognoscenti",
+  "teamBName": "\ud80c\udfbc\ud80c\udced\ud80c\udd71\ud80c\udc8b\ud80c\uddcc \ud80c\udfcf\ud80c\udd71 \ud80c\udc8b\ud80c\udd3f",
+  "teamAElo": 1469,
+  "teamBElo": 2062,
+  "games": [
+   {
+    "id": 969343,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Islands"
+   }
+  ],
+  "wait": null
+ },
+ "969329": {
+  "match": {
+   "id": 969329,
+   "teamAId": 351,
+   "teamBId": 842,
+   "mapId": 31,
+   "ranked": false,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 51,
+   "scoresB": 298,
+   "views": 0,
+   "seriesId": "15e9d9fd-dd3b-47ad-91b8-e47373b1b9a6",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:52.620Z",
+   "startedAt": "2026-10-03T14:35:56.543Z",
+   "completedAt": "2026-10-03T14:37:47.893Z",
+   "log": null,
+   "seed": "0a5954b8bdad0f04"
+  },
+  "mapName": "Maze",
+  "teamAName": "Cognoscenti",
+  "teamBName": "horse",
+  "teamAElo": 1469,
+  "teamBElo": 2166,
+  "games": [
+   {
+    "id": 969329,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Maze"
+   }
+  ],
+  "wait": null
+ },
+ "969279": {
+  "match": {
+   "id": 969279,
+   "teamAId": 351,
+   "teamBId": 91,
+   "mapId": 30,
+   "ranked": false,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 0,
+   "scoresB": 316,
+   "views": 0,
+   "seriesId": "e52564ab-5527-4df5-b65d-d736e765404e",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:31.719Z",
+   "startedAt": "2026-10-03T14:35:32.255Z",
+   "completedAt": "2026-10-03T14:37:34.930Z",
+   "log": null,
+   "seed": "19d77f92d49979d8"
+  },
+  "mapName": "Islands",
+  "teamAName": "Cognoscenti",
+  "teamBName": "SSS",
+  "teamAElo": 1469,
+  "teamBElo": 2288,
+  "games": [
+   {
+    "id": 969279,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Islands"
+   }
+  ],
+  "wait": null
+ },
+ "969278": {
+  "match": {
+   "id": 969278,
+   "teamAId": 351,
+   "teamBId": 91,
+   "mapId": 31,
+   "ranked": false,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 97,
+   "scoresB": 164,
+   "views": 0,
+   "seriesId": "681e4ced-34d8-4d0e-862d-6f6bbae78824",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:31.093Z",
+   "startedAt": "2026-10-03T14:35:31.245Z",
+   "completedAt": "2026-10-03T14:37:20.142Z",
+   "log": null,
+   "seed": "79487e694890d5e8"
+  },
+  "mapName": "Maze",
+  "teamAName": "Cognoscenti",
+  "teamBName": "SSS",
+  "teamAElo": 1469,
+  "teamBElo": 2288,
+  "games": [
+   {
+    "id": 969278,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Maze"
+   }
+  ],
+  "wait": null
+ },
+ "969323": {
+  "match": {
+   "id": 969323,
+   "teamAId": 351,
+   "teamBId": 566,
+   "mapId": 19,
+   "ranked": false,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 0,
+   "scoresB": 110,
+   "views": 0,
+   "seriesId": "aa94a2cb-988a-4ab3-8b6e-7605a74fd743",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:47.802Z",
+   "startedAt": "2026-10-03T14:35:47.976Z",
+   "completedAt": "2026-10-03T14:37:18.681Z",
+   "log": null,
+   "seed": "5269949bc8f8914e"
+  },
+  "mapName": "Autarky",
+  "teamAName": "Cognoscenti",
+  "teamBName": "tungtung67",
+  "teamAElo": 1469,
+  "teamBElo": 2159,
+  "games": [
+   {
+    "id": 969323,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Autarky"
+   }
+  ],
+  "wait": null
+ },
+ "969284": {
+  "match": {
+   "id": 969284,
+   "teamAId": 351,
+   "teamBId": 306,
+   "mapId": 30,
+   "ranked": false,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 0,
+   "scoresB": 290,
+   "views": 0,
+   "seriesId": "7b32f1ce-9fc7-49dc-ab61-71dc6e56fb6c",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:37.082Z",
+   "startedAt": "2026-10-03T14:35:38.457Z",
+   "completedAt": "2026-10-03T14:37:17.170Z",
+   "log": null,
+   "seed": "af9cc28bb044b06b"
+  },
+  "mapName": "Islands",
+  "teamAName": "Cognoscenti",
+  "teamBName": "Vibing++",
+  "teamAElo": 1469,
+  "teamBElo": 1393,
+  "games": [
+   {
+    "id": 969284,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Islands"
+   }
+  ],
+  "wait": null
+ },
+ "969275": {
+  "match": {
+   "id": 969275,
+   "teamAId": 351,
+   "teamBId": 91,
+   "mapId": 9,
+   "ranked": false,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 23,
+   "scoresB": 585,
+   "views": 0,
+   "seriesId": "8e0a3d91-fe25-4b8f-b81c-e8725acd4fae",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:29.124Z",
+   "startedAt": "2026-10-03T14:35:29.242Z",
+   "completedAt": "2026-10-03T14:37:00.265Z",
+   "log": null,
+   "seed": "883332d762d07d83"
+  },
+  "mapName": "Schooltime",
+  "teamAName": "Cognoscenti",
+  "teamBName": "SSS",
+  "teamAElo": 1469,
+  "teamBElo": 2288,
+  "games": [
+   {
+    "id": 969275,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Schooltime"
+   }
+  ],
+  "wait": null
+ },
+ "969322": {
+  "match": {
+   "id": 969322,
+   "teamAId": 351,
+   "teamBId": 566,
+   "mapId": 7,
+   "ranked": false,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 8,
+   "scoresB": 82,
+   "views": 0,
+   "seriesId": "42f2f538-929f-4086-8181-50a63c0f07a1",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:47.171Z",
+   "startedAt": "2026-10-03T14:35:47.488Z",
+   "completedAt": "2026-10-03T14:36:58.517Z",
+   "log": null,
+   "seed": "146c2c62ef55cdf7"
+  },
+  "mapName": "Queen Of Spades",
+  "teamAName": "Cognoscenti",
+  "teamBName": "tungtung67",
+  "teamAElo": 1469,
+  "teamBElo": 2159,
+  "games": [
+   {
+    "id": 969322,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Queen Of Spades"
+   }
+  ],
+  "wait": null
+ },
+ "969334": {
+  "match": {
+   "id": 969334,
+   "teamAId": 351,
+   "teamBId": 552,
+   "mapId": 4,
+   "ranked": false,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 0,
+   "scoresB": 175,
+   "views": 0,
+   "seriesId": "de21a10f-f9b6-4e96-a622-faea6a5aaed4",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:56.785Z",
+   "startedAt": "2026-10-03T14:35:58.354Z",
+   "completedAt": "2026-10-03T14:36:56.147Z",
+   "log": null,
+   "seed": "14ea6926a8a65c57"
+  },
+  "mapName": "Default",
+  "teamAName": "Cognoscenti",
+  "teamBName": "fandagong",
+  "teamAElo": 1469,
+  "teamBElo": 2082,
+  "games": [
+   {
+    "id": 969334,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Default"
+   }
+  ],
+  "wait": null
+ },
+ "969333": {
+  "match": {
+   "id": 969333,
+   "teamAId": 351,
+   "teamBId": 552,
+   "mapId": 15,
+   "ranked": false,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "a",
+   "scoresA": 36,
+   "scoresB": 134,
+   "views": 0,
+   "seriesId": "b8087d6a-738e-4ec1-a0c2-b2c1fcdeb49f",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:55.953Z",
+   "startedAt": "2026-10-03T14:35:57.777Z",
+   "completedAt": "2026-10-03T14:36:53.396Z",
+   "log": null,
+   "seed": "d8970c69066cd238"
+  },
+  "mapName": "Trauma",
+  "teamAName": "Cognoscenti",
+  "teamBName": "fandagong",
+  "teamAElo": 1469,
+  "teamBElo": 2082,
+  "games": [
+   {
+    "id": 969333,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Trauma"
+   }
+  ],
+  "wait": null
+ },
+ "969328": {
+  "match": {
+   "id": 969328,
+   "teamAId": 351,
+   "teamBId": 842,
+   "mapId": 20,
+   "ranked": false,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 10,
+   "scoresB": 32,
+   "views": 0,
+   "seriesId": "d257b393-e617-4a5a-bb3d-26423b8e16d6",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:51.996Z",
+   "startedAt": "2026-10-03T14:35:54.005Z",
+   "completedAt": "2026-10-03T14:36:49.043Z",
+   "log": null,
+   "seed": "68268fe3f8131d4b"
+  },
+  "mapName": "Portals",
+  "teamAName": "Cognoscenti",
+  "teamBName": "horse",
+  "teamAElo": 1469,
+  "teamBElo": 2166,
+  "games": [
+   {
+    "id": 969328,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Portals"
+   }
+  ],
+  "wait": null
+ },
+ "969331": {
+  "match": {
+   "id": 969331,
+   "teamAId": 351,
+   "teamBId": 552,
+   "mapId": 20,
+   "ranked": false,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "a",
+   "scoresA": 8,
+   "scoresB": 59,
+   "views": 0,
+   "seriesId": "219b1477-c428-49d3-9e62-4801a78c3a9e",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:53.833Z",
+   "startedAt": "2026-10-03T14:35:57.343Z",
+   "completedAt": "2026-10-03T14:36:37.023Z",
+   "log": null,
+   "seed": "735b7b321cfed466"
+  },
+  "mapName": "Portals",
+  "teamAName": "Cognoscenti",
+  "teamBName": "fandagong",
+  "teamAElo": 1469,
+  "teamBElo": 2082,
+  "games": [
+   {
+    "id": 969331,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Portals"
+   }
+  ],
+  "wait": null
+ },
+ "969336": {
+  "match": {
+   "id": 969336,
+   "teamAId": 351,
+   "teamBId": 952,
+   "mapId": 19,
+   "ranked": false,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 0,
+   "scoresB": 122,
+   "views": 0,
+   "seriesId": "a1cc002b-94e0-4147-b551-d6ea7ee2766b",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:58.014Z",
+   "startedAt": "2026-10-03T14:36:00.067Z",
+   "completedAt": "2026-10-03T14:36:35.452Z",
+   "log": null,
+   "seed": "87d8868329f6d343"
+  },
+  "mapName": "Autarky",
+  "teamAName": "Cognoscenti",
+  "teamBName": "Cache me outside",
+  "teamAElo": 1469,
+  "teamBElo": 2099,
+  "games": [
+   {
+    "id": 969336,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Autarky"
+   }
+  ],
+  "wait": null
+ },
+ "969271": {
+  "match": {
+   "id": 969271,
+   "teamAId": 351,
+   "teamBId": 264,
+   "mapId": 9,
+   "ranked": false,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 52,
+   "scoresB": 492,
+   "views": 0,
+   "seriesId": "7158495e-3f37-4c2e-adcf-e6e0e69404dc",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:25.269Z",
+   "startedAt": "2026-10-03T14:35:25.757Z",
+   "completedAt": "2026-10-03T14:36:33.227Z",
+   "log": null,
+   "seed": "10bd953b37f5dc51"
+  },
+  "mapName": "Schooltime",
+  "teamAName": "Cognoscenti",
+  "teamBName": "forgot to mention",
+  "teamAElo": 1469,
+  "teamBElo": 2362,
+  "games": [
+   {
+    "id": 969271,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Schooltime"
+   }
+  ],
+  "wait": null
+ },
+ "969289": {
+  "match": {
+   "id": 969289,
+   "teamAId": 351,
+   "teamBId": 213,
+   "mapId": 20,
+   "ranked": false,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 8,
+   "scoresB": 60,
+   "views": 0,
+   "seriesId": "81e76618-7498-46b8-beec-4eed1b174178",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:42.628Z",
+   "startedAt": "2026-10-03T14:35:42.814Z",
+   "completedAt": "2026-10-03T14:36:31.931Z",
+   "log": null,
+   "seed": "639404c99b83df55"
+  },
+  "mapName": "Portals",
+  "teamAName": "Cognoscenti",
+  "teamBName": "Sponge(Albert and Bob)",
+  "teamAElo": 1469,
+  "teamBElo": 2272,
+  "games": [
+   {
+    "id": 969289,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Portals"
+   }
+  ],
+  "wait": null
+ },
+ "969335": {
+  "match": {
+   "id": 969335,
+   "teamAId": 351,
+   "teamBId": 952,
+   "mapId": 4,
+   "ranked": false,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 0,
+   "scoresB": 142,
+   "views": 0,
+   "seriesId": "eabf27b1-a402-40e2-ba20-d8e52db19434",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:57.399Z",
+   "startedAt": "2026-10-03T14:35:59.426Z",
+   "completedAt": "2026-10-03T14:36:30.563Z",
+   "log": null,
+   "seed": "9eafbcf41b62f7d3"
+  },
+  "mapName": "Default",
+  "teamAName": "Cognoscenti",
+  "teamBName": "Cache me outside",
+  "teamAElo": 1469,
+  "teamBElo": 2099,
+  "games": [
+   {
+    "id": 969335,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Default"
+   }
+  ],
+  "wait": null
+ },
+ "969344": {
+  "match": {
+   "id": 969344,
+   "teamAId": 351,
+   "teamBId": 55,
+   "mapId": 13,
+   "ranked": false,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 0,
+   "scoresB": 150,
+   "views": 0,
+   "seriesId": "49762c81-99e3-4f1a-be1f-981bb9b2577f",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:36:03.974Z",
+   "startedAt": "2026-10-03T14:36:07.178Z",
+   "completedAt": "2026-10-03T14:36:17.749Z",
+   "log": null,
+   "seed": "ea24d086c0ab89a1"
+  },
+  "mapName": "Devil",
+  "teamAName": "Cognoscenti",
+  "teamBName": "\ud80c\udfbc\ud80c\udced\ud80c\udd71\ud80c\udc8b\ud80c\uddcc \ud80c\udfcf\ud80c\udd71 \ud80c\udc8b\ud80c\udd3f",
+  "teamAElo": 1469,
+  "teamBElo": 2062,
+  "games": [
+   {
+    "id": 969344,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Devil"
+   }
+  ],
+  "wait": null
+ },
+ "969341": {
+  "match": {
+   "id": 969341,
+   "teamAId": 351,
+   "teamBId": 55,
+   "mapId": 11,
+   "ranked": false,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 0,
+   "scoresB": 192,
+   "views": 0,
+   "seriesId": "702e40bf-20f3-4502-80b5-23bb3d7e03af",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:36:02.130Z",
+   "startedAt": "2026-10-03T14:36:02.981Z",
+   "completedAt": "2026-10-03T14:36:17.729Z",
+   "log": null,
+   "seed": "da5d5e934a48993d"
+  },
+  "mapName": "Trophy",
+  "teamAName": "Cognoscenti",
+  "teamBName": "\ud80c\udfbc\ud80c\udced\ud80c\udd71\ud80c\udc8b\ud80c\uddcc \ud80c\udfcf\ud80c\udd71 \ud80c\udc8b\ud80c\udd3f",
+  "teamAElo": 1469,
+  "teamBElo": 2062,
+  "games": [
+   {
+    "id": 969341,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Trophy"
+   }
+  ],
+  "wait": null
+ },
+ "969291": {
+  "match": {
+   "id": 969291,
+   "teamAId": 351,
+   "teamBId": 566,
+   "mapId": 11,
+   "ranked": false,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 0,
+   "scoresB": 132,
+   "views": 0,
+   "seriesId": "51003031-b813-494c-ae11-c42e2764ef93",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:45.930Z",
+   "startedAt": "2026-10-03T14:35:46.457Z",
+   "completedAt": "2026-10-03T14:36:16.855Z",
+   "log": null,
+   "seed": "ec548b49b8aaa675"
+  },
+  "mapName": "Trophy",
+  "teamAName": "Cognoscenti",
+  "teamBName": "tungtung67",
+  "teamAElo": 1469,
+  "teamBElo": 2159,
+  "games": [
+   {
+    "id": 969291,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Trophy"
+   }
+  ],
+  "wait": null
+ },
+ "969340": {
+  "match": {
+   "id": 969340,
+   "teamAId": 351,
+   "teamBId": 55,
+   "mapId": 11,
+   "ranked": false,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 0,
+   "scoresB": 165,
+   "views": 0,
+   "seriesId": "9628c750-e2b1-4aa2-a9e0-7414cb40432c",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:36:01.120Z",
+   "startedAt": "2026-10-03T14:36:02.648Z",
+   "completedAt": "2026-10-03T14:36:16.678Z",
+   "log": null,
+   "seed": "973bdbf32df20eab"
+  },
+  "mapName": "Trophy",
+  "teamAName": "Cognoscenti",
+  "teamBName": "\ud80c\udfbc\ud80c\udced\ud80c\udd71\ud80c\udc8b\ud80c\uddcc \ud80c\udfcf\ud80c\udd71 \ud80c\udc8b\ud80c\udd3f",
+  "teamAElo": 1469,
+  "teamBElo": 2062,
+  "games": [
+   {
+    "id": 969340,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Trophy"
+   }
+  ],
+  "wait": null
+ },
+ "969325": {
+  "match": {
+   "id": 969325,
+   "teamAId": 351,
+   "teamBId": 842,
+   "mapId": 19,
+   "ranked": false,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 0,
+   "scoresB": 132,
+   "views": 0,
+   "seriesId": "384ccb5f-18fb-4b73-ace6-04b8ad97f319",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:49.312Z",
+   "startedAt": "2026-10-03T14:35:49.923Z",
+   "completedAt": "2026-10-03T14:36:13.646Z",
+   "log": null,
+   "seed": "7738c2ea419977b3"
+  },
+  "mapName": "Autarky",
+  "teamAName": "Cognoscenti",
+  "teamBName": "horse",
+  "teamAElo": 1469,
+  "teamBElo": 2166,
+  "games": [
+   {
+    "id": 969325,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Autarky"
+   }
+  ],
+  "wait": null
+ },
+ "969342": {
+  "match": {
+   "id": 969342,
+   "teamAId": 351,
+   "teamBId": 55,
+   "mapId": 13,
+   "ranked": false,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 0,
+   "scoresB": 110,
+   "views": 0,
+   "seriesId": "26a2f854-a71a-4304-a47a-b092b4b74dbc",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:36:02.728Z",
+   "startedAt": "2026-10-03T14:36:04.659Z",
+   "completedAt": "2026-10-03T14:36:09.801Z",
+   "log": null,
+   "seed": "cac00a9ff67d2fb9"
+  },
+  "mapName": "Devil",
+  "teamAName": "Cognoscenti",
+  "teamBName": "\ud80c\udfbc\ud80c\udced\ud80c\udd71\ud80c\udc8b\ud80c\uddcc \ud80c\udfcf\ud80c\udd71 \ud80c\udc8b\ud80c\udd3f",
+  "teamAElo": 1469,
+  "teamBElo": 2062,
+  "games": [
+   {
+    "id": 969342,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Devil"
+   }
+  ],
+  "wait": null
+ },
+ "969338": {
+  "match": {
+   "id": 969338,
+   "teamAId": 351,
+   "teamBId": 952,
+   "mapId": 33,
+   "ranked": false,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 0,
+   "scoresB": 112,
+   "views": 0,
+   "seriesId": "6ebeb75c-fac7-4e48-9a5c-a2a086b7a58a",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:59.236Z",
+   "startedAt": "2026-10-03T14:36:01.456Z",
+   "completedAt": "2026-10-03T14:36:08.747Z",
+   "log": null,
+   "seed": "22ae5fe12648365b"
+  },
+  "mapName": "Tower Defense",
+  "teamAName": "Cognoscenti",
+  "teamBName": "Cache me outside",
+  "teamAElo": 1469,
+  "teamBElo": 2099,
+  "games": [
+   {
+    "id": 969338,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   }
+  ],
+  "wait": null
+ },
+ "969281": {
+  "match": {
+   "id": 969281,
+   "teamAId": 351,
+   "teamBId": 306,
+   "mapId": 19,
+   "ranked": false,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 0,
+   "scoresB": 143,
+   "views": 0,
+   "seriesId": "50235800-db25-4d73-9490-546526b2adfd",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:34.650Z",
+   "startedAt": "2026-10-03T14:35:34.815Z",
+   "completedAt": "2026-10-03T14:36:08.442Z",
+   "log": null,
+   "seed": "bbfa9b70b486cc33"
+  },
+  "mapName": "Autarky",
+  "teamAName": "Cognoscenti",
+  "teamBName": "Vibing++",
+  "teamAElo": 1469,
+  "teamBElo": 1393,
+  "games": [
+   {
+    "id": 969281,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Autarky"
+   }
+  ],
+  "wait": null
+ },
+ "969337": {
+  "match": {
+   "id": 969337,
+   "teamAId": 351,
+   "teamBId": 952,
+   "mapId": 11,
+   "ranked": false,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 0,
+   "scoresB": 137,
+   "views": 0,
+   "seriesId": "036df761-05f2-4d13-9f9b-04b7ac9d3ba1",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:58.614Z",
+   "startedAt": "2026-10-03T14:36:01.367Z",
+   "completedAt": "2026-10-03T14:36:08.078Z",
+   "log": null,
+   "seed": "c08dc763b1cd56d4"
+  },
+  "mapName": "Trophy",
+  "teamAName": "Cognoscenti",
+  "teamBName": "Cache me outside",
+  "teamAElo": 1469,
+  "teamBElo": 2099,
+  "games": [
+   {
+    "id": 969337,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Trophy"
+   }
+  ],
+  "wait": null
+ },
+ "969327": {
+  "match": {
+   "id": 969327,
+   "teamAId": 351,
+   "teamBId": 842,
+   "mapId": 13,
+   "ranked": false,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 0,
+   "scoresB": 112,
+   "views": 0,
+   "seriesId": "f2d59767-678b-4888-a5e0-dfd9ce9ed4f0",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:51.323Z",
+   "startedAt": "2026-10-03T14:35:51.692Z",
+   "completedAt": "2026-10-03T14:36:03.745Z",
+   "log": null,
+   "seed": "c96fe1c6b38fa13d"
+  },
+  "mapName": "Devil",
+  "teamAName": "Cognoscenti",
+  "teamBName": "horse",
+  "teamAElo": 1469,
+  "teamBElo": 2166,
+  "games": [
+   {
+    "id": 969327,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Devil"
+   }
+  ],
+  "wait": null
+ },
+ "969332": {
+  "match": {
+   "id": 969332,
+   "teamAId": 351,
+   "teamBId": 552,
+   "mapId": 32,
+   "ranked": false,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 0,
+   "scoresB": 41,
+   "views": 0,
+   "seriesId": "78efc735-e2ab-4ae0-a68a-67b4e3f511b5",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:54.895Z",
+   "startedAt": "2026-10-03T14:35:57.386Z",
+   "completedAt": "2026-10-03T14:36:03.429Z",
+   "log": null,
+   "seed": "57647996cd561f4e"
+  },
+  "mapName": "Stripes",
+  "teamAName": "Cognoscenti",
+  "teamBName": "fandagong",
+  "teamAElo": 1469,
+  "teamBElo": 2082,
+  "games": [
+   {
+    "id": 969332,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Stripes"
+   }
+  ],
+  "wait": null
+ },
+ "969330": {
+  "match": {
+   "id": 969330,
+   "teamAId": 351,
+   "teamBId": 552,
+   "mapId": 32,
+   "ranked": false,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 0,
+   "scoresB": 39,
+   "views": 0,
+   "seriesId": "dc423c41-94ab-4f7f-9d78-6042ac9b9131",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:53.233Z",
+   "startedAt": "2026-10-03T14:35:56.628Z",
+   "completedAt": "2026-10-03T14:36:02.143Z",
+   "log": null,
+   "seed": "c737de0856938f29"
+  },
+  "mapName": "Stripes",
+  "teamAName": "Cognoscenti",
+  "teamBName": "fandagong",
+  "teamAElo": 1469,
+  "teamBElo": 2082,
+  "games": [
+   {
+    "id": 969330,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Stripes"
+   }
+  ],
+  "wait": null
+ },
+ "969324": {
+  "match": {
+   "id": 969324,
+   "teamAId": 351,
+   "teamBId": 566,
+   "mapId": 17,
+   "ranked": false,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 0,
+   "scoresB": 24,
+   "views": 0,
+   "seriesId": "a0f739c0-fb45-4faf-b848-0eda4bf82f07",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:48.515Z",
+   "startedAt": "2026-10-03T14:35:48.565Z",
+   "completedAt": "2026-10-03T14:35:54.762Z",
+   "log": null,
+   "seed": "6f1e91f89c50368f"
+  },
+  "mapName": "Prisoners Dilemma",
+  "teamAName": "Cognoscenti",
+  "teamBName": "tungtung67",
+  "teamAElo": 1469,
+  "teamBElo": 2159,
+  "games": [
+   {
+    "id": 969324,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Prisoners Dilemma"
+   }
+  ],
+  "wait": null
+ },
+ "969290": {
+  "match": {
+   "id": 969290,
+   "teamAId": 351,
+   "teamBId": 566,
+   "mapId": 32,
+   "ranked": false,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 0,
+   "scoresB": 35,
+   "views": 0,
+   "seriesId": "3aeeb902-1405-428f-a28f-f3ac802e9721",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:44.242Z",
+   "startedAt": "2026-10-03T14:35:44.467Z",
+   "completedAt": "2026-10-03T14:35:52.176Z",
+   "log": null,
+   "seed": "73f0eaee6899fbbf"
+  },
+  "mapName": "Stripes",
+  "teamAName": "Cognoscenti",
+  "teamBName": "tungtung67",
+  "teamAElo": 1469,
+  "teamBElo": 2159,
+  "games": [
+   {
+    "id": 969290,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Stripes"
+   }
+  ],
+  "wait": null
+ },
+ "969286": {
+  "match": {
+   "id": 969286,
+   "teamAId": 351,
+   "teamBId": 213,
+   "mapId": 33,
+   "ranked": false,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 0,
+   "scoresB": 80,
+   "views": 0,
+   "seriesId": "1534a9aa-722f-4c05-a268-0c564d6a8e54",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:38.568Z",
+   "startedAt": "2026-10-03T14:35:38.624Z",
+   "completedAt": "2026-10-03T14:35:44.027Z",
+   "log": null,
+   "seed": "b0e659fb14b8c3b2"
+  },
+  "mapName": "Tower Defense",
+  "teamAName": "Cognoscenti",
+  "teamBName": "Sponge(Albert and Bob)",
+  "teamAElo": 1469,
+  "teamBElo": 2272,
+  "games": [
+   {
+    "id": 969286,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   }
+  ],
+  "wait": null
+ },
+ "969280": {
+  "match": {
+   "id": 969280,
+   "teamAId": 351,
+   "teamBId": 306,
+   "mapId": 19,
+   "ranked": false,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 0,
+   "scoresB": 90,
+   "views": 0,
+   "seriesId": "16900787-de06-4ef4-a113-2321b95a36f9",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:32.828Z",
+   "startedAt": "2026-10-03T14:35:34.304Z",
+   "completedAt": "2026-10-03T14:35:42.159Z",
+   "log": null,
+   "seed": "5aedbd1d56d2e349"
+  },
+  "mapName": "Autarky",
+  "teamAName": "Cognoscenti",
+  "teamBName": "Vibing++",
+  "teamAElo": 1469,
+  "teamBElo": 1393,
+  "games": [
+   {
+    "id": 969280,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Autarky"
+   }
+  ],
+  "wait": null
+ },
+ "969283": {
+  "match": {
+   "id": 969283,
+   "teamAId": 351,
+   "teamBId": 306,
+   "mapId": 32,
+   "ranked": false,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 0,
+   "scoresB": 59,
+   "views": 0,
+   "seriesId": "b7443a55-402b-4c29-85f9-32a3472aabe5",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:36.461Z",
+   "startedAt": "2026-10-03T14:35:36.680Z",
+   "completedAt": "2026-10-03T14:35:42.059Z",
+   "log": null,
+   "seed": "b4c1475e1d97ae24"
+  },
+  "mapName": "Stripes",
+  "teamAName": "Cognoscenti",
+  "teamBName": "Vibing++",
+  "teamAElo": 1469,
+  "teamBElo": 1393,
+  "games": [
+   {
+    "id": 969283,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Stripes"
+   }
+  ],
+  "wait": null
+ },
+ "969282": {
+  "match": {
+   "id": 969282,
+   "teamAId": 351,
+   "teamBId": 306,
+   "mapId": 11,
+   "ranked": false,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 0,
+   "scoresB": 165,
+   "views": 0,
+   "seriesId": "1936a203-9b54-43f8-bc1c-106baa560e08",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:35.506Z",
+   "startedAt": "2026-10-03T14:35:36.456Z",
+   "completedAt": "2026-10-03T14:35:41.981Z",
+   "log": null,
+   "seed": "3e456af905168332"
+  },
+  "mapName": "Trophy",
+  "teamAName": "Cognoscenti",
+  "teamBName": "Vibing++",
+  "teamAElo": 1469,
+  "teamBElo": 1393,
+  "games": [
+   {
+    "id": 969282,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Trophy"
+   }
+  ],
+  "wait": null
+ },
+ "969277": {
+  "match": {
+   "id": 969277,
+   "teamAId": 351,
+   "teamBId": 91,
+   "mapId": 33,
+   "ranked": false,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 0,
+   "scoresB": 79,
+   "views": 0,
+   "seriesId": "b12d2d31-802d-4763-a885-840b8e8f43a2",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:30.368Z",
+   "startedAt": "2026-10-03T14:35:30.676Z",
+   "completedAt": "2026-10-03T14:35:40.217Z",
+   "log": null,
+   "seed": "f08f8073612b11f4"
+  },
+  "mapName": "Tower Defense",
+  "teamAName": "Cognoscenti",
+  "teamBName": "SSS",
+  "teamAElo": 1469,
+  "teamBElo": 2288,
+  "games": [
+   {
+    "id": 969277,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   }
+  ],
+  "wait": null
+ },
+ "969272": {
+  "match": {
+   "id": 969272,
+   "teamAId": 351,
+   "teamBId": 264,
+   "mapId": 9,
+   "ranked": false,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 0,
+   "scoresB": 191,
+   "views": 0,
+   "seriesId": "ef51b0fa-b8b3-4f7a-833d-1236c80c057e",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:25.948Z",
+   "startedAt": "2026-10-03T14:35:26.076Z",
+   "completedAt": "2026-10-03T14:35:39.473Z",
+   "log": null,
+   "seed": "717469634a77af4a"
+  },
+  "mapName": "Schooltime",
+  "teamAName": "Cognoscenti",
+  "teamBName": "forgot to mention",
+  "teamAElo": 1469,
+  "teamBElo": 2362,
+  "games": [
+   {
+    "id": 969272,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Schooltime"
+   }
+  ],
+  "wait": null
+ },
+ "969274": {
+  "match": {
+   "id": 969274,
+   "teamAId": 351,
+   "teamBId": 264,
+   "mapId": 11,
+   "ranked": false,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 0,
+   "scoresB": 110,
+   "views": 0,
+   "seriesId": "768ae529-b705-44b7-aa1b-6cbbdf8d9de0",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:28.533Z",
+   "startedAt": "2026-10-03T14:35:28.673Z",
+   "completedAt": "2026-10-03T14:35:35.846Z",
+   "log": null,
+   "seed": "b0af001d1a1b11ce"
+  },
+  "mapName": "Trophy",
+  "teamAName": "Cognoscenti",
+  "teamBName": "forgot to mention",
+  "teamAElo": 1469,
+  "teamBElo": 2362,
+  "games": [
+   {
+    "id": 969274,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Trophy"
+   }
+  ],
+  "wait": null
+ },
+ "969273": {
+  "match": {
+   "id": 969273,
+   "teamAId": 351,
+   "teamBId": 264,
+   "mapId": 33,
+   "ranked": false,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 0,
+   "scoresB": 93,
+   "views": 0,
+   "seriesId": "27186332-02db-4319-8b8d-1d7cb0e83257",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:27.671Z",
+   "startedAt": "2026-10-03T14:35:28.082Z",
+   "completedAt": "2026-10-03T14:35:35.111Z",
+   "log": null,
+   "seed": "b8672c2305759a94"
+  },
+  "mapName": "Tower Defense",
+  "teamAName": "Cognoscenti",
+  "teamBName": "forgot to mention",
+  "teamAElo": 1469,
+  "teamBElo": 2362,
+  "games": [
+   {
+    "id": 969273,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   }
+  ],
+  "wait": null
+ },
+ "969276": {
+  "match": {
+   "id": 969276,
+   "teamAId": 351,
+   "teamBId": 91,
+   "mapId": 32,
+   "ranked": false,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 0,
+   "scoresB": 36,
+   "views": 0,
+   "seriesId": "32420e13-052e-4826-9ee0-3e4ced788f13",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:29.737Z",
+   "startedAt": "2026-10-03T14:35:29.999Z",
+   "completedAt": "2026-10-03T14:35:33.056Z",
+   "log": null,
+   "seed": "23a41ec746cf7550"
+  },
+  "mapName": "Stripes",
+  "teamAName": "Cognoscenti",
+  "teamBName": "SSS",
+  "teamAElo": 1469,
+  "teamBElo": 2288,
+  "games": [
+   {
+    "id": 969276,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Stripes"
+   }
+  ],
+  "wait": null
+ },
+ "969255": {
+  "match": {
+   "id": 969255,
+   "teamAId": 351,
+   "teamBId": 264,
+   "mapId": 9,
+   "ranked": false,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 0,
+   "scoresB": 331,
+   "views": 0,
+   "seriesId": "e4e9f4ba-28bc-43e3-a048-4d920d194994",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:35:15.580Z",
+   "startedAt": "2026-10-03T14:35:16.076Z",
+   "completedAt": "2026-10-03T14:35:29.094Z",
+   "log": null,
+   "seed": "ae6987c3ac03149a"
+  },
+  "mapName": "Schooltime",
+  "teamAName": "Cognoscenti",
+  "teamBName": "forgot to mention",
+  "teamAElo": 1469,
+  "teamBElo": 2362,
+  "games": [
+   {
+    "id": 969255,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Schooltime"
+   }
+  ],
+  "wait": null
+ },
+ "969085": {
+  "match": {
+   "id": 969085,
+   "teamAId": 351,
+   "teamBId": 1082,
+   "mapId": 13,
+   "ranked": true,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "a",
+   "scoresA": 145,
+   "scoresB": 5,
+   "views": 0,
+   "seriesId": "3c0a48e7-bf50-438d-b02d-aeff5ad12ef0",
+   "eloChangeA": -2,
+   "eloChangeB": 1,
+   "requestedAt": "2026-10-03T14:31:41.711Z",
+   "startedAt": "2026-10-03T14:31:42.373Z",
+   "completedAt": "2026-10-03T14:33:07.119Z",
+   "log": null,
+   "seed": "a4c3588f27568f67"
+  },
+  "mapName": "Devil",
+  "teamAName": "Cognoscenti",
+  "teamBName": "bsg",
+  "teamAElo": 1469,
+  "teamBElo": 1348,
+  "games": [
+   {
+    "id": 969085,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Devil"
+   },
+   {
+    "id": 969086,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   },
+   {
+    "id": 969087,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Schooltime"
+   },
+   {
+    "id": 969088,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Around UNSW"
+   },
+   {
+    "id": 969089,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Stripes"
+   }
+  ],
+  "wait": null
+ },
+ "969171": {
+  "match": {
+   "id": 969171,
+   "teamAId": 351,
+   "teamBId": 213,
+   "mapId": 28,
+   "ranked": true,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 0,
+   "scoresB": 105,
+   "views": 0,
+   "seriesId": "8ad3c79a-3255-4482-ac0c-ca1c98945ad4",
+   "eloChangeA": -7,
+   "eloChangeB": 3,
+   "requestedAt": "2026-10-03T14:33:47.484Z",
+   "startedAt": "2026-10-03T14:33:49.009Z",
+   "completedAt": "2026-10-03T14:34:09.212Z",
+   "log": null,
+   "seed": "fbec651ce7686e75"
+  },
+  "mapName": "weakhold",
+  "teamAName": "Cognoscenti",
+  "teamBName": "Sponge(Albert and Bob)",
+  "teamAElo": 1469,
+  "teamBElo": 2272,
+  "games": [
+   {
+    "id": 969171,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "weakhold"
+   },
+   {
+    "id": 969172,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   },
+   {
+    "id": 969173,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Schooltime"
+   },
+   {
+    "id": 969174,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Devil"
+   },
+   {
+    "id": 969175,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Autarky"
+   }
+  ],
+  "wait": null
+ },
+ "968977": {
+  "match": {
+   "id": 968977,
+   "teamAId": 351,
+   "teamBId": 1092,
+   "mapId": 4,
+   "ranked": true,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "a",
+   "scoresA": 27,
+   "scoresB": 0,
+   "views": 0,
+   "seriesId": "a50a9f15-db18-4219-b748-97a6375c89ed",
+   "eloChangeA": 30,
+   "eloChangeB": -10,
+   "requestedAt": "2026-10-03T14:28:51.227Z",
+   "startedAt": "2026-10-03T14:28:51.751Z",
+   "completedAt": "2026-10-03T14:28:58.856Z",
+   "log": null,
+   "seed": "cfc14f0f3ad43f45"
+  },
+  "mapName": "Default",
+  "teamAName": "Cognoscenti",
+  "teamBName": "so-lonely",
+  "teamAElo": 1469,
+  "teamBElo": 1424,
+  "games": [
+   {
+    "id": 968977,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Default"
+   },
+   {
+    "id": 968978,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Trauma"
+   },
+   {
+    "id": 968979,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Around UNSW"
+   },
+   {
+    "id": 968980,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Maze"
+   },
+   {
+    "id": 968981,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Australia"
+   }
+  ],
+  "wait": null
+ },
+ "969018": {
+  "match": {
+   "id": 969018,
+   "teamAId": 199,
+   "teamBId": 351,
+   "mapId": 34,
+   "ranked": false,
+   "skinA": "Vatulele Prawn",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 241,
+   "scoresB": 276,
+   "views": 0,
+   "seriesId": "fb1b66b8-f9f2-4949-a828-758e408263de",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T14:30:13.246Z",
+   "startedAt": "2026-10-03T14:30:13.409Z",
+   "completedAt": "2026-10-03T14:33:23.586Z",
+   "log": null,
+   "seed": "ecb727ad4f3a5f6f"
+  },
+  "mapName": "Around UNSW",
+  "teamAName": "Low Cortisol",
+  "teamBName": "Cognoscenti",
+  "teamAElo": 1515,
+  "teamBElo": 1469,
+  "games": [
+   {
+    "id": 969018,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Around UNSW"
+   },
+   {
+    "id": 969019,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Australia"
+   },
+   {
+    "id": 969020,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Autarky"
+   },
+   {
+    "id": 969021,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Default"
+   },
+   {
+    "id": 969022,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Devil"
+   },
+   {
+    "id": 969023,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Islands"
+   },
+   {
+    "id": 969024,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Maze"
+   },
+   {
+    "id": 969025,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Portals"
+   },
+   {
+    "id": 969026,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Prisoners Dilemma"
+   },
+   {
+    "id": 969027,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Queen Of Spades"
+   },
+   {
+    "id": 969028,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Schooltime"
+   },
+   {
+    "id": 969029,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Slithery Fight"
+   },
+   {
+    "id": 969030,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Stripes"
+   },
+   {
+    "id": 969031,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   },
+   {
+    "id": 969032,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Trauma"
+   },
+   {
+    "id": 969033,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Trophy"
+   },
+   {
+    "id": 969034,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "weakhold"
+   }
+  ],
+  "wait": null
+ },
+ "969035": {
+  "match": {
+   "id": 969035,
+   "teamAId": 351,
+   "teamBId": 199,
+   "mapId": 11,
+   "ranked": true,
+   "skinA": "Jiaolong",
+   "skinB": "Vatulele Prawn",
+   "status": "completed",
+   "winner": "a",
+   "scoresA": 135,
+   "scoresB": 0,
+   "views": 0,
+   "seriesId": "c1c10442-e4b9-4774-b81a-58eca5cc23e1",
+   "eloChangeA": 18,
+   "eloChangeB": -17,
+   "requestedAt": "2026-10-03T14:30:30.472Z",
+   "startedAt": "2026-10-03T14:30:31.907Z",
+   "completedAt": "2026-10-03T14:31:02.574Z",
+   "log": null,
+   "seed": "f352b590eefeeb82"
+  },
+  "mapName": "Trophy",
+  "teamAName": "Cognoscenti",
+  "teamBName": "Low Cortisol",
+  "teamAElo": 1469,
+  "teamBElo": 1515,
+  "games": [
+   {
+    "id": 969035,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Trophy"
+   },
+   {
+    "id": 969036,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Devil"
+   },
+   {
+    "id": 969037,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Stripes"
+   },
+   {
+    "id": 969038,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Portals"
+   },
+   {
+    "id": 969039,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Default"
+   }
+  ],
+  "wait": null
+ },
+ "967369": {
+  "match": {
+   "id": 967369,
+   "teamAId": 351,
+   "teamBId": 216,
+   "mapId": 13,
+   "ranked": true,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "a",
+   "scoresA": 106,
+   "scoresB": 0,
+   "views": 0,
+   "seriesId": "6eb6a03d-312a-4051-b96b-30f98cfebeea",
+   "eloChangeA": 3,
+   "eloChangeB": -3,
+   "requestedAt": "2026-10-03T14:05:07.895Z",
+   "startedAt": "2026-10-03T14:05:08.262Z",
+   "completedAt": "2026-10-03T14:05:24.152Z",
+   "log": null,
+   "seed": "69c63f2ee75adbdc"
+  },
+  "mapName": "Devil",
+  "teamAName": "Cognoscenti",
+  "teamBName": "Human Learning",
+  "teamAElo": 1469,
+  "teamBElo": 1391,
+  "games": [
+   {
+    "id": 967369,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Devil"
+   },
+   {
+    "id": 967370,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Around UNSW"
+   },
+   {
+    "id": 967371,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Islands"
+   },
+   {
+    "id": 967372,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Queen Of Spades"
+   },
+   {
+    "id": 967373,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Trophy"
+   }
+  ],
+  "wait": null
+ },
+ "967116": {
+  "match": {
+   "id": 967116,
+   "teamAId": 1092,
+   "teamBId": 351,
+   "mapId": 33,
+   "ranked": true,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "a",
+   "scoresA": 44,
+   "scoresB": 3,
+   "views": 0,
+   "seriesId": "8924ceec-85df-4a6a-8a0b-3165bd6bf984",
+   "eloChangeA": 11,
+   "eloChangeB": -4,
+   "requestedAt": "2026-10-03T14:00:00.903Z",
+   "startedAt": "2026-10-03T14:00:02.135Z",
+   "completedAt": "2026-10-03T14:00:52.329Z",
+   "log": null,
+   "seed": "7a94f4e457aa1a10"
+  },
+  "mapName": "Tower Defense",
+  "teamAName": "so-lonely",
+  "teamBName": "Cognoscenti",
+  "teamAElo": 1424,
+  "teamBElo": 1469,
+  "games": [
+   {
+    "id": 967116,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   },
+   {
+    "id": 967117,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Portals"
+   },
+   {
+    "id": 967118,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Slithery Fight"
+   },
+   {
+    "id": 967119,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Around UNSW"
+   },
+   {
+    "id": 967120,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Devil"
+   }
+  ],
+  "wait": null
+ },
+ "966606": {
+  "match": {
+   "id": 966606,
+   "teamAId": 782,
+   "teamBId": 351,
+   "mapId": 31,
+   "ranked": false,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "a",
+   "scoresA": 54,
+   "scoresB": 168,
+   "views": 0,
+   "seriesId": "85699a8c-73ba-40ee-bd00-6224bc201310",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T13:51:27.034Z",
+   "startedAt": "2026-10-03T13:51:27.696Z",
+   "completedAt": "2026-10-03T13:53:52.708Z",
+   "log": null,
+   "seed": "92bfb10ea3932837"
+  },
+  "mapName": "Maze",
+  "teamAName": "WaterCandle",
+  "teamBName": "Cognoscenti",
+  "teamAElo": 1746,
+  "teamBElo": 1469,
+  "games": [
+   {
+    "id": 966606,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Maze"
+   },
+   {
+    "id": 966607,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   },
+   {
+    "id": 966608,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "weakhold"
+   },
+   {
+    "id": 966609,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Australia"
+   },
+   {
+    "id": 966610,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Islands"
+   },
+   {
+    "id": 966611,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Stripes"
+   },
+   {
+    "id": 966612,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Around UNSW"
+   },
+   {
+    "id": 966613,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Devil"
+   },
+   {
+    "id": 966614,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Queen Of Spades"
+   },
+   {
+    "id": 966615,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Default"
+   }
+  ],
+  "wait": null
+ },
+ "965217": {
+  "match": {
+   "id": 965217,
+   "teamAId": 351,
+   "teamBId": 201,
+   "mapId": 4,
+   "ranked": true,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 9,
+   "scoresB": 180,
+   "views": 0,
+   "seriesId": "7e7da491-c571-43f4-b0b9-bbb88212c985",
+   "eloChangeA": -6,
+   "eloChangeB": 6,
+   "requestedAt": "2026-10-03T13:28:50.828Z",
+   "startedAt": "2026-10-03T13:28:51.700Z",
+   "completedAt": "2026-10-03T13:29:44.343Z",
+   "log": null,
+   "seed": "fafabce37899be91"
+  },
+  "mapName": "Default",
+  "teamAName": "Cognoscenti",
+  "teamBName": "NeungzAI",
+  "teamAElo": 1469,
+  "teamBElo": 1534,
+  "games": [
+   {
+    "id": 965217,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Default"
+   },
+   {
+    "id": 965218,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Islands"
+   },
+   {
+    "id": 965219,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "weakhold"
+   },
+   {
+    "id": 965220,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Australia"
+   },
+   {
+    "id": 965221,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   }
+  ],
+  "wait": null
+ },
+ "963565": {
+  "match": {
+   "id": 963565,
+   "teamAId": 324,
+   "teamBId": 351,
+   "mapId": 15,
+   "ranked": true,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "a",
+   "scoresA": 18,
+   "scoresB": 36,
+   "views": 0,
+   "seriesId": "a3c92c3d-6a63-482c-8f7e-b02500cc8637",
+   "eloChangeA": 3,
+   "eloChangeB": -2,
+   "requestedAt": "2026-10-03T12:59:46.059Z",
+   "startedAt": "2026-10-03T12:59:46.380Z",
+   "completedAt": "2026-10-03T13:00:52.875Z",
+   "log": null,
+   "seed": "f7b057fde5d94b8c"
+  },
+  "mapName": "Trauma",
+  "teamAName": "Mr Aura",
+  "teamBName": "Cognoscenti",
+  "teamAElo": 1403,
+  "teamBElo": 1469,
+  "games": [
+   {
+    "id": 963565,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Trauma"
+   },
+   {
+    "id": 963566,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Maze"
+   },
+   {
+    "id": 963567,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Around UNSW"
+   },
+   {
+    "id": 963568,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Trophy"
+   },
+   {
+    "id": 963569,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Devil"
+   }
+  ],
+  "wait": null
+ },
+ "963228": {
+  "match": {
+   "id": 963228,
+   "teamAId": 1092,
+   "teamBId": 351,
+   "mapId": 4,
+   "ranked": true,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 18,
+   "scoresB": 132,
+   "views": 0,
+   "seriesId": "a113a2ae-1359-4583-9a1f-794924201943",
+   "eloChangeA": 5,
+   "eloChangeB": -1,
+   "requestedAt": "2026-10-03T12:53:38.726Z",
+   "startedAt": "2026-10-03T12:53:39.939Z",
+   "completedAt": "2026-10-03T12:56:13.351Z",
+   "log": null,
+   "seed": "b938210d5c9f11b1"
+  },
+  "mapName": "Default",
+  "teamAName": "so-lonely",
+  "teamBName": "Cognoscenti",
+  "teamAElo": 1424,
+  "teamBElo": 1469,
+  "games": [
+   {
+    "id": 963228,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Default"
+   },
+   {
+    "id": 963229,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Slithery Fight"
+   },
+   {
+    "id": 963230,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Devil"
+   },
+   {
+    "id": 963231,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Schooltime"
+   },
+   {
+    "id": 963232,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Trophy"
+   }
+  ],
+  "wait": null
+ },
+ "963061": {
+  "match": {
+   "id": 963061,
+   "teamAId": 782,
+   "teamBId": 351,
+   "mapId": 31,
+   "ranked": false,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "a",
+   "scoresA": 76,
+   "scoresB": 182,
+   "views": 0,
+   "seriesId": "81c15a23-f06b-4669-83d0-3cda0d4b8407",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T12:51:00.892Z",
+   "startedAt": "2026-10-03T12:51:01.689Z",
+   "completedAt": "2026-10-03T12:54:47.726Z",
+   "log": null,
+   "seed": "96842d98be440c2b"
+  },
+  "mapName": "Maze",
+  "teamAName": "WaterCandle",
+  "teamBName": "Cognoscenti",
+  "teamAElo": 1746,
+  "teamBElo": 1469,
+  "games": [
+   {
+    "id": 963061,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Maze"
+   },
+   {
+    "id": 963062,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   },
+   {
+    "id": 963063,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "weakhold"
+   },
+   {
+    "id": 963064,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Australia"
+   },
+   {
+    "id": 963065,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Islands"
+   },
+   {
+    "id": 963066,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Stripes"
+   },
+   {
+    "id": 963067,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Around UNSW"
+   },
+   {
+    "id": 963068,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Devil"
+   },
+   {
+    "id": 963069,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Queen Of Spades"
+   },
+   {
+    "id": 963070,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Default"
+   }
+  ],
+  "wait": null
+ },
+ "961058": {
+  "match": {
+   "id": 961058,
+   "teamAId": 351,
+   "teamBId": 201,
+   "mapId": 34,
+   "ranked": true,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 316,
+   "scoresB": 233,
+   "views": 0,
+   "seriesId": "33fea2dc-1652-4f07-9a4c-83f00d0f1add",
+   "eloChangeA": 0,
+   "eloChangeB": 1,
+   "requestedAt": "2026-10-03T12:20:55.304Z",
+   "startedAt": "2026-10-03T12:20:58.554Z",
+   "completedAt": "2026-10-03T12:28:40.130Z",
+   "log": null,
+   "seed": "0a3209c85b811000"
+  },
+  "mapName": "Around UNSW",
+  "teamAName": "Cognoscenti",
+  "teamBName": "NeungzAI",
+  "teamAElo": 1469,
+  "teamBElo": 1534,
+  "games": [
+   {
+    "id": 961058,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Around UNSW"
+   },
+   {
+    "id": 961059,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Slithery Fight"
+   },
+   {
+    "id": 961060,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Queen Of Spades"
+   },
+   {
+    "id": 961061,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Trophy"
+   },
+   {
+    "id": 961062,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Autarky"
+   }
+  ],
+  "wait": null
+ },
+ "959431": {
+  "match": {
+   "id": 959431,
+   "teamAId": 1118,
+   "teamBId": 351,
+   "mapId": 13,
+   "ranked": true,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 0,
+   "scoresB": 132,
+   "views": 0,
+   "seriesId": "8aa2a66f-f300-479f-ac04-67e21fa3534b",
+   "eloChangeA": -6,
+   "eloChangeB": 0,
+   "requestedAt": "2026-10-03T11:54:22.928Z",
+   "startedAt": "2026-10-03T11:54:23.335Z",
+   "completedAt": "2026-10-03T11:55:00.220Z",
+   "log": null,
+   "seed": "3619fdd09dd51058"
+  },
+  "mapName": "Devil",
+  "teamAName": "zach",
+  "teamBName": "Cognoscenti",
+  "teamAElo": 1556,
+  "teamBElo": 1469,
+  "games": [
+   {
+    "id": 959431,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Devil"
+   },
+   {
+    "id": 959432,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Australia"
+   },
+   {
+    "id": 959433,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   },
+   {
+    "id": 959434,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "weakhold"
+   },
+   {
+    "id": 959435,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Around UNSW"
+   }
+  ],
+  "wait": null
+ },
+ "958916": {
+  "match": {
+   "id": 958916,
+   "teamAId": 1092,
+   "teamBId": 351,
+   "mapId": 15,
+   "ranked": true,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "a",
+   "scoresA": 58,
+   "scoresB": 21,
+   "views": 0,
+   "seriesId": "fd5ee49c-557d-4c9a-a37d-387eba840be6",
+   "eloChangeA": 0,
+   "eloChangeB": 0,
+   "requestedAt": "2026-10-03T11:46:12.388Z",
+   "startedAt": "2026-10-03T11:46:13.410Z",
+   "completedAt": "2026-10-03T11:48:12.702Z",
+   "log": null,
+   "seed": "6ed41596f848551f"
+  },
+  "mapName": "Trauma",
+  "teamAName": "so-lonely",
+  "teamBName": "Cognoscenti",
+  "teamAElo": 1424,
+  "teamBElo": 1469,
+  "games": [
+   {
+    "id": 958916,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Trauma"
+   },
+   {
+    "id": 958917,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Around UNSW"
+   },
+   {
+    "id": 958918,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Islands"
+   },
+   {
+    "id": 958919,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Queen Of Spades"
+   },
+   {
+    "id": 958920,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Trophy"
+   }
+  ],
+  "wait": null
+ },
+ "957604": {
+  "match": {
+   "id": 957604,
+   "teamAId": 782,
+   "teamBId": 351,
+   "mapId": 31,
+   "ranked": false,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "a",
+   "scoresA": 71,
+   "scoresB": 185,
+   "views": 0,
+   "seriesId": "76cacbb3-5fc7-43e2-94bc-11cf9ac24081",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T11:21:34.987Z",
+   "startedAt": "2026-10-03T11:21:35.341Z",
+   "completedAt": "2026-10-03T11:23:56.386Z",
+   "log": null,
+   "seed": "c9daa06d3c933df2"
+  },
+  "mapName": "Maze",
+  "teamAName": "WaterCandle",
+  "teamBName": "Cognoscenti",
+  "teamAElo": 1746,
+  "teamBElo": 1469,
+  "games": [
+   {
+    "id": 957604,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Maze"
+   },
+   {
+    "id": 957605,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   },
+   {
+    "id": 957606,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "weakhold"
+   },
+   {
+    "id": 957607,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Australia"
+   },
+   {
+    "id": 957608,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Islands"
+   },
+   {
+    "id": 957609,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Stripes"
+   },
+   {
+    "id": 957610,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Around UNSW"
+   },
+   {
+    "id": 957611,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Devil"
+   },
+   {
+    "id": 957612,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Queen Of Spades"
+   },
+   {
+    "id": 957613,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Default"
+   }
+  ],
+  "wait": null
+ },
+ "957217": {
+  "match": {
+   "id": 957217,
+   "teamAId": 351,
+   "teamBId": 201,
+   "mapId": 15,
+   "ranked": true,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 27,
+   "scoresB": 48,
+   "views": 0,
+   "seriesId": "cbf1f8be-645d-4090-8e60-f16ceefc8193",
+   "eloChangeA": 0,
+   "eloChangeB": 0,
+   "requestedAt": "2026-10-03T11:14:35.115Z",
+   "startedAt": "2026-10-03T11:14:35.414Z",
+   "completedAt": "2026-10-03T11:15:11.248Z",
+   "log": null,
+   "seed": "f825d6ad3663bff7"
+  },
+  "mapName": "Trauma",
+  "teamAName": "Cognoscenti",
+  "teamBName": "NeungzAI",
+  "teamAElo": 1469,
+  "teamBElo": 1534,
+  "games": [
+   {
+    "id": 957217,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Trauma"
+   },
+   {
+    "id": 957218,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Around UNSW"
+   },
+   {
+    "id": 957219,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Stripes"
+   },
+   {
+    "id": 957220,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "weakhold"
+   },
+   {
+    "id": 957221,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Schooltime"
+   }
+  ],
+  "wait": null
+ },
+ "955683": {
+  "match": {
+   "id": 955683,
+   "teamAId": 1118,
+   "teamBId": 351,
+   "mapId": 33,
+   "ranked": true,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "a",
+   "scoresA": 90,
+   "scoresB": 0,
+   "views": 0,
+   "seriesId": "214de249-9625-4e2a-9a5b-595f0321242a",
+   "eloChangeA": 19,
+   "eloChangeB": -1,
+   "requestedAt": "2026-10-03T10:48:19.590Z",
+   "startedAt": "2026-10-03T10:48:20.130Z",
+   "completedAt": "2026-10-03T10:48:28.300Z",
+   "log": null,
+   "seed": "294013892bedefab"
+  },
+  "mapName": "Tower Defense",
+  "teamAName": "zach",
+  "teamBName": "Cognoscenti",
+  "teamAElo": 1556,
+  "teamBElo": 1469,
+  "games": [
+   {
+    "id": 955683,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   },
+   {
+    "id": 955684,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Default"
+   },
+   {
+    "id": 955685,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Prisoners Dilemma"
+   },
+   {
+    "id": 955686,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Portals"
+   },
+   {
+    "id": 955687,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Schooltime"
+   }
+  ],
+  "wait": null
+ },
+ "954784": {
+  "match": {
+   "id": 954784,
+   "teamAId": 1092,
+   "teamBId": 351,
+   "mapId": 30,
+   "ranked": true,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 11,
+   "scoresB": 229,
+   "views": 0,
+   "seriesId": "98f2e6ef-fd8d-4f66-8d3d-83b11267cbf5",
+   "eloChangeA": -6,
+   "eloChangeB": 2,
+   "requestedAt": "2026-10-03T10:35:31.299Z",
+   "startedAt": "2026-10-03T10:40:38.394Z",
+   "completedAt": "2026-10-03T10:45:56.165Z",
+   "log": null,
+   "seed": "fcb3baad1ab320c0"
+  },
+  "mapName": "Islands",
+  "teamAName": "so-lonely",
+  "teamBName": "Cognoscenti",
+  "teamAElo": 1424,
+  "teamBElo": 1469,
+  "games": [
+   {
+    "id": 954784,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Islands"
+   },
+   {
+    "id": 954785,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Schooltime"
+   },
+   {
+    "id": 954786,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Autarky"
+   },
+   {
+    "id": 954787,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   },
+   {
+    "id": 954788,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Stripes"
+   }
+  ],
+  "wait": null
+ },
+ "953873": {
+  "match": {
+   "id": 953873,
+   "teamAId": 782,
+   "teamBId": 351,
+   "mapId": 31,
+   "ranked": false,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 34,
+   "scoresB": 209,
+   "views": 0,
+   "seriesId": "7fae6668-bc02-4ca1-810b-6b3404e04d79",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T10:20:49.864Z",
+   "startedAt": "2026-10-03T10:20:50.126Z",
+   "completedAt": "2026-10-03T10:23:04.638Z",
+   "log": null,
+   "seed": "5082017587a4d703"
+  },
+  "mapName": "Maze",
+  "teamAName": "WaterCandle",
+  "teamBName": "Cognoscenti",
+  "teamAElo": 1746,
+  "teamBElo": 1469,
+  "games": [
+   {
+    "id": 953873,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Maze"
+   },
+   {
+    "id": 953874,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   },
+   {
+    "id": 953875,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "weakhold"
+   },
+   {
+    "id": 953876,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Australia"
+   },
+   {
+    "id": 953877,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Islands"
+   },
+   {
+    "id": 953878,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Stripes"
+   },
+   {
+    "id": 953879,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Around UNSW"
+   },
+   {
+    "id": 953880,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Devil"
+   },
+   {
+    "id": 953881,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Queen Of Spades"
+   },
+   {
+    "id": 953882,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Default"
+   }
+  ],
+  "wait": null
+ },
+ "953272": {
+  "match": {
+   "id": 953272,
+   "teamAId": 351,
+   "teamBId": 201,
+   "mapId": 9,
+   "ranked": true,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "a",
+   "scoresA": 3,
+   "scoresB": 275,
+   "views": 0,
+   "seriesId": "6ab91aa4-8fa4-4c61-b91c-efc567a56b7d",
+   "eloChangeA": 3,
+   "eloChangeB": -3,
+   "requestedAt": "2026-10-03T10:10:00.055Z",
+   "startedAt": "2026-10-03T10:10:00.454Z",
+   "completedAt": "2026-10-03T10:11:01.754Z",
+   "log": null,
+   "seed": "47075b40c0e485d4"
+  },
+  "mapName": "Schooltime",
+  "teamAName": "Cognoscenti",
+  "teamBName": "NeungzAI",
+  "teamAElo": 1469,
+  "teamBElo": 1534,
+  "games": [
+   {
+    "id": 953272,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Schooltime"
+   },
+   {
+    "id": 953273,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "weakhold"
+   },
+   {
+    "id": 953274,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Stripes"
+   },
+   {
+    "id": 953275,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   },
+   {
+    "id": 953276,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Around UNSW"
+   }
+  ],
+  "wait": null
+ },
+ "951636": {
+  "match": {
+   "id": 951636,
+   "teamAId": 1118,
+   "teamBId": 351,
+   "mapId": 34,
+   "ranked": true,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "a",
+   "scoresA": 149,
+   "scoresB": 323,
+   "views": 0,
+   "seriesId": "2b241287-9cff-4537-b782-e9b29c79695a",
+   "eloChangeA": 84,
+   "eloChangeB": -5,
+   "requestedAt": "2026-10-03T09:43:57.999Z",
+   "startedAt": "2026-10-03T09:44:00.540Z",
+   "completedAt": "2026-10-03T09:47:31.157Z",
+   "log": null,
+   "seed": "6be9a7691e70e696"
+  },
+  "mapName": "Around UNSW",
+  "teamAName": "zach",
+  "teamBName": "Cognoscenti",
+  "teamAElo": 1556,
+  "teamBElo": 1469,
+  "games": [
+   {
+    "id": 951636,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Around UNSW"
+   },
+   {
+    "id": 951637,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Slithery Fight"
+   },
+   {
+    "id": 951638,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Default"
+   },
+   {
+    "id": 951639,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Maze"
+   },
+   {
+    "id": 951640,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Schooltime"
+   }
+  ],
+  "wait": null
+ },
+ "950566": {
+  "match": {
+   "id": 950566,
+   "teamAId": 1092,
+   "teamBId": 351,
+   "mapId": 33,
+   "ranked": true,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "a",
+   "scoresA": 21,
+   "scoresB": 37,
+   "views": 0,
+   "seriesId": "853d89f6-8c71-4d05-8c01-fbf981f02ab1",
+   "eloChangeA": 10,
+   "eloChangeB": -3,
+   "requestedAt": "2026-10-03T09:29:38.054Z",
+   "startedAt": "2026-10-03T09:29:38.509Z",
+   "completedAt": "2026-10-03T09:30:24.560Z",
+   "log": null,
+   "seed": "cc86acd85e2068b6"
+  },
+  "mapName": "Tower Defense",
+  "teamAName": "so-lonely",
+  "teamBName": "Cognoscenti",
+  "teamAElo": 1424,
+  "teamBElo": 1469,
+  "games": [
+   {
+    "id": 950566,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   },
+   {
+    "id": 950567,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Autarky"
+   },
+   {
+    "id": 950568,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Slithery Fight"
+   },
+   {
+    "id": 950569,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Islands"
+   },
+   {
+    "id": 950570,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Portals"
+   }
+  ],
+  "wait": null
+ },
+ "950177": {
+  "match": {
+   "id": 950177,
+   "teamAId": 782,
+   "teamBId": 351,
+   "mapId": 31,
+   "ranked": false,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 0,
+   "scoresB": 183,
+   "views": 0,
+   "seriesId": "77feaee7-1c4f-44d4-9ae8-8386a7550d7c",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T09:20:04.836Z",
+   "startedAt": "2026-10-03T09:20:05.126Z",
+   "completedAt": "2026-10-03T09:22:25.182Z",
+   "log": null,
+   "seed": "87b24a07e12df247"
+  },
+  "mapName": "Maze",
+  "teamAName": "WaterCandle",
+  "teamBName": "Cognoscenti",
+  "teamAElo": 1746,
+  "teamBElo": 1469,
+  "games": [
+   {
+    "id": 950177,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Maze"
+   },
+   {
+    "id": 950178,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   },
+   {
+    "id": 950179,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "weakhold"
+   },
+   {
+    "id": 950180,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Australia"
+   },
+   {
+    "id": 950181,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Islands"
+   },
+   {
+    "id": 950182,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Stripes"
+   },
+   {
+    "id": 950183,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Around UNSW"
+   },
+   {
+    "id": 950184,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Devil"
+   },
+   {
+    "id": 950185,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Queen Of Spades"
+   },
+   {
+    "id": 950186,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Default"
+   }
+  ],
+  "wait": null
+ },
+ "948839": {
+  "match": {
+   "id": 948839,
+   "teamAId": 1015,
+   "teamBId": 351,
+   "mapId": 28,
+   "ranked": true,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 0,
+   "scoresB": 48,
+   "views": 0,
+   "seriesId": "1ef90640-3639-4f97-a514-27860f96b40d",
+   "eloChangeA": -8,
+   "eloChangeB": 9,
+   "requestedAt": "2026-10-03T09:01:01.778Z",
+   "startedAt": "2026-10-03T09:01:02.821Z",
+   "completedAt": "2026-10-03T09:01:28.432Z",
+   "log": null,
+   "seed": "d0d4d04374cd8e9b"
+  },
+  "mapName": "weakhold",
+  "teamAName": "doofenshmirtz good incorporated",
+  "teamBName": "Cognoscenti",
+  "teamAElo": 1619,
+  "teamBElo": 1469,
+  "games": [
+   {
+    "id": 948839,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "weakhold"
+   },
+   {
+    "id": 948840,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Devil"
+   },
+   {
+    "id": 948841,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Trophy"
+   },
+   {
+    "id": 948842,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Portals"
+   },
+   {
+    "id": 948843,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Around UNSW"
+   }
+  ],
+  "wait": null
+ },
+ "947167": {
+  "match": {
+   "id": 947167,
+   "teamAId": 351,
+   "teamBId": 956,
+   "mapId": 19,
+   "ranked": true,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "a",
+   "scoresA": 98,
+   "scoresB": 48,
+   "views": 0,
+   "seriesId": "11d3c507-657e-4da5-a854-989556c4f057",
+   "eloChangeA": -4,
+   "eloChangeB": 3,
+   "requestedAt": "2026-10-03T08:37:29.704Z",
+   "startedAt": "2026-10-03T08:37:30.244Z",
+   "completedAt": "2026-10-03T08:39:26.687Z",
+   "log": null,
+   "seed": "05a3e06262d4b7d2"
+  },
+  "mapName": "Autarky",
+  "teamAName": "Cognoscenti",
+  "teamBName": "I wanna go to CHINA",
+  "teamAElo": 1469,
+  "teamBElo": 1439,
+  "games": [
+   {
+    "id": 947167,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Autarky"
+   },
+   {
+    "id": 947168,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Devil"
+   },
+   {
+    "id": 947169,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Slithery Fight"
+   },
+   {
+    "id": 947170,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "weakhold"
+   },
+   {
+    "id": 947171,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Maze"
+   }
+  ],
+  "wait": null
+ },
+ "946447": {
+  "match": {
+   "id": 946447,
+   "teamAId": 1092,
+   "teamBId": 351,
+   "mapId": 19,
+   "ranked": true,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 46,
+   "scoresB": 119,
+   "views": 0,
+   "seriesId": "21dd486b-f8cb-4f69-a353-6886af7af104",
+   "eloChangeA": 0,
+   "eloChangeB": 0,
+   "requestedAt": "2026-10-03T08:23:43.103Z",
+   "startedAt": "2026-10-03T08:23:43.450Z",
+   "completedAt": "2026-10-03T08:26:03.180Z",
+   "log": null,
+   "seed": "eb9e021beb23903b"
+  },
+  "mapName": "Autarky",
+  "teamAName": "so-lonely",
+  "teamBName": "Cognoscenti",
+  "teamAElo": 1424,
+  "teamBElo": 1469,
+  "games": [
+   {
+    "id": 946447,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Autarky"
+   },
+   {
+    "id": 946448,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Australia"
+   },
+   {
+    "id": 946449,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Slithery Fight"
+   },
+   {
+    "id": 946450,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Queen Of Spades"
+   },
+   {
+    "id": 946451,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Prisoners Dilemma"
+   }
+  ],
+  "wait": null
+ },
+ "946171": {
+  "match": {
+   "id": 946171,
+   "teamAId": 782,
+   "teamBId": 351,
+   "mapId": 31,
+   "ranked": false,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "a",
+   "scoresA": 63,
+   "scoresB": 172,
+   "views": 0,
+   "seriesId": "73588d9e-6bee-4bb9-a8f6-b4e38bdc8042",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T08:19:34.707Z",
+   "startedAt": "2026-10-03T08:19:35.038Z",
+   "completedAt": "2026-10-03T08:22:53.728Z",
+   "log": null,
+   "seed": "a210d91ac4d32250"
+  },
+  "mapName": "Maze",
+  "teamAName": "WaterCandle",
+  "teamBName": "Cognoscenti",
+  "teamAElo": 1746,
+  "teamBElo": 1469,
+  "games": [
+   {
+    "id": 946171,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Maze"
+   },
+   {
+    "id": 946172,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   },
+   {
+    "id": 946173,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "weakhold"
+   },
+   {
+    "id": 946174,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Australia"
+   },
+   {
+    "id": 946175,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Islands"
+   },
+   {
+    "id": 946176,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Stripes"
+   },
+   {
+    "id": 946177,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Around UNSW"
+   },
+   {
+    "id": 946178,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Devil"
+   },
+   {
+    "id": 946179,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Queen Of Spades"
+   },
+   {
+    "id": 946180,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Default"
+   }
+  ],
+  "wait": null
+ },
+ "945460": {
+  "match": {
+   "id": 945460,
+   "teamAId": 969,
+   "teamBId": 351,
+   "mapId": 33,
+   "ranked": false,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 18,
+   "scoresB": 92,
+   "views": 0,
+   "seriesId": "836c4678-e6e0-44f7-8d92-d1cdb324765f",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T08:07:21.618Z",
+   "startedAt": "2026-10-03T08:07:22.754Z",
+   "completedAt": "2026-10-03T08:08:37.529Z",
+   "log": null,
+   "seed": "e8325fa2870a8986"
+  },
+  "mapName": "Tower Defense",
+  "teamAName": "Atlas",
+  "teamBName": "Cognoscenti",
+  "teamAElo": 1573,
+  "teamBElo": 1469,
+  "games": [
+   {
+    "id": 945460,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   },
+   {
+    "id": 945461,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "weakhold"
+   }
+  ],
+  "wait": null
+ },
+ "945323": {
+  "match": {
+   "id": 945323,
+   "teamAId": 969,
+   "teamBId": 351,
+   "mapId": 33,
+   "ranked": false,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "a",
+   "scoresA": 49,
+   "scoresB": 2,
+   "views": 0,
+   "seriesId": "616615e7-eb69-4032-b57c-4db9847fe011",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T08:05:32.707Z",
+   "startedAt": "2026-10-03T08:05:37.068Z",
+   "completedAt": "2026-10-03T08:05:47.237Z",
+   "log": null,
+   "seed": "7a7f359065de5f87"
+  },
+  "mapName": "Tower Defense",
+  "teamAName": "Atlas",
+  "teamBName": "Cognoscenti",
+  "teamAElo": 1573,
+  "teamBElo": 1469,
+  "games": [
+   {
+    "id": 945323,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   },
+   {
+    "id": 945324,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "weakhold"
+   }
+  ],
+  "wait": null
+ },
+ "944767": {
+  "match": {
+   "id": 944767,
+   "teamAId": 1015,
+   "teamBId": 351,
+   "mapId": 34,
+   "ranked": true,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "a",
+   "scoresA": 213,
+   "scoresB": 354,
+   "views": 0,
+   "seriesId": "bdb90c9d-b7c2-48d2-9c31-8957c8c5727c",
+   "eloChangeA": 0,
+   "eloChangeB": 0,
+   "requestedAt": "2026-10-03T07:56:07.550Z",
+   "startedAt": "2026-10-03T07:56:07.642Z",
+   "completedAt": "2026-10-03T08:00:43.670Z",
+   "log": null,
+   "seed": "a9aad14da8906fce"
+  },
+  "mapName": "Around UNSW",
+  "teamAName": "doofenshmirtz good incorporated",
+  "teamBName": "Cognoscenti",
+  "teamAElo": 1619,
+  "teamBElo": 1469,
+  "games": [
+   {
+    "id": 944767,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Around UNSW"
+   },
+   {
+    "id": 944768,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Portals"
+   },
+   {
+    "id": 944769,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Trophy"
+   },
+   {
+    "id": 944770,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Stripes"
+   },
+   {
+    "id": 944771,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Default"
+   }
+  ],
+  "wait": null
+ },
+ "943360": {
+  "match": {
+   "id": 943360,
+   "teamAId": 351,
+   "teamBId": 956,
+   "mapId": 4,
+   "ranked": true,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 81,
+   "scoresB": 15,
+   "views": 0,
+   "seriesId": "ec34f940-4f4a-416d-9f04-b23b817796bd",
+   "eloChangeA": -5,
+   "eloChangeB": 3,
+   "requestedAt": "2026-10-03T07:34:42.087Z",
+   "startedAt": "2026-10-03T07:34:42.460Z",
+   "completedAt": "2026-10-03T07:36:05.236Z",
+   "log": null,
+   "seed": "4d9bbb19f165e510"
+  },
+  "mapName": "Default",
+  "teamAName": "Cognoscenti",
+  "teamBName": "I wanna go to CHINA",
+  "teamAElo": 1469,
+  "teamBElo": 1439,
+  "games": [
+   {
+    "id": 943360,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Default"
+   },
+   {
+    "id": 943361,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Islands"
+   },
+   {
+    "id": 943362,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Portals"
+   },
+   {
+    "id": 943363,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Trauma"
+   },
+   {
+    "id": 943364,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Trophy"
+   }
+  ],
+  "wait": null
+ },
+ "942596": {
+  "match": {
+   "id": 942596,
+   "teamAId": 782,
+   "teamBId": 351,
+   "mapId": 31,
+   "ranked": false,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "a",
+   "scoresA": 82,
+   "scoresB": 193,
+   "views": 0,
+   "seriesId": "418255bc-9e22-4231-9c78-876872e93653",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T07:18:59.509Z",
+   "startedAt": "2026-10-03T07:19:00.382Z",
+   "completedAt": "2026-10-03T07:22:23.901Z",
+   "log": null,
+   "seed": "faa963379b103c1d"
+  },
+  "mapName": "Maze",
+  "teamAName": "WaterCandle",
+  "teamBName": "Cognoscenti",
+  "teamAElo": 1746,
+  "teamBElo": 1469,
+  "games": [
+   {
+    "id": 942596,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Maze"
+   },
+   {
+    "id": 942597,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   },
+   {
+    "id": 942598,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "weakhold"
+   },
+   {
+    "id": 942599,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Australia"
+   },
+   {
+    "id": 942600,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Islands"
+   },
+   {
+    "id": 942601,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Stripes"
+   },
+   {
+    "id": 942602,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Around UNSW"
+   },
+   {
+    "id": 942603,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Devil"
+   },
+   {
+    "id": 942604,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Queen Of Spades"
+   },
+   {
+    "id": 942605,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Default"
+   }
+  ],
+  "wait": null
+ },
+ "942789": {
+  "match": {
+   "id": 942789,
+   "teamAId": 1092,
+   "teamBId": 351,
+   "mapId": 33,
+   "ranked": true,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "a",
+   "scoresA": 80,
+   "scoresB": 0,
+   "views": 0,
+   "seriesId": "6251b71a-7911-449a-bc3e-14386e5ab81e",
+   "eloChangeA": 4,
+   "eloChangeB": 0,
+   "requestedAt": "2026-10-03T07:21:56.585Z",
+   "startedAt": "2026-10-03T07:21:56.870Z",
+   "completedAt": "2026-10-03T07:22:13.341Z",
+   "log": null,
+   "seed": "77c8ef963d2a6089"
+  },
+  "mapName": "Tower Defense",
+  "teamAName": "so-lonely",
+  "teamBName": "Cognoscenti",
+  "teamAElo": 1424,
+  "teamBElo": 1469,
+  "games": [
+   {
+    "id": 942789,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   },
+   {
+    "id": 942790,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Stripes"
+   },
+   {
+    "id": 942791,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Trauma"
+   },
+   {
+    "id": 942792,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Devil"
+   },
+   {
+    "id": 942793,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Portals"
+   }
+  ],
+  "wait": null
+ },
+ "941143": {
+  "match": {
+   "id": 941143,
+   "teamAId": 351,
+   "teamBId": 943,
+   "mapId": 9,
+   "ranked": true,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 26,
+   "scoresB": 212,
+   "views": 0,
+   "seriesId": "d0e86820-391f-4784-8ab1-6a6aedb54636",
+   "eloChangeA": -2,
+   "eloChangeB": 2,
+   "requestedAt": "2026-10-03T06:53:23.473Z",
+   "startedAt": "2026-10-03T06:53:23.994Z",
+   "completedAt": "2026-10-03T06:54:05.200Z",
+   "log": null,
+   "seed": "3fe94e07d66e84fc"
+  },
+  "mapName": "Schooltime",
+  "teamAName": "Cognoscenti",
+  "teamBName": "EternalWisdom",
+  "teamAElo": 1469,
+  "teamBElo": 1633,
+  "games": [
+   {
+    "id": 941143,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Schooltime"
+   },
+   {
+    "id": 941144,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   },
+   {
+    "id": 941145,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Devil"
+   },
+   {
+    "id": 941146,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Islands"
+   },
+   {
+    "id": 941147,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Trauma"
+   }
+  ],
+  "wait": null
+ },
+ "939320": {
+  "match": {
+   "id": 939320,
+   "teamAId": 351,
+   "teamBId": 956,
+   "mapId": 4,
+   "ranked": true,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "a",
+   "scoresA": 146,
+   "scoresB": 22,
+   "views": 0,
+   "seriesId": "1dc2ad77-0a5b-4620-a97e-541a303d583e",
+   "eloChangeA": 0,
+   "eloChangeB": 0,
+   "requestedAt": "2026-10-03T06:29:59.541Z",
+   "startedAt": "2026-10-03T06:30:01.078Z",
+   "completedAt": "2026-10-03T06:32:43.834Z",
+   "log": null,
+   "seed": "0853c6492dc60028"
+  },
+  "mapName": "Default",
+  "teamAName": "Cognoscenti",
+  "teamBName": "I wanna go to CHINA",
+  "teamAElo": 1469,
+  "teamBElo": 1439,
+  "games": [
+   {
+    "id": 939320,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Default"
+   },
+   {
+    "id": 939321,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Trophy"
+   },
+   {
+    "id": 939322,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Islands"
+   },
+   {
+    "id": 939323,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Australia"
+   },
+   {
+    "id": 939324,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Stripes"
+   }
+  ],
+  "wait": null
+ },
+ "938645": {
+  "match": {
+   "id": 938645,
+   "teamAId": 782,
+   "teamBId": 351,
+   "mapId": 31,
+   "ranked": false,
+   "skinA": "Jiaolong",
+   "skinB": "Loch Ness",
+   "status": "completed",
+   "winner": "a",
+   "scoresA": 39,
+   "scoresB": 185,
+   "views": 0,
+   "seriesId": "92bf2b1a-cbc9-463a-acdc-7b83e1e5ef55",
+   "eloChangeA": null,
+   "eloChangeB": null,
+   "requestedAt": "2026-10-03T06:17:56.864Z",
+   "startedAt": "2026-10-03T06:17:57.194Z",
+   "completedAt": "2026-10-03T06:21:07.732Z",
+   "log": null,
+   "seed": "477c2e5373479d4d"
+  },
+  "mapName": "Maze",
+  "teamAName": "WaterCandle",
+  "teamBName": "Cognoscenti",
+  "teamAElo": 1746,
+  "teamBElo": 1469,
+  "games": [
+   {
+    "id": 938645,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Maze"
+   },
+   {
+    "id": 938646,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   },
+   {
+    "id": 938647,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "weakhold"
+   },
+   {
+    "id": 938648,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Australia"
+   },
+   {
+    "id": 938649,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Islands"
+   },
+   {
+    "id": 938650,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Stripes"
+   },
+   {
+    "id": 938651,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Around UNSW"
+   },
+   {
+    "id": 938652,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Devil"
+   },
+   {
+    "id": 938653,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Queen Of Spades"
+   },
+   {
+    "id": 938654,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Default"
+   }
+  ],
+  "wait": null
+ },
+ "938670": {
+  "match": {
+   "id": 938670,
+   "teamAId": 351,
+   "teamBId": 529,
+   "mapId": 28,
+   "ranked": true,
+   "skinA": "Jiaolong",
+   "skinB": "Vatulele Prawn",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 26,
+   "scoresB": 45,
+   "views": 0,
+   "seriesId": "b81294cc-12eb-4518-8b94-f66f504bf8f8",
+   "eloChangeA": 2,
+   "eloChangeB": -2,
+   "requestedAt": "2026-10-03T06:18:16.347Z",
+   "startedAt": "2026-10-03T06:18:17.935Z",
+   "completedAt": "2026-10-03T06:18:50.919Z",
+   "log": null,
+   "seed": "e6e74ec8bc1f000f"
+  },
+  "mapName": "weakhold",
+  "teamAName": "Cognoscenti",
+  "teamBName": "meowest",
+  "teamAElo": 1469,
+  "teamBElo": 1658,
+  "games": [
+   {
+    "id": 938670,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "weakhold"
+   },
+   {
+    "id": 938671,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Queen Of Spades"
+   },
+   {
+    "id": 938672,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Maze"
+   },
+   {
+    "id": 938673,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Stripes"
+   },
+   {
+    "id": 938674,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Devil"
+   }
+  ],
+  "wait": null
+ },
+ "937711": {
+  "match": {
+   "id": 937711,
+   "teamAId": 928,
+   "teamBId": 351,
+   "mapId": 11,
+   "ranked": true,
+   "skinA": "Loch Ness",
+   "skinB": "Jiaolong",
+   "status": "completed",
+   "winner": "b",
+   "scoresA": 0,
+   "scoresB": 117,
+   "views": 0,
+   "seriesId": "0d7f043c-e17b-43b8-a7bc-599ac5a67651",
+   "eloChangeA": -18,
+   "eloChangeB": 2,
+   "requestedAt": "2026-10-03T06:02:06.624Z",
+   "startedAt": "2026-10-03T06:02:06.916Z",
+   "completedAt": "2026-10-03T06:02:42.478Z",
+   "log": null,
+   "seed": "7536f8c45cd2383f"
+  },
+  "mapName": "Trophy",
+  "teamAName": "Ron Squad",
+  "teamBName": "Cognoscenti",
+  "teamAElo": 1657,
+  "teamBElo": 1469,
+  "games": [
+   {
+    "id": 937711,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Trophy"
+   },
+   {
+    "id": 937712,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Portals"
+   },
+   {
+    "id": 937713,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Devil"
+   },
+   {
+    "id": 937714,
+    "status": "completed",
+    "winner": "a",
+    "hasReplay": true,
+    "mapName": "Tower Defense"
+   },
+   {
+    "id": 937715,
+    "status": "completed",
+    "winner": "b",
+    "hasReplay": true,
+    "mapName": "Queen Of Spades"
+   }
+  ],
+  "wait": null
+ }
+}

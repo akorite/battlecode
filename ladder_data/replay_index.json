@@ -1,0 +1,962 @@
+[
+ {
+  "gameId": 937713,
+  "file": "ladder_replays/937713.replay",
+  "status": "ok",
+  "map": "Devil",
+  "opponent": "Ron Squad",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 937714,
+  "file": "ladder_replays/937714.replay",
+  "status": "ok",
+  "map": "Tower Defense",
+  "opponent": "Ron Squad",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 938670,
+  "file": "ladder_replays/938670.replay",
+  "status": "ok",
+  "map": "weakhold",
+  "opponent": "meowest",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 938671,
+  "file": "ladder_replays/938671.replay",
+  "status": "ok",
+  "map": "Queen Of Spades",
+  "opponent": "meowest",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 938674,
+  "file": "ladder_replays/938674.replay",
+  "status": "ok",
+  "map": "Devil",
+  "opponent": "meowest",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 939321,
+  "file": "ladder_replays/939321.replay",
+  "status": "ok",
+  "map": "Trophy",
+  "opponent": "I wanna go to CHINA",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 939324,
+  "file": "ladder_replays/939324.replay",
+  "status": "ok",
+  "map": "Stripes",
+  "opponent": "I wanna go to CHINA",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 941143,
+  "file": "ladder_replays/941143.replay",
+  "status": "ok",
+  "map": "Schooltime",
+  "opponent": "EternalWisdom",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 941145,
+  "file": "ladder_replays/941145.replay",
+  "status": "ok",
+  "map": "Devil",
+  "opponent": "EternalWisdom",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 941146,
+  "file": "ladder_replays/941146.replay",
+  "status": "ok",
+  "map": "Islands",
+  "opponent": "EternalWisdom",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 942789,
+  "file": "ladder_replays/942789.replay",
+  "status": "ok",
+  "map": "Tower Defense",
+  "opponent": "so-lonely",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 942790,
+  "file": "ladder_replays/942790.replay",
+  "status": "ok",
+  "map": "Stripes",
+  "opponent": "so-lonely",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 943360,
+  "file": "ladder_replays/943360.replay",
+  "status": "ok",
+  "map": "Default",
+  "opponent": "I wanna go to CHINA",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 943361,
+  "file": "ladder_replays/943361.replay",
+  "status": "ok",
+  "map": "Islands",
+  "opponent": "I wanna go to CHINA",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 943363,
+  "file": "ladder_replays/943363.replay",
+  "status": "ok",
+  "map": "Trauma",
+  "opponent": "I wanna go to CHINA",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 944767,
+  "file": "ladder_replays/944767.replay",
+  "status": "ok",
+  "map": "Around UNSW",
+  "opponent": "doofenshmirtz good incorporated",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 944768,
+  "file": "ladder_replays/944768.replay",
+  "status": "ok",
+  "map": "Portals",
+  "opponent": "doofenshmirtz good incorporated",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 944770,
+  "file": "ladder_replays/944770.replay",
+  "status": "ok",
+  "map": "Stripes",
+  "opponent": "doofenshmirtz good incorporated",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 946448,
+  "file": "ladder_replays/946448.replay",
+  "status": "ok",
+  "map": "Australia",
+  "opponent": "so-lonely",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 946450,
+  "file": "ladder_replays/946450.replay",
+  "status": "ok",
+  "map": "Queen Of Spades",
+  "opponent": "so-lonely",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 947169,
+  "file": "ladder_replays/947169.replay",
+  "status": "ok",
+  "map": "Slithery Fight",
+  "opponent": "I wanna go to CHINA",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 947170,
+  "file": "ladder_replays/947170.replay",
+  "status": "ok",
+  "map": "weakhold",
+  "opponent": "I wanna go to CHINA",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 947171,
+  "file": "ladder_replays/947171.replay",
+  "status": "ok",
+  "map": "Maze",
+  "opponent": "I wanna go to CHINA",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 948843,
+  "file": "ladder_replays/948843.replay",
+  "status": "ok",
+  "map": "Around UNSW",
+  "opponent": "doofenshmirtz good incorporated",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 950566,
+  "file": "ladder_replays/950566.replay",
+  "status": "ok",
+  "map": "Tower Defense",
+  "opponent": "so-lonely",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 950568,
+  "file": "ladder_replays/950568.replay",
+  "status": "ok",
+  "map": "Slithery Fight",
+  "opponent": "so-lonely",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 950569,
+  "file": "ladder_replays/950569.replay",
+  "status": "ok",
+  "map": "Islands",
+  "opponent": "so-lonely",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 951636,
+  "file": "ladder_replays/951636.replay",
+  "status": "ok",
+  "map": "Around UNSW",
+  "opponent": "zach",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 951637,
+  "file": "ladder_replays/951637.replay",
+  "status": "ok",
+  "map": "Slithery Fight",
+  "opponent": "zach",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 951638,
+  "file": "ladder_replays/951638.replay",
+  "status": "ok",
+  "map": "Default",
+  "opponent": "zach",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 951639,
+  "file": "ladder_replays/951639.replay",
+  "status": "ok",
+  "map": "Maze",
+  "opponent": "zach",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 951640,
+  "file": "ladder_replays/951640.replay",
+  "status": "ok",
+  "map": "Schooltime",
+  "opponent": "zach",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 953273,
+  "file": "ladder_replays/953273.replay",
+  "status": "ok",
+  "map": "weakhold",
+  "opponent": "NeungzAI",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 953276,
+  "file": "ladder_replays/953276.replay",
+  "status": "ok",
+  "map": "Around UNSW",
+  "opponent": "NeungzAI",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 954785,
+  "file": "ladder_replays/954785.replay",
+  "status": "ok",
+  "map": "Schooltime",
+  "opponent": "so-lonely",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 954786,
+  "file": "ladder_replays/954786.replay",
+  "status": "ok",
+  "map": "Autarky",
+  "opponent": "so-lonely",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 955683,
+  "file": "ladder_replays/955683.replay",
+  "status": "ok",
+  "map": "Tower Defense",
+  "opponent": "zach",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 955686,
+  "file": "ladder_replays/955686.replay",
+  "status": "ok",
+  "map": "Portals",
+  "opponent": "zach",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 955687,
+  "file": "ladder_replays/955687.replay",
+  "status": "ok",
+  "map": "Schooltime",
+  "opponent": "zach",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 957217,
+  "file": "ladder_replays/957217.replay",
+  "status": "ok",
+  "map": "Trauma",
+  "opponent": "NeungzAI",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 957218,
+  "file": "ladder_replays/957218.replay",
+  "status": "ok",
+  "map": "Around UNSW",
+  "opponent": "NeungzAI",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 957220,
+  "file": "ladder_replays/957220.replay",
+  "status": "ok",
+  "map": "weakhold",
+  "opponent": "NeungzAI",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 958916,
+  "file": "ladder_replays/958916.replay",
+  "status": "ok",
+  "map": "Trauma",
+  "opponent": "so-lonely",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 958919,
+  "file": "ladder_replays/958919.replay",
+  "status": "ok",
+  "map": "Queen Of Spades",
+  "opponent": "so-lonely",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 958920,
+  "file": "ladder_replays/958920.replay",
+  "status": "ok",
+  "map": "Trophy",
+  "opponent": "so-lonely",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 959432,
+  "file": "ladder_replays/959432.replay",
+  "status": "ok",
+  "map": "Australia",
+  "opponent": "zach",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 959433,
+  "file": "ladder_replays/959433.replay",
+  "status": "ok",
+  "map": "Tower Defense",
+  "opponent": "zach",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 959435,
+  "file": "ladder_replays/959435.replay",
+  "status": "ok",
+  "map": "Around UNSW",
+  "opponent": "zach",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 961058,
+  "file": "ladder_replays/961058.replay",
+  "status": "ok",
+  "map": "Around UNSW",
+  "opponent": "NeungzAI",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 961059,
+  "file": "ladder_replays/961059.replay",
+  "status": "ok",
+  "map": "Slithery Fight",
+  "opponent": "NeungzAI",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 961062,
+  "file": "ladder_replays/961062.replay",
+  "status": "ok",
+  "map": "Autarky",
+  "opponent": "NeungzAI",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 963230,
+  "file": "ladder_replays/963230.replay",
+  "status": "ok",
+  "map": "Devil",
+  "opponent": "so-lonely",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 963231,
+  "file": "ladder_replays/963231.replay",
+  "status": "ok",
+  "map": "Schooltime",
+  "opponent": "so-lonely",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 963232,
+  "file": "ladder_replays/963232.replay",
+  "status": "ok",
+  "map": "Trophy",
+  "opponent": "so-lonely",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 963565,
+  "file": "ladder_replays/963565.replay",
+  "status": "ok",
+  "map": "Trauma",
+  "opponent": "Mr Aura",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 963566,
+  "file": "ladder_replays/963566.replay",
+  "status": "ok",
+  "map": "Maze",
+  "opponent": "Mr Aura",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 963568,
+  "file": "ladder_replays/963568.replay",
+  "status": "ok",
+  "map": "Trophy",
+  "opponent": "Mr Aura",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 965217,
+  "file": "ladder_replays/965217.replay",
+  "status": "ok",
+  "map": "Default",
+  "opponent": "NeungzAI",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 965218,
+  "file": "ladder_replays/965218.replay",
+  "status": "ok",
+  "map": "Islands",
+  "opponent": "NeungzAI",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 965219,
+  "file": "ladder_replays/965219.replay",
+  "status": "ok",
+  "map": "weakhold",
+  "opponent": "NeungzAI",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 965220,
+  "file": "ladder_replays/965220.replay",
+  "status": "ok",
+  "map": "Australia",
+  "opponent": "NeungzAI",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 965221,
+  "file": "ladder_replays/965221.replay",
+  "status": "ok",
+  "map": "Tower Defense",
+  "opponent": "NeungzAI",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 967116,
+  "file": "ladder_replays/967116.replay",
+  "status": "ok",
+  "map": "Tower Defense",
+  "opponent": "so-lonely",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 967118,
+  "file": "ladder_replays/967118.replay",
+  "status": "ok",
+  "map": "Slithery Fight",
+  "opponent": "so-lonely",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 967120,
+  "file": "ladder_replays/967120.replay",
+  "status": "ok",
+  "map": "Devil",
+  "opponent": "so-lonely",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 967372,
+  "file": "ladder_replays/967372.replay",
+  "status": "ok",
+  "map": "Queen Of Spades",
+  "opponent": "Human Learning",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 968978,
+  "file": "ladder_replays/968978.replay",
+  "status": "ok",
+  "map": "Trauma",
+  "opponent": "so-lonely",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 969038,
+  "file": "ladder_replays/969038.replay",
+  "status": "ok",
+  "map": "Portals",
+  "opponent": "Low Cortisol",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 969087,
+  "file": "ladder_replays/969087.replay",
+  "status": "ok",
+  "map": "Schooltime",
+  "opponent": "bsg",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 969089,
+  "file": "ladder_replays/969089.replay",
+  "status": "ok",
+  "map": "Stripes",
+  "opponent": "bsg",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 969171,
+  "file": "ladder_replays/969171.replay",
+  "status": "ok",
+  "map": "weakhold",
+  "opponent": "Sponge(Albert and Bob)",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 969172,
+  "file": "ladder_replays/969172.replay",
+  "status": "ok",
+  "map": "Tower Defense",
+  "opponent": "Sponge(Albert and Bob)",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 969173,
+  "file": "ladder_replays/969173.replay",
+  "status": "ok",
+  "map": "Schooltime",
+  "opponent": "Sponge(Albert and Bob)",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 969174,
+  "file": "ladder_replays/969174.replay",
+  "status": "ok",
+  "map": "Devil",
+  "opponent": "Sponge(Albert and Bob)",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 969175,
+  "file": "ladder_replays/969175.replay",
+  "status": "ok",
+  "map": "Autarky",
+  "opponent": "Sponge(Albert and Bob)",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 971118,
+  "file": "ladder_replays/971118.replay",
+  "status": "ok",
+  "map": "Queen Of Spades",
+  "opponent": "so-lonely",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 971122,
+  "file": "ladder_replays/971122.replay",
+  "status": "ok",
+  "map": "Tower Defense",
+  "opponent": "so-lonely",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 971553,
+  "file": "ladder_replays/971553.replay",
+  "status": "ok",
+  "map": "weakhold",
+  "opponent": "\u5929\u5929\u5f00\u5fc3 :(",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 971557,
+  "file": "ladder_replays/971557.replay",
+  "status": "ok",
+  "map": "Queen Of Spades",
+  "opponent": "\u5929\u5929\u5f00\u5fc3 :(",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 973116,
+  "file": "ladder_replays/973116.replay",
+  "status": "ok",
+  "map": "Islands",
+  "opponent": "meowest",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 973117,
+  "file": "ladder_replays/973117.replay",
+  "status": "ok",
+  "map": "Schooltime",
+  "opponent": "meowest",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 973118,
+  "file": "ladder_replays/973118.replay",
+  "status": "ok",
+  "map": "Trauma",
+  "opponent": "meowest",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 973119,
+  "file": "ladder_replays/973119.replay",
+  "status": "ok",
+  "map": "Stripes",
+  "opponent": "meowest",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 973120,
+  "file": "ladder_replays/973120.replay",
+  "status": "ok",
+  "map": "Tower Defense",
+  "opponent": "meowest",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 974916,
+  "file": "ladder_replays/974916.replay",
+  "status": "ok",
+  "map": "Queen Of Spades",
+  "opponent": "so-lonely",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 974917,
+  "file": "ladder_replays/974917.replay",
+  "status": "ok",
+  "map": "Schooltime",
+  "opponent": "so-lonely",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 974918,
+  "file": "ladder_replays/974918.replay",
+  "status": "ok",
+  "map": "Trauma",
+  "opponent": "so-lonely",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 974919,
+  "file": "ladder_replays/974919.replay",
+  "status": "ok",
+  "map": "Stripes",
+  "opponent": "so-lonely",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 974920,
+  "file": "ladder_replays/974920.replay",
+  "status": "ok",
+  "map": "Around UNSW",
+  "opponent": "so-lonely",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 975176,
+  "file": "ladder_replays/975176.replay",
+  "status": "ok",
+  "map": "weakhold",
+  "opponent": "so-lonely",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 975178,
+  "file": "ladder_replays/975178.replay",
+  "status": "ok",
+  "map": "Schooltime",
+  "opponent": "so-lonely",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 976478,
+  "file": "ladder_replays/976478.replay",
+  "status": "ok",
+  "map": "Australia",
+  "opponent": "LOOPING THE FUNCTIONS",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 978254,
+  "file": "ladder_replays/978254.replay",
+  "status": "ok",
+  "map": "Trophy",
+  "opponent": "so-lonely",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 978256,
+  "file": "ladder_replays/978256.replay",
+  "status": "ok",
+  "map": "Schooltime",
+  "opponent": "so-lonely",
+  "ourSide": "b",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 978580,
+  "file": "ladder_replays/978580.replay",
+  "status": "cached",
+  "map": "Prisoners Dilemma",
+  "opponent": "404 Not Found",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ },
+ {
+  "gameId": 978581,
+  "file": "ladder_replays/978581.replay",
+  "status": "ok",
+  "map": "Autarky",
+  "opponent": "404 Not Found",
+  "ourSide": "a",
+  "ranked": true,
+  "draw": false
+ }
+]

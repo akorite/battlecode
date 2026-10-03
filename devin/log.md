@@ -118,3 +118,15 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
   Loss was pure endgame attrition (queen alive all game).
 - Still bleeding: queen H2H/wall mid-game on some wins (survivable),
   early r0-5 swarm hitWall on big maps.
+
+## ~00:20 UTC Oct 4 — v113 SUBMITTED (v112 + wh4)
+
+- whfix worker iterated wh2→wh4: seenOnly scan gated on NC<=trapMaxTiles=700
+  (small maps get pocket veto; big maps byte-identical v104 scans).
+  Its own honest 22-map gate: 50.0%, no 0/4, no timeouts — PASS.
+- v113 = v112 + wh4 trap-scan block + frontier semantics + params.
+  Honest gate vs v104: **46.4%** — parity with v112's 48.9% (CI overlap);
+  queen non-ram deaths 0.310 vs 0.369, queen-kept 0.318 vs 0.171,
+  td 2/4→4/4. wh4 mechanism confirmed in merged form.
+- Self-challenge tally for v112: ~11W-12L; Portals W×3 vs ranked (flip),
+  Devil 2/2, Australia + Slithery W; Schooltime guard held (0 id0 deaths).

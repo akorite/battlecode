@@ -70,6 +70,10 @@ struct World {
     // its team letter, we heard a beacon from id 0/1, or a teammate's beacon told
     // us. Until then fall back to the old parity guess.
     int ourQueen = -1;
+    int ourQueenSrc = -1;  // how we know: 3 we are her, 2 seen with team letter, 1 her own beacon, 0 relayed
+    void learnQueen(int id, int src) {
+        if (src >= ourQueenSrc) { ourQueen = id; ourQueenSrc = src; }
+    }
     int champId() const { return ourQueen >= 0 ? ourQueen : (init.id & 1); }
     // The enemy team's queen: the other one of {0, 1}.
     int enemyQueen() const { return 1 - champId(); }
@@ -93,7 +97,8 @@ struct World {
 
     void start(Init const& in) {
         init = in;
-        if (in.id <= 1) ourQueen = in.id;
+        keySonarTag(in.team);
+        if (in.id <= 1) learnQueen(in.id, 3);
         board.init(in.w, in.h);
         next.assign(board.NC, -1);
         lastSpawn.assign(board.NC, -1);
@@ -215,10 +220,29 @@ struct World {
         for (Seen& s : others)
             for (Part const& part : t.parts)
                 if (part.id == s.id) s.visible++;
-        if (ourQueen < 0)
+        if (ourQueenSrc < 2)
             for (Part const& part : t.parts)
-                if (part.id <= 1) { ourQueen = part.team == init.team ? part.id : 1 - part.id; break; }
+                if (part.id <= 1) { learnQueen(part.team == init.team ? part.id : 1 - part.id, 2); break; }
 
+        // Our queen: any visible part is fresh evidence (head preferred); a remembered position that is in
+        // view with no queen on it means she moved off or died, so the evidence is dropped (otherwise relays
+        // keep a dead queen alive and feeders loiter at her grave).
+        if (ourQueen >= 0 && ourQueen != init.id) {
+            int cnt = 0, partCell = -1, headCell = -1;
+            for (Part const& part : t.parts)
+                if (part.id == ourQueen && part.team == init.team) {
+                    cnt++;
+                    if (partCell < 0) partCell = board.id(part.x, part.y);
+                    if (part.head) headCell = board.id(part.x, part.y);
+                }
+            if (cnt > 0) {
+                queenCell = headCell >= 0 ? headCell : partCell;
+                queenLen = std::max(cnt, queenLen);
+                queenRound = t.round;
+            } else if (queenRound >= 0 && queenRound < t.round && queenCell >= 0 && visible(queenCell)) {
+                queenRound = -1;
+            }
+        }
         // Champion evidence from sight. A remembered champion whose cell we now see empty of her is gone.
         if (chId >= 0 && chRound >= 0 && visible(chCell)) {
             bool here = false;
@@ -238,8 +262,8 @@ struct World {
             if (msgType(m) != MsgEnemy && msgCaged(m)) queenCaged = true;
             if (msgType(m) == MsgChamp) {
                 // sender field = the champion's id: a report about him, relayed by someone else
-                if (msgChampIsQueen(m) && ourQueen < 0) ourQueen = sid;
-                noteChamp(sid, cell, msgLen(m), t.round - msgChampAge(m), p);
+                if (msgChampIsQueen(m)) learnQueen(sid, 0);
+                noteChamp(sid, cell, msgLen(m), t.round - msgChampAge(m) - 1, p);  // +1 per hop: relays only age
             } else if (msgType(m) == MsgEnemy) {
                 int elen = std::min(msgLen(m), 15);
                 bool dup = false;
@@ -247,8 +271,8 @@ struct World {
                     if (h.cell == cell && h.round >= t.round - 4) { dup = true; break; }
                 if (!dup) heardEnemies.push_back({sid, cell, elen, msgEnemyIsQueen(m) ? 1 : 0, t.round});
             } else {
-                if (sid <= 1) ourQueen = sid;  // only our team speaks our tag
-                else if (ourQueen < 0 && msgQueenInfo(m) != 0) ourQueen = msgQueenInfo(m) - 1;
+                if (sid <= 1) learnQueen(sid, 1);  // only our team speaks our (team-keyed) tag
+                else if (msgQueenInfo(m) != 0) learnQueen(msgQueenInfo(m) - 1, 0);
                 bool found = false;
                 for (Heard& h : heard)
                     if (h.id == sid) { h.cell = cell; h.len = msgLen(m); h.role = msgRole(m); h.round = t.round; found = true; break; }

@@ -1185,7 +1185,10 @@ class Policy {
             int n = b.nb[dest * 4 + q];
             if (n >= 0 && n != head && blk[n] <= 1) exits++;
         }
-        if (exits <= 1 && k == 0) danger += p_.wPocket;  // corridors would pile this up along a plan
+        // forage lane: a short dragon skipped an adjacent pearl because the eating tile paid
+        // wPocket/wFog (1.5-1.75) against eatBonus 1.0. Not the queen: a pocket is how she dies.
+        bool eatShort = c.eat && L <= p_.pocketEatLen && !queen_;
+        if (exits <= 1 && k == 0 && !eatShort) danger += p_.wPocket;  // corridors would pile this up along a plan
         // Through a portal the far side may be out of vision. Only the real first step
         // pays for that (lookahead leaves vision all the time), and only much when we
         // recently saw dragons around the exit.
@@ -1205,7 +1208,7 @@ class Policy {
         if (k == 0 && b.portalSide[dest] && b.portalSide[head] && !crossing) danger += p_.wPortalLoiter;
         // Fog of war: a never-seen edge might be kelp, and stepping into kelp
         // kills. Long dragons pay more — they have more to lose.
-        if (k == 0 && !crossing && !b.side(head, d).seen)
+        if (k == 0 && !crossing && !b.side(head, d).seen && !eatShort)
             danger += p_.wFog * (1.0 + 0.25 * newL) * (assassin_ ? p_.assassinFogMult : 1.0);
 
         c.stepTerm = (c.eat ? p_.eatBonus : 0.0) - danger;

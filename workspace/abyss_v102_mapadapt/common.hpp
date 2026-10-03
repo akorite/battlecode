@@ -34,7 +34,12 @@ inline int dirFromChar(char c) {
 //   [63:48] tag 0xC0A1 | [47:32] sender id | [31:28] type | payload
 //   beacon: [27:20] x, [19:12] y, [11:4] len, [3:2] queen id + 1 (0 unknown), [1:0] role (0 swarm, 1 grower, 2 queen)
 //   enemy : [27:20] x, [19:12] y, [11:4] len(clamped 15), [3:0] reserved
-inline constexpr uint64_t kSonarTag = 0xC0A1ull << 48;
+// The tag is keyed on our team letter (World::start sets it): both sides of a local
+// self-play game run this code, and with one shared tag each side accepted the other's
+// beacons (an enemy queen beacon could even overwrite our queen identity). No team
+// uses the bare 0xC0A1 any more, so the old bots (abyss_st) and we ignore each other too.
+inline uint64_t kSonarTag = 0xC0A1ull << 48;
+inline void keySonarTag(char team) { kSonarTag = uint64_t(0xC0A1 ^ (team == 'A' ? 0x1111 : 0x2222)) << 48; }
 //   champ : [47:32] = the CHAMPION's id (not the relayer's), [27:20] x, [19:12] y, [11:4] len, [3] 1 = it is our queen,
 //           [2:0] coarse age code (0-3 exact, then 4-7, 8-15, 16-31, 32+)
 enum MsgType : int { MsgBeacon = 0, MsgEnemy = 1, MsgChamp = 2 };
@@ -60,7 +65,8 @@ inline uint64_t msgChamp(int champId, int x, int y, int len, int isQueen, int ag
 }
 inline int msgChampIsQueen(uint64_t m) { return int((m >> 3) & 1); }
 inline int msgChampAge(uint64_t m) {
-    static constexpr int kAge[8] = {0, 1, 2, 3, 6, 12, 24, 40};
+    // upper bound of each bucket: a relayed report can only look OLDER than it is, so gossip can never refresh evidence
+    static constexpr int kAge[8] = {0, 1, 2, 3, 7, 15, 31, 40};
     return kAge[m & 7];
 }
 inline bool msgOurs(uint64_t m) { return (m >> 48) == (kSonarTag >> 48); }
@@ -88,6 +94,7 @@ struct Params {
     double seenDecay = 0.97;          // belief a pearl we saw is still there, per round
     double spawnDecay = 0.985;        // belief an unseen spawned pearl is still there, per round
     double enemyCloserFactor = 0.5;   // pearl an enemy head reaches first
+    int pocketEatLen = 3;             // non-queen dragons this short pay no wPocket/wFog on a step that eats (forage lane)
     int horizon = 48;                 // BFS depth considered
     int maxRivalFields = 12;          // distance fields computed for the nearest visible heads
     int maxDepth = 10;                // lookahead cap for the anytime search

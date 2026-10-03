@@ -65,7 +65,8 @@ inline uint64_t msgChamp(int champId, int x, int y, int len, int isQueen, int ag
 }
 inline int msgChampIsQueen(uint64_t m) { return int((m >> 3) & 1); }
 inline int msgChampAge(uint64_t m) {
-    static constexpr int kAge[8] = {0, 1, 2, 3, 6, 12, 24, 40};
+    // upper bound of each bucket: a relayed report can only look OLDER than it is, so gossip can never refresh evidence
+    static constexpr int kAge[8] = {0, 1, 2, 3, 7, 15, 31, 40};
     return kAge[m & 7];
 }
 inline bool msgOurs(uint64_t m) { return (m >> 48) == (kSonarTag >> 48); }

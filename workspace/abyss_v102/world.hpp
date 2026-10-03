@@ -221,6 +221,25 @@ struct World {
             for (Part const& part : t.parts)
                 if (part.id <= 1) { learnQueen(part.team == init.team ? part.id : 1 - part.id, 2); break; }
 
+        // Our queen: any visible part is fresh evidence (head preferred); a remembered position that is in
+        // view with no queen on it means she moved off or died, so the evidence is dropped (otherwise relays
+        // keep a dead queen alive and feeders loiter at her grave).
+        if (ourQueen >= 0 && ourQueen != init.id) {
+            int cnt = 0, partCell = -1, headCell = -1;
+            for (Part const& part : t.parts)
+                if (part.id == ourQueen && part.team == init.team) {
+                    cnt++;
+                    if (partCell < 0) partCell = board.id(part.x, part.y);
+                    if (part.head) headCell = board.id(part.x, part.y);
+                }
+            if (cnt > 0) {
+                queenCell = headCell >= 0 ? headCell : partCell;
+                queenLen = std::max(cnt, queenLen);
+                queenRound = t.round;
+            } else if (queenRound >= 0 && queenRound < t.round && queenCell >= 0 && visible(queenCell)) {
+                queenRound = -1;
+            }
+        }
         // Champion evidence from sight. A remembered champion whose cell we now see empty of her is gone.
         if (chId >= 0 && chRound >= 0 && visible(chCell)) {
             bool here = false;
@@ -240,7 +259,7 @@ struct World {
             if (msgType(m) == MsgChamp) {
                 // sender field = the champion's id: a report about him, relayed by someone else
                 if (msgChampIsQueen(m)) learnQueen(sid, 0);
-                noteChamp(sid, cell, msgLen(m), t.round - msgChampAge(m), p);
+                noteChamp(sid, cell, msgLen(m), t.round - msgChampAge(m) - 1, p);  // +1 per hop: relays only age
             } else if (msgType(m) == MsgEnemy) {
                 int elen = std::min(msgLen(m), 15);
                 bool dup = false;

@@ -43,3 +43,8 @@ queen kept after theirs died (base):   0.330  (30/91; won 51.0)
          small maps: splits by r60:  10.350 vs   9.083  (n=120)
           small maps: alive at r50:   6.131 vs   5.364  (n=120)
    r500 games: 80, eliminations: 112, mean secs/game 40
+j0006-v102i-field: abyss_v102 vs field, std maps x2 seeds @7000 (merged dual-worker dataset)
+abyss_cf:     37W/4D/23L = 60.9%
+abyss_b2:     42W/0D/22L = 65.6%
+abyss_combat: 41W/0D/23L = 64.1%
+combined:     120W/4D/68L = 63.5% of 192

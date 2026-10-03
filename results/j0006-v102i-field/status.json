@@ -1,73 +1,74 @@
 {
+ "state": "done",
+ "worker": "devin-qkmtwr+devin-wkr4d",
+ "job_version": 1,
+ "bot_commit": "cefe70b08cfca4adab4c401d582b2d93c23af9fe",
+ "unswbc_version": "1.2.7",
  "opponents": {
   "abyss_cf": {
-   "cand_wins": 36,
+   "cand_wins": 37,
    "games": 64,
    "draws": 4,
    "per_map": {
-    "Colosseum": {
-     "wins": 2,
-     "games": 4
-    },
-    "arena": {
-     "wins": 2,
-     "games": 4
-    },
-    "autarky": {
-     "wins": 1,
-     "games": 4
-    },
-    "default": {
-     "wins": 4,
-     "games": 4
-    },
-    "default_small": {
-     "wins": 3,
-     "games": 4
+    "dilemma": {
+     "D": 4
     },
     "devil": {
-     "wins": 2,
-     "games": 4
-    },
-    "dilemma": {
-     "wins": 0,
-     "games": 4
-    },
-    "maze": {
-     "wins": 3,
-     "games": 4
-    },
-    "portals": {
-     "wins": 4,
-     "games": 4
-    },
-    "queen_of_spades": {
-     "wins": 1,
-     "games": 4
-    },
-    "stripes": {
-     "wins": 2,
-     "games": 4
-    },
-    "stronghold": {
-     "wins": 4,
-     "games": 4
-    },
-    "tower_defense": {
-     "wins": 2,
-     "games": 4
-    },
-    "trauma": {
-     "wins": 2,
-     "games": 4
+     "L": 2,
+     "W": 2
     },
     "trophy": {
-     "wins": 2,
-     "games": 4
+     "W": 2,
+     "L": 2
+    },
+    "Colosseum": {
+     "L": 2,
+     "W": 2
+    },
+    "stripes": {
+     "W": 2,
+     "L": 2
+    },
+    "tower_defense": {
+     "L": 2,
+     "W": 2
+    },
+    "queen_of_spades": {
+     "L": 3,
+     "W": 1
+    },
+    "arena": {
+     "L": 2,
+     "W": 2
+    },
+    "default_small": {
+     "W": 3,
+     "L": 1
+    },
+    "portals": {
+     "W": 4
+    },
+    "default": {
+     "W": 4
     },
     "weakhold": {
-     "wins": 2,
-     "games": 4
+     "W": 2,
+     "L": 2
+    },
+    "trauma": {
+     "W": 2,
+     "L": 2
+    },
+    "autarky": {
+     "W": 2,
+     "L": 2
+    },
+    "stronghold": {
+     "W": 4
+    },
+    "maze": {
+     "W": 3,
+     "L": 1
     }
    }
   },
@@ -76,151 +77,137 @@
    "games": 64,
    "draws": 0,
    "per_map": {
-    "Colosseum": {
-     "wins": 2,
-     "games": 4
-    },
-    "arena": {
-     "wins": 2,
-     "games": 4
-    },
-    "autarky": {
-     "wins": 3,
-     "games": 4
-    },
-    "default": {
-     "wins": 1,
-     "games": 4
-    },
-    "default_small": {
-     "wins": 3,
-     "games": 4
-    },
-    "devil": {
-     "wins": 2,
-     "games": 4
+    "trophy": {
+     "L": 2,
+     "W": 2
     },
     "dilemma": {
-     "wins": 4,
-     "games": 4
+     "W": 4
     },
-    "maze": {
-     "wins": 4,
-     "games": 4
-    },
-    "portals": {
-     "wins": 4,
-     "games": 4
+    "Colosseum": {
+     "W": 2,
+     "L": 2
     },
     "queen_of_spades": {
-     "wins": 2,
-     "games": 4
+     "W": 2,
+     "L": 2
+    },
+    "devil": {
+     "W": 2,
+     "L": 2
     },
     "stripes": {
-     "wins": 2,
-     "games": 4
-    },
-    "stronghold": {
-     "wins": 4,
-     "games": 4
+     "L": 2,
+     "W": 2
     },
     "tower_defense": {
-     "wins": 2,
-     "games": 4
+     "L": 2,
+     "W": 2
     },
-    "trauma": {
-     "wins": 3,
-     "games": 4
+    "arena": {
+     "W": 2,
+     "L": 2
     },
-    "trophy": {
-     "wins": 2,
-     "games": 4
+    "default_small": {
+     "W": 3,
+     "L": 1
     },
     "weakhold": {
-     "wins": 2,
-     "games": 4
+     "W": 2,
+     "L": 2
+    },
+    "portals": {
+     "W": 4
+    },
+    "default": {
+     "L": 3,
+     "W": 1
+    },
+    "autarky": {
+     "L": 1,
+     "W": 3
+    },
+    "trauma": {
+     "W": 3,
+     "L": 1
+    },
+    "stronghold": {
+     "W": 4
+    },
+    "maze": {
+     "W": 4
     }
    }
   },
   "abyss_combat": {
-   "cand_wins": 40,
+   "cand_wins": 41,
    "games": 64,
    "draws": 0,
    "per_map": {
-    "Colosseum": {
-     "wins": 2,
-     "games": 4
-    },
-    "arena": {
-     "wins": 1,
-     "games": 4
-    },
-    "autarky": {
-     "wins": 2,
-     "games": 4
-    },
-    "default": {
-     "wins": 4,
-     "games": 4
-    },
-    "default_small": {
-     "wins": 3,
-     "games": 4
+    "dilemma": {
+     "L": 2,
+     "W": 2
     },
     "devil": {
-     "wins": 4,
-     "games": 4
-    },
-    "dilemma": {
-     "wins": 2,
-     "games": 4
-    },
-    "maze": {
-     "wins": 3,
-     "games": 4
-    },
-    "portals": {
-     "wins": 3,
-     "games": 4
-    },
-    "queen_of_spades": {
-     "wins": 2,
-     "games": 4
-    },
-    "stripes": {
-     "wins": 2,
-     "games": 4
-    },
-    "stronghold": {
-     "wins": 4,
-     "games": 4
-    },
-    "tower_defense": {
-     "wins": 3,
-     "games": 4
-    },
-    "trauma": {
-     "wins": 1,
-     "games": 4
+     "W": 4
     },
     "trophy": {
-     "wins": 2,
-     "games": 4
+     "L": 2,
+     "W": 2
+    },
+    "Colosseum": {
+     "L": 2,
+     "W": 2
+    },
+    "stripes": {
+     "L": 2,
+     "W": 2
+    },
+    "tower_defense": {
+     "W": 3,
+     "L": 1
+    },
+    "arena": {
+     "L": 3,
+     "W": 1
+    },
+    "queen_of_spades": {
+     "W": 2,
+     "L": 2
+    },
+    "default_small": {
+     "W": 3,
+     "L": 1
+    },
+    "portals": {
+     "W": 3,
+     "L": 1
     },
     "weakhold": {
-     "wins": 2,
-     "games": 4
+     "W": 2,
+     "L": 2
+    },
+    "default": {
+     "W": 4
+    },
+    "autarky": {
+     "W": 3,
+     "L": 1
+    },
+    "trauma": {
+     "W": 1,
+     "L": 3
+    },
+    "stronghold": {
+     "W": 4
+    },
+    "maze": {
+     "W": 3,
+     "L": 1
     }
    }
   }
  },
  "timeouts": 0,
- "state": "done",
- "worker": "devin-wkr4d",
- "job_version": 1,
- "bot_commit": "cefe70b08cfca4adab4c401d582b2d93c23af9fe",
- "kvmrun_commit": "45452bd43a308ee4cb6818c3c036a2a2b4165394",
- "unswbc_version": "1.2.7",
- "control": null,
- "notes": "61.5% overall (118-70, 4 draws). abyss_cf: 36-24+4d. abyss_b2: 42-22. abyss_combat: 40-24. all games decisive, no timeouts. Side attribution spot-checked x3."
+ "notes": "v102 vs field @std x2 seeds@7000 (dual-worker union, deduped): combined 63.5%/192. cf 60.9%, b2 65.6%, combat 64.1%. 1-2 games had run-to-run variance (CPU budget under load). queen_of_spades net-negative."
 }

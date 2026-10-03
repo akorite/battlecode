@@ -1,0 +1,107 @@
+{
+ "state": "done",
+ "worker": "devin-wkr3c",
+ "job_version": 1,
+ "bot_commit": "1c73b1e0e18312c26190d736bf83059b80fdf04f",
+ "kvmrun_commit": "45452bd43a308ee4cb6818c3c036a2a2b4165394",
+ "unswbc_version": "1.2.7",
+ "opponents": {
+  "abyss_v102_champk": {
+   "cand_wins": 43,
+   "games": 96,
+   "draws": 8,
+   "per_map": {
+    "dilemma": {
+     "wins": 0,
+     "draws": 6,
+     "games": 6
+    },
+    "trophy": {
+     "wins": 2,
+     "draws": 0,
+     "games": 6
+    },
+    "Colosseum": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "stripes": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "devil": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "tower_defense": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "queen_of_spades": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "arena": {
+     "wins": 2,
+     "draws": 0,
+     "games": 6
+    },
+    "weakhold": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "default": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "portals": {
+     "wins": 2,
+     "draws": 2,
+     "games": 6
+    },
+    "default_small": {
+     "wins": 2,
+     "draws": 0,
+     "games": 6
+    },
+    "trauma": {
+     "wins": 5,
+     "draws": 0,
+     "games": 6
+    },
+    "autarky": {
+     "wins": 4,
+     "draws": 0,
+     "games": 6
+    },
+    "stronghold": {
+     "wins": 2,
+     "draws": 0,
+     "games": 6
+    },
+    "maze": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    }
+   }
+  }
+ },
+ "timeouts": 0,
+ "control": {
+  "cand": "abyss_st",
+  "base": "starter",
+  "maps": "small",
+  "seeds": 1,
+  "cand_wins": 20,
+  "games": 20
+ },
+ "notes": "spot-checked winner==candSide on all 96 games: 0 mismatches; no timeouts; max game 165s. Overall 43 wins + 8 draws of 96 (49.0% score) \u2014 pocketEatLen ablation reads neutral."
+}

@@ -1,0 +1,38 @@
+## abyss_v102_seal vs abyss_v102: 60 games
+             map    n   score   win%       game CI  pairs W/S/L        pair CI
+       Colosseum    6     3.0  50.0% [18.8, 81.2]    0/  3/0    [50.0, 50.0]
+           arena    6     3.0  50.0% [18.8, 81.2]    0/  3/0    [50.0, 50.0]
+   default_small    6     2.0  33.3% [ 9.7, 70.0]    0/  2/1    [ 0.0, 50.0]
+           devil    6     3.0  50.0% [18.8, 81.2]    0/  3/0    [50.0, 50.0]
+         dilemma    6     3.0  50.0% [18.8, 81.2]    0/  3/0    [50.0, 50.0]
+ queen_of_spades    6     3.0  50.0% [18.8, 81.2]    0/  3/0    [50.0, 50.0]
+         stripes    6     3.0  50.0% [18.8, 81.2]    0/  3/0    [50.0, 50.0]
+   tower_defense    6     3.0  50.0% [18.8, 81.2]    0/  3/0    [50.0, 50.0]
+          trophy    6     3.0  50.0% [18.8, 81.2]    0/  3/0    [50.0, 50.0]
+        weakhold    6     3.0  50.0% [18.8, 81.2]    0/  3/0    [50.0, 50.0]
+             ALL   60    29.0  48.3% [36.2, 60.7]    0/ 29/1    [45.0, 50.0]
+    ALL-unlocked   48    23.0  47.9% [34.5, 61.7]    0/ 23/1    [43.8, 50.0]
+    map-weighted               48.3%  (each map equal weight; ALL-unlocked drops devil, portals, queen_of_spades, schooltime, slithery_fight)
+
+per-game metrics, cand vs base (means):
+                     alive at r499:   4.875 vs   5.125  (n=8)
+       longest at end (r500 games):  17.750 vs  17.500  (n=8)
+     queen len at end (r500 games):   0.000 vs   0.000  (n=8)
+         queen alive at end (r500):   0.000 vs   0.000  (n=8)
+            pearls per dragon-turn:   0.128 vs   0.126  (n=60)
+         adjacent free pearl taken:   0.716 vs   0.722  (n=60)
+             ... no enemy head <=3:   0.727 vs   0.735  (n=60)
+         queen non-ram deaths/game:   0.417 vs   0.333  (n=60)
+            queen dead (any) /game:   0.917 vs   0.900  (n=60)
+       deaths/game: wall+self+body:  23.317 vs  23.933  (n=60)
+         deaths/game: head-to-head:  13.417 vs  13.317  (n=60)
+  in-reach queen kill rate, dist 1:   1.000 vs   1.000  (opps 5 vs 5)
+  in-reach queen kill rate, dist 2:   0.600 vs   0.636  (opps 15 vs 11)
+ in-reach queen kill rate, dist 3+:   0.609 vs   0.700  (opps 23 vs 20)
+queen kept after theirs died (cand):   0.179  (5/28; won 14.5)
+queen kept after theirs died (base):   0.200  (6/30; won 16.5)
+   small maps: pearls eaten by r60:  31.483 vs  30.883  (n=60)
+         small maps: splits by r60:  11.050 vs  10.883  (n=60)
+          small maps: alive at r50:   6.021 vs   6.167  (n=60)
+   r500 games: 8, eliminations: 52, mean secs/game 15
+

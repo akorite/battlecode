@@ -1,0 +1,78 @@
+{
+ "state": "done",
+ "worker": "devin-wkr1a",
+ "job_version": 1,
+ "bot_commit": "aac44f29876f30e79ecf3cb583f5cd844e473dbc",
+ "kvmrun_commit": "45452bd43a308ee4cb6818c3c036a2a2b4165394",
+ "unswbc_version": "1.2.7",
+ "opponents": {
+  "abyss_v102": {
+   "cand_wins": 26,
+   "games": 60,
+   "draws": 6,
+   "per_map": {
+    "Colosseum": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "arena": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "default_small": {
+     "wins": 2,
+     "draws": 0,
+     "games": 6
+    },
+    "devil": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "dilemma": {
+     "wins": 0,
+     "draws": 6,
+     "games": 6
+    },
+    "queen_of_spades": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "stripes": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "tower_defense": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "trophy": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "weakhold": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    }
+   }
+  }
+ },
+ "timeouts": 0,
+ "control": {
+  "cand": "abyss_st",
+  "base": "starter",
+  "maps": "small",
+  "seeds": 1,
+  "result": "20-0",
+  "timeouts": 0,
+  "note": "from session start"
+ },
+ "notes": "seal (wCrowd 0.8 near allied bodies) vs flagship v102 on small maps, seeds 8500-8502: 48.3% score (26W/6D/28L, pair CI [45.0,50.0]; 29/30 pairs split). Neutral lane. wall+self+body deaths 23.3 vs 23.9/game, alive@r50 6.02 vs 6.17. No timeouts; control 20-0."
+}

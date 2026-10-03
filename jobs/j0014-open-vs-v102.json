@@ -1,0 +1,12 @@
+{
+  "id": "j0014-open-vs-v102",
+  "version": 1,
+  "bot_commit": "25968a557302c86f2c88b4d2437a784606924ca4",
+  "cand": "abyss_v102_open",
+  "opponents": ["abyss_v102"],
+  "maps": "small",
+  "seeds": 3,
+  "seed_start": 9000,
+  "priority": 19,
+  "note": "Lane: small-map breed phase pays for the pearl race — budMult->1.0 and eat beats split during bud_ on brawl maps (w*h<=700). Hypothesis: elimination losses come from losing pearls 14v35 by r60, not fights. Metrics: pearls@r60, splits@r60, alive@r50, W/L per map."
+}

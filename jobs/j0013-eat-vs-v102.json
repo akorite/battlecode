@@ -1,0 +1,12 @@
+{
+  "id": "j0013-eat-vs-v102",
+  "version": 1,
+  "bot_commit": "25968a557302c86f2c88b4d2437a784606924ca4",
+  "cand": "abyss_v102_eat",
+  "opponents": ["abyss_v102"],
+  "maps": "std",
+  "seeds": 3,
+  "seed_start": 7000,
+  "priority": 21,
+  "note": "Lane: adjacent pearls underweighted (eatBonus 1.0->2.0) vs the flagship. Hypothesis: a free adjacent pearl is skipped ~40% of the time (opponents skip 26%). Metrics that matter: adjQuietAte/adjQuietN rate (target >=0.73) and pearls@r60, then W/L per map."
+}

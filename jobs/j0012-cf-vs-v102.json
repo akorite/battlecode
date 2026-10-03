@@ -1,0 +1,12 @@
+{
+  "id": "j0012-cf-vs-v102",
+  "version": 1,
+  "bot_commit": "25968a557302c86f2c88b4d2437a784606924ca4",
+  "cand": "abyss_v102_cf",
+  "opponents": ["abyss_v102"],
+  "maps": "big",
+  "seeds": 3,
+  "seed_start": 6000,
+  "priority": 22,
+  "note": "Lane: earlier consolidation (feedRound/champFallback 400->320, feedRoundBrawl 380->300) vs the flagship. Hypothesis from our-games report: we never consolidate (50% of losses) — count stays ~26 at r499, longest ~14 vs opp 26. Metrics that matter: longest@499 and alive@499 (target: longest up, count down), then W/L per map."
+}

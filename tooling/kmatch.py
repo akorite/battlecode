@@ -214,6 +214,19 @@ def summary(dirs, out=sys.stdout):
         ('small maps: alive at r50', elim, lambda s: s['alive50']),
     ]
     for name, gs, f in rows:
+        if name.startswith('small maps: pearls'):
+            for b in '123':
+                opp = [sum(g[k].get('slayOpp' + b, 0) for g in G) for k in 'cb']
+                kil = [sum(g[k].get('slayKill' + b, 0) for g in G) for k in 'cb']
+                pr(f'{"in-reach queen kill rate, dist " + b + ("+" if b == "3" else ""):>34}: '
+                   f'{kil[0] / max(1, opp[0]):7.3f} vs {kil[1] / max(1, opp[1]):7.3f}  (opps {opp[0]} vs {opp[1]})')
+            for k, lab in (('c', 'cand'), ('b', 'base')):
+                o = 'b' if k == 'c' else 'c'
+                first = [g for g in G if g[o]['qDeadRound'] is not None and
+                         (g[k]['qDeadRound'] is None or g[k]['qDeadRound'] > g[o]['qDeadRound'])]
+                kept = [g for g in first if g[k]['qDeadRound'] is None]
+                pr(f'{"queen kept after theirs died (" + lab + ")":>34}: {len(kept) / max(1, len(first)):7.3f}'
+                   f'  ({len(kept)}/{len(first)}; won {sum(g["candWin"] if k == "c" else 1 - g["candWin"] for g in first):.1f})')
         if gs:
             pr(f'{name:>34}: {mean([f(g["c"]) for g in gs]):7.3f} vs {mean([f(g["b"]) for g in gs]):7.3f}  (n={len(gs)})')
     pr(f'   r500 games: {len(r500)}, eliminations: {sum(1 for g in G if g["end"] == "teamEliminated")}, '

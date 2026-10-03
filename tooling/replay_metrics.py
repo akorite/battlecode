@@ -8,6 +8,9 @@ Metrics per side (A/B), tied to the blockers in analysis/our-games/report.md:
   eaten, turns, ppt                     pearls per dragon-turn (blocker 2)
   adjN, adjAte, adjQuietN, adjQuietAte  free pearl adjacent to head -> eaten that turn (blocker 2)
   qDeadRound, qDeadReason, qNonRam      queen deaths, non-ram = not hitHeadToHead (blocker 3)
+  slayOpp1/2/3, slayKill1/2/3           dragon-turns with the enemy queen in vision and a free path
+                                        within reach ceil(L/4)+L-2 (by path length, 3 = 3+),
+                                        and how many ended with her dead that turn
   eaten60, splits60, alive50            opening race (blocker 4)
 Replay parsing follows analysis/our-games/scripts/an.py and forage2.py.
 """
@@ -79,6 +82,28 @@ def analyze(path):
     occ = set()
     rnd = 0
     st = None  # (id, side, adjacent?, quiet?, ate)
+    slay = None  # (dragon id, side, distance bucket) while that dragon has an in-reach enemy queen
+
+    def path_dist(src, dst, limit):
+        # BFS over free tiles (no kelp, no portal edges, no bodies except the target head)
+        seen = {src: 0}
+        q = [src]
+        for c in q:
+            if seen[c] >= limit:
+                continue
+            for d, (dx, dy) in D.items():
+                if edge_kind(edges, W, H, c[0], c[1], d) != 0:
+                    continue
+                t = ((c[0] + dx) % W, (c[1] + dy) % H)
+                if t in seen:
+                    continue
+                if t == dst:
+                    return seen[c] + 1
+                if t in occ:
+                    continue
+                seen[t] = seen[c] + 1
+                q.append(t)
+        return None
 
     def close():
         nonlocal st
@@ -112,11 +137,24 @@ def analyze(path):
                 pend.add(t)
         elif ty == 'turnStart':
             close()
+            slay = None
             i = e['id']
             if i not in body:
                 continue
             s = team[i]
             h = body[i][0]
+            eq = queen['B' if s == 'A' else 'A']
+            if i > 1 and eq in body:
+                qh = body[eq][0]
+                dx, dy = abs(qh[0] - h[0]), abs(qh[1] - h[1])
+                if max(min(dx, W - dx), min(dy, H - dy)) <= 3:  # in 7x7 vision
+                    L = len(body[i])
+                    reach = -(-L // 4) + L - 2
+                    pd = path_dist(h, qh, reach)
+                    if pd is not None:
+                        b = str(min(pd, 3))
+                        T[s]['slayOpp' + b] += 1
+                        slay = (i, s, b)
             adj = False
             for d, (dx, dy) in D.items():
                 if edge_kind(edges, W, H, h[0], h[1], d) == 1:
@@ -170,6 +208,9 @@ def analyze(path):
             T[s]['deaths'] += 1
             if i == queen[s]:
                 qdead[s] = (rnd, e['reason'])
+                if slay and slay[1] != s:
+                    T[slay[1]]['slayKill' + slay[2]] += 1
+                    slay = None
             body.pop(i, None)
     close()
 

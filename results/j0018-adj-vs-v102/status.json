@@ -1,0 +1,110 @@
+{
+ "state": "done",
+ "worker": "devin-wkr1a",
+ "job_version": 1,
+ "bot_commit": "2158056bc33a4964dbcd44bd02d6ce46729d313f",
+ "kvmrun_commit": "45452bd43a308ee4cb6818c3c036a2a2b4165394",
+ "unswbc_version": "1.2.7",
+ "opponents": {
+  "abyss_v102": {
+   "cand_wins": 45,
+   "games": 96,
+   "draws": 6,
+   "per_map": {
+    "Colosseum": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "arena": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "autarky": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "default": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "default_small": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "devil": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "dilemma": {
+     "wins": 0,
+     "draws": 6,
+     "games": 6
+    },
+    "maze": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "portals": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "queen_of_spades": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "stripes": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "stronghold": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "tower_defense": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "trauma": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "trophy": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "weakhold": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    }
+   }
+  }
+ },
+ "timeouts": 0,
+ "control": {
+  "cand": "abyss_st",
+  "base": "starter",
+  "maps": "arena",
+  "seeds": [
+   30
+  ],
+  "result": "2-0",
+  "timeouts": 0,
+  "note": "job spec said abyss_starter; ran starter (no abyss_starter dir at this commit)"
+ },
+ "notes": "adj (queen never parks enemy-adjacent) vs flagship v102 on std, seeds 8500-8502: EXACTLY 50.0% (48/48 pairs split, 0 clean pairs). Identical-decision signature on every map. Job control abyss_st vs starter arena s30: 2-0 (job spec said abyss_starter, ran starter \u2014 no abyss_starter dir exists). No timeouts."
+}

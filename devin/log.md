@@ -41,3 +41,18 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
   trapSeenOnly=1, openUntil=48, openQueenKeep=3, openQueenDanger=1.8).
   Compiles; deaths gate clean (baseline pattern only).
   Honest kmatch gates running: gate-v109-cf (22 ladder maps), then combat.
+
+## ~20:45 UTC — v109 = REGRESSION, v110 queued, pearl bounced
+
+- v108-combat honest gate: **42.0%** (37/88, 22 maps) ≥ v104's 38.9% baseline → v108 gate-clean.
+- v109 (v108+wh2+pearl) vs v104 honest: **42.0%** (37/88) — NET REGRESSION.
+  SMALL maps 60% (dilemma 4/4, schooltime 4/4, td/trophy/arena/ds 3/4) but
+  BIG 27%: australia/maze/portals/slithery/stronghold/trauma all 0/4.
+  Mechanism: forage-scatter starves the brood on big maps (queenLen@end
+  0.365 vs 2.0; wall+self+body deaths 96 vs 73). Pearl lane bounced to
+  worker for a map-gated variant (abyss_pearl4 on devin/pearl).
+- v110 = v108 + wh2 (trapSeenOnly=1 + frontier discriminator) built.
+  Honest gate vs v104 (22 maps, gate-v110-v104) running.
+- New worker c85884d3: weakhold starvation dive (alive@499 ~2 vs 21).
+- v106 ladder: ~3W-4L ranked at 9 matches (Slithery/TD losses are endgame
+  attrition, not guard failures — guard held, no r0-5 schooltime deaths).

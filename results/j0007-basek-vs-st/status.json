@@ -1,0 +1,137 @@
+{
+ "state": "done",
+ "worker": "devin-qkmtwr",
+ "job_version": 1,
+ "bot_commit": "1c73b1e0e18312c26190d736bf83059b80fdf04f",
+ "kvmrun_commit": "45452bd43a308ee4cb6818c3c036a2a2b4165394",
+ "unswbc_version": "1.2.7",
+ "opponents": {
+  "abyss_st": {
+   "cand_wins": 85,
+   "games": 176,
+   "draws": 8,
+   "per_map": {
+    "dilemma": {
+     "wins": 0,
+     "draws": 8,
+     "games": 8
+    },
+    "devil": {
+     "wins": 4,
+     "draws": 0,
+     "games": 8
+    },
+    "queen_of_spades": {
+     "wins": 3,
+     "draws": 0,
+     "games": 8
+    },
+    "Colosseum": {
+     "wins": 4,
+     "draws": 0,
+     "games": 8
+    },
+    "trophy": {
+     "wins": 4,
+     "draws": 0,
+     "games": 8
+    },
+    "stripes": {
+     "wins": 4,
+     "draws": 0,
+     "games": 8
+    },
+    "arena": {
+     "wins": 4,
+     "draws": 0,
+     "games": 8
+    },
+    "weakhold": {
+     "wins": 4,
+     "draws": 0,
+     "games": 8
+    },
+    "default_small": {
+     "wins": 4,
+     "draws": 0,
+     "games": 8
+    },
+    "default": {
+     "wins": 4,
+     "draws": 0,
+     "games": 8
+    },
+    "tower_defense": {
+     "wins": 4,
+     "draws": 0,
+     "games": 8
+    },
+    "portals": {
+     "wins": 4,
+     "draws": 0,
+     "games": 8
+    },
+    "trauma": {
+     "wins": 3,
+     "draws": 0,
+     "games": 8
+    },
+    "autarky": {
+     "wins": 3,
+     "draws": 0,
+     "games": 8
+    },
+    "stronghold": {
+     "wins": 4,
+     "draws": 0,
+     "games": 8
+    },
+    "maze": {
+     "wins": 6,
+     "draws": 0,
+     "games": 8
+    },
+    "schooltime": {
+     "wins": 3,
+     "draws": 0,
+     "games": 8
+    },
+    "slithery_fight": {
+     "wins": 4,
+     "draws": 0,
+     "games": 8
+    },
+    "islands": {
+     "wins": 4,
+     "draws": 0,
+     "games": 8
+    },
+    "big_empty": {
+     "wins": 4,
+     "draws": 0,
+     "games": 8
+    },
+    "australia": {
+     "wins": 4,
+     "draws": 0,
+     "games": 8
+    },
+    "unsw": {
+     "wins": 3,
+     "draws": 0,
+     "games": 8
+    }
+   }
+  }
+ },
+ "timeouts": 0,
+ "control": {
+  "cand": "abyss_st",
+  "base": "starter",
+  "maps": "small",
+  "seeds": 1,
+  "cand_wins": 20,
+  "games": 20
+ },
+ "notes": "base_k vs live st: 85W/8D of 176 = 48.3% (pair CI 44.9-51.7). Queen-identity neutral vs st; flagship 63.6% comes from layers above. 0 timeouts."
+}

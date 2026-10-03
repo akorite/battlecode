@@ -1,0 +1,12 @@
+{
+  "id": "j0003-champ",
+  "version": 1,
+  "bot_commit": "0ccfcc242530c05d4ed861058bccddc89c89ce94",
+  "cand": "abyss_v102_champ",
+  "opponents": ["abyss_v102_base", "abyss_st"],
+  "maps": "big",
+  "seeds": 3,
+  "seed_start": 3000,
+  "priority": 20,
+  "note": "Champion-feeding lane on big maps (mid + schooltime, slithery, islands, big_empty, australia, unsw). Local: 19/24 vs base on mid. 64x64 maps are ~5-6 min per game."
+}

@@ -1,4 +1,5 @@
 #pragma once
+#define BC_DEBUG 1
 
 #include <algorithm>
 #include <chrono>

@@ -1185,6 +1185,12 @@ class Policy {
                     if (b.bed[cc] == 1 || w_.seenPearl[cc]) { pocketTrap = true; break; }
                 }
             }
+#ifdef BC_DEBUG
+            if (k == 0)
+                dbgScan_ += " " + std::string(1, DCH[d]) + ":s" + std::to_string(sc.cells) +
+                            "f" + std::to_string(sc.frontier) + "c" + std::to_string(sc.cycle) +
+                            "e" + std::to_string(sc.exhausted) + "p" + std::to_string(pocketTrap);
+#endif
         }
 
         nav_.bfs(b, dest, blk, p_.horizon);

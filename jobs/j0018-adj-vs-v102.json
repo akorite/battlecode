@@ -1,0 +1,32 @@
+{
+ "version": 1,
+ "id": "j0018-adj-vs-v102",
+ "priority": 16,
+ "bot": "abyss_v102_adj",
+ "bot_commit": "2158056bc33a4964dbcd44bd02d6ce46729d313f",
+ "tag": "abyss_v102_adj",
+ "opponents": [
+  "abyss_v102"
+ ],
+ "setup": "workspace/abyss_v102_adj",
+ "setup_commit": "2158056bc33a4964dbcd44bd02d6ce46729d313f",
+ "maps": "std",
+ "seeds": [
+  8500,
+  8501,
+  8502
+ ],
+ "both_sides": true,
+ "replays": false,
+ "control": {
+  "bot": "abyss_st",
+  "opponent": "abyss_starter",
+  "maps": [
+   "arena"
+  ],
+  "seeds": [
+   30
+  ],
+  "both_sides": true
+ }
+}

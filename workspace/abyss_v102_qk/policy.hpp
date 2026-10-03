@@ -324,9 +324,13 @@ class Policy {
                 return c;
             }
         }
-        if (best.score < -500 && L_ >= 4 && w_.t.units < w_.init.unitLimit) {
+        if (best.score < -500 && L_ >= 4 && w_.t.units < w_.init.unitLimit &&
+            !(queen_ && best.why != "trapped")) {
             // Reverse: keep a 2-long stub here, the child (our old tail, facing out)
-            // leaves with the rest.
+            // leaves with the rest. The queen never does this while any survivable
+            // move exists: the stub keeps her id, and a stub in a dead end dies
+            // within ~2 rounds (117 queen kelp deaths). A trapped queen has no
+            // survivable move anyway, so the split still saves the child's mass.
             split.split = true;
             split.n = L_ - 2;
             split.why = "reverse";
@@ -1082,7 +1086,9 @@ class Policy {
         // the child's head is our tail and faces out. So a dead end (a fountain corridor,
         // a pocket) is fine as long as the tail side has room; it costs the 2-long stub.
         bool viaReverse = false;
-        if (space < need && newL >= 4 && static_cast<int>(body.size()) == newL) {
+        // Never for the queen: a U-turn split leaves her as the 2-long stub
+        // inside whatever pocket she entered — she dies there (weakhold r52).
+        if (space < need && newL >= 4 && static_cast<int>(body.size()) == newL && !queen_) {
             int childNeed = std::min(static_cast<int>(p_.spaceFactor * (newL - 2)) + p_.spaceMargin, b.NC / 2);
             std::vector<int> blk2 = base_;
             for (size_t i = 0; i + 1 < body.size(); i++) blk2[body[i]] = INF;
@@ -1254,7 +1260,10 @@ class Policy {
             for (EnemyField const& e : enemies_) {
                 int dd = e.dist[dest];
                 if (dd <= 1) continue;  // adjacent heads: counted above
-                if (dd <= std::max(freeSteps(e.visible) + e.visible - 2, 1)) danger += p_.wLeadReach * newL * mult;
+                // Enemy kill-reach is +len-1: head-to-head kills both, so a rammer
+                // arriving at len 1 still takes our queen. (Our own slay uses -2 —
+                // we only commit when we land at len 2+.)
+                if (dd <= std::max(freeSteps(e.visible) + e.visible - 1, 1)) danger += p_.wLeadReach * newL * mult;
             }
         }
         if (grower_) {

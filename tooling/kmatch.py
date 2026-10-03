@@ -148,7 +148,7 @@ def run(a):
                'secs': round(secs, 1), 'end': met['end'], 'rounds': met['rounds'],
                'winner': met['winner'], 'candWin': met[side]['win'], 'c': met[side], 'b': met[other]}
         if not a.keep_replays:
-            rp.unlink()
+            rp.unlink(missing_ok=True)
         with lock:
             with open(games, 'a') as f:
                 f.write(json.dumps(rec) + '\n')

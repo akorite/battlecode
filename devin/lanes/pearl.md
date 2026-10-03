@@ -161,3 +161,99 @@ Artifacts: `results/gate_*/games.jsonl` (local; gitignored),
 `tooling/replay_metrics.py` (eaten30 metric), `tooling/kmatch.py`
 (pearls-by-r30 summary rows). Variants: `abyss_pearl` = v2 (ship),
 `abyss_pearl1`/`abyss_pearl3` = ablation snapshots (local only).
+
+---
+
+# pearl4 — map-gated opening on the v110 base (2026-10-03)
+
+## Why
+
+Integrator measured `abyss_pearl` (v2, ungated) at **42.0% vs v104** over
+88 games on the full 22-map ladder pool: SMALL 60%, BIG 27% — australia,
+maze, portals, slithery_fight, stronghold, trauma all 0/4 (foraging swarm
+scatters, brood starves: queen len@end 0.365 vs 2.0).
+
+## What changed
+
+`abyss_pearl4` = reconstructed abyss_v110 (wh2 files from devin/whfix +
+v106 selfguard main.cpp; v110 itself is integrator-local) + the full v2
+opening + a **map gate**. `open_` now requires `openMapOk()`:
+
+```cpp
+open_ = bud_ && round < openUntil && openMapOk();
+bool openMapOk() const {
+    int nc = board.NC;                       // W*H cells
+    if (nc <= 700 && !(maze_ && nc > 200)) return true;   // small, non-kelp-maze
+    return startUnits >= 5 && nc <= 1300;                 // or a big brood on a mid map
+}
+```
+
+Engages on: arena (121), Colosseum (256), default_small (256),
+dilemma (512/.127), trophy (625), autarky (972/6-dragons) — the v2 winner
+set. Excludes every killer (islands 2240, maze/trauma/stronghold 1152,
+slithery 1701, portals/.300-maze, australia/big_empty/unsw 4096) plus the
+v2 losers (devil, stripes, weakhold, td — kelp-maze vetoed). Arena
+survives its .957 kelp because the maze veto floors at nc>200.
+
+New params: `openMaxTiles 700, openMazeMinTiles 200, openMinUnits 5,
+openBroodTiles 1300`. All other v2 knobs unchanged.
+
+## Gate — abyss_pearl4 vs abyss_v104 (22 maps, seeds 1-2, both sides, 88g)
+
+**ALL 44.3% — SMALL 70.0% (28/40), BIG 22.9% (11/48).** Below the ≥52%
+target; six maps still 0/4.
+
+| map | score | win% | open_ |
+|---|---|---|---|
+| Colosseum | 2.0 | 50% | IN |
+| arena | 3.0 | 75% | IN |
+| default_small | 4.0 | 100% | IN |
+| devil | 2.0 | 50% | out (maze) |
+| dilemma | 4.0 | 100% | IN |
+| queen_of_spades | 3.0 | 75% | out |
+| stripes | 2.0 | 50% | out (maze) |
+| tower_defense | 3.0 | 75% | out (maze) |
+| trophy | 3.0 | 75% | IN |
+| weakhold | 2.0 | 50% | out (maze) |
+| australia | 1.0 | 25% | OUT |
+| autarky | 2.0 | 50% | IN (brood) |
+| big_empty | 2.0 | 50% | OUT |
+| default | 2.0 | 50% | OUT |
+| islands | 0.0 | 0% | OUT |
+| maze | 0.0 | 0% | OUT |
+| portals | 0.0 | 0% | OUT (maze) |
+| schooltime | 2.0 | 50% | OUT |
+| slithery_fight | 0.0 | 0% | OUT |
+| stronghold | 0.0 | 0% | OUT |
+| trauma | 0.0 | 0% | OUT |
+| unsw | 2.0 | 50% | OUT |
+
+## The real finding — v110 itself bleeds on the BIG pool
+
+On every hard-excluded map (nc>700 with <5 dragons, or nc>1300) `open_`
+can never engage and **pearl4 is bit-identical to v110 there**. The
+eaten30 columns prove the gate works: identical to v104's on islands
+(12.2/12.2), maze (13.5/13.5), slithery (34.2/34.2), stronghold
+(14.2/14.2), unsw (37.8/37.8), australia (5.5/5.5), portals, td, weakhold
+— yet islands/maze/portals/slithery/stronghold/trauma still went 0/4.
+
+So the BIG-map collapse is **v110-vs-v104 in mid/late game**, not the
+opening: the same signature the integrator saw (queen len@end 0.43 vs
+1.79, wall+self+body deaths 91 vs 77) reproduces with the opening fully
+off. The opening's only BIG-pool seat is autarky, which split 50%.
+
+Direct proof running: `gate_v110_killers` = abyss_v110 vs abyss_v104 on
+the six killer maps.
+
+## pearl5 — gated opening straight onto v104 (the alternative ship)
+
+`abyss_pearl5` = v104 + v2 opening + the same gate (no wh2/v106). If the
+integrator wants the pearl gain without the v110 regression, this is the
+diff. Gating vs v104 on all 22 maps: `gate_pearl5_v104`.
+
+e30 boosts where open_ engages (vs v104): arena 63.5 vs 54.8, dilemma
+13.5 vs 6.5, default_small 8.2 vs 6.8, trophy 12.0 vs 9.5.
+
+## cf/combat gates + verdict
+
+[table pending — gates running]

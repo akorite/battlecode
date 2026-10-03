@@ -1,10 +1,10 @@
 # whfix — weakhold / tower_defense / trauma queen-trap fix
 
-Bot: `workspace/abyss_wh2` (wh1 + frontier discriminator). Flag: `Params::trapSeenOnly`
-(default on via kParams), `trapSafeCells=12`, `trapFrontier=2`.
+Bot: `workspace/abyss_wh4` (wh3 + map-size gate). Flags via kParams: `trapSeenOnly=1`,
+`trapSafeCells=8`, `trapFrontier=1`, `trapMaxTiles=700`.
 
-`workspace/abyss_wh1` is kept as the version merged into v107 (it gates green locally but
-failed the integrator's cf+combat gate — see below); **wh2 is the ship candidate**.
+`workspace/abyss_wh1..wh3` are kept as the failed iterations (see below); **wh4 is the
+ship candidate**.
 
 ## Diagnosis
 
@@ -50,6 +50,18 @@ aperture); open space's boundary is ~all scanned cells.
 
 `unproven = trapSeenOnly && !cycle && cells <= trapSafeCells && frontier <= trapFrontier`
 
+## wh2 → wh3 → wh4: corridors are pockets until proven otherwise
+
+wh3 tightened the mouth signature (`cells<=8 && frontier<=1`) — still a net regression on
+the honest 22-map gate (34% at the 53-game mark, abandoned): a thin corridor ending in fog
+has *exactly* that signature, so the veto still fired on maze/trauma/stronghold-type maps.
+
+wh4 gives up on geometric discrimination entirely: the whole `seenOnly` scan (and with it
+`unproven`) runs **only when `NC <= trapMaxTiles` (700)** — all 10 small ladder maps
+(weakhold 600, td/dilemma/devil/portals 512, trophy 625, stripes 288, Colosseum/
+default_small 256, arena 121) get the fix; every big map gets byte-identical v104 scans,
+so the pin regression cannot exist there by construction.
+
 ## Results (local, kmatch; cand=wh1/wh2 unless noted)
 
 | run | cand | base | maps/seeds | score | notes |
@@ -61,6 +73,9 @@ aperture); open space's boundary is ~all scanned cells.
 | wh2-weakhold | wh2 | abyss_cf | weakhold ×4 | 12.5% | identical to wh1: 0 own wall deaths; cf queen still dies hitWall in pocket every game |
 | wh2-open | wh2 | abyss_cf | big_empty,default,trauma ×2 | 50.0% | big_empty 3/4 (alive@499 61–64 — no pin), default 2/4, trauma 1/4; queen deaths all combat r65–430; **0 r0–5 deaths, 0 timeouts** |
 | wh2-gate1 | wh2 | abyss_v104 | weakhold,td,trauma ×4 | 54.2% | weakhold 4/4 splits; td 50% (wh1 was 37.5%), trauma 62.5%; queen non-ram 0.25 vs 0.458; queen alive@end 0.562 vs 0.375 |
+| wh3-all (abandoned) | wh3 | abyss_v104 | all 22 ×2 | ~34% | same corridor-pin signature; killed at 53/88 |
+| **wh4-all (HONEST GATE)** | wh4 | abyss_v104 | all 22 ×2 | **50.0%** | PASS: ≥50%, no map at 0/4 (worst 25%); td 4/4, weakhold/trauma 2/4 splits; 0 timeouts; schooltime r1 hitSelf is a v104 baseline quirk (both queens die identically — other lane owns it) |
+| wh4-cf | wh4 | abyss_cf | weakhold,td,trauma ×2 | 41.7% | weakhold 25% (veto intact: 0 own wall deaths, cf queen dies in pocket every game); td 50%; trauma 50%; queen non-ram 0.167 vs 0.583 |
 
 vs abyss_cf on weakhold the queen-trap loss mode is gone, but games still lose to swarm
 starvation (alive@499 1.7 vs 21.0) — a different failure class (forage/economy), for a
@@ -68,8 +83,8 @@ different lane. vs v104 head-to-head weakhold is side-determined (every seed pai
 
 ## Verdict
 
-Ship **abyss_wh2**: keeps the pocket veto (weakhold identical to wh1 — zero own wall
-deaths, cf's queen still dies in the pocket every game) while removing the open-map pin
-(big_empty 3/4 vs cf, healthy swarm counts; no r0–5 deaths, no timeouts). It does not move
-weakhold win rate vs strong opponents — the map's remaining losses are starvation, not
-queen traps.
+Ship **abyss_wh4**: the pocket veto works exactly where it was needed (weakhold: 0 own
+wall deaths; cf's queen still dies in the pocket every game) and cannot fire on big maps
+at all (`NC>700` → v104-identical decisions). Honest 22-map gate: 50.0% vs v104, no 0/4
+map, no timeouts. It does not move weakhold win rate vs strong opponents — the map's
+remaining losses are starvation, not queen traps.

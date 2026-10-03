@@ -242,18 +242,87 @@ opening: the same signature the integrator saw (queen len@end 0.43 vs
 1.79, wall+self+body deaths 91 vs 77) reproduces with the opening fully
 off. The opening's only BIG-pool seat is autarky, which split 50%.
 
-Direct proof running: `gate_v110_killers` = abyss_v110 vs abyss_v104 on
-the six killer maps.
+Direct proof (`gate_v110_killers`, abyss_v110 vs abyss_v104, the six
+killer maps, seeds 1-2, 24 games): **v110 alone scores 8.3%** — maze,
+portals, slithery_fight, stronghold, trauma all 0/4, islands 2.0/4.
+This build has ZERO pearl code; identical signature: queen len@end
+0.625 vs 3.5, longest 13.7 vs 34.3, wall+self+body 164 vs 142, e30
+identical 12.79/12.79. The wh2 (and/or v106-selfguard) merge itself
+regresses vs v104 on kelp-heavy big maps — the integrator's BIG-pool
+collapse attribution to the pearl opening was confounded.
 
 ## pearl5 — gated opening straight onto v104 (the alternative ship)
 
 `abyss_pearl5` = v104 + v2 opening + the same gate (no wh2/v106). If the
 integrator wants the pearl gain without the v110 regression, this is the
-diff. Gating vs v104 on all 22 maps: `gate_pearl5_v104`.
+diff.
+
+### Gate — pearl5 vs v104 (88g): **ALL 50.0% — SMALL 52.5%, BIG 47.9%**
+
+| map | score | | map | score |
+|---|---|---|---|---|
+| Colosseum | 2.0 | | australia | 1.0 |
+| arena | 3.0 | | autarky | 3.0 |
+| default_small | 2.0 | | big_empty | 2.0 |
+| devil | 0.0 | | default | 2.0 |
+| dilemma | 4.0 | | islands | 1.0 |
+| queen_of_spades | 1.0 | | maze | 3.0 |
+| stripes | 2.0 | | portals | 2.0 |
+| tower_defense | 2.0 | | schooltime | 2.0 |
+| trophy | 3.0 | | slithery_fight | 1.0 |
+| weakhold | 2.0 | | trauma | 2.0 |
+| | | | unsw | 2.0 |
+
+Every killer map that went 0/4 under v110 scores at parity-or-better here
+(maze 3/4, portals/stronghold/trauma/schooltime/big_empty 2/4) — further
+proof the 0/4s were the base. devil 0/4 is an identical-code mirror
+(pearl5 ≡ v104 on devil) and devil is positionally asymmetric. Wins are
+exactly the opening's seats: dilemma 4/4, arena/trophy/autarky 3/4.
 
 e30 boosts where open_ engages (vs v104): arena 63.5 vs 54.8, dilemma
 13.5 vs 6.5, default_small 8.2 vs 6.8, trophy 12.0 vs 9.5.
 
-## cf/combat gates + verdict
+## Gates — pearl4 (v110, no swarmTrap) vs cf / combat (88g each)
 
-[table pending — gates running]
+| map | vs cf | vs combat |
+|---|---|---|
+| Colosseum | 2.0 (50%) | 2.0 (50%) |
+| arena | 4.0 | 3.0 |
+| default_small | 4.0 | 4.0 |
+| devil | 2.0 | 0.0 |
+| dilemma | 4.0 | 4.0 |
+| queen_of_spades | 2.0 | 0.0 |
+| stripes | 1.0 | 0.0 |
+| tower_defense | 3.0 | 2.0 |
+| trophy | 3.0 | 4.0 |
+| weakhold | 0.0 | 0.0 |
+| australia | 4.0 | 2.0 |
+| autarky | 2.0 | 2.0 |
+| big_empty | 4.0 | 2.0 |
+| default | 2.0 | 1.0 |
+| islands | 1.0 | 2.0 |
+| maze | 1.0 | 0.0 |
+| portals | 0.0 | 2.0 |
+| schooltime | 0.0 | 0.0 |
+| slithery_fight | 1.0 | 1.0 |
+| stronghold | 1.0 | 1.0 |
+| trauma | 0.0 | 0.0 |
+| unsw | 1.0 | 2.0 |
+| **ALL** | **47.7%** (S 62.5 / B 35.4) | **38.6%** (S 47.5 / B 31.2) |
+
+NOTE: these cf/combat gates ran the pre-swarmTrap pearl4 (built at
+launch). pearl4 now carries swarmTrap=1 (starve lane's non-queen deadEnd
+veto on maze_ maps — the wall+self+body ratchet fix); re-gating as
+`gate_p4s_*`.
+
+## Verdict (pending pearl4s + pearl5 + v110-killer gates)
+
+Targets missed pre-swarmTrap: 44.3% vs v104 (needed ≥52%), six maps 0/4.
+But attribution is clean: the 0/4s are all hard-excluded maps where the
+binary is exactly v110 — i.e. the integrator's merged base regresses vs
+v104 on the BIG pool independent of the opening. Options on the table:
+
+1. **pearl4 + swarmTrap** (`gate_p4s_*`): v110-with-swarmTrap + gate —
+   most likely what the real v110 actually is.
+2. **pearl5** (`gate_pearl5_v104`): the gate alone on v104 — if it hits
+   ≥52% it's the conservative ship (pearl gain, zero v110 exposure).

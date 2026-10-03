@@ -206,6 +206,7 @@ def analyze(path):
             if s is None:
                 continue
             T[s]['deaths'] += 1
+            T[s]['d_' + e['reason']] += 1
             if i == queen[s]:
                 qdead[s] = (rnd, e['reason'])
                 if slay and slay[1] != s:

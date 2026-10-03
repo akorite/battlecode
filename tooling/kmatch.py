@@ -223,6 +223,8 @@ def summary(dirs, out=sys.stdout):
         ('  ... no enemy head <=3', G, lambda s: s.get('adjQuietAte', 0) / max(1, s.get('adjQuietN', 0))),
         ('queen non-ram deaths/game', G, lambda s: s['qNonRam']),
         ('queen dead (any) /game', G, lambda s: int(s['qDeadRound'] is not None)),
+        ('deaths/game: wall+self+body', G, lambda s: s.get('d_hitWall', 0) + s.get('d_hitSelf', 0) + s.get('d_hitOtherBody', 0)),
+        ('deaths/game: head-to-head', G, lambda s: s.get('d_hitHeadToHead', 0)),
         ('small maps: pearls eaten by r60', elim, lambda s: s.get('eaten60', 0)),
         ('small maps: splits by r60', elim, lambda s: s.get('splits60', 0)),
         ('small maps: alive at r50', elim, lambda s: s['alive50']),

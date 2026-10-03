@@ -1,0 +1,12 @@
+{
+  "id": "j0004-mapadapt-big",
+  "version": 1,
+  "bot_commit": "e1243ec194660425a5bbaf210bf09c547608657c",
+  "cand": "abyss_v102_mapadapt",
+  "base": "abyss_v102_champ",
+  "maps": "trauma,maze,schooltime,slithery_fight,islands,australia,unsw,stronghold,big_empty",
+  "seeds": 3,
+  "seed_start": 3500,
+  "priority": 25,
+  "note": "Map-adaptive lane (branch claude/map-adaptive-lane-elbb81, NOT bot-improvements: git fetch origin claude/map-adaptive-lane-elbb81 first). Only big maps: the plan switch changes nothing on maps under 1100 tiles, so games there are mirrors. Report per map. 64x64 maps take ~5-6 min per game."
+}

@@ -1,0 +1,12 @@
+{
+  "id": "j0007-basek-vs-st",
+  "version": 1,
+  "bot_commit": "1c73b1e0e18312c26190d736bf83059b80fdf04f",
+  "cand": "abyss_v102_base_k",
+  "base": "abyss_st",
+  "maps": "all",
+  "seeds": 4,
+  "seed_start": 1000,
+  "priority": 28,
+  "note": "Keyed re-run of j0001 (same seeds 1000-1003, so the two can be compared game by game). abyss_v102_base_k = v102_base + team-keyed sonar tag: no cross-talk with abyss_st. Report per map."
+}

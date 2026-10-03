@@ -1,0 +1,15 @@
+{
+  "id": "j0008-champk-big",
+  "version": 1,
+  "bot_commit": "1c73b1e0e18312c26190d736bf83059b80fdf04f",
+  "cand": "abyss_v102_champk",
+  "opponents": [
+    "abyss_v102_base_k",
+    "abyss_st"
+  ],
+  "maps": "big",
+  "seeds": 3,
+  "seed_start": 3000,
+  "priority": 27,
+  "note": "Keyed re-run of j0003 (same seeds 3000-3002). abyss_v102_champk = champion lane with keyed tag and ghost-queen fix (pocketEatLen off). Report per map and per opponent."
+}

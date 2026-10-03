@@ -3,10 +3,13 @@
   "version": 1,
   "bot_commit": "0ccfcc242530c05d4ed861058bccddc89c89ce94",
   "cand": "abyss_v102_champ",
-  "opponents": ["abyss_v102_base", "abyss_st"],
+  "opponents": [
+    "abyss_v102_base",
+    "abyss_st"
+  ],
   "maps": "big",
   "seeds": 3,
   "seed_start": 3000,
   "priority": 20,
-  "note": "Champion-feeding lane on big maps (mid + schooltime, slithery, islands, big_empty, australia, unsw). Local: 19/24 vs base on mid. 64x64 maps are ~5-6 min per game."
+  "note": "Champion-feeding lane on big maps (mid + schooltime, slithery, islands, big_empty, australia, unsw). Local: 19/24 vs base on mid. 64x64 maps are ~5-6 min per game. CONTAMINATED (2026-10-03): bots in this job shared the 0xC0A1 sonar tag and the newer bot's beacons/MsgChamp were misread by the older one (role bits, queen id), biasing results toward the cand. Superseded by the keyed re-runs; do NOT re-run this job."
 }

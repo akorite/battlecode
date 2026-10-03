@@ -8,5 +8,5 @@
   "seeds": 4,
   "seed_start": 1000,
   "priority": 10,
-  "note": "Queen-identity fix vs live bot, all 22 maps, both sides per seed (kmatch does this). Local result so far: 61% small (n=80), 67% mid (n=24). Report per map. Big 64x64 maps take several minutes per game; that is expected."
+  "note": "Queen-identity fix vs live bot, all 22 maps, both sides per seed (kmatch does this). Local result so far: 61% small (n=80), 67% mid (n=24). Report per map. Big 64x64 maps take several minutes per game; that is expected. CONTAMINATED (2026-10-03): bots in this job shared the 0xC0A1 sonar tag and the newer bot's beacons/MsgChamp were misread by the older one (role bits, queen id), biasing results toward the cand. Superseded by the keyed re-runs; do NOT re-run this job."
 }

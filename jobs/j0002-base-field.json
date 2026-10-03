@@ -3,10 +3,14 @@
   "version": 1,
   "bot_commit": "cc65778b8e7393851ed2e164b4f44d921e3422a7",
   "cand": "abyss_v102_base",
-  "opponents": ["abyss_cf", "abyss_b2", "abyss_combat"],
+  "opponents": [
+    "abyss_cf",
+    "abyss_b2",
+    "abyss_combat"
+  ],
   "maps": "std",
   "seeds": 3,
   "seed_start": 2000,
   "priority": 5,
-  "note": "Field check: queen-identity base vs three stylistically different older variants (feed-260, bud-2 spam, crowd penalty). std = 10 small + 6 mid maps."
+  "note": "Field check: queen-identity base vs three stylistically different older variants (feed-260, bud-2 spam, crowd penalty). std = 10 small + 6 mid maps. CONTAMINATED (2026-10-03): bots in this job shared the 0xC0A1 sonar tag and the newer bot's beacons/MsgChamp were misread by the older one (role bits, queen id), biasing results toward the cand. Superseded by the keyed re-runs; do NOT re-run this job."
 }

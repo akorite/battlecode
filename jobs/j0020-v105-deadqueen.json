@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "id": "j0020-v105-deadqueen",
+  "priority": 20,
+  "bot": "abyss_v105",
+  "bot_commit": "f31a892f83119889f37b3b02144a2179097f688c",
+  "tag": "abyss_v105",
+  "opponents": ["abyss_v104", "abyss_st"],
+  "setup": "workspace/abyss_v105",
+  "setup_commit": "f31a892f83119889f37b3b02144a2179097f688c",
+  "maps": "weakhold,autarky,schooltime,default,Colosseum,queen_of_spades",
+  "seeds": [9700, 9701, 9702],
+  "both_sides": true,
+  "replays": true,
+  "control": {"bot": "abyss_st", "opponent": "abyss_starter", "maps": ["arena"], "seeds": [31], "both_sides": true}
+}

@@ -13,3 +13,11 @@
 - whfix worker landed abyss_wh1 (trapSeenOnly fog-as-wall queen trap scan,
   weakhold 8/8 pocket suicides → 0/8, own gate clean). Merged into abyss_v107
   (guard + wh1), queued behind v106.
+
+## 2026-10-03 — v107 gate FAIL (do not submit as-is)
+- v107 = v106 guard + wh1 trapSeenOnly. 68-game fixture vs cf+combat: 31% vs
+  v104's 44%. Regressed: big_empty 4→0, default 2→0, devil 2→0, trauma 4→2.
+- Cause: `unproven` veto (seen-cells<=12) fires on open maps — early vision is
+  sparse, every dest looks unproven, queen pinned. Bounced to whfix worker for
+  frontier-bounded iteration (abyss_wh2).
+- Deaths phase still clean: zero new r0-5 self-deaths vs v104 baseline.

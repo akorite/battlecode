@@ -102,5 +102,5 @@
   "cand_wins": 20,
   "games": 20
  },
- "notes": "eatBonus 1.0->2.0: 50.5% score (47W+3D/96) NEUTRAL -> drop. Mechanism failed: adjQuietAte 0.760 vs 0.759 unchanged; small-map eaten60 worse 28.8 vs 32.7. Adjacent-pearl skips are not weight-driven."
+ "notes": "eatBonus 1.0->2.0: 47.4% score (44W+3D/96 deduped) NEUTRAL -> drop. Mechanism failed: adjQuietAte 0.760 vs 0.759 unchanged; small-map eaten60 worse 28.8 vs 32.7. Adjacent-pearl skips are not weight-driven."
 }

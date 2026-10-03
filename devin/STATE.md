@@ -1,40 +1,41 @@
 # STATE — autonomous ladder iteration (2026-10-03)
 
 ## Goal
-Top-20 ladder rating on game.battlecode.au (team Cognoscenti id 351). Ladder Elo ~1500, leaders 1900+. Qualifiers snapshot bots+ratings 10 Oct 2026 — must be live and stable before then.
+Top-20 ladder rating on game.battlecode.au (team Cognoscenti id 351) before qualifiers snapshot 10 Oct 2026.
 
-## Current best
-- Local ship candidate: abyss_v104 (commit 232c080) — 59.4% vs abyss_st on paired 9600-seed fixtures.
-- Flagship reference: abyss_v102 — 63.6% vs abyss_st (176g, my j0005 run).
-- abyss_v105 = REGRESSION (41.7% vs v104) — DO NOT SUBMIT.
-- Ladder state: PENDING BC_KEY — will record submissions/Elo when key lands.
+## Ladder state (live, API-verified 2026-10-03)
+- Rank 136 / Elo 1463. Top-20 cutoff ~1955 → ~490 Elo gap, 7 days.
+- Live bot: abyss_v104 (submission 15960, active). Ranked record 79W/1D/99L (43.8%).
+- vs 1500+ opponents: NeungzAI 7/13, zach 4/11, meowest 2/8, Sponge 0/5.
+- abyss_v105 = REGRESSION (41.7% vs v104) — never submit.
+- Loss survey (worker, 96 losses): queen death precedes ~every elimination.
+  Buckets: mid r51-200 13 (hitHeadToHead 12, hitWall 9), late r201+ 7,
+  early r6-50 3, r0-5 schooltime 6. Zero timeouts. Report: devin/lanes/losssurvey.md.
 
-## Lanes
-- Lane A (fixes): Schooltime queen suicide, in-reach queen kills (slayQueen already in v104 — verify live), protectLead, round-keyed sonar (already in v104).
-- Lane B (queen): feed queen/consolidation — cf timing merged (320); v105 deadQ failed. Next: caged-queen detection (schooltime feeder waste ~1800 turns), ally-aware exit legality (seal done right).
-- Lane C (tuning): param vectors per map class + CMA-ES/SPSA on kvmrun. NOT started.
-- Lane D (review/research): ladder game review, opponent modelling, per-map doctrine.
+## Current work — v106 schooltime fix (IN GATE)
+- Bug: coiled queen on schooltime issues r1 `MOVE N` into own neck → hitSelf
+  auto-loss. Deterministic 11/11 local + 6/6 ladder in v104. ~20% of losses.
+  Timing-sensitive: any extra per-turn work (debug logs) flips the choice;
+  hence an output-layer guard, not a policy patch.
+- Fix: main.cpp emit path — if chosen step's dest ∈ body∪ownExtra, redirect to
+  first safe adjacent dir (body vacated cells only freed by engine, never by us).
+- Gate so far: schooltime 5/5 survive r5 (was 0/5). All-17-map deaths phase:
+  ZERO NEW r0-5 self-deaths vs v104 baseline (autarky/dilemma/help/slithery
+  deaths identical in v104 — pre-existing). Wins phase running vs cf+combat.
 
-## Backlog (ranked)
-1. Read ladder state (BC_KEY): which version is live, per-map ratings, last 100 games.
-2. Local gate for v104 (control vs starter, all-17-map queen-death check r0-5, 2 outside opponents).
-3. Schooltime r1 queen suicide repro + fix (v104 may already fix via deadEnd veto — verify).
-4. Caged-queen detection for schooltime feeders (~1800 wasted turns).
-5. Ally-aware exit legality (seal done right — mechanism, not danger price).
-6. Early-pearl intake gap: 7.4 vs top teams' 18.8 per first-30r on small maps — forage-first opening.
-7. Round-keyed anti-replay sonar — verify present in v104 (WaterCandle echo).
-8. Opponent classification in first 30-60r -> strategy profile switch.
-9. Beam search 2-4 turns over joint moves (bounded, cheap eval).
-10. Behaviour-clone top-team decisions from replays (parse_replay.py; post-1-Oct games only).
+## Lanes / workers
+- me (integrator): schooltime fix → submit v106 → review → iterate.
+- losssurvey worker: DONE, branch devin/losssurvey pushed.
+- whfix worker (d50d6e85…): running, weakhold/TD queen-death dive.
+- pearl lane: pending SWE-2 slot (cap 5) — retry spawn.
 
-## Rules (from prompt sec 4)
-- Separate message tags per team in local tests (keyed sonar now default).
-- Outside opponents, not just self-play; ~6 max parallel games; halve on any timeout.
-- Spot-check side attribution x3; report per map; use ALL-unlocked on side-locked maps.
-- Pass = no timeouts, no NEW r0-5 queen deaths on all 17 maps, >= best vs 2 outside opponents.
-- Ladder decides keep/revert; <60 ranked games = no verdict; -40 Elo over 60g = revert.
+## Known hazards
+- wasm build cache stamps ONLY .cpp — header edits reuse stale wasm. Use fresh
+  dir names (v106 not v104-edit) or rm ~/.cache/unswbc/wasmbots/<dir>-*.
+- Replay dl: fetch 302 Location WITHOUT auth header. battles API = latest-100 only.
+- BC_KEY at ~/.unswbc/keys.json — never print/commit.
 
 ## Next 3 actions
-1. Wait for BC_KEY -> pull submissions/Elo/matches.
-2. Control run abyss_v104 vs starter (small, seed1) + schooltime queen-death repro.
-3. Write devin/log.md + first STATUS.md, push branch.
+1. Finish wins phase → if parity-vs-v104 vs cf/combat: submit v106, git-tag.
+2. Integrate whfix output when worker settles; spawn pearl worker on slot free.
+3. 60+ ranked-game review of v106 → keep/revert, update log.md loss table.

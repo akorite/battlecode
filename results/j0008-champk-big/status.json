@@ -1,0 +1,155 @@
+{
+ "state": "done",
+ "worker": "devin-wkr1a",
+ "job_version": 1,
+ "bot_commit": "1c73b1e0e18312c26190d736bf83059b80fdf04f",
+ "kvmrun_commit": "45452bd43a308ee4cb6818c3c036a2a2b4165394",
+ "unswbc_version": "1.2.7",
+ "opponents": {
+  "abyss_v102_base_k": {
+   "cand_wins": 47,
+   "games": 72,
+   "draws": 0,
+   "per_map": {
+    "australia": {
+     "wins": 5,
+     "draws": 0,
+     "games": 6
+    },
+    "autarky": {
+     "wins": 1,
+     "draws": 0,
+     "games": 6
+    },
+    "big_empty": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "default": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "islands": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "maze": {
+     "wins": 5,
+     "draws": 0,
+     "games": 6
+    },
+    "portals": {
+     "wins": 6,
+     "draws": 0,
+     "games": 6
+    },
+    "schooltime": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "slithery_fight": {
+     "wins": 5,
+     "draws": 0,
+     "games": 6
+    },
+    "stronghold": {
+     "wins": 6,
+     "draws": 0,
+     "games": 6
+    },
+    "trauma": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "unsw": {
+     "wins": 4,
+     "draws": 0,
+     "games": 6
+    }
+   }
+  },
+  "abyss_st": {
+   "cand_wins": 56,
+   "games": 72,
+   "draws": 0,
+   "per_map": {
+    "australia": {
+     "wins": 6,
+     "draws": 0,
+     "games": 6
+    },
+    "autarky": {
+     "wins": 4,
+     "draws": 0,
+     "games": 6
+    },
+    "big_empty": {
+     "wins": 5,
+     "draws": 0,
+     "games": 6
+    },
+    "default": {
+     "wins": 3,
+     "draws": 0,
+     "games": 6
+    },
+    "islands": {
+     "wins": 4,
+     "draws": 0,
+     "games": 6
+    },
+    "maze": {
+     "wins": 4,
+     "draws": 0,
+     "games": 6
+    },
+    "portals": {
+     "wins": 6,
+     "draws": 0,
+     "games": 6
+    },
+    "schooltime": {
+     "wins": 4,
+     "draws": 0,
+     "games": 6
+    },
+    "slithery_fight": {
+     "wins": 6,
+     "draws": 0,
+     "games": 6
+    },
+    "stronghold": {
+     "wins": 6,
+     "draws": 0,
+     "games": 6
+    },
+    "trauma": {
+     "wins": 4,
+     "draws": 0,
+     "games": 6
+    },
+    "unsw": {
+     "wins": 4,
+     "draws": 0,
+     "games": 6
+    }
+   }
+  }
+ },
+ "timeouts": 0,
+ "control": {
+  "cand": "abyss_st",
+  "base": "starter",
+  "maps": "small",
+  "seeds": 1,
+  "result": "20-0",
+  "timeouts": 0,
+  "note": "from session start"
+ },
+ "notes": "champk (keyed tag, pocketEatLen off) on big maps, seeds 3000-3002: 65.3% vs base_k (47W/25L), 77.8% vs st (56W/16L, pair CI [68.1,86.1]). Combined 103/144 = 71.5%. No timeouts; control abyss_st vs starter 20-0."
+}

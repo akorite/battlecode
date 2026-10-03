@@ -73,3 +73,15 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
   Base was its own v109 reconstruction → transplanted to **abyss_v111**
   (v108 + swarmTrap only, maze_ → kelpFraction inline since v108 lacks
   pearl's maze_ flag). Honest 22-map gate running (gate-v111-v104).
+
+## ~22:10 UTC — v111 dead; v106 ladder 4W-6L; all lanes iterating
+
+- v111 (v108+swarmTrap) vs v104: **36.9%** — regression. Corridor maps
+  bled (islands 1/4, slithery 1/4, weakhold 2/4 vs v108's 4/4). Lane-local
+  gate missed maps where pockets are survivable. Starve worker bounced
+  with conveyor-vs-survivable-pocket discrimination requirement.
+- Pattern across v109/v110/v111: every trap/fog veto bleeds big maps.
+  v108 ≈ v104 parity (47.7%) remains the only clean delta.
+- v106 ladder (10 ranked, no schooltime drawn): 4W-6L, -77 net Elo;
+  losses Trophy/Stripes/Slithery/Trauma — pre-existing corridor weakness,
+  guard untested (zero schooltime matches since activation).

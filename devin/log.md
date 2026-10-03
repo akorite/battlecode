@@ -85,3 +85,17 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
 - v106 ladder (10 ranked, no schooltime drawn): 4W-6L, -77 net Elo;
   losses Trophy/Stripes/Slithery/Trauma — pre-existing corridor weakness,
   guard untested (zero schooltime matches since activation).
+
+## ~22:40 UTC — hitWall mechanism found; v112 (wallguard) gating
+
+- Death-reason histogram over 25 ladder replays: hitWall 2174, hitSelf 1734,
+  H2H 1513 — ALL at 1-step moves (multi-step deaths ~0). Not blind pathing.
+- Mechanism: unseen edges model as open (kind=0). Planner emits c.dir (or
+  path[0]) across a seen-kelp edge when trapped/stale; the v106 selfguard
+  only fired on ownSeg → wall steps went out unguarded.
+- v112 = v108 + wallguard: output layer redirects any provably-fatal first
+  step (dest<0 OR ownSeg) to a free exit; covers single-step AND path[0]
+  (path truncates to the safe step). Provably safe: replaces a step that is
+  certainly fatal with any free exit, else no-op. Gate vs v104 running.
+- Queen-siege losses (mid-game H2H/hitWall encirclement) remain the biggest
+  open loss class — next lane after guards settle.

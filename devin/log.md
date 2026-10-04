@@ -138,3 +138,4 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
   per-hour start cap (~4 games left; refills ~33min) + 120 req/min.
   Queue remaining batch after refill.
 - explore: qOS r36 mutual-elim = torus wrap-seam invisible head-on (crossing check can't see wrap steps); fix: price seam crossings + boundary occupancy — devin/lanes/explore.md
+- explore: v143 C-pack attribution — C1 bleeds dilemma 0-4, C2 clean (no weakhold-B flatline), C3 queen-death bleed stronghold/qOS — devin/lanes/explore.md

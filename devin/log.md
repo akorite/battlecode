@@ -212,3 +212,6 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
   crash deaths ~equal. Safe to merge into winners; combo at S2 only.
 - v120 live: Elo 1440->1535 (pre-v120 window); v120 autoscrim record pending.
 - battles feed found: api/v1/battles?teamId=351 — per-upload tables now feasible.
+- feedgate2 halfway (24/48): 66.7% — schooltime 4/4, islands 3/4, slithery 2/2.
+  alive@r499 24.2 vs 11.9 (swarm survives to feed), qlen 1.8 vs 1.2, longest
+  26.5 vs 27.5 (midEnd=400 danger-doubling at feed start may cost ~1 len — F16).

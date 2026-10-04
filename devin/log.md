@@ -249,3 +249,10 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
 - qdeathprobe: queen deaths SEAT/MAP-LOCKED not unhide-timing-locked (seat A dies
   ~same round regardless of bot/hideUntil). Escort/5b is the real queen fix.
 - v129screen: S1 kill-check vs v120 all 17 maps both seats 88g LAUNCHED.
+- v129screen final (88g): v129 47.7% vs v120 — S1 KILL on corridors:
+  maze/slithery 0/4, trauma/portals/weakhold 1/4. Small maps 55% fine.
+  Swarm mechanism works (alive@499 18.6 vs 11.4) but corridors bleed.
+- ROOT CAUSE: queenHideUntil 390 in v129 vs v120's 320 — queen stays swarm-worker
+  +70r instead of growing. On corridors queen-as-champion works (maze: queen len 26
+  won). Feed@360 for worker-champ fine; delayed unhide is the bleed.
+- v130 = v129 + queenHideUntil 320 — corridorfix gate vs v120 (6 maps x2 seeds x2 seats).

@@ -281,3 +281,9 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
   Reframing: we're mid-pack; +400 Elo needs beating 1600-1750 at 60%+.
 - Discrimination set fired: meowest(529)+WaterCandle(782) unranked, 1234(919) ranked.
 - v133-local: feed@360 on opens + corridor-gate = mechanism up, no regression.
+| v134econ | S1 | v134=v133+ee_fix120 dual-scan (econ lane candidate) | 6-map elim set x8s vs v133 | started | — | combo test per method (different mechanisms: feed gate vs trap-scan) |
+| v134econ | S1 result | v134 vs v133 | 6-map elim x8s 96g | **56.2% ALL / 54.7% unlocked** | splits60 8.19vs5.66 (+45%), pearls60 +41%, devil 68.8% stripes 75% qOS/aut/default mirrors; qNonRam 0.31vs0.22 (accepted trade) | PASS→submitted v111 |
+| v133-band | ladder obs | v133 vs 1600-1750 band (self-challenges) | ~19g so far | ~47% (9W-10L) vs v120 ~25-30% | wins incl 1234(1708) on TD+Australia 3-2 each; losses = pre-r200 swarm collapse | trending |
+| v135pocket | S1 | v135=v134+pocket bait-fix | weakhold+dilemma+maze+stripes x8s 64g | **46.9% — FAIL** | maze 31.2%: starving_/baitEat ungated on anyBait_ → pulls+wedge-deaths on no-bait-cell-class maps (maze has 94 deg-1 cells) | iterate v135b |
+| v135b | S1 | pocket gate tightened: pocketMap_=anyBait_&&NC<=700 | same 4-map set x8s | running | maze should bit-mirror v134 (all pocket mechs off) | — |
+| v134-ladder | S2 obs | v134 live (sub v111) band challenges | 13 games fired (919x10R, 782/529/475 unranked) | — | — | accumulating |

@@ -367,3 +367,6 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
 - **Method fix:** incremental integration (v143=v139+p10 alone) replaces big-bang stack; lanes now gate each piece in parallel on v143.
 - **Lane tasking:** pocket→v143+feed; explore→C1/C2/C3 attribution; earlyecon→v143+qsafe port; autarky→corrected mirror-hunt.
 - **Ladder:** Elo 1646 (peak 1696). Last 80: band(1500-2000) 9/20=45%, top(2000+) 10/60=17%. Standing: lanes parallel, adversarial review pre-submit, battle log checked often (user).
+- **v143 S0 vs v138 (68g): 50.0%** — dead-even (3W/28S/3L pairs). Mechanism metrics lean cand: alive@end +3.2, longest@end +2.8, qKeptAfterTheirs 34.5% vs 28%, qDead 0.647 vs 0.691. Weakhold 3/4, maze/slithery 3/4; td/stronghold/autarky 1/4 pair-losses. v143 = new integration base.
+- **Ladder ~13:20:** Elo 1650. WC dropped to 1653 — we just won 2 Islands games off them.
+- **Standing (user):** lanes parallel per-piece gating; adversarial review pre-submit; check battles often.

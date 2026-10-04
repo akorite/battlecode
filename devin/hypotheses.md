@@ -61,3 +61,23 @@
 - Fix (v156): loopRoom requires proven loop in the seenOnly scan; a proven-exhausted non-cyclic thin-frontier region counts as `tree`.
 - Prediction: dilemma queen survives r20-25 (picks N/E at r20); queen dead-by-pocket deaths drop on all small maps.
 - Kill condition: v156 <50% vs v149 on the elim-map fixture, or queen pinned into starvation.
+
+## H-RAMREACH — 2026-10-04
+- Mechanism: the queen's ram screen prices an enemy's kill-reach as
+  freeSteps + L - 1, ignoring pearls: a rammer that eats mid-path gains
+  segments and out-ranges the screen by one tile per pearl eaten. Real
+  reach = free + L - 1 + pearls-on-path (rules audit).
+- Fix (v160): per-enemy reachBoost = count of seen pearls inside its
+  reach field (cap 4), added to the queen ram/lead/heard screens.
+- Prediction: on pearl-rich queen-death maps (qOS/stripes/dilemma),
+  cand queen dies measurably less often (qDead/game down, more
+  r66-elims like the s2-B win survived).
+- Kill condition: 24g board <52% or new r0-60 queen deaths vs v149.
+- Status: GATING (tag v160_ramr).
+
+## Composite plan (flagship v16x)
+- Base v157 (portal picker + C5; autarky 68g board pending) +
+  qRamAdj (pocket's weakhold-dim adjacency ram fix, verified 4/8 wh) +
+  reachBoost if v160 passes + pocket's v153 queen module (anchor +
+  threat-conditional escort + evasion) when delivered + v159 seam fix.
+- Each piece only merges if its own gate passes — v142 composite lesson.

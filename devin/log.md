@@ -137,3 +137,4 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
   ranked vs Nitronics + JKS (10 games), unranked 1 more; then 429:
   per-hour start cap (~4 games left; refills ~33min) + 120 req/min.
   Queue remaining batch after refill.
+- explore: qOS r36 mutual-elim = torus wrap-seam invisible head-on (crossing check can't see wrap steps); fix: price seam crossings + boundary occupancy — devin/lanes/explore.md

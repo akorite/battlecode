@@ -308,3 +308,192 @@ ship candidate). Verified: devil spl60 +71%, eat50 +61%, n200 +118%,
 wins 62%; stripes/td/weakhold mirrors; pair-set maps unaffected by
 gate. Cost accepted: devil qNR 0.44 vs 0.25 (foraging-queen exposure,
 same trade ee_fix shipped).
+
+## Steering-3: action-A — dual-scan vs F2 veto-hole bisect (in flight)
+
+Coordinator's question: on ≤2000-tile maps v134 thins tl@r100 vs v120 (30.3
+vs 34.8); vs 1234 our tl@r100 is 42 vs 57. Is the dual-scan or the F2
+veto-hole slowing r25-100?
+
+**Discovery (git forensics): the whole v122 correctness pack never shipped.**
+F2 = dead-end veto `c.score = c.stepTerm` (v122/v123 only). The v129 rebuild
+off v120 dropped it — v129, v133, v134, v135 (LIVE) all lack it, along with
+F3 (`!queen_` viaReverse), reachOf(-1), theirQueenDead expiry, advanceBody
+recompute. So "the F2 veto-hole" is literally a hole in live: a vetoed
+queen move keeps score **0.0** — it OUTRANKS any negative-scoring legal
+move (veto leaks: she enters traps the scan flagged) — and all-vetoed →
+empty best → trapped fallback.
+
+**Variants on v135 (live base):**
+- `abyss_a_f2` = v135 + `c.score = c.stepTerm` (F2 restore)
+- `abyss_a_nods` = v135 with dual-scan reverted (single seenOnly scan = v133
+  semantics)
+- `abyss_a_f2nods` = both
+- `abyss_a_fpack` = v135 + full pack restore (F2+F3+reachOf+queenDead-expiry
+  +advanceBody) — follow-up if F2 alone moves
+
+**Prior evidence already weighs in (ee_fix120 vs v120, 112g):** dual-scan on
+v120 base was growth-POSITIVE — tl100 22.5 vs 19.1 (+18%), devil 52.9 vs
+40.2, stripes 18.2 vs 7.5; elims suffered 14 vs 24. So the r100 thinning in
+the v134-vs-v120 comparison isn't the scan itself — it's the rest of the
+v133 lineage (feed stack) or the F2 hole interacting.
+
+**Ladder obs (24 elim-map replays vs 1234/meowest/WaterCandle, v134-era):**
+bimodal — we OUT-grow the band in wins (vs 1234 n=16: tl25 9.1/8.9, tl50
+16.9/11.4, tl100 32.7/10.9, eat100 49.8/17.1), but the pre-r200 elim losses
+are driven by queen h2h RAM deaths <r50 — Prisoners Dilemma queen dies r12
+in all 3 seat-B games (seat-locked knife-edge), Trophy r46/45/31/33 h2h,
+Default r43 hitWall. Pocket-leak (hitWall/hitSelf in dead-ends) is NOT the
+dominant ladder signature — rams are.
+
+Gate runs (devil,dilemma,trophy,default,stripes,td,qos ×8s×2seats, jobs2):
+a_f2_v135, a_nods_v135, a_f2nods_v135 — table below when they land.
+
+### Bisect result (both runs complete, 112g each)
+
+**a_f2 vs v135: PERFECT MIRROR — F2 is inert on the elim corpus.**
+Every metric identical to the 10th on every map; per-game margins
+seat-for-seat identical. The score-0 leak on vetoed moves never binds here.
+The F2 hole cannot be the r25-100 thinner (it is still missing from live —
+restoring it neither helps nor hurts elim maps; its original value was
+queen-self-kill protection, unmeasured here).
+
+**a_nods vs v135: dual-scan is strongly growth-POSITIVE — reverting it is
+the catastrophe.** 43.8% pair (nods loses).
+
+| map | tl100 nods/v135 | n100 | eat50 | note |
+|-----|------|------|-------|------|
+| devil | **37.2 / 54.1** | 14.4/21.4 | 27.1/40.8 | -31% — reverting starves the favored seat too |
+| stripes | **8.0 / 19.2** | 3.1/7.7 | 3.1/6.7 | -58% |
+| dilemma | 6.0/7.0 | 2.0/3.0 | 18.0/16.0 | strict veto delays q-death r13->r113, doesn't save (h2h) |
+| trophy | 50.0/45.9 | 20.2/18.3 | 28.6/27.1 | nods slightly ahead here (+9%) |
+| td | 11.2/11.5 | 3.9/4.2 | 2.4/2.6 | ~mirror |
+| default/qos | mirror | mirror | mirror | so=false, scan never differs |
+| ALL | 21.7/25.3 | 8.4/10.0 | 14.6/16.6 | -14% tl100 |
+
+**Verdict: neither.** Dual-scan is the best growth mechanism we own on elim
+maps (+14% tl100 overall, +45% devil, +140% stripes vs the strict veto);
+the F2 hole is inert. The v134-vs-v120 thinning the coordinator measured
+(30.3 vs 34.8 tl100) lives in the rest of the v133 lineage — midEnd450,
+hideUntil320, feedRoundBrawl — NOT the scan. Recommend decomposing that
+slice next (v133 vs v133-minus-feedstack on corridors).
+
+### Structural finding: spawn-side lock on devil/stripes
+Per (map,seed) one seat always reaches ~64-93 tl100 (devil) / ~20-34
+(stripes) and the other stalls at ~5-26/~2-10 — IDENTICAL margins for both
+bots in the a_f2 run (deterministic mirror). The stalled side's queen dies
+~r28-90 h2h crossing for food → elimination <r200. This matches the ladder
+signature (h2h rams <r50 in PD/dilemma r13 seat-lock): the pre-r200 elim
+class is **queen-lane lethality on the starved lane**, not a foraging
+deficit. No symmetric econ mechanism fixes the starved seat — the fixable
+unit is queen survival there (5b escort / hide doctrine territory).
+
+### Third suspect surfaced during the bisect: pocket stack on elim maps
+While verifying what gates `pocketMap_`: deg-1 BED cells per map (bait cells
+only count when they hold a bed): devil **24**, td **11**, stripes **11**,
+weakhold 3, portals 8, trophy 4 (NC<=700 -> pocketMap_ live on all of them).
+Dilemma has 0 -> pocket never fires (knife-edge queen lane untouched, as the
+comment intends). On devil/stripes/td the worker k==0 deadEnd scan + baitLen
+food-skip + starving pulls are ALL live — a real CPU+forage suspect that
+post-dates v120 (came in v135's pocket work; NOT in v134, so it cannot
+explain the coordinator's v134-vs-v120 30.3/34.8 number — that one reduces
+to dual-scan+misc on corridors, both legs now exonerated/inert).
+Launched `a_nopocket` (pocketMap_ forced false) vs v135 on the elim set.
+
+### Bisect final (all 3 legs, 112g each vs v135): NEITHER suspect is the thinner
+| leg | pairW | verdict |
+|-----|-------|---------|
+| a_f2 (F2 restore) | 50.0% | **bit-mirror — F2 inert on elim corpus** |
+| a_nods (no dual-scan) | 43.8% | **dual-scan growth-POSITIVE** (devil -31% tl100, stripes -58% without it) |
+| a_fpack (full pack) | 48.2% | net-negative (devil -28% tl100, trophy qd<50 worse) |
+| a_nopocket (pocketMap_ off) | 50.0% | neutral — not the thinner either |
+
+Structural: elim maps spawn-side-locked — per seed one seat hits ~64-93
+tl100 devil, other stalls ~5-26 regardless of bot; stalled queen dies
+~r28-90 h2h. Pre-r200 elim = queen-lane lethality on the starved seat,
+not a foraging deficit.
+
+### Steering-4: portal routing + don't-stall-short-of-bed
+Winner data: 1.3-3.1 portal transits by r25 on QoS/Trophy/Default vs our
+0.0-0.1 (first transit r33-45, usually queen). Root cause candidates in
+our code: (a) unknown portal partner -> nb=-1 -> BFS never routes through;
+(b) wPortalBlind penalizes crossings even when scouting cleared far side.
+Fix direction (per steering): unseen portal = passable w/ symmetric-tile
+partner; no blind penalty r<30; scout-first then workers route on belief.
+Winner opening scripts + pearl benchmarks (r25/r50): Devil 12/54,
+Trophy 10/44, Stripes 8/24, QoS 6/20, Default 6/18, PD 20/35, TD 1/4.
+S0: own portal transits by r25 > 0 and pearls@r25 toward benchmarks.
+
+### Steering-4 progress: portal routing
+Baseline (v135 side, 16g/map): transits<=r25 default 1, qos 0, trophy 0,
+stripes 24 (in-corridor pairs), first transits r30-49 — matches winner-gap
+data (their 1.3-3.1 by r25 on qos/trophy/default).
+Pearl benchmarks vs ours (eat25/eat50): qos 0.7/7.8 vs 6/20, trophy
+5.9/25.8 vs 10/44, stripes 2.4/6.1 vs 8/24, default 8.2/15.2 vs 6/18
+(ahead at r25, behind r50), dilemma 16.5/16.5 vs 20/35.
+
+**a_portal** (v135 + unpaired-portal->point-rot landing guess in nb[] +
+blindGrace=30 workers + scout-crossing blindQuiet drop pre-30, queen keeps
+blind): transits<=r25 qos 13, trophy 6, default 20, dilemma 32, stripes 21 —
+mechanism delivers early transits everywhere. But pair 41.2% overall:
+qos **+81% (13/16)** tl100 23.0/15.7, trophy **+56% (9/16)** tl100 58.7/42.0;
+dilemma **0/16** (workers desert the queen lane — transits 32<=r25),
+default -37.5% (12 pairs = guess flood), stripes -31% (16 ends, transits
+already native). qd<50: dilemma 0 vs 8 (portal crossing SAVES her lane but
+starves the swarm), trophy 5 vs 5, qos 4 vs 4, default 2 vs 1.
+
+Split exactly on unpaired-end count: qos 4 / trophy 2 win; dilemma 8 /
+stripes 16 / default 24 lose (phantom-route flood).
+**a_portal2** = a_portal + gate `portalGuess_`: unpairedEnds <= 4 AND
+round < 50 (board flag set in observe(); dilemma/default/stripes revert to
+scout-only behaviour, qos/trophy keep the guess). In flight.
+
+### Pending: don't-stall-short-of-bed (devil/stripes — no portals)
+v135 stalls 2-4 tiles short of centre bed (devil A-seat x<=16 r25 vs bed
+x14-17; belief=0 for never-seen beds -> only generic explore pull).
+Beds are dense on devil (156/512) so local greed stalls the east push.
+Candidate: frontier-depth explore bonus or centre-ward opening bias.
+
+### don't-stall diagnosis (devil s1 A-seat, v135 replay): NOT a forage-belief problem
+Traced head paths: the queen pushed east 3,4 -> 17,4 by ~r35 and died
+hitHeadToHead r37 at the centre bed. Later splits SPAWN at x13-19
+(contested centre) and die r32-100 in waves (hitSelf/hitWall/
+hitOtherBody/h2h). The 'stall' = survivors orbiting x9-12 while pushers
+die at x14-17. Dragons reaching the rate-30 centre fountain die in the
+centre fight — pushing harder increases deaths, not pearls.
+Devil centre: 46 beds, only 5 deg-1 (bait-skip NOT the blocker); all 12
+rate-30 beds are centre, all 16 rate-10 on stripes mostly centre.
+=> the devil/stripes stall is the SAME queen-lane/combat class as the
+   whole pre-r200 elim problem: whoever survives the centre fight eats the
+   fountain. Fix axis = centre survivability (pocket discipline on hitSelf/
+   hitWall, queen escort/screen for the h2h), NOT exploration pull.
+   a_deep (deep-explore weight): bit-mirror — explore term never wins
+   argmax vs belief, confirming weight-tuning can't fix this.
+
+### a_portal6 — PASS (57.5%, 80g, gated portal package)
+v135 + [unpaired-portal -> point-rot landing guess in nb[], blindGrace=30
+workers (queen keeps wBlind/wBlindQuiet), scout-crossing blindQuiet drop
+pre-30] — ALL behind `portalOpen_` gate: NC in (512,900] && !maze && <=2
+distinct portal ids seen (sticky manyPortals_ latch). On qos/trophy the
+package is live; dilemma(512)/stripes(288)/td(512)/default(1024)/devil(512)
+are hard-excluded -> bit-mirror.
+| map | pairW | tl100 c/b | transits<=r25 | eat50 |
+|-----|-------|-----------|---------------|-------|
+| qos | **13/16 (81%)** | 20.6/16.6 | 13 (was 0), first r14 | 14.1/7.5 +88% |
+| trophy | **9/16 (56%)** | 60.3/44.1 | 6 (was 0), first r10 | 27.4/26.9 |
+| dilemma | 8/16 | mirror | mirror | mirror |
+| default | 8/16 | mirror | mirror | mirror |
+| stripes | 8/16 | mirror | mirror | mirror |
+| ALL | **46/80 57.5%** | 25.6/21.5 | elim<200 21 vs 26 | qd<50 28/28 |
+
+Gate design history: a_portal (ungated) 41.2% — floods on many-portal maps;
+a_portal2 (<=4 unpaired ENDS) broken — count was per-end not per-pid;
+a_portal3 (<=2 pids sticky) opened pre-30 window on dilemma before 3rd pid
+seen; a_portal4 (guess only) proved the guess itself starves dilemma.
+Final gate is deterministic per map (NC from init, no leak window).
+S0: transits<=r25 >0 delivered (qos 13, trophy 6); pearls@r25 toward
+benchmark (qos 2.5 vs target 6 — doubled from 0.7, still short; transits
+0.8/game vs winners 1.3-3.1).
+Candidate for staging: workspace/abyss_a_portal6 (v135 + gated package).
+Open work for this lane: devil/stripes centre-fight survivability (the real
+'stall' mechanism — overlaps 5b escort/screen + hitSelf/hitWall discipline).

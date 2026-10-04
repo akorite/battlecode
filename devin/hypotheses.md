@@ -53,3 +53,11 @@
 **H-PACE (explore)** — BC_PACE revisit-penalty on v127 base: schooltime swept 2-0, alive@499 23.5 vs 3.7, longest 36 vs 13.7 vs cf. Porting to v149 base now — first artifact with big alive@end deltas.
 
 **H-CHFEED (pocket v150 merge)** — die-in-place SPLIT-0 works (22.2/game, 23% adj vs 18%) but 45%/20 wash. Gap identified: queen-champ never plants → stale-head feed deaths. Feeds into v153 spec (queen anchor + threat escort).
+
+## H-QTRAP (2026-10-04) — phantom loopRoom disables ALL queen dead-end vetoes
+- Observation: dilemma queen deterministic hitSelf@r25 both seeds; replay shows her walk a 1-wide cul-de-sac (14,11->15) scoring "forage" +1 at r20 while the seenOnly scan flagged unproven=1.
+- Mechanism: `loopRoom = sc.cycle && sc.cells > newL && sc.frontier == 0` is computed on the OPTIMISTIC (fog=open) scan; on every map except weakhold (so && wh_), fog leaks phantom cycles → loopRoom always true → `!loopRoom` gates the veto off. Queen dead-end veto never fired outside weakhold.
+- Also found: C1-class "unproven" flag was computed correctly (unp=1) but ignored.
+- Fix (v156): loopRoom requires proven loop in the seenOnly scan; a proven-exhausted non-cyclic thin-frontier region counts as `tree`.
+- Prediction: dilemma queen survives r20-25 (picks N/E at r20); queen dead-by-pocket deaths drop on all small maps.
+- Kill condition: v156 <50% vs v149 on the elim-map fixture, or queen pinned into starvation.

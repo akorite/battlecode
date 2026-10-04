@@ -23,3 +23,11 @@
 - H-EVADE: queen steps off when enemy head in vision + no ally between → cuts ram deaths.
 - H-QFEED: feeder reach to queen r200+ → qlen@end 3.8 → 8+.
 - H-CONVERGE: die-in-place feeders lift feed-capture 10% → ~17%.
+
+## 2026-10-04 ~04:55 UTC — mid-cycle checkpoint
+- Rating ~1600-1615 (bled ~80 since 1696 peak; ranked vs band = net negative until queen module lands — ranked refill STOPPED).
+- Live: v149 (sub #116). Latest losses all queen-class: h2h @83-201, hitOtherBody, or qlen out-fed when alive (Nitronics/Milk Dragon/😹/SSS).
+- Mechanism found (this session): `loopRoom` computed on OPTIMISTIC fog scan → phantom cycles exempt the deadend veto on ALL maps except weakhold → queen walked cul-de-sacs blind. Deterministic dilemma hitSelf@25 reproduced + traced via qscan logs (S scored "forage" +1 while unproven=1).
+- v156 (proven-loop/tree fix): 31.8%/22 — veto now FIRES but converts death mode (hitSelf→h2h earlier). Needs escort, held as piece.
+- Gates running: autarky→v157 composite board (portal-fix+C5, 68g); earlyecon→v158 front-load feeders; explore→v159 seam-crossing fix; pocket→v153 queen anchor+threat-escort (THE critical piece per all census data: queen dead in 82% of ladder replays, h2h=45%).
+- Killed since last: v152 C2+C3 (41.7%, queen deaths up), mirror-hunt (37.5%), queen-feed all configs, C5 wash 50%.

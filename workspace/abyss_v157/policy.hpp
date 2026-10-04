@@ -270,7 +270,12 @@ class Policy {
             bool complete = true;
             for (int d = 0; d < 4 && complete; d++) {
                 Choice const& c = first[d];
-                if (c.dest < 0) continue;
+                if (c.dest < 0) {
+                    // Blind portal crossings keep their scout score at every
+                    // depth — there is nothing to search past a teleport.
+                    if (c.why == "scout") t[d] = c.score;
+                    continue;
+                }
                 if (c.terminal) { t[d] = c.score; continue; }
                 std::vector<int> eaten;
                 if (c.eat) eaten.push_back(c.dest);
@@ -293,7 +298,7 @@ class Policy {
         }
         Choice best;
         for (int d = 0; d < 4; d++) {
-            if (first[d].dest < 0) continue;
+            if (first[d].dest < 0 && first[d].why != "scout") continue;
             Choice c = first[d];
             c.score = total[d];
             if (c.score > best.score) best = c;
@@ -303,7 +308,7 @@ class Policy {
             c.score = ctot[i];
             if (c.score > best.score) best = c;
         }
-        if (best.dest < 0) {
+        if (best.dest < 0 && best.why != "scout") {
             // Nothing legal: first try a tile we only gave up as a teammate's last exit,
             // otherwise any well-formed move beats the default suicide.
             best.dir = w_.t.dir;
@@ -874,7 +879,7 @@ class Policy {
             // Queen self-kill fix (1b): queens move first, so a teammate standing on
             // one of her last two exits is a wall she cannot clear. Workers never
             // end a turn on them.
-            if (s.id == w_.ourQueen && exits <= 2)
+            if (s.id == w_.ourQueen && exits == 1)
                 for (int i = 0; i < exn; i++) {
                     base_[exCells[i]] = INF;
                     queenExits_.push_back(exCells[i]);
@@ -1191,9 +1196,9 @@ class Policy {
             // teleports the head to the far neck. Score the crossing as exploration
             // so a dragon learns the pair and the far half of the map opens up.
             Edge const& e = b.side(head, d);
-            if (k == 0 && e.kind == 2 && e.partnerOrient < 0) {
+            if (k == 0 && !queen_ && e.kind == 2 && e.partnerOrient < 0) {
                 c.dest = -1;
-                c.score = p_.wScout - (!queen_ && b.portalOpen_ && w_.t.round < p_.blindGrace ? 0.0 : p_.wBlindQuiet * (1.0 + 0.25 * L));
+                c.score = p_.wScout - (p_.wBlindQuiet * (1.0 + 0.25 * L));
                 c.why = "scout";
                 c.terminal = true;
             }

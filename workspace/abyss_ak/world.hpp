@@ -83,6 +83,17 @@ struct World {
     bool queenDead(int id) const { return id >= 0 && id <= 1 && qtrack[id].deadRound >= 0; }
     int theirQueenDeadHeard = -1;  // round a teammate's beacon last said their queen is dead, -1 never
     bool theirQueenDead() const { return queenDead(enemyQueen()) || theirQueenDeadHeard >= 0; }
+    // Team-phase memory for the phase controller (PH_* in policy.hpp): Policy is
+    // rebuilt every turn, so the monotonic phase marker has to live here.
+    int phase = 0;
+    // The elected champion's park anchor (CONSOLIDATE+): a stable cell — the
+    // nearest pearl bed — so its relayed position stops churning and feeder
+    // drops land where they can be eaten.
+    int champCampCell = -1;
+    // High-water mark of team size this game: the collapse consolidation
+    // trigger compares current units against it (a fresh small team is not a
+    // collapse; half the peak gone is).
+    int peakUnits = 0;
     // Map classes, keyed on properties every dragon sees at INIT (so the whole
     // team agrees without coordinating): the 32x16 killboxes and 25x25 trophy
     // are brawls where farming early gets you eaten.

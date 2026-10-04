@@ -1,5 +1,7 @@
 # Lane: autarky (54x18, elimination-map class)
 
+**Confirmed cause (one line):** our doctrine consolidates on a fixed clock (feed/split-stop ~r320) while the attrition war still runs — we freeze production, bleed ~19 length through r300-400, and the feed suicides scatter because the champion they die for is re-elected every few rounds; the winners keep producing (~39 dragons at r400) and consolidate one stable champion late.
+
 Worker: session devin-13f9c33210b04125bd9da40bc7345e09, branch `devin/autarky`, bot `workspace/abyss_ak` (copy of `abyss_v113` + the single autarky-gated fix below).
 
 ## Diagnosis (mechanism, not just win%)

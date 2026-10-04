@@ -190,3 +190,17 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
 - qsiege lane closed (honest negative, dead code). starve session terminated.
 - Ladder: v117 final self-challenge band 7-13 vs 1650+ (Nitronics 2-3, Quaker 1-4,
   1234 2-3, IW 2-3). v119 ACTIVE (sub 16258, queen-ram screen).
+
+## Code review r1 applied (Oct 4 ~04:50 UTC)
+- F1: v121 was measuring the feed move WRONG — queenFeedRound alone. Real feed
+  start = min(feedRound,queenFeedRound); live=320 (queenHide=1). Rebuilt v121 =
+  feed bundle: feedRound/qFeedRound/champFallback→400, queenRelayFrom→370,
+  queenHideUntil→390 (was 320 — 80r exposed grower otherwise). feedgate2 running.
+- F2 HIGH: dead-end veto never set c.score → vetoed queen move can't win →
+  trapped fallback → reverse split → len-2 stub (the queen-self-kill mechanism).
+- F3 HIGH: viaReverse skips queen trap scan entirely post-320.
+- v122 = v120 + {c.score=c.stepTerm, !queen_ in viaReverse} — vetofix gate running.
+- Sticky review forwarded to earlyecon (drop kind-x assassin, feedMaxLen cap on
+  holds, swarmRank on re-add, flags out of common.hpp). Autarky got F8/F9.
+- v120: live sub 16296. Remaining-maps gate 52.1% (96g) → total ~52.4%/160g.
+- v119 challenge record: Nitronics 3-2, 1234 1-4, unranked top3 3-4. Elo 1440.

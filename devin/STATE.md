@@ -28,7 +28,7 @@
   (H2H/hitWall r50-450, all-4-exits-blocked). Pick ONE fix: exit-freedom
   scoring / convergence trigger / pocket-depth limit.
 - losssurvey (d1bd4e24): done, terminated.
-- explore lane: SPSA tune done — top vectors {sd2 revert, feed330 triple, combo} vs cf in devin/tuning.md; sent to integrator
+- explore lane: SPSA r4 done — S2 vectors sd2/feed330/sm2 + metrics (devin/tuning.md); portal probes 7-3 elim-wins -> earlyecon
 
 ## Harness facts
 - kmatch.py = honest A/B (paired seats). gate_v10X.sh = single embedded pair,

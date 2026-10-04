@@ -66,3 +66,38 @@ New eval axes per probe (eval_probe.py over kept replays): elim maps dev/dil/tro
 r25/r50/r100 (dragons,totalLength) minus winner-targets (6.7/16.4, 10.3/25.5, 20/50);
 open maps longest@499>33 & total>=260; REJECT flags: cand queen dead <r50 on elim
 maps, any elim game ending <r200.
+| x4_rel360 | `queenRelayFrom=360,champRelayFrom=360` | stronghold,trauma,schooltime,devil,trophy | 6-4 (60%) | dlen +2.5 | 7m | relays aligned-ish earlier |
+| x4_rel370 | `queenRelayFrom=370,champRelayFrom=370` | stronghold,trauma,schooltime,devil,trophy | 6-4 (60%) | dlen +8.2 | 7m | integrator's ~370 suggestion |
+| x4_rel390 | `queenRelayFrom=390,champRelayFrom=390` | stronghold,trauma,schooltime,devil,trophy | 6-4 (60%) | dlen +4.8 | 8m | fully aligned to read-time |
+| x4_her2 | `heardEnemyReach=2` | stronghold,trauma,schooltime,devil,trophy | 6-4 (60%) | dlen +8.7 | 8m | tighter heard-fear radius |
+| x4_her4 | `heardEnemyReach=4` | stronghold,trauma,schooltime,devil,trophy | 6-4 (60%) | dlen +10.2 | 7m | wider heard-fear radius |
+| x4_em2 | `exposureMode=2` | stronghold,trauma,schooltime,devil,trophy | 6-4 (60%) | dlen +5.7 | 8m | sprint-reach danger where outnumbered |
+| x4_qts2 | `queenTradeSlack=2` | stronghold,trauma,schooltime,devil,trophy | 5-5 (50%) | dlen +6.7 | 7m | tighter queen-trade slack |
+| x4_qts5b | `queenTradeSlack=5` | stronghold,trauma,schooltime,devil,trophy | 5-5 (50%) | dlen +7.0 | 7m | recheck vs cf (was combat-only) |
+| x4_sm2b | `sprintMax=2` | stronghold,trauma,schooltime,devil,trophy | 5-5 (50%) | dlen +15.0 | 7m | recheck vs cf on v127 base |
+| x4_sm4b | `sprintMax=4` | stronghold,trauma,schooltime,devil,trophy | 5-5 (50%) | dlen +8.5 | 7m | recheck (r2: +9.1 dlen) |
+| x4_wd10 | `wDanger=1.0` | stronghold,trauma,schooltime,devil,trophy | 5-5 (50%) | dlen +8.9 | 7m | weaker adjacent-head fear |
+| x4_wd22 | `wDanger=2.2` | stronghold,trauma,schooltime,devil,trophy | 5-5 (50%) | dlen +6.7 | 7m | stronger adjacent-head fear |
+| x4_qd15 | `queenDanger=1.5` | stronghold,trauma,schooltime,devil,trophy | 5-5 (50%) | dlen +6.7 | 7m | queen less cautious |
+| x4_b | `feedRound=360` | stronghold,trauma,schooltime,devil,trophy | 5-5 (50%) | dlen +9.3 | 7m | v127-replica baseline rerun |
+| x4_sd2 | `splitEnemyDist=2` | stronghold,trauma,schooltime,devil,trophy | 6-4 (60%) | dlen +15.0 | 8m | top-1 rerun |
+| x4_f330 | `feedRound=330,queenFeedRound=330,champFallbackRound=330` | stronghold,trauma,schooltime,devil,trophy | 5-5 (50%) | dlen +14.2 | 7m | top-2 rerun |
+| x4_combo | `splitEnemyDist=2,feedRound=330,queenFeedRound=330,champFallbackRound=330` | stronghold,trauma,schooltime,devil,trophy | 6-4 (60%) | dlen +7.5 | 7m | top-3 rerun |
+| x4_em1 | `exposureMode=1` | stronghold,trauma,schooltime,devil,trophy | 6-4 (60%) | dlen +8.1 | 8m | divergent candidate rerun |
+| x4_sc9 | `wScout=9` | stronghold,trauma,schooltime,devil,trophy | 5-5 (50%) | dlen +8.8 | 7m | stronger unseen-cross bonus |
+| x4_psc8 | `wPortalScout=8` | stronghold,trauma,schooltime,devil,trophy | 7-3 (70%) | dlen +1.3 | 7m | stronger portal-lip explore pull |
+| x4_bq015 | `wBlindQuiet=0.15` | stronghold,trauma,schooltime,devil,trophy | 5-5 (50%) | dlen +8.8 | 7m | cheaper blind exits |
+| x4_por | `wScout=9,wPortalScout=8,wBlindQuiet=0.15` | stronghold,trauma,schooltime,devil,trophy | 7-3 (70%) | dlen +1.8 | 7m | combined portal-opening lever |
+
+## Round 4 eval (steering-3 metrics) — full read
+Baseline devils7A r49 queen death appears in EVERY probe (seat-locked, integrator-confirmed) — only NEW flags discriminate: em1 (+devils7B r38, trophys7A r44) and em2 (+devils7B r38) add early queen deaths → REJECTED by rule.
+r25/r50 flat across all probes (-1.0d/-3.1l, -2.3d/-4.8l) — opening insensitive to these knobs (all act post-300; portal probes did NOT move r25 either).
+r100 separators: sd2/combo -2.5d/-7.5L (halves base deficit), sm2b -4.0/-13.0, em1/em2 WORSE (-8..-9d).
+Open r499: f330 longest 41.2 (best, 3/6>33); sm2b total 162 (best, 2/6>=260); sd2 38.8/136; portal probes 22-24/45-46 — 7-3 wins by ELIM but crush endgame totals (econ cost — pair with earlyecon's portal routing fix, don't ship alone).
+Relays peaked @370 (340:+4.3, 360:+2.5, 370:+8.2, 390:+4.8) — integrator's ~370 confirmed.
+
+### Final vectors for S2 (mechanism numbers)
+1. {splitEnemyDist=2}: 6-4 both runs, dlen +15.0; r100 deficit halved; open tot 136 (best-by-total); no flags.
+2. {feed triple 330}: 5-5, dlen +14.2/15.8; open longest 41.2 (best); opening untouched; no flags.
+3. {sprintMax=2}: 5-5, dlen +15.0; r100 -4.0/-13.0 (2nd); open tot 162 (best); no flags.
+Watch: relays 370 (6-4/+8.2). wPortalScout=8/combo 7-3-by-elim, open tot 45 — report to earlyecon as routing-fix signal, not a flagship vector.

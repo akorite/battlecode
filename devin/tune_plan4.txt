@@ -19,3 +19,8 @@ x4_sd2    splitEnemyDist=2                                top-1 rerun
 x4_f330   feedRound=330,queenFeedRound=330,champFallbackRound=330  top-2 rerun
 x4_combo  splitEnemyDist=2,feedRound=330,queenFeedRound=330,champFallbackRound=330  top-3 rerun
 x4_em1    exposureMode=1                                  divergent candidate rerun
+# steering-4: portal-transit axis (winners 1.3-3.1 transits by r25, ours 0.0)
+x4_sc9    wScout=9                                       stronger unseen-cross bonus
+x4_psc8   wPortalScout=8                                 stronger portal-lip explore pull
+x4_bq015  wBlindQuiet=0.15                               cheaper blind exits
+x4_por    wScout=9,wPortalScout=8,wBlindQuiet=0.15       combined portal-opening lever

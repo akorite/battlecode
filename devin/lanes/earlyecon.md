@@ -132,25 +132,70 @@ divergences per seed: s2 r16, s3 r38, s5 r47 = claims firing pre-60.
 **abyss_jobs5** = jobs4 + claimMinDist 6 (only far targets worth commuting;
 stripes is 24x12 so most claims should never form).
 
-**jobs5_s0: mid-run** — stripes s2 still diverges at r16 (a far target on
-stripes IS >=6 away) so distance-gating alone doesn't close it.
+**jobs5_s0: 48/96 = 50.0%** — stripes s2 still diverges at r16 (a far target
+on stripes IS >=6 away) so distance-gating alone doesn't close it.
 
 **abyss_jobs6** = jobs5 + commitSticky disabled entirely (claims-only
-ablation): attributes the residual stripes dip to claims vs holds cleanly.
+ablation). **jobs6_s0: 50/96 = 52.1%** — qos 12/16, splits/eaten flat-ish,
+stripes still 3.5/4.5.
 
-**abyss_jobs7** = jobs5 + claim margin gate: commit 'g' only when top1-top2
-target margin < claimMargin*gp(dist) (0.2) — the claim exists to stop knife-edge
-argmax flapping, so it only forms where the flap actually is. Clear-order
-targets (stripes' local beds) never claim. Runs: results/jobs6_s0, jobs7_s0.
+**abyss_jobs7** = jobs5 + claim margin gate (commit only when top1-top2 margin
+< 0.2*gp): **jobs7_s0: 39/93 = 41.9%** — inverted intent: on dense-bed maps
+EVERYTHING is knife-edge so the gate claims more, not less. Rejected.
 
-Allocator read so far: sticky HOLDS are the net drag on elim maps (jobs3
-43.8%, jobs4 50.0% with them pushed past r60); CLAIMS are near-neutral at
-tie-break strength and are the only remaining lever for S0's tl@r200 gap
-(top teams 118 vs our 66). If jobs6/7 don't move tl25-100 on devil/autarky
-without losing stripes/td, the honest report is: forage claims don't move the
-econ needle — the marginal-choice binding is too weak an instrument for a
-66->118 gap, which likely needs structural econ changes (bud cadence/bed
-coverage), not assignment stickiness.
+**abyss_jobs8** = jobs6 + claimMinTiles 300 (claims only where commutes are
+real; stripes 288 out): **jobs8_s0: 50/96 = 52.1%** — stripes STILL 3.5/4.5
+with claims provably unable to fire. That broke the "claims cause stripes"
+theory.
+
+Root cause of the stripes mystery (deterministic replay + debug-build proof):
+**the judge clock is virtual — 1ns per CPU point — and the search is
+iterative-deepening bounded by BC_TURN_BUDGET=0.075 (75M points).** Turns
+saturate (ms=75 in every dragonLog), so the last depth level always ends
+mid-way; ANY added instruction deterministically flips whether that level
+completes -> the pick changes. Debug proof on stripes-s2 r16, identical
+world: v120 reached depth=6 (move W); jobs8d — every feature logically inert
+— reached depth=5 (move S). jobs9 (forageClaimCell hoisted once-per-decide)
+and jobs10 (all per-node claim work gated on a canClaim_ flag -> ~0 added
+instrs on stripes) STILL diverge at identical events (s2 r16/636, s3 r38,
+s1 r193): the boundary sits within ~1-2 compares of the deadline. On
+CPU-saturated maps, added code cannot be behavior-inert — there is no
+measurement floor below which a variant mirrors.
+
+So per-map attribution: stripes (and likely td/default partial dips) measure
+"added code costs depth-completion" — a tax every variant pays — NOT a claim
+or hold mechanism. Mechanism attribution holds on the non-saturated reads:
+holds lose broadly (43.8% jobs3 — depth-clip noise can't explain -6pts
+uniformly across maps+phases); claims mildly positive (52.1% three ways).
+
+**jobs9_s0: 50/96 = 52.1%** (identical to jobs6/jobs8 — hoisting moved where
+the instructions live, not the count). devil tl200 95.6/25.2, qos tl100
+18.1/14.1 — some econ-metric movement but splits/eaten flat.
+
+**abyss_jobs10** = canClaim_-gated loops (zero added instrs when claims
+can't exist). Run: results/jobs10_s0 (in flight).
+
+### S0 verdict (96g set, vs v120)
+
+NOT PASSED as specified. Decomposed:
+- Sticky job HOLDS (h/e/f): net loss on elim maps — 43.8% alone, ~-6pts
+  everywhere; 'h' hunts extended through the forage window is the main
+  bleed. The explore lane's 70%-vs-v113 result does not transfer to v120
+  on this set.
+- Forage CLAIMS ('g'): ~+2pts and flat econ metrics — inside the
+  CPU-overhead noise band on saturated maps; big-map spots (qos 12/16,
+  autarky splits, devil tl200) hint positive but not separable cleanly.
+- The S0 target (66 -> ~118 tl@r200) is not movable by assignment
+  stickiness alone: no variant moved splits60/eaten60 on the elim set.
+  The gap is structural (bud cadence / bed coverage / search depth), not
+  per-dragon-assignment.
+
+Recommendation: ship the econ fix (abyss_econ120, +4.5pts verified twice);
+park the allocator at 'g'-claims-only-if-cheap (jobs6/9 config) — any
+further investment should go to making the feature cost ~0 instructions
+(register-level, outside the deadline-bound search) before more mechanism
+tuning, since on saturated maps the tax, not the mechanism, dominates the
+measurement.
 
 Fixtures: results/ee_<variant>/{games.jsonl,replays/,ee_<variant>.log},
 results/jobs_s0/ results/jobs{2..7}_s0/

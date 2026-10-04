@@ -630,28 +630,31 @@ class Policy {
     // Corridors resolve by attrition before a late window pays (r320, v104's
     // own feed timing); open maps keep feeding to ~r360. Brawl maps (the
     // codebase's own mapBrawl test) never consolidate.
+    // Open-floor classification over SEEN topology (fog of war): blocked-edge
+    // fraction and dead-end (deg-1) density split corridors from open floors.
+    // Big maps are open outright; a map defaults to corridor until half its
+    // edges have been observed — corridor timing is never wrong vs v104.
+    bool mapIsOpen() const {
+        int tiles = w_.init.w * w_.init.h;
+        if (tiles > p_.phaseOpenTiles) return true;
+        Board const& b = w_.board;
+        int seen = 0, kelp = 0, deg1 = 0;
+        for (int c = 0; c < b.NC; c++) {
+            int free = 0;
+            for (int d = 0; d < 4; d++) if (b.nb[c * 4 + d] >= 0) free++;
+            if (free == 1) deg1++;
+        }
+        for (Edge const& e : b.hE) if (e.seen) { seen++; kelp += e.kind == 1; }
+        for (Edge const& e : b.vE) if (e.seen) { seen++; kelp += e.kind == 1; }
+        double wallFrac = seen ? static_cast<double>(kelp) / seen : 1.0;
+        double deg1Frac = static_cast<double>(deg1) / b.NC;
+        return seen >= b.NC && wallFrac < p_.phaseOpenWallFrac && deg1Frac < p_.phaseOpenDeg1Frac;
+    }
+
     int consolAtRound() const {
         int tiles = w_.init.w * w_.init.h;
         if (tiles <= p_.phaseBrawlTiles) return 999;
-        // Classify over SEEN topology (fog of war): blocked-edge fraction and
-        // dead-end (deg-1) density split corridors from open floors. Big maps
-        // are open outright; a map defaults to corridor until half its edges
-        // have been observed — r320 consolidation is never wrong vs v104.
-        bool open = tiles > p_.phaseOpenTiles;
-        if (!open) {
-            Board const& b = w_.board;
-            int seen = 0, kelp = 0, deg1 = 0;
-            for (int c = 0; c < b.NC; c++) {
-                int free = 0;
-                for (int d = 0; d < 4; d++) if (b.nb[c * 4 + d] >= 0) free++;
-                if (free == 1) deg1++;
-            }
-            for (Edge const& e : b.hE) if (e.seen) { seen++; kelp += e.kind == 1; }
-            for (Edge const& e : b.vE) if (e.seen) { seen++; kelp += e.kind == 1; }
-            double wallFrac = seen ? static_cast<double>(kelp) / seen : 1.0;
-            double deg1Frac = static_cast<double>(deg1) / b.NC;
-            open = seen >= b.NC && wallFrac < p_.phaseOpenWallFrac && deg1Frac < p_.phaseOpenDeg1Frac;
-        }
+        bool open = mapIsOpen();
         if (open)
             return std::min<int>(std::max<int>(p_.phaseOpenBase + w_.board.NC / p_.phaseConsolNC,
                                              p_.phaseConsolMin), p_.phaseConsolMax);
@@ -688,7 +691,12 @@ class Policy {
             eff_.feedRound = 999; eff_.queenFeedRound = 999; eff_.champFallbackRound = 999;
             eff_.champRelayFrom = 999; eff_.queenRelayFrom = 999;
             eff_.growRound = 999; eff_.midEnd = 999; eff_.lateSplitUnits = w_.init.unitLimit;
-            eff_.tradeSlack = 0; eff_.tradeMinUnits = 8;
+            // Match v113's trade doctrine pre-consolidation: refusing +1-shorter
+            // mutual kills let enemy killers survive and keep hunting on elim
+            // maps (dilemma/slithery regate losses were h2h attrition, not
+            // starvation). The controller still owns willingness — here it
+            // chooses the baseline doctrine.
+            eff_.tradeSlack = 1; eff_.tradeMinUnits = 4;
             eff_.queenBudUntil = 999;
             break;
         case PH_GROW:
@@ -708,7 +716,7 @@ class Policy {
             eff_.champRelayFrom = std::max(0, consolAt - 30);
             eff_.queenRelayFrom = std::max(0, consolAt - 30);
             eff_.growRound = 999; eff_.midEnd = 999; eff_.lateSplitUnits = w_.init.unitLimit;
-            eff_.tradeSlack = 0; eff_.tradeMinUnits = 6;
+            eff_.tradeSlack = 1; eff_.tradeMinUnits = 4;
             eff_.queenBudUntil = 999;
             break;
         case PH_CONSOL:
@@ -1109,10 +1117,12 @@ class Policy {
 
         // Idle escort: stay near the closest visible grower — the queen first —
         // if we are among its first escorts. Under the phase controller the
-        // escort switch starts early (89% of pre-r100 queen deaths are len2-3
-        // movers — an escort body takes the hit instead).
+        // escort switch starts early on open-floor maps (the queen-duel
+        // evidence is big-map bells; elim maps end before r330 and need every
+        // forager in the production war — early econ beats queen safety).
         bool escortsOn = midGame() ||
-            (p_.phaseCtl && phase_ <= PH_GROW && w_.t.round >= p_.phaseQueenEscortFrom);
+            (p_.phaseCtl && phase_ <= PH_GROW && w_.t.round >= p_.phaseQueenEscortFrom &&
+             mapIsOpen());
         if (!assassin_ && hunts_.empty() && escortsOn) {
             int bestD = INF;
             for (int pass = 0; pass < 2 && escortOf_ < 0; pass++) {

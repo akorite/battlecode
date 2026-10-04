@@ -197,7 +197,19 @@ off every corridor game in the production war) PLUS trade doctrine drift:
   big-map bells (our queen dead by r330 in 20/22 open-map games); elim maps end before
   r330 and need every forager. Corridor maps no longer pay the escort tax.
 
-v7_check re-run on dilemma/slithery/autarky/unsw in flight.
+### v7_check (dilemma/slithery/autarky/unsw × 4 seeds vs v104): **34.4%** (was 12.5%)
+
+| map | v6 | v7 | note |
+|-----|----|----|------|
+| dilemma | 0% | **50%** | A-seat: eliminated v104 at r49 every seed; B-seat: deterministic r92 elim loss (asymmetric map side?) |
+| autarky | 25% | **50%** | incl. B-seat r443 elim c37 |
+| slithery_fight | 12.5% | 25% | |
+| unsw | 12.5% | 12.5% | residual: open-map champ gap (longest@end 19 vs 31) |
+
+Trade-doctrine restore + corridor-escort removal recovered the elim maps. Remaining
+deficit concentrates in open-map champ conversion — v104's queen-champ reaches ~31 while
+our elected champ plateaus ~19 (front-load + fd=1 improved conversion but not enough on
+the biggest maps).
 
 ## Still weak
 

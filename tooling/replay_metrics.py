@@ -78,6 +78,7 @@ def analyze(path):
     T = {s: collections.Counter() for s in 'AB'}
     qdead = {s: None for s in 'AB'}
     alive_at = {s: {} for s in 'AB'}
+    tot_at = {s: {} for s in 'AB'}
     pearls, pend = set(), set()
     occ = set()
     rnd = 0
@@ -125,6 +126,7 @@ def analyze(path):
             rnd = e['round']
             for s in 'AB':
                 alive_at[s][rnd] = sum(1 for j in body if team[j] == s)
+                tot_at[s][rnd] = sum(len(body[j]) for j in body if team[j] == s)
             occ = set()
             for b in body.values():
                 occ.update(b)
@@ -226,6 +228,8 @@ def analyze(path):
         o['alive'] = tr.get('dragonCount', 0)
         o['alive499'] = alive_at[s].get(499)
         o['alive50'] = alive_at[s].get(50)
+        o['tl50'] = tot_at[s].get(50)
+        o['tl100'] = tot_at[s].get(100)
         o['longest'] = tr.get('longestDragon', 0)
         o['total'] = tr.get('totalLength', 0)
         q = queen[s]

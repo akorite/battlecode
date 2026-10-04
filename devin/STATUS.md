@@ -1,2 +1,3 @@
-Building v137 = v135 + F2 (score=stepTerm both veto paths) + v122 correctness pack (F3/F12/F13/F15) + sealed-queen fallback (unreachable/ungrown queen ≠ champion). Gate: dilemma+portals+td+trophy+weakhold+stripes+maze ×8s; ship when both-seat losses clear.
-Measure: per-upload table (band W-L, elim<200, tl@25/50/100/300/400/499, queen alive@499, self-hits r360-389); ≥100g per verdict, same opponents.
+v138.1 built = steering-4 combined candidate + queen deadend-demote fix (weakhold r37 hitWall). S0 sweep (17 maps x2) running.
+Steering-4 routed: earlyecon->portal routing + winner scripts; pocket->5b escort/evasion + channelling; autarky->CONSOLIDATE front-load + in-place feed; explore->SPSA+portal weights.
+v137b gate mid-run (v135 baseline). Next: v138 S0 smoke -> S1 17-map -> ladder band 1234/meowest/WaterCandle+top4.

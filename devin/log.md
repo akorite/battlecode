@@ -298,3 +298,43 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
 | v137qos | S1 | same | 43.8 | 16 | neutral | qOS unchanged (7/8 splits) — r36 mutual-elim not touched by pack |
 | v136ak | S1 | v135+autarky election fix | 50.9 | 112 | hold | autarky 54.2% (3-1 pairs) all else inert; champMargin=3+relayFrom=280+tradeSlack=0 |
 | v137b | S1 | v137-sealed-queen keeps trapped | — | 144 | running | F2 score gated !queen_||queenReach>=20 |
+
+## Steering-4 (4 Oct) — queen self-kills, openings, champions, Computers diff
+- Self-kills: 73/212 ladder queen deaths own-fault (hitWall 30, hitOtherBody 23, hitSelf 20); 46 pre-r200. Queen alive@499 -> 88% win; dead -> 34%. Targets: self-deaths <5/34 native, N/A <10% own-fault.
+- x3 measured prototype: queen keepBase cap 2 (<=700 tiles, r<100) -> Stripes 7->18/20 wins. Ship behind bud_+r<100.
+- Openings: portal transits r25 = dominant gap (winners 1.3-3.1 on QoS/Trophy/Default, ours 0.0). Cause: portals bug (unknown partner nb=-1) + blind penalty. Winner scripts per map recorded. Pearl benchmarks r25/r50: Devil 12/54, Trophy 10/44, Stripes 8/24, QoS 6/20, Default 6/18, PD 20/35.
+- Champions: channelling not fragmentation — feeders die IN PLACE at champion head (noValidAction ~50/game) vs our hitSelf (~42, scattered). Lock champion ~r330; leaders start r360 at len 24 vs our 14. Gate: longest@r450 >=40 open maps.
+- Queen killers: 96% mover-vs-stationary; side/front strikes never behind; in vision >=2 round-starts 65%; killers len2-3 age 13-21; dies median 14 tiles from start. Evasion step + front-arc escort 2-3 tiles + leash ~8 tiles <r100 (per map class).
+- Computers +130: front-loaded feed (12.9 recycles r360-379 vs 5.3) + champion +1.6@r300 -> bell games 26->67% (both dead), 30->52% (both alive). Counter: feed ONE champion; their queen dies r71 median (hunt her: 0/39 when dead vs ours alive).
+- Queen hunt: enemy queen start = 180-degree rotation of ours on 13/17 maps; x-mirror on Devil/Islands/Schooltime/Trophy. Send len-3 pairs from r25; slayQueen finishes in view.
+- STOP list adds: param-only tweaks, feed-date moves.
+- Order next 48h: (1a-1c)+(2) one candidate -> S0 native sweep (self-deaths <5/34, Stripes tl@50>12) -> S1 17 maps -> ladder 1234/meowest/WaterCandle+top4. Then portal fix + hunt.
+- Test band adds: 1234 (919), meowest (529), WaterCandle (782), YueciLi (475) + Computers (112).
+
+## v138 build + weakhold r37 diagnosis
+- v138 = v137 pack + self-kill fixes (ally-walls deadend scan, <2-exit queen veto, worker exit-reservation <=2, doomed-fallback queen-exit last) + x3 queen bud (keepBase<=2, bud_&&r<100).
+- v137b gate (9 maps x8 seeds): 47.2%; dilemma/portals both-seat losses CLEARED (0/8/0, 0/7/0+1). schooltime 31.2% = seat-lock (queens sealed both sides, attrition race). weakhold NEW deterministic self-kill: cand seat-A queen hitWall@r37 every seed — walked a fog corridor into a pocket nook; base's same-seat queen took the open east route, died ~r123-353.
+- Root cause: F2's score=stepTerm made a vetoed pocket step pickable at -1999 — a scared queen with open-but-dangerous moves got routed into the pocket anyway.
+- v138.1 fix: for queen_, vetoed 'deadend' choices demote to -1e18 whenever any non-deadend choice exists (all-vetoed still picks least-bad). Workers keep F2 ordering.
+- v138smoke (schooltime/islands/maze x3s): 50%, maze 66.7%, queen non-ram deaths 0.444->0.389; schooltime seat-locked, queens stay sealed len 3.
+- S0 native sweep v138s0c running: 17 maps x 2 seeds vs v135. Gate: queen self-deaths <5/34, Stripes tl@50>12 (tl50/tl100 metric added to replay_metrics).
+
+## v138 iteration 2 — heads-only ally-walls
+- S0 v138s0c (ally-body-walls, 68g): 51.5%, queen non-ram 0.250 vs 0.382 — BUT weakhold 0/4 (queen rerouted off the east food route into a south loop: over-walling all ally cells within 2) and stripes tl50 7.5 < 12 gate.
+- Tightened 1a to spec-literal: teammate HEADS only (was every ally cell).
+- v138fix1 recheck (weakhold/stripes/islands/dilemma x3s): weakhold seat-A restored 3/3 wins; stripes seat-B 3/3; seat-locks held; self-kills 7/24 vs base 12 (remaining are mostly the deterministic dilemma seat-A hitSelf@25 which exists identically in base).
+- Full S0 re-sweep running (v138s0d).
+
+## v138 S0 verdict (v138s0d, 68g vs v135) + submit
+- Board 58.8% (SMALL 57.1, BIG 60.0); trauma/qOS/slithery 100%, autarky 75%.
+- Mechanisms: queen non-ram 0.206 vs 0.382 (-46%); alive@end 0.488 vs 0.293; len@end 4.49 vs 1.24; longest@end 34.2 vs 30.0; queen-kept-after-theirs-died 39% vs 13%.
+- Self-kills 14/68 (~7/34) vs literal gate <5/34 — user approved promotion anyway: mechanism moved hard; residual classes are fog-walk hitWalls + edge-wrap hitSelf + queen-onto-unseen-ally hitOtherBody.
+- Stripes tl@50 8.5 mean (seat-B 13/9, seat-A 6/6) — below >12 bar; seat-lock noise.
+- v138 SUBMITTED = sub 16660 "v138-selfkill-x3" (live). S1 challenges fired vs FtM/Vibing++ (6g ea ranked); 91/213/112/919/529/782 queued behind 60g/hr cap, background retry loop.
+
+## v139 build = v138 + two-way + fog (portal experiments dropped)
+- wQueenAlly=4.0: queen penalizes landing on/beside seen ally heads (queens move first; unseen-ally hitOtherBody residual).
+- wQueenFog=2.0: queen penalizes landing on non-visible dest (seen-safe > unseen bonus).
+- Portal attempts FAILED twice: (a) symmetric-guess nb for unpaired portals — queen evaluates wrong dest cell, crosses blind, dies (portals+QoS 0/8, self-kills x5). (b) all-map lip scout pull — parks workers off food, dilemma both seats wiped by r80. Reverted both; portal routing stays with earlyecon lane.
+- v139 bisect smoke (4 maps x2s): 50%, identical seat board; queen dead 0.562 vs 0.750, pearls@r60 +30%.
+- Full S0 v139s0full running vs v138.

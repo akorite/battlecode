@@ -67,7 +67,18 @@ Dual-scan + weakhold-dims gate in the queen deadEnd block (policy.hpp ~1128):
 First iteration kept unproven everywhere and reopened weakhold queen deaths
 (1.00/game vs v119's 0.07) — unproven alone doesn't reproduce wh4's save there
 (the pocket vetoes that fire are tiny/tree on the shrunk scan), hence the dims
-gate. ee_fix verification on the 6-map set pending (results/ee_fix).
+gate.
+
+**ee_fix (abyss_econ vs v119, 96g): 52/96 = 54.2%** — devil spl 22.9/16.9 eat
+58.1/42.6 alv 12.4/9.2; stripes 4.1/3.6, 9.6/6.8; td 1.6/1.2; controls+weakhold
+bit-mirrors (ee_fix2_wh 16g: qNonRam 0.00/0.00). Devil qNonRam 0.56 vs 0.25 =
+v104-level queen exposure (the fog scan also saved her on devil) — pair still
+wins; that's the accepted trade.
+
+**ee_fix120 (abyss_econ120 = same patch on v120, vs v120, 112g incl weakhold):
+61/112 = 54.5%** — devil 11/16 (spl 25.2/16.7 eat 60.1/40.1 alv 13.1/8.9, tl50
+33.2/23.5 eat100 134/110), stripes 12/16 (4.3/3.8, 10.2/6.6), td 7/16, controls
++ weakhold all bit-mirrors. The fix is confirmed forward-portable to live.
 
 ## 5c job/role allocator (workspace/abyss_jobs, on v120)
 
@@ -84,8 +95,17 @@ picture; the claim layer adds commitment so knife-edge argmax can't flap.
 
 S0 evidence gate: pearls + total len @25/50/100/200 (top teams 118 tl@r200 vs
 our 66). Metrics added to tooling/replay_metrics.py (n/tl/eat checkpoints);
-ee_table.py prints them. Run: results/jobs_s0 (abyss_jobs vs abyss_v120,
-6 maps x s1-8 x both sides).
+ee_table.py prints them.
+
+**jobs_s0 (abyss_jobs vs v120, 96g): 46/96 = 47.9% — S0 FAIL.** 'g' claims
+help where the game is a long economy (devil spl 21.9/18.5 eat 52.5/46.5
+tl200 71.7/50.7; autarky tl50 29.1/25.2; qos eat200 123/88) but the 0.8-strength
+commute pull drags workers past fresher food on tight maps (stripes spl 3.5/4.5
+tl200 11.0/18.1; td tl200 13.0/24.9; default eat60 18.1/20.2).
+
+**abyss_jobs2**: 'g' claims gated to r<60 (claims are an opening tool; late
+commutes were the overstay) + wStickyForage 0.3 (tie-break strength — loses to
+any real new value). Run: results/jobs2_s0 (vs v120, same 96g set).
 
 Fixtures: results/ee_<variant>/{games.jsonl,replays/,ee_<variant>.log},
 results/jobs_s0/

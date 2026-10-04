@@ -37,3 +37,19 @@
 ## H-FEEDFLOOR/H-UNHIDE: both wash (v150, 50%/20)
 - feedMinUnits 3→8 on >2000-tile maps + queenHideUntil 390→300: qlen@end IDENTICAL (3.167), alive@end +2.3, unsw pair loss. Queen dies 75% before unhide matters; when she lives, feeders still can't reach her. REJECTED — binding constraint is survival+reach, not timing.
 - CONFIRMED BUG (priority 1): kParams line `p.champFallbackRound = 360` overrode the 330 decl — live v149 ran 360. Fixed in source; next build carries it.
+
+## 2026-10-04 (post-restart batch)
+
+**H-PORTAL2 (scout picker fix)** — mechanism: scout moves scored +5.8 but never selectable (dest<0 skipped in pick loop; safeFirst vetoed). Fix: pick/depth/fallback allow why=="scout", queen excluded, wScout 6→2.
+- S0: portals freeze BROKEN — 900 pearls eaten vs 5, longest 21 vs 5. ✓ mechanism
+- S1 (24g, pre-queen-gate+wScout6 binary): **41.7% — NEGATIVE.** Worker stream-through → deaths 59 vs 42, escort drain, qDead 0.79 vs 0.67. v151b (queen-gate + wScout=2) re-gating.
+
+**H-MIRRORHUNT-final (autarky)** — corrected aim (queen's mirror, seen-symmetry): **37.5%/24 — DEAD, parked permanently.**
+
+**H-QFEED (earlyecon, 4-variant)** — feeding queen r200+ negative in every config (sacrifice > drops; death cell walls her). Screens: qs2 +5.5pp qAlive@end at 50% pair = marginal. **Queen-feed CLOSED; survival is escort/evasion-geometry bound.** Pending: pocket's threat-conditional escort + queen-anchor.
+
+**H-TORUS (explore)** — Board::id() wraps unconditionally; qOS mutual-elims = invisible seam-approach h2h (17.2/game/side). Earlyecon checking loss asymmetry on queen before building a guard.
+
+**H-PACE (explore)** — BC_PACE revisit-penalty on v127 base: schooltime swept 2-0, alive@499 23.5 vs 3.7, longest 36 vs 13.7 vs cf. Porting to v149 base now — first artifact with big alive@end deltas.
+
+**H-CHFEED (pocket v150 merge)** — die-in-place SPLIT-0 works (22.2/game, 23% adj vs 18%) but 45%/20 wash. Gap identified: queen-champ never plants → stale-head feed deaths. Feeds into v153 spec (queen anchor + threat escort).

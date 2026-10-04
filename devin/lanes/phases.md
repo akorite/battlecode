@@ -23,13 +23,17 @@ one stable champion late.
 
 - **OPEN** (r0 → 18+NC/28, clamped 25-75): produce only. All feed/relay/grow gates at 999,
   lateSplitUnits=unitLimit (never stops splitting), tradeSlack=0, tradeMinUnits=8.
-- **GROW** (→ 240+NC/7 clamped 290-425, or swarm collapse): keep replacing losses, nobody feeds.
+- **GROW** (→ consolAt, or swarm collapse): keep replacing losses, nobody feeds.
   Champion election warms up (champFallbackRound = consolAt-40); champ relays arm at consolAt-30
   (~5M/turn each, per review guidance). tradeSlack=0, tradeMinUnits=6.
 - **CONSOLIDATE**: feed machinery on (feed/queenFeed/fallback = now), relays already running,
   champMargin=3 (stable election), all splitting off, queen stops budding. tradeSlack=0.
 - **PROTECT** (r>=452 AND teamBestLen >= foeBestLen+8, hysteresis via monotonic phase): feedStop=now,
   near-pacifist (tradeSlack=-1, tradeMinUnits=12).
+
+`consolAtRound()` picks the CONSOLIDATE round by map class (w*h at INIT, per integrator's
+corridor/open data): ≤700 tiles → 999 (never — attrition decides), ≤2000 corridor → 320
+(v104's own feed timing), >2000 open → 320+NC/50 clamped 355-390 (~r360).
 
 Collapse trigger is *relative* — `units <= 8 && units*2 <= peakUnits` — a fresh 6-dragon team at openAt
 is not a collapse (bug fix: absolute threshold flipped default games straight OPEN→CONSOL at r54 and
@@ -70,7 +74,9 @@ self-champ held title 38+ rounds parked at a bed. Bell won 37 vs (their) ... see
 ### CPU/turn
 Every turn spends its full 75ms budget by design (search deepens until the deadline) — the real CPU
 metric is `depthReached`: median 5 pre-saturation (s3 autarky debug game), vs ... (post-saturation
-pending s0b analysis).
+pending s0b analysis). Final twin-build measure (akdbg phases-ON vs offdbg phases-OFF, 5 games):
+median depth 4 vs 4 — no measurable CPU delta from the phase layer (it is a per-turn O(1) param
+rewrite + one O(NC) anchor scan per champ-lifetime).
 
 ## Results
 
@@ -86,21 +92,30 @@ pending s0b analysis).
 | s0e_phases (+home-biased anchor) | autarky,trauma vs v104, 4 seeds | autarky 12.5% (1/8) — home anchor parks champ at COLD corner beds; REVERTED |
 | s0f_phases (ring back to 2/6, keep defer) | autarky vs v104, **8 seeds** | autarky **31.2%** (5/16), longest 18.5 vs 35.5 — deference retained |
 
-## S1 — local tournament (abyss_ak vs abyss_v104, 6 maps × 4 seeds, paired)
+## S1 — local tournament (paired seats, 4 seeds per map)
 
-| map | win% | vs baseline |
-|-----|------|-------------|
-| weakhold | **62.5%** | was 0% — A-seat bells c29-36 vs b2 every seed |
-| trophy | 50% | mixed elims |
-| default | 50% | both seats can elim (s2: r285+r382) |
-| autarky | 25% | baseline ~37.5%, within n=8 noise; champ depth still trails |
-| trauma | 12.5% | was 0% in s0b |
-| stronghold | 0% | v113 also 0/8 — not a regression |
-| **ALL** | 33.3% | SMALL (trophy+weakhold) 56.2%, BIG 21.9% |
+vs **abyss_v104** (s1a = pre-axis consolAt 240+NC/7; s1c = corridor/open axis):
 
-Kill criteria: **no r≤5 queen deaths** in any of 48 replays (checked by parse — early deaths are
-ids 2-13, the standard opening brawl on both bots). No map clearly worse than v113's own record.
-s1b vs abyss_cf running.
+| map | s1a win% | s1c win% | note |
+|-----|----------|----------|------|
+| weakhold | 62.5% | **62.5%** | was 0% pre-phases |
+| trophy | 50% | 50% | brawl class (≤700) — never consolidates in s1c |
+| default | 50% | **62.5%** | corridor 320 |
+| autarky | 25% | **37.5%** | corridor 320 window — champ hit 41 as seat B |
+| trauma | 12.5% | 12.5% | corridor 320 still loses attrition |
+| stronghold | 0% | 0% | v113 also 0/8 — not a regression |
+| **ALL** | 33.3% | **37.5%** | axis added +4.2 overall, +12.5 autarky/default |
+
+vs **abyss_cf** (s1b, same 6 maps): ALL 37.5% — autarky 62.5%, trophy 62.5%, default 50%,
+weakhold 12.5%, trauma 12.5%, stronghold 25%.
+
+Kill criteria: **zero r≤5 queen deaths** in s1a (48) and s1c (48) replays (parse-checked:
+early deaths are ids 2-13 — the standard opening brawl on both bots).
+
+### CPU/turn (abyss_akdbg vs abyss_offdbg twin run, autarky+default)
+The phase layer is a per-turn O(1) param rewrite plus one O(NC) anchor scan per champ — cost
+shows in search `depth=` within the fixed 75ms budget: median depth 4 phases-ON vs 4 phases-OFF
+(5 games). No measurable CPU delta.
 
 ## Still weak
 
@@ -113,3 +128,5 @@ s1b vs abyss_cf running.
 - Diagnosis of the residual gap: v104's queen-champ parks deep by doctrine; feeders die into her
   in friendly territory. Our elected champ camps mid-map → transit deaths. s0d added drop-zone
   deference (allies don't steal the drops); queen-camp added for s1a.
+- Trauma remains the unresolved map (12.5% both axes): corridor attrition decided before our
+  consolidation window pays — same pattern the integrator measured on corridor classes.

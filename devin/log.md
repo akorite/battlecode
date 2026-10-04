@@ -243,3 +243,9 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
 - feedstack (20g so far): v128 feed@400 stack 60%, +1.75 longest — weaker than feed@360.
   hideUntil340 adds queen exposure w/o payoff (per Akorite flag) — DROPPED from stack.
 - v129 = feed@360 + midEnd450 + no-crown-hidden, unhide@390 — gating vs v127 (stack360).
+- feedstack final (24g): v128 58.3% vs v121 — confirms feed@360 > feed@400 stack.
+- stack360 (20g so far): v129 (feed@360+midEnd450+nocrown) 55% vs v127 — longest@end
+  36.0 vs 35.5, queen dead 0.60 vs 0.65. v129 = FEED CANDIDATE.
+- qdeathprobe: queen deaths SEAT/MAP-LOCKED not unhide-timing-locked (seat A dies
+  ~same round regardless of bot/hideUntil). Escort/5b is the real queen fix.
+- v129screen: S1 kill-check vs v120 all 17 maps both seats 88g LAUNCHED.

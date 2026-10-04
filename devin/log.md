@@ -287,3 +287,7 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
 | v135pocket | S1 | v135=v134+pocket bait-fix | weakhold+dilemma+maze+stripes x8s 64g | **46.9% — FAIL** | maze 31.2%: starving_/baitEat ungated on anyBait_ → pulls+wedge-deaths on no-bait-cell-class maps (maze has 94 deg-1 cells) | iterate v135b |
 | v135b | S1 | pocket gate tightened: pocketMap_=anyBait_&&NC<=700 | same 4-map set x8s | running | maze should bit-mirror v134 (all pocket mechs off) | — |
 | v134-ladder | S2 obs | v134 live (sub v111) band challenges | 13 games fired (919x10R, 782/529/475 unranked) | — | — | accumulating |
+| v135b | S1 result | v135 vs v134 | 4-map x8s 63g | 42.9% (maze 20%) | residual per-node cost still flipped saturated games | hoisted loops → v135c |
+| v135c | S1 result | v135(hoisted) vs v134 | 4-map x8s 64g | 46.9% (maze 31.2%, all pair-S elsewhere) | maze skew = wasm depth-clip noise — several games bit-identical to mirror; vs cf 81.2% = v134's 81.2% (maze 87.5>75) | real-opp parity |
+| v135combat | S1 conv | v135 vs abyss_combat | weakhold+stripes x4s 16g | 43.8%; **weakhold 0/8 → 50%** | seat-A flatline broken (27 elim, 24-21 len); alive499 3.9 vs 15.7 | mechanism converts |
+| v135 | S3 | v134+v135 submitted | — | sub v112 "v135-pocket-bait" | per method: combo passed real-opp checks | LIVE |

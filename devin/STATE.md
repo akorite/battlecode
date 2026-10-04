@@ -31,3 +31,10 @@
 - v156 (proven-loop/tree fix): 31.8%/22 — veto now FIRES but converts death mode (hitSelf→h2h earlier). Needs escort, held as piece.
 - Gates running: autarky→v157 composite board (portal-fix+C5, 68g); earlyecon→v158 front-load feeders; explore→v159 seam-crossing fix; pocket→v153 queen anchor+threat-escort (THE critical piece per all census data: queen dead in 82% of ladder replays, h2h=45%).
 - Killed since last: v152 C2+C3 (41.7%, queen deaths up), mirror-hunt (37.5%), queen-feed all configs, C5 wash 50%.
+
+## 2026-10-04 ~06:30 UTC
+- v160 reachBoost: 54.2%/24 W1S11L0 — safe but mechanism-inert (qDead identical; rams arrive via fog anyway). Merged as harmless piece.
+- v161 portalGuess=0: 54%/24 W2S9L1 vs v157 — safe-positive; single qOS-s2 pair loss (seat-locked queen h2h zone). Small-map econ -2/60 cost visible.
+- explore v159 seam fix: KILLED — premise false (vision is toroidal, wrap landings always visible). Confirms reach-model+wQueenRam is THE queen-h2h lever (already in v162 via reachBoost+qRamAdj).
+- v162 = v161 + reachBoost + qRamAdj boarding vs v157 (8 maps ×2×2).
+- Elo 1604. Lanes: autarky v157 board in flight, pocket v153 (critical), earlyecon v158 feeders.

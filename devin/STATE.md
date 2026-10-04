@@ -28,7 +28,7 @@
   (H2H/hitWall r50-450, all-4-exits-blocked). Pick ONE fix: exit-freedom
   scoring / convergence trigger / pocket-depth limit.
 - losssurvey (d1bd4e24): done, terminated.
-- explore lane: mode histograms + margins + transitions done; thrash quantified, sticky-mode prototype next
+- explore lane: sticky-mode prototype kills feeder/escort thrash; 5-map A/B vs v113 running
 
 ## Harness facts
 - kmatch.py = honest A/B (paired seats). gate_v10X.sh = single embedded pair,

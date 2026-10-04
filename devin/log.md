@@ -234,3 +234,6 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
 - Feed-bundle refinement queue: v125 (no-crown-hidden) gating; v126
   (hideUntil 340, queen grows to ~len-15 by 400) next. Main lever =
   feed turns + a champion that exists to feed (queen dies 77% post-unhide).
+- hidqueen final (24g): 50.0%, identical metrics — churn theory FALSIFIED (hidden
+  queen never crowned anyway). v126/v128 keep the no-crown guard anyway (harmless).
+  Queen-as-champ path needs escort (5b) — she dies 77% post-unhide regardless.

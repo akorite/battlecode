@@ -12,3 +12,11 @@ feed already wins its longest-dragon share; early versions donate dragons into
 contested space before territory settles. Champion growth should ride swarm size
 (pearl/feed restore), not the calendar. Opponents' 40@300 champs may come from
 organic queen foraging + pocket safety, not earlier convergence.
+
+## v120 openMaxTiles=1200 (2 smokes, both <50%)
+Extending forage-first opening to 700-1200 tile maps (QoS/autarky/default/maze/trauma):
+- plain 1200: 42.5% — autarky 75% but QoS 12.5%, default 37.5%, maze 37.5%
+- +enemy-arrival gate (open_ off when enemy<=10): 32.5% — per-dragon flickering breaks
+  swarm coherence; longest crashed 29.6 vs 41.1.
+VERDICT: the opening only fits <=700 non-maze maps. Autarky's gain isn't capturable by
+NC or local enemy gates — contestedness needs swarm-level state, not a tile count.

@@ -47,3 +47,17 @@
 - Queen deaths: 94% are len2-3 rams on unguarded queens (0 allies within 3 tiles). Median ram death r131.
 - Stop: guards on non-queen dragons; whole-board vetoes; 88-gate verdicts (±10 noise); mixed-field records (compare by tier).
 - Benchmark bots: Bot(11), test4(19), Sabotage-d(46). Sonar: no fixed tags.
+
+## Method addendum (4 Oct, Keitaro) — staged pipeline
+- S0 mechanism check (10-20 local games + debug build): the mechanism number
+  must move or the candidate dies free. S1 local screen vs benchmarks+outside
+  bots both seats; kill if clearly worse or ANY new r0-5 queen death. S2
+  sequential ladder test vs FtM(264)/Vibing(306)/SSS(91)/Sponge(213) on affected
+  maps, SPRT vs current best (+8pts H1, ~30-40g kill, cap 80). S3 = full 17-map
+  both-seat × 4 teams (~136g) only pre-upload.
+- Lanes own S0-S2; quota queue by best S1. Diagnose before fixing (one-line
+  cause + evidence per lane doc). Param tuning as vector via SPSA (explore lane).
+- Build order 5a phases (autarky) → 5b queen module (pocket next) → 5c job
+  allocator (earlyecon, rebases explore sticky) → 5d map-class selector (last).
+- Candidates in flight: v120 LIVE (splitEnemyDist 1, sub 16296); v121 =
+  queenFeedRound 400 in S1 (feedgate, big maps). Sticky promo via earlyecon.

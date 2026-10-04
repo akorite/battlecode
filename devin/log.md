@@ -256,3 +256,7 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
   +70r instead of growing. On corridors queen-as-champion works (maze: queen len 26
   won). Feed@360 for worker-champ fine; delayed unhide is the bleed.
 - v130 = v129 + queenHideUntil 320 — corridorfix gate vs v120 (6 maps x2 seeds x2 seats).
+- corridorfix (24g): v130 (v129+hideUntil320) 16.7% vs v120 — WORSE. Queen timing
+  NOT the corridor cause. Feed bundle itself bleeds corridors.
+- Decomposing on 6 corridor maps: v131 = v120 + feed@360 ONLY (timing), v132 = +midEnd450.
+  If v131 bleeds too → feed-timing is corridor-toxic → feature-gate feed by map class.

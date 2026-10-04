@@ -218,10 +218,13 @@ longest@end 18.2 vs 28.6.
 v9 (CONSOL feedMaxLen=10): unsw 12.5% (first unsw win, c24 bell), slithery 12.5% — net
 12.5% overall. Conversion still capped: longest@end 18.8 vs 30.6.
 
-**Next untested lever (documented, not shipped):** `feedHeardDie=2` — a feeder only dies
-beside a HEARD champ if the report is ≤2 rounds old. On 4096-tile maps relay cadence is
-slower than 2 rounds, so heard-only feeders may circle forever and never die into the
-champ; widening it in CONSOL (champ is parked, stale positions are safe) is the cheap fix.
+### v10 (feedHeardDie 8 in CONSOL — from direct replay evidence)
+
+unsw debug replays showed **46% of post-window feeder turns had fh=-1** (no feed target)
+and 31% had no champ at all — heard-champ freshness (`feedHeardDie=2`) blocks suicides on
+4096-tile maps where relay cadence lags the parked champ. CONSOL now allows dying beside
+heard positions ≤8 rounds old. champMemory(40) covers resolution; feedMaxLen=10 covers
+feeder size. v10_check on unsw+slithery in flight.
 
 **Lane verdict stands: honest negative overall** — phase machine mechanically verified
 (transitions, classifier, front-load, in-place deaths, escort switch, hysteresis) and

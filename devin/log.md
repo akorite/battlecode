@@ -215,3 +215,9 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
 - feedgate2 halfway (24/48): 66.7% — schooltime 4/4, islands 3/4, slithery 2/2.
   alive@r499 24.2 vs 11.9 (swarm survives to feed), qlen 1.8 vs 1.2, longest
   26.5 vs 27.5 (midEnd=400 danger-doubling at feed start may cost ~1 len — F16).
+- feedgate2 FINAL (48g): 50.0% — MECHANISM real (alive@499 25.0 vs 11.4) but
+  champion pays for it: longest@end 26.3 vs 31.7 (-5.4). Win pattern: islands/
+  australia/slithery/schooltime 66.7%; maze 16.7%, stronghold/unsw 33.3%.
+  Read: 90r of feed can't rebuild the 30+ champion — need either earlier feed
+  time or less feeder shyness (midEnd=400 doubles danger at feed start, F16).
+  Next: v124 = bundle + midEnd450.

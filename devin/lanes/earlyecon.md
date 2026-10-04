@@ -105,7 +105,52 @@ tl200 11.0/18.1; td tl200 13.0/24.9; default eat60 18.1/20.2).
 
 **abyss_jobs2**: 'g' claims gated to r<60 (claims are an opening tool; late
 commutes were the overstay) + wStickyForage 0.3 (tie-break strength — loses to
-any real new value). Run: results/jobs2_s0 (vs v120, same 96g set).
+any real new value).
+
+**jobs2_s0: 50/96 = 52.1%** — devil spl 19.9/19.3 eat 50.7/46.9 tl50 26.0/24.6;
+stripes still 3.5/4.5; default/autarky splits dip. Claims at tie-break strength
+are near-neutral: the wins shrink with the wins' mechanism.
+
+**abyss_jobs3**: claims OFF entirely (`forageClaims=0`), holds only — isolates
+the sticky layer.
+
+**jobs3_s0: 42/96 = 43.8% — holds alone lose.** 'h' is the only hold that can
+fire pre-120 ('e' gated midGame r>=120, 'f' ~r330): extended hunts during the
+forage window starve econ on every elim map (devil spl 17.6/20.4, stripes
+3.5/4.5, default 8.8/10.5, tl200 down across the board).
+
+**abyss_jobs4** = jobs2 + all holds gated r>=60 (partition: claims own the
+opening, holds own the midgame).
+
+**jobs4_s0: 48/96 = 50.0%** — devil +1.3 spl, default +0.6 (partition works
+there) but stripes still 3.5/4.5 identically in EVERY variant.
+
+Deterministic check on stripes-s1 replays: jobs4 is bit-identical to v120 until
+r193, so the stripes regression can't come from holds (gated r>=60) — first
+divergences per seed: s2 r16, s3 r38, s5 r47 = claims firing pre-60.
+
+**abyss_jobs5** = jobs4 + claimMinDist 6 (only far targets worth commuting;
+stripes is 24x12 so most claims should never form).
+
+**jobs5_s0: mid-run** — stripes s2 still diverges at r16 (a far target on
+stripes IS >=6 away) so distance-gating alone doesn't close it.
+
+**abyss_jobs6** = jobs5 + commitSticky disabled entirely (claims-only
+ablation): attributes the residual stripes dip to claims vs holds cleanly.
+
+**abyss_jobs7** = jobs5 + claim margin gate: commit 'g' only when top1-top2
+target margin < claimMargin*gp(dist) (0.2) — the claim exists to stop knife-edge
+argmax flapping, so it only forms where the flap actually is. Clear-order
+targets (stripes' local beds) never claim. Runs: results/jobs6_s0, jobs7_s0.
+
+Allocator read so far: sticky HOLDS are the net drag on elim maps (jobs3
+43.8%, jobs4 50.0% with them pushed past r60); CLAIMS are near-neutral at
+tie-break strength and are the only remaining lever for S0's tl@r200 gap
+(top teams 118 vs our 66). If jobs6/7 don't move tl25-100 on devil/autarky
+without losing stripes/td, the honest report is: forage claims don't move the
+econ needle — the marginal-choice binding is too weak an instrument for a
+66->118 gap, which likely needs structural econ changes (bud cadence/bed
+coverage), not assignment stickiness.
 
 Fixtures: results/ee_<variant>/{games.jsonl,replays/,ee_<variant>.log},
-results/jobs_s0/
+results/jobs_s0/ results/jobs{2..7}_s0/

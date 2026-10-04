@@ -1,0 +1,14 @@
+# <slug> <param>=<value> [maps=csv] [note]
+xt_base   feedRound=400          BASELINE row (v120 default → no-op patch)
+xt_fr320  feedRound=320          feeds wake ~80r earlier; bigger champ on r500 maps
+xt_cf320  champFallbackRound=320 queen-less champion emerges earlier
+xt_qf290  queenFeedRound=290     queen gets fed earlier
+xt_sd0    splitEnemyDist=0       always split even adjacent to enemy head
+xt_qts5   queenTradeSlack=5      trade into their queen more readily
+xt_sm4    sprintMax=4            longer own sprints
+xt_sm2    sprintMax=2            shorter own sprints (safety)
+xt_wx20   wExposed=2.0           stronger reach-aversion
+xt_wx06   wExposed=0.6           weaker reach-aversion
+xt_em1    exposureMode=1         favour exposed when local numbers
+xt_qd30   queenDanger=3.0        queen more cautious
+xt_sv45   survivalDanger=4.5     survival-mode dragons more cautious

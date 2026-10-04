@@ -260,3 +260,10 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
   NOT the corridor cause. Feed bundle itself bleeds corridors.
 - Decomposing on 6 corridor maps: v131 = v120 + feed@360 ONLY (timing), v132 = +midEnd450.
   If v131 bleeds too → feed-timing is corridor-toxic → feature-gate feed by map class.
+- corr360 (24g): v131 (feed@360 timing ONLY) 20.8% vs v120 corridors — maze/trauma/
+  weakhold still 0/4. CORRIDOR BLEED = FEED TIMING ITSELF, not midEnd/hideUntil.
+- Corridors want EARLY consolidation; open maps want LATE feed. Split: <=2000 tiles
+  = corridor class (maze1152/trauma1152/weakhold600/portals512/slithery1701);
+  >2000 = open class (islands2240/schooltime2400/unsw+aus+bigempty4096).
+- v133 = v129 + eff_-gate: corridor-class reverts all 7 feed params to v120 values.
+  v133screen (88g all maps vs v120) launched.

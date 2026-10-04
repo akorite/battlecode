@@ -38,7 +38,7 @@ class Policy {
                " fh=" + std::to_string(feedHead_) + " fa=" + std::to_string(feedAge_) + " sc=" + std::to_string(selfChamp_) +
                " qr=" + std::to_string(w_.queenRound) + " ql=" + std::to_string(w_.queenLen) +
                " ch=" + std::to_string(champHead_) + " hd=" + std::to_string(w_.heard.size()) +
-               " oq=" + std::to_string(w_.ourQueen) + " hx=" + std::to_string(w_.board.X(w_.head)) + " hy=" + std::to_string(w_.board.Y(w_.head));
+               " ln=" + std::to_string(lean_) + " oq=" + std::to_string(w_.ourQueen) + " hx=" + std::to_string(w_.board.X(w_.head)) + " hy=" + std::to_string(w_.board.Y(w_.head));
     }
 
     Policy(World& w, Params const& p, double deadline, Out& out) : w_(w), eff_(p), p_(eff_), deadline_(deadline), out_(out) {

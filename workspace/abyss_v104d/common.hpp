@@ -330,6 +330,7 @@ inline double clockNow() {
 
 // Seconds of that clock the search may spend per turn: 0.075 = 75M of the 100M
 // points. Test builds may override it to keep native local games short.
+#define BC_DEBUG
 #ifndef BC_TURN_BUDGET
 #define BC_TURN_BUDGET 0.075
 #endif

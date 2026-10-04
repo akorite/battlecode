@@ -77,3 +77,56 @@
          stripes s7 cand=A W r490 teamEliminated len c14/b0 11s
    tower_defense s7 cand=B L r166 teamEliminated len c0/b3 5s
    tower_defense s7 cand=A W r198 teamEliminated len c5/b0 7s
+ queen_of_spades s7 cand=A W r391 teamEliminated len c8/b0 36s
+ queen_of_spades s7 cand=B L r391 teamEliminated len c0/b8 37s
+         default s7 cand=A W r90  teamEliminated len c4/b0 8s
+         default s7 cand=B L r90  teamEliminated len c0/b4 8s
+         autarky s7 cand=A L r499 roundLimit len c22/b40 100s
+         autarky s7 cand=B W r499 roundLimit len c40/b22 101s
+           devil s8 cand=B W r81  teamEliminated len c5/b0 9s
+         stripes s8 cand=A L r75  teamEliminated len c0/b3 3s
+         stripes s8 cand=B W r136 teamEliminated len c5/b0 9s
+           devil s8 cand=A L r199 teamEliminated len c0/b4 34s
+   tower_defense s8 cand=B L r221 teamEliminated len c0/b4 17s
+ queen_of_spades s8 cand=A W r189 teamEliminated len c3/b0 7s
+ queen_of_spades s8 cand=B L r189 teamEliminated len c0/b3 7s
+   tower_defense s8 cand=A W r499 roundLimit len c30/b17 43s
+         default s8 cand=A L r198 teamEliminated len c0/b3 26s
+         default s8 cand=B W r198 teamEliminated len c3/b0 24s
+         autarky s8 cand=B L r499 roundLimit len c36/b56 72s
+         autarky s8 cand=A W r499 roundLimit len c56/b36 73s
+## abyss_econ vs abyss_v119: 96 games
+             map    n   score   win%       game CI  pairs W/S/L        pair CI
+           devil   16     9.0  56.2% [33.2, 76.9]    2/  5/1    [37.5, 75.0]
+ queen_of_spades   16     8.0  50.0% [28.0, 72.0]    0/  8/0    [50.0, 50.0]
+         stripes   16    12.0  75.0% [50.5, 89.8]    4/  4/0    [56.2, 93.8]
+   tower_defense   16     7.0  43.8% [23.1, 66.8]    0/  7/1    [31.2, 50.0]
+         autarky   16     8.0  50.0% [28.0, 72.0]    0/  8/0    [50.0, 50.0]
+         default   16     8.0  50.0% [28.0, 72.0]    0/  8/0    [50.0, 50.0]
+           SMALL   64    36.0  56.2% [44.1, 67.7]    6/ 24/2    [48.4, 64.1]
+             BIG   32    16.0  50.0% [33.6, 66.4]    0/ 16/0    [50.0, 50.0]
+             ALL   96    52.0  54.2% [44.2, 63.8]    6/ 40/2    [49.0, 59.4]
+    ALL-unlocked   64    35.0  54.7% [42.6, 66.3]    4/ 27/1    [48.4, 60.9]
+    map-weighted               54.2%  (each map equal weight; ALL-unlocked drops devil, portals, queen_of_spades, schooltime, slithery_fight)
+
+per-game metrics, cand vs base (means):
+                     alive at r499:   5.048 vs   4.619  (n=21)
+       longest at end (r500 games):  37.952 vs  36.190  (n=21)
+     queen len at end (r500 games):   0.619 vs   0.619  (n=21)
+         queen alive at end (r500):   0.048 vs   0.048  (n=21)
+            pearls per dragon-turn:   0.062 vs   0.059  (n=96)
+         adjacent free pearl taken:   0.726 vs   0.745  (n=96)
+             ... no enemy head <=3:   0.733 vs   0.756  (n=96)
+         queen non-ram deaths/game:   0.292 vs   0.198  (n=96)
+            queen dead (any) /game:   0.875 vs   0.865  (n=96)
+       deaths/game: wall+self+body:  31.052 vs  30.396  (n=96)
+         deaths/game: head-to-head:  20.865 vs  20.865  (n=96)
+  in-reach queen kill rate, dist 1:   1.000 vs   1.000  (opps 19 vs 20)
+  in-reach queen kill rate, dist 2:   1.000 vs   1.000  (opps 16 vs 14)
+ in-reach queen kill rate, dist 3+:   0.889 vs   1.000  (opps 27 vs 17)
+queen kept after theirs died (cand):   0.255  (12/47; won 34.0)
+queen kept after theirs died (base):   0.265  (13/49; won 31.0)
+   small maps: pearls eaten by r60:  20.203 vs  15.438  (n=64)
+         small maps: splits by r60:   7.562 vs   5.688  (n=64)
+          small maps: alive at r50:   5.328 vs   4.312  (n=64)
+   r500 games: 21, eliminations: 75, mean secs/game 31

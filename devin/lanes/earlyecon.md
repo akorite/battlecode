@@ -203,3 +203,108 @@ measurement.
 
 Fixtures: results/ee_<variant>/{games.jsonl,replays/,ee_<variant>.log},
 results/jobs_s0/ results/jobs{2..7}_s0/
+
+## Birth-stall diagnosis (v104-level econ vs current; mission 3)
+
+Corpora (96 side-games each, 3 elim maps × 8 seeds × both sides,
+--keep-replays): diag_v104 = abyss_v104 vs abyss_v120;
+diag_v104e = abyss_v104 vs abyss_econ120 (the shipped fix). Analyzer:
+devin/lanes/birthdiag.py — per-side birth timelines split by queen-parent
+(min initial id) vs worker-parent, matched ±15r.
+
+Splits≤60 totals (per-16-side-games):
+
+| map | v104 | v120 | v104 | econ120 |
+|-----|------|------|------|---------|
+| devil | 373 | 280 | 372 | 261 |
+| stripes | 38 | 22 | 38 | 35 |
+| tower_defense | 8 | 7 | 8 | 8 |
+
+Residual after ee_fix120 (diag_v104e):
+- devil: queen-parented splits≤60 56 vs 36; econ120 queen dies r52 vs
+  v104's r68 (15/16 vs 16/16 deaths — devil kills every queen, the
+  timing is the diff = the accepted exposure trade).
+- stripes: gap closed early (35 vs 38; queen 22 vs 24) and econ120
+  out-splits late (297 vs 173 total).
+- td: even.
+
+Missing-birth decomposition (v104 births with no counterpart ±15r):
+122 vs v120, of which worker-parented 103 — the collapse is
+cascade-dominated, not queen-dominated (queen-missings 19, 18 on stripes
+= the pin, already fixed).
+
+### One line of cause
+
+The residual stall is INTAKE-side, not cadence or coverage or depth-clip:
+on devil, econ120 eats 25% less by r25 (5.4 vs 7.2) while unit count is
+still even (n25 6.7 vs 7.2) — fewer pearls per dragon, not fewer dragons —
+which compounds to n50 -31% (9.0 vs 13.1) and swarm wipe by r200
+(n200 0.9 vs 18.1). The veto still refusing mouth cells v104 flooded —
+`unproven` — is the leading mechanism suspect (it remains active on
+non-weakhold maps in the shipped fix). Queen-death-timing is second-order.
+
+### Experiment results: abyss_unprov / abyss_noram / abyss_noopen
+
+Attribution (devil queen vs worker eats r<=30, head-cell on removed
+pearls): v104 queen 73 vs econ120 37 across 16 side-games; workers
+133 vs 148 (~even). The intake deficit is THE QUEEN'S. stripes queen
+50 vs 44; td even.
+
+- unprov_d (unproven veto off on non-wh): intake bit-equal
+  (eat25 5.9/5.9 devil, 2.6/2.6 stripes, 1.5/1.5 td); only qNonRam
+  +0.06-0.19. REFUTED as intake cause — veto rarely fires on these maps.
+  Queen pick at the divergent turn identical to econ120's.
+- noram_d (wQueenRam/wQueenRamHeard = 0): near-mirror — spl60/eat
+  identical, wins 50%, qNR 0.44 vs 0.38 devil. REFUTED — screen rarely
+  binds. Queen pick identical again.
+- Replay trace (devil s1-8, mirrored pairs): the first same-side
+  divergence is always the new worker at r1-r4 (id7/8, move N vs E) —
+  systematic, direction-consistent. Queen path divergence r8-15 is
+  downstream. v104 queen emits multi-step ['S','S'] moves; econ120 emits
+  single steps/splits — she covers half the ground.
+- open_ is LIVE on all three elim maps: openMapOk() = NC<=700 &&
+  !(maze&&big) → true on devil/stripes/td; openMinUnits=99 only kills
+  the fallback clause. open_ is post-v104 (v104's Params lack openUntil)
+  and rewrites the whole early swarm: openExplore/openFog for workers,
+  openDanger 1.0 vs budMult 1.8, openEnemyDist 1, openQueenKeep 3.
+  The r1 id7 divergence (v104 W vs econ S, every seed) is openExplore/
+  openFog reshaping the worker's first pick.
+- lean_ NEVER fires (0/10k turns, debug builds); twoStep params identical.
+
+noopen_d (econ120 + openUntil=0) verification: does queen eat25/splits60
+recover toward v104.
+
+
+### Result: `open_` is the residual stall — openUntil=0 recovers v104 econ
+
+noopen_d (abyss_noopen = econ120 + openUntil=0, vs abyss_econ120, 48g):
+
+| map | metric | econ120 | noopen | v104 ref |
+|-----|--------|---------|--------|----------|
+| devil | eat50 | 26.6 | 42.9 | 39.6 |
+| devil | n50 | 8.8 | 13.9 | 13.1 |
+| devil | spl60 | 15.6 | 26.6 | 23.3 |
+| devil | n200 | 5.9 | 12.9 | 18.1 |
+| devil | wins | .38 | .62 | — |
+| stripes | spl60 | 2.1 | 2.1 | 2.4 |
+| td | spl60 | 0.5 | 0.5 | 0.5 |
+
+weakhold 16g mirror: w .50/.50, qNR 0.00/0.00, deaths flat, eat ~equal.
+qos/default/autarky: openMapOk NC<=700 → open_ never fires there;
+unaffected by construction.
+
+**Cause line**: the residual pre-r200 birth stall on elim maps is the
+post-v104 forage-opening (`open_`, live wherever NC<=700 && !maze — i.e.
+devil/stripes/td/weakhold): under it the swarm's first picks go scouting
+(openExplore/openFog for workers; divergence seed = new worker's r1
+pick, every seed) and the queen's lane-foraging collapses (devil queen
+eats<=30: 37 vs v104's 73; her multi-step ['S','S'] lane moves vanish) —
+a mechanism trading early intake for map coverage, not a cadence veto,
+coverage veto, or depth-clip. The cascade is worker-parented (103/122
+missing births) atop the queen's halved intake (36 vs 56 q-splits<=60).
+
+**Fix**: `p.openUntil = 0` — one line (abyss_noopen ≡ abyss_econ121,
+ship candidate). Verified: devil spl60 +71%, eat50 +61%, n200 +118%,
+wins 62%; stripes/td/weakhold mirrors; pair-set maps unaffected by
+gate. Cost accepted: devil qNR 0.44 vs 0.25 (foraging-queen exposure,
+same trade ee_fix shipped).

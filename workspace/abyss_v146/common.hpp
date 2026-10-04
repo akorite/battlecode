@@ -302,7 +302,7 @@ struct Params {
     // ---- champion lane (abyss_v102_champ): one champion; our queen while she lives ----
     int champOne = 1;                 // 1: feeders feed only the champion (queen, else the team's longest known)
     int champMemory = 40;             // rounds a sighting/beacon/relay stays a usable pull target
-    int champFallbackRound = 330;     // queen-less champion (longest known dragon) from this round — WC locks ~r330 so the feed has ~150 rounds to converge
+    int champFallbackRound = 400;     // queen-less champion (longest known dragon) from this round (= old feedRound)
     int champFeedDist = 2;            // champion feeds die when this close to a tile beside its head (feedDist 1 let her walk away)
     int feedFar = 1;                  // 1: feed pull uses the long-range discount gammaFar (+ manhattan pull past the BFS horizon)
     int feedHeardDie = 2;             // die in place beside a champion we only HEARD if the report is <= this many rounds old (0 off)
@@ -312,7 +312,6 @@ struct Params {
     int champRelayAge = 30;           // forward only reports at most this old (the age is coarsely coded)
     int queenRelayFrom = 330;         // queen position relay starts at this round
     int champRelayFrom = 330;         // queen-less champion relay starts at this round
-    int champPlantLead = 40;          // the elected champion plants its anchor this many rounds before feedRound
     int feedStop = 490;               // later sacrifices cannot be eaten in time
     int feedMargin = 4;
     int feedMaxLen = 6;               // only small dragons feed
@@ -370,7 +369,7 @@ inline Params const kParams = [] {
     p.openQueenKeep = 3;
     p.openQueenDanger = 1.8;          // queen exempt from the relief: keeps budMult-level fear
     p.feedRound = 360;
-    p.champFallbackRound = 330;
+    p.champFallbackRound = 360;
     p.feedRoundBrawl = 300;
     p.wTailStrike = 2.0;
     p.trapSeenOnly = 1;               // wh4: weakhold pocket fix — fog is a wall for the queen

@@ -134,12 +134,17 @@ struct Params {
     double wBlind = 2.0;              // portal into unseen tiles where dragons were seen lately
     double wBlindQuiet = 0.3;         // portal into unseen tiles with no recent sightings
     int blindMemory = 6;              // rounds a sighting near a portal exit stays relevant
-    double s0Portal = 9.0;            // lip-target weight for the designated first-worker scout
-    int s0Until = 60;                 // scout mission window (covers first-sighting lag)
-    double s0Far = 7.0;               // mirror-waypoint weight before any end is seen
+    int blindGrace = 30;              // no blind-crossing penalty before this round (winners transit by r25)
+    int portalGuessEnds = 2;          // few-portal map: at most this many distinct portal ids
+    int portalGuessMinTiles = 512;    // portal package only on maps bigger than this
+    int portalGuessMaxTiles = 900;    // and not bigger than this (qos 875, trophy 625)
+    int portalGuessUntil = 80;        // and only this early — late stale guesses scramble dist[]
     double wPortalLoiter = 1.0;       // ending a move on a tile beside a portal
     double wScout = 6.0;              // bonus for crossing a portal whose partner is unseen
     double wPortalScout = 4.0;        // explore-target weight on the lip of an unpaired portal
+    double s0Portal = 9.0;            // lip-target weight for the designated first-worker scout
+    int s0Until = 60;                 // scout mission window (covers first-sighting lag)
+    double s0Far = 7.0;               // mirror-waypoint weight before any end is seen
     int portalScoutUntil = 60;        // pull scouts to unpaired portal lips only before this round
     double wFog = 1.0;                // stepping through a never-seen edge (could be a wall)
     double mazeKelpFrac = 0.22;       // learned kelp fraction above this -> maze: wPocket off
@@ -216,11 +221,6 @@ struct Params {
     // never escapes (fountain corridors, tree pockets). The swarm can afford a lost stub;
     // she cannot. (from the autarky lane's deadEnd scan, queen-scoped here)
     int trapOn = 1;                   // 0: off
-    int blindGrace = 30;              // no blind-crossing penalty before this round (winners transit by r25)
-    int portalGuessEnds = 2;          // few-portal map: at most this many distinct portal ids
-    int portalGuessMinTiles = 512;    // portal package only on maps bigger than this
-    int portalGuessMaxTiles = 900;    // and not bigger than this (qos 875, trophy 625)
-    int portalGuessUntil = 80;        // and only this early — late stale guesses scramble dist[]
     int trapScanCells = 32;           // BFS budget per candidate destination
     int trapMargin = 2;               // region <= length + this: a sure trap
     int trapSeenOnly = 0;             // 1: fog counts as a wall in the queen trap scan
@@ -277,6 +277,21 @@ struct Params {
     int escortRadius = 5;             // enemy head this close to a grower is a threat
     int escortRing = 3;               // escorts hold this distance from the grower
     int supportRing = 3;              // supporters hold this distance from the target, ready to eat
+    int qEscortThreat = 8;            // 5b: escorts form only while an enemy is within this of the queen's cell
+    int qEscortDist = 14;             // only workers already this close to her cell volunteer
+    int qRamAdj = 1;                  // weakhold-dims only: ram-adjacency reach bonus (head-to-head kills beside her head)
+    int qVetoReach = 1;               // queen: dest inside an enemy's this-turn kill reach = lethal tier
+    int qEnemyLenMin = 3;             // edge-seen enemies under-read len (head only); killers are len2-3
+    double wQueenLeash = 0.0;         // queen overshoot penalty (steering-4 leash; stage OFF — A/B'd worse, see lane report)
+    int leashDist = 8;
+    int leashUntil = 100;             // comfort zone only before this round
+    double wQueenVeto = 500.0;        // lethal-tier penalty minus dd (near-veto, still prefers distance)
+    int huntMirror = 0;               // B1: expendables hunt her start mirror — OFF until aim corrected (hunter-start rot bleeds v140)
+    int huntRound = 25;               // B1: mirror-hunters release at this round
+    int huntLenMax = 3;               // B1: expendable cap (len <= this hunts)
+    int huntSquad = 3;                // B1: at most this many mirror-hunters
+    int huntSpawnMax = 30;            // B1: only dragons born this early know the spawn region
+    double wHuntMirror = 2.0;         // B1: pull toward the mirror target (weaker than sighting pull)
     double wHunt = 1.5;
     double wEscort = 0.8;
     double wSupport = 0.6;
@@ -302,8 +317,11 @@ struct Params {
     // ---- champion lane (abyss_v102_champ): one champion; our queen while she lives ----
     int champOne = 1;                 // 1: feeders feed only the champion (queen, else the team's longest known)
     int champMemory = 40;             // rounds a sighting/beacon/relay stays a usable pull target
-    int champFallbackRound = 330;     // queen-less champion (longest known dragon) from this round — WC locks ~r330 so the feed has ~150 rounds to converge
+    int champFallbackRound = 400;     // queen-less champion (longest known dragon) from this round (= old feedRound)
     int champFeedDist = 2;            // champion feeds die when this close to a tile beside its head (feedDist 1 let her walk away)
+    int champChannelDist = 1;         // channelling: feeder dies in place (noValidAction) when this close to a beside-head tile
+    int champMinLen = 0;              // channelling: non-queen champion len floor — REJECTED at 8 (stronghold: blocks the feed bootstrap)
+    double wChampHold = 0.0;          // channelling: champion station-hold — REJECTED (ch6: parked champ stopped foraging, longest@end 13->7)
     int feedFar = 1;                  // 1: feed pull uses the long-range discount gammaFar (+ manhattan pull past the BFS horizon)
     int feedHeardDie = 2;             // die in place beside a champion we only HEARD if the report is <= this many rounds old (0 off)
     int boxFeedDist = 6;              // boxed-in dragon within this many tiles of the champion dies in place (0 off)
@@ -312,7 +330,9 @@ struct Params {
     int champRelayAge = 30;           // forward only reports at most this old (the age is coarsely coded)
     int queenRelayFrom = 330;         // queen position relay starts at this round
     int champRelayFrom = 330;         // queen-less champion relay starts at this round
-    int champPlantLead = 40;          // the elected champion plants its anchor this many rounds before feedRound
+    int champMargin = 0;              // challenger must exceed the heard champion's length by
+                                      // this to take the title (0: any +1 takeover — churns on
+                                      // large swarms; feed suicides scatter across a moving target)
     int feedStop = 490;               // later sacrifices cannot be eaten in time
     int feedMargin = 4;
     int feedMaxLen = 6;               // only small dragons feed
@@ -370,7 +390,7 @@ inline Params const kParams = [] {
     p.openQueenKeep = 3;
     p.openQueenDanger = 1.8;          // queen exempt from the relief: keeps budMult-level fear
     p.feedRound = 360;
-    p.champFallbackRound = 330;
+    p.champFallbackRound = 330;   // lock one champion by ~r330 (feed lane): relay already starts 330
     p.feedRoundBrawl = 300;
     p.wTailStrike = 2.0;
     p.trapSeenOnly = 1;               // wh4: weakhold pocket fix — fog is a wall for the queen

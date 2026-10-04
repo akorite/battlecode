@@ -308,6 +308,8 @@ struct Params {
     int feedHeardDie = 2;             // die in place beside a champion we only HEARD if the report is <= this many rounds old (0 off)
     int boxFeedDist = 6;              // boxed-in dragon within this many tiles of the champion dies in place (0 off)
     int feedMinUnits = 3;             // a feeder dies only while the team has >= this many dragons (do not wipe a remnant out)
+    int feedMinUnitsBig = 8;          // on open maps keep a swarm: the feed may not drain below this
+    int feedMinUnitsBigTiles = 2000;  // w*h above which the big-map floor applies
     int champRelay = 1;               // 1: dragons that know the champion's position forward it (MsgChamp)
     int champRelayAge = 30;           // forward only reports at most this old (the age is coarsely coded)
     int queenRelayFrom = 330;         // queen position relay starts at this round

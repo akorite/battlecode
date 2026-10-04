@@ -716,3 +716,53 @@ Candidate if integrator wants the marginal piece: workspace/abyss_v149qs2
 (neutral-pair, +5.5pp queen-alive, ~zero instruction cost — 4 hoisted
 members + constants). Else parked: abyss_v149qf/qfs2/qs3/qs4 + results/
 {v149qf,v149qs2,v149qfs2,v149qs3,v149qs4}_smoke.
+
+## QUEEN FEED v3 (feeder-reach variant): abyss_v149qf2 — 30% pair, thread closed
+
+Per steering-2 spec: feed queen as champion r200+ on open maps +
+keep-her-near-start pre-r100. Full feeder-REACH unblocked this time:
+feedAt=200 when NC>=600 (openFeed_), locateChamp window follows
+(was floored r320), feedMargin waived for queen-champ (FtM feeds her
+from len 2), nobody self-elects over her, queen relay opens r160,
+plus spawn leash pull r<100 (wQueenLeash 0.6).
+
+Verdict vs abyss_v149@devin/v120-HEAD (autarky/stronghold/default/unsw/
+islands x2 x2 seats, tag v149qf2_smoke): **30% pair (6/20)** — 1W/4S/5L.
+- qlen@end 2.13 vs 3.13, qAlive@end .133/.200, queen-dead .85/.75 —
+  worse on every queen metric.
+- autarky 3/4 (75%) — the ONLY map the feed ever helps, again.
+- unsw 0/4, stronghold 1/4, islands 1/4, default 1/4 (s1 both seats
+  team-eliminated r231/r383 — swarm starved while feeders walked).
+
+Conclusion (3 strikes): die-in-place (40%), gated feed (45%), full
+feeder-reach (30%) — feeding the queen is negative in EVERY form in
+self-play. Workers are worth more foraging/fighting than as drops;
+autarky is the only exception and the dose can't survive the other
+four maps. Queen-feed thread CLOSED at mechanism level.
+
+## TORUS-SEAM AUDIT: symmetric attrition — STANDING DOWN per spec
+
+Verified the claim on 24 v149L-vs-v138 ladder replays (6 seam maps,
+devin/lanes/seamdiag.py): h2h deaths classified by death-cell position.
+
+h2h deaths AT edge cells (x=0/W-1 or y=0/H-1 — the strict seam sig):
+| map | ours | theirs | notes |
+|---|---|---|---|
+| queen_of_spades | 12/57 | 10/57 | real class (~20% of h2h) |
+| tower_defense | 11/34 | 7/34 | funnel chains, positional |
+| stripes | 3/26 | 3/26 | small |
+| weakhold | 2/28 | 1/28 | small |
+| devil | 0/85 | 0/85 | edge cells are walls — no seam play |
+| dilemma | 0/36 | 0/36 | same |
+Strict wrap-adjacent kills (heads |dx|=W-1 or |dy|=H-1): only 4 total
+in 237 h2h deaths — the kills happen AT the seam ring, not across the
+wrap. All edge deaths are ~mutual pairs; the 28-vs-20 net is td/qos
+funnel chains (multiple ours dying on one theirs), not a guard gap.
+
+QUEEN seam exposure: zero strict wrap-deaths. Within ring-2 of the
+edge: ours 8/15 of her h2h deaths, theirs 5/16 — slightly asymmetric
+but n=31 queen h2h deaths total; driven by stripes/td positional
+density, not the invisible-march mechanic (which produced 0 queen
+deaths in the corpus). VERDICT: symmetric fair-attrition on the seam —
+per spec, standing down on the queen-only seam guard. If revisited:
+td is where edge kills concentrate asymmetrically (11 vs 7).

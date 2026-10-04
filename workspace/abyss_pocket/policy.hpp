@@ -79,7 +79,23 @@ class Policy {
         buildTargets();
         if (!lean_) buildFriendFields();
         else noFriendFields();
+        // Pocket-geometry gate: every mechanism below exists for bait-pocket
+        // maps (deg<=1 bed appendages). On maps with none the worker deltas
+        // are pure perturbation — dilemma's queen lane is knife-edge enough
+        // that any early worker reroute flips her into the kill column.
+        if (!anyBait_) {
+            for (Target const& t : targets_)
+                if (bait(t.cell)) { anyBait_ = true; break; }
+        }
+        noteFoodReach();
         buildSquadTargets();
+        worker_ = !queen_ && !grower_ && !lead_ && !assassin_;
+        // Starving on safe food: nothing edible in reach that isn't a bait bed.
+        // Then a suicide-eat (enter the appendage, take its pearls, wedge-die)
+        // out-values orbiting a food desert — v119's swarm economy tolerates
+        // those deaths because each baby banks pearls first. Not starving:
+        // bait cells stay excluded and the deadEnd veto keeps us out.
+        starving_ = worker_ && foodReach_ < p_.starveLocal;
 
         // End-game feeding (see Params::feedRound). Under the hide doctrine
         // feeders wake earlier (queenFeedRound) and walk to the queen at the
@@ -395,11 +411,32 @@ class Policy {
         myDist_ = nav_.dist;
     }
 
+    // Starving signal: belief that can actually be collected (in reach and,
+    // below baitLen, not behind a single exit). Drives the persist bonus.
+    void noteFoodReach() {
+        foodReach_ = 0;
+        bool short_ = anyBait_ && L_ < p_.baitLen;
+        for (Target const& t : targets_) {
+            if (t.belief <= 0.02 || myDist_[t.cell] == INF) continue;
+            if (short_ && bait(t.cell)) continue;
+            foodReach_ += t.belief;
+        }
+    }
+
     bool timeUp() {
         if (!timedOut_ && clockNow() >= deadline_) timedOut_ = true;
         return timedOut_;
     }
     Nav nav_;
+    double foodReach_ = 0;          // reachable, collectible belief (starving signal)
+    bool worker_ = true;            // no doctrine role: not queen/grower/lead/assassin
+    bool anyBait_ = false;          // a bait cell (deg<=1 provable) seen this game — gates pocket mechanisms
+    bool starving_ = false;         // worker with little reachable non-bait food — suicide-eats allowed
+    double bedBelief(int c) const {
+        for (Target const& t : targets_)
+            if (t.cell == c) return t.belief;
+        return 0;
+    }
     int L_ = 2;
     bool grower_ = false;
     bool queen_ = false;            // we are this team's queen (lowest id)
@@ -1013,9 +1050,19 @@ class Policy {
         return found;
     }
 
+    // True when c provably has a single usable exit: three of its edges are
+    // seen-blocked. Entering head-first is a wedge for anyone too short to
+    // reverse out — weakhold's row-0/row-14 beds are exactly this bait.
+    bool bait(int c) const {
+        int walls = 0;
+        for (int d = 0; d < 4; d++) walls += w_.board.nb[c * 4 + d] < 0;
+        return walls == 3;
+    }
+
     // One step from a simulated state: `body` (head first, true length L) after k of
     // our own moves this turn-plan, with `eaten` pearls already taken along the way.
     // k = 0 is the real move; deeper k is lookahead with other dragons held still.
+
     Choice scoreFrom(std::vector<int> const& body, int L, int d, int k, std::vector<int> const& eaten,
                      std::vector<int>* nextBody = nullptr) {
         Board const& b = w_.board;
@@ -1107,11 +1154,15 @@ class Policy {
             if (room >= childNeed) viaReverse = true;
         }
 
-        // Queen dead ends (trapOn): a closed region with no loop is a trap the queen
-        // never leaves — fountain corridors, tree pockets. The swarm can lose a stub;
-        // she cannot. Only our own body walls the scan: a cell it plugs stays plugged
-        // while she cannot advance, while anything else may move off.
-        if (queen_ && p_.trapOn && !viaReverse) {
+        // Dead ends (trapOn): a closed region with no loop is a trap you never
+        // leave — fountain corridors, tree pockets, weakhold's one-cell bed
+        // appendages. Workers get the scan only for the immediate step (k==0):
+        // the appendage wedge is a first-step blunder, and bounding it there
+        // keeps the deeper search cheap. Only our own body walls the scan: a
+        // cell it plugs stays plugged while we cannot advance, while anything
+        // else may move off.
+        bool baitEat = starving_ && bedBelief(dest) > 0;
+        if (p_.trapOn && !viaReverse && !baitEat && (queen_ || (p_.workerScan && anyBait_ && k == 0))) {
             wallScratch_.assign(b.NC, 0);
             for (int oc : nb2) wallScratch_[oc] = INF;
             for (int oc : w_.ownExtra) wallScratch_[oc] = INF;
@@ -1139,10 +1190,15 @@ class Policy {
         std::vector<int> const& dist = nav_.dist;
 
         double value = 0;
+        bool short_ = worker_ && anyBait_ && newL < p_.baitLen && !starving_;
         for (Target const& t : targets_) {
             if (t.cell == dest) continue;
             int dd = dist[t.cell];
             if (dd == INF) continue;
+            // Bait cells: a bed behind a single exit is lethal below baitLen
+            // (the only way out runs through our own body, and reverse needs 4).
+            // It is not food for us — count it out of the pull entirely.
+            if (short_ && bait(t.cell)) continue;
             if (!eaten.empty() && std::find(eaten.begin(), eaten.end(), t.cell) != eaten.end()) continue;
             int m = dd + 1 + k;  // moves from now, counting the ones already planned
             double v = t.belief * gp(m);
@@ -1168,7 +1224,34 @@ class Policy {
             int m = dd + 1 + k;
             // A fountain cluster feeds several dragons; yield only to a teammate already on it.
             if (friendDist_[h.cell] < m && friendDist_[h.cell] <= p_.hotYield) continue;
+            if (short_ && bait(h.cell)) continue;
             value += p_.wHot * h.rate * fp(m);
+        }
+
+        // Frontier reach: prefer regions that keep unseen tiles BFS-reachable.
+        // A starving worker in a seen pocket gets a corridor-routed pull toward
+        // the exits; the deadEnd veto above keeps unseen appendages off-limits,
+        // so the pull cannot reward walking into the pockets it reveals.
+        // Inert for roles with their own doctrine and once the map is seen.
+        if (worker_ && starving_ && (anyBait_ || w_.t.round >= p_.pullAfter)) {
+            int nu = 0, ndu = INF;
+            for (int c2 = 0; c2 < b.NC; c2++) {
+                if (w_.seenRound[c2] < 0 && dist[c2] != INF) {
+                    nu++;
+                    ndu = std::min(ndu, dist[c2]);
+                }
+            }
+            value += p_.wFrontier * nu;
+            // Fog approach: the per-tile explore pull is ~0.001 at corridor
+            // distances, so workers orbit in a value desert around pocket
+            // mouths. Pay real weight (long-range discount) for getting the
+            // nearest unseen tile closer — BFS-routed, inert once map is seen.
+            if (ndu != INF) value += p_.wFogPull * fp(ndu);
+            // Starving hysteresis: keep walking the current heading rather than
+            // orbiting a corridor mouth while nothing edible is in reach.
+            if (k == 0 && foodReach_ < p_.starveLocal && body.size() >= 2 &&
+                d < 4 && b.nb[body[1] * 4 + d] == body[0])
+                value += p_.wPersist;
         }
 
         std::string why;

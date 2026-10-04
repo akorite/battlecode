@@ -1,0 +1,69 @@
+# pocket lane — weakhold pocket-starvation
+
+## Verdict: SHIP candidate `abyss_pocket` (branch devin/pocket)
+
+vs abyss_combat on weakhold — the actual #1 loss signature — **4/8 (1W/2S/1L
+pairs), up from v119's 0/8.** cand-A reached alive 15–21 at r499 where v119
+flatlined to 1 alive vs 27; cand-B won one outright. vs v119 pair-set:
+weakhold 0W/4S/0L, dilemma 0W/4S/0L, stripes 1W/3S/0L — **zero pair losses on
+all three mission maps** (arena+devil sanity: 43.8%, 1 pair-loss on devil s4;
+devil is spawn-side-locked — v119 self-play is the identical A-sweep/B-lose
+signature, ours flipped one thin A-side seed).
+
+## S0 diagnosis (confirmed, with evidence)
+
+**weakhold flatline is a bait-pocket woodchipper, not fog-starvation.**
+
+- ~24–33 dragons/side/game die `hitWall` at ONE cell each — A: (15,14),
+  B: (24,0): 1-exit appendage beds (open-degree 1) down 1-wide corridors.
+- weakhold's food engine is concentrated bait: the cd=1 beds live inside the
+  pockets. In v119 self-play, 93/98 of side-A pearls came from its own trap
+  cells; each eat respawns a pearl that pulls the next newborn in. Babies
+  (len 2–3) enter head-first, exit is through their own neck → `hitWall` ~9
+  rounds later. `viaReverse` needs len>=4.
+- Combat eats 433 pearls across ~30 cells (field beds cd=100–500), never camps
+  bait. We eat only our own bait pocket → feed the woodchipper, never roam.
+- Residual symptom after trap fix: *safe-paralysis* — workers froze in 2×2
+  orbits at corridor mouths, all dirs scored 1–7, nearest belief 14+ steps out,
+  per-tile explore pull ~0.001 at that range.
+
+## Mechanism (abyss_pocket = v119 + 3 gated changes, all worker-scoped)
+
+1. **Worker deadEnd scan at k==0** (`workerScan`, was queen-only): wedge is a
+   first-step blunder. Exception `baitEat`: a *starving* worker may still take
+   the informed suicide-eat (enter, bank the pearls, wedge-die) — cheap suicide
+   out-values orbiting a food desert in v119's swarm economy.
+2. **Bait exclusion** (`baitLen=4`): a bed with 3 seen-blocked edges isn't food
+   for len<4 unless starving; kills the belief anchor at the pocket lip.
+3. **Fog approach** (`wFogPull=6 · fp(ndu)`, `fp` = long-range discount 0.93^k):
+   pull toward the *nearest* unseen tile by BFS distance (routes through fog,
+   not walls; count is flat, manhattan was the failed integrator approach).
+   `wPersist=0.5` heading hysteresis while starving stops mouth-orbitting;
+   `wFrontier=0.004 · nu` unseen-reach preference.
+   Gate: `worker_ && starving_ && (anyBait_ || round>=60)`. `anyBait_` (a
+   3-wall cell in targets_) is the load-bearing guard: on no-bait maps the
+   whole block is off and behavior is exactly v119 — that is what keeps
+   dilemma's knife-edge queen lane (any early worker perturbation = r47 flip)
+   clean at 4W/4L.
+
+## Results matrix (A/B, same seeds both seats)
+
+| run | cand | base | map | score | pairs W/S/L |
+|-----|------|------|-----|-------|-------------|
+| pocketrepro | v119 | combat | weakhold | 0/8 | 0/0/4 — the signature |
+| pvc2 | pocket | combat | weakhold | **4/8** | 1/2/1 — flatline broken |
+| pocket21 | pocket | v119 | weakhold | 50% | 0/4/0 — alive A 17–26 vs B 3 |
+| pdil13 | pocket | v119 | dilemma | 50% | 0/4/0 — clean seat-lock |
+| pstr3 | pocket | v119 | stripes | 62.5% | 1/3/0 |
+| pgen | pocket | v119 | arena+devil | 43.8% | 0/7/1 — devil s4 flip |
+| devbase | v119 | v119 | devil | 50% | 0/4/0 — same seat-lock |
+
+Explored and REJECTED (seat-flip whack-a-mole — every interior/frontier pull
+variant that helped one weakhold side broke the other or flipped dilemma):
+frontier-masked pulls (≥2 seen-open neighbors), baitOpt_ pull suppression,
+foodNow_/poorFood_ escort release, age-clock starvation (Policy is rebuilt per
+turn — member state can't persist). These stay in git history on devin/pocket.
+
+Residual risks: `hitSelf` deaths ~50/game (bigger swarm, corridor pileups);
+the two pvc2 losses and devil s4 are queen-death endings — that is module 5b's
+signature, not a navigation defect.

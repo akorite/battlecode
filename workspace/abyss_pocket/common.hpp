@@ -208,9 +208,11 @@ struct Params {
     double wLeadReach = 1.5;          // queen: per own segment, ending inside any enemy's sprint reach
     int leadTradeMinUnits = 8;        // the swarm trades heads only with at least this many units
 
-    // Dead-end lookahead for the queen: a closed kelp region with no loop is a trap she
-    // never escapes (fountain corridors, tree pockets). The swarm can afford a lost stub;
-    // she cannot. (from the autarky lane's deadEnd scan, queen-scoped here)
+    // Dead-end lookahead: a closed region with no loop is a trap you never
+    // leave (fountain corridors, tree pockets, weakhold's one-cell bed
+    // appendages). The queen scans every candidate; workers scan only the
+    // immediate step (k==0) — appendage wedges are first-step blunders and
+    // bounding them there keeps the search cheap.
     int trapOn = 1;                   // 0: off
     int trapScanCells = 32;           // BFS budget per candidate destination
     int trapMargin = 2;               // region <= length + this: a sure trap
@@ -218,6 +220,25 @@ struct Params {
     int trapSafeCells = 12;           // seenOnly: veto when proven-open room is this small
     int trapFrontier = 2;             // seenOnly: veto only when fog boundary is this thin
     int trapMaxTiles = 0;             // seenOnly applies only when NC <= this (0 = every map)
+
+    // Frontier reach (weakhold pocket exit): a starving worker parked inside a
+    // fully-seen pocket keeps ~450 unseen tiles within BFS reach but never
+    // takes them — exploreValue * gamma^m is ~0.001 at corridor distances.
+    // Counting unseen tiles reachable from the candidate gives a BFS-routed
+    // pull toward exits (manhattan pulls died against walls, qsiege lane).
+    // Self-gating: zero once the map is fully seen.
+    double wFrontier = 0.004;         // per unseen tile reachable from the candidate
+    double wFogPull = 6.0;            // pull toward the nearest unseen tile (BFS dist, gamma-weighted)
+    int baitLen = 4;                  // beds in 1-exit cells only count as food at >= this length
+    // Starving hysteresis: a worker with no reachable real food value sits in a
+    // 2x2 orbit at corridor mouths — every direction scores ~0, so junction
+    // noise flips the argmax each turn. Pay its current heading so it keeps
+    // walking until something edible is in reach.
+    double starveLocal = 0.75;        // reachable belief below this = starving
+    double wPersist = 0.5;            // bonus for continuing the last move's heading
+    int workerScan = 1;               // deadEnd scan on workers (k==0 only)
+    int pullAfter = 60;                 // fog/frontier pulls only after this round (queen lanes resolve early)
+    int starveAge = 40;                 // rounds without growth = really starving (belief lies about empty beds)
     int sonarKeyed = 1;               // 1: round-keyed hash tag (rejects replays), 0: fixed team-keyed tag
 
     // Hide-and-feed queen doctrine (alternative to the always-grower queen):

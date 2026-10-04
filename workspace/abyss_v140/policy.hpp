@@ -1670,17 +1670,6 @@ class Policy {
             double fogMult = (open_ && !queen_ && !grower_ && !maze_) ? p_.openFog : 1.0;
             danger += p_.wFog * (1.0 + 0.25 * newL) * (assassin_ ? p_.assassinFogMult : 1.0) * fogMult;
         }
-        // Queen self-kill (two-way reservation): workers clear her exits; she in
-        // turn keeps off cells on or beside seen ally heads — queens move first,
-        // so an ally's current tile is a wall she cannot clear.
-        if (queen_ && k == 0) {
-            for (World::Seen const& s : w_.others)
-                if (!isEnemy(s) && b.cheb(s.head, dest) <= 1) danger += p_.wQueenAlly;
-            // Fog preference: landing on a tile nobody currently sees is how she
-            // walks into unseen kelp — prefer seen-safe cells (a bonus, not a veto).
-            if (!crossing && !w_.visible(dest)) danger += p_.wQueenFog;
-        }
-
         c.stepTerm = (c.eat ? p_.eatBonus : 0.0) - danger;
         if (viaReverse) c.stepTerm -= p_.wReverse;
         c.score = value + c.stepTerm + p_.wSpace * std::min(space, need) / need;

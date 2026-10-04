@@ -338,3 +338,10 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
 - Portal attempts FAILED twice: (a) symmetric-guess nb for unpaired portals — queen evaluates wrong dest cell, crosses blind, dies (portals+QoS 0/8, self-kills x5). (b) all-map lip scout pull — parks workers off food, dilemma both seats wiped by r80. Reverted both; portal routing stays with earlyecon lane.
 - v139 bisect smoke (4 maps x2s): 50%, identical seat board; queen dead 0.562 vs 0.750, pearls@r60 +30%.
 - Full S0 v139s0full running vs v138.
+
+## v139 full S0 verdict + v140 (qsafe port)
+- v139 (two-way ally-adjacency + fog preference): 45.6% vs v138 — NET LOSS. BIG 42.5%, unsw 0/4, longest@end -4.6. Queen metrics improved (alive@end +11%) but rerouting costs games. DROPPED both; logged as honest negative (mechanism loses more in reroute/forage than the rare hitOtherBody saves).
+- v140 = v138 + pocket qsafe port (qAdj adjacency screen, threat-escort, qVetoReach kill-tier, qEnemyLenMin len-floor, huntMirror B1). Smoke vs v138: 55% (5 maps x2s), queen dead 0.60 vs 0.95, kept-after-theirs 61% vs 14%.
+- Full S0 v140s0full vs v138 running.
+- v138 LIVE (sub 16660). S1 challenges: 0/10 vs FtM/Vibing++ (top-4 wall as expected); SSS/Sponge/Computers + band 919/529/782 queued behind 60g/hr cap.
+- Lane status: earlyecon allocator iterating (sticky holds look net-loss); autarky shipped champMargin+relay+trade block (54x18 gate — to integrate); explore SPSA delivered vectors (feed330, sd2 revert — feed moves on STOP list, sd2 conflicts v120 ship — parked).

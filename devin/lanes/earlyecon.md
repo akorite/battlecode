@@ -624,3 +624,45 @@ qsafe parked per steering threshold. Awaiting the queen-evasion-vs-
 front-arc design (killer-geometry escort: 96% mover-kills, side/front
 arcs, 65% visible 2+ rounds out) — that escort needs measured arcs, not
 this concentric-fear model.
+
+## QUEEN FEED (v2#2 second half): abyss_v149qf — NOT PASSED (40% pair)
+
+Mechanism (per spec): expendable len-2/3 workers adjacent (cheb<=1) to
+the LIVE queen's head die in place mid-game so she eats the drops —
+the elected-champ die-in-place path extended to [qFeedRound, feedAt).
+Params: qFeedRound=200, qFeedDist=1, qFeedMaxLen=3, qFeedAge=8,
+guarded by worker_ + feedMinUnits + !queenDead + fresh queenRound.
+Verdict vs abyss_v149 (devin/v120 HEAD), 5-map x2-seed x2-seat smoke
+(autarky/islands/unsw/default/stronghold, tag v149qf_smoke):
+
+- pair: 8/20 = 40% (0W/8S/2L). autarky 1/4, stronghold 1/4, rest 2/4.
+- Target metrics ALL moved backward:
+    qlen@end     2.944 vs 4.333   (she gets SHORTER, not longer)
+    qAlive@end   0.167 vs 0.278   (she dies MORE, not less)
+    longest@end  33.5  vs 32.9    (~flat, +0.5)
+- Mechanism fires: d_hitSelf up on 4/5 maps (autarky +3.3, default
+  +1.2, islands +6.0, stronghold +24.3; unsw -5.6). tl200 bit-identical
+  on every map — pre-200 behavior untouched, so the delta is the qfeed
+  window itself.
+- Per-map queenEnd c/b: autarky 0.0/0.5, default 2.2/0.0, islands
+  0.0/0.0, stronghold 13.2/19.0, unsw 0.0/0.0 — nowhere net-positive.
+- She still dies h2h: qDeadReason mostly hitHeadToHead both sides;
+  qDeadRound mixed (autarky 299/284 later, islands 220/196 later,
+  default 138/193 EARLIER).
+
+Why it fails (read): mid-game the queen is ram-threatened, not
+pearl-starved — she forages fine, so a corpse-drop next to her head
+doesn't convert to length before an enemy head arrives. The sacrifice
+just removes a forager near the colony core (and possibly a blocking
+body she needed). The 2-3 pearls a len-2/3 drops can't buy back the
+lost forage round-trips. stronghold's +24 hitSelf/game shows the die
+fires heavily where workers crowd her — pure tax.
+
+qfeed parked at qFeedRound=200 / len<=3 / cheb1. If revisited: the
+spec's premise "every pearl on her compounds" needs her to LIVE —
+maybe gate the die behind no-visible-enemy (she already has
+wQueenRam-gated safety evaluation; a suicidal drop beside a threatened
+queen is a donation to the rammer).
+
+Files: workspace/abyss_v149/ (base ref), workspace/abyss_v149qf/,
+results/v149qf_smoke/.

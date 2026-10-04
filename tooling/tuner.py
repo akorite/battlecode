@@ -23,11 +23,11 @@ BASE = 'abyss_x_tune'
 OPP = 'abyss_combat'
 
 
-def make_variant(slug, param, val):
+def make_variant(slug, param, val, base):
     dst = WS / slug
     if dst.exists():
         shutil.rmtree(dst)
-    shutil.copytree(WS / BASE, dst)
+    shutil.copytree(WS / base, dst)
     common = dst / 'common.hpp'
     text = common.read_text()
     pat = re.compile(r'(\b' + re.escape(param) + r'\s*=\s*)[-0-9a-fxA-F\.]+')
@@ -40,11 +40,11 @@ def make_variant(slug, param, val):
         f.unlink()
 
 
-def run_probe(slug, param, val, maps, jobs, seed_start):
+def run_probe(slug, param, val, maps, jobs, seed_start, opp):
     tag = 'tune_' + slug
     res = BC / 'results' / tag
     cmd = [PY, str(BC / 'tooling/kmatch.py'), 'run',
-           '--cand', slug, '--base', OPP,
+           '--cand', slug, '--base', opp,
            '--maps', maps, '--seeds', '1', '--seed-start', str(seed_start),
            '--jobs', str(jobs), '--tag', tag]
     t0 = time.time()
@@ -78,8 +78,6 @@ def main():
     ap.add_argument('--opp', default=OPP)
     ap.add_argument('--seed-start', type=int, default=7)
     a = ap.parse_args()
-    global BASE, OPP
-    BASE, OPP = a.base, a.opp
 
     LOG.parent.mkdir(exist_ok=True)
     for line in open(a.plan):
@@ -91,8 +89,8 @@ def main():
         param, val = kv.split('=', 1)
         maps = next((p[5:] for p in parts[2:] if p.startswith('maps=')), MAPS)
         note = ' '.join(p for p in parts[2:] if not p.startswith('maps='))
-        make_variant(slug, param, val)
-        wins, losses, score, dlen, mins = run_probe(slug, param, val, maps, a.jobs, a.seed_start)
+        make_variant(slug, param, val, a.base)
+        wins, losses, score, dlen, mins = run_probe(slug, param, val, maps, a.jobs, a.seed_start, a.opp)
         row = (f'| {slug} | `{param}={val}` | {maps} | {wins}-{losses} '
                f'({score:.0%}) | dlen {dlen:+.1f} | {mins:.0f}m | {note} |\n')
         print(row, end='', flush=True)

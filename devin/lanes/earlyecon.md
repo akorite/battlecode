@@ -766,3 +766,41 @@ density, not the invisible-march mechanic (which produced 0 queen
 deaths in the corpus). VERDICT: symmetric fair-attrition on the seam —
 per spec, standing down on the queen-only seam guard. If revisited:
 td is where edge kills concentrate asymmetrically (11 vs 7).
+
+## v158 FRONT-LOAD FEEDERS — PASS 62.5% pair (15/24), first feed-variant pass
+
+Mechanism (v3 late-game spec #4): feedBurst_ = nearest-ring front wave
+at window open — worker within feedBurstDist=14 of champHead_, report
+age <= champMemory, round - feedAt <= 20 → wFeed x3 pull. Everything
+else reused (champOne election, champFeedDist=2 die-in-place, anchor).
+
+Gate vs abyss_v149@devin/v120-HEAD, 6-map x2-seed x2-seat (unsw,
+islands, stronghold, default, autarky, schooltime; tag v158_frontload,
+replays kept):
+
+- pair: **15/24 = 62.5% (3W/9S/0L)** — ZERO pair losses on any map.
+  islands 100% (2W), stronghold 75% (1W/1S), rest 50%.
+- Required metrics: qlen@end **3.41 vs 1.91 (+79%)**, longest@end
+  **32.7 vs 28.6 (+14%)**, queen-dead/game 0.625 vs 0.625 (flat),
+  alive@end 18.6 vs 16.5.
+- Feed drops: the base ALREADY dies massively in the window (unsw
+  156 hitSelf r360-380 alone); cand vs base deltas are mixed
+  (schooltime +16 r380-420, stronghold +9, unsw/islands slightly
+  down) — the win is CONVERSION not volume: more of the drops land
+  on her (qlen@end nearly doubled) because the near-ring wave
+  actually arrives inside the window.
+- This is the first feed variant that pays — the difference vs the
+  dead v149qf series: feeding the ELECTED champ (late, anchored,
+  alive by definition) not the roaming queen mid-game.
+
+## SMALL-MAP BUD (v3 #3): verified firing — no change needed
+
+Code at policy.hpp (queen_ && bud_ && round<100 → keepBase=min 2)
+is present and live: bud_ = units<18 opens early on all maps,
+hiding_ cannot starve it (queenHide=0). Replay check on
+v149L-v138 stripes/devil/td/weakhold/dilemma: queen splits fire
+r0-56 everywhere incl. td r11 and stripes r11/29 — the keep floor
+is already low where it matters. No NC gate in code — it fires on
+every map during the breed phase, not just NC<=700.
+
+Candidate for staging: workspace/abyss_v158.

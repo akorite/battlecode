@@ -180,8 +180,24 @@ CONSOLIDATE recipe from computers' decoded +130:
 
 s2a_feed (autarky,schooltime × 2 seeds vs v104, akdbg): **4/8 = 50%** (schooltime B 2/2
 incl. r197 elim, autarky A 1/2 c30 bell, schooltime A 1/2); champ lengths c30-48 vs the
-gate's 12-14. L@300 still 9-14 (target ≥10 borderline). Regate on the 5 regression/
-affected maps running.
+gate's 12-14. L@300 still 9-14 (target ≥10 borderline).
+
+### reg_phases (v6, dilemma/slithery/autarky/unsw/trauma × 4 seeds vs v104): **12.5%**
+
+dilemma 0/8 (ALL eliminated r73-237 — production collapse), slithery 12.5%, trauma 12.5%,
+unsw 12.5%, autarky 25% (A-seat elims win). Mechanism: `alive@r50 1.5 vs 6.0`,
+`splits@r60 7.5 vs 13.5`, splits r0-25 counted in replays — 6-9 vs v104's 12-15. The
+early-econ regression is the v6 **unscoped queen escort** (r40 escorts pulled ~3 foragers
+off every corridor game in the production war) PLUS trade doctrine drift:
+
+- v7 fix A: `tradeSlack=0`→1 / `tradeMinUnits`→4 in OPEN+GROW — refusing +1-shorter
+  mutual kills left enemy killers alive adjacent → `splitEnemyDist=2` blocked our splits
+  (compounding: fewer units, more enemy proximity, fewer splits).
+- v7 fix B: `phaseQueenEscortFrom` scoped to `mapIsOpen()` — the queen-duel evidence is
+  big-map bells (our queen dead by r330 in 20/22 open-map games); elim maps end before
+  r330 and need every forager. Corridor maps no longer pay the escort tax.
+
+v7_check re-run on dilemma/slithery/autarky/unsw in flight.
 
 ## Still weak
 

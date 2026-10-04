@@ -76,6 +76,11 @@ class Policy {
             Choice sl;
             if (slayQueen(sl)) return sl;
         }
+        // s0 identity must exist before buildTargets: Policy is rebuilt every
+        // turn, so flags assigned later in decide() are dead-on-arrival to the
+        // target builder. (assassin_ is always false pre-squad — early test.)
+        s0scout_ = !queen_ && !grower_ && !lead_ && w_.init.id == w_.champId() + 2
+                   && w_.t.round < p_.s0Until && w_.board.portalOpen_;
         buildTargets();
         if (!lean_) buildFriendFields();
         else noFriendFields();
@@ -94,6 +99,11 @@ class Policy {
         if (pocketMap_) noteFoodReach();
         buildSquadTargets();
         worker_ = !queen_ && !grower_ && !lead_ && !assassin_;
+        // S0 scout mission: our first worker (queen id +2 under alternating
+        // initial ids) gets a lip target on gated-portal maps so the scout
+        // branch makes the first transit inside the blindGrace window —
+        // winners send a scout across by ~r10; unguided ours arrive ~r40+.
+
         // Starving on safe food: nothing edible in reach that isn't a bait bed.
         // Then a suicide-eat (enter the appendage, take its pearls, wedge-die)
         // out-values orbiting a food desert — v119's swarm economy tolerates
@@ -228,23 +238,6 @@ class Policy {
                 }
             }
         }
-        // Queen self-kill fix (1c follow-on): a vetoed dead-end step may only win
-        // when EVERY move is vetoed — a scared queen who still has an open move
-        // must never be routed into a pocket she cannot leave (weakhold seat-A
-        // fog-nook hitWall at r37). Workers keep F2's least-bad ordering.
-        if (queen_) {
-            bool anyOpen = false;
-            for (int d = 0; d < 4; d++)
-                if (first[d].dest >= 0 && first[d].why != "deadend") anyOpen = true;
-            for (Cand const& cd : cands)
-                if (cd.c.dest >= 0 && cd.c.why != "deadend") anyOpen = true;
-            if (anyOpen) {
-                for (int d = 0; d < 4; d++)
-                    if (first[d].why == "deadend") first[d].score = -1e18;
-                for (Cand& cd : cands)
-                    if (cd.c.why == "deadend") cd.c.score = -1e18;
-            }
-        }
         std::vector<double> ctot(cands.size());
         for (size_t i = 0; i < cands.size(); i++) ctot[i] = cands[i].c.score;
 
@@ -257,8 +250,8 @@ class Policy {
             bool complete = true;
             for (int d = 0; d < 4 && complete; d++) {
                 Choice const& c = first[d];
-                if (c.terminal) { t[d] = c.score; continue; }
                 if (c.dest < 0) continue;
+                if (c.terminal) { t[d] = c.score; continue; }
                 std::vector<int> eaten;
                 if (c.eat) eaten.push_back(c.dest);
                 double rest = searchFrom(firstBody[d], c.newL, depth - 1, 1, eaten);
@@ -280,7 +273,7 @@ class Policy {
         }
         Choice best;
         for (int d = 0; d < 4; d++) {
-            if (first[d].dest < 0 && (first[d].why != "scout" || queen_)) continue;
+            if (first[d].dest < 0) continue;
             Choice c = first[d];
             c.score = total[d];
             if (c.score > best.score) best = c;
@@ -290,7 +283,7 @@ class Policy {
             c.score = ctot[i];
             if (c.score > best.score) best = c;
         }
-        if (best.dest < 0 && (best.why != "scout" || queen_)) {
+        if (best.dest < 0) {
             // Nothing legal: first try a tile we only gave up as a teammate's last exit,
             // otherwise any well-formed move beats the default suicide.
             best.dir = w_.t.dir;
@@ -308,8 +301,7 @@ class Policy {
                     if (s2.id == hid) (isEnemy(s2) ? enemyHead : friendHead) = true;
                 bool own = n >= 0 && (ownCell(n) || std::find(w_.ownExtra.begin(), w_.ownExtra.end(), n) != w_.ownExtra.end());
                 bool physFree = n >= 0 && w_.occ[n] < 0 && !own;
-                bool qRes = std::find(queenExits_.begin(), queenExits_.end(), n) != queenExits_.end();
-                int rank = enemyHead ? 0 : friendHead ? 9 : qRes ? 10 : physFree ? (base_[n] >= INF ? 6 : 4) : 7;
+                int rank = enemyHead ? 0 : friendHead ? 9 : physFree ? (base_[n] >= INF ? 6 : 4) : 7;
                 if (rank < bestRank) {
                     bestRank = rank;
                     best.dir = d;
@@ -453,6 +445,7 @@ class Policy {
     Nav nav_;
     double foodReach_ = 0;          // reachable, collectible belief (starving signal)
     bool worker_ = true;            // no doctrine role: not queen/grower/lead/assassin
+    bool s0scout_ = false;          // first worker on a portal mission (early transits)
     bool anyBait_ = false;          // a bait cell (deg<=1 provable) seen this game — raw detector
     bool pocketMap_ = false;        // anyBait_ && small map — gates pocket mechanisms
     bool starving_ = false;         // worker with little reachable non-bait food — suicide-eats allowed
@@ -558,27 +551,6 @@ class Policy {
     // dragon known (ties: lowest id), possibly ourselves. Everybody runs the same rule on
     // gossiped evidence, so the team converges on one champion instead of each long dragon
     // electing itself.
-    // Geometric size of the region containing `cell` (walls bound it — a
-    // Schooltime queen is sealed in a 2x2 at 4 of 2400 tiles). Static map
-    // property; result capped at 40. Unknown/out-of-range cell -> not sealed.
-    int regionReach(int cell) {
-        Board const& b = w_.board;
-        if (cell < 0 || cell >= b.NC) return 40;
-        std::vector<int> seen(b.NC, 0), q(1, cell);
-        seen[cell] = 1;
-        for (size_t i = 0; i < q.size() && q.size() < 40; i++)
-            for (int d = 0; d < 4; d++) {
-                int n2 = b.nb[q[i] * 4 + d];
-                if (n2 >= 0 && !seen[n2]) { seen[n2] = 1; q.push_back(n2); }
-            }
-        return (int)q.size();
-    }
-    int queenReach_ = -1;
-    std::vector<int> queenExits_;   // queen's free exits we reserved (workers keep off)
-    int queenReach() {
-        if (queenReach_ < 0) queenReach_ = regionReach(w_.queenCell);
-        return queenReach_;
-    }
     void locateChamp() {
         champHead_ = -1;
         champAge_ = 0;
@@ -586,12 +558,8 @@ class Policy {
         champId_ = -1;
         champIsQueen_ = false;
         selfChamp_ = false;
-        queenReach_ = -1;
-        queenExits_.clear();
         if (w_.t.round < std::min(p_.queenFeedRound, p_.feedRound) - 40) return;
         bool queenReady = !p_.queenHide || w_.t.round >= p_.queenHideUntil;
-        if (queenReady && w_.ourQueen >= 0 && !w_.queenDead(w_.ourQueen) && queenReach() < 20)
-            queenReady = false;  // sealed queen is no champion — feed the longest dragon
         if (queenReady && w_.ourQueen >= 0 && !w_.queenDead(w_.ourQueen) && w_.queenRound >= 0 && w_.t.round - w_.queenRound <= p_.champMemory) {
             champHead_ = w_.queenCell;
             champAge_ = w_.t.round - w_.queenRound;
@@ -815,9 +783,7 @@ class Policy {
         return mine >= theirs;
     }
     // How far an enemy head can move in one turn: a MOVE of k steps needs length k + 1.
-    // Enemy kill-reach: freeSteps + len-1 (arriving at len 1 still kills on h2h,
-    // per the lead_ branch's own rule). -2 under-screens len2-3 rams by a tile.
-    int reachOf(int visible) const { return std::min(std::max(freeSteps(visible) + visible - 1, 1), p_.reachCap); }
+    int reachOf(int visible) const { return std::min(std::max(freeSteps(visible) + visible - 2, 1), p_.reachCap); }
     bool midGame() const { return w_.t.round >= p_.earlyEnd; }
     bool lateGame() const { return w_.t.round >= p_.midEnd; }
 
@@ -850,21 +816,12 @@ class Policy {
         markBody(blk, w_.body, L_);
         for (World::Seen const& s : w_.others) {
             if (isEnemy(s)) continue;
-            int exits = 0, exit = -1, exn = 0;
-            int exCells[4];
+            int exits = 0, exit = -1;
             for (int d = 0; d < 4; d++) {
                 int n = b.nb[s.head * 4 + d];
-                if (n >= 0 && blk[n] <= 1) { exits++; exit = n; exCells[exn++] = n; }
+                if (n >= 0 && blk[n] <= 1) exits++, exit = n;
             }
             if (exits == 1) base_[exit] = INF;
-            // Queen self-kill fix (1b): queens move first, so a teammate standing on
-            // one of her last two exits is a wall she cannot clear. Workers never
-            // end a turn on them.
-            if (s.id == w_.ourQueen && exits <= 2)
-                for (int i = 0; i < exn; i++) {
-                    base_[exCells[i]] = INF;
-                    queenExits_.push_back(exCells[i]);
-                }
         }
     }
 
@@ -902,6 +859,43 @@ class Policy {
                 for (int c2 : lips)
                     if (b.bed[c2] != 1) targets_.push_back({c2, 0.0, -1, p_.wPortalScout});
             }
+        // The designated scout routes straight to the nearest unpaired lip;
+        // belief-0 targets bypass friend-claim so the pull always reaches it.
+        if (s0scout_) {
+            // Until the scout sees a portal end it cannot know where one is —
+            // lips only exist once observed (r40+ unguided on qos). Before
+            // that, send it at the point-rotated spawn tile: the far quadrant
+            // is where the designers put portal pairs (qos/trophy/default).
+            bool anyPaired = false;
+            int best = -1, bd = INF;
+            for (auto const& pe : w_.portalEnds) {
+                if (pe.second.size() == 2) { anyPaired = true; continue; }
+                World::PortalEnd const& e = pe.second.front();
+                int lips[2] = {e.orient == 0 ? b.id(e.x, e.y - 1) : b.id(e.x - 1, e.y),
+                               b.id(e.x, e.y)};
+                for (int c2 : lips)
+                    if (b.bed[c2] != 1 && b.cheb(c2, w_.head) < bd) { bd = b.cheb(c2, w_.head); best = c2; }
+            }
+            if (!anyPaired) {
+                if (best >= 0) {
+                    // Pull must come from BEYOND the portal: a lip target is
+                    // skipped the moment dest==lip (t.cell==dest) and
+                    // wPortalLoiter pushes off the lip — dragons hover one
+                    // ring out for the whole window. Target the guess
+                    // landing instead so BFS-through-guess gives the
+                    // gradient that walks the scout across; countdown=-2
+                    // exempts it from the dest skip so the pull still applies
+                    // on the crossing step (dest == guess landing).
+                    int rot = b.id(b.W - 1 - b.X(best), b.H - 1 - b.Y(best));
+                    if (b.bed[rot] != 1) targets_.push_back({rot, 0.0, -2, p_.s0Portal});
+                }
+                else if (w_.spawnCell >= 0) {
+                    int wp = b.id(b.W - 1 - b.X(w_.spawnCell), b.H - 1 - b.Y(w_.spawnCell));
+                    if (b.cheb(wp, w_.head) > 4 && b.bed[wp] != 1)
+                        targets_.push_back({wp, 0.0, -1, p_.s0Far});
+                }
+            }
+        }
     }
 
     void buildFriendFields() {
@@ -1148,11 +1142,9 @@ class Policy {
             // teleports the head to the far neck. Score the crossing as exploration
             // so a dragon learns the pair and the far half of the map opens up.
             Edge const& e = b.side(head, d);
-            // The champion (queen while alive) never blind-crosses: the far neck
-            // is unseen, and her hitSelf cost us the tiebreak on portal maps.
-            if (k == 0 && e.kind == 2 && e.partnerOrient < 0 && !queen_) {
+            if (k == 0 && e.kind == 2 && e.partnerOrient < 0) {
                 c.dest = -1;
-                c.score = p_.wScout - p_.wBlindQuiet * (1.0 + 0.25 * L);
+                c.score = p_.wScout - (!queen_ && b.portalOpen_ && w_.t.round < p_.blindGrace ? 0.0 : p_.wBlindQuiet * (1.0 + 0.25 * L));
                 c.why = "scout";
                 c.terminal = true;
             }
@@ -1216,7 +1208,7 @@ class Policy {
         // the child's head is our tail and faces out. So a dead end (a fountain corridor,
         // a pocket) is fine as long as the tail side has room; it costs the 2-long stub.
         bool viaReverse = false;
-        if (space < need && newL >= 4 && !queen_ && static_cast<int>(body.size()) == newL) {
+        if (space < need && newL >= 4 && static_cast<int>(body.size()) == newL) {
             int childNeed = std::min(static_cast<int>(p_.spaceFactor * (newL - 2)) + p_.spaceMargin, b.NC / 2);
             std::vector<int> blk2 = base_;
             for (size_t i = 0; i + 1 < body.size(); i++) blk2[body[i]] = INF;
@@ -1238,17 +1230,6 @@ class Policy {
             wallScratch_.assign(b.NC, 0);
             for (int oc : nb2) wallScratch_[oc] = INF;
             for (int oc : w_.ownExtra) wallScratch_[oc] = INF;
-            // Queen self-kill fix (1a): teammate HEADS within 2 tiles of the queen
-            // are walls in her dead-end scan — they move after her and stay
-            // blocked for her whole turn, so they read as the nook plug she
-            // cannot clear. Body middles are deliberately not walled: escorts
-            // in open space must not shrink her reachable region (weakhold
-            // seat-A route regression).
-            if (queen_) {
-                for (World::Seen const& s : w_.others)
-                    if (!isEnemy(s) && b.cheb(s.head, w_.head) <= 2)
-                        wallScratch_[s.head] = INF;
-            }
             // wh4: the fog-walls scan only runs on small maps — on big maps a
             // small seen component + thin fog boundary describes corridors as
             // well as pockets, and the veto pinned the queen.
@@ -1274,27 +1255,8 @@ class Policy {
                 Scan sc2 = nav_.deadEnd(b, dest, wallScratch_, p_.trapScanCells, true);
                 unproven = !sc2.cycle && sc2.cells <= p_.trapSafeCells && sc2.frontier <= p_.trapFrontier;
             }
-            // Queen self-kill fix (1a2): a tile with <2 free exits is a nook —
-            // her own body frees next turn but an ally or enemy standing there
-            // will not. Corridors (neck + ahead) still count 2.
-            bool fewExits = false;
-            if (queen_) {
-                int ex = 0;
-                for (int d = 0; d < 4; d++) {
-                    int n = b.nb[dest * 4 + d];
-                    if (n < 0) continue;
-                    int o = w_.occ[n];
-                    if (o >= 0 && o != w_.init.id) continue;
-                    ex++;
-                }
-                fewExits = ex < 2;
-            }
-            if (!loopRoom && (tiny || tree || unproven || fewExits)) {
+            if (!loopRoom && (tiny || tree || unproven)) {
                 c.stepTerm = -2000 + sc.cells;  // least-bad largest region wins if all vetoed
-                // F2: a vetoed step must still be pickable — except for a sealed
-                // queen, whose 'trapped-free' keeps her in her safe room (walking
-                // out of it gets her killed; schooltime 18.8% regression gate).
-                if (!queen_ || regionReach(body.front()) >= 20) c.score = c.stepTerm;
                 c.terminal = true;
                 c.why = "deadend";
                 return c;
@@ -1311,7 +1273,7 @@ class Policy {
         // (maze). Two loop bodies keep the off path instruction-identical.
         if (!short_)
         for (Target const& t : targets_) {
-            if (t.cell == dest) continue;
+            if (t.cell == dest && t.countdown != -2) continue;
             int dd = dist[t.cell];
             if (dd == INF) continue;
             if (!eaten.empty() && std::find(eaten.begin(), eaten.end(), t.cell) != eaten.end()) continue;
@@ -1330,7 +1292,7 @@ class Policy {
         }
         else
         for (Target const& t : targets_) {
-            if (t.cell == dest) continue;
+            if (t.cell == dest && t.countdown != -2) continue;
             int dd = dist[t.cell];
             if (dd == INF) continue;
             // Bait cells: a bed behind a single exit is lethal below baitLen
@@ -1559,7 +1521,8 @@ class Policy {
                 int n = q < 0 ? dest : b.nb[dest * 4 + q];
                 busy = n >= 0 && w_.occSeen[n] >= 0 && w_.t.round - w_.occSeen[n] <= p_.blindMemory;
             }
-            danger += busy ? p_.wBlind * (1.0 + 0.25 * newL) : p_.wBlindQuiet;
+            if (w_.t.round >= p_.blindGrace || queen_ || !b.portalOpen_)
+                danger += busy ? p_.wBlind * (1.0 + 0.25 * newL) : p_.wBlindQuiet;
         }
         // Heads parked next to a portal are what dragons coming through it crash into
         // (they cannot see us). Pass through or move on; do not loiter there.
@@ -1574,16 +1537,6 @@ class Policy {
             // to reach fresh beds; kelp-ful mazes keep the full price.
             double fogMult = (open_ && !queen_ && !grower_ && !maze_) ? p_.openFog : 1.0;
             danger += p_.wFog * (1.0 + 0.25 * newL) * (assassin_ ? p_.assassinFogMult : 1.0) * fogMult;
-        }
-        // Queen self-kill (two-way reservation): workers clear her exits; she in
-        // turn keeps off cells on or beside seen ally heads — queens move first,
-        // so an ally's current tile is a wall she cannot clear.
-        if (queen_ && k == 0) {
-            for (World::Seen const& s : w_.others)
-                if (!isEnemy(s) && b.cheb(s.head, dest) <= 1) danger += p_.wQueenAlly;
-            // Fog preference: landing on a tile nobody currently sees is how she
-            // walks into unseen kelp — prefer seen-safe cells (a bonus, not a veto).
-            if (!crossing && !w_.visible(dest)) danger += p_.wQueenFog;
         }
 
         c.stepTerm = (c.eat ? p_.eatBonus : 0.0) - danger;
@@ -1642,10 +1595,6 @@ class Policy {
             // brood multiplies sooner; afterwards the normal keep floor returns.
             int keepBase = (open_ && w_.init.id == w_.champId() && p_.openQueenKeep >= 0)
                                ? p_.openQueenKeep : p_.growerKeepBase;
-            // x3: a small-map queen out-grows keep = base + round/30 and never buds
-            // (Stripes: first split at r42, opponents r16). Cap her base while the
-            // brood is still building, gated on the breed phase not a tile count.
-            if (queen_ && bud_ && w_.t.round < 100) keepBase = std::min(keepBase, 2);
             int keep = keepBase + w_.t.round / p_.growerKeepEvery;
             if (L_ < keep + p_.growerChild) return false;
             n = p_.growerChild;

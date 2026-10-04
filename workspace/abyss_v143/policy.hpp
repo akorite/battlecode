@@ -76,6 +76,9 @@ class Policy {
             Choice sl;
             if (slayQueen(sl)) return sl;
         }
+        // s0 identity must exist before buildTargets (Policy rebuilt per turn).
+        s0scout_ = !queen_ && !grower_ && !lead_ && w_.init.id == w_.champId() + 2
+                   && w_.t.round < p_.s0Until && w_.board.portalOpen_;
         buildTargets();
         if (!lean_) buildFriendFields();
         else noFriendFields();
@@ -257,8 +260,8 @@ class Policy {
             bool complete = true;
             for (int d = 0; d < 4 && complete; d++) {
                 Choice const& c = first[d];
-                if (c.terminal) { t[d] = c.score; continue; }
                 if (c.dest < 0) continue;
+                if (c.terminal) { t[d] = c.score; continue; }
                 std::vector<int> eaten;
                 if (c.eat) eaten.push_back(c.dest);
                 double rest = searchFrom(firstBody[d], c.newL, depth - 1, 1, eaten);
@@ -280,7 +283,7 @@ class Policy {
         }
         Choice best;
         for (int d = 0; d < 4; d++) {
-            if (first[d].dest < 0 && (first[d].why != "scout" || queen_)) continue;
+            if (first[d].dest < 0) continue;
             Choice c = first[d];
             c.score = total[d];
             if (c.score > best.score) best = c;
@@ -290,7 +293,7 @@ class Policy {
             c.score = ctot[i];
             if (c.score > best.score) best = c;
         }
-        if (best.dest < 0 && (best.why != "scout" || queen_)) {
+        if (best.dest < 0) {
             // Nothing legal: first try a tile we only gave up as a teammate's last exit,
             // otherwise any well-formed move beats the default suicide.
             best.dir = w_.t.dir;
@@ -635,6 +638,7 @@ class Policy {
             }
     }
     bool assassin_ = false;       // assigned to the queen-assassin squad this turn
+    bool s0scout_ = false;          // first worker on a portal mission (early transits)
     int assassinCell_ = -1;       // where the enemy queen was last reported (or seen)
 
     // Our sonar traffic for the turn: a beacon in every direction, plus one
@@ -902,6 +906,31 @@ class Policy {
                 for (int c2 : lips)
                     if (b.bed[c2] != 1) targets_.push_back({c2, 0.0, -1, p_.wPortalScout});
             }
+        // The designated scout routes straight to the nearest unpaired lip;
+        // belief-0 targets bypass friend-claim so the pull always reaches it.
+        if (s0scout_) {
+            bool anyPaired = false;
+            int best = -1, bd = INF;
+            for (auto const& pe : w_.portalEnds) {
+                if (pe.second.size() == 2) { anyPaired = true; continue; }
+                World::PortalEnd const& e = pe.second.front();
+                int lips[2] = {e.orient == 0 ? b.id(e.x, e.y - 1) : b.id(e.x - 1, e.y),
+                               b.id(e.x, e.y)};
+                for (int c2 : lips)
+                    if (b.bed[c2] != 1 && b.cheb(c2, w_.head) < bd) { bd = b.cheb(c2, w_.head); best = c2; }
+            }
+            if (!anyPaired) {
+                if (best >= 0) {
+                    int rot = b.id(b.W - 1 - b.X(best), b.H - 1 - b.Y(best));
+                    if (b.bed[rot] != 1) targets_.push_back({rot, 0.0, -2, p_.s0Portal});
+                }
+                else if (w_.spawnCell >= 0) {
+                    int wp = b.id(b.W - 1 - b.X(w_.spawnCell), b.H - 1 - b.Y(w_.spawnCell));
+                    if (b.cheb(wp, w_.head) > 4 && b.bed[wp] != 1)
+                        targets_.push_back({wp, 0.0, -1, p_.s0Far});
+                }
+            }
+        }
     }
 
     void buildFriendFields() {
@@ -1148,11 +1177,9 @@ class Policy {
             // teleports the head to the far neck. Score the crossing as exploration
             // so a dragon learns the pair and the far half of the map opens up.
             Edge const& e = b.side(head, d);
-            // The champion (queen while alive) never blind-crosses: the far neck
-            // is unseen, and her hitSelf cost us the tiebreak on portal maps.
-            if (k == 0 && e.kind == 2 && e.partnerOrient < 0 && !queen_) {
+            if (k == 0 && e.kind == 2 && e.partnerOrient < 0) {
                 c.dest = -1;
-                c.score = p_.wScout - p_.wBlindQuiet * (1.0 + 0.25 * L);
+                c.score = p_.wScout - (!queen_ && b.portalOpen_ && w_.t.round < p_.blindGrace ? 0.0 : p_.wBlindQuiet * (1.0 + 0.25 * L));
                 c.why = "scout";
                 c.terminal = true;
             }
@@ -1311,7 +1338,7 @@ class Policy {
         // (maze). Two loop bodies keep the off path instruction-identical.
         if (!short_)
         for (Target const& t : targets_) {
-            if (t.cell == dest) continue;
+            if (t.cell == dest && t.countdown != -2) continue;
             int dd = dist[t.cell];
             if (dd == INF) continue;
             if (!eaten.empty() && std::find(eaten.begin(), eaten.end(), t.cell) != eaten.end()) continue;
@@ -1330,7 +1357,7 @@ class Policy {
         }
         else
         for (Target const& t : targets_) {
-            if (t.cell == dest) continue;
+            if (t.cell == dest && t.countdown != -2) continue;
             int dd = dist[t.cell];
             if (dd == INF) continue;
             // Bait cells: a bed behind a single exit is lethal below baitLen
@@ -1559,7 +1586,8 @@ class Policy {
                 int n = q < 0 ? dest : b.nb[dest * 4 + q];
                 busy = n >= 0 && w_.occSeen[n] >= 0 && w_.t.round - w_.occSeen[n] <= p_.blindMemory;
             }
-            danger += busy ? p_.wBlind * (1.0 + 0.25 * newL) : p_.wBlindQuiet;
+            if (w_.t.round >= p_.blindGrace || queen_ || !b.portalOpen_)
+                danger += busy ? p_.wBlind * (1.0 + 0.25 * newL) : p_.wBlindQuiet;
         }
         // Heads parked next to a portal are what dragons coming through it crash into
         // (they cannot see us). Pass through or move on; do not loiter there.

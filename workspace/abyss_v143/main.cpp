@@ -53,13 +53,6 @@ int main() {
             };
             auto safeFirst = [&](int dir) -> int {
                 int dest = dir >= 0 ? world.board.nb[world.head * 4 + dir] : -1;
-                if (dest < 0 && dir >= 0) {
-                    // An unpaired portal edge still crosses — the engine teleports
-                    // the head; nb[] only reads -1 because the far neck is unseen.
-                    // The champion (queen while alive) never blind-crosses.
-                    bc::Edge const& e = world.board.side(world.head, dir);
-                    if (e.kind == 2 && e.partnerOrient < 0 && world.init.id != world.champId()) return dir;
-                }
                 if (dest >= 0 && !ownSeg(dest)) return dir;
                 for (int off : {0, 1, 3, 2}) {
                     int d = dir >= 0 ? (dir + off) & 3 : off;

@@ -99,3 +99,37 @@ REJECTED (all hurt econ or flip seats):
 Escort side of 5b NOT shipped — converging workers on a hidden queen keeps
 costing econ; the right form probably wants escorts to form only once an enemy
 is *near* the queen's reported cell, not continuously.
+
+## v150 = abyss_v149 + channelling feed merge (gate-runner task)
+
+Merged v143feed's three pieces onto the v149 base (v143+C4+champ-plant+fallback330):
+champSeen_ live-head targeting, die-in-place SPLIT-0 (noValidAction), fresh gate
+feedAge_<=feedHeardDie(2) || champSeen_. champChannelDist=1 replaces champFeedDist
+for champOne feeders; champMinLen kept at 0 (documented rejection). wChampHold NOT
+ported — champAnchor_ is the same idea done right (planted hover, not parked roam).
+C4 corridor veto + c.terminal early-outs untouched.
+
+Gate vs abyss_v149 — autarky,stronghold,default,unsw,islands x2 seeds both seats (20g):
+- win%: 45.0% ALL (1W/7S/2L); autarky/default/unsw 0/2/0 pairs, islands 1/0/1,
+  stronghold 0/1/1 (s1 double-loss, s2 split). CI [25.8,65.8] — noise band.
+- longest@end (r500 n=17): 26.5 vs 31.7 — delta driven by 2-3 monster games on
+  base side (54,48,39,37 vs cand max 41); per-map medians much closer. unsw cand
+  actually ahead (28.75 vs 27.0).
+- Feed capture (channel.py, 20 r>=320 games, seat-corrected): chfeed fires as
+  designed — 22.2 noValidAction/game ALL SPLIT-0 verified vs base 0.1. Feed
+  deaths 45.6 at 23% adj vs base 47.6 at 18% adj — die-in-place is the MORE
+  accurate drop mechanism. leadShare 8.2 vs 9.2 (no conversion gain), l450 19.4
+  vs 24.8.
+- Queen deaths 0.700=0.700; wall+self+body deaths 107 vs 132 (the ~25 shifted
+  into noValidAction = the chfeed volume). No r0-5 queen kills either side.
+- Map-shape finding: unsw/islands show 50-63 deliberate SPLIT-0/game at 3-10%
+  adjacency — those games keep the QUEEN as champion (roams, never plants):
+  feeders die beside a <=2-round-stale reported head. Same stale-target waste
+  v149 has there, just with a different death type. The plant only covers
+  worker-champs; queen-champ targeting is the shared gap.
+
+VERDICT: mechanisms are compatible — die-in-place out-precisions the neck-step
+(23% vs 18%) and scores within noise (45%±20); no evidence it helps or hurts
+the monster-champ upside at n=20. If a ship/die call needs power, run a bigger
+board; if longest@end is the gate metric, the signal is slightly negative but
+inside per-map variance.

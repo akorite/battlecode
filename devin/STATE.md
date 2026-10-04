@@ -59,5 +59,9 @@
   cause + evidence per lane doc). Param tuning as vector via SPSA (explore lane).
 - Build order 5a phases (autarky) → 5b queen module (pocket next) → 5c job
   allocator (earlyecon, rebases explore sticky) → 5d map-class selector (last).
-- Candidates in flight: v120 LIVE (splitEnemyDist 1, sub 16296); v121 =
-  queenFeedRound 400 in S1 (feedgate, big maps). Sticky promo via earlyecon.
+- Candidates in flight: v120 LIVE (splitEnemyDist 1, sub 16296, Elo 1440->1535);
+  v121 = FULL feed bundle (3 feed params + relays 370 + hideUntil 390) at S1
+  (feedgate2, 8 big maps x3 seeds — early 62.5%, alive@499 +157%);
+  v122 = correctness pack F2,F3,F12,F13,F15 — F2+F3 alone neutral (50.0%/48g),
+  full pack gating on queen-death maps (v122full). Sticky promo via earlyecon.
+- F11 (public sonar secret) parked on user: gitignored header or private repo.

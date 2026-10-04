@@ -204,3 +204,6 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
   holds, swarmRank on re-add, flags out of common.hpp). Autarky got F8/F9.
 - v120: live sub 16296. Remaining-maps gate 52.1% (96g) → total ~52.4%/160g.
 - v119 challenge record: Nitronics 3-2, 1234 1-4, unranked top3 3-4. Elo 1440.
+- vetofix (v122 F2+F3, 48g 6-map): 50.0% — neutral; queen-death rate unchanged.
+  Correctness kept in branch; F12/F13/F15 added after gate start — re-gate with
+  the full pack on queen-death maps before any ship decision.

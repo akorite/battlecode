@@ -41,3 +41,13 @@
 - v112 ladder review at 60+ ranked games (from activation ~23:15).
 - Integrate pearl v3 or qsiege fix, whichever passes first.
 - Backlog: stripes/devil openings, mid-game H2H defense tuning, STATUS.md.
+
+## Steering (Keitaro, 4 Oct 00:00) — key facts
+- Round-500 win rule (426 top-team replays): longer queen wins 210/210; equal queens → longer longest dragon wins 214/214. Dead queen = len 0.
+- Guards killed the feed: v104's boxed-in dragons dying beside the champion FED it. hitSelf r300-399: 30.3 (v104) → 10.4 (v106) → 12.7 (v112). Longest r499: 30.8 → 13.3 → 13.0. ACTION A: scope guards queen-only or r<40.
+- v113 grows better (27.8 drag, 69 len r100 vs opp 22.6/60; 720 pearls vs 481) but doesn't consolidate (15.3 vs 28.9 longest r499).
+- Elimination maps (Stripes/Trophy/Devil/Dilemma/QoS/Autarky/TD/Default): winner ahead by r25 (6.3v5.3 dragons), far by r50. Opening 0-50 IS the game there.
+- Round-500 maps: winners' longest 9.4 vs 7.1 at r200, 16.8 vs 12.0 at r300. Islands/Schooltime/Australia → longest dragon decides.
+- Queen deaths: 94% are len2-3 rams on unguarded queens (0 allies within 3 tiles). Median ram death r131.
+- Stop: guards on non-queen dragons; whole-board vetoes; 88-gate verdicts (±10 noise); mixed-field records (compare by tier).
+- Benchmark bots: Bot(11), test4(19), Sabotage-d(46). Sonar: no fixed tags.

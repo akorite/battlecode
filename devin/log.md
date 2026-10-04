@@ -148,3 +148,15 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
 - New lanes: autarky (13f9c332) spawned — 0/4-0/6 everywhere, worst map.
   whfix terminated post-wh4-ship.
 - v113 challenges so far 4W-7L; quota refills ~30min for next batch.
+
+## 23:30 UTC — self-challenge census + v114 build
+- Elo 1513 (was ~1463). Ranked record overall 54W-71L; self-challenge batch vs 1700+: Nitronics 3W-13L, JKS 6W-11L, 1234 2W-10L, Sarvottam 6W-4L. Sweet spot: win vs ~1580, lose narrowly vs 1700+.
+- pearl worker finding: BIG-map bleed on pearl4 was v110's wh2 (not the opening) — opening bit-inert on big maps, still 0/4 there. wh4 already replaced wh2 on v113.
+- Built abyss_v114 = v113 + pearl gated opening (open_ engages nc<=700 non-maze OR startUnits>=5 && nc<=1300). Smoke vs v113: 66.7% (arena 75%, dilemma 100%, islands coin-flip). Metrics: +26% pearls r60, +47% splits r60, alive@r50 7.0 vs 1.0, queen deaths 0.58 vs 1.0/game.
+- gate-v114-v104 (22 maps, 88g) running.
+
+## 23:50 UTC — v114 gate result + v115 build + starvation root cause
+- gate-v114-v104: 42.0% (SMALL 57.5%, BIG 29.2%). open_-IN maps (arena/Colosseum/default_small/dilemma/trophy) ~70%; BIG dip = noise on open_-out maps + marginal brood-clause maps (autarky/QoS/default).
+- AUTOSCRIM ROOT CAUSE FOUND: swarm starvation. TD m997381: splits 3v20 extinct r148; stripes 1v54; weakhold 30v164; australia 59v395. Queen never reaches bud length — paths never cross pearl beds (no 'eat' action exists; growth is passive on tile entry).
+- abyss_v115 = v114 with openMinUnits=99 (brood clause dead): open_ engages ONLY on <=700 non-maze maps (arena, Colosseum, default_small, dilemma, trophy). Outside-opponent gates vs cf+combat running on those + 4 inert controls.
+- Outstanding: mid-game/big-map forage deficit = the real autoscrim killer (Australia/UNSW/Slithery all >1300 tiles, open_ inert). Needs a whole-game forage lane — starve/autarky workers.

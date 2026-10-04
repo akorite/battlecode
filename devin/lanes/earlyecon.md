@@ -666,3 +666,53 @@ queen is a donation to the rammer).
 
 Files: workspace/abyss_v149/ (base ref), workspace/abyss_v149qf/,
 results/v149qf_smoke/.
+
+## QUEEN FEED v2 (lexicographic-scoring reframe): 4-variant series — feed NEGATIVE, screen ~neutral
+
+Steering reframe (verified): r499 bells score lexicographically —
+queen end-length, then longest, then team total. Spec: (a) keep her
+ALIVE to 499, (b) drops adjacent to her head r200-feedStart,
+(c) die-in-place extension. All runs: vs abyss_v149, same 5-map x2-seed
+x2-seat smoke (autarky/islands/unsw/default/stronghold), jobs 2.
+
+| variant | mechanism | pair | qlen@end | qAlive@end | longest@end |
+|---|---|---|---|---|---|
+| v149qf   | qfeed die-in-place r200+ cheb1 len<=3 | 40% (8/20) | 2.94/4.33 | .167/.278 | 33.5/32.9 |
+| v149qs2  | screen hardens r200: wQueenRam x3 +1 ring | 50% (10/20)| 3.17/3.06 | .333/.278 | 31.1/33.2 |
+| v149qfs2 | qs2 + qfeed gated no-enemy-reach       | 45% (9/20) | 2.94/4.22 | .167/.222 | 34.0/33.8 |
+| v149qs3  | screen r150 x6 +2 ring                 | 45% (9/20) | —         | —         | —         |
+| v149qs4  | qs2 + queen-adjacency wDanger x10      | 45% (9/20) | —         | —         | —         |
+
+qs3/qs4 per-map queen detail: autarky qAlive 0.50 vs 0.25 BOTH variants
+(qlen 3.0/0.8 and 1.2/0.8) — the ONLY survival gains in the series, and
+they live on the single open map. default/islands/unsw: queen dies by
+h2h/wall identically regardless (islands: fear converts her deaths to
+hitWall x3 — same deaths, different mode). stronghold: 13.0/13.0 both
+sides (protected either way).
+
+Findings:
+1. (b)+(c) feeding is UNIFORMLY negative — every feed variant cut
+   qlen@end below base. Sacrifice cost > drop value: a len-2/3 worker
+   is worth more foraging than the ~2-3 pearls she eats off the corpse,
+   and the death cell can wall her. Safety-gating (no enemy reach of
+   queenCell) doesn't rescue it — the tax is intrinsic.
+2. (a) screens give a real but SMALL survival gain — qs2: qAlive@end
+   +5.5pp at exactly 50% pair (neutral). Dose response: autarky qAlive
+   0.50 vs 0.25 at both mult6+b2 and adjx10 — but islands pays for it
+   (she flees into walls). Fear screens only work where escape
+   geometry exists; on constrained maps they convert death mode, not
+   death rate.
+3. The actual kill vector confirmed: in-reach queen kill rate is
+   100% at every distance — once an enemy head is adjacent she is
+   dead. Adjacency was priced at wDanger=1.5/seg — qs4 raised it x10
+   for her post-200 with no downside vs qs2 but no extra gain either.
+4. CONCLUSION: queen-survival is escort/evasion-geometry bound
+   (pocket's lane), not fear-screen bound and not feedable in
+   self-play. Feeding the primary tiebreaker fails because in OUR
+   self-play she rarely lives to eat — the (a) precondition is the
+   real bottleneck and it belongs to the front-arc escort work.
+
+Candidate if integrator wants the marginal piece: workspace/abyss_v149qs2
+(neutral-pair, +5.5pp queen-alive, ~zero instruction cost — 4 hoisted
+members + constants). Else parked: abyss_v149qf/qfs2/qs3/qs4 + results/
+{v149qf,v149qs2,v149qfs2,v149qs3,v149qs4}_smoke.

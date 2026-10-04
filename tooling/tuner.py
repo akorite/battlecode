@@ -23,26 +23,31 @@ BASE = 'abyss_x_tune'
 OPP = 'abyss_combat'
 
 
-def make_variant(slug, param, val, base):
+def make_variant(slug, pairs, base):
     dst = WS / slug
     if dst.exists():
         shutil.rmtree(dst)
     shutil.copytree(WS / base, dst)
     common = dst / 'common.hpp'
     text = common.read_text()
-    pat = re.compile(r'(\b' + re.escape(param) + r'\s*=\s*)[-0-9a-fxA-F\.]+')
-    new, n = pat.subn(r'\g<1>' + val, text, count=1)
-    if n != 1:
-        sys.exit(f'param {param} not found in {common}')
-    common.write_text(new)
+    # patch every assignment site: `PARAM = v` (struct default) and `p.PARAM = v`
+    # (kParams lambda override) — a probe must set the ACTIVE site(s).
+    # \b stops feedRound matching inside queenFeedRound / feedRoundBrawl.
+    for param, val in pairs:
+        pat = re.compile(r'(\b' + re.escape(param) + r'\s*=\s*)[-0-9a-fxA-F\.]+')
+        text, n = pat.subn(r'\g<1>' + val, text)
+        if n < 1:
+            sys.exit(f'param {param} not found in {common}')
+    common.write_text(text)
     (dst / 'main.cpp').touch()  # bust wasm cache
     for f in pathlib.Path.home().glob(f'.cache/unswbc/wasmbots/{slug}-*.wasm'):
         f.unlink()
 
 
-def run_probe(slug, param, val, maps, jobs, seed_start, opp):
+def run_probe(slug, label, maps, jobs, seed_start, opp):
     tag = 'tune_' + slug
     res = BC / 'results' / tag
+    shutil.rmtree(res, ignore_errors=True)
     cmd = [PY, str(BC / 'tooling/kmatch.py'), 'run',
            '--cand', slug, '--base', opp,
            '--maps', maps, '--seeds', '1', '--seed-start', str(seed_start),
@@ -86,12 +91,12 @@ def main():
             continue
         parts = line.split()
         slug, kv = parts[0], parts[1]
-        param, val = kv.split('=', 1)
+        pairs = [tuple(p.split('=', 1)) for p in kv.split(',')]
         maps = next((p[5:] for p in parts[2:] if p.startswith('maps=')), MAPS)
         note = ' '.join(p for p in parts[2:] if not p.startswith('maps='))
-        make_variant(slug, param, val, a.base)
-        wins, losses, score, dlen, mins = run_probe(slug, param, val, maps, a.jobs, a.seed_start, a.opp)
-        row = (f'| {slug} | `{param}={val}` | {maps} | {wins}-{losses} '
+        make_variant(slug, pairs, a.base)
+        wins, losses, score, dlen, mins = run_probe(slug, ','.join(k for k, _ in pairs), maps, a.jobs, a.seed_start, a.opp)
+        row = (f'| {slug} | `{kv}` | {maps} | {wins}-{losses} '
                f'({score:.0%}) | dlen {dlen:+.1f} | {mins:.0f}m | {note} |\n')
         print(row, end='', flush=True)
         with open(LOG, 'a') as f:

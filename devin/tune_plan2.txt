@@ -1,0 +1,19 @@
+# round 2: perturb around the landed v127 vector (feed360 triple, relays330, unhide390)
+# opponent abyss_cf (closer fixture than combat)
+x2b_cf   feedRound=360                                   BASELINE: v127-replica as-is vs cf
+x2_f330  feedRound=330,queenFeedRound=330,champFallbackRound=330  whole feed window earlier
+x2_f390  feedRound=390,queenFeedRound=390,champFallbackRound=390  whole feed window later
+x2_qf340 queenFeedRound=340                              queen fed earlier only
+x2_qf380 queenFeedRound=380                              queen fed later only
+x2_me450 midEnd=450                                      growers keep splitting 50r longer
+x2_me360 midEnd=360                                      late-game from 360
+x2_tsc12 trapSafeCells=12                                bigger veto margin (active 8)
+x2_tsc4  trapSafeCells=4                                 tighter veto
+x2_sd0   splitEnemyDist=0                                always split vs heads
+x2_sd2   splitEnemyDist=2                                back to pre-v120
+x2_sm4   sprintMax=4                                     recheck on new base
+x2_rel340 queenRelayFrom=340,champRelayFrom=340          relays later
+x2_rel300 queenRelayFrom=300,champRelayFrom=300          relays earlier
+x2_em1   exposureMode=1                                  favour exposed w/ local numbers
+x2_qd30  queenDanger=3.0                                 queen more cautious
+x2_sv45  survivalDanger=4.5                              survival-mode more cautious

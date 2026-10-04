@@ -338,8 +338,14 @@ inline Params const kParams = [] {
     p.openUntil = 48;               // gated: open_ engages only where it wins (pearl4)
     p.openQueenKeep = 3;
     p.openQueenDanger = 1.8;          // queen exempt from the relief: keeps budMult-level fear
-    p.feedRound = 320;
-    p.champFallbackRound = 320;
+    // v127-replica (integrator-described landed vector, v127 not yet on origin):
+    // feed window triple -> 360, relays -> 330, unhide -> 390.
+    p.feedRound = 360;
+    p.queenFeedRound = 360;
+    p.champFallbackRound = 360;
+    p.queenRelayFrom = 330;
+    p.champRelayFrom = 330;
+    p.queenHideUntil = 390;
     p.feedRoundBrawl = 300;
     p.wTailStrike = 2.0;
     p.trapSeenOnly = 1;               // wh4: weakhold pocket fix — fog is a wall for the queen

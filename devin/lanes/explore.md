@@ -19,4 +19,4 @@ Tune lane r4 (steering-3/4): relays peak @370 vs cf; fear radius (heardEnemyReac
 - Target: schooltime frontier pacing (r135-170: ~15-19 dragons/side in 4-9 cell loops, incl both queens by design). Mechanism confirmed: revisit_frac 0.27→0.14 vs cf pairing baseline.
 - vs abyss_x_tune (same base, s7, 5 maps): 5-5; schooltime swept 2-0, alive@r499 23.5 vs 3.7. Trauma-A flip = the only loss.
 - vs abyss_cf (s7, schooltime/stronghold/trauma): 4-2, longest@end 36.0 vs 13.7, stronghold swept, no elim flags. Remaining pacers: exempt queens + all-exits-visited dither.
-- Caveats: n=2/map seat-paired; trauma-A regression needs a second seed before flagship consideration. Tooling: tooling/loophist.py measures pacing windows.
+- s8 recheck (trauma+stronghold): trauma swept 2-0 (s7 flip = knife-edge noise), stronghold 0-2 — net vs own base ~7-7, map noise everywhere except schooltime 2-0 (the fix's target). Tooling: tooling/loophist.py measures pacing windows.

@@ -358,3 +358,12 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
 - Local engine = official judge wasm (unswbc pkg) — no free-step cost mismatch on our side.
 - Review says do NOT ship v140 over v139 (their sweep: 53.3 vs 56.6, Default 1-7, Maze 2-6, PD 3-5) — consistent with local 51.5%.
 - Ladder ask: queen evasion vs front-arc rams (66% of v138 games) + portal transits r25 (0.01 vs 1.5) + feed queen r200-225 (FtM recipe 2→13 by r300).
+
+## 2026-10-04 ~12:55 UTC — v142 bisect findings + lanes re-armed
+- **v142 root-cause #1 (fixed):** `if (c.terminal) { t[d] = c.score; continue; }` dropped from the first[] depth loop during port → deadend-vetoed moves got phantom continuation scores → deterministic queen hitSelf@r26 weakhold-A. Restored; weakhold-A now wins.
+- **v142 root-cause #2 (fixed):** portalOpen_ fired on ZERO-portal maps (weakhold 600 tiles ∈ (512,900], 0 portal ends ≤ 2) → phantom s0scout mission + blindGrace. Gate now requires ≥1 portal end seen.
+- **v142 root-cause #3 (scoped):** C1's `|| unproven` inversion vetoes unproven regions even with loopRoom → workers can't enter fog pockets. Scoped to queen-only per v2 rule.
+- **Residual:** stack still ~35-45% vs v139's 55% baseline on 5-map smoke. C2 bud-gate (`hiding && r≥50 && parentRoomy<2`) confirmed partial bleed on weakhold-B (flatline c2) but not sole cause — queen rams @225-280 remain.
+- **Method fix:** incremental integration (v143=v139+p10 alone) replaces big-bang stack; lanes now gate each piece in parallel on v143.
+- **Lane tasking:** pocket→v143+feed; explore→C1/C2/C3 attribution; earlyecon→v143+qsafe port; autarky→corrected mirror-hunt.
+- **Ladder:** Elo 1646 (peak 1696). Last 80: band(1500-2000) 9/20=45%, top(2000+) 10/60=17%. Standing: lanes parallel, adversarial review pre-submit, battle log checked often (user).

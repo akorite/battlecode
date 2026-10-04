@@ -497,3 +497,64 @@ benchmark (qos 2.5 vs target 6 — doubled from 0.7, still short; transits
 Candidate for staging: workspace/abyss_a_portal6 (v135 + gated package).
 Open work for this lane: devil/stripes centre-fight survivability (the real
 'stall' mechanism — overlaps 5b escort/screen + hitSelf/hitWall discipline).
+
+### a_portal7 — S0 scout mission, INERT (57.5%, identical to a_portal6)
+Design: first worker (init.id == champId()+2, alternating initial ids) gets
+lip target s0Portal=9.0 while s0scout_ && round<28 && portalOpen_.
+Result: bit-equivalent metrics to a_portal6 — the mission NEVER fires.
+Cause: on qos/trophy the nearest portal sits ~6 cells from spawn, outside
+vision radius 3; no unpaired end is ever in portalEnds during the window.
+Replay check (qos s1): id3 (=S0 for seat B) still crossed at r56 — saw the
+(4,3) end ~r40, 16-round forage lag. Correct decode of EDGE index is
+row*(W+1)+x (row even=hE top of tile(x,row/2), odd=vE left of tile
+(x,(row-1)/2)): qos pairs vE(4,3)<->vE(9,33) = winner's far-bed line,
+vE(16,1)<->vE(21,31); trophy hE(12,6)<->hE(12,22) = winner's (12,5) landing.
+
+### a_portal8 — waypoint pre-sighting (in flight)
+S0 mission v2: until ANY pid pairs — if an unpaired end is seen, lip target
+(s0Portal=10); else mirror-waypoint target at pointRot(spawnCell)
+(s0Far=7, >4 cheb away) — sends the scout to the far quadrant where portals
+sit; window extended to s0Until=60 (covers first-sighting lag). Ends on
+first pairing (size==2 in portalEnds).
+
+### a_portal10 — S0 scout mission, LIVE + PASS (57.5%, 80g, mission verified)
+Root cause of p7-p9 inertness found by BC_DEBUG logging through the replay
+(abyss_p9dbg instrument): **Policy is a fresh per-turn object** (main.cpp
+news it every round) — s0scout_ assigned at decide():~101 AFTER
+buildTargets():82 was dead-on-arrival to the target builder on EVERY turn,
+not just the first. s0b (flag as seen inside buildTargets) was 0 in all
+~1000 logged decides while s0=1 at decide end. Whole block was dead code.
+
+Two fixes in p10:
+1. s0 identity computed BEFORE buildTargets (early-worker test
+   !queen_&&!grower_&&!lead_ — assassin_ always false pre-squad).
+2. t.cell==dest skip exemption via countdown==-2 sentinel — the crossing
+   step's dest IS the guess landing (= rot(lip) target), so the pull died
+   exactly at the crossing choice (the p9 hover). Also tested the
+   zero-compare alternative (push rot of BOTH lips, sibling pull survives
+   skip): qos collapsed 37.5% vs sentinel's 87.5% on identical seeds —
+   reverted. Sentinel adds 1 compare per target-eval: default gained 1W
+   (depth-clip flip, harmless direction).
+
+Final gate (a_portal10b, 80g vs v135, both seats):
+| map | pairW | tl100 c/b | transits<=r25 | eat50 | elim<200 | qd<50 |
+|-----|-------|-----------|---------------|-------|----------|-------|
+| qos | **12/16 (75%)** | 26.9/13.7 | **19 (was 0), first r12** | 16.3/8.2 +99% | 1/6 | 3/7 |
+| trophy | **9/16 (56%)** | 45.7/57.7 | **6 (was 0), first r11** | 33.1/24.8 +34% | 7/8 | 3/7 |
+| dilemma | 8/16 | mirror | mirror | mirror | mirror | mirror |
+| stripes | 8/16 | mirror | mirror | mirror | mirror | mirror |
+| default | 9/16 | ~mirror (+1W) | ~mirror | ~mirror | ~mirror | ~mirror |
+| ALL | **46/80 57.5%** | | | | 22/30 | 25/33 |
+
+vs a_portal6: same pair, better where it was designed to bite — qos tl100
+26.9 vs p6's 20.6, transits 19 vs 13, first transit r12 vs r14; trophy
+eat50 33.1 vs 27.4 (more intake) but tl100 45.7 vs 60.3 (scout survives
+the centre fight less — same trade class as don't-stall). Same 57.5% pair
+with the mechanism now PROVEN to fire (p6's transits came only from the
+guess+blindGrace passive package; p10's scout actively routes).
+
+S0 metric: transits<=r25 19 qos / 6 trophy (>0 both, benchmark-ward);
+eat25 qos 3.2 vs winner benchmark 6 (was 0.7 pre-gate; moving, still short).
+Transits 1.2/game qos — inside winners' 1.3-3.1 band now.
+Candidate for staging: workspace/abyss_a_portal10 (supersedes a_portal6 —
+same pair, verified mission, debug-channel proven).

@@ -207,3 +207,8 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
 - vetofix (v122 F2+F3, 48g 6-map): 50.0% — neutral; queen-death rate unchanged.
   Correctness kept in branch; F12/F13/F15 added after gate start — re-gate with
   the full pack on queen-death maps before any ship decision.
+- v122full (v122 pack F2,F3,F12,F13,F15 on queen-death maps, 30g): 53.3% /
+  55.6% unlocked — mild positive, queen-death rate unmoved (0.80 vs 0.77);
+  crash deaths ~equal. Safe to merge into winners; combo at S2 only.
+- v120 live: Elo 1440->1535 (pre-v120 window); v120 autoscrim record pending.
+- battles feed found: api/v1/battles?teamId=351 — per-upload tables now feasible.

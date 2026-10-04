@@ -251,6 +251,52 @@ identical 12.79/12.79. The wh2 (and/or v106-selfguard) merge itself
 regresses vs v104 on kelp-heavy big maps — the integrator's BIG-pool
 collapse attribution to the pearl opening was confounded.
 
+### Attribution drill-down — the bleed is v106 selfguard, not wh2's scan
+
+`abyss_v110n` = v110 with `trapSeenOnly=0` (all wh2 code then degenerates
+to v104 semantics — frontier always 0, unproven veto off, dbg fields are
+BC_DEBUG-only). Kelp-9 gate (killers + weakhold/devil/stripes, 36g):
+**30.6%** vs v104 (stripes 3/4, devil/weakhold 2/4, islands 3/4,
+trauma 1/4; maze/portals/slithery/stronghold still 0/4). So
+trapSeenOnly=1 causes roughly two-thirds of the bleed — but since v110n
+≡ v104 + v106 selfguard and the four big corridor maps still went 0/4,
+**the residual is the selfguard itself**.
+
+Mechanism: `ownSeg` marks every tracked body cell lethal, including
+`body.back()` — the tail that VACATES on any non-eating move
+(`advanceBody` pops it: `size > t.length → pop_back`). policy.hpp:191
+already treats `body.back()` as enterable on `!eat`. On 1-wide kelp
+corridors the follow-the-tail step is often the only forward progress;
+the guard blocks or redirects it, dragons stall, the queen starves
+(queen len@end 0.93 vs 5.4, longest 12.75 vs 29.0). Schooltime needed
+the guard because post-split geometry makes stale plans lethal — but as
+written it over-blocks by exactly one cell.
+
+`abyss_v110g` = v110 + tail-aware guard (`body.back()` excluded from
+ownSeg on non-eat only when `bodyKnown()` — with an incomplete prefix
+back() is mid-body and stays lethal). Gate (killers + controls +
+schooltime, 40g): **27.5%** — maze/portals/stronghold/trauma still 0/4,
+slithery 1/4, schooltime 2/4 (the r1-suicide fix survives the narrower
+guard), controls all 50%.
+
+#### Bleed attribution on the six killer maps (v104 mirror floor ≈ 45.8%)
+
+| build | killer-maps score | changes vs v104 |
+|---|---|---|
+| v110 | 2/24 = 8.3% | wh2 (seenOnly scan) + v106 selfguard |
+| v110g | 3/24 = 12.5% | wh2 + tail-aware selfguard |
+| v110n | 4/24 = 16.7% | wh2-off + selfguard |
+| pearl5 OUT maps | 11/24 ≈ 45.8% | none (identical code = mirror noise) |
+
+Neither toggle alone recovers the killers — the bleeds compound
+(the guard blocks tail-follow in corridors AND the fog-wall scan
+starves the queen). The remaining ~29pp vs the mirror floor is split
+between them; a wh2-off + guard-fix combo is untested (v110gn).
+
+For the integrator: the "pearl regression on BIG maps" was the v110
+merge itself. Until wh2/v106 are fixed at the base, no merged build
+gated vs v104 on this pool can hold the 0/4s off.
+
 ## pearl5 — gated opening straight onto v104 (the alternative ship)
 
 `abyss_pearl5` = v104 + v2 opening + the same gate (no wh2/v106). If the
@@ -315,14 +361,42 @@ launch). pearl4 now carries swarmTrap=1 (starve lane's non-queen deadEnd
 veto on maze_ maps — the wall+self+body ratchet fix); re-gating as
 `gate_p4s_*`.
 
-## Verdict (pending pearl4s + pearl5 + v110-killer gates)
+## Verdict — pearl4 iteration complete (2026-10-03)
 
-Targets missed pre-swarmTrap: 44.3% vs v104 (needed ≥52%), six maps 0/4.
-But attribution is clean: the 0/4s are all hard-excluded maps where the
-binary is exactly v110 — i.e. the integrator's merged base regresses vs
-v104 on the BIG pool independent of the opening. Options on the table:
+**The pearl lane's opening is cleared; the v110 base is not.** Scoreboard
+vs each gate (88g, 22-map pool, seeds 1-2, both sides):
 
-1. **pearl4 + swarmTrap** (`gate_p4s_*`): v110-with-swarmTrap + gate —
-   most likely what the real v110 actually is.
-2. **pearl5** (`gate_pearl5_v104`): the gate alone on v104 — if it hits
-   ≥52% it's the conservative ship (pearl gain, zero v110 exposure).
+| candidate | base | vs v104 | vs cf | vs combat |
+|---|---|---|---|---|
+| abyss_pearl4 (v110+gate) | rec. v110 | 44.3% | 47.7% | 38.6% |
+| abyss_pearl4 (+swarmTrap) | rec. v110 | 47.7% | 47.7% | 38.6% |
+| abyss_pearl5 (v104+gate) | v104 | 50.0% | — | — |
+
+Map-gated `open_` engages on exactly the six winner maps (arena,
+Colosseum, default_small, dilemma, trophy, autarky-via-brood) and wins
+them (SMALL 60-70% across gates; dilemma/default_small repeatedly 4/4).
+Every 0/4 left on the board is a gated-out map = base behavior.
+
+Evidence chain:
+1. `open_` hard-off ⇒ identical eaten30 to v104 on every excluded map.
+2. v110 alone (no pearl) = 8.3% on the six killers vs v104.
+3. peel: wh2's trapSeenOnly ≈ +8pp of the bleed; v106 selfguard's
+   tail-inclusive ownSeg ≈ rest (fixes each independently tested).
+4. swarmTrap flips weakhold 0→4/4 vs v104 but nothing else.
+
+Recommendation:
+- **Ship candidate: `abyss_pearl5`** (v104 + gated opening). Clean,
+  self-contained, measurably wins the small-map econ goal (+10% e30
+  small) with zero exposure to the v110 bleed. Its 50% vs v104 is the
+  honest gate read: wins confined to open_ seats, mirror noise elsewhere.
+- `abyss_pearl6` (v110g+swarmTrap+gate) is built and gated-ready if the
+  integrator wants the pearl diff on the real v110 line — but no variant
+  on the v110 base reaches 52% until the wh2/v106 bleed is fixed there.
+- Hand-off for wh/selfguard lanes: exclude `body.back()` on non-eat when
+  `bodyKnown()` (v110g pattern) and re-examine trapSeenOnly=1 on big
+  kelp maps (costs ~8pp on killers, though it wins weakhold pockets).
+
+Variants on this branch: `abyss_pearl` (v2 ship, ungated), `abyss_pearl4`
+(v110+swarmTrap+gate), `abyss_pearl5` (v104+gate), `abyss_pearl6`
+(v110g+swarmTrap+gate, ungated), `abyss_v110`/`v110n`/`v110g`
+(reconstructed base + attribution A/Bs).

@@ -173,3 +173,6 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
 - v116 ladder-game metrics (20 ranked, 1650+): our champ hits 3-13 len @r300 vs opp 41@300 (m999547 maze vs 1234) — gap is real but feeding earlier locally fails vs our own base. Revisit after swarm size grows via pearl.
 - Queen deaths in v116 batch: all hitHeadToHead/hitOtherBody (rams) — qsiege lane owns. hitWall is generic corridor death for all dragons, not queen-specific in this window.
 - v117 = LIVE (sub 16206, activated ~01:05). Challenge quota: 2 games left this hour (battle needs 5) — refills ~01:30.
+- v119 = v117 + queen ram screen (queen_: tiles inside seen/heard enemy sprint reach priced fatal; heard=2 ghost-hint). Self-play 50% (neutral); vs combat queen-death-maps: score-neutral but non-ram queen deaths 0.083 vs 0.458 (-82%), in-reach opps 2 vs 9. SUBMITTED. wQueenRam=30/wQueenRamHeard=2.
+- v117 vs combat full board (87g): 57.5% (BIG 68.1%, SMALL 45%): losses stripes/weakhold 0/4 (starvation), QoS/devil/schooltime/default_small 25%.
+- v117 20 ranked games fired vs 1650+ (m1002893-1002922) + 10 vs top-3 earlier.

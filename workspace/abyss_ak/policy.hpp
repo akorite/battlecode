@@ -709,7 +709,8 @@ class Policy {
             // before consolAt and start walking to the heard champ head, so
             // arrivals concentrate in the window's first stretch instead of
             // spreading across the full window.
-            eff_.queenFeedRound = std::max(0, consolAt - p_.phaseFeedBurst);
+            eff_.queenFeedRound = std::max(0, consolAt - p_.phaseFeedBurst
+                                                - w_.board.NC / p_.phaseFeedBurstNC);
             eff_.champFallbackRound = std::max(0, consolAt - 40);
             // Relays cost ~5M pts/turn: arm them ~30 rounds before the feed
             // window so consensus exists when the first feeder wakes.
@@ -733,6 +734,11 @@ class Policy {
             // distance 2 scattered drops). The champ is parked under CONSOL, so
             // distance 1 is safe — it cannot walk away like a moving queen.
             eff_.champFeedDist = 1;
+            // Convert the whole swarm, not just smalls: alive@r499 is 50+
+            // while the champ plateaus ~19 — L>6 dragons currently can never
+            // feed. fd=1 lands their drops at the head (the earlier 6→8 revert
+            // was entangled with the feed-ring change, not the length cap).
+            eff_.feedMaxLen = 10;
             eff_.tradeSlack = 0; eff_.tradeMinUnits = 6;
             break;
         case PH_PROTECT:

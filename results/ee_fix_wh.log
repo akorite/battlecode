@@ -1,0 +1,44 @@
+16 games to play (0 already done), 2 at a time
+        weakhold s1 cand=B W r499 roundLimit len c29/b2 40s
+        weakhold s1 cand=A W r499 roundLimit len c25/b5 48s
+        weakhold s2 cand=B W r457 teamEliminated len c16/b0 36s
+        weakhold s2 cand=A W r499 roundLimit len c17/b3 50s
+        weakhold s3 cand=B W r499 roundLimit len c27/b2 38s
+        weakhold s3 cand=A W r499 roundLimit len c15/b3 58s
+        weakhold s4 cand=A W r499 roundLimit len c46/b2 45s
+        weakhold s4 cand=B L r499 roundLimit len c35/b3 35s
+        weakhold s5 cand=A L r499 roundLimit len c2/b3 20s
+        weakhold s5 cand=B W r499 roundLimit len c18/b2 37s
+        weakhold s6 cand=A W r499 roundLimit len c40/b2 44s
+        weakhold s6 cand=B W r499 roundLimit len c31/b6 33s
+        weakhold s7 cand=A W r374 teamEliminated len c18/b0 36s
+        weakhold s7 cand=B W r499 roundLimit len c12/b2 45s
+        weakhold s8 cand=A L r499 roundLimit len c3/b3 21s
+        weakhold s8 cand=B W r499 roundLimit len c20/b2 33s
+## abyss_econ vs abyss_v119: 16 games
+             map    n   score   win%       game CI  pairs W/S/L        pair CI
+        weakhold   16    13.0  81.2% [57.0, 93.4]    5/  3/0    [62.5,100.0]
+             ALL   16    13.0  81.2% [57.0, 93.4]    5/  3/0    [62.5,100.0]
+    map-weighted               81.2%  (each map equal weight; ALL-unlocked drops devil, portals, queen_of_spades, schooltime, slithery_fight)
+
+per-game metrics, cand vs base (means):
+                     alive at r499:   9.786 vs   1.571  (n=14)
+       longest at end (r500 games):  22.857 vs   2.857  (n=14)
+     queen len at end (r500 games):   0.000 vs   0.643  (n=14)
+         queen alive at end (r500):   0.000 vs   0.214  (n=14)
+            pearls per dragon-turn:   0.059 vs   0.051  (n=16)
+         adjacent free pearl taken:   0.671 vs   0.568  (n=16)
+             ... no enemy head <=3:   0.671 vs   0.576  (n=16)
+         queen non-ram deaths/game:   1.000 vs   0.062  (n=16)
+            queen dead (any) /game:   1.000 vs   0.812  (n=16)
+       deaths/game: wall+self+body:  94.375 vs  28.312  (n=16)
+         deaths/game: head-to-head:   2.688 vs   2.688  (n=16)
+  in-reach queen kill rate, dist 1:   1.000 vs   0.000  (opps 7 vs 0)
+  in-reach queen kill rate, dist 2:   1.000 vs   0.000  (opps 3 vs 0)
+ in-reach queen kill rate, dist 3+:   0.400 vs   0.000  (opps 5 vs 0)
+queen kept after theirs died (cand):   0.000  (0/0; won 0.0)
+queen kept after theirs died (base):   0.188  (3/16; won 3.0)
+   small maps: pearls eaten by r60:  10.500 vs  11.312  (n=16)
+         small maps: splits by r60:   5.375 vs   5.438  (n=16)
+          small maps: alive at r50:   4.062 vs   4.000  (n=16)
+   r500 games: 14, eliminations: 2, mean secs/game 39

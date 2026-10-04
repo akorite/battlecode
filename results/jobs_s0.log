@@ -1,0 +1,19 @@
+96 games to play (0 already done), 2 at a time
+           devil s1 cand=B W r72  teamEliminated len c5/b0 7s
+         stripes s1 cand=A W r276 teamEliminated len c13/b0 9s
+           devil s1 cand=A W r146 teamEliminated len c4/b0 19s
+         stripes s1 cand=B L r273 teamEliminated len c0/b14 8s
+   tower_defense s1 cand=B L r499 roundLimit len c14/b27 50s
+   tower_defense s1 cand=A L r499 roundLimit len c8/b16 58s
+ queen_of_spades s1 cand=B W r196 teamEliminated len c4/b0 12s
+         default s1 cand=A L r169 teamEliminated len c0/b4 14s
+ queen_of_spades s1 cand=A W r499 roundLimit len c61/b3 37s
+         default s1 cand=B W r360 teamEliminated len c13/b0 47s
+         autarky s1 cand=A L r499 roundLimit len c28/b37 78s
+           devil s2 cand=A L r129 teamEliminated len c0/b5 16s
+           devil s2 cand=B L r144 teamEliminated len c0/b6 19s
+         autarky s1 cand=B L r499 roundLimit len c36/b49 78s
+         stripes s2 cand=A W r129 teamEliminated len c3/b0 7s
+   tower_defense s2 cand=A W r238 teamEliminated len c3/b0 7s
+         stripes s2 cand=B L r235 teamEliminated len c0/b3 21s
+ queen_of_spades s2 cand=A L r176 teamEliminated len c0/b3 11s

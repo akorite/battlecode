@@ -1,0 +1,132 @@
+96 games to play (0 already done), 2 at a time
+           devil s1 cand=A W r76  teamEliminated len c4/b0 11s
+           devil s1 cand=B W r100 teamEliminated len c4/b0 17s
+         stripes s1 cand=A W r315 teamEliminated len c11/b0 20s
+         stripes s1 cand=B L r204 teamEliminated len c0/b4 17s
+   tower_defense s1 cand=A L r258 teamEliminated len c0/b4 21s
+   tower_defense s1 cand=B L r220 teamEliminated len c0/b3 21s
+ queen_of_spades s1 cand=A W r174 teamEliminated len c3/b0 15s
+ queen_of_spades s1 cand=B L r174 teamEliminated len c0/b3 16s
+         default s1 cand=A L r158 teamEliminated len c0/b4 25s
+         default s1 cand=B W r158 teamEliminated len c4/b0 24s
+         autarky s1 cand=B W r499 roundLimit len c47/b28 102s
+         autarky s1 cand=A W r499 roundLimit len c50/b48 121s
+           devil s2 cand=A W r159 teamEliminated len c4/b0 37s
+         stripes s2 cand=A W r147 teamEliminated len c7/b0 14s
+         stripes s2 cand=B L r283 teamEliminated len c0/b3 30s
+           devil s2 cand=B W r268 teamEliminated len c4/b0 68s
+   tower_defense s2 cand=A L r206 teamEliminated len c0/b3 12s
+   tower_defense s2 cand=B L r260 teamEliminated len c0/b5 15s
+ queen_of_spades s2 cand=B W r266 teamEliminated len c3/b0 18s
+ queen_of_spades s2 cand=A W r369 teamEliminated len c21/b0 29s
+         default s2 cand=A W r251 teamEliminated len c3/b0 50s
+         default s2 cand=B W r340 teamEliminated len c16/b0 83s
+         autarky s2 cand=A W r499 roundLimit len c38/b19 107s
+         autarky s2 cand=B L r499 roundLimit len c18/b48 106s
+           devil s3 cand=A W r192 teamEliminated len c5/b0 42s
+         stripes s3 cand=A L r177 teamEliminated len c0/b4 16s
+           devil s3 cand=B W r137 teamEliminated len c4/b0 28s
+         stripes s3 cand=B L r193 teamEliminated len c0/b3 15s
+   tower_defense s3 cand=A W r172 teamEliminated len c4/b0 10s
+   tower_defense s3 cand=B L r157 teamEliminated len c0/b4 7s
+ queen_of_spades s3 cand=A L r188 teamEliminated len c0/b3 16s
+ queen_of_spades s3 cand=B W r233 teamEliminated len c4/b0 25s
+         default s3 cand=A L r387 teamEliminated len c0/b19 70s
+         default s3 cand=B W r387 teamEliminated len c19/b0 72s
+         autarky s3 cand=A W r499 roundLimit len c55/b35 113s
+         autarky s3 cand=B L r499 roundLimit len c27/b32 113s
+           devil s4 cand=B L r89  teamEliminated len c0/b7 14s
+           devil s4 cand=A L r235 teamEliminated len c0/b5 57s
+         stripes s4 cand=A W r252 teamEliminated len c5/b0 31s
+         stripes s4 cand=B W r195 teamEliminated len c3/b0 13s
+   tower_defense s4 cand=A W r313 teamEliminated len c4/b0 15s
+   tower_defense s4 cand=B L r221 teamEliminated len c0/b3 13s
+ queen_of_spades s4 cand=B W r358 teamEliminated len c9/b0 42s
+ queen_of_spades s4 cand=A L r423 teamEliminated len c0/b12 56s
+         default s4 cand=B W r499 roundLimit len c71/b4 77s
+         default s4 cand=A L r499 roundLimit len c7/b25 87s
+         autarky s4 cand=A W r499 roundLimit len c50/b44 89s
+         autarky s4 cand=B W r499 roundLimit len c41/b37 85s
+           devil s5 cand=A L r127 teamEliminated len c0/b3 26s
+         stripes s5 cand=A W r136 teamEliminated len c4/b0 9s
+         stripes s5 cand=B W r155 teamEliminated len c3/b0 12s
+           devil s5 cand=B L r211 teamEliminated len c0/b4 51s
+   tower_defense s5 cand=B W r183 teamEliminated len c3/b0 12s
+   tower_defense s5 cand=A L r263 teamEliminated len c0/b4 20s
+ queen_of_spades s5 cand=A L r306 teamEliminated len c0/b4 31s
+ queen_of_spades s5 cand=B W r291 teamEliminated len c3/b0 34s
+         default s5 cand=B W r350 teamEliminated len c13/b0 95s
+         default s5 cand=A L r499 roundLimit len c9/b42 105s
+         autarky s5 cand=A W r218 teamEliminated len c3/b0 48s
+         autarky s5 cand=B L r224 teamEliminated len c0/b4 49s
+           devil s6 cand=A W r157 teamEliminated len c4/b0 35s
+           devil s6 cand=B L r175 teamEliminated len c0/b4 37s
+         stripes s6 cand=B W r117 teamEliminated len c6/b0 7s
+         stripes s6 cand=A W r223 teamEliminated len c3/b0 15s
+   tower_defense s6 cand=B W r499 roundLimit len c27/b6 13s
+   tower_defense s6 cand=A W r204 teamEliminated len c4/b0 15s
+ queen_of_spades s6 cand=A L r111 teamEliminated len c0/b4 10s
+ queen_of_spades s6 cand=B W r389 teamEliminated len c16/b0 36s
+         default s6 cand=A L r377 teamEliminated len c0/b7 66s
+         default s6 cand=B W r377 teamEliminated len c7/b0 63s
+         autarky s6 cand=A W r499 roundLimit len c36/b48 109s
+         autarky s6 cand=B L r499 roundLimit len c48/b36 113s
+           devil s7 cand=B W r197 teamEliminated len c5/b0 44s
+           devil s7 cand=A W r312 teamEliminated len c6/b0 85s
+         stripes s7 cand=B W r102 teamEliminated len c5/b0 5s
+         stripes s7 cand=A W r337 teamEliminated len c8/b0 19s
+   tower_defense s7 cand=B L r166 teamEliminated len c0/b3 8s
+   tower_defense s7 cand=A W r294 teamEliminated len c4/b0 25s
+ queen_of_spades s7 cand=B L r292 teamEliminated len c0/b4 32s
+ queen_of_spades s7 cand=A W r391 teamEliminated len c8/b0 51s
+         default s7 cand=A W r90  teamEliminated len c4/b0 10s
+         default s7 cand=B L r90  teamEliminated len c0/b4 12s
+         autarky s7 cand=A L r499 roundLimit len c22/b40 126s
+         autarky s7 cand=B W r499 roundLimit len c40/b22 126s
+           devil s8 cand=A L r73  teamEliminated len c0/b4 7s
+         stripes s8 cand=A L r135 teamEliminated len c0/b4 11s
+           devil s8 cand=B W r105 teamEliminated len c3/b0 15s
+         stripes s8 cand=B W r190 teamEliminated len c3/b0 18s
+   tower_defense s8 cand=B L r212 teamEliminated len c0/b3 16s
+ queen_of_spades s8 cand=A W r189 teamEliminated len c3/b0 9s
+   tower_defense s8 cand=A W r499 roundLimit len c29/b16 48s
+         default s8 cand=A L r198 teamEliminated len c0/b3 28s
+ queen_of_spades s8 cand=B L r341 teamEliminated len c0/b8 34s
+         default s8 cand=B W r198 teamEliminated len c3/b0 23s
+         autarky s8 cand=A W r499 roundLimit len c56/b36 68s
+         autarky s8 cand=B W r499 roundLimit len c59/b45 69s
+## abyss_v104 vs abyss_v119: 96 games
+             map    n   score   win%       game CI  pairs W/S/L        pair CI
+           devil   16    10.0  62.5% [38.6, 81.5]    4/  2/2    [31.2, 93.8]
+ queen_of_spades   16     9.0  56.2% [33.2, 76.9]    1/  7/0    [50.0, 68.8]
+         stripes   16    11.0  68.8% [44.4, 85.8]    4/  3/1    [43.8, 93.8]
+   tower_defense   16     7.0  43.8% [23.1, 66.8]    1/  5/2    [25.0, 62.5]
+         autarky   16    11.0  68.8% [44.4, 85.8]    3/  5/0    [50.0, 87.5]
+         default   16     9.0  56.2% [33.2, 76.9]    1/  7/0    [50.0, 68.8]
+           SMALL   64    37.0  57.8% [45.6, 69.1]   10/ 17/5    [46.9, 68.8]
+             BIG   32    20.0  62.5% [45.3, 77.1]    4/ 12/0    [53.1, 75.0]
+             ALL   96    57.0  59.4% [49.4, 68.7]   14/ 29/5    [51.0, 67.7]
+    ALL-unlocked   64    38.0  59.4% [47.1, 70.5]    9/ 20/3    [50.0, 70.3]
+    map-weighted               59.4%  (each map equal weight; ALL-unlocked drops devil, portals, queen_of_spades, schooltime, slithery_fight)
+
+per-game metrics, cand vs base (means):
+                     alive at r499:   4.895 vs   4.684  (n=19)
+       longest at end (r500 games):  38.421 vs  32.158  (n=19)
+     queen len at end (r500 games):   1.474 vs   1.000  (n=19)
+         queen alive at end (r500):   0.105 vs   0.105  (n=19)
+            pearls per dragon-turn:   0.060 vs   0.056  (n=96)
+         adjacent free pearl taken:   0.731 vs   0.722  (n=96)
+             ... no enemy head <=3:   0.740 vs   0.729  (n=96)
+         queen non-ram deaths/game:   0.292 vs   0.229  (n=96)
+            queen dead (any) /game:   0.854 vs   0.896  (n=96)
+       deaths/game: wall+self+body:  32.115 vs  23.438  (n=96)
+         deaths/game: head-to-head:  19.125 vs  18.958  (n=96)
+  in-reach queen kill rate, dist 1:   1.000 vs   1.000  (opps 21 vs 11)
+  in-reach queen kill rate, dist 2:   1.000 vs   1.000  (opps 18 vs 23)
+ in-reach queen kill rate, dist 3+:   1.000 vs   0.947  (opps 19 vs 19)
+queen kept after theirs died (cand):   0.289  (13/45; won 36.0)
+queen kept after theirs died (base):   0.180  (9/50; won 30.0)
+   small maps: pearls eaten by r60:  20.500 vs  15.672  (n=64)
+         small maps: splits by r60:   7.625 vs   5.766  (n=64)
+          small maps: alive at r50:   5.547 vs   4.547  (n=64)
+   r500 games: 19, eliminations: 77, mean secs/game 41

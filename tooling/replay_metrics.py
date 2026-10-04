@@ -78,6 +78,8 @@ def analyze(path):
     T = {s: collections.Counter() for s in 'AB'}
     qdead = {s: None for s in 'AB'}
     alive_at = {s: {} for s in 'AB'}
+    CHECKS = (25, 50, 100, 200)
+    chk = {s: {} for s in 'AB'}  # checkpoint snapshots: n dragons, total len, eaten
     pearls, pend = set(), set()
     occ = set()
     rnd = 0
@@ -125,6 +127,10 @@ def analyze(path):
             rnd = e['round']
             for s in 'AB':
                 alive_at[s][rnd] = sum(1 for j in body if team[j] == s)
+                if rnd in CHECKS:
+                    chk[s][rnd] = {'n': alive_at[s][rnd],
+                                   'len': sum(len(body[j]) for j in body if team[j] == s),
+                                   'eat': T[s]['eaten']}
             occ = set()
             for b in body.values():
                 occ.update(b)
@@ -226,6 +232,10 @@ def analyze(path):
         o['alive'] = tr.get('dragonCount', 0)
         o['alive499'] = alive_at[s].get(499)
         o['alive50'] = alive_at[s].get(50)
+        for ck in CHECKS:
+            o['n%d' % ck] = chk[s].get(ck, {}).get('n')
+            o['tl%d' % ck] = chk[s].get(ck, {}).get('len')
+            o['eat%d' % ck] = chk[s].get(ck, {}).get('eat')
         o['longest'] = tr.get('longestDragon', 0)
         o['total'] = tr.get('totalLength', 0)
         q = queen[s]

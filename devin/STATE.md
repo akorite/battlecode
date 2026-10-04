@@ -1,67 +1,29 @@
-# STATE — ladder iteration (updated ~01:10 UTC Oct 4)
+# Battlecode state — refreshed 2026-10-04 ~08:45 UTC
 
 ## Ladder
-- Team 351 "Cognoscenti". Goal: top-20 (~1955 Elo) by Oct 10 qualifiers.
-- **LIVE: v119 (sub 16258) = v116-guard-scope + pearl opening + queen ram screen.**
-- v117 band: 7-13 vs 1650+ (Nitro 2-3, Quaker 1-4, 1234 2-3, IW 2-3).
-- Elo 1520. Weak spots: weakhold/starvation maps, devil (25%), early econ halved.
+- Elo ~1576 (v135 live as sub v112; v134 re-uploaded as sub v114 to stop the dilemma/portals bleed while v137 gates)
+- Team 351 (Cognoscenti). Quota: 60 game-starts/hr.
+- Band 1550-1849: ~40-45%; top-4: 1-31. Top-20 cutoff ~1955.
 
-## Honest-gate scoreboard (kmatch.py)
-- v119 = live (v116+pearl+queen-screen); v117 sub 16206 idle
-- v108 vs v104: 47.7% — parity, current clean base
-- v112 vs v104: 48.9% — parity + wallguard = free insurance → SUBMITTED
-- v110 (v108+wh2): 40.0% — DEAD (wh2 unproven-veto pins queen on foggy maps)
-- v111 (v108+swarmTrap): 36.9% — DEAD (corridor-pocket veto bleeds islands/
-  slithery/weakhold)
-- v109 (v108+wh2+pearl): 42.0% — DEAD
-- Honest baseline: v104 = 48.6% vs cf, 38.9% vs combat
+## Version line
+v120 (splitEnemyDist=1) → v133 (feed@360 on open maps, corridor ≤2000 revert) → v134 (+ee dual-scan) → v135 (+pocket bait-fix, has A1 defect live) → v137 candidate (=v135 + F2 score gated on sealed-queen + F3 + F13 + A2 sealed-queen≠champion). v136 (autarky election fix) gated 50.9%, hold.
 
-## Lanes (4 workers)
-- pocket (5d3c6001, devin/pocket): weakhold starvation — dragons can't reach
-  fields past horizon; integrator far-pull failed 25-37%; needs corridor-aware exit.
-- earlyecon (381c0534, devin/earlyecon): bisect wh4/open_/guards — splits@r60
-  halved since v104 on elim maps (devil 25%).
-- autarky (13f9c332, devin/autarky): elim-map tempo (running, no branch yet).
-- explore (97938483, devin/explore-modes): isolated lane per explore-steering.md.
+## Steering-3 order (active)
+A. Early growth elim maps — targets r25 6.7d/16.4L, r50 10.3d/25.5L, r100 20d/50L (earlyecon lane owns)
+B. Feed-window champion-pearl measurement + feeder-only guard (target <10 self-hits/30r, longest>33)
+C. Review fixes before uploads (F2/F3/F13/A2 in v137; open: F12, F15, feature-gates, champId_ trace)
+D. 17-map both-seat vs FtM/Vibing++/SSS/Sponge/Computers(112), ≥100g per verdict
 
+## Stop list
+feed-date moves; map-name tables (w*h, W==40); queen-risk trades; <100g verdicts; one-seat drills; rating reads as verdicts.
 
-## Harness facts
-- kmatch.py = honest A/B (paired seats). gate_v10X.sh = single embedded pair,
-  wins-phase labels wrong for 2nd opponent — do not use.
-- `strings runner | grep bota_` reveals embedded pair dirs.
-- unswbc CLI at ~/.venv-bc/bin/unswbc; API via unswbc.api.request(key).
-- Edge seen-flag = fog of war; unseen edges model open (kind=0) → hitWall.
-- Death histogram: hitWall 2174, hitSelf 1734, H2H 1513 — all 1-step moves.
+## Lanes
+- autarky devin-13f9c…: 5a phase controller + computed map features (replaces w*h/40x15 gates)
+- earlyecon devin-381c…: pre-r200 elimination / action A targets
+- pocket devin-5d3c…: 5b escort+hunt (target ≤.06 queen lost <r250; B1 hunt bonus; qOS r36 mutual-elim open)
+- explore devin-9793…: SPSA tuner + sticky (per explore addendum)
 
-## Next
-- v112 ladder review at 60+ ranked games (from activation ~23:15).
-- Integrate pearl v3 or qsiege fix, whichever passes first.
-- Backlog: stripes/devil openings, mid-game H2H defense tuning, STATUS.md.
-
-## Steering (Keitaro, 4 Oct 00:00) — key facts
-- Round-500 win rule (426 top-team replays): longer queen wins 210/210; equal queens → longer longest dragon wins 214/214. Dead queen = len 0.
-- Guards killed the feed: v104's boxed-in dragons dying beside the champion FED it. hitSelf r300-399: 30.3 (v104) → 10.4 (v106) → 12.7 (v112). Longest r499: 30.8 → 13.3 → 13.0. ACTION A: scope guards queen-only or r<40.
-- v113 grows better (27.8 drag, 69 len r100 vs opp 22.6/60; 720 pearls vs 481) but doesn't consolidate (15.3 vs 28.9 longest r499).
-- Elimination maps (Stripes/Trophy/Devil/Dilemma/QoS/Autarky/TD/Default): winner ahead by r25 (6.3v5.3 dragons), far by r50. Opening 0-50 IS the game there.
-- Round-500 maps: winners' longest 9.4 vs 7.1 at r200, 16.8 vs 12.0 at r300. Islands/Schooltime/Australia → longest dragon decides.
-- Queen deaths: 94% are len2-3 rams on unguarded queens (0 allies within 3 tiles). Median ram death r131.
-- Stop: guards on non-queen dragons; whole-board vetoes; 88-gate verdicts (±10 noise); mixed-field records (compare by tier).
-- Benchmark bots: Bot(11), test4(19), Sabotage-d(46). Sonar: no fixed tags.
-
-## Method addendum (4 Oct, Keitaro) — staged pipeline
-- S0 mechanism check (10-20 local games + debug build): the mechanism number
-  must move or the candidate dies free. S1 local screen vs benchmarks+outside
-  bots both seats; kill if clearly worse or ANY new r0-5 queen death. S2
-  sequential ladder test vs FtM(264)/Vibing(306)/SSS(91)/Sponge(213) on affected
-  maps, SPRT vs current best (+8pts H1, ~30-40g kill, cap 80). S3 = full 17-map
-  both-seat × 4 teams (~136g) only pre-upload.
-- Lanes own S0-S2; quota queue by best S1. Diagnose before fixing (one-line
-  cause + evidence per lane doc). Param tuning as vector via SPSA (explore lane).
-- Build order 5a phases (autarky) → 5b queen module (pocket next) → 5c job
-  allocator (earlyecon, rebases explore sticky) → 5d map-class selector (last).
-- Candidates in flight: v120 LIVE (splitEnemyDist 1, sub 16296, Elo 1440->1535);
-  v121 = FULL feed bundle (3 feed params + relays 370 + hideUntil 390) at S1
-  (feedgate2, 8 big maps x3 seeds — early 62.5%, alive@499 +157%);
-  v122 = correctness pack F2,F3,F12,F13,F15 — F2+F3 alone neutral (50.0%/48g),
-  full pack gating on queen-death maps (v122full). Sticky promo via earlyecon.
-- F11 (public sonar secret) parked on user: gitignored header or private repo.
+## Pending review/verification
+- qOS r36 all-4-dead mutual elimination — no shipped fix touches it
+- champId_ fragmentation trace (12-55% late turns think selfChamp_)
+- dual-scan r100 cost vs v133 on ≤2000 maps (30.3 vs 34.8 flag)

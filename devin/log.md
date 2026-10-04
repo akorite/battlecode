@@ -291,3 +291,10 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
 | v135c | S1 result | v135(hoisted) vs v134 | 4-map x8s 64g | 46.9% (maze 31.2%, all pair-S elsewhere) | maze skew = wasm depth-clip noise — several games bit-identical to mirror; vs cf 81.2% = v134's 81.2% (maze 87.5>75) | real-opp parity |
 | v135combat | S1 conv | v135 vs abyss_combat | weakhold+stripes x4s 16g | 43.8%; **weakhold 0/8 → 50%** | seat-A flatline broken (27 elim, 24-21 len); alive499 3.9 vs 15.7 | mechanism converts |
 | v135 | S3 | v134+v135 submitted | — | sub v112 "v135-pocket-bait" | per method: combo passed real-opp checks | LIVE |
+| STEERING-3 (07:45) | — | new order | — | — | A: early growth elim maps (r25 6.7d/16.4L, r50 10.3d/25.5L, r100 20d/50L); B: feed-window champion-pearls (self-hit spike = intended feed deaths, not guard gap); C: review fixes before uploads; D: 17-map both-seat vs 5 teams ≥100g | v135 has A1 defect live (dilemma+portals lose both seats via F2 worker-scan trapped) → v137 fix path |
+| STOP | — | — | — | — | — | feed-date moves; map-name tables (w*h, W==40); queen-risk trades; <100g verdicts; one-seat drills |
+| KEPT | — | — | — | — | — | schooltime fix, scoped guards, wh4 small maps, map-gated pearl opening, feed@360 opens, corridor revert (feature-gated TBD), 1650+ matched challenges, round-keyed sonar, explore lane as-is |
+| v137fix | S1 | abyss_v135+v137 pack | 41.4 | 128 | FAIL | F2+F3+F13+A2sealed: dilemma/portals seat-locked (fixed) BUT schooltime 18.8% 5-both-losses; alive@r499 5.3 vs 17.8 — sealed queen left her room via scored veto |
+| v137qos | S1 | same | 43.8 | 16 | neutral | qOS unchanged (7/8 splits) — r36 mutual-elim not touched by pack |
+| v136ak | S1 | v135+autarky election fix | 50.9 | 112 | hold | autarky 54.2% (3-1 pairs) all else inert; champMargin=3+relayFrom=280+tradeSlack=0 |
+| v137b | S1 | v137-sealed-queen keeps trapped | — | 144 | running | F2 score gated !queen_||queenReach>=20 |

@@ -1,3 +1,2 @@
-LIVE: v119 (sub 16258) = guard-scope + pearl open + queen-ram screen.
-LANES: pocket starvation, early-econ bisect, autarky, explore — 4 workers.
-NEXT: v119 60-game measure; quota refill ~02:30 UTC for next challenge batch.
+Building v137 = v135 + F2 (score=stepTerm both veto paths) + v122 correctness pack (F3/F12/F13/F15) + sealed-queen fallback (unreachable/ungrown queen ≠ champion). Gate: dilemma+portals+td+trophy+weakhold+stripes+maze ×8s; ship when both-seat losses clear.
+Measure: per-upload table (band W-L, elim<200, tl@25/50/100/300/400/499, queen alive@499, self-hits r360-389); ≥100g per verdict, same opponents.

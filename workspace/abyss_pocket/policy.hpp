@@ -974,6 +974,22 @@ class Policy {
                     }
                 }
             }
+            // Heard-queen escort: she hides out of vision and pings a role-2
+            // beacon; 76% of queen deaths had no ally within 3 tiles. Nearby
+            // workers converge on her last reported cell so a ram meets a head
+            // before it meets her.
+            if (escortOf_ < 0 && p_.qEscortHeard) {
+                World::Heard const* rep = nullptr;
+                for (World::Heard const& h : w_.heard)
+                    if (h.role == 2 && w_.t.round - h.round <= p_.heardFresh &&
+                        (!rep || h.round > rep->round))
+                        rep = &h;
+                if (rep) {
+                    int d = distToHead(myDist_, rep->cell);
+                    if (d != INF && d <= p_.qEscortDist && swarmRank(rep->cell, d) < p_.escortCount)
+                        escortOf_ = rep->cell;
+                }
+            }
         }
     }
 
@@ -1292,6 +1308,12 @@ class Policy {
             if (fd != INF) value += p_.wHideFriend * gp(fd + k);
             if (why.empty()) why = "hide";
         }
+        if (queen_ && !lead_ && p_.wQueenAlone > 0) {
+            // A lone queen is the 76% kill signature; drift back toward the
+            // swarm's cover once no ally is within qAlone of this tile.
+            int fd = friendDist_[dest];
+            if (fd != INF && fd > p_.qAlone) value += p_.wQueenAlone * fp(fd - p_.qAlone);
+        }
         if (assassin_ && assassinCell_ >= 0) {
             // Converge on the reported cell and its neighbours. No pull past the
             // BFS horizon: chasing ghosts through fog is how the squad bleeds.
@@ -1373,13 +1395,34 @@ class Policy {
             // Queen ram screen: 94% of queen deaths are len2-3 rams stepping onto her.
             // A tile inside a seen OR fresh heard enemy's sprint reach is priced fatal —
             // not soft — so she never ends a turn where a rammer can arrive this round.
+            // Head-to-head kills at ADJACENCY: a ram only has to reach a tile
+            // next to her destination (r222 loss: len3 sprinted beside her head
+            // and both died). And e.dist runs over ownBlk, so tiles on/behind
+            // her own body read INF — checking only dest leaves a hole exactly
+            // where rams attack along her body line. Score the worst reachable
+            // approach: min dist to dest or any of its 4 neighbors. But the
+            // wider fear net costs her anywhere else — gate to weakhold dims,
+            // the map where the hole demonstrably kills her (pvc2 r222).
+            bool adj = p_.qRamAdj > 0 && b.W == 40 && b.H == 15;
             for (EnemyField const& e : enemies_) {
                 int dd = e.dist[dest];
-                if (dd > 1 && dd <= reachOf(e.visible)) danger += p_.wQueenRam * newL * mult;
+                if (adj)
+                    for (int d2 = 0; d2 < 4; d2++) {
+                        int n = b.nb[dest * 4 + d2];
+                        if (n >= 0) dd = std::min(dd, e.dist[n]);
+                    }
+                if (dd > (adj ? 0 : 1) && dd <= reachOf(e.visible) + (adj ? p_.qRamAdj : 0))
+                    danger += p_.wQueenRam * newL * mult;
             }
             for (EnemyField const& e : heardEnemies_) {
                 int dd = e.dist[dest];
-                if (dd > 1 && dd <= reachOf(e.visible)) danger += p_.wQueenRamHeard * newL * mult;
+                if (adj)
+                    for (int d2 = 0; d2 < 4; d2++) {
+                        int n = b.nb[dest * 4 + d2];
+                        if (n >= 0) dd = std::min(dd, e.dist[n]);
+                    }
+                if (dd > (adj ? 0 : 1) && dd <= reachOf(e.visible) + (adj ? p_.qRamAdj : 0))
+                    danger += p_.wQueenRamHeard * newL * mult;
             }
         }
         if (queen_ && p_.wTailStrike > 0 && k == 0) {

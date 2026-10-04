@@ -67,3 +67,35 @@ turn — member state can't persist). These stay in git history on devin/pocket.
 Residual risks: `hitSelf` deaths ~50/game (bigger swarm, corridor pileups);
 the two pvc2 losses and devil s4 are queen-death endings — that is module 5b's
 signature, not a navigation defect.
+
+## 5b queen-safety module — findings (partial, folded into this branch)
+
+Replay forensics on pvc2 s3-A (queen r222): a **lone len-3 ram sprinted W 2 tiles
+and died head-to-head with her** — both died at adjacent heads, nearest ally ~5
+tiles. Exact 5b signature. Two real defects found in v119's ram screen
+(`queen_ && !lead_`, policy.hpp):
+
+1. head-to-head kills at ADJACENCY — the screen's `reachOf(v)=freeSteps+v-2`
+   is one short of the lead-branch's `+v-1`, and the kill actually lands
+   *beside* her head.
+2. `e.dist` is BFS over `ownBlk` — her own body blocks the field, so rams
+   attacking along her body line read INF and score "safe".
+
+Shipped: `qRamAdj=1` + min-dist over dest's 4 neighbors, **gated to weakhold
+dims (W40×H15)** — the map where the hole demonstrably killed her. pvc4/pvc6 =
+4/8 vs combat (queen survived the r222 pattern; the remaining s3 loss is a
+late-game swarm collapse — 7 enemies inside cheb 4, not interceptable).
+
+REJECTED (all hurt econ or flip seats):
+- `qEscortHeard` (idle workers converge on her role-2 beacon ≤14 tiles): weakhold
+  s3-A pair-loss — escort pull drains forage.
+- `wQueenAlone` (queen drifts toward allies when none within 3): POISON — pulls
+  the hiding queen toward the swarm = into fights; mirror-flipped BOTH seats on
+  weakhold+dilemma (B swept, A collapsed 11 vs 59 eaten).
+- adjacency screen ungated or gated on `anyBait_`: stripes s4-B pair-loss +
+  arena/stripes regressions (37.5%). The wider fear net is only safe where the
+  geometry hole was proven.
+
+Escort side of 5b NOT shipped — converging workers on a hidden queen keeps
+costing econ; the right form probably wants escorts to form only once an enemy
+is *near* the queen's reported cell, not continuously.

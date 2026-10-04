@@ -252,10 +252,15 @@ struct Params {
     int queenHideLen = 2;             // length she keeps while hiding
     double wQueenRam = 30.0;          // queen-only: tile inside a seen enemy's sprint reach (ram screen)
     double wQueenRamHeard = 2.0;     // same for fresh heard enemies (fog rams are len2-3)
+    int qRamAdj = 1;                // queen ram screen reach bonus: head-adjacent rams still kill (head-to-head takes both)
     double wQueenFlee = 0.0;          // hiding queen's fear of relayed enemy sightings (heardDanger; stage-2 OFF — A/B'd worse, see lane report)
     int queenFeedRound = 330;         // feeders wake for her from this round
     int queenFeedMargin = 2;          // feeders die for her once she is at least this long
     double wHideFriend = 0.8;         // hiding queen's pull toward teammates
+    double wQueenAlone = 0.0;         // queen's pull back toward allies when none within qAlone
+    int qAlone = 3;                   // 'no ally within this' = the 76% queen-death signature
+    int qEscortHeard = 0;             // idle workers escort the heard (role-2 beacon) hiding queen
+    int qEscortDist = 14;             // only workers already this close volunteer for heard escort
     int lateSplitUnits = 20;          // after growRound the swarm splits only below this many units
     int tradeMinUnits = 4;            // below this many units we do not trade heads
     int tradeSlack = 1;               // trade if own length <= enemy visible length + slack

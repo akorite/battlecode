@@ -59,6 +59,7 @@ class Policy {
         hiding_ = p_.queenHide && queen_ && w_.t.round < p_.queenHideUntil && w_.board.NC >= p_.hideMinTiles;
         grower_ = isGrower(w_.init.id, L_) && !hiding_;
         bud_ = w_.t.units < p_.budAlive;
+        open_ = bud_ && w_.t.round < p_.openUntil && openMapOk();  // forage-first opening, map-gated
         feedHead_ = -1;
         feedAge_ = 0;
         // A fresh child's setup can eat most of its first turn late in the game:
@@ -374,6 +375,14 @@ class Policy {
     bool lean_ = false;
     bool bud_ = false;                // breed phase: swarm below budAlive — split over eating, avoid contact
 
+    bool open_ = false;               // forage-first opening: bud_ && round < openUntil, map-gated
+    bool openMapOk() const {
+        int nc = w_.board.NC;
+        if (nc <= p_.openMaxTiles && !(maze_ && nc > p_.openMazeMinTiles)) return true;
+        return w_.startUnits >= p_.openMinUnits && nc <= p_.openBroodTiles;
+    }
+    bool maze_ = false;               // kelp fraction above mazeKelpFrac (corridors: fog stays priced)
+
     void noFriendFields() {
         Board const& b = w_.board;
         friendDist_.assign(b.NC, INF);
@@ -546,7 +555,8 @@ class Policy {
     void adjustByMap() {
         // Maze maps (Portals: walls on ~28% of edges) paralyse the swarm if every
         // corridor mouth counts as a pocket — drop pocket fear there.
-        if (w_.kelpFraction() > p_.mazeKelpFrac) eff_.wPocket = 0.0;
+        maze_ = w_.kelpFraction() > p_.mazeKelpFrac;
+        if (maze_) eff_.wPocket = 0.0;
         return;  // brawl overrides stay off pending their own A/B
         if (!w_.mapBrawl()) return;
         eff_.champRound = eff_.champRoundBrawl;
@@ -690,7 +700,7 @@ class Policy {
     bool tradeOk(int myLen, int enemyLen) const {
         return w_.t.units >= (lead_ ? p_.leadTradeMinUnits : p_.tradeMinUnits) && myLen <= enemyLen + p_.tradeSlack;
     }
-    bool survival() const { return w_.t.units <= p_.survivalUnits; }
+    bool survival() const { return w_.t.units <= p_.survivalUnits && !open_; }  // a small brood is a start, not a remnant
 
     // Whoever has more heads around a trade site eats most of the pearls the two dead
     // dragons drop. Counts heads near `site`, leaving out ourselves and the enemy we
@@ -757,7 +767,10 @@ class Policy {
             int cd = (b.bed[c] == 1 && w_.next[c] >= 0 && w_.next[c] < p_.horizon) ? w_.next[c] : -1;
             belief_[c] = bel;
             countdown_[c] = cd;
-            double ex = w_.seenRound[c] < 0 ? p_.exploreValue : 0.0;  // never-seen tile
+            // Forage-first opening: swarm dragons get a stronger scout pull so the
+            // brood fans out onto fresh beds instead of circling known ground.
+            double exv = (open_ && !queen_ && !grower_) ? p_.openExplore : p_.exploreValue;
+            double ex = w_.seenRound[c] < 0 ? exv : 0.0;  // never-seen tile
             if (bel > 0.02 || cd >= 0 || ex > 0) targets_.push_back({c, bel, cd, ex});
         }
         hot_.clear();
@@ -890,7 +903,10 @@ class Policy {
             double gain = threat ? std::max<double>(protect, e.visible) - L_ : e.visible - L_;
             // Their queen is always worth hunting: a head-to-head kills her at any length.
             bool queenTgt = e.id == w_.enemyQueen();
-            bool worth = queenTgt || (threat ? e.visible >= 2 : tradeOk(L_, e.visible));
+            // Forage-first opening: swarm dragons eat and split, not skirmish —
+            // only their queen and genuine grower-threats still pull a mission.
+            bool worth = queenTgt || (threat ? e.visible >= 2
+                                             : (p_.openHunt || !open_) && tradeOk(L_, e.visible));
             if (!worth) continue;
             int mine = distToHead(myDist_, e.head);
             if (mine == INF) continue;
@@ -1227,7 +1243,13 @@ class Policy {
         double mult = (grower_ || hiding_) ? p_.growerDanger : survival() ? p_.survivalDanger : 1.0;
         if (queen_) mult *= p_.queenDanger;
         if (lateGame()) mult *= 2.0;
-        if (bud_) mult *= p_.budMult;
+        // Forage-first opening: the extra breed-phase fear tax is what starves the
+        // pearl race; base danger terms still apply.
+        if (bud_) {
+            double dm = open_ ? (queen_ && p_.openQueenDanger >= 0 ? p_.openQueenDanger : p_.openDanger)
+                              : p_.budMult;
+            mult *= dm;
+        }
         int enemyId = -1;
         if (nextToEnemyHead(dest, enemyLen, huntNext, enemyId)) {
             // Parking next to an enemy head hands it the choice (and the drops). Only a
@@ -1264,6 +1286,19 @@ class Policy {
                 if (dd <= std::max(freeSteps(e.visible) + e.visible - 1, 1)) danger += p_.wLeadReach * newL * mult;
             }
         }
+        if (queen_ && !lead_ && k == 0 && p_.wQueenRam > 0) {
+            // Queen ram screen: 94% of queen deaths are len2-3 rams stepping onto her.
+            // A tile inside a seen OR fresh heard enemy's sprint reach is priced fatal —
+            // not soft — so she never ends a turn where a rammer can arrive this round.
+            for (EnemyField const& e : enemies_) {
+                int dd = e.dist[dest];
+                if (dd > 1 && dd <= reachOf(e.visible)) danger += p_.wQueenRam * newL * mult;
+            }
+            for (EnemyField const& e : heardEnemies_) {
+                int dd = e.dist[dest];
+                if (dd > 1 && dd <= reachOf(e.visible)) danger += p_.wQueenRamHeard * newL * mult;
+            }
+        }
         if (queen_ && p_.wTailStrike > 0 && k == 0) {
             // Tail-strike: a length-N enemy can U-turn split so its old tail becomes
             // a new head that acts the same turn. Head within `visible` of dest means
@@ -1293,7 +1328,7 @@ class Policy {
         }
         // forage lane: a short dragon skipped an adjacent pearl because the eating tile paid
         // wPocket/wFog (1.5-1.75) against eatBonus 1.0. Not the queen: a pocket is how she dies.
-        bool eatShort = c.eat && L <= p_.pocketEatLen && !queen_;
+        bool eatShort = c.eat && L <= (open_ ? p_.openEatLen : p_.pocketEatLen) && !queen_;
         if (exits <= 1 && k == 0 && !eatShort) danger += p_.wPocket;  // corridors would pile this up along a plan
         // Through a portal the far side may be out of vision. Only the real first step
         // pays for that (lookahead leaves vision all the time), and only much when we
@@ -1314,8 +1349,12 @@ class Policy {
         if (k == 0 && b.portalSide[dest] && b.portalSide[head] && !crossing) danger += p_.wPortalLoiter;
         // Fog of war: a never-seen edge might be kelp, and stepping into kelp
         // kills. Long dragons pay more — they have more to lose.
-        if (k == 0 && !crossing && !b.side(head, d).seen && !eatShort)
-            danger += p_.wFog * (1.0 + 0.25 * newL) * (assassin_ ? p_.assassinFogMult : 1.0);
+        if (k == 0 && !crossing && !b.side(head, d).seen && !eatShort) {
+            // Forage-first opening: on open maps the swarm must cross unseen edges
+            // to reach fresh beds; kelp-ful mazes keep the full price.
+            double fogMult = (open_ && !queen_ && !grower_ && !maze_) ? p_.openFog : 1.0;
+            danger += p_.wFog * (1.0 + 0.25 * newL) * (assassin_ ? p_.assassinFogMult : 1.0) * fogMult;
+        }
 
         c.stepTerm = (c.eat ? p_.eatBonus : 0.0) - danger;
         if (viaReverse) c.stepTerm -= p_.wReverse;
@@ -1369,7 +1408,11 @@ class Policy {
             // The queen's own length decides the game: stop budding workers from
             // her body once the economy phase ends.
             if (w_.init.id == w_.champId() && w_.t.round >= p_.queenBudUntil) return false;
-            int keep = p_.growerKeepBase + w_.t.round / p_.growerKeepEvery;
+            // Forage-first opening: the queen buds down to openQueenKeep so the
+            // brood multiplies sooner; afterwards the normal keep floor returns.
+            int keepBase = (open_ && w_.init.id == w_.champId() && p_.openQueenKeep >= 0)
+                               ? p_.openQueenKeep : p_.growerKeepBase;
+            int keep = keepBase + w_.t.round / p_.growerKeepEvery;
             if (L_ < keep + p_.growerChild) return false;
             n = p_.growerChild;
         } else {
@@ -1379,8 +1422,9 @@ class Policy {
             if (w_.t.round >= p_.growRound && w_.t.units >= p_.lateSplitUnits) return false;
             n = L_ / 2;
         }
+        int enemyBan = open_ ? p_.openEnemyDist : p_.splitEnemyDist;
         for (World::Seen const& s : w_.others)
-            if (isEnemy(s) && b.cheb(s.head, w_.head) <= p_.splitEnemyDist) return false;
+            if (isEnemy(s) && b.cheb(s.head, w_.head) <= enemyBan) return false;
 
         int keep = L_ - n;
         std::vector<int> parent(w_.body.begin(), w_.body.begin() + keep);

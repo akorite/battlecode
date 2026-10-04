@@ -28,7 +28,7 @@
   (H2H/hitWall r50-450, all-4-exits-blocked). Pick ONE fix: exit-freedom
   scoring / convergence trigger / pocket-depth limit.
 - losssurvey (d1bd4e24): done, terminated.
-- explore lane: sticky delivered (65% n=20, ~par vs combat); SPSA tune lane on abyss_x_tune running coordinate probes vs combat → devin/tuning.md
+- explore lane: SPSA tune done — top vectors {sd2 revert, feed330 triple, combo} vs cf in devin/tuning.md; sent to integrator
 
 ## Harness facts
 - kmatch.py = honest A/B (paired seats). gate_v10X.sh = single embedded pair,

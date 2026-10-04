@@ -1,0 +1,2 @@
+x3_sd2f330 splitEnemyDist=2,feedRound=330,queenFeedRound=330,champFallbackRound=330  combo: revert + feed-early
+x3_full    splitEnemyDist=2,feedRound=330,queenFeedRound=330,champFallbackRound=330,exposureMode=1  combo + em1

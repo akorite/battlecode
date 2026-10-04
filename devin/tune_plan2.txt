@@ -17,3 +17,6 @@ x2_rel300 queenRelayFrom=300,champRelayFrom=300          relays earlier
 x2_em1   exposureMode=1                                  favour exposed w/ local numbers
 x2_qd30  queenDanger=3.0                                 queen more cautious
 x2_sv45  survivalDanger=4.5                              survival-mode more cautious
+x2_f300  feedRound=300,queenFeedRound=300,champFallbackRound=300  extend earlier-gradient
+x2_fr300 feedRound=300                                     feed window only, queenFeed/champ stay
+x2_cf300 champFallbackRound=300                            queenless champ only earlier

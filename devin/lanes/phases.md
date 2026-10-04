@@ -211,6 +211,22 @@ deficit concentrates in open-map champ conversion — v104's queen-champ reaches
 our elected champ plateaus ~19 (front-load + fd=1 improved conversion but not enough on
 the biggest maps).
 
+### v8/v9 (open-map iteration, unsw+slithery × 4 seeds vs v104)
+
+v8 (consolAt clamp 368 + NC-scaled burst): slithery 37.5%, unsw 0/8 — alive@r499 62 vs 22,
+longest@end 18.2 vs 28.6.
+v9 (CONSOL feedMaxLen=10): unsw 12.5% (first unsw win, c24 bell), slithery 12.5% — net
+12.5% overall. Conversion still capped: longest@end 18.8 vs 30.6.
+
+**Next untested lever (documented, not shipped):** `feedHeardDie=2` — a feeder only dies
+beside a HEARD champ if the report is ≤2 rounds old. On 4096-tile maps relay cadence is
+slower than 2 rounds, so heard-only feeders may circle forever and never die into the
+champ; widening it in CONSOL (champ is parked, stale positions are safe) is the cheap fix.
+
+**Lane verdict stands: honest negative overall** — phase machine mechanically verified
+(transitions, classifier, front-load, in-place deaths, escort switch, hysteresis) and
+recovers to ~34-37% on the affected subset, still behind v104 on open-map bells.
+
 ## Still weak
 
 - B-seat autarky bells: our champ lands 8-16 vs their 35-39 (A-seat we reach 12-66). Feed throughput

@@ -739,6 +739,11 @@ class Policy {
             // feed. fd=1 lands their drops at the head (the earlier 6→8 revert
             // was entangled with the feed-ring change, not the length cap).
             eff_.feedMaxLen = 10;
+            // Let a feeder die beside a moderately stale heard position —
+            // the parked champ does not move, and a 2-round freshness bar
+            // blocks suicides on big maps where relay cadence lags (46% of
+            // post-window feeder turns on unsw resolved no feed target).
+            eff_.feedHeardDie = 8;
             eff_.tradeSlack = 0; eff_.tradeMinUnits = 6;
             break;
         case PH_PROTECT:

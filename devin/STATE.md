@@ -28,6 +28,7 @@
   (H2H/hitWall r50-450, all-4-exits-blocked). Pick ONE fix: exit-freedom
   scoring / convergence trigger / pocket-depth limit.
 - losssurvey (d1bd4e24): done, terminated.
+- explore lane: mode histograms, debug build running
 
 ## Harness facts
 - kmatch.py = honest A/B (paired seats). gate_v10X.sh = single embedded pair,

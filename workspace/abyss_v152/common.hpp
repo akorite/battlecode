@@ -138,7 +138,7 @@ struct Params {
     int s0Until = 60;                 // scout mission window (covers first-sighting lag)
     double s0Far = 7.0;               // mirror-waypoint weight before any end is seen
     double wPortalLoiter = 1.0;       // ending a move on a tile beside a portal
-    double wScout = 2.0;              // bonus for crossing a portal whose partner is unseen (6.0 streamed whole squads through portals into enemy territory: deaths 59 vs 42)
+    double wScout = 6.0;              // bonus for crossing a portal whose partner is unseen
     double wPortalScout = 4.0;        // explore-target weight on the lip of an unpaired portal
     int portalScoutUntil = 60;        // pull scouts to unpaired portal lips only before this round
     double wFog = 1.0;                // stepping through a never-seen edge (could be a wall)

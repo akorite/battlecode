@@ -377,9 +377,10 @@ class Policy {
                 return c;
             }
         }
-        if (best.score < -500 && L_ >= 4 && w_.t.units < w_.init.unitLimit) {
+        if (!queen_ && best.score < -500 && L_ >= 4 && w_.t.units < w_.init.unitLimit) {
             // Reverse: keep a 2-long stub here, the child (our old tail, facing out)
-            // leaves with the rest.
+            // leaves with the rest. Queen excluded (C3): all-vetoed F2 turns would
+            // otherwise mutilate her to a 2-stub on survivable boards.
             split.split = true;
             split.n = L_ - 2;
             split.why = "reverse";
@@ -1758,6 +1759,23 @@ class Policy {
         for (int c : parent) blk[c] = INF;
         markBody(blk, child, n);
         if (!hasRoomyMove(child.front(), blk, n)) return false;
+
+        // C2: a hiding queen keeps two roomy exits — a child plugging her last
+        // corridor is how len-2 queens die (Islands). Opening buds (r<=2) are
+        // exempt: the start-position bud must not slip a round (unsw seat-A).
+        if (hiding_ && w_.t.round > 2) {
+            int need2 = std::min(std::max(static_cast<int>(p_.spaceFactor * keep) + p_.spaceMargin, p_.splitRoom), b.NC / 2);
+            std::vector<int> blkP = base_;
+            for (int c : child) blkP[c] = INF;
+            markBody(blkP, parent, keep);
+            int roomy = 0;
+            for (int d = 0; d < 4; d++) {
+                int nn = b.nb[parent.front() * 4 + d];
+                if (nn < 0 || blkP[nn] > 1) continue;
+                if (nav_.flood(b, nn, blkP, need2 + 1) >= need2) roomy++;
+            }
+            if (roomy < 2) return false;
+        }
 
         out.split = true;
         out.n = n;

@@ -267,3 +267,10 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
   >2000 = open class (islands2240/schooltime2400/unsw+aus+bigempty4096).
 - v133 = v129 + eff_-gate: corridor-class reverts all 7 feed params to v120 values.
   v133screen (88g all maps vs v120) launched.
+- v133screen final (88g): v133 50.0% vs v120 — ZERO bleed. corridors 50% exact
+  (gate restores v120 behavior), schooltime 75%, slithery 1/4 boundary.
+  alive@499 +54%, longest +0.9, queen len +0.7. No r0-5 queen deaths.
+- v133combat (12g): 83.3% — swarm converts vs real opp (longest 31.9 vs 24.2).
+- v120 vs top-4 benchmark: 0W-25L pulled from battles feed — total wipeout.
+- v133 SUBMITTED (sub 16457, v110) + S2 challenges fired: FtM/Vibing++/Sponge
+  ranked, SSS unranked. SPRT p0~0; check per 10g, cap 80g.

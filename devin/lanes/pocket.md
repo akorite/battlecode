@@ -147,3 +147,124 @@ queen end-length -> longest -> total. This changes two v150 reads:
   the feed ahead of a worker-champ fallback.
 - autarky s1-A win (queen 3 vs dead, longest 31 vs 54) is the dead-queen
   autolose — escort/hunt work is directly on-score.
+
+## v149q — queen-survival module on v149 (evasion + threat escort + leash): REJECTED 41.7%
+
+Spec (integrator, resuming task): (a) queen evasion — step away when an enemy
+head enters vision with no ally between, (b) escort 2-3 tiles out on her front
+arc, (c) keep her near start r<100. Built on synced abyss_v149 (devin/v120 HEAD,
+champAnchor in World):
+
+- Evasion veto tier: dest inside `freeSteps(ev)+ev-1` of a seen enemy →
+  `wQueenVeto(500)*newL*mult − dd` (near-veto, keeps escape gradient);
+  `qEnemyLenMin=3` floor in BOTH the queen screen and the lead screen
+  (edge-seen len under-read — visible counts segments).
+- Threat escort with front-arc post: escortOf_=queenCell_ (seen else freshest
+  role-2 beacon), qThreat_ = enemy (seen or heard) within qEscortThreat=8 cheb,
+  volunteers within qEscortDist=14 + swarmRank<escortCount; arc pull wQueenArc=0.8
+  toward the cheb-2..3 ring cell nearest the threat.
+- Leash: wQueenLeash=1.0 overshoot penalty past leashDist=10 of startCell,
+  r<leashUntil=100, gated NC<=2000 && portalEnds.empty() (lifts on portal
+  sighting — the band-8 version fought scripted portal walks and regressed qOS).
+
+GATE abyss_v149q vs abyss_v149, tag q149, weakhold/stronghold/autarky/
+queen_of_spades/dilemma/arena ×2 seeds both seats (24g):
+- Score 41.7% (0W/10S/2L), CI [24.5,61.2]; pair losses arena + stronghold,
+  pair splits everywhere else.
+- QUEEN METRICS MOVED WRONG WAY: queen-dead 0.667 vs 0.542, queen-alive@end
+  0.455 vs 0.636, qlen@end 4.9 vs 9.6, queen non-ram deaths 0.125 vs 0.042.
+- Small-map pearls-eaten@r60 33.3 vs 40.9 — the queen starves. This is the
+  same signature both prior leash rejections showed (v135 band-8: qOS 0/2/2 +
+  stripes; the starvation is strongest on small maps where she must range to
+  eat). Band-10 + portal-lift did NOT fix it — third rejection; the comfort
+  zone is not a radius constraint, it's wherever food is.
+- Cannot cleanly attribute the 3 adds among themselves (no per-piece ablation
+  run); the leash is the overwhelming suspect by signature. Evasion veto and
+  front-arc escort individually verified-good on v135 bases (qOS r32 dodge,
+  escort 5/8 weakhold) — the bundle regression pattern is leash's.
+
+VERDICT: dead on arrival as a bundle; spec superseded by v153 anyway (anchor +
+threat-escort + die-in-place, no leash). The escort/arc block ports to v153
+unchanged; leash rejected 3x — do not retry without a food-aware trigger.
+
+## v153 — queen-champ anchor + threat-conditional escort + die-in-place (IN PROGRESS)
+
+Spec (integrator): queen-champ plant (she anchors when champIsQueen_ at
+feedRound-champPlantLead, roomy pivot >=12, hover ~1-2 cells) + threat-
+conditional escort (guard post 2-3 on her front arc, ONLY while an enemy head
+is within ~8 of her reported cell) + keep die-in-place feed convergence.
+
+BUILD: abyss_v153 = v149 + World::queenAnchor latch (queen-only set/clear) +
+wQueenAnchor=3.0 pull + threat escort (qEscortThreat=8, qEscortDist=14,
+qArcDist=3 front-arc cell, wQueenArc=0.8) + v150's die-in-place feed
+(champSeen_ live-head, champChannelDist=1, SPLIT-0 -> noValidAction,
+feedAge_<=feedHeardDie(2)||champSeen_). No leash (3x-rejected), no evasion-veto
+bundle (kept base ram screen for clean attribution of spec items).
+
+GATE-1 (shared-latch version, tag v153): abyss_v153 vs abyss_v149,
+unsw/islands/stronghold/autarky/default x2 both seats (20g):
+- 65.0% (4W/5S/1L) CI [43.3,81.9]; islands 4/4 (the queen-champ pathology),
+  autarky 3/4, unsw 1W/0S/1L, stronghold+default splits.
+- qlen@end 2.875 vs 2.125 UP; queen-dead 0.750 vs 0.800 DOWN; longest@end
+  29.6 vs 32.4 DOWN (stronghold s2-B 28-vs-58 monster outlier); wall+self+body
+  deaths 108 vs 130 (stale-target feed waste converted away).
+- Channel (cand vs base side, seat-corrected): noaDie cand 18-113/g vs base 0
+  (v149 neck-steps, no SPLIT-0); adjacency default 49%, stronghold 71%,
+  unsw 32%, islands 9%, autarky 2%.
+- ANCHOR POST-MORTEM: the queen never planted. unsw/islands queens die
+  r205-345 — before the r360 window. autarky s1 queen lived to 499 but post-360
+  span 29 (roamed): the shared w_.champAnchor latch is wiped by every
+  non-planter decide, so she re-locked at her DRIFTED head each turn — the
+  v149a deceleration-pull failure, reproduced on the queen. Worker-champs pin
+  anyway (their post-feed pulls are weak; the drops are their food), the
+  queen's forage targets outbid the 1.2 pull.
+- FIX (v153b): dedicated World::queenAnchor — set/cleared by the queen's own
+  decide only, locks ONCE at the first roomy cell in-window, wQueenAnchor=3.0
+  (beats forage). Re-gating same 20g.
+
+GATE-2 (locked-pivot version, tag v153b): same 20g —
+- 50.0% (3W/4S/3L) CI [29.9,70.1]. unsw 0/4 = TWO pair losses (gate-1 was
+  1W/0S/1L); islands 3/4 (was 4/4); stronghold 1W/0S/1L (was split).
+- qlen@end 2.444 vs 2.778 — FLIPPED negative; queen-dead 0.750 = 0.750;
+  longest@end 31.6 vs 32.4 still down; feed-waste reduction held (108 vs 135).
+- READ: a pinned r360+ queen starves where she must range to keep eating —
+  unsw is the harshest case (0/4). The anchor is REJECTED on mechanism
+  evidence: fixed pivot converts a roaming champ into a starving one; the
+  drops are not enough local food. Worker-champ pin works because its whole
+  job is hoovering drops; the queen has a forage/survival scoring layer.
+- STRIPPED: anchor block + pull removed. abyss_v153 = v149 + threat escort +
+  die-in-place only. Re-gating same 20g as v153c to confirm the ~65% was the
+  escort+feed pair and not the (weak) anchor pull.
+
+GATE-3 (stripped — escort + die-in-place ONLY, tag v153c): same 20g —
+- 40.0% (1W/6S/3L) CI [21.9,61.3]. unsw 0/4 again; islands 3/4; stronghold 1/4;
+  autarky 2/4. qlen@end 3.389 vs 3.222 (≈flat); queen-dead 0.75 vs 0.80;
+  longest@end 30.7 vs 32.6.
+
+THREE-GATE ORDERING (identical 20g protocol, same seeds both seats):
+  weak latch hover (v153)   65%  4W/5S/1L  qlen@end 2.9 vs 2.1  islands 4/4
+  locked pivot      (v153b) 50%  3W/4S/3L  qlen@end 2.4 vs 2.8  islands 3/4
+  no localization   (v153c) 40%  1W/6S/3L  qlen@end 3.4 vs 3.2  islands 3/4
+
+The "deceleration pull" is not a bug to fix — it is the mechanism. The queen
+re-locks the shared champAnchor at her own head each decide (every non-planter
+wipes it, so it never holds a real pivot); the resulting 1.2 pull toward where
+she IS slows her enough that relayed positions stay convergent for die-in-place
+drops, while she still ranges to eat. Harder (locked pivot at w3.0) starves
+her; nothing lets her outrun her own relays. unsw: she dies pre-window in
+every build (queen-dead ~0.75 there) — the s2 flip gate-1->later is the only
+map whose result moved, consistent with the localization being active.
+
+FINAL BUILD: restored the gate-1 block verbatim (byte-identical semantics —
+only comments differ; kvmrun replays are deterministic, so its 65%/4W/5S/1L
+holds; world.hpp identical to v149). abyss_v153 =
+  abyss_v149 + queen soft-localization via shared champAnchor latch (above)
+            + threat-conditional escort (enemy head within 8 of her reported
+              cell -> worker takes the front-arc post 2-3 out, qArcDist=3,
+              wQueenArc=0.8, swarmRank<escortCount, qEscortDist<=14 volunteer)
+            + v150 die-in-place feed (champSeen_ live head, champChannelDist=1,
+              SPLIT-0 noValidAction die, feedAge_<=2 || champSeen_).
+Spec metrics on the shipped build (gate-1): qlen@end 2.875 vs 2.125 UP,
+queen-dead 0.750 vs 0.800 DOWN, longest@end 29.6 vs 32.4 DOWN (stronghold
+s2-B 28-vs-58 monster outlier; medians closer). VERDICT: SHIP escort +
+localization + die-in-place; REJECT locked queen pivot; leash stays 3x-rejected.

@@ -345,3 +345,16 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
 - Full S0 v140s0full vs v138 running.
 - v138 LIVE (sub 16660). S1 challenges: 0/10 vs FtM/Vibing++ (top-4 wall as expected); SSS/Sponge/Computers + band 919/529/782 queued behind 60g/hr cap.
 - Lane status: earlyecon allocator iterating (sticky holds look net-loss); autarky shipped champMargin+relay+trade block (54x18 gate — to integrate); explore SPSA delivered vectors (feed330, sd2 revert — feed moves on STOP list, sd2 conflicts v120 ship — parked).
+
+## ~11:00 UTC ladder obs (v138 live ~50 min)
+- Elo 1637 (+61 since submit). vs top-4: Vibing++ 3W-22L, FtM 3W-27L ≈ 10-12% (v120 was 0-25, v133 1-26) — wall softening.
+- Band: WaterCandle 4-6u (worse than v134's record — watch), nsw seng 0-5R (real loss, mid-band), meowest mixed 2-3/3-2R.
+- v140 = v138 + qsafe + autarky_ak (folded into S0; gate 54x18). Sweep v140s0full2 running.
+
+## ~11:40 UTC — steering-5/r3 folded
+- Mirror-hunt bleed proven: huntMirror=0 → td/qOS/trophy 12/12 splits (was ~33% on). Review C8 explains: aims at rotation of hunter's own start = enemy worker spawn. Correct target = mirror of OUR queen's start; x-mirror on Devil/Islands/Schooltime/Trophy.
+- v141a = v139 + C0 (scout portal unblocked at depth loop, move picker, trapped fallback, safeFirst). Smoke: pearls/turn 0.138 vs 0.001 on portals — mechanism fires. Full S0 running.
+- v141 = v141a + C1 (unproven veto || path) + C2 (queen hide-bud needs 2 roomy exits, exempt r<50) + C3 (!queen_ on reverse split). Staged, gates after v141a.
+- Local engine = official judge wasm (unswbc pkg) — no free-step cost mismatch on our side.
+- Review says do NOT ship v140 over v139 (their sweep: 53.3 vs 56.6, Default 1-7, Maze 2-6, PD 3-5) — consistent with local 51.5%.
+- Ladder ask: queen evasion vs front-arc rams (66% of v138 games) + portal transits r25 (0.01 vs 1.5) + feed queen r200-225 (FtM recipe 2→13 by r300).

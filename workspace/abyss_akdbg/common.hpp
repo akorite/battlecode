@@ -262,14 +262,35 @@ struct Params {
     int champRelayAge = 30;           // forward only reports at most this old (the age is coarsely coded)
     int queenRelayFrom = 300;         // queen position relay starts at this round
     int champRelayFrom = 370;         // queen-less champion relay starts at this round
+    int champDropZone = 3;            // CONSOLIDATE+: pearls within this cheb of the champion are its alone
     int champMargin = 0;              // a challenger must exceed the heard champion's length by
                                     // this much to take over (0: any +1 takeover — large swarms
                                     // churn the champion every few rounds and feeds scatter)
     int feedStop = 490;               // later sacrifices cannot be eaten in time
     int feedMargin = 4;
+    // Team phase controller (lane 5a): one macro layer decides the team's
+    // OPEN / GROW / CONSOLIDATE / PROTECT phase from round, map feature (NC),
+    // queen state, and length/unit counts, and drives the feed window, relays,
+    // split-stop and trade willingness through eff_. phaseCtl=0 keeps the old
+    // scattered round-gates; 1 replaces them with the phase machine.
+    int phaseCtl = 0;
+    int phaseOpenNC = 28;             // OPEN ends at round ~18 + NC/this
+    int phaseOpenMin = 25;
+    int phaseOpenMax = 75;
+    int phaseBrawlTiles = 700;        // w*h at/below: never consolidate (mapBrawl axis)
+    int phaseCorridorTiles = 2000;    // w*h at/below: corridor class — consolidate early
+    int phaseCorridorAt = 320;        // corridor CONSOLIDATE round (v104's own feed timing)
+    int phaseOpenBase = 320;          // open maps: consolAt = base + NC/phaseConsolNC (~360)
+    int phaseConsolNC = 50;
+    int phaseConsolMin = 355;
+    int phaseConsolMax = 390;
+    int phaseCollapseUnits = 8;       // a swarm this small consolidates whatever remains
+    int phaseProtectAt = 452;         // PROTECT never before this round
+    int phaseProtectMargin = 8;       // and only while our longest known beats theirs by this
     int feedMaxLen = 6;               // only small dragons feed
     int feedDist = 1;                 // die when this close to a tile next to the big head
     double wFeed = 3.0;
+    double wChampCamp = 6.0;          // elected champion's pull to its park anchor in CONSOLIDATE+
 
     // hot beds (fountains): fast-respawning beds, valued as a long-range pull
     // proportional to their yield rate (pearls per round).
@@ -312,6 +333,7 @@ struct Params {
 inline Params const kParams = [] {
     Params p;
     p.queenHide = 1;  // this variant runs the hide-and-feed doctrine
+    p.phaseCtl = 1;   // this variant runs the OPEN/GROW/CONSOLIDATE/PROTECT phase controller
     // v104 = qk minus queen-escape removals (paired analysis: removals threw 20 queen-fate
     // games via hitSelf+h2h) + cf consolidation timing + tail-strike queen fear:
     p.feedRound = 320;

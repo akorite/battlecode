@@ -33,8 +33,12 @@ class Policy {
   public:
     int depthReached() const { return depthReached_; }
     // Debug string for the per-turn LOG line (champion lane tracing).
+    // Team phases (lane 5a): OPEN produces, GROW replaces, CONSOLIDATE piles
+    // length onto one champion for the bell, PROTECT guards a held lead.
+    static int constexpr PH_OPEN = 0, PH_GROW = 1, PH_CONSOL = 2, PH_PROTECT = 3;
+
     std::string dbg() const {
-        return " id=" + std::to_string(w_.init.id) + " U=" + std::to_string(w_.t.units) + " g=" + std::to_string(grower_) +
+        return " id=" + std::to_string(w_.init.id) + " U=" + std::to_string(w_.t.units) + " ph=" + std::to_string(phase_) + " g=" + std::to_string(grower_) +
                " fh=" + std::to_string(feedHead_) + " fa=" + std::to_string(feedAge_) + " sc=" + std::to_string(selfChamp_) +
                " qr=" + std::to_string(w_.queenRound) + " ql=" + std::to_string(w_.queenLen) +
                " ch=" + std::to_string(champHead_) + " hd=" + std::to_string(w_.heard.size()) +
@@ -53,6 +57,9 @@ class Policy {
     Choice decide() {
         Board const& b = w_.board;
         adjustByMap();
+        // The phase machine is the last writer on the gates it owns: map
+        // overrides (adjustByMap) keep any field it does not touch.
+        if (p_.phaseCtl) { computePhase(); applyPhase(); }
         L_ = w_.t.length;
         queen_ = w_.init.id == w_.champId();
         lead_ = p_.protectLead && w_.theirQueenDead() && !w_.queenDead(w_.champId());
@@ -68,6 +75,45 @@ class Policy {
         if (p_.champOne && !queen_) {
             locateChamp();
             if (selfChamp_) grower_ = true;  // the team's champion plays safe and does not hunt
+            // CONSOLIDATE+: the elected champion parks at the nearest pearl bed
+            // (a self-feeding anchor). Its relayed position stops churning, so
+            // feeder suicides land their drops within reach and it eats them.
+            if (selfChamp_ && p_.phaseCtl && phase_ >= PH_CONSOL) {
+                champCamp_ = true;
+                if (w_.champCampCell < 0) {
+                    // Park at a hot bed (known short refill gap earns passive
+                    // income while drops arrive); distance is the tie-break.
+                    // Unobserved gaps score like a dead bed. (Home-ward bias
+                    // toward queenCell tested worse — cold corner beds.)
+                    int best = -1;
+                    double bs = 1e18;
+                    for (int c = 0; c < w_.board.NC; c++) {
+                        if (w_.board.bed[c] != 1) continue;
+                        int gap = w_.board.gapMax[c] > 0 ? w_.board.gapMax[c] : 999;
+                        double sc = gap * 2.0 + w_.board.cheb(c, w_.head);
+                        if (sc < bs) { bs = sc; best = c; }
+                    }
+                    w_.champCampCell = best >= 0 ? best : w_.head;
+                }
+            }
+        }
+        // CONSOLIDATE+: our queen is the feed beacon — park her at a nearby hot
+        // bed like the elected champion. v104's queen survives to r500 ~2x as
+        // often as ours (0.44 vs 0.25) and is their bell anchor; ours marches
+        // to the attrition war and dies mid-map, forcing a late re-election.
+        if (queen_ && p_.phaseCtl && phase_ >= PH_CONSOL) {
+            champCamp_ = true;
+            if (w_.champCampCell < 0) {
+                int best = -1;
+                double bs = 1e18;
+                for (int c = 0; c < w_.board.NC; c++) {
+                    if (w_.board.bed[c] != 1) continue;
+                    int gap = w_.board.gapMax[c] > 0 ? w_.board.gapMax[c] : 999;
+                    double sc = gap * 2.0 + w_.board.cheb(c, w_.head);
+                    if (sc < bs) { bs = sc; best = c; }
+                }
+                w_.champCampCell = best >= 0 ? best : w_.head;
+            }
         }
         if (p_.sonarOn) emitSonar();
         buildBase();
@@ -395,6 +441,7 @@ class Policy {
     bool grower_ = false;
     bool queen_ = false;            // we are this team's queen (lowest id)
     bool hiding_ = false;           // queen playing small under queenHide
+    bool champCamp_ = false;        // elected champion parked at a farm anchor (CONSOLIDATE+)
     bool lead_ = false;             // their queen dead, ours alive: pure survival now
 
     // Always take the enemy-queen kill: if her head is in sight and a path of free tiles within
@@ -495,7 +542,9 @@ class Policy {
         champId_ = -1;
         champIsQueen_ = false;
         selfChamp_ = false;
-        if (w_.t.round < std::min(p_.queenFeedRound, p_.feedRound) - 40) return;
+        // Warmup gate: off under the phase controller, whose champFallbackRound
+        // already encodes the election window per phase (GROW: consolAt-40).
+        if (!p_.phaseCtl && w_.t.round < std::min(p_.queenFeedRound, p_.feedRound) - 40) return;
         if (w_.ourQueen >= 0 && !w_.queenDead(w_.ourQueen) && w_.queenRound >= 0 && w_.t.round - w_.queenRound <= p_.champMemory) {
             champHead_ = w_.queenCell;
             champAge_ = w_.t.round - w_.queenRound;
@@ -543,21 +592,121 @@ class Policy {
 
     // Our sonar traffic for the turn: a beacon in every direction, plus one
     // enemy report aimed where a teammate is likeliest to pick it up.
+    // ---- team phase controller -------------------------------------------
+    // One place decides the team's phase from round, map feature (NC), queen
+    // state, and length/unit counts, and drives every time-of-game gate
+    // through eff_: feed window + relays, split-stops, the queen's budding
+    // window, and trade willingness. It replaces the scattered constants
+    // (feedRound, queenFeedRound, champFallbackRound, *RelayFrom, growRound,
+    // midEnd, lateSplitUnits, queenBudUntil, queenHideUntil). Phases only
+    // advance — the monotonic marker persists in w_.phase because Policy is
+    // rebuilt every turn; the hysteresis is the monotonicity itself.
+    int phase_ = PH_GROW;
+
+    int teamBestLen() const {
+        int best = L_;
+        for (World::Seen const& s : w_.others)
+            if (!isEnemy(s)) best = std::max(best, s.visible);
+        if (w_.ourQueen >= 0 && !w_.queenDead(w_.ourQueen) && w_.queenRound >= 0)
+            best = std::max(best, w_.queenLen);
+        if (w_.chRound >= 0 && w_.t.round - w_.chRound <= p_.champMemory)
+            best = std::max(best, w_.chLen);
+        return best;
+    }
+    int foeBestLen() const {
+        int best = 0;
+        for (World::Seen const& s : w_.others)
+            if (isEnemy(s)) best = std::max(best, s.visible);
+        for (World::Heard const& h : w_.heardEnemies)
+            if (w_.t.round - h.round <= p_.heardMemory) best = std::max(best, h.len);
+        return best;
+    }
+
+    // CONSOLIDATE fires by map class, not name — the axis is w*h at INIT.
+    // Corridor maps (<=2000 tiles) resolve by attrition before a late window
+    // pays: consolidate at v104's own r320. Open maps (>2000) keep feeding
+    // longer: r360 (integrator data: feed@360 wins +3.5-7 on open, fails on
+    // corridors). Brawl maps (<=700, the codebase's own mapBrawl threshold)
+    // never consolidate — attrition decides them.
+    int consolAtRound() const {
+        int tiles = w_.init.w * w_.init.h;
+        if (tiles <= p_.phaseBrawlTiles) return 999;
+        if (tiles <= p_.phaseCorridorTiles) return p_.phaseCorridorAt;
+        return std::min<int>(std::max<int>(p_.phaseOpenBase + w_.board.NC / p_.phaseConsolNC,
+                                         p_.phaseConsolMin), p_.phaseConsolMax);
+    }
+
+    void computePhase() {
+        int r = w_.t.round, nc = w_.board.NC;
+        if (w_.t.units > w_.peakUnits) w_.peakUnits = w_.t.units;
+        int openAt = std::min<int>(std::max<int>(18 + nc / p_.phaseOpenNC, p_.phaseOpenMin), p_.phaseOpenMax);
+        int consolAt = consolAtRound();
+        int ph = w_.phase;
+        if (ph == PH_OPEN && r >= openAt) ph = PH_GROW;
+        // Consolidate when the bell is close — or early, if the swarm has
+        // collapsed (half the peak lost and what's left is small: a remnant
+        // consolidates around its longest). A fresh 6-dragon team is NOT a
+        // collapse, so the threshold is relative to the peak, not absolute.
+        else if (ph == PH_GROW && (r >= consolAt ||
+                 (w_.t.units <= p_.phaseCollapseUnits && w_.t.units * 2 <= w_.peakUnits && r >= openAt))) ph = PH_CONSOL;
+        // PROTECT only while we actually hold the longest-known lead; a team
+        // that is behind keeps consolidating until the round limit.
+        else if (ph == PH_CONSOL && r >= p_.phaseProtectAt && teamBestLen() >= foeBestLen() + p_.phaseProtectMargin) ph = PH_PROTECT;
+        w_.phase = ph;
+        phase_ = ph;
+    }
+
+    void applyPhase() {
+        int r = w_.t.round, nc = w_.board.NC;
+        int consolAt = consolAtRound();
+        switch (phase_) {
+        case PH_OPEN:
+            // The production war decides elim maps: never stop splitting, take
+            // no bad trades, nobody feeds yet.
+            eff_.feedRound = 999; eff_.queenFeedRound = 999; eff_.champFallbackRound = 999;
+            eff_.champRelayFrom = 999; eff_.queenRelayFrom = 999;
+            eff_.growRound = 999; eff_.midEnd = 999; eff_.lateSplitUnits = w_.init.unitLimit;
+            eff_.tradeSlack = 0; eff_.tradeMinUnits = 8;
+            eff_.queenBudUntil = 999;
+            break;
+        case PH_GROW:
+            // Keep replacing losses through the attrition war — still nobody
+            // feeds. The champion election warms up ~40 rounds before
+            // consolidation so a consensus exists when the first feeder dies.
+            eff_.feedRound = 999; eff_.queenFeedRound = 999;
+            eff_.champFallbackRound = std::max(0, consolAt - 40);
+            // Relays cost ~5M pts/turn: arm them ~30 rounds before the feed
+            // window so consensus exists when the first feeder wakes.
+            eff_.champRelayFrom = std::max(0, consolAt - 30);
+            eff_.queenRelayFrom = std::max(0, consolAt - 30);
+            eff_.growRound = 999; eff_.midEnd = 999; eff_.lateSplitUnits = w_.init.unitLimit;
+            eff_.tradeSlack = 0; eff_.tradeMinUnits = 6;
+            eff_.queenBudUntil = 999;
+            break;
+        case PH_CONSOL:
+            // The bell is the longest dragon: wake the feeders and the relays,
+            // stop all splitting so length piles onto the champion.
+            eff_.feedRound = r; eff_.queenFeedRound = r; eff_.champFallbackRound = r;
+            eff_.champRelayFrom = std::max(0, consolAt - 30);
+            eff_.queenRelayFrom = std::max(0, consolAt - 30);
+            eff_.champMargin = 3;
+            eff_.growRound = r; eff_.midEnd = 0; eff_.lateSplitUnits = 0;
+            eff_.queenBudUntil = r; eff_.queenHideUntil = r;
+            eff_.tradeSlack = 0; eff_.tradeMinUnits = 6;
+            break;
+        case PH_PROTECT:
+            // We hold the lead: near-pacifist trades only. Feeds KEEP running —
+            // drops convert into our champion's length, so they widen the lead;
+            // stopping them here lost +8 leads in the last 48 rounds.
+            eff_.tradeSlack = -1; eff_.tradeMinUnits = 12;
+            break;
+        }
+    }
+
     void adjustByMap() {
         // Maze maps (Portals: walls on ~28% of edges) paralyse the swarm if every
         // corridor mouth counts as a pocket — drop pocket fear there.
         if (w_.kelpFraction() > p_.mazeKelpFrac) eff_.wPocket = 0.0;
-        // Autarky (54x18 — unique in the pool): bell games go to the longest
-        // dragon, and our swarm's champion churns every few rounds — every
-        // L>=4 dragon self-elects while no relays exist (they start at r370,
-        // after the feed window opens), and any +1 takeover re-elects. Feed
-        // suicides then scatter across a moving target. Elect a stable
-        // champion: broadcast from before the feed window, and only a clearly
-        // longer challenger takes the title.
-        if (w_.init.w == 54 && w_.init.h == 18) {
-            eff_.champRelayFrom = 280;
-            eff_.champMargin = 3;
-        }
         return;  // brawl overrides stay off pending their own A/B
         if (!w_.mapBrawl()) return;
         eff_.champRound = eff_.champRoundBrawl;
@@ -647,6 +796,10 @@ class Policy {
                                 if (s.id == w_.occ[hit]) sc = isEnemy(s) ? 0 : 3;
                     }
                     if (sc > bestS) { bestS = sc; bestD = d; }
+                    // Phase controller: saturating gossip while the relay window is
+                    // open — every free ray that does not hit an enemy carries the
+                    // champion report (each extra ping ~5M of the 75M budget).
+                    if (p_.phaseCtl && sc > 0) rDirs |= 1 << d;
                 }
                 if (bestD >= 0 && bestS > 0) rDirs |= 1 << bestD;
             }
@@ -760,12 +913,18 @@ class Policy {
 
     void buildTargets() {
         Board const& b = w_.board;
+        // CONSOLIDATE: pearls inside the champion's drop ring are reserved for
+        // it — everyone else discounts them so the parked champ eats the drops
+        // feeders die for (they were being eaten by whoever stood closest).
+        bool iAmChamp = selfChamp_ || (queen_ && champIsQueen_);
+        bool deferDrops = p_.phaseCtl && phase_ >= PH_CONSOL && champHead_ >= 0 && !iAmChamp;
         targets_.clear();
         belief_.assign(b.NC, 0.0);
         countdown_.assign(b.NC, -1);
         for (int c = 0; c < b.NC; c++) {
             double bel = w_.belief(c, p_);
             int cd = (b.bed[c] == 1 && w_.next[c] >= 0 && w_.next[c] < p_.horizon) ? w_.next[c] : -1;
+            if (deferDrops && b.cheb(c, champHead_) <= p_.champDropZone) { bel = 0; cd = -1; }
             belief_[c] = bel;
             countdown_[c] = cd;
             double ex = w_.seenRound[c] < 0 ? p_.exploreValue : 0.0;  // never-seen tile
@@ -1203,6 +1362,12 @@ class Policy {
             int fd = friendDist_[dest];
             if (fd != INF) value += p_.wHideFriend * gp(fd + k);
             if (why.empty()) why = "hide";
+        }
+        if (champCamp_ && w_.champCampCell >= 0) {
+            int dd = distToHead(dist, w_.champCampCell);
+            if (dd != INF) value += p_.wChampCamp * gp(dd + k);
+            else value += p_.wChampCamp * fp(static_cast<int>(1.3 * b.manh(dest, w_.champCampCell)) + k);
+            if (why.empty()) why = "champ-camp";
         }
         if (assassin_ && assassinCell_ >= 0) {
             // Converge on the reported cell and its neighbours. No pull past the

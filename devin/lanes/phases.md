@@ -45,6 +45,16 @@ starved them).
    (Feed-target cells were churning across 115+ distinct cells/10r before.)
 3. **Saturating champ gossip**: forwarders emit the champ report on every free ray that doesn't hit
    an enemy (was: 1 ray/turn) — heard-champ coverage went from ~30% to ~75-90% in-window.
+4. ~~Wider feed ring~~ (s0c, REVERTED at s0f): champFeedDist 2→3, feedMaxLen 6→8 — drops land
+   too far out; leaked to bystanders. Kept 2/6.
+5. **Drop-zone deference** (s0d): in CONSOLIDATE+, non-champ dragons zero pearl beliefs within
+   `champDropZone`=3 cheb of the heard champion — drops stopped being eaten by whichever ally
+   stood closest (the parked champ was gaining ~+6 off ~50 dropped pearls).
+6. ~~Home-biased camp anchor~~ (s0e, REVERTED): anchoring toward queenCell parked the champ on
+   cold corner beds — 12.5% autarky vs 37.5% without. Nearest-hot-bed anchor kept.
+7. **Queen camps in CONSOLIDATE** (s1a+): `queen_ && phase>=CONSOL` parks at the nearest hot bed
+   like the elected champ — she is the beacon feeders die into (v104's queen survives to r500
+   2x ours). Champ itself already carries growerDanger=3.0 > queenDanger=2.0 — no extra fear.
 
 ## S0 (mechanism evidence — abyss_akdbg vs abyss_v104, replays kept)
 
@@ -70,10 +80,36 @@ pending s0b analysis).
 | ph2_aut5 (camp+gossip+margin, consolAt 417) | autarky vs v104 | **60%** (6/10): A-seat 4/5 incl. 2 elims + c66 bell, B-seat 2/5 |
 | ph3_aut5 (locateChamp warmup fix, consolAt ~379) | autarky vs v104 | 60% (6/10): A 4/5, B 2/5 |
 | ph4_dbg_def (collapse fix) | default s2 vs v104 | 2/2 ELIMINATIONS r282-285 |
-| s0b_phases (all fixes) | autarky,weakhold,default,trauma vs v104, 4 seeds | running |
+| s0b_phases (mech 1-3, feeds@2/6) | autarky,weakhold,default,trauma vs v104, 4 seeds | autarky 12.5% (1/8), weakhold 0%, default 62.5% (5/8), trauma 0% — longest@499 ~10-20 vs 25-48 |
+| s0c_phases (+feed ring 3/8) | autarky,trauma vs v104, 4 seeds | autarky 12.5% (1/8), trauma 25% (2/8), longest 10.2 vs 29.5 |
+| s0d_phases (+drop-zone deference) | autarky,trauma vs v104, 4 seeds | autarky **37.5%** (3/8), trauma 25% (2/8), longest 10.1 vs 26.8 |
+| s0e_phases (+home-biased anchor) | autarky,trauma vs v104, 4 seeds | autarky 12.5% (1/8) — home anchor parks champ at COLD corner beds; REVERTED |
+| s0f_phases (ring back to 2/6, keep defer) | autarky vs v104, **8 seeds** | autarky **31.2%** (5/16), longest 18.5 vs 35.5 — deference retained |
+
+## S1 — local tournament (abyss_ak vs abyss_v104, 6 maps × 4 seeds, paired)
+
+| map | win% | vs baseline |
+|-----|------|-------------|
+| weakhold | **62.5%** | was 0% — A-seat bells c29-36 vs b2 every seed |
+| trophy | 50% | mixed elims |
+| default | 50% | both seats can elim (s2: r285+r382) |
+| autarky | 25% | baseline ~37.5%, within n=8 noise; champ depth still trails |
+| trauma | 12.5% | was 0% in s0b |
+| stronghold | 0% | v113 also 0/8 — not a regression |
+| **ALL** | 33.3% | SMALL (trophy+weakhold) 56.2%, BIG 21.9% |
+
+Kill criteria: **no r≤5 queen deaths** in any of 48 replays (checked by parse — early deaths are
+ids 2-13, the standard opening brawl on both bots). No map clearly worse than v113's own record.
+s1b vs abyss_cf running.
 
 ## Still weak
 
 - B-seat autarky bells: our champ lands 8-16 vs their 35-39 (A-seat we reach 12-66). Feed throughput
   in the ~75-110-round window still trails v104's 170-round window.
 - PROTECT phase never triggered yet in observed games (we never hold +8).
+- Feed conversion ceiling: ~19-22 suicide deliveries/window; our swarm loses ~35+ bodies to
+  head-to-head attrition that never reach the walk. Home-anchor (s0e) did NOT fix it — the
+  remaining gap is walk attrition through the contested mid-field on autarky-class maps.
+- Diagnosis of the residual gap: v104's queen-champ parks deep by doctrine; feeders die into her
+  in friendly territory. Our elected champ camps mid-map → transit deaths. s0d added drop-zone
+  deference (allies don't steal the drops); queen-camp added for s1a.

@@ -278,12 +278,20 @@ struct Params {
     int phaseOpenMin = 25;
     int phaseOpenMax = 75;
     int phaseBrawlTiles = 700;        // w*h at/below: never consolidate (mapBrawl axis)
-    int phaseCorridorTiles = 2000;    // w*h at/below: corridor class — consolidate early
     int phaseCorridorAt = 320;        // corridor CONSOLIDATE round (v104's own feed timing)
+    int phaseOpenTiles = 2000;        // w*h above: open class outright
+    double phaseOpenWallFrac = 0.15;  // or: few walls AND almost no dead-ends = open floor
+    double phaseOpenDeg1Frac = 0.02;
     int phaseOpenBase = 320;          // open maps: consolAt = base + NC/phaseConsolNC (~360)
     int phaseConsolNC = 50;
     int phaseConsolMin = 355;
     int phaseConsolMax = 390;
+    int phaseQueenEscortFrom = 40;    // under phases: idle escorts guard the queen from here
+                                    // (pre-r100 deaths are len2-3 movers an escort takes)
+    int phaseFeedBurst = 20;          // feeders wake this many rounds before consolAt and
+                                    // walk to the champ — arrivals front-load into the
+                                    // window's first ~20 rounds (winners: 12.9 recycles
+                                    // in r360-379 vs our 5.3)
     int phaseCollapseUnits = 8;       // a swarm this small consolidates whatever remains
     int phaseProtectAt = 452;         // PROTECT never before this round
     int phaseProtectMargin = 8;       // and only while our longest known beats theirs by this

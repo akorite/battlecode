@@ -622,18 +622,40 @@ class Policy {
         return best;
     }
 
-    // CONSOLIDATE fires by map class, not name — the axis is w*h at INIT.
-    // Corridor maps (<=2000 tiles) resolve by attrition before a late window
-    // pays: consolidate at v104's own r320. Open maps (>2000) keep feeding
-    // longer: r360 (integrator data: feed@360 wins +3.5-7 on open, fails on
-    // corridors). Brawl maps (<=700, the codebase's own mapBrawl threshold)
-    // never consolidate — attrition decides them.
+    // CONSOLIDATE fires by map class from SHAPE features at round 0, not name
+    // or dimension tables: open-tile interior fraction vs blocked-edge fraction
+    // and dead-end (deg-1) density reproduce the corridor/open partition —
+    // stronghold is open-floor despite maze/trauma's exact dims, and autarky/
+    // trophy are narrow-walled corridors despite high deg-4 interior.
+    // Corridors resolve by attrition before a late window pays (r320, v104's
+    // own feed timing); open maps keep feeding to ~r360. Brawl maps (the
+    // codebase's own mapBrawl test) never consolidate.
     int consolAtRound() const {
         int tiles = w_.init.w * w_.init.h;
         if (tiles <= p_.phaseBrawlTiles) return 999;
-        if (tiles <= p_.phaseCorridorTiles) return p_.phaseCorridorAt;
-        return std::min<int>(std::max<int>(p_.phaseOpenBase + w_.board.NC / p_.phaseConsolNC,
-                                         p_.phaseConsolMin), p_.phaseConsolMax);
+        // Classify over SEEN topology (fog of war): blocked-edge fraction and
+        // dead-end (deg-1) density split corridors from open floors. Big maps
+        // are open outright; a map defaults to corridor until half its edges
+        // have been observed — r320 consolidation is never wrong vs v104.
+        bool open = tiles > p_.phaseOpenTiles;
+        if (!open) {
+            Board const& b = w_.board;
+            int seen = 0, kelp = 0, deg1 = 0;
+            for (int c = 0; c < b.NC; c++) {
+                int free = 0;
+                for (int d = 0; d < 4; d++) if (b.nb[c * 4 + d] >= 0) free++;
+                if (free == 1) deg1++;
+            }
+            for (Edge const& e : b.hE) if (e.seen) { seen++; kelp += e.kind == 1; }
+            for (Edge const& e : b.vE) if (e.seen) { seen++; kelp += e.kind == 1; }
+            double wallFrac = seen ? static_cast<double>(kelp) / seen : 1.0;
+            double deg1Frac = static_cast<double>(deg1) / b.NC;
+            open = seen >= b.NC && wallFrac < p_.phaseOpenWallFrac && deg1Frac < p_.phaseOpenDeg1Frac;
+        }
+        if (open)
+            return std::min<int>(std::max<int>(p_.phaseOpenBase + w_.board.NC / p_.phaseConsolNC,
+                                             p_.phaseConsolMin), p_.phaseConsolMax);
+        return p_.phaseCorridorAt;
     }
 
     void computePhase() {
@@ -673,7 +695,13 @@ class Policy {
             // Keep replacing losses through the attrition war — still nobody
             // feeds. The champion election warms up ~40 rounds before
             // consolidation so a consensus exists when the first feeder dies.
-            eff_.feedRound = 999; eff_.queenFeedRound = 999;
+            eff_.feedRound = 999;
+            // Front-load the feed window (steering-4: winners stack 12.9
+            // recycles into r360-379 vs our 5.3): feeders wake ~20 rounds
+            // before consolAt and start walking to the heard champ head, so
+            // arrivals concentrate in the window's first stretch instead of
+            // spreading across the full window.
+            eff_.queenFeedRound = std::max(0, consolAt - p_.phaseFeedBurst);
             eff_.champFallbackRound = std::max(0, consolAt - 40);
             // Relays cost ~5M pts/turn: arm them ~30 rounds before the feed
             // window so consensus exists when the first feeder wakes.
@@ -692,6 +720,11 @@ class Policy {
             eff_.champMargin = 3;
             eff_.growRound = r; eff_.midEnd = 0; eff_.lateSplitUnits = 0;
             eff_.queenBudUntil = r; eff_.queenHideUntil = r;
+            // In-place deaths AT the champ's head (steering-4: winners die on
+            // the champion's path so drops land at its head; our hitSelf at
+            // distance 2 scattered drops). The champ is parked under CONSOL, so
+            // distance 1 is safe — it cannot walk away like a moving queen.
+            eff_.champFeedDist = 1;
             eff_.tradeSlack = 0; eff_.tradeMinUnits = 6;
             break;
         case PH_PROTECT:
@@ -1075,8 +1108,12 @@ class Policy {
                 if (isEnemy(e) && e.id == w_.enemyQueen()) assassinCell_ = e.head;  // live fix beats the report
 
         // Idle escort: stay near the closest visible grower — the queen first —
-        // if we are among its first escorts.
-        if (!assassin_ && hunts_.empty() && midGame()) {
+        // if we are among its first escorts. Under the phase controller the
+        // escort switch starts early (89% of pre-r100 queen deaths are len2-3
+        // movers — an escort body takes the hit instead).
+        bool escortsOn = midGame() ||
+            (p_.phaseCtl && phase_ <= PH_GROW && w_.t.round >= p_.phaseQueenEscortFrom);
+        if (!assassin_ && hunts_.empty() && escortsOn) {
             int bestD = INF;
             for (int pass = 0; pass < 2 && escortOf_ < 0; pass++) {
                 for (FriendField const& f : friends_) {

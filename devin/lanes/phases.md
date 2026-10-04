@@ -31,9 +31,19 @@ one stable champion late.
 - **PROTECT** (r>=452 AND teamBestLen >= foeBestLen+8, hysteresis via monotonic phase): feedStop=now,
   near-pacifist (tradeSlack=-1, tradeMinUnits=12).
 
-`consolAtRound()` picks the CONSOLIDATE round by map class (w*h at INIT, per integrator's
-corridor/open data): ≤700 tiles → 999 (never — attrition decides), ≤2000 corridor → 320
-(v104's own feed timing), >2000 open → 320+NC/50 clamped 355-390 (~r360).
+`consolAtRound()` picks the CONSOLIDATE round by map class — steering-3 replaced the
+w*h dimension gate with computed SHAPE features over SEEN topology (fog of war):
+`open = tiles > phaseOpenTiles(2000) || (kelpEdgeFrac < 0.15 && deg1Frac < 0.02 && half the
+edges observed)`; unseen maps default to corridor. This reproduces the integrator partition
+(corridor: maze, trauma, weakhold, portals, slithery, dilemma, trophy, stripes, devil, qOS,
+td, autarky, default vs open: islands, schooltime, unsw, australia, big_empty, stronghold) —
+only miss is trophy, which is brawl-gated anyway. Class results: corridor → 320 (v104's own
+feed timing), open → 320+NC/50 clamped 355-390 (~r360), ≤700 brawl → 999 (never).
+
+**Queen escort switch** (steering-3 evidence: 89% of pre-r100 queen deaths are len2-3 movers
+on unescorted queens; our queen dead by r330 in 20/22 open-map games): under phaseCtl the
+idle-escort block also arms at `phaseQueenEscortFrom`=40 during OPEN/GROW — an escort body
+takes the cheap h2h hit instead of the queen.
 
 Collapse trigger is *relative* — `units <= 8 && units*2 <= peakUnits` — a fresh 6-dragon team at openAt
 is not a collapse (bug fix: absolute threshold flipped default games straight OPEN→CONSOL at r54 and
@@ -116,6 +126,41 @@ early deaths are ids 2-13 — the standard opening brawl on both bots).
 The phase layer is a per-turn O(1) param rewrite plus one O(NC) anchor scan per champ — cost
 shows in search `depth=` within the fixed 75ms budget: median depth 4 phases-ON vs 4 phases-OFF
 (5 games). No measurable CPU delta.
+
+## Full 22-map gate vs abyss_v104 (gate_phases, 4 seeds both seats — w*h-axis build,
+before the steering-3 feature classifier which is partition-equivalent)
+
+**ALL 35.8% — honest negative vs the v113 baseline.** Per-map (baseline in parens):
+
+| map | gate | map | gate | map | gate |
+|-----|------|-----|------|-----|------|
+| Colosseum | 62.5% | australia | 50% (37.5) | islands | 37.5% |
+| arena | 25% (50) | autarky | 37.5% (50) | maze | 0% (0) |
+| default_small | 37.5% (37.5) | big_empty | 37.5% | portals | 12.5% (12.5) |
+| devil | 50% | default | 62.5% (50) | schooltime | 87.5% |
+| **dilemma** | **0% (50)** | queen_of_spades | 62.5% (50) | **slithery_fight** | **0% (25)** |
+| stripes | 37.5% (62.5) | stronghold | 0% (0) | trauma | 12.5% (37.5) |
+| tower_defense | 62.5% (75) | trophy | 50% | **unsw** | **0% (25)** |
+| | | weakhold | 62.5% | | |
+
+**NEW 0/8 maps vs baseline: dilemma, slithery_fight, unsw.** Regressions also on trauma
+(-25), stripes (-25), arena (-25), autarky (-12.5), tower_defense (-12.5). Gains on
+weakhold, default, qOS, australia, schooltime, Colosseum, devil.
+
+Mechanism read: `alive@r499 38.8 vs 9.2` (we hold the swarm) but `longest@end 17.5 vs
+30.4` and `alive@r50 5.7 vs 6.5` — the phase machine over-produces late and under-produces
+early: the GROW-doctrine param rewrite weakens the r50-100 elimination economy (steering-3's
+6.7d/16.4L@r25 → 10.3d/25.5L@r50 benchmarks), and consolidation still doesn't convert the
+swarm into a champ on big maps. SMALL 45.0% vs BIG 28.1% — the open-class axis is the
+worst seat.
+
+**Verdict: net-worse than v113 baseline across the ladder spread — do not ship as-is.**
+Options: (a) iterate on the early-econ axis (GROW doctrine is likely where dilemma/
+slithery/unsw regress — phase gates replaced budAlive/split gates that drove elim-map
+production); (b) keep the machine phaseCtl=0-inert for integrator cherry-picks (consensus
+gossip + drop deference + warmup fix are independent wins per S0). The steering-3
+classifier + queen-escort switch landed after this run — they are partition-equivalent
+resp. additive and were not what lost the maps.
 
 ## Still weak
 

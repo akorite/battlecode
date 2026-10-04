@@ -93,7 +93,12 @@ qsiege and v112 — inherited, not introduced.
 |---|---|---|---|
 | F3 (v112 base) | v104 | 35/88 = 39.8% | escort-pull, new 0/4s devil/stripes/tower/unsw |
 | F4 (v112 base) | v104 | 38/88 = 43.2% | inert where no siege; BIG 33% = v112 baseline |
-| R2c (v113 base) | v113 | RUNNING (gate3) | expected ≈inert per 3 inert smokes |
+| R2c (v113 base) | v113 | 42/86 = 48.8% | **all 22 maps seat-splits (maze 1/4); every metric identical to 3 decimals — dead code** |
+
+Sanity vs abyss_cf (trauma, stronghold, slithery_fight, stripes, s0-1 both seats):
+4/16 = 25% — stripes 0/4, slithery 1/4, stronghold 2/4, trauma 1/4. Since the diff
+is inert this is effectively v113-vs-cf: cf's queen survives more (0.625 vs 0.875
+dead/game) — cf remains the stronger queen-survival reference on these maps.
 
 ## Queen-death-rate deltas
 
@@ -101,7 +106,8 @@ qsiege and v112 — inherited, not introduced.
 |---|---|---|---|---|
 | F3 gate vs v104 (88g) | 0.864 | 0.875 | 143 | 96 |
 | F4 gate vs v104 (88g) | 0.864 | 0.795 | — | — |
-| R2 vs v113 (12g attrib) | 0.750 | 0.750 | identical metrics | |
+| R2c gate vs v113 (86g) | 0.767 | 0.767 | identical metrics — qNonRam 0.337 vs 0.337, queen alive@end 0.250 vs 0.250 | |
+| sanity vs cf (16g) | 0.875 | 0.625 | — | — |
 
 ## What would actually help (for whoever takes this next)
 

@@ -237,3 +237,9 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
 - hidqueen final (24g): 50.0%, identical metrics — churn theory FALSIFIED (hidden
   queen never crowned anyway). v126/v128 keep the no-crown guard anyway (harmless).
   Queen-as-champ path needs escort (5b) — she dies 77% post-unhide regardless.
+- feed360 final (24g): v127 feed@360 = 66.7% vs v121. longest@end 29.1 vs 25.6 (+3.5),
+  queen dead IDENTICAL 0.75 (no added exposure — unhide stayed 390), alive@499 20.0 vs 25.7.
+  unsw 6/6. FEED-TIME IS THE LEVER: 139 feed turns > 90.
+- feedstack (20g so far): v128 feed@400 stack 60%, +1.75 longest — weaker than feed@360.
+  hideUntil340 adds queen exposure w/o payoff (per Akorite flag) — DROPPED from stack.
+- v129 = feed@360 + midEnd450 + no-crown-hidden, unhide@390 — gating vs v127 (stack360).

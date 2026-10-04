@@ -20,3 +20,12 @@ Extending forage-first opening to 700-1200 tile maps (QoS/autarky/default/maze/t
   swarm coherence; longest crashed 29.6 vs 41.1.
 VERDICT: the opening only fits <=700 non-maze maps. Autarky's gain isn't capturable by
 NC or local enemy gates — contestedness needs swarm-level state, not a tile count.
+
+## abyss_pocket hotFar pulls (2 smokes, <50%)
+Past-horizon fountain pull for starving dragons (wHot*hotFar*fp(1.3*manh), gated
+foodLocal<0.05): hotFar=0.5 → 25% on weakhold self-play (queen deaths +); hotFar=0.25,
+queen/grower/lead excluded → 37.5%, stark side asymmetry (A 3/4, B 1/4).
+Weakhold repro vs combat: we out-eat them to r60 (11.5 vs 1.5 pearls) then flatline —
+they hit 27 alive, we die at 4. BUT self-play shows v119 CAN grow 20-40 swarms on
+weakhold — starvation only bites under contest. Fix needs corridor-aware exit pathing,
+not manh-greed toward fountains through walls. Code left in workspace/abyss_pocket.

@@ -558,3 +558,37 @@ eat25 qos 3.2 vs winner benchmark 6 (was 0.7 pre-gate; moving, still short).
 Transits 1.2/game qos — inside winners' 1.3-3.1 band now.
 Candidate for staging: workspace/abyss_a_portal10 (supersedes a_portal6 —
 same pair, verified mission, debug-channel proven).
+
+### abyss_v143qs — qsafe port onto v143 (pocket lane): smoke 45%, mechanism fires, net-negative
+Port (per steering): qVetoReach=1/wQueenVeto=500 lethal tier in BOTH
+ram-screen loops, qEnemyLenMin=3 ev-floor (lead loop + queen loop),
+qEscortThreat=8/qEscortDist=14 threat-escort, qAdj_=W40xH15 adjacency gate,
+wQueenLeash=0 (ported inert), huntMirror machinery NOT ported.
+base=abyss_v143 (=v139+p10+portalEnds-empty fix), 20g, 5-map smoke x2 seeds.
+| map | pairW | tl100 c/b | splits60 | qNonRam c/b | qd |
+|-----|-------|-----------|----------|-------------|-----|
+| qos | 2/4 | 19.2/24.2 | 7.8/7.5 | 0/0 | 3h2h/4h2h |
+| trophy | 2/4 | **26.7/64.3** | 11.8/16.5 | 0/1 | 3h2h/3h2h+1body |
+| dilemma | 2/4 | 0/0 (r24 elims) | 8.0/8.0 | 0/0 | 2h2h/2h2h |
+| default | 2/4 | 32.7/22.7 | 10.5/9.8 | 0/2 | 3h2h/1h2h+2body |
+| stripes | **1/4** | 12.8/13.5 | 3.0/3.0 | 0/1 | 4h2h/3h2h+1wall |
+| ALL | **9/20 (45%)** | 18.3/24.9 | 7.6/8.8 | **0/4** | qd<50 8/5 |
+
+Mechanism verdicts:
+- Evasion lever FIRES: queen non-ram deaths 0 vs 4 in 20g (the class the
+  veto tier targets); queen-kept-after-theirs-died 45.5% vs 33.3%.
+- Threat-escort is INERT on this set: abyss_v143qv (qEscortThreat=0) is
+  bit-identical across all 20 games — qThreat escorts never slotted in
+  (either never true when idle, or escortCount filled by grower escorts).
+- The bleed is the ram-screen rewrite itself: trophy tl100 collapsed
+  -58% (26.7 vs 64.3). Either ~10 extra compares in the hot danger loops
+  on saturated maps (depth-clip tax) or the veto re-routes the queen off
+  her forage lane — both plausible, not separated in a 2-seed smoke.
+- splits60 -1.1, eat50 -3.1, alive50 -1.9 — early econ pays for evasion.
+
+Lane read: qsafe's protection is real but the 20g smoke is net-negative
+(-5pts). Not a ship at these params. If the integrator wants the lever,
+the cheap isolations are: (a) veto+floors only (drop qAdj_ nb-min —
+weakhold-dims only, pure tax elsewhere), (b) wQueenVeto scaled to ~wQueenRam
+tier instead of 500x, (c) replicate on 4+ seeds — trophy tl100 swings hard
+on single seeds (one 64-tl game dominates a 4-game mean).

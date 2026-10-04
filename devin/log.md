@@ -140,3 +140,4 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
 - explore: qOS r36 mutual-elim = torus wrap-seam invisible head-on (crossing check can't see wrap steps); fix: price seam crossings + boundary occupancy — devin/lanes/explore.md
 - explore: v143 C-pack attribution — C1 bleeds dilemma 0-4, C2 clean (no weakhold-B flatline), C3 queen-death bleed stronghold/qOS — devin/lanes/explore.md
 - explore: v149 audit — losses cluster on queenEnd bell: autarky queen-h2h exposure, td queen-wall@40, islands/stronghold queen-feed race (qEat 2-11 vs 23-83) — devin/lanes/explore.md
+- explore: rules-check — portal exits heading-preserved (96/96 replays), dir^2 neck bug world.hpp:215; portals freeze=starvation-loops; move cost=uniform slither shed, freeSteps wrong — devin/lanes/explore.md

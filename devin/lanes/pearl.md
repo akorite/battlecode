@@ -371,6 +371,7 @@ vs each gate (88g, 22-map pool, seeds 1-2, both sides):
 | abyss_pearl4 (v110+gate) | rec. v110 | 44.3% | 47.7% | 38.6% |
 | abyss_pearl4 (+swarmTrap) | rec. v110 | 47.7% | 47.7% | 38.6% |
 | abyss_pearl5 (v104+gate) | v104 | 50.0% | — | — |
+| abyss_pearl6 (v110g+swarmTrap+gate) | v110g | 39.8% | — | — |
 
 Map-gated `open_` engages on exactly the six winner maps (arena,
 Colosseum, default_small, dilemma, trophy, autarky-via-brood) and wins
@@ -398,5 +399,21 @@ Recommendation:
 
 Variants on this branch: `abyss_pearl` (v2 ship, ungated), `abyss_pearl4`
 (v110+swarmTrap+gate), `abyss_pearl5` (v104+gate), `abyss_pearl6`
-(v110g+swarmTrap+gate, ungated), `abyss_v110`/`v110n`/`v110g`
+(v110g+swarmTrap+gate), `abyss_v110`/`v110n`/`v110g`
 (reconstructed base + attribution A/Bs).
+
+pearl6 row: (v110g+swarmTrap+gate) vs v104 39.8% — SMALL 60%, BIG 22.9%;
+weakhold 4/4 via swarmTrap, killers still 0/4 (wh2-on + guardfix doesn't
+recover corridors), dilemma 2/4 (guard fix shifted its small-map noise).
+
+## 3-line verdict (lane close, 2026-10-03)
+
+The forage-first opening works exactly where gated (`openMapOk`: nc<=700
+non-maze or ≥5-brood on nc<=1300): SMALL 60-70%, dilemma/default_small
+4/4, +10% pearls@30 small; every 0/4 is a gated-out map = base, proven
+by identical eaten30. The BIG-pool collapse the integrator measured was
+v110 itself (8.3% alone on killers): wh2's trapSeenOnly fog-wall scan
+plus the v106 selfguard marking the vacating tail cell lethal — fixes
+shipped as v110g pattern; swarmTrap (weakhold 0→4/4) folded into pearl4+.
+Ship pearl5-style diffs on v104 until the base is repaired; v117's
+guard-scope + map-gated open matches this lane's recommendation.

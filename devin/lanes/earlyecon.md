@@ -592,3 +592,35 @@ the cheap isolations are: (a) veto+floors only (drop qAdj_ nb-min —
 weakhold-dims only, pure tax elsewhere), (b) wQueenVeto scaled to ~wQueenRam
 tier instead of 500x, (c) replicate on 4+ seeds — trophy tl100 swings hard
 on single seeds (one 64-tl game dominates a 4-game mean).
+
+### abyss_v143qk — qsafe isolation (a): veto/floor only — PARKED at 45%
+v143 + ONLY qVetoReach=1/wQueenVeto=500 kill-tier (seen-enemy ram loop) +
+qEnemyLenMin=3 ev-floor (lead + queen seen loops). No qAdj_, no escort
+code, no leash — the whole auxiliary qsafe block absent.
+Gate vs v143, same 20g smoke: **45% pair (9/20, 0W/9S/1L) — NOT PASSED**
+(needed >=55% and nonRam<=1; nonRam leg passed 1 vs 3).
+| map | pairW | tl100 c/b | splits60 | queen deaths c/b |
+|-----|-------|-----------|----------|------------------|
+| qos | 2/4 | 19.2/24.2 | 7.8/7.5 | 3h2h / 4h2h |
+| trophy | 2/4 | 26.7/64.3 | 11.8/16.5 | 3h2h / 3h2h+1body |
+| dilemma | 2/4 | 0/0 (r24) | 8.0/8.0 | 2h2h / 2h2h |
+| default | 2/4 | 34.0/20.3 | 10.5/9.8 | 2h2h+1body / 1h2h+2body |
+| stripes | 1/4 | 12.8/13.5 | 3.0/3.0 | 4h2h / 3h2h+1wall |
+| ALL | 9/20 | 18.5/24.5 | 7.6/8.8 | nonRam 1/3, qd<50 8/5 |
+
+Isolation verdict: the veto/floor piece alone reproduces the full qs
+regression — identical pair count, identical trophy tl100 collapse
+(26.7 vs 64.3), same stripes pair loss. qAdj_/escort/leash contributed
+NOTHING to the bleed (proved by subtraction). The cost is the queen's
+fear-priority reorder itself: with every ram-reach dest near-vetoed,
+she detours off the forage lane and the swarm starves — surviving to
+be rammed later anyway (h2h deaths 15 vs 13; queen kept 45% vs 33% —
+she survives MORE but it doesn't convert).
+default is the exception — tl100 34.0/20.3 (+67%): on the open map the
+veto dodges real rams without forking her off-lane. The failure is
+trophy/stripes-class: corridor maps where "safe" is a funnel.
+
+qsafe parked per steering threshold. Awaiting the queen-evasion-vs-
+front-arc design (killer-geometry escort: 96% mover-kills, side/front
+arcs, 65% visible 2+ rounds out) — that escort needs measured arcs, not
+this concentric-fear model.

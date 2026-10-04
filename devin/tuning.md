@@ -60,3 +60,9 @@ Flat vs cf: qf340/380, me360/450, tsc4/12, qd30, sv45, fr300, cf300, sd0(+4.3 wo
 3. {sd2 + feed330} — stacks: 6-4, +12.3. Single-vector option if landing one change.
 (exposureMode=1: solo 6-4 but incompatible with feed330 — alternative only if feed stays ≥360.)
 All evidence n=10/probe single-seed s7 vs abyss_cf — directional, needs integrator gate validation.
+
+## Round 4 (steering-3): relays->370+, fear radius (heardEnemyReach), em2, qts/sm recheck, danger weights
+New eval axes per probe (eval_probe.py over kept replays): elim maps dev/dil/tro/def
+r25/r50/r100 (dragons,totalLength) minus winner-targets (6.7/16.4, 10.3/25.5, 20/50);
+open maps longest@499>33 & total>=260; REJECT flags: cand queen dead <r50 on elim
+maps, any elim game ending <r200.

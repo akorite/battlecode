@@ -51,7 +51,7 @@ def run_probe(slug, label, maps, jobs, seed_start, opp):
     cmd = [PY, str(BC / 'tooling/kmatch.py'), 'run',
            '--cand', slug, '--base', opp,
            '--maps', maps, '--seeds', '1', '--seed-start', str(seed_start),
-           '--jobs', str(jobs), '--tag', tag]
+           '--jobs', str(jobs), '--tag', tag, '--keep-replays']
     t0 = time.time()
     p = subprocess.run(cmd, cwd=BC, capture_output=True, text=True)
     mins = (time.time() - t0) / 60

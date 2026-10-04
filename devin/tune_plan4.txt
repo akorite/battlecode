@@ -1,0 +1,21 @@
+# round 4: steering-3 — relays->370+, fear radius (heardEnemyReach), exposureMode=2,
+# queenTradeSlack/sprintMax recheck on v127 base, vs abyss_cf, replays kept for new eval
+x4_rel360 queenRelayFrom=360,champRelayFrom=360    relays aligned-ish earlier
+x4_rel370 queenRelayFrom=370,champRelayFrom=370    integrator's ~370 suggestion
+x4_rel390 queenRelayFrom=390,champRelayFrom=390    fully aligned to read-time
+x4_her2   heardEnemyReach=2                        tighter heard-fear radius
+x4_her4   heardEnemyReach=4                        wider heard-fear radius
+x4_em2    exposureMode=2                           sprint-reach danger where outnumbered
+x4_qts2   queenTradeSlack=2                        tighter queen-trade slack
+x4_qts5b  queenTradeSlack=5                        recheck vs cf (was combat-only)
+x4_sm2b   sprintMax=2                              recheck vs cf on v127 base
+x4_sm4b   sprintMax=4                              recheck (r2: +9.1 dlen)
+x4_wd10   wDanger=1.0                              weaker adjacent-head fear
+x4_wd22   wDanger=2.2                              stronger adjacent-head fear
+x4_qd15   queenDanger=1.5                          queen less cautious
+# metric-confirmation reruns of r2/r3 winners (now with replays)
+x4_b      feedRound=360                                   v127-replica baseline rerun
+x4_sd2    splitEnemyDist=2                                top-1 rerun
+x4_f330   feedRound=330,queenFeedRound=330,champFallbackRound=330  top-2 rerun
+x4_combo  splitEnemyDist=2,feedRound=330,queenFeedRound=330,champFallbackRound=330  top-3 rerun
+x4_em1    exposureMode=1                                  divergent candidate rerun

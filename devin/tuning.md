@@ -101,3 +101,20 @@ Relays peaked @370 (340:+4.3, 360:+2.5, 370:+8.2, 390:+4.8) — integrator's ~37
 2. {feed triple 330}: 5-5, dlen +14.2/15.8; open longest 41.2 (best); opening untouched; no flags.
 3. {sprintMax=2}: 5-5, dlen +15.0; r100 -4.0/-13.0 (2nd); open tot 162 (best); no flags.
 Watch: relays 370 (6-4/+8.2). wPortalScout=8/combo 7-3-by-elim, open tot 45 — report to earlyecon as routing-fix signal, not a flagship vector.
+| v5_sd2 | `splitEnemyDist=2` | stronghold,schooltime,trauma,trophy,devil | 6-4 (60%) | dlen +5.8 | 6m | note=S2#1 on v143 |
+| v5_f330 | `feedRound=330,queenFeedRound=330,champFallbackRound=330` | stronghold,schooltime,trauma,trophy,devil | 4-6 (40%) | dlen +6.4 | 6m | note=S2#2 on v143 |
+| v5_sm2 | `sprintMax=2` | stronghold,schooltime,trauma,trophy,devil | 4-6 (40%) | dlen +6.8 | 6m | note=S2#3 on v143 |
+| v5_rel370 | `queenRelayFrom=370,champRelayFrom=370` | stronghold,schooltime,trauma,trophy,devil | 4-6 (40%) | dlen +7.4 | 6m | note=watch on v143 |
+| v5_base | `splitEnemyDist=1` | stronghold,schooltime,trauma,trophy,devil | 4-6 (40%) | dlen +7.7 | 6m | note=v143 control rerun |
+
+## Round 5 — S2 vectors re-gated on v143 base (vs abyss_cf, s7, n=10 paired)
+
+| slug | params | maps | W-L | dlen | note |
+|------|--------|------|-----|------|------|
+| v5_sd2 | `splitEnemyDist=2` | 5-map | 6-4 | +5.8 | was 6-4/+15.0 on v127-replica |
+| v5_f330 | `feed triple 330` | 5-map | 4-6 | +6.4 | was 5-5/+15.8 |
+| v5_sm2 | `sprintMax=2` | 5-map | 4-6 | +6.8 | was 5-5/+15.0 |
+| v5_rel370 | `relays 370` | 5-map | 4-6 | +7.4 | was 6-4/+8.2 |
+| v5_base | control (sd=1 no-op) | 5-map | 4-6 | +7.7 | v143 baseline |
+
+**Read: on v143 every vector sits AT or BELOW the control's own dlen (+7.7).** sd2's signature advantage collapsed (+15.0→+5.8 vs +7.7 control); f330/sm2/rel370 indistinguishable from noise. Interpretation: v143 already captures most of what these vectors bought on the old base (feed360 triple landed, a_portal10). Marginal S2 value of this vector set on v143 ≈ 0 within this fixture's resolution. sd2 keeps the best pair score (6-4) but its mechanism number is gone — flag as "unresolved, needs multi-seed" not "deliver".

@@ -1,0 +1,6 @@
+# round5: re-gate S2 vectors on v143 base (vs abyss_cf, s7, 5-map fixture)
+v5_sd2  splitEnemyDist=2                  maps=stronghold,schooltime,trauma,trophy,devil  note=S2#1 on v143
+v5_f330 feedRound=330,queenFeedRound=330,champFallbackRound=330  maps=stronghold,schooltime,trauma,trophy,devil  note=S2#2 on v143
+v5_sm2  sprintMax=2                       maps=stronghold,schooltime,trauma,trophy,devil  note=S2#3 on v143
+v5_rel370 queenRelayFrom=370,champRelayFrom=370  maps=stronghold,schooltime,trauma,trophy,devil  note=watch on v143
+v5_base splitEnemyDist=1                               maps=stronghold,schooltime,trauma,trophy,devil  note=v143 control rerun

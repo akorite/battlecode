@@ -274,3 +274,10 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
 - v120 vs top-4 benchmark: 0W-25L pulled from battles feed — total wipeout.
 - v133 SUBMITTED (sub 16457, v110) + S2 challenges fired: FtM/Vibing++/Sponge
   ranked, SSS unranked. SPRT p0~0; check per 10g, cap 80g.
+- S2 reality check: v133 vs top4 = 0-17 first wave (same floor as v120's 0-25).
+  Replays: THEIR champions hit 51-94, ours cap 40-47; ~1/3 games = pre-r200 elim.
+  Top-4 SPRT floored (both ~0%) — discrimination impossible at that tier.
+- Our band record (1580-1750): meowest 10-30%, 1234 20%, WaterCandle 35-50%.
+  Reframing: we're mid-pack; +400 Elo needs beating 1600-1750 at 60%+.
+- Discrimination set fired: meowest(529)+WaterCandle(782) unranked, 1234(919) ranked.
+- v133-local: feed@360 on opens + corridor-gate = mechanism up, no regression.

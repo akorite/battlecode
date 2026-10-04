@@ -229,3 +229,8 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
   champion gets 90r. v125 = don't crown a hidden queen (queenReady gate).
   Design note: for queen-as-champion she must unhide ~340 (grow to ~15 by
   400), not 390 — feed can't build 30+ from len-2 in 90r.
+- midend450 final (32g, driver killed): v124 56.2% vs v121, longest +1.6 —
+  midEnd=450 is a small keeper (feeders less shy), not the main lever.
+- Feed-bundle refinement queue: v125 (no-crown-hidden) gating; v126
+  (hideUntil 340, queen grows to ~len-15 by 400) next. Main lever =
+  feed turns + a champion that exists to feed (queen dies 77% post-unhide).

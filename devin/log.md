@@ -141,3 +141,4 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
 - explore: v143 C-pack attribution — C1 bleeds dilemma 0-4, C2 clean (no weakhold-B flatline), C3 queen-death bleed stronghold/qOS — devin/lanes/explore.md
 - explore: v149 audit — losses cluster on queenEnd bell: autarky queen-h2h exposure, td queen-wall@40, islands/stronghold queen-feed race (qEat 2-11 vs 23-83) — devin/lanes/explore.md
 - explore: rules-check — portal exits heading-preserved (96/96 replays), dir^2 neck bug world.hpp:215; portals freeze=starvation-loops; move cost=uniform slither shed, freeSteps wrong — devin/lanes/explore.md
+- explore: pace149 gate 12-8 (60%) vs v149 — wins on queen columns (alive 55v40, qNonRam halved) not pacing (v149 already low revisit); bleeds islands 1-3 post-queen longest race — devin/lanes/explore.md

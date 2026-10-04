@@ -173,7 +173,10 @@ the instructions live, not the count). devil tl200 95.6/25.2, qos tl100
 18.1/14.1 — some econ-metric movement but splits/eaten flat.
 
 **abyss_jobs10** = canClaim_-gated loops (zero added instrs when claims
-can't exist). Run: results/jobs10_s0 (in flight).
+can't exist). **jobs10_s0: 46/96 = 47.9%** — devil 17.1/21.1; stripes still
+3.5/4.5 despite ~0 added instrs on it. The claims-family spread 47.9-52.1%
+across 4 configs IS the overhead-noise band; no config separates signal
+from the depth-clip tax.
 
 ### S0 verdict (96g set, vs v120)
 
@@ -182,9 +185,10 @@ NOT PASSED as specified. Decomposed:
   everywhere; 'h' hunts extended through the forage window is the main
   bleed. The explore lane's 70%-vs-v113 result does not transfer to v120
   on this set.
-- Forage CLAIMS ('g'): ~+2pts and flat econ metrics — inside the
-  CPU-overhead noise band on saturated maps; big-map spots (qos 12/16,
-  autarky splits, devil tl200) hint positive but not separable cleanly.
+- Forage CLAIMS ('g'): 47.9-52.1% across 4 configs — the spread IS the
+  noise band (the configs differ only in where the added instructions
+  live). qos 12/16 and devil tl200 highs hint positive but the same data
+  shows devil splits down in jobs10; nothing survives a strict read.
 - The S0 target (66 -> ~118 tl@r200) is not movable by assignment
   stickiness alone: no variant moved splits60/eaten60 on the elim set.
   The gap is structural (bud cadence / bed coverage / search depth), not

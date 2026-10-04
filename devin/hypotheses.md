@@ -33,3 +33,7 @@
 - **Evidence:** all 35 r499 replays in v149L_v138 predicted with zero misses, including both counterintuitive stronghold cases (lost 96-vs-47-longest with dead queen; won 41-vs-45 with qEnd 17 vs 4).
 - **Doctrine consequences:** (1) queen survival to 499 auto-wins vs dead-queen boards; (2) qlen@end is literally the primary score — feeding her is the top mechanism; (3) champ lock handles only the both-dead (0=0) axis; (4) "queen wins length races" is literal, not metaphor.
 - v149's win edge IS this: qlen@end 3.79 vs 2.65 (+43%).
+
+## H-FEEDFLOOR/H-UNHIDE: both wash (v150, 50%/20)
+- feedMinUnits 3→8 on >2000-tile maps + queenHideUntil 390→300: qlen@end IDENTICAL (3.167), alive@end +2.3, unsw pair loss. Queen dies 75% before unhide matters; when she lives, feeders still can't reach her. REJECTED — binding constraint is survival+reach, not timing.
+- CONFIRMED BUG (priority 1): kParams line `p.champFallbackRound = 360` overrode the 330 decl — live v149 ran 360. Fixed in source; next build carries it.

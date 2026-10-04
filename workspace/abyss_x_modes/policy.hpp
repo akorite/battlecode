@@ -55,8 +55,14 @@ class Policy {
                " ch=" + std::to_string(champHead_) + " hd=" + std::to_string(w_.heard.size()) +
                " oq=" + std::to_string(w_.ourQueen) + " hx=" + std::to_string(w_.board.X(w_.head)) + " hy=" + std::to_string(w_.board.Y(w_.head)) +
                " m=" + std::string(mode()) + " bud=" + std::to_string(bud_) + " lean=" + std::to_string(lean_) +
-               " lead=" + std::to_string(lead_);
+               " lead=" + std::to_string(lead_) + " s=" + std::to_string(int(bestScore_)) +
+               " wb=" + altWhy_.substr(0, altWhy_.find(' ')) + "@" + std::to_string(altDir_) + ":" +
+               std::to_string(int(altScore_ < -1e17 ? -1 : bestScore_ - altScore_));
     }
+    // Would-be search choice (explore lane): runner-up of this turn's argmax.
+    double bestScore_ = -1e18, altScore_ = -1e18;
+    std::string altWhy_ = "-";
+    int altDir_ = -1;
 
     Policy(World& w, Params const& p, double deadline, Out& out) : w_(w), eff_(p), p_(eff_), deadline_(deadline), out_(out) {
         gammaPow_.resize(kPowSize);
@@ -257,18 +263,24 @@ class Policy {
             ctot = tc;
             depthReached_ = depth;
         }
-        Choice best;
+        Choice best, alt;
         for (int d = 0; d < 4; d++) {
             if (first[d].dest < 0) continue;
             Choice c = first[d];
             c.score = total[d];
-            if (c.score > best.score) best = c;
+            if (c.score > best.score) { alt = best; best = c; }
+            else if (c.score > alt.score) alt = c;
         }
         for (size_t i = 0; i < cands.size(); i++) {
             Choice c = cands[i].c;
             c.score = ctot[i];
-            if (c.score > best.score) best = c;
+            if (c.score > best.score) { alt = best; best = c; }
+            else if (c.score > alt.score) alt = c;
         }
+        bestScore_ = best.score;
+        altScore_ = alt.score;
+        altWhy_ = alt.why.empty() ? "-" : alt.why;
+        altDir_ = alt.dest < 0 ? -1 : alt.dir;
         if (best.dest < 0) {
             // Nothing legal: first try a tile we only gave up as a teammate's last exit,
             // otherwise any well-formed move beats the default suicide.

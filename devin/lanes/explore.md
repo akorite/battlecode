@@ -37,3 +37,33 @@ Tune lane r4 (steering-3/4): relays peak @370 vs cf; fear radius (heardEnemyReac
 
 ## tune r5 — S2 vectors on v143 — 2026-10-04
 - Re-gated the delivered vectors on abyss_v143 vs abyss_cf (same fixture/protocol): sd2 6-4/+5.8, f330 4-6/+6.4, sm2 4-6/+6.8, rel370 4-6/+7.4 — control v143-noop 4-6/+7.7. ALL ≤ control. v143 already embodies the gains (feed360+portal10); the vector set's marginal value on this base is ~0 at fixture resolution. sd2 flagged unresolved-needs-multiseed.
+
+## v149 vs v138 map-class audit — 2026-10-04 (tag audit149, all 22 maps ×2 seeds both seats)
+Bells model verified in data: r499 = queenEnd → longest → total. Format: map | cand W-L | lock | mech.
+
+| map | W-L | lock | mechanism |
+|---|---|---|---|
+| autarky | **0-4** | cand loses both seats/seeds | queen dies hitH r197-391 every game; s2B cand dominated len56/tot79 but queen dead vs base's alive@5 → bells queenEnd kills. Feed is FINE (qEat 30 on B) — the bleed is queen EXPOSURE to h2h, not econ. |
+| tower_defense | **1-3** | both-seat loss s2 | early queen deaths → elims: cand qd @40 hitWall (s2B, base ALSO wall@40 s2A but its swarm outlasted), @135/@275 h2h. Elim map: queen fragility decides. |
+| big_empty | **1-3** | — | all 8 queens die h2h r49-98 (killbox). Then longest decides: cand tot DOMINATES (723-915 vs 497-683) but longest loses 43-61 vs 44-65 — v149 spreads food across swarm, v138 concentrates post-queen-death. Funnel arrives too late / leaks. |
+| stronghold | 2-2 | side-locked | s1B: cand qd@195hitO vs base alive@22 → queen-death loss. s2A: BOTH alive, cq3<bq10 → queen-feed race lost (s2B won cq17>bq4). qEat tracks it: 94v77 won, 15v83 lost. |
+| islands | 2-2 | side-locked(s1) | s1 both seats lost: cand queen dies early (@206hitSELF, @142h2h) + longest deficit vs base q-alive-385/308 + base qEat 23 vs cand 2-11. s2 flips. Queen-survival + feed race, not structural. |
+| schooltime | 2-2 | side-locked | both queens alive@3 sealed-hide — pure longest contest. |
+| trauma | 2-2 | side-locked | queens alive; queenEnd decides seats (cq25>bq21 won). |
+| portals | 2-2 | — | queens alive both sides; longest swaps seats. |
+| slithery_fight | 3-1 | side-locked | s1A won cq21 vs dead base queen — bells queenEnd. s1B loss cq†422 vs bq3: cand queen died @422 while base's lived at 3 → flip. |
+| weakhold | 3-1 | side-locked | cand queens alive 2/4 vs base 0/4 — the pocket doctrine holds; one split B loss. |
+| unsw | 2-2 | side-locked | queens dead all; longest decides seats. |
+| maze | 2-2 | — | queens dead all; longest seat-flips. |
+| australia | 2-2 | — | queens dead all; tot decides seats (441/45 dominant vs 88/268 crushed). |
+| default | 3-1 | side-locked | s2B loss: cand queen @15 early h2h vs base alive till 78ish; rest clean. |
+| default_small | 3-1 | side-locked | s2B loss on longest 19/28 (queens dead both). |
+| devil | 2-2 | side-locked | elim race seat-locked; cq4 won A. |
+| dilemma | 2-2 | side-locked | cand A loses @25 hitSelf BOTH seeds — A-seat queen self-kill structural pattern (matches earlier C1 dilemma bleed: this map is a queen-trap geometry). |
+| trophy | 2-2 | side-locked | elim race; cand queen dies @42-80 vs base @26-73 — seat decides. |
+| stripes | 2-2 | — | elim race seat-flips; cand B wins. |
+| queen_of_spades | 2-2 | — | seat-flip per seed (NOT locked): genuinely contested; all queen deaths h2h incl. the r36-class seam events. |
+| Colosseum | 2-2 | — | elim race seat-flips. |
+| arena | 3-1 | side-locked | s2B one loss @13h2h early; elim race. |
+
+AGGREGATE: cand queens@499 9/53 vs base 8/53 — global parity, but the loss maps all fail the SAME column: cand queen dies while base's lives (autarky, td, stronghold s1B/s2A, islands s1), or cand queen out-fed on bells (stronghold/islands qEat 2-11 vs base 23-83). Loss class = QUEEN SURVIVAL (exposure to h2h/wall pre-endgame) + QUEEN-FEED FUNNEL on bells races. Next mechanism targets in order: (1) autarky-class queen h2h exposure (all 4 losses are her fights, feed fine), (2) td-class early queen wall/fog deaths @40 → elim, (3) islands/stronghold-class queen-feed rate (v149 feeds her less than v138 on shared bells races). Non-issues: total/econ (dominates big_empty/schooltime tot columns), sealed-queen maps (schooltime/trauma/portals all healthy).

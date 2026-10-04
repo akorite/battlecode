@@ -162,6 +162,27 @@ gossip + drop deference + warmup fix are independent wins per S0). The steering-
 classifier + queen-escort switch landed after this run — they are partition-equivalent
 resp. additive and were not what lost the maps.
 
+## Steering-4 iteration (v6, post-gate)
+
+CONSOLIDATE recipe from computers' decoded +130:
+
+- **Front-loaded feed window**: `queenFeedRound = consolAt - phaseFeedBurst(20)` during
+  GROW — feeders wake early and walk to the heard champ head, so arrivals concentrate in
+  the window's first ~20 rounds (winners stack 12.9 recycles into r360-379; we had ~5.3).
+  Measured on s2a_feed replays: 13-21 deaths in consol+20 — in-band.
+- **In-place deaths at the champ's head**: `champFeedDist 2→1` in CONSOL — the champ is
+  parked so adjacent suicide lands drops at its head (was: hitSelf at distance 2 scattered
+  drops). Winners die in place on the champ's path (~50 noValidAction/game); ours now die
+  adjacent rather than scattered.
+- **Champ lock ~r330**: election warmup already at consolAt-40 (open ≈r328) — kept.
+- Phase transitions verified on debug replays: autarky OPEN→52→320→452,
+  schooltime 0→75→368→452 — classifier lands corridor/open correctly.
+
+s2a_feed (autarky,schooltime × 2 seeds vs v104, akdbg): **4/8 = 50%** (schooltime B 2/2
+incl. r197 elim, autarky A 1/2 c30 bell, schooltime A 1/2); champ lengths c30-48 vs the
+gate's 12-14. L@300 still 9-14 (target ≥10 borderline). Regate on the 5 regression/
+affected maps running.
+
 ## Still weak
 
 - B-seat autarky bells: our champ lands 8-16 vs their 35-39 (A-seat we reach 12-66). Feed throughput

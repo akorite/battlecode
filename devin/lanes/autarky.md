@@ -78,3 +78,89 @@ Autarky trajectory over experiments (16-game runs, seeds 1-8 both seats):
 
 - v113's late-game "output guards" (r320+ feed-blocking, fixed in v116) distort local-vs-v104 results on non-autarky maps only in principle; autarky block is orthogonal.
 - qsiege lane owns generic queen-encirclement; nothing here touches queen logic.
+
+---
+
+# Adversarial review — v149→v151 (portal-scout), v151→v152 (C2/C3), C7 sealed-queen
+
+Reviewed against devin/v120 @ c6c22ba. Read job, no gates.
+
+## Diff 1: v149→v151 portal-scout — mechanics correct, ship-shape
+
+**(a) scout → cand/two-step/split propagation: SAFE.**
+- Two-step `cands` can never carry a scout: first-step filtered by `c1.dest < 0` (policy.hpp:201), second-leg filtered by `if (c2.dest < 0) continue`. So `cd.c.terminal`, `tc[]`, `ctot[]` never see dest=-1.
+- `eaten.push_back(c.dest)` only runs in the `c.dest >= 0` branch — a scout's -1 never lands in `eaten`.
+- `firstBody[d]` for a scout dir is unpopulated but also never read (dest<0 skips both `searchFrom` and the two-step pass).
+- **trySplit CAN override a scout winner** — "scout" is not in its why-reject list (trade/defend/slay) and scout's `c.eat` stays false (the scout block returns before the `c.eat` line). The bud itself is safe: `out.split(c.n)` carries no direction (in-place), and portal edges read as nb=-1 → non-exits → `hasRoomyMove` is *conservative* at portal lips, not permissive. No bad-bud hole — the scout intent is just silently dropped that turn. If scouts should stick, add `bestMove.why == "scout"` to the trySplit reject list; as committed, legal buds outrank scouts (arguably fine — wScout is "exploration of last resort"). sprintTrade can also outbid a scout — defensible (a guaranteed kill > a blind cross).
+
+**(b) `best.dest<0 && best.why!="scout"` skip: AIRTIGHT.**
+- A scout is the only dest<0 choice that can win: other dest<0 `first[]` entries are skipped in the pick loop, cands always have dest≥0. When nothing wins, `best` stays default-constructed (`dest=-1`, `why=""`) → `why != "scout"` → trapped fallback still runs. Correct for all three cases (scout wins / cand wins / nothing wins).
+- main.cpp safeFirst bypass is **load-bearing**: safeFirst's `dest >= 0` test rejects the portal-edge dir outright — without `c.why != "scout"` it would redirect every scout into an ordinary move and the feature would be dead code.
+- Emit path is `out.move(c.dir)` — direction only; `dest` is internal bookkeeping. Engine teleports on the edge dir. Correct.
+- Depth loop `if (c.dest<0) { if (why=="scout") t[d]=c.score; continue; }` keeps the terminal score at every depth — including timeout-before-first-depth (`total[d]` initialises to `first[d].score` = same value). Consistent. `c.terminal=true` on the scout is belt-and-suspenders (the dest<0 branch catches it first) — harmless.
+
+**(c) queen exclusion covers all states.** `queen_` is id-based (`init.id == champId`); `hiding_` requires `queen_` (policy.hpp:59), grower is her other mode — hiding/grower/post-unhide queens all excluded by the one flag. The second `!queen_` inside the score expression is dead but harmless.
+
+**(d) portals.map bud geometry:** covered in (a) — `hasRoomyMove` treats portal edges as non-exits → more conservative at portal lips, can't produce a portal-specific bad bud. Residual: a swarm dragon that keeps meeting split conditions at a portal lip will bud every turn instead of scouting — scout starvation, not a correctness bug.
+
+## Diff 2: v151→v152 — C2/C3 sound; **wScout silently reverted to 6.0**
+
+**wScout 2.0 → 6.0 (common.hpp:141)** — v151's own comment documented the reason ("6.0 streamed whole squads through portals into enemy territory: deaths 59 vs 42"). The revert is now *load-bearing* rather than cosmetic: with the v151 pick-loop fix scouts can actually win, and at 6.0 a blind cross scores ~5.4 (`6.0 − 0.3·(1+0.25·L)` for L≈4) — that outbids nearly every ordinary move, so the squad-streaming leak re-arms. The rest of v152's common.hpp is byte-identical and main/world/board/nav/io are untouched — this looks like an accidental clobber from a pre-v151 base, not a deliberate re-tune. If it IS deliberate, scout needs a value that only wins over dead options, not over real moves.
+
+**C2 (hiding queen needs ≥2 roomy exits, r>2): consistent.**
+- `blkP` is byte-for-byte the same construction as the parent's own roomy check six lines above (`base_` + child-INF + `markBody(parent, keep)`) — could literally reuse `blk`; the duplicated NC-copy + ≤4 floods are negligible CPU, so it's dead duplication not a bug.
+- `blkP[nn] > 1` is the right idiom: markBody writes vacate-times (head→L+1, tail→2), `<=1` = free-now, matching buildBase's teammate-exit test; `flood`'s `blk[n] > nd` correctly lets vacating cells admit the wavefront.
+- `keep` = parent's post-split len (= queenHideLen for a hiding queen) — same role as `len` in `hasRoomyMove(len)`. `parent.front()` = head cell = correct anchor (the parent holds position on the split turn). `b`, `nav_` in scope.
+- r≤2 exemption matches the stated intent: `hiding_` can be true at r≤2 (`queenHide && queen_ && round<queenHideUntil && NC≥hideMinTiles`), and the scripted opening bud must not slip a round (unsw seat-A). Harmless no-op when it can't fire.
+- Counting exits by independent floods is consistent: two dirs into the *same* small region both fail `≥need2` → `roomy<2` → no bud. Residual gap (document, don't block): it tests *this* turn's geometry — a child landing in her corridor next turn is unguarded, same limitation as all existing checks.
+
+**C3 (`!queen_` on the score<-500 reverse): the cornered-queen fallback chain is complete.**
+- When all moves are vetoed-but-legal she takes the least-bad — same as before minus the reverse option.
+- She keeps normal splitting machinery: trySplit's grower/hiding paths have no score gate, so a legal bud still fires on a doomed-score turn.
+- The trapped fallback remains reachable: it triggers on `best.dest<0 && why!="scout"`, queen-agnostic; a queen never produces `why=="scout"`.
+- When truly illegal-moves-only (all dest<0), she still gets the ranked trapped fallback — no hang, no illegal emit.
+- Removed case: all-vetoed + L≥4 → previously reversed into a facing-out 2-stub; now she takes the vetoed step. Both can die — the stub-vs-step tradeoff is your policy judgment (and your comment matches: stubs mutilate her on survivable boards); mechanically there is no hole in the chain.
+
+## v150 pending deltas (feedFloor + unhide) — mechanism verdict for the washes
+
+- **feedFloor**: correct but ~vacuous → explains the wash. `units>8` holds on >2000-tile maps for nearly the whole game, so the floor only binds after the swarm has already collapsed — but the pre-collapse feed turns are exactly the ones that scattered it. Under lexicographic scoring, plan-B longest can't be rebuilt from a sub-8 remnant either. Delete.
+- **unhide** (`queenHideUntil=300`, `queenFeedRound=320` on >2000 tiles): live but backwards. An unhidden, mobile queen at r300 precedes the ~r330 anchor lock, so feeders die on a *moving* target — the scattered-drops anti-pattern — and her roaming exposure opens earlier under lexicographic scoring (queen dead = automatic tiebreak-1 loss). Under the verified scoring, she compounds by *being fed*, not by *waking early*. Delete both; if you want her earlier, make her the anchored feed target rather than mobile.
+
+## C7 — sealed-queen test (implementable, head+len only)
+
+The hole: `locateChamp`'s `queenReach() < 20` uses `regionReach()` — a 40-cell flood over `nb[]` that ignores occupancy. A queen sealed by her own body across a 1-tile neck floods *through her unseen body* → reads reachable → workers name a queen who can't be fed (31% of post-r390 schooltime turns).
+
+Two hard facts available without knowing her body:
+
+1. **Her neck is always one head-neighbor.** A snake's second segment occupies one of her ≤4 adjacent cells → real exits ≤ `openNb − 1`. `openNb ≤ 2` ⇒ at most one non-body exit ⇒ the 1-wide-mouth geometry = sealed for feeding purposes.
+2. **Pocket capacity.** Her len−1 body must physically occupy cells in her connected open space. If that space holds ≤ `qlen + margin` cells, the body fills most of it — no free approach corridor can exist.
+
+Drop-in (replace `queenReach() < 20` at policy.hpp:612):
+
+```cpp
+bool queenSealed(int qh, int qlen) {
+    Board const& b = w_.board;
+    if (qh < 0 || qh >= b.NC) return false;
+    // A) head-degree bound — her neck is always one neighbor cell.
+    int openNb = 0;
+    for (int d = 0; d < 4; d++) {
+        int n = b.nb[qh * 4 + d];
+        if (n >= 0 && base_[n] < INF) openNb++;
+    }
+    if (openNb <= 2) return true;          // <=1 real exit: mouth-of-pocket geometry
+    // B) pocket-capacity bound — her len-1 body can't leave a free corridor
+    //    when the whole connected open space is this small.
+    int cap = qlen + 8;                    // slack: head step + drop ring
+    if (nav_.flood(b, qh, base_, cap + 1) <= cap) return true;
+    return false;
+}
+// locateChamp: if (queenReady && ... && queenSealed(w_.queenCell, w_.queenLen)) queenReady = false;
+```
+
+Honest residual: (B) is still body-blind on the escape path — it catches *small-component* seals (the schooltime nooks, the actual failure) but not a queen self-coiled in open field (rare — bodies uncoil). It tightens for free as workers see her: any queen-body cell already marked in `w_.occ`/`ownExtra` is INF in `base_`. Cheap hardening option: run the flood on a seen-only map (fog = wall, the `deadEnd` convention) — false-sealed only costs a champ candidate, false-open costs 100 rounds of dead feeding, so the bias should be toward sealed. Related site: `regionReach(w_.head) >= 12` (policy.hpp:80) has the same blindness, but there the dragon's own body IS known — `blk = base_; markBody(blk, w_.body, L_);` makes that one exact.
+
+---
+
+# Feed-convergence lane — mechanism status (blocked item flagged to integrator)
+
+`abyss_v152` (local, v149-based): die-in-place feeders walk to champ head + HOLD; `feedConvLead=40` hoists the gate to `feedAt-40`. Mechanism check on the dbg twin shows **zero fh≥0 turns before r360**: the feed target itself doesn't exist pre-window — `champHead_` stays -1 until `champFallbackRound` (360 under the live kParams shadow on v149; 330 fixed on v150+), and the queen branch is `queenReady`-gated at `queenHideUntil` (390 open / 320 corridor). Same reason `champPlantLead=40` is inert — `selfChamp_` can't exist before the election round. Front-loading recycles needs a pre-window target; convergence code is built and ready to gate once the target-timing question is answered (recommend: let the champ plant/anchor fire at `consolAt-40`, or relax the `queenReady` gate for TARGET purposes while keeping it for feed deaths).

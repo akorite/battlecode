@@ -176,3 +176,17 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
 - v119 = v117 + queen ram screen (queen_: tiles inside seen/heard enemy sprint reach priced fatal; heard=2 ghost-hint). Self-play 50% (neutral); vs combat queen-death-maps: score-neutral but non-ram queen deaths 0.083 vs 0.458 (-82%), in-reach opps 2 vs 9. SUBMITTED. wQueenRam=30/wQueenRamHeard=2.
 - v117 vs combat full board (87g): 57.5% (BIG 68.1%, SMALL 45%): losses stripes/weakhold 0/4 (starvation), QoS/devil/schooltime/default_small 25%.
 - v117 20 ranked games fired vs 1650+ (m1002893-1002922) + 10 vs top-3 earlier.
+
+## v120 deadend + weakhold repro + wh4check (Oct 4 ~01:00 UTC)
+- v120 (openMaxTiles=1200 + enemy-arrival gate): 32.5% vs v117 on 5 medium maps — logged
+  deadends. The pearl opening stays <=700 non-maze. Per-dragon open_ flicker broke swarm.
+- weakhold repro vs combat 0/8: we OUT-EAT to r60 (11.5v1.5 pearls, 5.5v2.5 splits) then
+  flatline to 1 alive vs their 27. Post-opening pocket-exit is the missing mechanism.
+  Integrator's hotFar pull attempts: 25%/37.5% self-play — deadend. Pocket worker lane
+  spawned (5d3c6001) with full diagnosis.
+- wh4check (v119 vs v104, devil/stripes/TD 24g): 50% overall, devil 25% (worst map),
+  TD 75%. splits@r60 5.1 vs 9.6 — early econ halved since v104; we win by attrition
+  not tempo. earlyecon worker spawned (381c0534) to bisect wh4/open_/guard-scope.
+- qsiege lane closed (honest negative, dead code). starve session terminated.
+- Ladder: v117 final self-challenge band 7-13 vs 1650+ (Nitronics 2-3, Quaker 1-4,
+  1234 2-3, IW 2-3). v119 ACTIVE (sub 16258, queen-ram screen).

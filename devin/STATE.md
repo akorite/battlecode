@@ -1,14 +1,13 @@
-# STATE — ladder iteration (updated ~23:20 UTC Oct 3)
+# STATE — ladder iteration (updated ~01:10 UTC Oct 4)
 
 ## Ladder
 - Team 351 "Cognoscenti". Goal: top-20 (~1955 Elo) by Oct 10 qualifiers.
-- **LIVE: v112 (sub 16175, building→active) = v108 + wallguard.** Guard
-  redirects any provably-fatal first step (seen-kelp edge OR own body) to a
-  free exit; covers single-step and path[0]. Strict superset of v106's guard.
-- v106 record before v112: 4W-6L ranked; losses corridor maps; zero
-  schooltime drawn so guard unverified on ladder.
+- **LIVE: v119 (sub 16258) = v116-guard-scope + pearl opening + queen ram screen.**
+- v117 band: 7-13 vs 1650+ (Nitro 2-3, Quaker 1-4, 1234 2-3, IW 2-3).
+- Elo 1520. Weak spots: weakhold/starvation maps, devil (25%), early econ halved.
 
-## Honest-gate scoreboard (kmatch.py, 22-map pool, seeds 2, both sides)
+## Honest-gate scoreboard (kmatch.py)
+- v119 = live (v116+pearl+queen-screen); v117 sub 16206 idle
 - v108 vs v104: 47.7% — parity, current clean base
 - v112 vs v104: 48.9% — parity + wallguard = free insurance → SUBMITTED
 - v110 (v108+wh2): 40.0% — DEAD (wh2 unproven-veto pins queen on foggy maps)
@@ -18,16 +17,13 @@
 - Honest baseline: v104 = 48.6% vs cf, 38.9% vs combat
 
 ## Lanes (4 workers)
-- pearl (d74f44be, devin/pearl): forage-first opening; v2 = 52.8% vs combat,
-  52.1% vs v104; v3 gating (hunts restored). Needs map-gating vs big maps.
-- whfix (d50d6e85, devin/whfix): wh2 bounced — unproven veto over-fires;
-  iterate maze-gated or tighter bound, full-pool gate ≥50% + no 0/4.
-- starve (c85884d3, devin/starve): swarmTrap bounced — needs conveyor-vs-
-  survivable-pocket discrimination or deadend writeup.
-- qsiege (64ec12ca, devin/qsiege): NEW — mid-game queen encirclement deaths
-  (H2H/hitWall r50-450, all-4-exits-blocked). Pick ONE fix: exit-freedom
-  scoring / convergence trigger / pocket-depth limit.
-- losssurvey (d1bd4e24): done, terminated.
+- pocket (5d3c6001, devin/pocket): weakhold starvation — dragons can't reach
+  fields past horizon; integrator far-pull failed 25-37%; needs corridor-aware exit.
+- earlyecon (381c0534, devin/earlyecon): bisect wh4/open_/guards — splits@r60
+  halved since v104 on elim maps (devil 25%).
+- autarky (13f9c332, devin/autarky): elim-map tempo (running, no branch yet).
+- explore (97938483, devin/explore-modes): isolated lane per explore-steering.md.
+
 
 ## Harness facts
 - kmatch.py = honest A/B (paired seats). gate_v10X.sh = single embedded pair,

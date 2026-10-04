@@ -133,3 +133,17 @@ VERDICT: mechanisms are compatible — die-in-place out-precisions the neck-step
 the monster-champ upside at n=20. If a ship/die call needs power, run a bigger
 board; if longest@end is the gate metric, the signal is slightly negative but
 inside per-map variance.
+
+### scoring-reframe addendum (2026-10-04): bells score LEXICOGRAPHICALLY
+
+Integrator's discovery, verified 17/17 on the v150 games.jsonl: queen-alive ->
+queen end-length -> longest -> total. This changes two v150 reads:
+- stronghold s1-B loss is NOT noise — it is the qlen signature: our queen ended
+  len-10 while a planted worker-champ grew to 36; their fed queen ended 31 and
+  won the first tiebreak outright. Feed-the-worker is score-blind whenever both
+  queens live; feed-the-queen is the primary key. The election's sealed-queen
+  exemption (queenReach<20 -> queenReady=false) therefore costs BELLS, not just
+  feed — a marginally-reachable queen who could still eat should probably keep
+  the feed ahead of a worker-champ fallback.
+- autarky s1-A win (queen 3 vs dead, longest 31 vs 54) is the dead-queen
+  autolose — escort/hunt work is directly on-score.

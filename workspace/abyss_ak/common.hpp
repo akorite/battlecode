@@ -343,7 +343,7 @@ struct Params {
 inline Params const kParams = [] {
     Params p;
     p.queenHide = 1;  // this variant runs the hide-and-feed doctrine
-    p.phaseCtl = 1;   // this variant runs the OPEN/GROW/CONSOLIDATE/PROTECT phase controller
+    p.phaseCtl = 0;   // 1 = run the OPEN/GROW/CONSOLIDATE/PROTECT phase controller (see devin/lanes/phases.md; net-negative vs v104 on open-map bells — kept OFF in this variant)
     // v104 = qk minus queen-escape removals (paired analysis: removals threw 20 queen-fate
     // games via hitSelf+h2h) + cf consolidation timing + tail-strike queen fear:
     p.feedRound = 320;

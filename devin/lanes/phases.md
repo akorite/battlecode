@@ -218,17 +218,21 @@ longest@end 18.2 vs 28.6.
 v9 (CONSOL feedMaxLen=10): unsw 12.5% (first unsw win, c24 bell), slithery 12.5% — net
 12.5% overall. Conversion still capped: longest@end 18.8 vs 30.6.
 
-### v10 (feedHeardDie 8 in CONSOL — from direct replay evidence)
+### v10 result (feedHeardDie 8): unsw 0/8, slithery 25% — 12.5% net
 
-unsw debug replays showed **46% of post-window feeder turns had fh=-1** (no feed target)
-and 31% had no champ at all — heard-champ freshness (`feedHeardDie=2`) blocks suicides on
-4096-tile maps where relay cadence lags the parked champ. CONSOL now allows dying beside
-heard positions ≤8 rounds old. champMemory(40) covers resolution; feedMaxLen=10 covers
-feeder size. v10_check on unsw+slithery in flight.
+feedHeardDie=8 did not convert the swarm either. Residual is ARCHITECTURAL: v104's
+queen-champ IS the consolidation point (feeders die into her path and she walks over the
+pearls); our elected champ is elected ~r300+, often the wrong dragon, and eats drops only
+when its path crosses them. alive@r499 62 vs 21 / longest@end 18.6 vs 27.6 across v8-v10.
 
-**Lane verdict stands: honest negative overall** — phase machine mechanically verified
-(transitions, classifier, front-load, in-place deaths, escort switch, hysteresis) and
-recovers to ~34-37% on the affected subset, still behind v104 on open-map bells.
+**Lane verdict: honest negative overall.** The phase machine is mechanically verified
+(transitions 52/320/452 corridor, 75/368/452 open; seen-topology classifier; front-load
+13-21 deaths in consol+20; in-place deaths; open-scoped escort; hysteresis) and wins
+elim-map econ (dilemma+autarky 50% in v7), but open-map bells stay ~12-37% — the
+elected-champ architecture cannot out-feed v104's queen-champ. Recommend: keep phaseCtl
+as a research switch (off in any shipped bot), cherry-pick the independent S0 wins
+(saturating gossip, drop-zone deference, locateChamp warmup fix — all phaseCtl-gated but
+trivially portable), and treat open-map consolidation as its own lane if pursued.
 
 ## Still weak
 

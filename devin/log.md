@@ -160,3 +160,9 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
 - AUTOSCRIM ROOT CAUSE FOUND: swarm starvation. TD m997381: splits 3v20 extinct r148; stripes 1v54; weakhold 30v164; australia 59v395. Queen never reaches bud length — paths never cross pearl beds (no 'eat' action exists; growth is passive on tile entry).
 - abyss_v115 = v114 with openMinUnits=99 (brood clause dead): open_ engages ONLY on <=700 non-maze maps (arena, Colosseum, default_small, dilemma, trophy). Outside-opponent gates vs cf+combat running on those + 4 inert controls.
 - Outstanding: mid-game/big-map forage deficit = the real autoscrim killer (Australia/UNSW/Slithery all >1300 tiles, open_ inert). Needs a whole-game forage lane — starve/autarky workers.
+
+## 00:15 UTC — guard census → v116 submitted; v115 gates done
+- GUARD CENSUS (v113dbg, self-play, 10 games): selfguard fires 300-1231x/game, ALL rounds 320-489, ZERO queen firings; wallguard 0 firings anywhere. The guard was silently blocking ~1000 feed deaths/game on big maps — the r320+ consolidation mechanism. Steering's inference confirmed directly.
+- v116 = v113 + guards scoped to (round<40 || champion). Smoke vs v113: 75% (9/12); longest dragon at end 24.0 vs 20.3 (feed partially restored); alive@r499 14 vs 41 (swarm consolidates); schooltime 4/4 queen alive. SUBMITTED as sub 16204 (processing).
+- v115 (=v113 + map-gated pearl open, brood clause dead) outside gates: vs combat 63.9% (SMALL 80%), vs cf 50.0% (SMALL 80%, BIG 12.5% — cf corridor-map bias as usual). Both clear v104 baselines (38.9%/48.6%). Plan: layer as v117 = v116 + open_ once v116 ladders.
+- Metrics pipeline tooling/upload_metrics.py built: per-game alive/maxlen/queen-death/hitSelf300 table by side.

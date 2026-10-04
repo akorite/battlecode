@@ -38,7 +38,8 @@ class Policy {
                " fh=" + std::to_string(feedHead_) + " fa=" + std::to_string(feedAge_) + " sc=" + std::to_string(selfChamp_) +
                " qr=" + std::to_string(w_.queenRound) + " ql=" + std::to_string(w_.queenLen) +
                " ch=" + std::to_string(champHead_) + " hd=" + std::to_string(w_.heard.size()) +
-               " oq=" + std::to_string(w_.ourQueen) + " hx=" + std::to_string(w_.board.X(w_.head)) + " hy=" + std::to_string(w_.board.Y(w_.head));
+               " oq=" + std::to_string(w_.ourQueen) + " hx=" + std::to_string(w_.board.X(w_.head)) + " hy=" + std::to_string(w_.board.Y(w_.head)) +
+               " ne=" + std::to_string(enemies_.size()) + " nh=" + std::to_string(heardEnemies_.size()) + " q=" + std::to_string(queen_);
     }
 
     Policy(World& w, Params const& p, double deadline, Out& out) : w_(w), eff_(p), p_(eff_), deadline_(deadline), out_(out) {
@@ -272,6 +273,16 @@ class Policy {
             c.score = total[d];
             if (c.score > best.score) best = c;
         }
+#ifdef BC_DEBUG
+        if (queen_) {
+            best.why += " dirs=";
+            for (int d = 0; d < 4; d++) {
+                best.why += std::string(1, DCH[d]) + std::to_string(int(total[d])) + "/";
+                for (EnemyField const& e : enemies_)
+                    best.why += "e" + std::to_string(e.dist[first[d].dest >= 0 ? first[d].dest : w_.head]) + "v" + std::to_string(e.visible) + " ";
+            }
+        }
+#endif
         for (size_t i = 0; i < cands.size(); i++) {
             Choice c = cands[i].c;
             c.score = ctot[i];
@@ -533,6 +544,7 @@ class Policy {
     int queenCell_ = -1;          // our queen's cell (seen, else freshest role-2 beacon)
     bool qThreat_ = false;        // an enemy is near queenCell_ — escorts form only while true
     bool qAdj_ = false;           // weakhold dims: the proven ram-adjacency geometry
+    bool mirrorHunt_ = false;     // B1: assassinCell_ is a guess, not a sighting — pull weaker, through fog
     int feedHead_ = -1;           // head of the longer teammate we are walking to, -1 none
     int feedAge_ = 0;             // rounds since feedHead_ was seen (0 = in vision now)
     int champHead_ = -1;          // where the champion is (freshest evidence), -1 unknown
@@ -950,6 +962,7 @@ class Policy {
         escortOf_ = -1;
         assassin_ = false;
         assassinCell_ = -1;
+        mirrorHunt_ = false;
         if (grower_ || queen_) return;  // the queen never hunts or escorts
         assignAssassin();
 
@@ -1047,8 +1060,19 @@ class Policy {
             if (h.role == 1 && w_.t.round - h.round <= p_.assassinMaxAge &&
                 (!rep || h.round > rep->round || (h.round == rep->round && h.cell < rep->cell)))
                 rep = &h;
-        if (!rep) return;
-        int cell = rep->cell;
+        int cell = -1;
+        if (rep) cell = rep->cell;
+        else if (p_.huntMirror > 0 && w_.t.round >= p_.huntRound && !w_.theirQueenDead() &&
+                 w_.firstRound >= 0 && w_.firstRound <= p_.huntSpawnMax && w_.startCell >= 0 &&
+                 L_ <= p_.huntLenMax && !queen_ && !grower_ && !lead_) {
+            // B1 mirror-hunt: nobody has seen her, so hunt the map-mirror of our
+            // own start — top teams' queens sit within ~4-11 of it. Expendable
+            // opening-born workers only (they are the ones who know the region).
+            int mx = b.W - 1 - b.X(w_.startCell), my = b.H - 1 - b.Y(w_.startCell);
+            cell = b.id(mx, my);
+            mirrorHunt_ = true;
+        }
+        if (cell < 0) return;
 
         // Candidates: me plus every swarm dragon whose position is shared —
         // visible teammates via their fields, heard swarm beacons via Chebyshev
@@ -1073,11 +1097,17 @@ class Policy {
         });
         double force = 0;
         bool in = false;
-        for (int i = 0; i < p_.assassinCount && i < static_cast<int>(cand.size()); i++) {
+        int squad = mirrorHunt_ ? p_.huntSquad : p_.assassinCount;
+        for (int i = 0; i < squad && i < static_cast<int>(cand.size()); i++) {
             force += cand[i].len;
             if (cand[i].id == w_.init.id) in = true;
         }
-        if (in && force >= rep->len * p_.assassinForce) {
+        if (mirrorHunt_) {
+            // Speculative hunt: go if I am among the nearest few — no force check,
+            // the target is a guess and the squad is expendable by construction.
+            if (in) { assassin_ = true; assassinCell_ = cell; }
+            else mirrorHunt_ = false;
+        } else if (in && rep && force >= rep->len * p_.assassinForce) {
             assassin_ = true;
             assassinCell_ = cell;
         }
@@ -1382,11 +1412,16 @@ class Policy {
         }
         if (assassin_ && assassinCell_ >= 0) {
             // Converge on the reported cell and its neighbours. No pull past the
-            // BFS horizon: chasing ghosts through fog is how the squad bleeds.
+            // BFS horizon for a sighting: chasing ghosts through fog is how the
+            // squad bleeds. The mirror-hunt is the exception — a fixed guess IS
+            // the assignment, so it pulls through fog by torus distance (weaker).
             int dd = distToHead(dist, assassinCell_);
             if (dd != INF) {
-                value += p_.wAssassin * gp(dd + k);
-                why = "assassinate";
+                value += (mirrorHunt_ ? p_.wHuntMirror : p_.wAssassin) * gp(dd + k);
+                why = mirrorHunt_ ? "mirror-hunt" : "assassinate";
+            } else if (mirrorHunt_) {
+                value += p_.wHuntMirror * fp(static_cast<int>(1.3 * b.manh(dest, assassinCell_)) + k);
+                if (why.empty()) why = "mirror-hunt";
             }
         }
 
@@ -1454,7 +1489,8 @@ class Policy {
                 // Enemy kill-reach is +len-1: head-to-head kills both, so a rammer
                 // arriving at len 1 still takes our queen. (Our own slay uses -2 —
                 // we only commit when we land at len 2+.)
-                if (dd <= std::max(freeSteps(e.visible) + e.visible - 1, 1)) danger += p_.wLeadReach * newL * mult;
+                if (dd <= std::max(freeSteps(std::max(e.visible, p_.qEnemyLenMin)) + std::max(e.visible, p_.qEnemyLenMin) - 1, 1))
+                    danger += p_.wLeadReach * newL * mult;
             }
         }
         if (queen_ && !lead_ && k == 0 && p_.wQueenRam > 0) {
@@ -1471,7 +1507,19 @@ class Policy {
                         int n = b.nb[dest * 4 + d2];
                         if (n >= 0) dd = std::min(dd, e.dist[n]);
                     }
-                if (dd > (qAdj_ ? 0 : 1) && dd <= reachOf(e.visible) + (qAdj_ ? p_.qRamAdj : 0))
+                // Edge-seen enemies report only their visible segments — a len-3
+                // ram whose tail is out of vision reads 1 and its reach reads 1.
+                // Floor at the killer profile (len 2-3 movers) so a head glimpsed
+                // at the vision edge still gets its real sprint reach.
+                int ev = std::max(e.visible, p_.qEnemyLenMin);
+                // Lethal tier first: a cell the enemy can step onto THIS turn is
+                // a near-veto — pricing it like the soft tier is the qOS trap
+                // (when every dest is "dangerous" the hide pull picks a dead one).
+                // Sprint reach freeSteps+len-1: a rammer arriving at len 1 still
+                // kills (the -dd keeps an escape gradient when all are lethal).
+                if (p_.qVetoReach > 0 && e.dist[dest] <= freeSteps(ev) + ev - 1)
+                    danger += p_.wQueenVeto * newL * mult - e.dist[dest];
+                else if (dd > (qAdj_ ? 0 : 1) && dd <= reachOf(ev) + (qAdj_ ? p_.qRamAdj : 0))
                     danger += p_.wQueenRam * newL * mult;
             }
             for (EnemyField const& e : heardEnemies_) {
@@ -1481,9 +1529,17 @@ class Policy {
                         int n = b.nb[dest * 4 + d2];
                         if (n >= 0) dd = std::min(dd, e.dist[n]);
                     }
-                if (dd > (qAdj_ ? 0 : 1) && dd <= reachOf(e.visible) + (qAdj_ ? p_.qRamAdj : 0))
-                    danger += p_.wQueenRamHeard * newL * mult;
+                if (dd > (qAdj_ ? 0 : 1) && dd <= freeSteps(e.visible) + e.visible - 1 + (qAdj_ ? p_.qRamAdj : 0))
+                    danger += p_.wQueenRamHeard * newL * mult;  // heard len is the relayed true length
             }
+        }
+        if (queen_ && !lead_ && k == 0 && p_.wQueenLeash > 0 && w_.t.round < p_.leashUntil &&
+            w_.board.NC <= 2000 && w_.startCell >= 0) {
+            // Comfort zone (steering-4): pre-r100 queen deaths happen ~14 tiles
+            // from start; her comfort radius is ~7.5. Soft overshoot leash —
+            // eating nearby still wins, wandering into the killer's vision pays.
+            int cd = b.cheb(dest, w_.startCell);
+            if (cd > p_.leashDist) danger += p_.wQueenLeash * (cd - p_.leashDist);
         }
         if (queen_ && p_.wTailStrike > 0 && k == 0) {
             // Tail-strike: a length-N enemy can U-turn split so its old tail becomes

@@ -266,6 +266,18 @@ struct Params {
     int qEscortThreat = 8;            // 5b: escorts form only while an enemy is within this of the queen's cell
     int qEscortDist = 14;             // only workers already this close to her cell volunteer
     int qRamAdj = 1;                  // weakhold-dims only: ram-adjacency reach bonus (head-to-head kills beside her head)
+    int qVetoReach = 1;               // queen: dest inside an enemy's this-turn kill reach = lethal tier
+    int qEnemyLenMin = 3;             // edge-seen enemies under-read len (head only); killers are len2-3
+    double wQueenLeash = 0.0;         // queen overshoot penalty (steering-4 leash; stage OFF — A/B'd worse: qOS 0/2/2 pairs, stripes pair loss, see lane report)
+    int leashDist = 8;
+    int leashUntil = 100;             // comfort zone only before this round
+    double wQueenVeto = 500.0;        // lethal-tier penalty minus dd (near-veto, still prefers distance)
+    int huntMirror = 1;               // B1: with no fresh queen sighting, expendables hunt her start mirror
+    int huntRound = 25;               // B1: mirror-hunters release at this round
+    int huntLenMax = 3;               // B1: expendable cap (len <= this hunts)
+    int huntSquad = 3;                // B1: at most this many mirror-hunters
+    int huntSpawnMax = 30;            // B1: only dragons born this early know the spawn region
+    double wHuntMirror = 2.0;         // B1: pull toward the mirror target (weaker than sighting pull)
     int escortRadius = 5;             // enemy head this close to a grower is a threat
     int escortRing = 3;               // escorts hold this distance from the grower
     int supportRing = 3;              // supporters hold this distance from the target, ready to eat

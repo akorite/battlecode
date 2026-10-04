@@ -46,6 +46,7 @@ struct World {
     // Best non-queen champion candidate known (longest teammate; ties lowest id), same sources.
     int chId = -1, chCell = -1, chLen = 0, chRound = -1;
     int firstRound = -1;                 // first round this process observed (children start late)
+    int startCell = -1;                  // first head cell observed (≈ spawn for opening-born dragons)
     int echoEnemy = 0;                   // enemy echoes this turn (enemy + enemyHead)
 
     // Portal ends seen, by portal id: (orient 0 = hE / 1 = vE, x, y). A portal is only
@@ -153,6 +154,7 @@ struct World {
         for (Part const& part : t.parts)
             if (part.id == init.id) visibleOwn.push_back(board.id(part.x, part.y));
         head = visibleOwn.empty() ? board.id(t.tiles[24].x, t.tiles[24].y) : visibleOwn.front();
+        if (startCell < 0) startCell = head;
 
         tickTo(t.round);
 

@@ -1,4 +1,3 @@
-#define BC_DEBUG 1
 // Every dragon runs its own copy of this program. Each turn: read what the dragon
 // sees (io.hpp), update what it knows about the map (world.hpp), pick an action
 // (policy.hpp) and write it out in a single write.

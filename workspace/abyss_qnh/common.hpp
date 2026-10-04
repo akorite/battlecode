@@ -269,7 +269,7 @@ struct Params {
     int qVetoReach = 1;               // queen: dest inside an enemy's this-turn kill reach = lethal tier
     int qEnemyLenMin = 3;             // edge-seen enemies under-read len (head only); killers are len2-3
     double wQueenVeto = 500.0;        // lethal-tier penalty minus dd (near-veto, still prefers distance)
-    int huntMirror = 1;               // B1: with no fresh queen sighting, expendables hunt her start mirror
+    int huntMirror = 0;               // B1: with no fresh queen sighting, expendables hunt her start mirror
     int huntRound = 25;               // B1: mirror-hunters release at this round
     int huntLenMax = 3;               // B1: expendable cap (len <= this hunts)
     int huntSquad = 3;                // B1: at most this many mirror-hunters

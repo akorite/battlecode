@@ -74,3 +74,92 @@ FtM/Vibing/SSS/Sponge on starvation maps — ASK integrator first, none run.
 - `results/qsc1/` qsafe vs combat weakhold (replays)
 - `results/qsbase/` v135 vs combat weakhold baseline
 - prior forensics + rejected variants: `devin/lanes/pocket.md` on devin/pocket
+
+---
+
+# Steering-3/4 iteration (v2)
+
+Targets (integrator): prevent the qOS r36 mirror-h2h signature WITHOUT vetoing
+the queen; escort >=1 ally within 3 tiles; sprint reach `freeSteps+len-1`;
+B1 hunt = 2-3 expendable len2-3 toward the enemy queen's mirror after r25
+(baseline .33 kills/game r100-250); leash ~8 tiles of start pre-r100 on elim
+maps (queen dies median 14 out); don't park adjacent (v138 reserves exits).
+
+## What v2 adds on top of the shipped v1 module
+
+4. **Queen kill-veto tier** (`qVetoReach`, `wQueenVeto=500`): at k==0 a dest
+   inside any *seen* enemy's this-turn reach (`freeSteps+len-1`) scores
+   `wQueenVeto*newL*mult - dd` — near-veto that still prefers distance. Soft
+   `wQueenRam` pricing keeps covering the wider near-miss ring; heard enemies
+   stay soft. Ungated — it's an engine-rule correctness check, not a map flag.
+5. **`qEnemyLenMin=3` len floor in the queen screen** (the bug that made the
+   naive veto useless): `Seen.visible` counts VISIBLE SEGMENTS — a len-3 ram
+   glimpsed head-only at the vision edge reads 1 -> reach 1 -> nothing in its
+   2-step kill zone is flagged (this is exactly how the qOS r32 kill walked
+   in: e2v1 at the fatal decision). Real dragons can't be len-1
+   (MIN_DRAGON_LENGTH=2), so visible==1 always means tail-hidden: floor at the
+   len2-3 killer profile. Also applied to the `lead_` screen's len-1 formula.
+6. **B1 mirror-hunt** (`huntMirror`, r>=25): when no fresh role-1 queen
+   sighting exists, expendable opening-born workers (len<=huntLenMax=3,
+   firstRound<=30) rank by `swarmRank < huntSquad=3` and set
+   `assassin_`/`assassinCell_` to the xy-mirror of `w_.startCell` (new World
+   field = first observed head = spawn region for opening-born). Reuses the
+   assassin lane end-to-end: mission-keeping, enemy-queen trade logic
+   (`assassin_ || L+queenTradeSlack >= len`), sighting handoff (a real
+   role-1 rep replaces the guess automatically). Fog pull via
+   `wHuntMirror=2.0 * fp(1.3*manh)` (feedFar pattern) — sighting pulls stay
+   BFS-only. `theirQueenDead()` stops the hunt.
+7. **Pre-r100 leash** (`wQueenLeash=0.5`, `leashDist=8`, `leashUntil=100`,
+   NC<=2000): soft overshoot penalty per cheb tile past 8 from `startCell`.
+   Torus-cheb makes her "far" cells on wrap maps read ~7 anyway — won't fight
+   the qOS/Trophy portal scripts; binds her hiding-phase wander on elim maps.
+
+## Verified mechanism (debug replays)
+
+- qOS s2 cand-B r32 kill (the steering repro): pre-fix she steps S into a
+  len-3 enemy's sprint cell (both die h2h); with the floor+veto S scores
+  -16197 vs W 0 and she escapes THROUGH THE WRAP, surviving to r111 (fog kill
+  — enemy never seen, `ne=0`, no module can price an unseen ram).
+- v135-side queen still dies r32 in the mirror game — seat/map-locked as
+  expected; the fix saves only the patched side.
+
+## v2 A/B (same 4 seeds both seats)
+
+**vs v135 regression (qs6, ship build):**
+- queen_of_spades 2W/1S/1L — pair-wins s1+s4, split s3, pair-loss s2 (the one
+  loss: B-seat weakness, queen survives r32->r111 but team still loses;
+  present identically in the v1 module and the veto-only build — map geometry)
+- weakhold 0W/4S/0L, dilemma 0W/4S/0L — clean parity
+- queen dead/game 0.875 vs 1.000; "queen kept after theirs died" 3/12 vs 0/12
+- zero r0-5 queen deaths in the 24 replayed games (S1 kill criterion)
+
+**vs v135 stripes+arena (qs7):** 2W/6S/0L — clean, plus 2 pair-wins
+(mirror-hunt converts on blitz maps).
+
+**vs abyss_combat weakhold (qsc3):** 4/8, pairs 0W/4S/0L — v1's 5/8 was one
+flip inside the same noise band (n=4; across builds weakhold lands 4-5/8);
+queen-dead 0.875 vs combat 1.000, "queen kept after theirs died" 1/7 vs 0/1.
+
+**Rejections (honest A/B):**
+- `wQueenLeash` (steering-4 leash) — qs8: qOS -> 0W/2S/2L, stripes gains a
+  pair loss. Reverted to 0.0 (same inert-param convention as wQueenFlee).
+- `huntMirror` ablation (qnh1, hunt off): identical 4/8 vs combat weakhold —
+  hunt is not the weakhold cost and wins pairs elsewhere; kept ON all maps.
+
+## Verdict v2: SHIP abyss_qsafe
+
+- The qOS r32 mirror-h2h is mechanically prevented (verified in replay).
+- Pair-set vs v135: 4W/15S/1L (20 pairs / 40 games, 5 maps) — the only loss
+  is the pre-existing qOS-s2 geometry loss, not introduced by v2.
+- No new r0-5 queen deaths; queen survives measurably better (0.875 vs 1.000
+  dead/game; 3x the kept-alive rate after the enemy queen dies).
+
+## v2 notes / not done
+
+- qOS s2 pair-LOSS persisted across v1/v2/v2+floor — flag for integrator.
+- Fog rams (killer never in anyone's vision) are out of scope for pricing —
+  escort sensor coverage is the only counter; v138 exit-reservation noted.
+- Escort ring is 3 all-around, not front-arc; killers flank side 65% — an
+  arc-aware escort target is the next refinement if the data wants it.
+- Champion-channelling (feeders die AT the champion head) is a different lane.
+- S2 ladder challenges: ASK integrator first — none run.

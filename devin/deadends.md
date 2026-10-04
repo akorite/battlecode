@@ -29,3 +29,14 @@ Weakhold repro vs combat: we out-eat them to r60 (11.5 vs 1.5 pearls) then flatl
 they hit 27 alive, we die at 4. BUT self-play shows v119 CAN grow 20-40 swarms on
 weakhold — starvation only bites under contest. Fix needs corridor-aware exit pathing,
 not manh-greed toward fountains through walls. Code left in workspace/abyss_pocket.
+
+## abyss_scale reproduction knobs (2 smokes vs combat, both dead)
+The 2x-throughput gap vs combat is NOT a knob:
+- swarmSplitLen=3 + splitEnemyDist=1 + splitRoom=6: 4.2% — splits DOWN (3.6v4.2),
+  dragons can't reach len-3 to split anyway. Gate isn't binding; survival is.
+- swarmSplitLen=2 + growerChild=1 (cheap len-1 children): 12.5% — alive@r50 crashed
+  to 1.05; len-1 children die instantly. Swarm-density reproduction is a system
+  (density protects children), can't be imported by a param.
+Bud engine diagnosis for whoever picks this up: queen buds only when
+L_>=keep+2 where keep=4+round/30 (len>=8@r60, >=16@r300), worker splits need
+len>=4 + enemy-ban 2 + roomy-move both halves — under contest neither fires.

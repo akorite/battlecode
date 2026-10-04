@@ -622,7 +622,7 @@ class Policy {
             champHead_ = -1;
             return;
         }
-        if (champHead_ < 0 || L_ > champLen_ || (L_ == champLen_ && w_.init.id < champId_)) {
+        if (champHead_ < 0 || L_ > champLen_ + p_.champMargin || (L_ == champLen_ && w_.init.id < champId_)) {
             selfChamp_ = true;
             champHead_ = -1;
         }
@@ -665,6 +665,17 @@ class Policy {
             eff_.champRelayFrom = 370;
             eff_.queenHideUntil = 320;
             eff_.midEnd = 400;
+        }
+        // Autarky (54x18): bell games go to the longest dragon, but the swarm's
+        // champion churns every few rounds — any +1 re-elects, and feed suicides
+        // scatter across a moving target. Elect one stable champion: broadcast
+        // before the feed window, only a clearly longer challenger takes it.
+        // Attrition war: take only non-losing trades with a real army.
+        if (w_.init.w == 54 && w_.init.h == 18) {
+            eff_.champRelayFrom = 280;
+            eff_.champMargin = 3;
+            eff_.tradeSlack = 0;
+            eff_.tradeMinUnits = 8;
         }
         return;  // brawl overrides stay off pending their own A/B
         if (!w_.mapBrawl()) return;

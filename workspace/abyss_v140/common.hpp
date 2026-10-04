@@ -319,6 +319,9 @@ struct Params {
     int champRelayAge = 30;           // forward only reports at most this old (the age is coarsely coded)
     int queenRelayFrom = 330;         // queen position relay starts at this round
     int champRelayFrom = 330;         // queen-less champion relay starts at this round
+    int champMargin = 0;              // challenger must exceed the heard champion's length by
+                                      // this to take the title (0: any +1 takeover — churns on
+                                      // large swarms; feed suicides scatter across a moving target)
     int feedStop = 490;               // later sacrifices cannot be eaten in time
     int feedMargin = 4;
     int feedMaxLen = 6;               // only small dragons feed

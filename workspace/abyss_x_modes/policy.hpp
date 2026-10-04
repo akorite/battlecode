@@ -48,13 +48,17 @@ class Policy {
         return "forage";
     }
     // Debug string for the per-turn LOG line (champion lane tracing).
-    std::string dbg() const {
+    std::string dbg() {
+        // explore lane: emit the previous mode only on a transition (pm stays "-" within a stint).
+        char const* cur = mode();
+        std::string pm = (w_.modePrev.empty() || w_.modePrev == cur) ? "-" : w_.modePrev;
+        w_.modePrev = cur;
         return " id=" + std::to_string(w_.init.id) + " U=" + std::to_string(w_.t.units) + " g=" + std::to_string(grower_) +
                " fh=" + std::to_string(feedHead_) + " fa=" + std::to_string(feedAge_) + " sc=" + std::to_string(selfChamp_) +
                " qr=" + std::to_string(w_.queenRound) + " ql=" + std::to_string(w_.queenLen) +
                " ch=" + std::to_string(champHead_) + " hd=" + std::to_string(w_.heard.size()) +
                " oq=" + std::to_string(w_.ourQueen) + " hx=" + std::to_string(w_.board.X(w_.head)) + " hy=" + std::to_string(w_.board.Y(w_.head)) +
-               " m=" + std::string(mode()) + " bud=" + std::to_string(bud_) + " lean=" + std::to_string(lean_) +
+               " m=" + std::string(cur) + " pm=" + pm + " bud=" + std::to_string(bud_) + " lean=" + std::to_string(lean_) +
                " lead=" + std::to_string(lead_) + " s=" + std::to_string(int(bestScore_)) +
                " wb=" + altWhy_.substr(0, altWhy_.find(' ')) + "@" + std::to_string(altDir_) + ":" +
                std::to_string(int(altScore_ < -1e17 ? -1 : bestScore_ - altScore_));

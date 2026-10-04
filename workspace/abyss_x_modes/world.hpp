@@ -53,6 +53,7 @@ struct World {
     struct PortalEnd { int orient, x, y; };
     std::vector<std::pair<int, std::vector<PortalEnd>>> portalEnds;
     int startUnits = -1;          // UNIT_COUNT on round 0 (starting dragons per team), -1 unknown
+    std::string modePrev;         // explore lane: last turn's mode() for transition logging (debug only)
 
     // Starting dragons get the first ids (both teams). Round 0 tells us how many there are;
     // a split child born later cannot know, and assumes 2 per team.

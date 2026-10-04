@@ -13,7 +13,7 @@ from parse_replay import parse
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from replay_metrics import parse_map
 
-TURN = re.compile(r'^r(\d+) (\S+).*? m=(\S+) bud=(\d) lean=(\d) lead=(\d) s=(-?\d+) wb=(\S+)@(-?\d+):(-?\d+)')
+TURN = re.compile(r'^r(\d+) (\S+).*? m=(\S+)(?: pm=(\S+))? bud=(\d) lean=(\d) lead=(\d) s=(-?\d+) wb=(\S+)@(-?\d+):(-?\d+)')
 BANDS = [(0, 29), (30, 119), (120, 299), (300, 399), (400, 999)]
 MODES = ['forage', 'attack', 'intercept', 'support', 'escort', 'feeder',
          'grower', 'champ', 'assassin', 'queen', 'qhide', 'qlead', 'lead']
@@ -48,9 +48,9 @@ def game_rows(path):
             d = team_of.get(e['id'])
             if d is None:
                 continue
-            yield (d, int(m.group(1)), m.group(2).split(':')[0], m.group(3),
-                   int(m.group(4)), int(m.group(5)), int(m.group(6)),
-                   int(m.group(7)), m.group(8), int(m.group(9)), int(m.group(10)))
+            yield (d, e['id'], int(m.group(1)), m.group(2).split(':')[0], m.group(3),
+                   m.group(4) or '-', int(m.group(5)), int(m.group(6)), int(m.group(7)),
+                   int(m.group(8)), m.group(9), int(m.group(10)), int(m.group(11)))
 
 
 def main():
@@ -64,6 +64,10 @@ def main():
     margins = collections.defaultdict(list)                # map -> [score margin best-alt]
     alt_whys = collections.defaultdict(collections.Counter)  # (map, mode) -> runner-up why counts
     knife = collections.Counter()                          # (map, mode) -> turns with margin <= 2
+    stints = {}                                            # (map, dragon id) -> [cur mode, stint start round, prev mode]
+    stint_len = collections.defaultdict(list)              # (map, mode) -> closed stint lengths
+    trans = collections.Counter()                          # (map, (from, to)) -> transition counts
+    oscill = collections.Counter()                         # (map, (m1, m2) sorted) -> A->B->A flips <=4r
     for g in games:
         rp = res / 'replays' / f"{g['map']}-s{g['seed']}-{g['cand'] if g['candSide']=='A' else g['base']}-{g['base'] if g['candSide']=='A' else g['cand']}.replay"
         # the replay file name is <map>-s<seed>-<nameA>-<nameB>
@@ -71,7 +75,7 @@ def main():
         if not rp.exists():
             print('missing replay', rp.name, file=sys.stderr)
             continue
-        for team, rnd, why, mode, bud, lean, lead, sc, wbwhy, wbdir, wbmar in game_rows(str(rp)):
+        for team, did, rnd, why, mode, pm, bud, lean, lead, sc, wbwhy, wbdir, wbmar in game_rows(str(rp)):
             if team != cand:
                 continue
             b = band_of(rnd)
@@ -85,6 +89,19 @@ def main():
                     knife[(g['map'], mode)] += 1
             f = flags[g['map']]
             f[0] += 1; f[1] += bud; f[2] += lean; f[3] += lead
+            # transitions: pm != '-' means mode flipped this turn (from pm to mode)
+            dk = (g['map'], g['seed'], g['candSide'], did)
+            if pm != '-':
+                st = stints.get(dk, [None, rnd, None])
+                if st[0] is not None:
+                    stint_len[(g['map'], st[0])].append(rnd - st[1])
+                trans[(g['map'], (pm, mode))] += 1
+                # A->B->A within the open stint = oscillation
+                if st[2] == mode and rnd - st[1] <= 4:
+                    oscill[(g['map'], tuple(sorted((st[0], mode))))] += 1
+                stints[dk] = [mode, rnd, st[0]]
+            elif dk not in stints:
+                stints[dk] = [mode, rnd, None]
     for m in sorted({k[0] for k in hist}):
         print(f'\n=== {m} ===')
         tot = sum(sum(c.values()) for k, c in hist.items() if k[0] == m)
@@ -114,6 +131,17 @@ def main():
                     continue
                 top = ', '.join(f'{w} {c}' for w, c in alt_whys[(m, mode)].most_common(3))
                 print(f'    knife {mode:>10}: {n} turns   top runner-ups: {top}')
+        # transitions + stint stability
+        tr = {k: n for (mm, k), n in trans.items() if mm == m}
+        if tr:
+            print('  top transitions (from->to):')
+            for (a, b), n in sorted(tr.items(), key=lambda kv: -kv[1])[:8]:
+                sl = stint_len.get((m, b), [])
+                dwell = f'  mean stint {sum(sl)/len(sl):.1f}r' if sl else ''
+                print(f'    {a:>10} -> {b:<10} {n:>5}{dwell}')
+            osc = {k: n for (mm, k), n in oscill.items() if mm == m}
+            if osc:
+                print('  flip-flops (A->B->A <=4r): ' + ', '.join(f'{a}<->{b} {n}' for (a, b), n in sorted(osc.items(), key=lambda kv: -kv[1])[:6]))
 
 
 if __name__ == '__main__':

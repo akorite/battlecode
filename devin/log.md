@@ -221,3 +221,11 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
   Read: 90r of feed can't rebuild the 30+ champion — need either earlier feed
   time or less feeder shyness (midEnd=400 doubles danger at feed start, F16).
   Next: v124 = bundle + midEnd450.
+- feedprobe (replays, 12g stronghold/unsw): v121 feed suicides DO fire —
+  r400-490 deaths ~2-3x base (stronghold 88/100 vs 27/45; unsw 219 vs 67).
+  Conversion bug found: locateChamp starts at min-40=360 while queen still
+  hidden to 390 → feeders die beside a len-2 hidden queen who re-buds the
+  drops into workers (churn). Then she unhides, dies 77% anyway, fallback
+  champion gets 90r. v125 = don't crown a hidden queen (queenReady gate).
+  Design note: for queen-as-champion she must unhide ~340 (grow to ~15 by
+  400), not 390 — feed can't build 30+ from len-2 in 90r.

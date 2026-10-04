@@ -90,8 +90,57 @@ Trophy 1/4 anatomy: the win is the clean case (their queen dead r26 h2h →
 snowball elim r120); the losses are our queen dying h2h at r26/47/49 before
 the hunters mattered.
 
+## v151 = v149 + hunt (integrator follow-up)
+
+`workspace/abyss_v151` = abyss_v149 (v143 + C4 veto + champ-plant +
+champFallbackRound 330) + the identical hunt patch, `huntMirror=1` ON.
+Merge applied clean (offsets only — champ-plant is selfChamp_-only, C4 is
+queen-only, hunters are L<=3 workers; no interaction).
+
+**Gate v151 vs v149** — devil,queen_of_spades,trophy,weakhold,default,unsw
+×2 seats = 24g:
+
+| map | win% | notes |
+|-----|------|-------|
+| devil | 50% | seat-lock as usual |
+| queen_of_spades | 50% | |
+| unsw | 50% | both wins = big-champ bells c34/33, c41/27 |
+| trophy | 25% | |
+| weakhold | 25% | |
+| default | 25% | |
+| **ALL** | **37.5%** | ALL-unlocked 31.2% |
+
+**The question — does consolidation change the exposure cost?**
+**No — it raises the stakes of a dead queen.** Numbers:
+
+| metric | hunt on v143 | hunt on v149 |
+|--------|--------------|--------------|
+| enemy-Q h2h kill r<100 (connection) | 5/20 | 6/24 |
+| own-Q h2h dead r<100 | 9/20 | 10/24 |
+| own-Q dead any round | 16/20 (80%) | 21/24 (87.5%) |
+| longest@end (r500 gms) | 20.7 vs 22.7 | **21.1 vs 31.1** |
+| alive@r499 | ~10.5 vs 10.8 | 17.3 vs 20.7 |
+| win% | 50% | **37.5%** |
+
+Kill/connection rates are unchanged — the hunt still lands ~25% early
+h2h kills (trophy r26 again, devil r83/91, qos r48/76). What changed is the
+penalty for the mutual-queen-trade the hunt provokes: v149's planted champ
+consolidates whether or not the queen lives, but only for the *intact*
+team — "queen kept after theirs died" 18% vs 50%, and v149-base
+longest@end grew +8.4 over v143-base while v151's stayed flat (+0.4 over
+v143hunt). On v143 mutual queen death left both sides scrambling; on v149
+it leaves their 31-champ machine vs our hunt-depleted feed economy
+(ppt 0.060 vs 0.075 — 3 hunters = 3 missing feeders).
+
+**Verdict: honest negative on this base — do not promote.** Machinery is
+correct and param-gated (`huntMirror=0` = v149 byte-equivalent path); it
+needs either (a) huntSquad throttled post-huntRound so feeders recover, or
+(b) hunts called off once our own queen is threatened (escort carve-out),
+before it's net-positive against a consolidation bot.
+
 ## Files
 
+- `workspace/abyss_v151/` — v149 + hunt machinery, huntMirror=1 (gate-negative; do not promote as-is).
 - `workspace/abyss_v143hunt/` — shipped bot (v143 + hunt machinery).
 - `world.hpp`: `queenStartCell` field + three set-sites (init/parts/noteChamp).
 - `common.hpp`: hunt params block (L349-356).

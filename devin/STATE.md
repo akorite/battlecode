@@ -109,3 +109,15 @@
 - v175 (C7+champMargin) running now, v176 (feedMaxLen) queued.
 - pocket -> room-shrink trajectory mechanism (abyss_qshrink vs v168).
   autarky -> champStep on v168 base. Lanes all producing.
+
+## ~06:50 UTC — v175 verdict
+
+- **v175 (C7+champMargin): 47.9%/48, W1/S21/L2 — FAIL merge bar.** wall-deaths
+  -12% but alive@end -37% (10.2 vs 16.2): stabilization over-consolidates.
+  champMargin remains an autarky-only option (56.2% there earlier); C7 parked.
+- **v178 built**: v168 + adj-ungate + queen close-cover (escortRingQueen=2 —
+  bodyguards INSIDE the "no ally within 2" kill window; escortCountQueen=4).
+  Direct counter to the band-ram profile (stationary queen + no cover).
+- **Pocket's live read**: self-kill FIXED in v168 (0/12 fresh vs 6/11 old);
+  ram h2h = 8/9 remaining losses, all on non-weakhold maps where adj was off.
+- v176 (feedMaxLen relax, BIG maps) gating now; v178 queued behind.

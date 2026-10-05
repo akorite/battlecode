@@ -357,3 +357,31 @@ matters once (1) and (2) stop pre-empting it.
 UNRANKED diagnostic challenges fired (never ranked): vs okbro battles
 1098973-76, vs DeepSeek 1098977-80, vs 1234 1099009/10/16/17 (first post
 502'd, retried clean). Replays pending ladder run.
+
+CHALLENGE SET (12 unranked diagnostics, current live build): 3-9
+  okbro 1-3, DeepSeek 2-2, 1234 1-3. Replays in ladder_replays/.
+
+  LOST  PrisDil    okbro    h2h r446 -> elim        qE 0/14
+  LOST  Autarky    okbro    h2h r257   qE 0/15  lg 47/20 <- won longest AGAIN
+  LOST  Schooltime okbro    BOTH ALIVE qE 3/3   lg 3/33 <- only non-queen-death loss
+  LOST  Stripes    DeepSeek h2h r173   qE 0/10
+  LOST  Trauma     DeepSeek h2h r393   qE 0/20
+  LOST  Trauma     1234     h2h r349   both dead -> lg 15/19
+  LOST  TowerDef   1234     h2h r132 -> elim
+  LOST  Australia  1234     h2h r170   both dead -> lg 26/36
+  WON   PrisDil    okbro    qE 6/0 (queen alive)
+  WON   Stripes    DeepSeek elim (our queen hitSelf r184 late, wiped them first)
+  WON   Default    DeepSeek both dead -> lg 16/13
+  WON   weakhold   1234     qE 7/0 (queen alive — the mission map converts)
+
+COMBINED (27 games, 20 losses): queen died in 19/20 losses; the ONLY loss with
+our queen alive at bells was Schooltime's champ rout (a499 1v30, lg 3v33).
+Ram h2h dominates fresh data 8/9; self-kill count ZERO in the 12 fresh games
+vs 6 in the older window — consistent with v138's self-kill protections now
+being live (verify: live build version between the two windows). Remaining
+leak is ~100% RAM, and it lands on trophy/devil/stripes/australia/trauma/
+prisdil where qRamAdj's W40xH15 gate does NOT cover — the escort/kill-veto
+module (devin/queen, currently weakhold-gated) is the missing coverage.
+Autarky flipped twice on 'won longest lost bell' (lg 47 vs live qE 15/26) —
+feeding worker-champs while our queen dies is structurally wrong under
+lexicographic scoring; queen survival must outrank worker feed.

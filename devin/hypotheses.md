@@ -219,3 +219,19 @@ v216 qRamAhead+2 DEAD ~46%/50 (wider ring = more flee tax); v217
 queen-champ anchor staleness SAFE 47%/34 0-pair-loss (rare-state fix,
 kept for composite); v218 promoteLen 10->7 in flight; v219
 growerKeepBase 4->2 in flight.
+
+## 2026-10-05 PM volume tests round 2 (vs v209, all-maps s3)
+
+DEAD/WASH: v218 promoteLen7 41%, v219 keepBase2 44%, v220 growerChild3 47%,
+v221 slackMax1700 50%, v222 champ-pull 47%, v223 dedie(len<=3) 44%,
+v224 feedRadius20 46%, v226 dedie+bait-midfeed 48%.
+ALIVE: v225 lateSplitUnits 20->9999 = 53.8%/26 early — post-r300 worker-split
+gate release; swarm keeps churning (winners field 2x alive count mid-game).
+v228 = v225 + feedRound 400->430 (split freeze lift into feed window) fired.
+v227 = swarmSplitLen 4->8 (winners split at ~9.7 pre-len, children ~5
+survivable + instantly productive) fired.
+
+earlyecon CLOSED spawn placement: timing veto falsified, spawnInner all
+radii dead (45.8/45.8/50). Their decisive datum: winners' parents split
+at plen~9.7 vs ours ~7.2 -> children born ~len5 not ~len2. Chain is
+production volume <- parent survival to len5+ <- survival surface closed.

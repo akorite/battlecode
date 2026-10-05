@@ -120,6 +120,25 @@ class Policy {
         int feedAt = p_.queenHide ? std::min(p_.feedRound, p_.queenFeedRound) : p_.feedRound;
         feedAge_ = 0;
         feedBurst_ = false;
+        // Mid-window die-in-place (pocket): our r120+ dead-pool already
+        // dies ~45/game at open cells for nothing. An idle short worker
+        // (no food target, no hunt, no escort) recycles early — dies
+        // beside the QUEEN so the drop feeds tiebreak-1 directly.
+        if (feedHead_ < 0 && worker_ && !grower_ && p_.midFeedRound > 0
+            && w_.t.round >= p_.midFeedRound && w_.t.round < p_.feedStop
+            && L_ <= p_.midFeedMaxLen && w_.ourQueen >= 0
+            && !w_.queenDead(w_.ourQueen) && w_.queenCell >= 0
+            && w_.queenRound >= 0 && w_.t.round - w_.queenRound <= p_.feedHeardDie
+            && regionReach(w_.queenCell) >= 20
+            && hunts_.empty() && escortOf_ < 0) {
+            bool foodNear = false;
+            for (Target const& t : targets_)
+                if (t.belief > 0.02 || t.countdown >= 0) { foodNear = true; break; }
+            if (!foodNear) {
+                feedHead_ = w_.queenCell;
+                feedAge_ = std::max(1, w_.t.round - w_.queenRound);
+            }
+        }
         if (!lead_ && !queen_ && !assassin_ && w_.t.round >= feedAt && w_.t.round < p_.feedStop && L_ <= p_.feedMaxLen) {
             int bestLen = L_ + p_.feedMargin - 1;
             int qMargin = p_.queenHide ? p_.queenFeedMargin : p_.feedMargin;
@@ -169,53 +188,40 @@ class Policy {
                         break;
                     }
             }
-            // Mid-window die-in-place (pocket): our r120+ dead-pool already
-            // dies ~45/game at open cells for nothing. An idle short worker
-            // (no food target, no hunt, no escort) with a fresh anchor
-            // recycles early — dies ON the anchor so the drop is retrievable.
-            if (feedHead_ < 0 && worker_ && !grower_ && p_.midFeedRound > 0
-                && w_.t.round >= p_.midFeedRound && w_.t.round < p_.feedStop
-                && L_ <= p_.midFeedMaxLen && champAnchor_ >= 0
-                && champAnchorId_ == champId_
-                && w_.t.round - champAnchorRound_ <= p_.feedHeardDie
-                && hunts_.empty() && escortOf_ < 0) {
-                bool foodNear = false;
-                for (Target const& t : targets_)
-                    if (t.belief > 0.02 || t.countdown >= 0) { foodNear = true; break; }
-                if (!foodNear) {
-                    feedHead_ = champAnchor_;
-                    feedAge_ = w_.t.round - champAnchorRound_;
-                }
-            }
             if (feedHead_ >= 0) {
-                grower_ = false;
-                hunts_.clear();
-                escortOf_ = -1;
-                int d = distToHead(myDist_, feedHead_);
-                // Conveyor radius: only feeders already within feedRadius of the
-                // target recycle; farther dragons keep foraging rather than walk a
-                // gauntlet they die in (feed-window h2h > nva gains at distance).
-                if (p_.feedRadius > 0 && d > p_.feedRadius) { feedHead_ = -1; feedAge_ = 0; }
-                feedBurst_ = w_.t.round - feedAt <= p_.feedBurstRounds
-                             && feedAge_ <= p_.feedHeardDie && d <= p_.feedBurstDist;
-                bool live = feedAge_ == 0;
-                // A champion we only heard (off vision) still takes the drop if the report is fresh.
-                bool heardNear = !live && p_.champOne && feedAge_ <= p_.feedHeardDie;
-                int fd = p_.champOne ? p_.champFeedDist : p_.feedDist;
-                if (d <= fd && L_ >= 2 && w_.t.units >= p_.feedMinUnits && (live || heardNear || !p_.champOne)) {
-                    // Die in place: an illegal SPLIT is a noValidAction death that
-                    // works even when the neck cell is blocked; the body drops
-                    // beside the champion's head.
-                    Choice c;
-                    c.split = true;
-                    c.n = 0;
-                    c.why = "chfeed";
-                    c.score = 1e9;
-                    return c;
-                }
-            } else if (!assassin_ && w_.t.round >= p_.feedRound && L_ >= p_.feedMargin && !p_.champOne) {
-                grower_ = true;  // nobody visible is longer: we are the one being fed
+                // handled below, outside the feed-window gate
             }
+        }
+        if (feedHead_ >= 0) {
+            grower_ = false;
+            hunts_.clear();
+            escortOf_ = -1;
+            int d = distToHead(myDist_, feedHead_);
+            // Conveyor radius: only feeders already within feedRadius of the
+            // target recycle; farther dragons keep foraging rather than walk a
+            // gauntlet they die in (feed-window h2h > nva gains at distance).
+            if (p_.feedRadius > 0 && d > p_.feedRadius) { feedHead_ = -1; feedAge_ = 0; }
+            else {
+            feedBurst_ = w_.t.round - feedAt <= p_.feedBurstRounds
+                         && feedAge_ <= p_.feedHeardDie && d <= p_.feedBurstDist;
+            bool live = feedAge_ == 0;
+            // A champion we only heard (off vision) still takes the drop if the report is fresh.
+            bool heardNear = !live && p_.champOne && feedAge_ <= p_.feedHeardDie;
+            int fd = p_.champOne ? p_.champFeedDist : p_.feedDist;
+            if (d <= fd && L_ >= 2 && w_.t.units >= p_.feedMinUnits && (live || heardNear || !p_.champOne)) {
+                // Die in place: an illegal SPLIT is a noValidAction death that
+                // works even when the neck cell is blocked; the body drops
+                // beside the champion's head.
+                Choice c;
+                c.split = true;
+                c.n = 0;
+                c.why = "chfeed";
+                c.score = 1e9;
+                return c;
+            }
+            }
+        } else if (!assassin_ && w_.t.round >= p_.feedRound && L_ >= p_.feedMargin && !p_.champOne) {
+            grower_ = true;  // nobody visible is longer: we are the one being fed
         }
 
         // Depth 1 is the plain one-step evaluation; then deepen while the CPU budget lasts.

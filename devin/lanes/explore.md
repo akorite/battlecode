@@ -153,3 +153,18 @@ Classes: **1** = queen self-kill (hitWall/hitSelf/hitOtherBody), **2** = elim or
 **Diagnostic games 1098973-80 + 1099009-17 (12g vs 1234/okbro/DeepSeek): v168 went 4-8.** Wins: weakhold, dilemma, stripes(elim of them), default. Losses: CLASS3-bells 5 (australia, trauma×2, autarky, schooltime, stripes), CLASS2 3 (td elim, dilemma elim, trauma deficit-h2h). Pattern matches the census: no CLASS1 selfkills in the diagnostic set, bells losses are post-queen-death on open maps, elims on small maps.
 
 **Headline:** queen-mortality story from the v168 replay-census holds — h2h queen deaths drive both the bells losses (1750+ band) and the pickoff→elim games (1500-1750); CLASS1 selfkills cluster on maze/autarky/australia wraps (4 vs each band); true early-swarm-deficit losses are a small-map-only phenomenon.
+
+## Live census + top-team structural study — 2026-10-05 (140 recent matches; 21 top-team replays: okbro/DeepSeek/1234)
+
+**Elo trajectory:** v168 skid bottomed at 1572 (~02:50Z), recovered to 1601 @04:15Z; rank ~136→122. Trajectory is climbing but still ~350pts under the 1955 target.
+
+**Per-opponent records (v168-era, n=140):** wawow830@1590 19-17, zzz3nith@1639 12-13, nooberGamer@1641 8-7, okbro@1785 **2-7**, Hydra@1537 3-2, Quantify@1432 3-2, SuitedConnectors@1596 1-4, STAR@1688 2-3, 1234@1698 1-3 (all-era 3-6), DeepSeek@1761 2-2 (all-era 3-6), CHINA@1529 3-2, MilkDragon@1494 4-5, life-is-NP-hard@1709 2-1.
+**Beatable read:** mid band 1520-1650 ≈ coin-flip (50-53%); occasional wins vs 1688-1709 (STAR, NP-hard, 1234); **vs 1750+ we go ~4-9** — the DeepSeek/okbro wall is the top-20 gate. Anomaly: SuitedConnectors@1596 1-4 (worth a replay pull — mid-band bot beating us 4:1).
+
+**STRUCTURAL deltas top bots run that we don't (from okbro/dseek/1234 replays):**
+1. **Late-swarm drawdown.** Winners end at dragonCount **2-14** (dseek 4-9, okbro 3-25, 1234 2-13) vs our typical 10-25. Peak-alive hits r150-380 then the swarm CHURNS down (splits300+ still 73-279 — they keep splitting AND dying, they don't throttle spawning). On islands dseek-B won ln 28v19 tot **61v243** — conceded the whole total-length bell on purpose.
+2. **Funnel concentration.** Winner longest/total ratio 20-50% (dseek 28/61=46%, 1234 38/73=52%); our v168 losses run 5-18% (australia-B 24/462!). Post-queen-death we keep 15-43 spread foragers; they already have ONE long dragon + a handful of blockers. Our champ-anchor-at-r330 is the right idea but the swarm never collapses into it — the both-dead-race funnel gap IS this.
+3. **Queen feed-rate.** In our losses to top teams their queen ate 4-10x ours (maze 60v5, unsw 47v6, australia-B 44v9, autarky 23v1, trophy 26v9). Their queen's survival to bells (oldest dragon + longest) is what wins the queenEnd bell — we don't feed her at that rate on contested maps.
+4. **Escort density costs are accepted.** Their hitSelf/hitWall deaths land within ±2 of an ALLY head ~75-90% (1234: 45/50 hitWall; dseek 85/90; ours ~30-40% by contrast) — i.e. they run tight body screens and eat the congestion kills. Deaths drop NO pearls (engine/pearls.cc — beds only, verified) so it's screen-formations, not corpse-feeding.
+
+**Mechanism implication for integrator:** the ranked levers in order — (a) post-death/late funnel collapse (converge swarm into 1 dragon + blockers r300+; longest is THE contested bell), (b) queen feed-rate on contested maps (their qEaten 15-60), (c) keep trade volume (they h2h 130-198/game — our trade code is on the right track, don't dampen it).

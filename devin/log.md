@@ -146,3 +146,4 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
 - v157 live loss census: 17-13; losses = both-dead-longest 6, queen-dead-solo 4 (maze cluster 3), elim 2, feed-race 1; portal fix verified live (520-710 transits/game vs 0 in audit); queen-alive@end -> 15/16 wins
 - v168 live census: 9-14 (down from 57%); queen survival collapsed to 17% (h2h x8, hitSelf x3 NEW); losses queen-dead 7, elim 3, both-dead-race 3, feed-race 1; transits still healthy
 - v168/last60 census in pocket taxonomy: vs1500-1750 CLASS2(8/17), vs1750+ CLASS3 bells(6/13); elims are small-map only (devil/trophy/trauma/stripes/td); diagnostics 4-8
+- census+structure study: elo 1572->1601 rank 122; vs1750+ wall 4-9; top bots = tiny funnel swarm (dr 2-14), longest/tot 20-50% (ours 5-18%), queen fed 4-10x, escort-density accepted

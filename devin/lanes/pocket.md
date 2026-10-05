@@ -308,3 +308,52 @@ the volume didn't. Real value is correctness, not score: a head-pinched queen
 pinch — and a len-12 queen in a 19-cell room now reads unsealed instead of
 excluded. Election changes are rare because most fixture queens die r205-345,
 before the r360 anchor window where the test gates.
+
+== Ladder diagnostics — vs 1750-2000 band (last-60 window) ==
+
+15 games found: okbro(id 22) 1-4, 1234(id 919) 2-3, DeepSeek-V4.1-Flash(id 776) 1-4.
+Our queen died in 11/15; EVERY loss includes her death; 3/4 wins she survived
+(4th = mutual death, won longest 33v29 vs 1234 unsw). The 1750-band reads are
+below — queen lens at r50/200/400 and death mechanism per game.
+
+CLASS 1 — QUEEN SELF-KILL -> dead-queen auto-loss (6/11 losses, THE LEAK)
+  m1098357 unsw    okbro    hitWall      r204  qE 0/33  lg 32/41 a499 7/32
+  m1098353 autarky okbro    hitSelf      r291  qE 0/26  lg 47/26 <- won longest, lost bell
+  m1098354 maze    okbro    hitSelf      r195  qE 0/50  lg 35/50 a499 6/20
+  m1093774 maze    DeepSeek hitWall      r198  qE 0/30  lg 38/30 <- won longest, lost bell
+  m1096032 austral 1234     hitOtherBody r494  qE 0/0   lg 27/28 <- self-kill 5 rounds before bells, lost longest by ONE
+  m1096034 stripes 1234     hitOtherBody r68 -> teamEliminated (a2 vs a5 @r50)
+  hitWall x2, hitSelf x2, hitOtherBody x2. In 3 games our longest was equal or
+  better — the self-kill alone forfeited the first key. v138 owns the self-kill
+  items (exit-reservation, <=2-exit veto) — confirm coverage for r195-291
+  mid-game deaths, not just the early cases; r494 hitOtherBody is a
+  bells-eve suicide that flipped a won game.
+
+CLASS 2 — EARLY SWARM DEFICIT -> queen ram -> elim (5/11)
+  m1098355 trophy  okbro    h2h r142 -> elim   a3 vs a8  @r50
+  m1096035 trophy  1234     h2h r49  -> elim   a4 vs a14 @r50
+  m1093775 devil   DeepSeek h2h r70  -> elim   a5 vs a21 @r50
+  m1093777 austral DeepSeek h2h r150          -> both dead -> lg 22/27
+                     (we led a64 vs a35 @r200 — swarm didn't matter, queen did)
+  m1093778 default DeepSeek h2h r203          -> lg 15/26
+  On elim maps we field 2-5 dragons at r50 vs their 5-21. The killer profile
+  matches steering-4 (mover, len small, no ally near). NOTE: qRamAdj is gated
+  W==40&&H==15 (weakhold dims) — the adjacency screen is OFF on trophy/devil/
+  stripes/australia where these rams land. Coverage gap is concrete.
+
+CLASS 3 — QUEEN-FEED DEFICIT (contributing, not primary)
+  okbro queen trajectory: q3@r50 -> q5-6@r200 -> q26-50@end (the FtM recipe —
+  len~2 till r200 then fed to 26+). Our queens die before the r360 feed window.
+  DeepSeek wins with WORKER swarms (queens die early both sides: qE 0/0 in
+  3 of 4 losses — they out-attrit us after mutual queen death).
+  1234 wins by early swarm mass (a14-21 @r50), queens irrelevant.
+
+Net: we lose the band not on econ (we out-swarm mid-game: unsw a64v35,
+austral a64v35 @r200) but on the FIRST lexicographic key. Fix order by
+measured cost: (1) queen self-kill coverage for r195-494 deaths = ~55% of
+losses, (2) early-split economy on blitz maps = ~45%, (3) feed timing only
+matters once (1) and (2) stop pre-empting it.
+
+UNRANKED diagnostic challenges fired (never ranked): vs okbro battles
+1098973-76, vs DeepSeek 1098977-80, vs 1234 1099009/10/16/17 (first post
+502'd, retried clean). Replays pending ladder run.

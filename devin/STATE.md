@@ -135,3 +135,17 @@
   her more, and queen-death forfeits key-1 regardless of longest. Every
   candidate must be evaluated on queen-alive@end FIRST.
 - v178 (close-cover escorts) gating next.
+
+## ~08:00 UTC — v178 verdict
+
+- **v178 (close-cover escorts): 45.8%/48 FAIL.** queen dead UP 0.771 vs 0.729
+  — ring-2 bodyguards CAGE her (friend cells block her escape when fleeing).
+  maze 4/4 + schooltime 75% (open maps it works) but dilemma 0/4 + trauma
+  0/4 + autarky 25% (corridors it cages). Same lesson as wh_: protection
+  that restricts her mobility kills her. Parked.
+- Correct close-cover lesson: escorts must stay MOBILE/non-blocking — if a
+  retry, ring>=3 with intercept behavior not body-block.
+- v179 (feedBurst port onto v168) queued next; earlyecon's original was
+  62.5% verified on the old base.
+- Note: qlen@end dropped 41% under v178 too (1.645 vs 2.774) — escorts
+  occupied cells her feeders needed; another queen-cost tax.

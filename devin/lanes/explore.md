@@ -168,3 +168,18 @@ Classes: **1** = queen self-kill (hitWall/hitSelf/hitOtherBody), **2** = elim or
 4. **Escort density costs are accepted.** Their hitSelf/hitWall deaths land within ±2 of an ALLY head ~75-90% (1234: 45/50 hitWall; dseek 85/90; ours ~30-40% by contrast) — i.e. they run tight body screens and eat the congestion kills. Deaths drop NO pearls (engine/pearls.cc — beds only, verified) so it's screen-formations, not corpse-feeding.
 
 **Mechanism implication for integrator:** the ranked levers in order — (a) post-death/late funnel collapse (converge swarm into 1 dragon + blockers r300+; longest is THE contested bell), (b) queen feed-rate on contested maps (their qEaten 15-60), (c) keep trade volume (they h2h 130-198/game — our trade code is on the right track, don't dampen it).
+
+## v168 census refresh + 1700+ milestone study — 2026-10-05 (~04:45Z; last-60 all seat-A scrims)
+
+**Last 60: 29-31.** Classes (new taxonomy): **bell-qdead 10, late-elim r150-400 10, bell-longest 6, bell-bothdead 3, bell-qlen 1, early-elim 1.** vs the stated baseline (bell 31%/late-elim 26%/early-elim 26%): ours is **bell 65%, late-elim 32%, early-elim 3%** — opening elims are solved; mass moved to queen-death bells + mid-game elims.
+Map clusters: **Tower Defense→late-elim ×4** (queen h2h@97-236 then snowball), **Maze→bell-qdead ×3** (hitWall×2, h2h), **Schooltime→bell-longest ×3** (live-queen funnel losses 28v41, 11v22, 30v30-tie→tot), UNSW→bothdead ×2 (queen hitSelf ×2!). Portals bell-qlen was ln 3v66 econ annihilation.
+
+**5 most recent losses vs 1700+ (Ron Squad@1700 ×4 + 1234@1700): r50 competitive → r150-300 separation.** Winners out-SPLIT and out-ATE us 2-8x mid-game, not in the opening:
+- australia-1107368: r50 13v18 → r150 alive **8v63**, splits 33v112, eaten 110v201 by r300.
+- maze-1107372: even@150 then eaten **106v240** by r300.
+- portals-1107369: **TOTAL FLATLINE — our 1 alive @r50, ZERO splits all game, eaten 30v602.** Portals engine-failure signature is back vs Ron Squad (lost ln 3v66).
+- default-1107371: deficit 9v20@150 → eliminated r256.
+- australia-1099017 (vs 1234): even@150 (44v43, 41v43 eaten) then out-eaten 212v291 by r300 — sustained mid-game econ, no opening gap.
+Headline: **the 1700+ differential is the r150-300 split/econ engine, not openings.** At r50 we're roughly even; they convert to 2-8x more splits + pearls while our engine stalls (portals being the extreme).
+
+**Ladder state:** elo **1601** (recovered from 1572 skid), rank ~122. Last-40: **19-21.** Bleed opponents: Ron Squad@1700 **1-4 NEW**, SuitedConnectors@1598 1-4, zzz3nith@1639 12-13, wawow830@1590 15-15, 1234@1700 1-2, DeepSeek@1761 1-1 (v168 era). No sub-1500 losses.

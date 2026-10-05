@@ -147,3 +147,4 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
 - v168 live census: 9-14 (down from 57%); queen survival collapsed to 17% (h2h x8, hitSelf x3 NEW); losses queen-dead 7, elim 3, both-dead-race 3, feed-race 1; transits still healthy
 - v168/last60 census in pocket taxonomy: vs1500-1750 CLASS2(8/17), vs1750+ CLASS3 bells(6/13); elims are small-map only (devil/trophy/trauma/stripes/td); diagnostics 4-8
 - census+structure study: elo 1572->1601 rank 122; vs1750+ wall 4-9; top bots = tiny funnel swarm (dr 2-14), longest/tot 20-50% (ours 5-18%), queen fed 4-10x, escort-density accepted
+- v168 last60: 29-31, classes bell-qdead 10/late-elim 10/longest 6/bothdead 3; TD->elim x4, maze->qdead x3, schooltime->longest x3; 1700+ losses = r150-300 split/econ collapse (portals 0-split flatline); elo 1601

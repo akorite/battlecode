@@ -235,3 +235,16 @@ earlyecon CLOSED spawn placement: timing veto falsified, spawnInner all
 radii dead (45.8/45.8/50). Their decisive datum: winners' parents split
 at plen~9.7 vs ours ~7.2 -> children born ~len5 not ~len2. Chain is
 production volume <- parent survival to len5+ <- survival surface closed.
+
+## 2026-10-05 PM3 lanes converge on funnel structure
+pocket (sd/dc stats): deliberate feeders die ~4 cells from bud site,
+~8-10 from rolling longest — die-in-blob, no path-to-anchor. The
+discriminator is VOLUME + COMPACTNESS: winners split median 164/g
+(peak 426-591) vs our ~44; deaths 93/g deliberate vs our ~40 cap.
+midFeed already implements die-in-blob; gap = bud volume (food intake
+upstream) + swarm tightness ~10 cells around anchor.
+autarky (adversarial): v200-line anchor machinery verified live;
+residual queen-champ hole = champAnchorId_==ourQueen != chId (v217
+fixed exactly this — in v235). feedBurstDist 14 > feedRadius 12 dead
+slack. qRamAdjMinTiles shape-blind on qOS/trophy/weakhold.
+earlyecon: deadEnd U-turn premise engine-verified; spawn closed.

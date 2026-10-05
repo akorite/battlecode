@@ -193,3 +193,35 @@ SMALL 55.0% / BIG 60.4% / ALL-unlocked 61.8%. Decisive pairs 10 W / 31 S / 3 L.
 ## C7 spec — body-aware sealed-queen test (design only)
 
 Feedability, not mobility, is the question: a queen is feedable iff drops can reach her — in-place drops beside her head (she must be able to step) or drops on cells she can reach. Rank what blocks her head's exits by persistence: (1) map walls — permanent; (2) **her own body** — permanent *while* she can't move (self-consistent: a body that blocks all exits never vacates); (3) foreign bodies, ours and theirs — transient, they move off within rounds and a queen crowded only by foreign bodies is delayed, not sealed. So the spec's wall set is **map walls only** — every foreign body is treated as open — with the queen's own body bounded rather than guessed: (a) **head-degree bound** — her neck always occupies one adjacent cell, so real exits ≤ `openNb − 1` where `openNb` counts wall-open neighbors; `openNb ≤ 2` ⇒ at most one non-body exit ⇒ mouth-of-pocket geometry ⇒ sealed for feeding purposes in *any* body configuration; (b) **pocket-capacity bound** — flood her connected open space over map-walls-only, foreign bodies open, capped at `qlen + slack` (slack ≈ 8: a step + drop ring); if the region holds ≤ `qlen + slack` cells, her len−1 body fills most of it and no free approach corridor exists in any configuration ⇒ sealed; (c) both pass (`openNb ≥ 3`, region > `qlen + slack`) ⇒ unsealed — a region that large cannot be fully neck-plugged without the degree bound already firing, and any residual foreign-body crowd resolves itself. Residual: a false-negative when she self-coils in open field (rare — bodies uncoil on the move); the bias should be toward sealed anyway — a false-sealed costs one champ candidate, a false-open costs ~100 rounds of dead feeding. Implementation hook: `queenSealed(w_.queenCell, w_.queenLen)` replacing `queenReach() < 20` in locateChamp; keep `regionReach` for the self-anchor site where the body IS known (`markBody(blk, w_.body, L_)` makes that one exact).
+
+---
+
+# abyss_v158 — champion multi-step (v3 item 5) vs abyss_v157
+
+**Build**: `workspace/abyss_v158` = v157 + champ path extension. Workers' twoStep caps at 2; the champ now extends the top `champStepSrc=8` (len−1)-step cands to `min(freeSteps(L), champStepMax=4)` via `scoreFrom` continuation (+`eatSum` for mid-path pearls, `pathEat` bitmask drives per-step `advanceBody`, `pathCost=0` since steps ≤ freeSteps). Emits `MOVE <dirs>` verbatim — engine accepts ≥4-step sequences (verified in replays: 678×3-step, 28×4-step, 1×5-step across 8 smoke games; no TLE/instruction-exceeded flags).
+
+**v158a lesson (first cut, 12.5% on 4-map smoke)**: extension for `selfChamp_ || (queen_ && !hiding_)` with no safety/margin → (1) the queen zigzagged 4-step paths r341-373 (argmax churn — each turn re-picks a different long path, she oscillates instead of traveling) and died h2h r397; (2) mid-path cells got legality checks but zero threat pricing — 68-72 deaths ≤2r after a multi-step move on big_empty; (3) swarm starved: alive@r499 9.4 vs 30.9 — a chasing champ abandons the drop field and the feed engine dies with it.
+
+**v158b fixes**: `selfChamp_` only (queen emits 0 multi-step in smoke2 — anchor/fragility outranks chase for her); every committed cell must have no enemy head within BFS `dist ≤ 1` (seen + heard fields); longer path must beat its own prefix by `champStepMargin=1.0` (kills jitter-commitment); `midEat` bit0 for wallguard fallback. Smoke2 recovered: **62.5%** (unsw 100%, autarky/big_empty/schooltime 50%).
+
+## Board gate: `--cand abyss_v158 --base abyss_v157 --maps all --seeds 2 --jobs 2 --tag v158_board` (88g)
+
+**Result: 51.1%** (45/88, CI 40.9-61.3) — vs v157's 58.0% gate vs v149, so net-neutral-to-slightly-worse as a full-board change. Split is the story:
+
+| 100% | 75% | 50% | 25% |
+|---|---|---|---|
+| **unsw** | weakhold | arena, big_empty, Colosseum, default, default_small, devil, dilemma, islands, portals, qos, schooltime, slithery_fight, stripes, stronghold, tower_defense, trauma, australia | **autarky**, **maze** |
+
+SMALL 52.5% / BIG 50.0% / ALL-unlocked 51.5%. Decisive pairs 4W/37S/3L.
+
+**Deltas (cand vs base, r500 n=52 / all n=88):**
+- longest@end **29.8 vs 28.4 (+1.35)** — the champ does convert speed into length.
+- qlen@end 1.35 vs 1.75 (−0.40); queen alive@end 0.25 vs 0.29; queen-dead/game +0.02 (0.784 vs 0.761); queen-kept-after-theirs 25.6% vs 30.0%.
+- alive@r499 14.75 vs 15.75; deaths flat (h2h 61.5 vs 61.6, wall+self+body 70.5 vs 72.2).
+- Post-multi-step deaths are all `hitHeadToHead` (trades, the map's normal kill mode) — no wall/self crash signature; the v158a mid-path crashes are gone.
+
+**Read**: mechanism confirmed (champ emits 3-4 steps, +1.35 longest@end, queen untouched). The payoff concentrates on big open boards (unsw 4/4 — both seeds both seats) where chasing converges; it costs on corridor/consolidation maps (autarky 75→25, maze →25) where champ position — staying planted over the drop field — beats pursuit speed, plus the small queen-side drag (−0.40 qlen@end). Neutral overall as shipped.
+
+**Options if you want the upside without the corridor tax**: gate `champStepMax>2` on open-class — cheapest honest axis is `!maze_` (kelp frac ≤ 0.22, already computed per-map) though autarky isn't maze-class so the better axis may be `w*h` large-open like unsw/schooltime/australia/big_empty, or a seen-topology openness measure. One param + a re-gate.
+
+Replays kept under `results/v158_board/`; smoke tags `v158_smoke` (pre-fix) / `v158_smoke2` (current build).

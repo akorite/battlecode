@@ -824,3 +824,43 @@ family is retired on 3 gates (v201 43.8%, v208 45%/20 + dilemma zap);
 corridor answer is the churn economy (forage-in, deliberate tip-death,
 len-1 sweeps), not routing. No new work needed here unless you want the
 tip-death conversion (~0 value, same drop cell).
+
+=== v225 MECHANISM AUDIT (locally reproduced: abyss_v225 = v209 + lateSplitUnits 20->9999, gate --maps all --seeds 1 --seed-start 3, 44g vs v209, results/v225_smoke_local) ===
+Your v225_smoke replays aren't on any branch/box I can reach, so I rebuilt
+the candidate (one-line param on v209, verified diff = common.hpp:270
+lateSplitUnits 20->9999) and reran the same fixture. Local read 52.3%/44
+vs your 55.9%/34 — same mechanism under test.
+
+MECHANISM CONFIRMED — post-r300 worker-split release raises late churn:
+  post-300 splits:   cand mean 35.8 (med 6.5)  vs  base mean 29.2 (med 5.5)
+                     burst concentrated r300-350 (703 vs 467 splits)
+  alive@end:         15.61 vs 14.41  (+8%); alive499 13.65 vs 11.58 (+18%)
+  total@end:         122.2 vs 96.7  (+26%); r499-only 169.8 vs 126.2 (+35%)
+  longest@end:       20.7 vs 19.4; r499-only 33.2 vs 31.0  (consolidation
+                     NOT harmed — champ still grows on the bigger swarm)
+  eaten:             635.7 vs 596.7 (+7%)
+
+WHERE THE EXTRA SPLITS HAPPEN: swarm-wide frontier churn, NOT bud-adjacent
+feed — only 13% land within cheb-6 of the longest head (schooltime 2%,
+big_empty 5%, unsw 16%, islands 42% [funnel map], slithery 9%). Parent
+len med 2 — small len-4->2 splits keeping population topped up. The feed
+phase still consolidates via the death side instead: post-300 nva feeds
+19.6 vs 14.1 (+39% — more units alive to walk into the anchor).
+
+COST SIGNATURE: none on h2h — dead even 58.15 vs 58.2 total, 10.1 = 10.1
+post-300. hitSelf/hitOtherBody even. The only negative read: queenEnd
+1.05 vs 1.68 mean — but queen-death RATE is near-even (36 vs 34 dead@end,
+qDeadRound med 113 vs 107 — ours dies slightly LATER), so it's length-mix
+noise not a survival regression. Bell flips (dead-vs-live): cand lost 5,
+won 3 — roughly balanced.
+
+PAIR RECORD: autarky 0/2 + weakhold 0/2 pair losses (both seeds); wins on
+default_small, islands, maze (all 2/2). 44-game CI is wide (~±15pts), so
+read as mechanism-verified + score-positive, not gate-proven.
+
+VERDICT: mechanism does what it claims — late churn volume up, champion
+consolidation preserved, no h2h donation tax. The +26-35% total-length
+lift is where the bell gains live (key-3), and nva-feed supply rising
++39% is the key-2 helper. Watch item: queenEnd means sit lower on cand
+side despite flat death rate — worth one more board before shipping if
+the composite margin is thin. Analyzer: tooling/v225_units.py.

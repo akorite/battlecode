@@ -529,3 +529,58 @@ instead of equal -inf — die where the drop is retrievable, never hitWall.
 EVIDENCE: workspace/transit_corridor.json (45 games), transit_metric.json,
 topreplays/, worst cases m1106138 (US wall 101 vs OPP 0), m1106190
 (US wall 98 vs OPP 0, OPP self 833).
+
+== Worker routing study (task: pocket-trap avoidance mechanism) ==
+
+Corpora: our 45 corridor-map ladder games + top-team replays
+(952 Cache/5g, 70 cheji/15g, 501 Quaker/8g, 226 Knight/11g).
+New tooling: narrow_visit.py — per-side narrow-cell (deg<=2 or region<40)
+VISIT outcomes: exit / split / die-by-reason, dwell, eats by region band.
+
+ANSWER — neither pure hypothesis; the trap is decided at ENTRY:
+
+(1) Target-selection ruled OUT. Winners enter narrow cells 1.4-8.6x our
+    rate (visits/g: ours 342, OPP-ladder 505, cheji 1067, Cache 466,
+    Quaker 1400, Knight 2955) and forage inside them heavily (cheji ~20%
+    of intake from region<40). No min-region-size filter on their targets.
+
+(2) Move-legality ruled out at death time: 219/219 sampled US hitWall
+    deaths had ZERO empty neighbors (e0) — once cornered, every option is
+    lethal; there is no "pick the exit" left. Exit share: US 81%, OPP 64%,
+    cheji 67%, Cache 64% — we actually exit the MOST.
+
+(3) The real geometry: our wall-dead are len2-3 (89%), in regions >=120
+    (92%) — NOT pockets — at deg<=2 cells: 1-wide dead-end BRANCHES
+    (deg1 tip + deg2 chain). Plug owners: own body ~48%, ally body ~45%,
+    enemy ~1.5%. A len>=2 dragon entering a 1-wide dead-end path can never
+    U-turn (retreat = hitSelf through own body): entering is a one-way
+    trip. len-1 unaffected (no body to plug).
+
+(4) Winners' narrow visits end deliberately, not on walls: Cache/cheji
+    hitWall=0 with die-in-narrow hitSelf 63/g and nva 156/g — they dive in
+    TO feed-die or pass through. Ours forage in and get self-plugged:
+    US 12.8 wall + 12.3 self/g in-narrow vs OPP 2.3 wall + 57.1 self +
+    18.9 nva/g. Knight/Quaker DO wall-die (174-494/g) — they win on churn
+    volume instead; zero-wall discipline exists and is reachable.
+
+PROPOSED MECHANISM — deadEnd_ branch map (one flag):
+precompute per cell `deadEnd` = cell lies on a maximal deg<=2 path ending
+at a deg1 tip (1-wide dead-end branch, not a loop — same BFS sweep as
+regionSize_, once per map). Then:
+  (a) forage/target/step value := 0 for any len>=2 worker whose move
+      would enter a deadEnd cell (one-way trip — can't retreat);
+  (b) dragons already inside (spawn/split there): die-in-place pull —
+      drop the body deliberately (suicide/SPLIT-0) instead of grinding
+      to the tip for a wall death. Same drop, deliberate positioning.
+Gated on corridor maps (anyDeadEnd_ flag). Predicted effect: our 12.8/g
+narrow wall deaths convert to ~0 (pathing never enters) + the trapped
+residual becomes feed drops like OPP's 57/g hitSelf.
+
+== C7 sealed-queen port status ==
+STILL UNPORTED in flagship. abyss_v192/policy.hpp:676 still gates
+`queenReach() < 20` in locateChamp; no queenSealed anywhere. NOTE: v192
+now computes `regionSize_` (wall-component size per cell, once per map,
+for workerRegionNorm) — C7 becomes a 4-line port:
+  sealed := openNb(cell) <= 2 || regionSize_[cell] <= qlen + 8
+exactly the autarky spec (head-degree bound + pocket-capacity bound),
+foreign bodies open by construction.

@@ -243,3 +243,47 @@ Every map 50%; every metric flat to the decimal: longest@end **33.3 vs 33.2** (+
 **Read**: on v168 the piece is a true coin-flip — safe (no metric regression anywhere, the v158a failure modes stayed fixed) but earns nothing measurable on this set. The chase window it helps (pre-window, unplanted, clear field) is narrow because the champAnchor plant already owns the high-value window. If merged it'd be for the rare games where it fires, not this gate's evidence. Recommendation: **don't merge at 50%** — unless you want it as a free option; if you do, keep `champStepMargin=1.0` and the anchor exclusion (they're what made it safe).
 
 Replays: `results/v158d_bell/`.
+
+---
+
+# Queen-behavior study — top teams vs Cognoscenti (351), ladder replays
+
+Data: `top_replays/` = 100 ladder replays (teams 264/306/91/213, 25 each), `our_replays/` = 30 (team 351). Analysis restricted to open/decision maps (Autarky, UNSW, Big Empty, Schooltime, Islands, Australia) — 26 top / 12 our-losses / 16 our-wins. Per round per queen: head, movement, dist to nearest own head (escort), enemy-head proximity, cell open-degree, open-edge flood region. Scripts: `analysis/queen_study.py`, `analysis/champ_anchor_study.py`, `analysis/drop_capture_study.py`.
+
+## Q: Do winning queens camp or move? — They move, always
+
+**Everyone's queen moves ~97-100% of rounds, all game phases, all cohorts. Nobody camps.** The difference is entirely WHERE they move:
+
+| cohort | escort mid→late | enemy≤3 mid→late | deg late | region late | queen alive@end |
+|---|---|---|---|---|---|
+| top teams | 5.6 → 5.6 | 17% → 12% | 3.2 | ~29 | **17/26 (65%)** |
+| ours (wins) | 3.9 → 6.5 | 10% → 3% | 3.1 | ~29 | 10/16 |
+| ours (losses) | 9.3 → **13.7** | **34%** → 24% | **2.0** | **~4** | **3/12** |
+
+- Top queens orbit at **~5.6 tiles from the nearest own head**, constant from mid to end. Ours in losses drift to 9.3→13.7 — the queen ends up separated from her swarm. In wins we hold the same 3.9-6.5 profile — **escort distance is the single clearest win/loss variable**.
+- Exposure: our losing queen has an enemy head within 3 in **34% of mid rounds** (top: 17%) and within 5 in **76% of late rounds** (top: 42%). edMean 4.7 vs their 7.2.
+- Geometry collapse: our losing queen's open-degree falls to 2.0 and her flood region to ~4 cells (sealed pocket); top queens hold deg 3.2 / region ~29 throughout.
+
+## Q: How do they survive rams that kill ours? — Prevention, not evasion
+
+- **Top queens never crash: zero hitWall/hitSelf in 26 games.** Their only deaths: 5 noValidAction (sealed — engine kills an immobilized dragon), 4 hitHeadToHead. Median "death round" = 499.
+- Ours: 9/12 dead by median r149 — h2h 6, **hitWall 2 + hitSelf 3** (cornered-flee crashes), hitOtherBody.
+- Mechanism: their queen sits inside the swarm perimeter (escort ~5.6), so a rammer must clear own-body escorts to reach her; the roomy region (deg≥3, region~30) means an exit always exists — they survive by never being cornered, not by out-dodging a sprint. It's a *positioning* property that holds every round, not a per-turn dodge.
+- They also kill the other queen: top opponents' queens die h2h 15/26, median r162 — the escorted queen IS the ram threat.
+
+## Champion anchoring (steering metric) — planted, midfield, not home-anchored
+
+- Top non-queen champ end-length median **47** vs ours 30 (losses) / 23 (wins). Queen-is-champ 19% top.
+- Anchor (median head, r330+): spread median **5 tiles** — genuinely planted/tight orbit, not a roamer.
+- BUT anchor is **not** near the queen's start: anch→ownQstart median 26 ≈ anch→center 24 ≈ anch→enemyQstart 29 ≈ anch→queen's-late-position 25. The champ plants at a territory-forward point, roughly midfield/equidistant — not beside the queen and not home.
+- **Feeder die-radius claim does NOT replicate as a distance signature.** Deaths r≥200 are ~median 20-23 tiles from the anchor / current-longest head in ALL cohorts (top 21-23, ours 20-21) — feeders die distributed across the field, not within a radius-N halo of the champ. (`feedRadius=12` in v184 sits well inside the empirical median ~21 — expect it to cut the majority of recycling unless feeders first converge.)
+- What DOES differ is the death-reason mix: top **noValidAction = 45%** of r200+ deaths (2994/6604, die-in-place) vs ours **17%** (351/2121); ours crash instead — hitSelf 24% + h2h 34%. Top teams run ~254 own-deaths/game vs our ~177 — they recycle ~1.4× harder, everywhere on the map.
+- Drop capture: ~99% of dead-dragon cells get re-visited by an own dragon within 12r in all cohorts; captured-by-longest ~8-10% everywhere — the 17-vs-10% split doesn't reproduce under head-visit capture.
+
+## Concrete diffs for the flagship
+
+1. **Escort/anchor geometry is the queen-safety lever**: top queens survive by orbiting ~5 tiles inside the swarm on deg≥3 cells. Ours drifts (escort 13.7 late) into pockets (region~4) then crashes. A "queen-leash" — penalize queen dests with own-centroid dist > ~8 or open-degree <3 — directly targets the loss signature. (Consistent with qRamAdj: prevention via positioning.)
+2. **Death-mix gap is the conveyor gap**: nva 45% vs 17% — the mechanism to close is not die-radius but converting hitSelf/h2h transit deaths into planned in-place deaths.
+3. **Champ plants midfield-forward** (dist ~25 from own queen start, spread ~5) — our champAnchor already does this shape; the gap is champLen 30 vs 47, i.e. feed throughput, not anchor placement.
+
+Replays: `top_replays/`, `our_replays/` on this box. All open-map cohort; corridor-class maps excluded (queen geometry differs by map class).

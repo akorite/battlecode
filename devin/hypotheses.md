@@ -248,3 +248,18 @@ residual queen-champ hole = champAnchorId_==ourQueen != chId (v217
 fixed exactly this — in v235). feedBurstDist 14 > feedRadius 12 dead
 slack. qRamAdjMinTiles shape-blind on qOS/trophy/weakhold.
 earlyecon: deadEnd U-turn premise engine-verified; spawn closed.
+
+## 2026-10-05 PM5 lane verdicts
+earlyecon DECISIVE: standing army equal at every checkpoint (3.5/2.9
+r25, 8.2/8.2 r100) — winners run 3x THROUGHPUT (splits 1.9x/3x/3.5x).
+Pearl intake at PARITY — food not the bottleneck; births-per-food is.
+Gap front-loaded: 1.9 vs 3.6 splits by r25; their parents split at
+~9.7 pre-len (children len~5 productive) vs ours halving at len4.
+autarky FALSIFIED cohesion: nn tightness is a readout of army size
+not a lever; winners hold MORE territory (+2.2 cenDist). Do NOT build
+wCohere centroid pulls. Only live signal = straggler suppression
+(-2.3pp, entangled with survival).
+EXPERIMENTS FIRING vs live: v237 (composite minus midFeed-small),
+v238 (v237+slay-stalk<=900), v239 (v237+workerBud len10->child5).
+v235_live final ~53.6%/335 — fails bar; BIG arm 57% worked, SMALL
+arm 49.7% dragged by midFeed-everywhere.

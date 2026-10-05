@@ -352,3 +352,19 @@ spawn-placement (split only near density centroid) is the third seed.
 
 Elo ~1605. Gate: 55%/200+/LB50 + benchmark parity; nothing within reach
 yet — composites will only ship if volume/geometry stack clears it.
+
+## 2026-10-05 PM2 (live)
+GATE: unchanged (>=55%/200+/both seats/all maps/LB>50 + benchmark parity).
+Ladder ~1602.
+LIVE BOARD (all vs v209, all-maps s3):
+- v225 lateSplitUnits 20->9999: 55.9%/34 — CANDIDATE, accumulating
+- v228 v225+feedRound430: 44%/25 dead (splits in feed window hurt)
+- v229 v225+assassin swarm (8/stale/kamikaze): 47.6%/21 trending dead
+- v230 v225+queenHide=0 (colonizer): 45.5%/22 trending dead
+- v231 v225+growerKeepEvery 30->60: fired
+- v232 v225+queenBudUntil 250->450: fired
+Note: kParams overrides declarations — v228/v230 first edits were dead writes,
+patched p.feedRound/p.queenHide in the kParams block instead.
+LANES re-tasked: earlyecon=early-elim classify, autarky=colony-blob
+measurement+cohesion prototype, pocket=v225 mechanism replay-check,
+explore=live-loss census.

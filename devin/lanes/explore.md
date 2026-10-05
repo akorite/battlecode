@@ -119,3 +119,21 @@ Record **17-13 (57%)**. vs DeepSeek-V4.1-Flash@1765 **1-4** (the top-20 band we 
 **Small-map pearls (our eaten60 live vs v149 self-play audit avg):** trophy 51/44 vs 38.5 ↑; devil 17(L)/78(W) vs 46.2 mixed; default 8/11 vs 21.1 ↓; dilemma 10 vs 15.8 ↓; maze 28-32 vs 33 ≈; autarky 20-28 vs 32 ≈; weakhold 4-6 vs 6.2 ≈. Early-econ on small maps is flat-to-down vs the audit baseline but small-map ladder record is strong regardless (swept trophy/devil/dilemma/weakhold/td vs Milk Dragon) — the losses there are queen-death driven, not pearl driven.
 
 **vs the v149 census:** same skeleton — queen exposure + longest-concentration — but the center of mass moved OFF small-map pearls (fixed/irrelevant) and ONTO (a) the both-dead longest funnel (6/13) and (b) maze-class queen traps (3/13). Next-lever ranking live: (1) post-mutual-death longest convergence, (2) maze queen-trap mechanism read, (3) DeepSeek-class opponents: their queens live to bells while ours die @110-251 — enemy queen-survival differential is the elo gate.
+
+## v168 LIVE loss census — 2026-10-05 (deploy ~02:00Z per orchestrator; cutoff 02:00:00Z; 23 games, all replays)
+
+Record **9-14 (39%) — a regression vs v157's 17-13 (57%).** Opponents: 1234@1703, okbro, wawow830, DeepSeek@1767, I-wanna-go-to-CHINA@1511.
+
+**Loss classes (14):**
+- **queen-dead-solo: 7 (50%)** — trauma h2h@393, autarky h2h@257, stripes h2h@173, unsw hitWall@204, and **hitSelf ×3** (australia-B@326, autarky-B@291, maze-B@195) — queen self-kills are NEW in the live signature (v157 census: zero solo hitSelf queen deaths).
+- **elim: 3** — td-A h2h@132, dilemma-A h2h@446, trophy-B h2h@142 (all queen h2h → team elim).
+- **both-dead-race: 3** — australia-A h2h@170 (ln 26v36 tot 145v166), trauma-A h2h@349 (15v19, 15v86), australia-B h2h@127 (**ln 24v28 w/ tot 462v31** — the mutual-death longest funnel persists: swarm dominates, longest loses).
+- **feed-race: 1** — schooltime-A starved (tot 3v229).
+
+**Queen mortality COLLAPSED: our queen reached end in only 4/23 games (17%) vs ~53% in v157.** Queen h2h deaths ×8 (@127-446) + hitSelf ×3. Queen-alive → 3/3 wins (weakhold, dilemma, portals — all queenEnd bells steals); the other 6 wins came with BOTH queens dead (0v0 → our swarm takes longest/total). DeepSeek went 2-1 with 2 queen h2h kills of us.
+
+**Portal fix still verified live:** portals 280 transits (ours 135, r34-494), maze-wraps 415, australia 172/34, dilemma 37. Transit channel healthy; freeze remains dead.
+
+**Small-map pearls (our eaten60 vs audit baseline):** default 18 (recovered vs v157's 8-11), dilemma 7-10 ↓, trophy 25 ↓, autarky 34/19 ≈, maze 32 ≈, weakhold 9 ↑, schooltime 9 ↓, stripes 3-6 ≈. Losses remain queen-driven not pearl-driven.
+
+**v168 vs v157 read:** the both-dead-longest funnel persists (6→3 only because opponents' queens now often survive OUR death — solo-dead went 4→7). Headline: **something in v168 makes our queen die far more — 8 h2h + 3 hitSelf, only 17% reaching bells.** hitSelf tripling is the sharpest new signal (queen walking into her own body — champ-funnel/anchor interaction?); h2h surge consistent with the reach-model/trade-ok zone changing around her. Recommend: replay-pull the 3 queen-hitSelf kills (m1098343@326, m1098353@291, m1098354@195) for the trap geometry before any more ship decisions.

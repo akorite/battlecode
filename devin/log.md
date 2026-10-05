@@ -144,3 +144,4 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
 - explore: pace149 gate 12-8 (60%) vs v149 — wins on queen columns (alive 55v40, qNonRam halved) not pacing (v149 already low revisit); bleeds islands 1-3 post-queen longest race — devin/lanes/explore.md
 - explore: v159 seam gate 10-10 no-op — vision is TOROIDAL (wraps never blind); mutual-elims = pursuit/trade geometry; queen dies to enemy-initiated trades — lever = reach model (freeSteps) not avoidance — devin/lanes/explore.md
 - v157 live loss census: 17-13; losses = both-dead-longest 6, queen-dead-solo 4 (maze cluster 3), elim 2, feed-race 1; portal fix verified live (520-710 transits/game vs 0 in audit); queen-alive@end -> 15/16 wins
+- v168 live census: 9-14 (down from 57%); queen survival collapsed to 17% (h2h x8, hitSelf x3 NEW); losses queen-dead 7, elim 3, both-dead-race 3, feed-race 1; transits still healthy

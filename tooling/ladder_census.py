@@ -10,6 +10,8 @@ sys.path.insert(0, BASE)
 
 
 def main():
+    import argparse as _ap
+    _p=_ap.ArgumentParser(); _p.add_argument('--dir',default='ladder_replays'); _p.add_argument('--cut',type=int,default=0); _a=_p.parse_args()
     import urllib.request, re
     d = urllib.request.urlopen(urllib.request.Request(
         'https://game.battlecode.au/teams/351', headers={'User-Agent': 'bc-scout'}), timeout=20).read().decode('utf8', 'replace')
@@ -27,13 +29,13 @@ def main():
                        capture_output=True, text=True)
     ms = [json.loads(l) for l in p.stdout.splitlines() if l.strip().startswith('{')]
     from email.utils import parsedate_to_datetime
-    dep_ms = int(datetime.datetime.fromisoformat(deploy.replace('Z', '+00:00')).timestamp() * 1000)
+    dep_ms = _a.cut or int(datetime.datetime.fromisoformat(deploy.replace('Z', '+00:00')).timestamp() * 1000)
     ms = [m for m in ms if m['at'] >= dep_ms]
     print(f'# v157-era matches: {len(ms)}', file=sys.stderr)
 
     rows = []
     for m in ms:
-        rp = os.path.join(os.path.dirname(BASE), 'ladder_replays', f"m{m['id']}.replay")
+        rp = os.path.join(os.path.dirname(BASE), _a.dir, f"m{m['id']}.replay")
         if not os.path.exists(rp):
             continue
         out = subprocess.run([sys.executable, os.path.join(BASE, 'replay_metrics.py'), rp],

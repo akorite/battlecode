@@ -45,3 +45,9 @@
 - Now boarding v153 PURE on 17 maps (tag v153_full) — the 65%/20 piece needs its own honest board vs live; if ≥55% it's the submission candidate.
 - Lane delivers so far: pocket v153 (65%/20 ✓), earlyecon v158 feedBurst (62.5% pair, qlen@end +79% ✓ → merged in v164), autarky v157 (board pending), explore v159 seam (killed — toroidal vision premise false), explore C1/C2/C3 attribution (all bleed different maps), pace schooltime-positive.
 - Killed: locked queen pivot (starves her), mirror-hunt, C2/C3, queen-feed all forms, seam avoidance.
+
+## Checkpoint ~09:05 UTC (Sat Oct 3)
+- **v153-pure full board: 50%/68 W5S23L5** — queen module (65%/20 on 5-map fixture) doesn't transfer to the 17-map board. Same plateau as every composite.
+- **v157 = best measured-vs-live (58%/88)**. Internal read: C5 arm costs queen survival (kept-after-theirs 24.2% vs 38.5%). v165 (portal-fix only, C5 reverted) vs v157 boarding now — winner = submission base.
+- Pattern confirmed across all gates: seat-locks dominate ~75% of pairs; individual pieces wash ±5% inside n≤90 boards. The lift has to come from stacking ALL the measured-positive pieces, not any one.
+- Ladder ~1615, ranked refill still stopped.

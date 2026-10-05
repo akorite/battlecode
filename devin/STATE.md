@@ -64,3 +64,18 @@
 - v169 (+feedBurst) 55.0%/60 — dilutes margin, parked (feedBurst may go back in behind a different base later).
 - Lanes re-tasked: pocket→C7 sealed-queen (autarky spec), autarky→champ ceil(L/4) multi-step, earlyecon→echo reads/sonar recon, explore→v168 live-loss census.
 - Confirmed in replay: v168 produced a 45-length champ on autarky — consolidation machinery delivers when it converges.
+
+## 2026-10-03 ~05:00 UTC — diagnostics cycle
+
+- Gate raised to 75% vs live (was 70%).
+- v172 (queen veto tier): smoke 50%/20 all-splits — rare-fire, kept as insurance.
+- pocket diag vs 1750-band (okbro/DeepSeek/1234): 11 losses = **6 queen SELF-KILL**
+  (hitWall/hitSelf/hitOtherBody r68-494 — she corners herself; 3 games longest was
+  equal/better, self-kill alone forfeited key-1) + **5 early swarm deficit** (a3-5
+  vs a8-21 @r50 → ram → elim). qRamAdj was gated to weakhold dims — OFF on every
+  map those rams landed. Also a rules violation (map-size table).
+- v173 built: qRamAdj ungated (adjacency screen on all maps) + wh_ dims table →
+  queen_||pocketMap_ (calibrated fog-trap scan + unproven veto for the queen on
+  every map — attacks the self-kill leak). Smoke on the 12 diagnostic maps running.
+- Feed census: ~13 chfeed deaths/feed-game — supply OK; champ ends ~26 vs 45+ —
+  the gap is convergence/capture, not feed volume.

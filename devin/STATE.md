@@ -368,3 +368,15 @@ patched p.feedRound/p.queenHide in the kParams block instead.
 LANES re-tasked: earlyecon=early-elim classify, autarky=colony-blob
 measurement+cohesion prototype, pocket=v225 mechanism replay-check,
 explore=live-loss census.
+
+## 2026-10-05 PM4 (live)
+LIVE GATES RUNNING vs v168 (the gate's actual bar):
+- v235_live (composite: lateSplit∞+keepEvery60+budUntil450+midFeed-all
+  +anchor-stale): 56.9%/51, 7W-3L pairs, SMALL 55.6 BIG 58.3 — TRACKING
+- v231_live (keepEvery60 alone): 55.2%/29 — backup
+Dead this round: v234 continuous-conveyor 47%, v225 neutral 51%/77,
+v236 elim-blitz 53% on small board (on-target but thin).
+Mechanism: production-throttle releases — matches pocket's funnel
+finding (winners split 164/g median vs our 44; their swarm stays
+~10 cells around anchor). Compactness lever = autarky's cohesion proto.
+Elo ~1608, refill firing.

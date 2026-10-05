@@ -151,3 +151,4 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
 - census3 22-38 vs elite band: bothdead 12 (islands/autarky/unsw), late-elim 11 (autarky x5), early-elim RESURGENT 9 (stripes x4); queen selfkill solo=0 (fix held); our conveyor nva ~0-4/game NOT firing, elites run 23-204
 - census4 19-21: bothdead 10/elim 6/qdead 4; queen own-fault x10 (hitSelf BACK x2); elite queen feed=escorted ROAM 97pct, 68pct at r200+, feed=win-spoils not plan; v202 plant cant match feed-rate
 - rank30 census 11-19: bothdead 10/elim 5/live-q 3; UNSW x4 bothdead; chad@2049 sweeps via econ+dead-queen swarm; own-fault qd 8/19 (hitSelf persists)
+- v168-15g: 6-9, ALL 9 losses queen-dead, 8/9 h2h ram; no live-q losses; chad nva 175-241 vs our 11-52; v237 builds, bench needs activation (blocked)

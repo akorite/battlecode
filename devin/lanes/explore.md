@@ -249,3 +249,31 @@ Method: tooling/queenfeed.py — attributes each pearl-eat to the eater id (head
 - **Mid-band beaters:** Oswald@1556 ×3 (mixed: our queen dies then bells/elim), Hydra@1575 ×3 (bothdead×2 + trophy early-elim), Wapowpow@1659 ×2 (bothdead×2), single losses to 1234/tozoman/Nexus/nooberGamer — all same signature: our queen dies early-ish (67-239) → their funnel out-lives us at bells.
 - **Anomaly:** "That's That, and This is This" @1441 beat us on Devil — queen h2h@106 → elim@418 (low-elo elim loss, worth a replay pull for mechanism).
 - **Pattern:** nobody beats us while our queen lives — all 3 live-queen losses are bells where BOTH queens survived (schooltime×2 + portals qlen 6v24); every other loss has our queen die @63-408.
+
+## Census — v168 last 15 ranked games (3 battles, ~23:07Z 2026-10-05)
+
+**Record 6-9** (Sarvottam 2-3, cactus 3-2, chad gdp 1-4). Elo ~1605.
+
+**Every loss has our queen dead — 9/9. Queen-ram (hitHeadToHead) = 8/9.** The remaining one is queen hitOtherBody@r1 (mutual first-round kill vs Sarvottam on Slithery — both queens dead @r1, then lost longest 37v54). Cascade: queen-ram → elim ×5 (qd@73-208), → bothdead bells ×3 (lost longest 35-37 vs 54-95), → queen-solo bell ×1.
+
+| game | map | end | our qd | opp qd | ln | tot |
+|---|---|---|---|---|---|---|
+| 1183613 | Islands | rL | 23/h2h | 260 | 35v84 | 110v94 |
+| 1183614 | qOS | elim | 73/h2h | alive | 0v4 | 0v69 |
+| 1183615 | UNSW | rL | 107/h2h | 307 | 37v95 | 279v257 |
+| 1183617 | Default | elim | 93/h2h | alive | 0v5 | 0v112 |
+| 1184422 | TD | elim | 148/h2h | alive | 0v4 | 0v78 |
+| 1184425 | Autarky | rL | 98/h2h | alive ql7 | 2v49 | 2v138 |
+| 1184521 | Devil | elim | 155/h2h | 68 | 0v6 | 0v85 |
+| 1184522 | Slithery | rL | 1/hob | 1 | 37v54 | 91v230 |
+| 1184525 | Dilemma | elim | 208/h2h | 12 | 0v3 | 0v20 |
+
+**Top-3 remaining kill causes NOW:** (1) queen-h2h initiation/acceptance ~89% of losses — she takes the fight from r23 onward; elims only ever follow HER death (no early-elims without queen kill this window); (2) post-queen-death funnel deficit — when both queens die their swarm out-lives ours at bells (ln 35-37 vs 54-95, the old bothdead bleed); (3) conveyor asymmetry persists — chad nva 175-241/game vs our 11-52 (sacrificial churn economics we don't run).
+Zero live-queen losses this window; queen survival is still the whole game.
+
+## v237 bench mechanics (blocked on spec)
+
+- abyss_v237 (origin/devin/v120 @ daa44c4) materialized + **builds clean** via kvmrun (22.2s native+wasm).
+- Bench ids verified: FtM=264(2411), Vibing++=306(1680), SSS=91(2328), Computers=314(1994), Sponge=213(2248), WaterCandle=782(1646). SSS/Computers/WaterCandle have ranked OFF.
+- **API reality:** POST /battles {teamId, ranked, mapIds} plays the ACTIVE submission — no version pin. Benchmarking v237 remotely requires POST /submissions/:id/activate → it becomes the live bot → plays ranked (elo cost + elo-history reset + census pollution). No unranked-only way to field a candidate remotely.
+- v168-vs-bench rates from battle history (200-battle window): only WaterCandle present (0-5 in 1 ranked series); the rest of the set never appears in our ranked feed — benchmark would be fresh data either way.

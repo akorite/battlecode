@@ -385,3 +385,36 @@ module (devin/queen, currently weakhold-gated) is the missing coverage.
 Autarky flipped twice on 'won longest lost bell' (lg 47 vs live qE 15/26) —
 feeding worker-champs while our queen dies is structurally wrong under
 lexicographic scoring; queen survival must outrank worker feed.
+
+== abyss_qshrink — room-shrink trajectory (queen self-kill mechanism), on v168 ==
+
+SPEC: track her reachable-region size each decide (BFS from head, walls +
+foreign bodies block, own body open); on shrink (>30% vs 5 rounds ago, or 3
+rounds running) AND below threshold -> relocate pull toward the deepest cell
+of the largest exit subtree (head-neighbour root with most cells). Queen-only,
+p_.qShrinkOn flag, history ring in World (Policy rebuilt per turn).
+
+TWO GATES vs abyss_v168, weakhold,devil,trophy,stripes,australia,autarky,maze
+x2 seeds both seats (28g each):
+
+qshrink-g1 (trajectory arms only):    50.0% (0W/14S/0L)  every map split
+qshrink-g2 (+ lostRoom drift-in arm): 50.0% (0W/14S/0L)  identical
+
+Metrics cand vs base (g2): queen-dead 0.893 vs 0.929; non-ram (self-kill class)
+0.321 vs 0.286 UP slightly; alive@r499 12.9 vs 13.6; all blitz metrics identical
+to 3 decimals (swarm untouched — the pull never perturbs workers, correct-by-
+construction).
+
+VERDICT: REJECT — inert on this fixture in both arms. Root-cause read: the
+self-kill class is only ~0.3 of a 0.9/game queen-death rate locally; the
+fixture's queen deaths are mostly h2h rams + elims where the region-shrink
+window either never existed (spawned into flat-low pockets: hmax8 arm added
+for exactly this, still silent) or the shrink happens inside the kill round
+itself (body-seals in <3 rounds — trajectory has no gradient to ride). The
+1750-band cornering pathology (queen self-kill r195-494) lives in games vs
+bots that block corridors with bodies; self-play mirrors don't produce it.
+Caveat: no per-decide trigger instrumentation — can't separate 'fired and
+failed' from 'never fired', but two identical 50% mirrors bound the effect
+to ~0 either way. Params parked: qShrinkOn=1, qShrinkMin=48, qShrinkDrop=0.30,
+wQShrink=2.5 in abyss_qshrink/common.hpp if a different trigger (e.g. enemy-
+body-frontier proximity rather than region-size trajectory) is wanted later.

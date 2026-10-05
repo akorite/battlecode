@@ -164,3 +164,32 @@ Honest residual: (B) is still body-blind on the escape path — it catches *smal
 # Feed-convergence lane — mechanism status (blocked item flagged to integrator)
 
 `abyss_v152` (local, v149-based): die-in-place feeders walk to champ head + HOLD; `feedConvLead=40` hoists the gate to `feedAt-40`. Mechanism check on the dbg twin shows **zero fh≥0 turns before r360**: the feed target itself doesn't exist pre-window — `champHead_` stays -1 until `champFallbackRound` (360 under the live kParams shadow on v149; 330 fixed on v150+), and the queen branch is `queenReady`-gated at `queenHideUntil` (390 open / 320 corridor). Same reason `champPlantLead=40` is inert — `selfChamp_` can't exist before the election round. Front-loading recycles needs a pre-window target; convergence code is built and ready to gate once the target-timing question is answered (recommend: let the champ plant/anchor fire at `consolAt-40`, or relax the `queenReady` gate for TARGET purposes while keeping it for feed deaths).
+
+---
+
+# abyss_v157 board gate — correctness composite vs abyss_v149
+
+**Build**: `workspace/abyss_v157` = v120-HEAD v149 + (a) portal-picker fix (scout candidate `!queen_`-gated, `wScout=2.0`, pick/depth/fallback/safeFirst wiring — verified mechanically in the earlier review) + (b) C5 (`s.id == ourQueen && exits <= 2` → `exits == 1`, keeping single-exit reservation only) + (c) `champFallbackRound=330` confirmed in both the decl and kParams on v120 HEAD — no 360 shadow. Compiles clean; `abyss_v149` synced to v120 HEAD first so the base is canonical (330 + `w_.champAnchor` World lock).
+
+Gate: `kmatch run --cand abyss_v157 --base abyss_v149 --maps all --seeds 2 --jobs 2 --tag v157_board --keep-replays` — 22 maps × 2 seeds × both seats = 88 games (integrator est. 68; `all` resolves to the full SMALL+BIG set).
+
+### Result: 58.0% overall (51/88) — composite is net-positive
+
+| 75%+ | 50% | 25% |
+|---|---|---|
+| trauma **100%**, unsw **100%** | arena, devil, dilemma, qos, stripes, tower_defense, trophy, weakhold, default, portals, schooltime | islands, maze, slithery_fight |
+| Colosseum, default_small, australia, autarky, big_empty, stronghold | | |
+
+SMALL 55.0% / BIG 60.4% / ALL-unlocked 61.8%. Decisive pairs 10 W / 31 S / 3 L.
+
+**Deltas (cand vs base):**
+- longest@end (r500): **30.6 vs 28.9 (+1.7)** — the portal-scout conversion contributes on the far-half maps (unsw/trauma 100%).
+- **queen dead /game: 0.750 vs 0.670 (+0.080)** — all non-ram (0.205 vs 0.125, ~1.6×): consistent with C5 releasing her second exit — workers now park cells she needed. queen alive@end 0.306 vs 0.429; **queen-kept-after-theirs 24.2% vs 38.5%** — the biggest regression in the composite, and it's tiebreak-1 currency under lexicographic scoring.
+- alive@r499 14.1 vs 15.9; deaths/game flat (74.7 vs 74.9). Small-map opening improved: alive@r50 6.59 vs 5.84, splits@60 13.7 vs 12.1, pearls@60 37.2 vs 33.9.
+- Map-level pattern: the three 25% maps (islands/maze/slithery) are exactly the pocket/corridor maps where queen exit-room matters most — the same geometry C2 was built for; C5 traded it away for devil (which stays 50% = seat-locked neutral here anyway).
+
+**Read**: composite wins +8% — ship direction is right, but the C5 arm is plausibly net-negative inside it (islands/maze/slithery + queen-dead delta vs devil-neutral). If you split the composite, gate `v149 + portal-fix-only` against `v149 + portal-fix + C5` — I'd bet the portal arm alone scores ≥ this.
+
+## C7 spec — body-aware sealed-queen test (design only)
+
+Feedability, not mobility, is the question: a queen is feedable iff drops can reach her — in-place drops beside her head (she must be able to step) or drops on cells she can reach. Rank what blocks her head's exits by persistence: (1) map walls — permanent; (2) **her own body** — permanent *while* she can't move (self-consistent: a body that blocks all exits never vacates); (3) foreign bodies, ours and theirs — transient, they move off within rounds and a queen crowded only by foreign bodies is delayed, not sealed. So the spec's wall set is **map walls only** — every foreign body is treated as open — with the queen's own body bounded rather than guessed: (a) **head-degree bound** — her neck always occupies one adjacent cell, so real exits ≤ `openNb − 1` where `openNb` counts wall-open neighbors; `openNb ≤ 2` ⇒ at most one non-body exit ⇒ mouth-of-pocket geometry ⇒ sealed for feeding purposes in *any* body configuration; (b) **pocket-capacity bound** — flood her connected open space over map-walls-only, foreign bodies open, capped at `qlen + slack` (slack ≈ 8: a step + drop ring); if the region holds ≤ `qlen + slack` cells, her len−1 body fills most of it and no free approach corridor exists in any configuration ⇒ sealed; (c) both pass (`openNb ≥ 3`, region > `qlen + slack`) ⇒ unsealed — a region that large cannot be fully neck-plugged without the degree bound already firing, and any residual foreign-body crowd resolves itself. Residual: a false-negative when she self-coils in open field (rare — bodies uncoil on the move); the bias should be toward sealed anyway — a false-sealed costs one champ candidate, a false-open costs ~100 rounds of dead feeding. Implementation hook: `queenSealed(w_.queenCell, w_.queenLen)` replacing `queenReach() < 20` in locateChamp; keep `regionReach` for the self-anchor site where the body IS known (`markBody(blk, w_.body, L_)` makes that one exact).

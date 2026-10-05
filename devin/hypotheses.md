@@ -189,3 +189,10 @@ if it taxes her escort or her drop supply.
 - v210 fired: tradeSlack=0 globally — tests whether the -1-trade bleed exists on open boards too (smoke on the >900 subset).
 - earlyecon closure: presence-priced worker evasion dead BOTH sides of reach boundary (inside-reach dodge converts death mode, outside-reach buffer taxes forage w/ h2h flat). Remaining surfaces: body-geometry escort screens, spawn placement.
 - Honest arithmetic: v200-lineage ≈ +3pts vs live. The 55/LB50 bar needs ~56% — nothing in the lineage reaches it without another mechanism-class gain.
+- v210 global tradeSlack=0: 47.6%/42 on >900 boards — dead (open boards need the +1 tempo)
+- v211 density pull w=1.5: 36.4%/33 — dead; 4th clustering-restriction family member. Blob is a RESULT of production, not a cause to imitate.
+- v212 NC-scaled budAlive (18+NC/512 cap 24): smoking, trending flat ~50%/38
+- v213 queen escape sprint: built (paid multi-step out of a full ram pin; fires only when every 1-step landing is in enemy reach)
+- v209_full FINAL: 52.7%/220 — fails gate. Lineage maxes ~+3 vs live.
+- Refill retargeted to proven-only set (Knight Capital/chad gdp/nooberGamer/1234/verity/tozoman/Wapowpow/TonyS/Sarvottam/Oswald/Nexus/Larper/JRN/Hydra), 72 queued.
+- Elo 1600, last-80-set window -51 elo net (challenge drift, autoscrims at parity).

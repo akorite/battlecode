@@ -1197,3 +1197,69 @@ route workers around contested ground before entering reach (nav
 lane), (b) volume parity (churn doctrine — needs stronger ammo than
 len-2 buds produced). Worker-side in-reach evasion is now CLOSED at
 mechanism level: exposureMode proven dead, never re-test.
+
+## Mechanism spec: pre-contact buffer (presence-only evasion)
+
+**Design:** unlike exposureMode (dead at 45.8% — dodges INSIDE reach,
+converts death mode on 1.9-exit corridors), the buffer prices the ring
+JUST OUTSIDE an enemy's sprint reach. A worker whose forage dest sits
+in `dd in (reachOf(e), reachOf(e)+bufferR]` pays wBuffer*newL*mult.
+The incentive is to never ENTER reach — enemy presence-only, zero
+effect when no enemy ring covers the dest. Non-queen, non-grower,
+L<=bufferLen only.
+
+**Code site:** policy.hpp scoreFrom, inside the `k == 0` block directly
+after the exposure screen — reuses `EnemyField::dist[dest]` (BFS from
+each seen enemy head, already computed for the hunt/stalk pulls).
+No new search; 4-8 enemies x per-dest lookup, cheaper than the
+exposure loop it sits beside. Danger accumulates the same way so the
+forage pull can still out-vote it where the food is dense.
+
+```cpp
+if (k == 0 && p_.wBuffer > 0 && !queen_ && !grower_ && L_ <= p_.bufferLen) {
+    for (EnemyField const& e : enemies_) {
+        int dd = e.dist[dest];
+        int rr = reachOf(e.visible);
+        if (dd > rr && dd <= rr + p_.bufferR)
+            danger += p_.wBuffer * newL * mult;
+    }
+}
+```
+
+**Params (common.hpp, beside wExposed):** `wBuffer` (0=off),
+`bufferR` (ring width beyond reach), `bufferLen` (worker cap).
+
+**Predicted counter-movement (vs v168, 24g elim set):**
+- h2h_small deaths −10-20% (the dd=2 kill band thins)
+- alive@50 +0.3-0.8, splits@60 +0-1 (more workers reach productive len)
+- pearls@60 −0-5% (the presence-only tax is bounded by ring coverage)
+- wall+self+body flat ±5% — if +15% it's the v168x mode-conversion again
+**Kill condition:** pair <55% OR wsb deaths +15% OR pearls@60 −10%.
+
+**Sweep table (all vs abyss_v168, 24g elim set, both seats):**
+
+| variant | wBuffer | bufferR | bufferLen | pair | notes |
+|---|---|---|---|---|---|
+| v168b1 | 0.75 | 2 | 3 | **45.8%** (1/9/2) | h2h 19.0/18.7 flat, pearls@60 −12% (21.3/24.1), alive@50 6.3/7.1 |
+| v168b2 | 1.50 | 2 | 3 | **41.7%** (1/8/3) | h2h 17.1/17.2 flat, wsb −41% (14.5/24.7), longest@end 9.75/26 |
+| v168b3 | 1.50 | 1 | 3 | **50.0%** (0/12/0) | every map dead-split; h2h 15.9/15.1, pearls@60 −13% (21.5/24.7), alive@50 6.2/7.0 |
+
+**Sweep verdict — pre-contact buffer is DEAD (kill condition met: pair<55%
+at every dose).** The signature is consistent across the ring widths:
+h2h deaths FLAT at all three points (19.0/18.7, 17.1/17.2, 15.9/15.1) —
+pricing the buffer ring never touches the rams; they walk through it
+because the ring overlaps the productive forage band (enemies graze where
+the pearls are). The only dose response is on the TAX side: pearls@60
+−12-13% at every dose, splits@60 −1, alive@50 −0.7-0.9. Narrowing the
+ring (bufferR 1) removes the loss but keeps the tax — no dose exists
+where evasion pays.
+
+**Combined closure:** inside-reach dodge (exposureMode, v168x 45.8%)
+converts death mode; outside-reach ring (wBuffer, b1-3 ≤50%) taxes
+forage with h2h flat. Presence-priced worker evasion is closed at BOTH
+sides of the reach boundary — marked do-not-retest. The 63% victim-ram
+bleed is not reachable by pricing workers' own movement: remaining
+surfaces are (a) production parity (dead at v174/v168c forms — needs a
+different churn form), (b) escort/body-geometry (a rammer can't move
+through our other dragons — an ally-screen, not a fear price), or
+(c) spawn placement so children don't forage into contested corridors.

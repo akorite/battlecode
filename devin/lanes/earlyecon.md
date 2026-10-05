@@ -1144,3 +1144,56 @@ war starts. ADDS growth; no mobility/econ restriction. Queen untouched
   (flat keep, worker-bud) are inert or negative.
 
 **Parked:** abyss_v168c (both forms) — results/v168c_churn{,2}/.
+
+## Worker survival under sprint-reach threat — mechanism study (34 ladder losses)
+
+Corpus: ladder_replays/ (24) + pdtd_replays/ (10). Threatened turn =
+len2-4 worker with an enemy head inside ITS sprint reach (d <= eLen-1,
+eLen<=4). ~33k threatened turns measured, r10-100.
+
+**Their workers respond EXACTLY like ours — every axis identical:**
+
+| axis | W (top teams) | L (us) |
+|---|---|---|
+| flee/hold/engage | .44/.37/.18 | .48/.34/.18 |
+| converge toward nearest ally | .23 | .25 |
+| mean exits at dest | 1.90 | 1.87 |
+| exits when dying soon | 1.78 | 1.76 |
+| exits when living | 1.98 | 1.93 |
+| post-threat h2h death <15r | .40 | .37 |
+| ally convergence on threat | +0.074 | +0.076 |
+| h2h deaths r10-60 (raw) | 67 | 45 |
+| killer/victim len mix | symmetric | symmetric |
+
+No winner template exists at the decision level. The survivorship
+signature (exits: lived 1.98 vs died 1.78) is universal, not theirs.
+
+**BUT the kill door is real and dodgeable — in OUR losses:**
+- 88 attributable victim-h2h deaths: **80% had the killer already inside
+  ITS sprint reach at our last decide** (dkh 1: 30, dkh 2: 53), and
+  **95% had a free step that increased distance** — visible, in-reach,
+  escapable. Only ~20% were true fog approaches.
+- Root cause in code: `exposureMode = 0` — the worker sprint-reach
+  screen (dd 2..reach pricing) is DISABLED; workers pay wDanger only
+  for dd<=1 adjacency. The queen has wQueenRam; workers have nothing
+  in the band where 60% of the kills land.
+
+**Gate: abyss_v168x = v168 + exposureMode=1 — 45.8% (11/24), NEGATIVE
+but diagnostic:**
+- h2h deaths FLAT: 15.46 vs 15.46 — the screen did NOT cut ram deaths
+- wall+self+body **+40%: 45.5 vs 32.5** — fleeing workers dive into
+  walls/corpses; the dodge converts death MODE not rate
+- pearls@60 down 21.8/23.9 (forage tax even threat-gated)
+- upside: longest@end +2.0, queen-kept 0.625/0.357
+- Structural read: exits ~1.9 means corridor maps offer nowhere to go.
+  Soft fear = forage tax (this), hard fear = wall dives. Evasion on
+  these maps is geometry-bound, not price-bound.
+
+**Synthesis (3 studies now):** every worker micro-behavior — clump,
+standoff, flee/engage, convergence, exit choice, ammo length — is
+identical across teams. The ONLY asymmetric variable is split volume
+(2.4x). Remaining open levers for elim class: (a) pre-contact nav —
+route workers around contested ground before entering reach (nav
+lane), (b) volume parity (churn doctrine — needs stronger ammo than
+len-2 buds produced). Worker-side in-reach evasion is now CLOSED at
+mechanism level: exposureMode proven dead, never re-test.

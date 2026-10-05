@@ -102,3 +102,32 @@
 ## H-FLAGSHIP-168
 v168 = v157 + reachBoost + qRamAdj + die-in-place(SPLIT-0). Board vs v149 running (75%/8 early).
 v169 = v168 + feedBurst staged behind it.
+
+## H-SELFKILL — queen self-kill is the top band-loss leak (OPEN, building)
+
+**Mechanism** (pocket diag, 11 band losses): 6/11 = the queen corners HERSELF —
+hitWall×2, hitSelf×2, hitOtherBody×2 at r68-494. In 3 games our longest was
+equal/better: the self-kill alone forfeits lexicographic key-1. The calibrated
+trap scan (unproven-room veto) was gated `W==40 && H==15` — dead on every map
+those deaths happened.
+
+**Prediction**: with the scan on for the queen on every map (v173:
+`wh_ = queen_||pocketMap_`), queen non-ram deaths drop on autarky/maze/unsw/
+australia without pinning her on open maps. Kill condition: queen non-ram
+deaths/game doesn't drop OR queen-dead rises (she pins herself to death).
+
+**Build**: v173 = v168 + qRamAdj ungated (adjacency screen was also dims-gated —
+OFF on trophy/devil/stripes/australia where 5/11 rams landed) + wh_ as above.
+Smoke: 12 diagnostic maps, both seats.
+
+## H-EARLYDEF — early swarm deficit on elim maps (OPEN)
+
+**Mechanism** (same diag): a3-5 vs a8-21 at r50 → ram → elim. We DO split ~9-10x
+by r60 — bounded by pearl intake (20 vs 29 @r50) and swarmSplitLen=4 (need 2
+pearls/worker to split). Prediction: swarmSplitLen 4→3 (v174) fields +1-2 units
+by r50 on elim maps without collapsing fights. Kill: alive@r50 doesn't rise or
+early losses worsen on the elim set (trophy/devil/stripes/weakhold/arena/
+dilemma).
+
+## Gate rule change: 75% (was 70%) — increments are dead; only structural
+moves ship now. v168 stays live until a candidate clears 75%/≥100g.

@@ -889,3 +889,67 @@ VERDICT (v3 item 5): the sonar channel is real but signal-starved.
 (e) Ram-warning at coverage level needs vision/escort geometry, not pings.
     Sonar detection lane closed at honest marginal; no further variants worth
     the quota-free gate time.
+
+## Early-attrition classification (first-62-round deaths, v158-era self-play replays)
+
+Corpus: 24 kept replays (v158_frontload), dragonDeath+dragonAction+dragonUpdate
+aligned per round. Victim vs initiator: whether OUR last move closed distance
+to the killer's pre-move head (their step onto us = victim).
+
+Per-map reasons <=r62 (both seats pooled):
+| map | h2h victim | h2h initiated | hitWall | hitSelf | hitOtherBody |
+|---|---|---|---|---|---|
+| unsw | 68 | 42 | 68 | 18 | 4 |
+| autarky | 46 | 22 | 16 | 0 | 0 |
+| default | 24 | 24 | 2 | 0 | 0 |
+| schooltime | 10 | 6 | 2 | 8 | 0 |
+| islands | 12 | 0 | 4 | 8 | 4 |
+| stronghold | 0 | 0 | 0 | 0 | 2 |
+| ALL | 160 (63%) | 94 (37%) | 94 | 34 | 10 |
+
+Length mix of initiated trades (manhattan head-tail proxy): len2-suicide 90
+(cheap ram, ~always good), wash-equal 66, slack+1 52, genuinely-shorter 28,
+VIOLATION (own len > theirs+1 while visible) 22. Fog-ambush deaths 26.
+
+Read: the early deficit is NOT fights-we-shouldn't-take in the tradeSlack
+sense — true violations are ~9% (22/254). Two real classes instead:
+1. **Victim-side h2h = the dominant bleed (63%)**: their len2-3 rammers choose
+   the trade against our longer dragons — same kill-door as the queen work
+   (adjacency decides; whoever initiates wins). Fix axis = worker-side
+   dodge-when-outgrown (we lose len k+2 for their len k), i.e. evasion
+   geometry for non-queens, not tradeSlack tuning.
+2. **unsw hitWall 68 (~1/3 of that map's early attrition)**: fog wall-dives —
+   a nav class, orthogonal to combat policy.
+Self-play symmetry caveat: both sides bleed identically here; the vs-1750+
+asymmetry (a3-5 vs a8-21 @r50) can't be read from self-play deaths alone —
+what this shows is WHERE ours come from.
+
+## feedBurst re-gate on live base (abyss_v168)
+
+v158c = v168 + feedBurst only (same params: 14-ring, <=20r, x3), 24g fixture
+vs abyss_v168, tag v158c_burst: **45.8% pair (11/24, 2W/7S/3L) — below the
+55% merge bar.** The mechanism still works on the primary axis — qlen@end
+1.158 vs 0.474 (+144%) — but longest@end -10% (31.8 vs 35.4) flips the net.
+
+Per-map qlen@end c/b: autarky 1.62/0.00, schooltime 1.12/1.12, rest ~0/0.
+longest@end losses: autarky 13.3/18.4, schooltime 14.3/19.6, unsw 13.3/14.1,
+stronghold 22.1/24.0 — the burst feeds a NON-QUEEN elected champ on queen-
+dead boards (queen dead ~80% of games here) and starves the longest axis.
+On the v149v2 base the same mechanism was +79% qlen AND +14% longest; v168's
+different base (wScout 2.0, qRamAdj merged) inverts the trade.
+
+Rescue under gate: abyss_v158d = v158c + burst restricted to champIsQueen_
+(drift-cadence feed for non-queen champs, burst only when feeding the actual
+queen — the autarky case that already worked). Tag v158d_burst.
+
+v158d (queen-only burst): **50.0% pair (12/24), bit-inert on 5/6 maps** —
+on unsw/islands/stronghold/default/schooltime the elected champ during the
+burst window is never the live queen (qDead ~0.8/game), so the gate mirrors
+base stats everywhere except autarky, which keeps qlen@end 1.62/0.00 and
+narrows the longest@end cost to -2.5 (vs -5.1 full-burst).
+
+Verdict on the merge ask: neither burst form meets the 55% bar on v168 —
+full 45.8% (net negative: starves longest@end feeding non-queen champs),
+queen-only 50% (marginal free-upside: +autarky qlen, bit-mirror elsewhere).
+If the integrator still wants it, abyss_v158d is the safe param'd form —
+qEcho-style "open-map upside" bucket, not a flagship merge at this base.

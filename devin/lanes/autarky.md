@@ -361,3 +361,45 @@ Scope: full diff `workspace/abyss_v198` vs `abyss_v168` on origin/devin/v120. Th
 Composite suspect ranking for SMALL 42.9%: **qRamAdj-global** (queen fenced on dense boards, qlen@end shrinks → lexicographic losses) > **midFeed on trophy/qOS/weakhold** (r120 recycling mid-combat) > **anchor-visible-clear + small-map omniscience** (everything visible → anchor cleared fast → conveyor reverts to live sightings; note this COSTS feeds on small maps while helping big — another split-consistent mechanism) > feedRadius=12 (mostly inert on small boards — everything's ≤12; can't explain small losses but still active on big).
 
 Suggested isolation: midFeed off entirely (`midFeedRound=0`) × small preset only — 20g decides whether mid-feed was the small-map driver; then qRamAdj back to weakhold-dims or reach-scaled (`bonus *= min(1, NC/1152)`) — 20g. Both are one-line param/param-expression changes behind no new mechanism.
+
+---
+
+# Adversarial review — abyss_v200 / v201 / v202 vs v168 (origin/devin/v120)
+
+Scope: v200 = my v198 defects' fix bundle (anchor w_.chId, density-centroid, qRamAdjMinTiles=600, leash INF→64, feedRadius ordering). v201 = v200 + deadEnd branch map (dedie). v202 = v200 + queen plant (w_.queenAnchor). Full diffs read; engine legality verified against engine/src/actions.cc.
+
+## Headline — v202's feed target is dead code, TWO independent ways
+
+**1. `w_.queenAnchor` never reaches feeders.** World objects are per-dragon. The plant writes `w_.queenAnchor` only inside the `queen_ &&` gate on the queen's own world (policy.hpp:127-129); it is never serialized into any beacon/heard/MsgChamp path (world.hpp:302-319 — no anchor field anywhere). On every worker's world `w_.queenAnchor` stays −1 forever → the feed-preference branch (policy.hpp:175 `!selfChamp_ && w_.queenAnchor >= 0 && ...`) is unreachable on the only dragons it exists for. The ONLY live v202 delta vs v200 is `targets_.push_back({w_.queenAnchor, 1.2, ...})` on the queen's own forage list — she self-orbits a post. The "stationary feed target, no staleness" mechanism is vapor. **Any v202-vs-v200 gate delta is noise + queen-orbit alone.**
+
+**2. `w_.chId == w_.ourQueen` is unsatisfiable anyway.** Even with the anchor broadcast, noteChamp early-returns `id == ourQueen` into queenCell (world.hpp:331-334) — the queen is never recorded in chId; chId is written only at world.hpp:338 for non-queen dragons. The gate can never pass. The intended condition is `w_.ourQueen >= 0 && !w_.queenDead(w_.ourQueen)` (the alive-check queenReady already uses).
+
+Fix sketch (no protocol change needed): workers already receive fresh queenCell via her beacons — derive "planted" client-side from queenCell stability (e.g. anchor = queenCell while cheb(queenCell_now, queenCell_from_5r_ago) ≤ 2). Or extend her own beacon with a plant flag+cell — every teammate already parses it. Secondary nits: plant gate `regionReach >= 12` uses the nb[]-flooding body-blind metric (the C7 issue) — a ≥12-cell pocket passes; `friendDist_<=6` bounds the damage but the metric is the known-weak one.
+
+## v200 — verified: the anchor now fires
+
+**Reachable states confirmed.** `champAnchorId_ == w_.chId` (policy.hpp:187-189): when the champ's report goes stale, locateChamp resets `champId_=champHead_=-1` but `w_.chId` persists — noteChamp only ousts it on a fresher/better report (world.hpp:335-338), never on age. So the else-if matches through the stale window → the intended off-vision conveyor is LIVE now (vs the dead code I flagged in v198). Also carries the v182 fixes correctly: evidence-round stamping (`champAnchorRound_ = round - champAge_` — no age laundering), `min(champAnchorAge, feedHeardDie)` = 30-window, `w_.visible(champAnchor_)` known-empty clear.
+
+**Residual issues, ranked:**
+
+- **(a) Queen-champ can never anchor through this path (medium-low).** When champId_=ourQueen (queen-branch), champAnchorId_=ourQueen ≠ w_.chId → during queen-alive games no anchor accumulates; on queen-report staleness the feed stream drops straight to fallback election, losing up to ~30r of convergence. Consistent with "anchor = worker-champ" scope — but v202 tried to fill exactly this hole and failed differently, so the hole is real: decide explicitly whether stale-queen feed continuity is wanted.
+- **(b) `qRamAdjMinTiles=600` is the same shape-blindness as midFeedMinTiles (medium).** NC is area, not topology: the gate admits qOS(875), trophy(625), weakhold(600), plus all corridor-class maps (maze/trauma 1152, slithery 1701). It only removes arena/Colosseum/default_small/stripes/devil/dilemma/portals/TD — i.e., exactly the maps where the fence was least costly anyway. If SMALL-map queen-fencing was the motive, qOS/trophy/weakhold stay exposed.
+- **(c) Verified fixes:** density-centroid picks the cheb-6-densest beacon (a real occupied cell — fixes both the torus-seam midpoint and the mid-air centroid); feedRadius ordering moved role-stripping inside the post-radius else (out-of-radius abort no longer churns grower_/hunts_/escortOf_); leash `fd==INF → 64` closes the free-pocket hole.
+- **(d) Nit:** `feedBurstDist=14 > feedRadius=12` — the 12-14 band is dead slack (radius abort kills feedHead_ first).
+
+## v201 (deadEnd) — mechanically sound, premise engine-verified
+
+**The U-turn premise is TRUE, not assumed:** `Step()` (engine/engine/src/actions.cc:41-43) tests `destination ∈ mBody` BEFORE `push_front` — the vacating tail is still in the body → any move into own body incl. the just-vacating tail = HitSelf. A len≥2 head inside a deg≤2 chain cannot retreat; the tip is certain death. dedie drops at the current cell vs at the tip — correct and earlier.
+
+**Map construction verified:** deg from nb[] counts portal edges as exits (nb≥0 routes through portals — correct, they are real escapes); only tip→junction chains marked (walk breaks on deg≥3, marking tip through mouth); tip-to-tip unmarked — correct AND moot, tip-to-tip corridors are closed components unreachable from open space; `deadEnd_[dest]` entry penalty (30×L_) is fatal-priced but finite → cornered dragons still pick least-bad; dedie trigger is worker_-scoped (queen excluded — she has her own nav_.deadEnd trap scan; champ is worker_-flagged and included — acceptable, doomed anyway).
+
+**Edges, ranked (all low):**
+- **(a) Unpaired-portal over-mark:** nb=-1 (unpaired, unguessed) counts as wall → a chain containing an unpaired portal is marked; dedie fires before move eval, preempting the scout escape the worker could take. Rare — needs an unpaired portal inside a corridor.
+- **(b) Coverage hole, not a bug:** lollipop deg-2 loops (cycle attached to a junction at one cell) have no tip → unmarked; a dragon longer than the loop circumference tail-bites walking the ring. Real trap class the map doesn't cover.
+- **(c) Escorts/hunters dedie on duty** — consistent (same doom), but the die-in-place drop lands inside the chain where nobody can safely retrieve it. Mitigation is upstream (entry penalty), not the trigger.
+
+## Ranked verdict
+
+1. **v202: fix before gating** — the anchor-propagation + `chId==ourQueen` gate make the intended mechanism unreachable; a v202-vs-v200 gate currently measures only "queen self-orbits a post". Two-line-ish fix via client-side queenCell stability derivation.
+2. **v201: gate-ready** — no reachable-states or legality defects; edges are low-impact.
+3. **v200: gate-ready** — anchor verified live; the NC≥600 gates carry the recurring area-vs-shape caveat on qOS/trophy/weakhold.

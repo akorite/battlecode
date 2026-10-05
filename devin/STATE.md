@@ -290,3 +290,4 @@
 - refill3 ranked top-ups running (winnable targets only; high-elo lottery cut per EV math).
 - Next: if v192 clears -> submit + fire benchmark challenges + push. If v193 reads >v192 -> gate it next.
 - v193 (queenHideUntil 390->100): FAIL. Fleet -33% (queen is the early factory; unhiding stops her budding), qlen flat 4.4v4.6, queen-alive +33% can't pay for it. Hide-vs-grow is structural: she produces OR grows, not both. Dead end logged.
+- v194 (feedRadius 12->20): FAIL 45.2%/42 vs v192. Autarky's rad study (on v182) doesn't transfer: inside v192 rad12 wins — fewer far-feeder transit deaths, fleet +23%, qlen 5.25v4.0. Radius correct at 12.

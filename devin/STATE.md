@@ -38,3 +38,10 @@
 - explore v159 seam fix: KILLED — premise false (vision is toroidal, wrap landings always visible). Confirms reach-model+wQueenRam is THE queen-h2h lever (already in v162 via reachBoost+qRamAdj).
 - v162 = v161 + reachBoost + qRamAdj boarding vs v157 (8 maps ×2×2).
 - Elo 1604. Lanes: autarky v157 board in flight, pocket v153 (critical), earlyecon v158 feeders.
+
+## 2026-10-04 ~08:00 UTC
+- Elo 1589 (down from 1696 peak — v149 par at band, not dominant).
+- v163 composite (v157+guess-off+reachBoost+qRamAdj+v153): ~52%/68 W4S26L3 — WASH. Seat-locks dominate; queen module's 65%/20 fixture lift diluted to parity on the full board.
+- Now boarding v153 PURE on 17 maps (tag v153_full) — the 65%/20 piece needs its own honest board vs live; if ≥55% it's the submission candidate.
+- Lane delivers so far: pocket v153 (65%/20 ✓), earlyecon v158 feedBurst (62.5% pair, qlen@end +79% ✓ → merged in v164), autarky v157 (board pending), explore v159 seam (killed — toroidal vision premise false), explore C1/C2/C3 attribution (all bleed different maps), pace schooltime-positive.
+- Killed: locked queen pivot (starves her), mirror-hunt, C2/C3, queen-feed all forms, seam avoidance.

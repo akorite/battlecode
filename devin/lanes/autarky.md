@@ -485,3 +485,44 @@ Condition for the prototype was "winners significantly more compact" — measure
 Caveats: botA/botB are empty in this replay format — can't isolate our side; within-game W/L contrast in our 30 games reproduces the population pattern anyway. Deaths located at last-seen head (accurate to last move). Centroid uses circular mean on the torus (correct across wrap seams). Heads seeded from map dr spawns; splits assign child teams.
 
 Note: origin/devin/v120 STATE.md already mentions a "v225 candidate" — if a build ever happens on this lane the name may need bumping.
+
+# v237 ship-candidate review (autarky lane) — vs live v168
+
+Scope: workspace/abyss_v237 on origin/devin/v120 @ daa44c4 vs abyss_v168. Diff = policy.hpp (15 hunks) + common.hpp; main.cpp is comment-only identical. Described composite (lateSplit release, keepEvery60, queenBudUntil450, v200-line anchor) verified present, PLUS two arms not in the description: the v213 queenEscape AND a tradeSlack tightening (tradeSlackSmall=0 on NC<=900 boards).
+
+## Defects ranked
+
+**1. HIGH — K1 unfixed: queenEscape's cap still admits engine-illegal paths for exactly the queens it serves (L in [5,10]).** policy.hpp `queenEscape`: `maxSteps = min(freeSteps(L_)+L_-2, qEscapeMax)`. The engine (actions.cc) gives only step 0 free — every later step needs body>2. True legal max = L-1. For L in [5,10] the cap exceeds L-1 (L=5: cap 5 vs legal 4; L=9: cap 10 vs legal 8). A queen whose only escape lands at the cap picks it (BFS takes nearest-safe), walks until the body can't pay, dies to NoValidAction mid-flight — strictly worse than eating the ram. Hidden queens are len 2-6: the kill window covers the common case. Fix: `maxSteps = std::min(L_-1, p_.qEscapeMax)`.
+
+**2. MED — K2 unfixed: pathCost under-model.** `pathCost = max(0, pth.size() - freeSteps(L_))`; true paid cost is `size-1`. main.cpp's `pay` loop under-pops → bot's world.body keeps a phantom tail → next-turn own-blk/legality mis-evaluation. Same one-line fix family: `pathCost = size-1`.
+
+**3. MED — the verify answer: lateSplitUnits=9999 IS a real release but bounded by a second gate — the feedRound total-split veto.** trySplit:1916 `if (w_.t.round >= p_.feedRound) return false` (pre-existing) kills ALL voluntary splits from feedRound. p_.feedRound = eff_.feedRound = 320 on corridor-class (w*h<=2000, most maps), 360 on big. So the release band is **[300,320) on corridor maps (20 rounds), [300,360) on open (60 rounds)** — "churn to the bell" overstates it; post-feedRound splits stay dead. (The die-in-place conveyor is unaffected — it's a separate `split,n=0` emit.) If the intent was pre-window mass-stocking it works; if it was release-to-499, the veto is in the way. Correctness clean otherwise: gate = `units>=9999` never fires; L_>=swarmSplitLen+roominess checks unchanged; unitLimit=64 (engine default, no map override) bounds total units; splits halve mass so no explosion past array bounds. Watch-item only: 64 dragons x per-dragon deadline — no timeout mechanism concern.
+
+**4. MED — queenBudUntil=450 is partially dead.** Same feedRound veto caps ALL buds at 320/360, and the grower arm's `lateGame()` (midEnd=400 corridor/450 open) sits just behind. Effective extension: 250→320 corridor / 250→360 open (+70/+110r), not the +200 the param implies. The [feedRound,450] range is unreachable.
+
+**5. MED — K3 unfixed: heard-ghost pins.** rammed() weights heardEnemies_ (<=8r stale relays) identically to seen enemies → a phantom can fake-pin the queen into burning body. Trigger on seen enemies only; heard for terminal safety is fine.
+
+**6. MED — unadvertised arm: tradeSlackSmall.** `slack = NC<=900 ? 0 : 1` — on weakhold(600)/trophy(625)/qOS(875)/small-board class, trades tighten to net-zero-length (myLen<=enemyLen, no +1 slack). Mechanically fine, but it's a real melee rule change not in the described diff — if small-map splits move, attribute here alongside lateSplit/leash/midFeed.
+
+**7. LOW — feedBurst sign.** `round - feedAt <= feedBurstRounds` is true for every round < feedAt (negative delta <= 20) → midFeed anchors carry a permanent x3 pull, not a 20-round front-load. Effect = midFeed is stronger than labeled; literal intent needs `0 <= round-feedAt <= 20`.
+
+**8. LOW — corpse-site residual.** Anchor else-if correctly caps at min(champAnchorAge,feedHeardDie)=30r and adds `w_.visible(anchor) -> clear` (v182's known-empty fix shipped). Residual: a dead champ's anchor still feeds for up to 30r if nobody sees the corpse cell — bounded, much better than v182's leak.
+
+**9. TRIVIAL — dead weight.** `p.feedRoundBrawl=300` write is dead (brawl block early-returns — pre-existing); `workerRegionNorm=0` disables the discount but regionSize_ still runs one BFS per dragon per game (harmless); `feedBurstDist=14 > feedRadius=12` is dead slack (radius aborts first). midFeedMinTiles=600 is still an area-gate not a shape-gate — fires on maze/trauma/slithery/qOS corridor boards (documented concern, inherited deliberately).
+
+**10. LOW — escape ignores the counter-ram option.** Trigger legality uses blk<=1, which excludes enemy heads — a pinned queen that could trade head-to-head flees instead. Conservative direction; fine as shipped.
+
+## Verified correct (explicitly checked)
+
+- **Anchor machinery fires now**: `champAnchorId_ == w_.chId` (persists through staleness) OR the new `== w_.ourQueen && !queenDead` arm — a queen-champ can anchor. Evidence-round stamping kills the age-laundering. 30r clamp matches feedHeardDie — no zombie feeders. `w_.visible(anchor)` clear = fresh observation empties it. champAnchorId_ only stamped under `champHead_>=0` → never -1-vs--1 vacuous match.
+- **feedHead_/feedAge_ reset per call** (:63,121) — the moved unconditional `if (feedHead_>=0)` block can't leak stale state; a dragon must pass a gate THIS turn to feed.
+- **selfChamp_ can't self-feed**: selfChamp_ -> grower_ -> !worker_ -> exempt from midFeed and the window block. No champ-dies-at-own-position.
+- **kParams block identical to v168** — no clobbers, champFallbackRound=330 confirmed in decl + kParams.
+- **No new worker-split or opening-move vetoes** in the diff. trySplit's veto set is unchanged (eat/trade/defend/slay/attack-hunt/enemy-ban/roominess, all pre-existing). The escape is post-trySplit; chfeed is an emit not a veto.
+- **Escape trigger**: `anyLegal && !anySafe` + placement after trySplit, before boxFeed — correct; dest=-1+path emit convention consistent; portal hops legal mid-path; pearl-landing payment offsets conservatively ignored.
+- **Leash INF->64** fixed (unreachable pocket now max-penalized); leash correctly excludes hiding_/lead_ queens.
+- **regionSize_ components** correct (wall-connected, portal-connected); bounded once-per-dragon.
+
+## Verdict
+
+Ship-risk concentrated in items 1-2: the escape's cap/cost model still assumes ceil(L/4) free steps that the engine never grants — for the len 5-6 queens most likely to trigger it, a max-range escape is certain death, worse than the pin it flees. One-expression fixes (`min(L_-1, qEscapeMax)`, `pathCost=len-1`). Item 3-4 are semantic: the release/bud extensions are real but truncated by the feedRound veto — if that's the intended design, correct the comments; if to-the-bell churn was the goal, the veto needs carving. Everything else is bounded or pre-existing.

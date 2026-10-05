@@ -57,18 +57,28 @@ def region_sizes(W, H, edges, cap):
             for c in q: out[c] = min(len(q), cap)
     return out
 
+def cell_deg(W, H, edges, x, y):
+    n = 0
+    for d in D:
+        if edge_kind(edges, W, H, x, y, d) == 0: n += 1
+    return n
+
 def main(path):
     r = parse(path)
     ev = r['events']
     W, H, dr, edges = parse_map(r['map'])
     rsize = region_sizes(W, H, edges, POCKETISH)
+    deg = [cell_deg(W, H, edges, x, y) for y in range(H) for x in range(W)]
     body, team = {}, {}
+    queen = {}
     for e in ev:
         if e['type'] == 'roundStart': break
         if e['type'] == 'dragonUpdate' and e['id'] < len(dr):
             t, b = dr[e['id']]
             body[e['id']] = collections.deque(tuple(x) for x in b)
             team[e['id']] = 'AB'[t]
+    qid = {s: min(i for i, t in team.items() if t == s) for s in 'AB'}
+    for i in qid.values(): queen[i] = True
     T = {s: collections.Counter() for s in 'AB'}
     pearls, pend = set(), set()
     rnd = 0
@@ -83,6 +93,7 @@ def main(path):
                 rs = rsize[h[1] * W + h[0]]
                 if rs < POCKET: T[s]['turnsPocket'] += 1
                 if rs < POCKETISH: T[s]['turnsPocketish'] += 1
+                if deg[h[1] * W + h[0]] <= 2: T[s]['turnsNarrow'] += 1
                 T[s]['turnsN'] += 1
         elif ty == 'tileChange':
             t = tuple(e['tile'])
@@ -116,10 +127,24 @@ def main(path):
             if s is None: continue
             T[s]['deaths'] += 1
             T[s]['d_' + e['reason']] += 1
+            if queen.get(i): T[s]['dQueen'] += 1
+            # round buckets: early <100, mid 100-359, late 360+ (feed/transit window)
+            rb = 'E' if rnd < 100 else ('M' if rnd < 360 else 'L')
+            T[s]['dr%s_%s' % (rb, e['reason'])] += 1
+            T[s]['drr%s' % rb] += 1
             h = heads.get(i)
-            if h and rsize[h[1] * W + h[0]] < POCKET:
-                T[s]['deathsPocket'] += 1
-                T[s]['dp_' + e['reason']] += 1
+            if h:
+                ci = h[1] * W + h[0]
+                rs = rsize[ci]
+                if rs < POCKET:
+                    T[s]['deathsPocket'] += 1
+                    T[s]['dp_' + e['reason']] += 1
+                elif rs < POCKETISH:
+                    T[s]['deathsPocketish'] += 1
+                else:
+                    T[s]['deathsOpen'] += 1
+                dg = deg[ci]
+                T[s]['dn%d_%s' % (min(dg, 3), e['reason'])] += 1
             body.pop(i, None)
             heads.pop(i, None)
     return {'file': os.path.basename(path), 'rounds': rnd,

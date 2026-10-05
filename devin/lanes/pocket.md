@@ -469,3 +469,63 @@ BEHAVIORAL DELTAS to clone (ranked by measured gap):
 
 REPLAY EVIDENCE on file: workspace/topreplays/t{952,70,501,226}/ + sides.json,
 pm_*.json aggregates. Analyzer: tooling/pocket_metric.py.
+
+== Corridor/transit attrition study (45 ladder games, corridor maps) ==
+
+Corpus: 45 corridor-map ladder games (whole 5-game sets pulled around recent
+losses vs nooberGamer/wawow830/zzz3nith/Ron Squad, elo 1590-1700): Maze,
+Tower Defense, Trauma, weakhold, Slithery Fight. us=A in every set.
+Metrics via extended tooling/pocket_metric.py (region bands + cell-degree
+bands + round buckets + queen flag + len-at-death).
+
+TASK 1 — per-game death mix, our losses (23) vs our wins (22):
+
+              our LOSSES (23g)          our WINS (22g)
+  deaths   US 96.1   OPP 263.1       US 78.5   OPP 65.3
+  wall     US 17.4   OPP 4.1         US 11.2   OPP 0.8
+  self     US 21.4   OPP 146.8       US 18.5   OPP 34.6
+  body     US 7.7    OPP 4.6         US 10.8   OPP 0.8
+  h2h      US 36.9   OPP 36.9        US 26.4   OPP 28.2
+  nva      US 12.7   OPP 70.7        US 11.6   OPP 1.0
+  eaten    US 337    OPP 792         US 360    OPP 188
+  queenD   US 0.78   OPP 0.17        US 0.36   OPP 0.91
+
+ONE-SIDED RATIOS in losses: eaten OPP 2.35x US; deliberate deaths
+(self+nva) OPP 217.5 vs US 34.1 = 6.4x; walls US 4.2x OPP; h2h 1.0x = WASH;
+hitOtherBody US 1.7x. Region: our deaths 93% OPEN cells, only 7.1/g in
+pockets — pocket-wedge is not the leak; OPP pocket deaths 21.2/g are feed
+drops. Narrow-cell deaths: our wall deaths 72% in deg<=2 cells; opponents
+die deg<=2 too but via self/nva (feed), never wedge.
+
+STEERING CLAIM CHECK — "31-33 feeders die h2h r360-499 in feed transit":
+NOT reproduced. Our late-window (r360+) h2h = 2.4/g in losses; h2h dead are
+len2-3 (31/36.9 per g) in the r100-359 melee, not long feeders walking to
+an anchor. The transit leak is not h2h; it is WHAT we die by: 14.8/g mid
+wall + 6.5/g mid body + 14.3/g mid self of mostly len2-3 dragons dying
+unproductively while OPP churns 143/g mid as deliberate feed.
+
+TASK 2 — how do winners avoid pocket traps:
+They do NOT avoid narrow cells (narrow-cell turn share 13.3-14.1% vs our
+11.9%). They never pick the wall death: m1106190 OPP wall=0 while
+self=833 + nva=275 (=1108 deliberate deaths/1206 total); m1106138 OPP
+wall=0, self=370. cheji/Cache corpus (earlier study): literal ZERO hitWall
+across ~400 deaths. Cornered -> die deliberately ON the feed anchor, not
+against the wall.
+
+TASK 3 — proposed mechanism (one, no mobility/econ restriction):
+MID-GAME DIE-IN-PLACE: relax the feed channel's eligibility from the
+r330+/converged-champ/cheb-1 gate to: round>=~120, worker len<=3, no pearl
+target within reach and no hunt -> path to champion reported cell and
+SPLIT-0 there (noValidAction drop on own cells). Rationale: (a) the dead
+population already exists — our 45/g mid deaths of len2-3 workers die for
+nothing; converting even 1/3 into anchor drops doubles feed volume;
+(b) measured OPP volume 143/g mid deliberate deaths is exactly their
+econ edge (eaten 792 vs 337); (c) zero movement restriction — it gives
+idle workers a destination, matching shipped die-in-place semantics
+(23% adjacency proven in v150). Cheap adjunct: when ALL candidate moves
+are lethal (cornered), score the death cell by ally-adjacency/pearl value
+instead of equal -inf — die where the drop is retrievable, never hitWall.
+
+EVIDENCE: workspace/transit_corridor.json (45 games), transit_metric.json,
+topreplays/, worst cases m1106138 (US wall 101 vs OPP 0), m1106190
+(US wall 98 vs OPP 0, OPP self 833).

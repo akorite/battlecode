@@ -281,3 +281,11 @@
 - earlyecon — PD/Trauma r150-250: elim class is production volume (they out-birth us), not survival behavior.
 - In gate now: v190 (v182 + all 6 autarky fixes + feedRadius12, anchor stays forward), v191 (queen swarm-leash: wQueenLeash 0.8 past dist 6 — keeps queen inside cover vs the 87% queen-death rate), v189 (bed-anchor, likely dead after forward-champ finding).
 - Composite metric insight: conveyor strips fleet (alive@end 12 vs 22.8) for +3.4 longest — net negative WHILE queen dies 87% (dead queen forfeits tiebreak-1). Queen survival gates everything else.
+
+## 2026-10-05 06:15 UTC
+- Ladder: Elo 1603. Last 18 done: 14W-4L vs Hydra(1612)/JustReboot(1438). Bleed maps persist: Trauma, TD, Australia, Default.
+- v192 composite (conveyor fixes + leash + mid-feed + anchor-die): smoke **58.6%/29, BIG 60.9%, pairs 3W/10S/1L**; alive@end +30%, longest +13%, qlen +16%. Adversarial review passed (accepted risks: contested centroid drops, per-spawn region flood CPU).
+- **Upload gate FIRED**: v192 vs v168, all 22 maps, seeds 1-5, 220 games both seats (2 batches). Needs >=55% + LB>50 + benchmark parity (FtM/Vibing++/SSS/Computers/Sponge/WaterCandle).
+- v193 (v192 + queenHideUntil 390->100, unhide-inside-leash doctrine): smoke running.
+- refill3 ranked top-ups running (winnable targets only; high-elo lottery cut per EV math).
+- Next: if v192 clears -> submit + fire benchmark challenges + push. If v193 reads >v192 -> gate it next.

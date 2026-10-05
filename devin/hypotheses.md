@@ -92,3 +92,13 @@
 - Prediction: ≥55% vs v149 on 17-map board, qlen@end up,
   queen-dead down on escort maps.
 - Status: GATING (tag v163_full, 68g).
+
+## H-C5MARG (resolved 2026-10-03)
+**Question:** does C5 (queen exits==1 reservation) inside v157 hurt queen survival (autarky's read: kept-after-theirs 24.2% vs 38.5%)?
+**Test:** v165 (portal-only) vs v157, 15 maps × 2 seeds × both seats = 60 games.
+**Result:** v165 = 41.7% (0W/25S/5L) — **C5 is net-positive inside v157.** qlen@end 3.89 vs 2.78. autarky's in-composite read inverted; the exit-reservation buys queen length that scores tier-1.
+**Decision:** KEEP C5 in the flagship line. v157 shipped.
+
+## H-FLAGSHIP-168
+v168 = v157 + reachBoost + qRamAdj + die-in-place(SPLIT-0). Board vs v149 running (75%/8 early).
+v169 = v168 + feedBurst staged behind it.

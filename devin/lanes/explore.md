@@ -101,3 +101,21 @@ Gates: BOTH 10-10, every per-game metric identical to 2 decimals, mirror end-sta
 **4. What v159 actually is now:** v149 + queen-only `wQueenSeam=2.0` on ending a turn on a boundary row/col whose far-side edge is UNSEEN (`!b.side(dest,boundary-dir).seen` — the honest "unexplored territory could lurk there" check; not-currently-visible version was dead since seam neighbors are always in vision). Also confirmed wrap steps keep paying wFog for unseen seam edges (kelp risk) — an earlier draft that folded wraps into `crossing` would have stripped it; restored. Still gate-inert on the elim fixture (queen boundary landings are corridor-forced).
 
 VERDICT: do not merge seam avoidance as specced — the premise (blind far side) is false in-engine. If queen h2h on qOS/devil-class maps matters, the fix is the enemy-reach model (freeSteps→~L) feeding wQueenRam, possibly + a "don't end in a seen enemy's step-1 reach when she'd win the trade" term that already exists as wQueenRam — just needs the corrected reach. abyss_v159 kept on branch as reference for the seamFog idiom.
+
+## v157 LIVE loss census — 2026-10-05 (tooling/ladder_census.py; deploy cutoff 2026-10-04T01:04:54Z from team elo-history reset; 40 v157-era matches, 30 replays analyzed)
+
+Record **17-13 (57%)**. vs DeepSeek-V4.1-Flash@1765 **1-4** (the top-20 band we must beat), vs life-is-NP-hard@1692 3-1, vs Milk Dragon@1489 11-8, vs Hydra@1615 1-1.
+
+**Loss classes (13):**
+- **both-dead-race / longest-concentration: 6 (46%, dominant)** — queens mutually die (h2h×4 @r110-251, hitOtherBody×2), bells then decides on LONGEST and we lose it while WINNING total-length: australia-A 22v27 (tot 248v158), australia-A2 34v49 (tot 299v111!), unsw-B 29v32 (tot 321v265), default-A 15v26, default-B 18v20, islands-B TIED 24v24 → lost total 84v223. Same mechanism as v149's big_empty audit bleed — the post-mutual-queen-death funnel doesn't converge one long dragon. This is now THE biggest live loss class.
+- **queen-dead-solo: 4** — MAZE CLUSTER ×3 (hitWall@198, hitWall@110, hitSelf@127 — maze-specific queen trap, worth a replay look), autarky-B h2h@433 (the audit bleed persists live).
+- **elim: 2** — devil-A h2h@70→elim, qOS-B h2h@191→elim.
+- **feed-race: 1** — trauma-B starved (tot 18v115, both queens alive short@2v5).
+
+**Queen-survival theorem confirmed live: our queen alive@end → 15/16 wins (94%)**; sole exception = the trauma starvation. 9/13 losses carry our queen's death; 4/4 DeepSeek losses had queen deaths.
+
+**Portal fix — VERIFIED in live games:** portals-map transits 520+710/game total (ours ≈273+355) vs **0 transits in all 4 v149 audit games** — the dest=-1 pairing fix demonstrably moved transits. Islands 338-409 teleports/game starting r1-2 (wrap+portal mix, both bots cross early there); australia 72-98; qOS 47. The freeze/starvation-loop disease is dead on live; both portals games WON (incl. e=43v1430 bells steal via queenEnd 7v0).
+
+**Small-map pearls (our eaten60 live vs v149 self-play audit avg):** trophy 51/44 vs 38.5 ↑; devil 17(L)/78(W) vs 46.2 mixed; default 8/11 vs 21.1 ↓; dilemma 10 vs 15.8 ↓; maze 28-32 vs 33 ≈; autarky 20-28 vs 32 ≈; weakhold 4-6 vs 6.2 ≈. Early-econ on small maps is flat-to-down vs the audit baseline but small-map ladder record is strong regardless (swept trophy/devil/dilemma/weakhold/td vs Milk Dragon) — the losses there are queen-death driven, not pearl driven.
+
+**vs the v149 census:** same skeleton — queen exposure + longest-concentration — but the center of mass moved OFF small-map pearls (fixed/irrelevant) and ONTO (a) the both-dead longest funnel (6/13) and (b) maze-class queen traps (3/13). Next-lever ranking live: (1) post-mutual-death longest convergence, (2) maze queen-trap mechanism read, (3) DeepSeek-class opponents: their queens live to bells while ours die @110-251 — enemy queen-survival differential is the elo gate.

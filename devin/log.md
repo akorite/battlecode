@@ -143,3 +143,4 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
 - explore: rules-check — portal exits heading-preserved (96/96 replays), dir^2 neck bug world.hpp:215; portals freeze=starvation-loops; move cost=uniform slither shed, freeSteps wrong — devin/lanes/explore.md
 - explore: pace149 gate 12-8 (60%) vs v149 — wins on queen columns (alive 55v40, qNonRam halved) not pacing (v149 already low revisit); bleeds islands 1-3 post-queen longest race — devin/lanes/explore.md
 - explore: v159 seam gate 10-10 no-op — vision is TOROIDAL (wraps never blind); mutual-elims = pursuit/trade geometry; queen dies to enemy-initiated trades — lever = reach model (freeSteps) not avoidance — devin/lanes/explore.md
+- v157 live loss census: 17-13; losses = both-dead-longest 6, queen-dead-solo 4 (maze cluster 3), elim 2, feed-race 1; portal fix verified live (520-710 transits/game vs 0 in audit); queen-alive@end -> 15/16 wins

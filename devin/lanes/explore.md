@@ -198,3 +198,26 @@ Trailing: queen-ram 2 (islands, dilemma — down from ~8-9 dominant share, consi
 **Delta vs last census:** bothdead 3→12 (exploded — vs this band their queen dies too but their funnel survives, ours doesn't), early-elim 1→9, self-kill solo deaths 3→0 (v168's fix confirmed live), queen-ram share shrank hard.
 
 **Conveyor check (3 worst losses + 1 attrition, nva r120-499):** OUR nva = 0,1,4,2 per game — **the mid-feed conveyor is NOT firing on ladder** (vs the 8-11/window local rate). Meanwhile the ELITE opponents run nva=23-204/game: chad gdp weakhold B=149 stall-deaths while winning e=609v2, KnightCapital isles B=204-range. Read: their feed-conveyor queues sacrifice stalled workers by the hundred and the funnel still delivers — our near-zero nva means the conveyor never engaged, and our econ in the same games was e=2-142 vs their 245-1784. If v168 shipped the conveyor, it isn't reaching its firing condition on ladder.
+
+## Census refresh — newest 40 games (2026-10-05 ~07:41Z, still v168 sub#118)
+
+**Record 19-21.** Same elite feed (chad gdp, Knight Capital, nooberGamer, Um_nik, JKS, 1234, Nitronics, Ron Squad, Oswald).
+
+**Loss classes (n=21):** both-dead-race **10** (48% — islands×4, unsw×2, portals, slithery, aus), elim **6** (29% — autarky×2, aus, weakhold, td, qOS), queen-dead-solo **4** (dilemma×2, islands, portals), feed-race **1** (schooltime — both queens alive ql 3v3, lost tot 18v195).
+
+**Queen death reason audit (all 21 losses):** own-fault (hitWall/hitSelf/hitOtherBody) **10** — hw×5, **hitSelf×2 NEW** (m1120482 unsw@193, m1120450 islands@79), hob×3; h2h **10**; none 1. The self-kill fix did NOT hold: hitSelf is back plus a large hitWall/hitOtherBody own-fault cluster — **9 of 14 bell losses have our queen die by her own fault**, not by rams.
+
+**Profile shift vs previous census:** elim share 53%→29% (early-elim gone, late-elims remain on autarky/td/qOS), bothdead still #1 (12→10), feed-race stable at 1. New: queen own-fault deaths now dominate the bell losses.
+
+## Queen feed-rate anatomy — how elite queens actually eat (13 sides qe≥15, 44 replays)
+
+Method: tooling/queenfeed.py — attributes each pearl-eat to the eater id (head==tile same round), queen = min starter id per team (team via split team-field + sonar ally union-find). Stationarity = queen head unchanged ≥5r. Escort = allies within Chebyshev 3 at eat round; lengths from exact split bodies + eaten growth.
+
+**Verdict: elite queens are escorted ROAMERS, not plants — and the feed is a LATE-game behavior.**
+- **97% of high-feed eats (510/524) happen while roaming** — planted_eats ≈ 0 for every qe≥15 queen.
+- **68% of high-feed eats (354/524) happen at r200+**, heaviest in r400-499: Knight isles-B 29@400+, unsw-A 36@400+, maze-B 41@400+, dilemma-A 36@300+. Feeding is the reward for winning the mid-game territory fight, not an opening plan.
+- **"Feeders" are escort screens, not deliverers** (there IS no delivery mechanic — queens eat only tiles their own head lands on): escort median len=4 (cheap small workers), esc_n 0.6-3.5. Knight's 108-eat queen ran esc_n=3.5 len-4s.
+- High-feed queens stay mobile to the end: cells/100r = 30-90 at r400+ (e.g. Knight queen 48→65). Ours either die mid-game or seal (schooltime both queens cells=4/100r, qe=1 — sealed queens CANNOT be fed at all; that map decides on total).
+- Feed rates: Knight isles-B 108, noober isles-B 57, Nitronics dil-A 56, unsw-A 50, maze-B 49, unsw-B 48 — vs our losses 0-18.
+
+**Prediction for v202 queen-plant (stationary anchor r320+):** a planted queen's eat ceiling ≈ respawns on her own tile (~0/100r) — anchor+hover CANNOT match roaming feed-rate; hoverers can't deliver (no feed action exists). Plant's real value = queenEnd-bell survival conversion (0→small-len vs the dead-queen 0s we keep posting — 9 own-fault deaths this window argues FOR the plant). But it CONCEDES the qlen bell vs surviving roamers (elite fed queens post len 25-108). NET: plant is a loss-reducer vs bothdead/queen-dead bleeds, not a feed engine; if the goal is matching elite qEaten, the mechanism to copy is escorted-roam (escort screen + safe pearl-field pathing r300+), not planting.

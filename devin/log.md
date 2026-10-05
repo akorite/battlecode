@@ -149,3 +149,4 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
 - census+structure study: elo 1572->1601 rank 122; vs1750+ wall 4-9; top bots = tiny funnel swarm (dr 2-14), longest/tot 20-50% (ours 5-18%), queen fed 4-10x, escort-density accepted
 - v168 last60: 29-31, classes bell-qdead 10/late-elim 10/longest 6/bothdead 3; TD->elim x4, maze->qdead x3, schooltime->longest x3; 1700+ losses = r150-300 split/econ collapse (portals 0-split flatline); elo 1601
 - census3 22-38 vs elite band: bothdead 12 (islands/autarky/unsw), late-elim 11 (autarky x5), early-elim RESURGENT 9 (stripes x4); queen selfkill solo=0 (fix held); our conveyor nva ~0-4/game NOT firing, elites run 23-204
+- census4 19-21: bothdead 10/elim 6/qdead 4; queen own-fault x10 (hitSelf BACK x2); elite queen feed=escorted ROAM 97pct, 68pct at r200+, feed=win-spoils not plan; v202 plant cant match feed-rate

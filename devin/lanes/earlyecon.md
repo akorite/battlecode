@@ -1263,3 +1263,64 @@ surfaces are (a) production parity (dead at v174/v168c forms — needs a
 different churn form), (b) escort/body-geometry (a rammer can't move
 through our other dragons — an ally-screen, not a fear price), or
 (c) spawn placement so children don't forage into contested corridors.
+
+## Spawn-position forensics (spec+numbers, 35 replays / 5279 splits)
+
+### Survival by spawn->enemy distance (BFS on real walls)
+| d_enemy | n | mean life | p(life>=20r) |
+|---|---|---|---|
+| 1-2 | 1430 | 35.1 | **0.473** |
+| 3 | 1979 | 46.3 | 0.585 |
+| 4-5 | 1076 | 38.8 | 0.514 |
+| 6-7 | 440 | 38.1 | 0.534 |
+| 8+ | 354 | 49.3 | 0.605 |
+
+Gradient exists but is shallow: the dangerous band (d<=2) costs ~11pp
+of 20r-survival vs d>=8. Modal spawn is d=3 (37% of all splits) — even
+"safe" spawns die at corridor attrition rates.
+
+### Spawn geometry ours (A) vs theirs (B) — the premise fails
+| side | n | d_enemy mean/med | d_own-centroid | own heads<4 | pct >=3 own |
+|---|---|---|---|---|---|
+| A (us) | 1258 | 3.91/3 | 17.5 | 1.36 | 0.138 |
+| B (them) | 4021 | 3.61/3 | 15.2 | 1.29 | 0.130 |
+| — r<=60 only | | | | | |
+| A | 246 | **5.19/3** | — | 1.19 | — |
+| B | 436 | **4.36/3** | — | 0.96 | — |
+
+**Our early children already spawn SAFER than theirs** (5.19 vs 4.36
+enemy dist r<=60) and we still lose the war. W-side d_cen 14.8 vs L 19.4
+is blob-size confounded (winners have bigger blobs by definition).
+d_parent=3 for 67% of splits — spawn cell is mechanical (tail-side
+offset), only WHEN is choosable.
+
+### Dilemma knife-fight verdict: YES, winners out-split early
+Per-game splits (A=us / B=them), winner marked:
+- we win (3 games): r0-30 ~8 vs ~5, r30-60 ~1 vs ~0 — BOTH sides taper;
+  we win knife fights where nobody ramped (early wipe/queen kill).
+- we lose (4 games): r0-30 **5-7 vs 9-17**, r30-60 **0-2 vs 3-16** —
+  theirs compound (~2x seed -> ~4x window-2), ours flatline ~0.
+- Parent profile r0-30: our splitting parents plen+clen ~= 7.2 total vs
+  their 9.7 — their early parents are +2.5 length before splitting.
+- Queen-parent share ~10-11% both sides; 90% is worker-parent churn.
+
+### Mechanism verdict: spawn-timing veto — REJECTED (data falsifies it)
+Proposed lever (delay splits while parent in contested ground) bounds:
+- population affected: 22-27% of splits sit at d_enemy<=2
+- upside: +11pp survival on <=1/4 of children = +2.6pp aggregate
+- cost: delayed production on the single variable that decides games
+- plus: our spawns are already safer than winners' — no differential
+  to capture. Predicted counter: splits@r60 -20%, alive@50 ~+0.1.
+**Do not build.** (c) spawn placement — closed, falsified.
+
+### What the forensics DO show
+The chain is: worker-parent split volume (2-9 vs 14-29 by r50)
+<- parents reaching plen~5+ (theirs split from ~9.7 pre-split len
+r0-30 vs our ~7.2) <- workers surviving past len-3 <- the closed
+evasion surface. Every link upstream of "production ramp" is a
+survival link. With (a) in/out-reach pricing closed and (c) spawn
+timing falsified, the only untested member of the closure list is
+(b) escort/body-geometry — physical cover via allied bodies, not a
+fear price. Caveat: ally-clump is already measured-flat (dAlly
+4.64/5.13, we clump MORE and die more) so a body-screen must change
+positions relative to THREAT vectors, not allies alone.

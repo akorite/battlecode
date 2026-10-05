@@ -437,3 +437,51 @@ Scope: escape mechanism only (94-line diff). Verified against engine truth at en
 ## Verdict
 
 Fix K1+K2 before gating (both are one-expression changes; K1 can convert "rammed anyway" into a strictly worse suicide). K3 worth the seen-only trigger guard. Mechanism itself is sound: reachable, well-placed in decide(), and the engine semantics it relies on check out.
+
+# Colony-blob hypothesis measurement (autarky lane) — FALSIFIED, no v225 build
+
+Task: measure whether winners fight as a compact swarm while we spread; if yes, prototype cohesion pull (wCohere*dist/6) in abyss_v225 vs v209.
+
+## Data
+
+Corpus: 137 replays parsed (`analysis/blob_study.py`): top_replays 100, ladder_replays 7, our_replays 30; 117 decisive games carried paired stats (`analysis/blob_paired.py`). Per roundStart per team: median pairwise chebyshev (torus), mean dist to circular-mean centroid, per-dragon nearest-ally dist (nn), straggler frac (nn>8), deaths ≤10 vs >10 from own centroid (death loc = last dragonUpdate head; dragonDeath carries no position).
+
+## Pooled distributions (non-351 games): winners are MORE spread, not less
+
+| phase | medPair W/L | cenDist W/L | nn med/mean W | nn med/mean L | alive W/L |
+|---|---|---|---|---|---|
+| early (<120) | 13 / 13 | 9.1 / 8.9 | 4.0 / 4.4 | 4.0 / 5.1 | 17 / 14 |
+| mid (120-330) | 15 / 14 | 12.6 / 10.4 | 3.0 / 3.2 | 3.0 / 4.0 | 40 / 28 |
+| late (330+) | 16 / 14 | 12.9 / 10.5 | 4.0 / 4.3 | 4.0 / 4.6 | 30 / 24 |
+
+Footprint (pairwise, centroid-dist) is LARGER on the winning side — losers get compressed into a pocket. The only tighter-winner signal is the nn MEAN (3.2 vs 4.0 mid): winners have fewer isolated stragglers, not more density.
+
+## Paired per-game (the right comparison — controls map/matchup)
+
+mid: W−L nn = **−0.48** mean (−0.23 med), W−L alive = **+12.6**. The nn edge is fully accounted for by army size:
+
+- winner-fewer-alive games (n=25): winner tighter in **2 (8%)**
+- winner-more-alive games (n=75): winner tighter in **61 (81%)**
+- tighter>0.3: 44% of games; looser>0.3: 21%
+
+late: W−L nn = −0.08 — coin flip (tighter 31% / looser 39%); alive still +5.6.
+straggler frac: W−L = −0.023 mid — the only cohesion-adjacent edge, small and size-entangled.
+Our corpus (n=23 decisive): same shape — nn −0.69 with alive +13.8; winner-fewer-alive n=5, tighter 0/5.
+
+## Deaths vs own centroid
+
+Winner side dies NEARER its centroid: 39% of deaths ≤10 cells vs 36% loser. Opposite of "losers die isolated" — consistent with die-in-place feeding (bodies dropped inside the swarm where the champ eats).
+
+## Verdict: hypothesis not supported → skipped the v225 build
+
+Condition for the prototype was "winners significantly more compact" — measured, they are not:
+
+1. Cohesion (nn) is a **readout of army size, not an independent lever** — winners are tighter because they have 40 dragons in similar territory (8% tighter when they field fewer).
+2. Winners' footprint is **larger** (+2.2 cenDist mid): they hold more territory. A centroid-pull `wCohere*dist/6` on idle workers would contract the swarm toward the losing configuration — wrong sign on the measured effect.
+3. What the data DOES support is already our direction: numbers dominance (+12.6 alive mid) = feed efficiency / consolidation; straggler suppression (−0.023) is the only live cohesion signal and is better served by escort/not-dying-isolated than a global pull.
+
+**Recommendation: don't build wCohere.** If a cohesion test is still wanted, the honest variant targets the nn TAIL (penalize targets when no ally within ~8), not centroid distance — but the effect size (−2.3pp stragglers) is small and entangled with survival.
+
+Caveats: botA/botB are empty in this replay format — can't isolate our side; within-game W/L contrast in our 30 games reproduces the population pattern anyway. Deaths located at last-seen head (accurate to last move). Centroid uses circular mean on the torus (correct across wrap seams). Heads seeded from map dr spawns; splits assign child teams.
+
+Note: origin/devin/v120 STATE.md already mentions a "v225 candidate" — if a build ever happens on this lane the name may need bumping.

@@ -293,3 +293,6 @@
 - v194 (feedRadius 12->20): FAIL 45.2%/42 vs v192. Autarky's rad study (on v182) doesn't transfer: inside v192 rad12 wins — fewer far-feeder transit deaths, fleet +23%, qlen 5.25v4.0. Radius correct at 12.
 - v195 (workerRam soft screen): FAIL 44.4%/18. Soft evasion tax degrades foraging (longest -16%), trauma pair-loss. 4th mobility-touch that costs more than it saves (region, unhide, rad20, workerRam) — victim-ram needs a different fix class.
 - Conveyor metric (gate replays): v192 nva feeds 8-11/window vs base 1-2 (5-10x); h2h transit losses ~3/game both sides — gains >> losses, radius holds at 12.
+- v196 (queen-graze): FAIL 29.4%/17. v197 (champ sweep): FAIL 28.6%/7 — champ IS the anchor; sprinting teleports it = v182 failure mode (longest -40%). Closed: champ stays put, grazes local drops.
+- v192 gate mid-read 131g: 49.6% — BIG 59.3% / SMALL 42.9%. Fails upload bar. v198 (midfeed big-map gate NC>=600) gating all-maps now.
+- Elo 1554 (challenge results landing + autoscrim parity losses). refill4 EV-filtered loop running.

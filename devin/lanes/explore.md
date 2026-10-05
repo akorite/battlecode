@@ -183,3 +183,18 @@ Map clusters: **Tower Defense→late-elim ×4** (queen h2h@97-236 then snowball)
 Headline: **the 1700+ differential is the r150-300 split/econ engine, not openings.** At r50 we're roughly even; they convert to 2-8x more splits + pearls while our engine stalls (portals being the extreme).
 
 **Ladder state:** elo **1601** (recovered from 1572 skid), rank ~122. Last-40: **19-21.** Bleed opponents: Ron Squad@1700 **1-4 NEW**, SuitedConnectors@1598 1-4, zzz3nith@1639 12-13, wawow830@1590 15-15, 1234@1700 1-2, DeepSeek@1761 1-1 (v168 era). No sub-1500 losses.
+
+## Census refresh — newest 60 games 2026-10-05 ~07:30Z (still v168; elite-band feed: chad gdp@2107, KnightCapital@1981, nooberGamer@1803, JKS/Um_nik@1740-50, Nitronics@1733)
+
+**Record 22-38 (37%)** — elo slid to 1579. Opponent band jumped to 1660-2100.
+
+**Top-3 causes (38 losses):**
+1. **bell-bothdead 12** — both queens die, we lose longest/total. Islands ×4, Portals ×2, UNSW ×2, australia, maze, td, trauma. hw asymmetry inside these: opponent hitWall+self 162-716 vs our 10-167 — they throw 2-4x more bodies at walls/collisions and STILL win on funnel concentration (ln their 33-64 vs our 11-34).
+2. **late-elim 11** — queen h2h @26-341 then snowball elim. Autarky ×5 (!), qOS ×3, weakhold, td, australia. Queen picks fights pre-r260 on small maps vs elite swarm and the fall is terminal.
+3. **early-elim <250: 9 (RESURGENT — was 1 last census)** — Stripes ×4, qOS ×2, autarky, devil, td. All queen h2h @49-228 vs elite openers; a50-gap pattern same as before.
+
+Trailing: queen-ram 2 (islands, dilemma — down from ~8-9 dominant share, consistent with self-kill fix holding: **zero solo queen hitSelf this batch vs 3 last census**), corridor-attrition 2 (schooltime), queen-other 2.
+
+**Delta vs last census:** bothdead 3→12 (exploded — vs this band their queen dies too but their funnel survives, ours doesn't), early-elim 1→9, self-kill solo deaths 3→0 (v168's fix confirmed live), queen-ram share shrank hard.
+
+**Conveyor check (3 worst losses + 1 attrition, nva r120-499):** OUR nva = 0,1,4,2 per game — **the mid-feed conveyor is NOT firing on ladder** (vs the 8-11/window local rate). Meanwhile the ELITE opponents run nva=23-204/game: chad gdp weakhold B=149 stall-deaths while winning e=609v2, KnightCapital isles B=204-range. Read: their feed-conveyor queues sacrifice stalled workers by the hundred and the funnel still delivers — our near-zero nva means the conveyor never engaged, and our econ in the same games was e=2-142 vs their 245-1784. If v168 shipped the conveyor, it isn't reaching its firing condition on ladder.

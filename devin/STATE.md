@@ -149,3 +149,16 @@
   62.5% verified on the old base.
 - Note: qlen@end dropped 41% under v178 too (1.645 vs 2.774) — escorts
   occupied cells her feeders needed; another queen-cost tax.
+
+## ~08:40 UTC — v179 verdict + v180 built
+
+- **v179 (feedBurst port): 55.0%/40, W4/S14/L2 — MERGE.** alive@end +20%,
+  zero queen-cost (dead 0.850 flat, alive@end 0.125 vs 0.094). unsw/
+  default/weakhold/big_empty wins. The consolidation mechanism that works
+  without the queen tax. Port from earlyecon's verified v158.
+- **v180 (worker-region): built.** Static region map at init + forage
+  targets in small regions pull weakly (workerRegionNorm=20, starving
+  exempt). Targets the one-sided hitWall bleed on corridor maps —
+  scoring not veto (rules-legal for workers).
+- Remaining queue: v180 smoke (corridor maps), then composite assembly
+  from merge-passing pieces.

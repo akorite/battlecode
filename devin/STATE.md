@@ -178,3 +178,18 @@
   +EV math: even 10-17% win rate vs +400-700 Elo is profitable.
 - v181 built = v168 + adj-ungate + feedBurst + worker-region (composite,
   region toggleable via param). v180 smoke 20/40.
+
+## ~10:00 UTC — v180 FAIL + lane re-tasking
+
+- **v180 (worker-region): FAIL 41.7%/36** (0W/15S/3L). longest@end
+  -15% — pocket forage was FEEDING dragons, not just wall-killing them.
+  Pulling workers off regions starved them.
+- **Pattern across 3 fails**: v173 (wh_-widen), v178 (close-cover),
+  v180 (region-discount) — every mobility/econ restriction costs more
+  than it saves. Correctness fixes are the only reliable gains.
+- **New lane directive**: study top-team replays directly and clone
+  observed winner behavior at the same decision points, not invent.
+  pocket: corridor worker behavior diff. autarky: queen positioning vs
+  region topology. earlyecon: early-split survival r10-50. explore:
+  census + rank tracking.
+- v181: workerRegionNorm=0 (piece killed), then gate vs v168.

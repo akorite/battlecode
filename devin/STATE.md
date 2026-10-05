@@ -296,3 +296,16 @@
 - v196 (queen-graze): FAIL 29.4%/17. v197 (champ sweep): FAIL 28.6%/7 — champ IS the anchor; sprinting teleports it = v182 failure mode (longest -40%). Closed: champ stays put, grazes local drops.
 - v192 gate mid-read 131g: 49.6% — BIG 59.3% / SMALL 42.9%. Fails upload bar. v198 (midfeed big-map gate NC>=600) gating all-maps now.
 - Elo 1554 (challenge results landing + autoscrim parity losses). refill4 EV-filtered loop running.
+
+## 2026-10-05 ~09:00Z — v192 postmortem → v200/v201
+- v192 gate died at 49.6%/131 (BIG 59.3 / SMALL 42.9 — but small-n CI overlaps noise).
+- Autarky adversarial review: champAnchor was DEAD CODE (champAnchorId_==champId_ never
+  true off-vision — locateChamp resets both). BIG-map gains ran on midFeed/leash/rad/burst only.
+- Small-map suspect reranked: qRamAdj-global (fences queen on dense boards → small qlen@end →
+  lexicographic losses). mid-feed nva=0 on small maps (beacon gate) — exonerated. Leash wash 53.4%/58 (v199).
+- Conveyor metric on v192 replays: small elim maps end BEFORE feed window — early-elim class owns them.
+- BUILT v200 = v198 + anchor->w_.chId + torus density-centroid + qRamAdj NC>=600 gate + leash INF pocket fix + feedRadius ordering. Full board firing.
+- BUILT v201 = v200 + pocket deadEnd branch map (deg<=2 chain to deg1 tip; len>=2 entry fatal-priced + inside -> die-in-place). Corridor smoke vs v200 firing.
+- earlyecon: both production knobs inert/negative — PD fix class = worker survival/evasion, not econ.
+- explore census: vs1500-1750 class2 elim 8/17; vs1750+ class3 bells 6/13; winners' queen eats 4-10x ours; longest/total funnel 20-50% vs our 5-18%.
+- Elo ~1597 (refill +EV grinding, 2/3 vs chad2087, beat Knight1981).

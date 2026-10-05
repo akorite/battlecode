@@ -45,6 +45,7 @@ struct World {
     int queenCell = -1, queenLen = 0, queenRound = -1;
     // Best non-queen champion candidate known (longest teammate; ties lowest id), same sources.
     int chId = -1, chCell = -1, chLen = 0, chRound = -1;
+    int champAnchor = -1;                // self-elected champion's locked cell (persists across turns)
     int firstRound = -1;                 // first round this process observed (children start late)
     int echoEnemy = 0;                   // enemy echoes this turn (enemy + enemyHead)
 

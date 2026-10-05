@@ -73,9 +73,12 @@ class Policy {
             // locks onto its current cell instead of roaming — feeders die at a
             // stationary head, not at where she was 15 rounds ago (WaterCandle
             // locks ~r330 for an r380 feed). Needs room to pace a long body.
+            // Anchor lives in World: Policy is rebuilt every turn — a per-turn
+            // member just chases the head (found in review: v149a's "plant" was
+            // really only a deceleration pull, the board win came from r330).
             if (selfChamp_ && w_.t.round >= p_.feedRound - p_.champPlantLead && w_.t.round < p_.feedStop) {
-                if (champAnchor_ < 0 && regionReach(w_.head) >= 12) champAnchor_ = w_.head;
-            } else champAnchor_ = -1;
+                if (w_.champAnchor < 0 && regionReach(w_.head) >= 12) w_.champAnchor = w_.head;
+            } else w_.champAnchor = -1;
         }
         if (p_.sonarOn) emitSonar();
         buildBase();
@@ -562,7 +565,6 @@ class Policy {
     int champId_ = -1;
     bool champIsQueen_ = false;
     bool selfChamp_ = false;      // queen-less team and we are the longest dragon known: we are the champion
-    int champAnchor_ = -1;        // selfChamp_ plants here once the feed window opens (water candle lock)
 
     // Who is the champion? Our queen while she is alive (any evidence <= champMemory rounds old:
     // sight, her beacon, or a relayed report); otherwise, from champFallbackRound, the longest
@@ -905,7 +907,7 @@ class Policy {
         // The planted champion hovers its anchor: a moderate fixed pull keeps it
         // findable (~3-5 cells) while local respawns still outbid the drift —
         // full freeze starved it between drops on stronghold (44 vs 61 bell loss).
-        if (champAnchor_ >= 0) targets_.push_back({champAnchor_, 1.2, -1, 0.0});
+        if (w_.champAnchor >= 0) targets_.push_back({w_.champAnchor, 1.2, -1, 0.0});
         // Unpaired portal ends: pull dragons to their lip cells so a scout can
         // cross and learn the partner, opening the far half of the map. Maze-only:
         // on open maps the pull outbids real food and parks workers on the lips.

@@ -287,3 +287,35 @@ Data: `top_replays/` = 100 ladder replays (teams 264/306/91/213, 25 each), `our_
 3. **Champ plants midfield-forward** (dist ~25 from own queen start, spread ~5) — our champAnchor already does this shape; the gap is champLen 30 vs 47, i.e. feed throughput, not anchor placement.
 
 Replays: `top_replays/`, `our_replays/` on this box. All open-map cohort; corridor-class maps excluded (queen geometry differs by map class).
+
+---
+
+# Adversarial review — abyss_v182 vs v168 (champAnchor_ + feedHeardDie=30 + extras)
+
+Diff inspected: `common.hpp`, `policy.hpp` (9 hunks). The landed diff is wider than the stated "persistent champAnchor + feedHeardDie 2→30": it also contains **feedBurst** (wFeed×3 for feeders within BFS-14 of feedHead_ during the first 20r of the feed window), **regionSize_ component labeling** (workerRegionNorm=0 — dead code, one wasted BFS per drone), and an **unstated qRamAdj scope change** (the `W==40 && H==15` gate dropped — weakhold-only fatal-reach queen pricing now applies on ALL maps; probably a deliberate de-gating since dims-gates are banned style, but it conflates the gate result: a pass/fail won't isolate which arm moved it).
+
+## (a) feedHead_ at a stale cell — yes, and worse than stated
+
+Anchor semantics: `champAnchor_ = champHead_` refreshes every round `champHead_>=0`, i.e. it records the last *estimate*, not a confirmed sighting — `champHead_` itself may already be `champAge_≤40` stale. When the estimate expires, `feedAge_ = round - champAnchorRound_` **resets to ~0**, re-arming `heardNear` (≤feedHeardDie=30) at a position that may already be ~40 rounds old. **Age laundering: true position staleness at die-time can reach ~40 (report edge) + ~30 (anchor window) ≈ 69 rounds** — the 30-round die gate does not bound real staleness. Fix: stamp the anchor with position-age not evidence-age — `champAnchorAge_ = champAge_` at refresh, `feedAge_ = champAnchorAge_ + (round - champAnchorRound_)`.
+
+Sharper version: world.hpp:265 clears `chRound` when `chCell` is visible-and-vacated — i.e. the moment the team *confirms* the champ left, `champHead_` drops to -1 and anchor mode engages on the **known-empty cell**. No `visible(champAnchor_)` check exists in the else-if, so a feeder will converge on and die at a cell its own team just verified empty. Fix: mirror the vacate check — skip/clear anchor when `w_.board.visible(champAnchor_)` and champ not seen there.
+
+Mitigant: for a *planted* champ (spread ~5 per the queen study) the stale anchor lands inside the patrol orbit — drops still get re-collected. The ghost-feeding risk concentrates in mobile-champ phases (queen-as-champ before anchor lock, pre-fallback).
+
+## (b) Dead-champ poisoning — partial, ~30r blast radius
+
+On champ death: sightings stop → `champHead_` expires at champMemory=40 → anchor holds the corpse site and `heardNear` stays armed ~30 more rounds. Feeders die at the corpse cell dropping THEIR pearls there — if the enemy swept the site, that's feeding pearls into enemy-held ground. A new elected champ re-arms `champHead_` → anchor re-targets, so not permanent. Net: bounded leak, ~30r × local feeder density per champ death. Worth one line: clear `champAnchor_` when the champ's death is observed or when a *different* champ id takes over `champHead_`.
+
+## (c) champAnchorAge=40 vs feedHeardDie=30 — inconsistent, makes zombie feeders
+
+Anchor serves `feedHead_` for anchor ages ≤40, but `heardNear` dies only ≤30. For anchor ages 30-40 feeders keep the to-feed pull, converge to `champFeedDist≤2` of the anchor, and **cannot die** — they hover at the ghost ring as non-productive drones for 10 rounds each. Either clamp the anchor branch to `champAnchorAge = min(champAnchorAge, feedHeardDie)` or raise `feedHeardDie` to 40 — the two constants must bound the same window.
+
+## Extra holes found
+
+- **selfChamp_ can feed itself to death**: the else-if isn't `!selfChamp_`-guarded. A freshly elected champ with `L_ ≤ feedMaxLen(6)` (small champ at election, e.g. remnant games) takes `feedHead_ = own stale anchor` and can die-in-place at its own remembered cell. One-token fix: `else if (!selfChamp_ && champAnchor_ >= 0 && ...)`.
+- **feedBurst_ amplifies ghosts**: burst requires `feedAge_ ≤ champMemory(40)` — a 39-stale anchor still gets wFeed×3 pulling feeders harder toward dead cells. Consider `feedAge_ ≤ feedHeardDie` as the burst freshness gate so only die-eligible targets get the pull.
+- Minor: `feedBurstRounds`/`feedBurstDist`/`feedBurstMult` new params — first 20r burst ≈ the front-load recipe from steering-4 (13+ recycles in window-open). Mechanism target for telemetry: nva feeds inside r360-380 should jump vs v168.
+
+## Conveyor telemetry (in progress)
+
+Gate replays for v182/v184 run on the integrator's box — not reachable; running a local gate `abyss_v184 vs abyss_v182` on autarky,australia,unsw,big_empty,schooltime,islands ×2 seats (24g, tag `v184_rad24`, --keep-replays) to answer "does feedRadius=12 cut h2h transit deaths without losing nva feeds". Per-map table to follow.

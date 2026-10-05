@@ -316,6 +316,22 @@ Anchor serves `feedHead_` for anchor ages ≤40, but `heardNear` dies only ≤30
 - **feedBurst_ amplifies ghosts**: burst requires `feedAge_ ≤ champMemory(40)` — a 39-stale anchor still gets wFeed×3 pulling feeders harder toward dead cells. Consider `feedAge_ ≤ feedHeardDie` as the burst freshness gate so only die-eligible targets get the pull.
 - Minor: `feedBurstRounds`/`feedBurstDist`/`feedBurstMult` new params — first 20r burst ≈ the front-load recipe from steering-4 (13+ recycles in window-open). Mechanism target for telemetry: nva feeds inside r360-380 should jump vs v168.
 
-## Conveyor telemetry (in progress)
+## Conveyor telemetry — v184 (feedRadius=12) vs v182, local 24g gate
 
-Gate replays for v182/v184 run on the integrator's box — not reachable; running a local gate `abyss_v184 vs abyss_v182` on autarky,australia,unsw,big_empty,schooltime,islands ×2 seats (24g, tag `v184_rad24`, --keep-replays) to answer "does feedRadius=12 cut h2h transit deaths without losing nva feeds". Per-map table to follow.
+Their gate replays aren't on this box, so this is a local paired gate: `--cand abyss_v184 --base abyss_v182 --maps autarky,australia,unsw,big_empty,schooltime,islands --seeds 2 --jobs 2 --tag v184_rad24 --keep-replays` (24g). Result: **45.8%** (pairs 2W/7S/3L) — below break-even; schooltime is pure B-seat-lock (B won all 4 regardless of bot).
+
+**Feed-window (r360-499) deaths per game, v184 vs v182:**
+
+| map | nva feeds | h2h | hitSelf | longest@end | wins |
+|---|---|---|---|---|---|
+| unsw | 28.5 / 53.2 | 20.5 / 20.0 | **61.5 / 38.0** | 24.2 / 25.0 | 1/3 |
+| australia | **10.5 / 37.0** | 11.2 / 11.2 | 0.8 / 19.8 | 26.5 / 38.8 | 0/4 |
+| autarky | 1.5 / 1.0 | 1.2 / 1.2 | 4.0 / 1.2 | 38.0 / 36.5 | 1/3 |
+| big_empty | 7.0 / 10.0 | 33.8 / 33.8 | 7.2 / 7.2 | 52.2 / 50.2 | 2/2 |
+| islands | 32.0 / 18.5 | 5.5 / 4.0 | 14.2 / 13.8 | 32.8 / 33.2 | 3/1 |
+| schooltime | 35.8 / 26.8 | 9.5 / 11.0 | 54.0 / 29.5 | 38.2 / 22.8 | 0/4* |
+| **ALL** | **19.2 / 24.4** | **13.6 / 13.5** | **23.6 / 18.2** | **35.3 / 34.4** | **7/17** |
+
+**Answer to the radius question — it fails the trade:** feedRadius=12 suppresses nva feeds **−21%** (19.2→24.4 lost; −47% on unsw, −72% on australia) while h2h transit deaths stay **flat** (13.6 vs 13.5) — the "feeders die walking to the anchor" theory doesn't hold: those h2h deaths are combat attrition that happens anyway. Displaced feeders don't survive either — **hitSelf +30%** (23.6 vs 18.2): a feeder barred from recycling finds a worse way to die. longest@end flat (+0.9, noise). Consistent with the queen-study measurement that feeder deaths distribute at ~median 21 tiles from the anchor: a 12-tile radius excludes >half of all recycling structurally. If a radius gate is wanted at all, the empirical median suggests ~20-25, not 12 — or gate on *path-exposure* (enemies along the walk) rather than raw distance.
+
+Replays: `results/v184_rad24/replays/`.

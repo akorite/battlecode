@@ -162,3 +162,19 @@
   scoring not veto (rules-legal for workers).
 - Remaining queue: v180 smoke (corridor maps), then composite assembly
   from merge-passing pieces.
+
+## ~09:30 UTC — leaderboard + ranked salvos
+
+- Our team has isPublic:false — invisible on the public ladder. Real
+  field bigger than the 88 shown (hidden teams like wawow830@1632 exist).
+  Our tracked Elo ~1583 slots ~rank 12 among VISIBLE teams; true rank
+  higher (more hidden teams above us possible). Cutoff math unchanged.
+- Ranked salvo #1 fired: wawow830 x6, zzz3nith x4, nooberGamer x2 (12
+  games, the best +EV targets). Result so far ~7W-7L = breakeven.
+- Refill queued (~30m): DeepSeek-1761 x5, Hydra x5, STAR-1688 x4,
+  1234 x3, okbro x2.
+- Top-team salvo queued (~65m): Cache 2229, cheji 2124, Quaker 1955,
+  Knight 1843, zhongwen 1806, Um_nik 1741, Nitronics 1728, JKS 1634 —
+  +EV math: even 10-17% win rate vs +400-700 Elo is profitable.
+- v181 built = v168 + adj-ungate + feedBurst + worker-region (composite,
+  region toggleable via param). v180 smoke 20/40.

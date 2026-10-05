@@ -289,3 +289,4 @@
 - v193 (v192 + queenHideUntil 390->100, unhide-inside-leash doctrine): smoke running.
 - refill3 ranked top-ups running (winnable targets only; high-elo lottery cut per EV math).
 - Next: if v192 clears -> submit + fire benchmark challenges + push. If v193 reads >v192 -> gate it next.
+- v193 (queenHideUntil 390->100): FAIL. Fleet -33% (queen is the early factory; unhiding stops her budding), qlen flat 4.4v4.6, queen-alive +33% can't pay for it. Hide-vs-grow is structural: she produces OR grows, not both. Dead end logged.

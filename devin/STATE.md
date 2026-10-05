@@ -51,3 +51,10 @@
 - **v157 = best measured-vs-live (58%/88)**. Internal read: C5 arm costs queen survival (kept-after-theirs 24.2% vs 38.5%). v165 (portal-fix only, C5 reverted) vs v157 boarding now — winner = submission base.
 - Pattern confirmed across all gates: seat-locks dominate ~75% of pairs; individual pieces wash ±5% inside n≤90 boards. The lift has to come from stacking ALL the measured-positive pieces, not any one.
 - Ladder ~1615, ranked refill still stopped.
+
+## Checkpoint ~09:45 UTC (Sat Oct 3)
+- **v157 SUBMITTED + ACTIVE** (server v117): portal fix + C5 + fallback330. Gate 58.0%/88 vs v149. Tag ladder-v157 pushed.
+- **C5 marginal verdict: KEEP** — v165 (portal-only, C5 removed) lost 41.7%/60 to v157, 0W/25S/5L pairs; qlen@end 2.78 vs 3.89. autarky's C5-drag hypothesis disproved on the board.
+- v153-pure full board: 50%/68 — fixture lift doesn't transfer; queen module parked as pieces.
+- Built + staging: v168 = v157 + reachBoost + qRamAdj + die-in-place (SPLIT-0 noValidAction vs neck-step). Board vs v149 running.
+- Ladder ~1610 (14/20 autoscrims).

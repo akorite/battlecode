@@ -309,3 +309,17 @@
 - earlyecon: both production knobs inert/negative — PD fix class = worker survival/evasion, not econ.
 - explore census: vs1500-1750 class2 elim 8/17; vs1750+ class3 bells 6/13; winners' queen eats 4-10x ours; longest/total funnel 20-50% vs our 5-18%.
 - Elo ~1597 (refill +EV grinding, 2/3 vs chad2087, beat Knight1981).
+
+## 2026-10-05 ~12:00Z — small-map hunt: per-map bisect
+- v200_full mid-read ~80/132: all maps ~50% EXCEPT Colosseum 0/4 + default_small 0/4 (the <=256-cell boards — where qRamAdj/midFeed are already off). Only leash touches them.
+- **v205 (v200 + leash gate NC>=600): 48.3%/60** — Colosseum recovered 4/6, TD 4/6 (leash WAS the tiny-map bleeder: pinning her to a brawl covering the whole 256 map) BUT dilemma 0/6 triple-loss (leash kept her alive there — v199's 6/6).
+- **v204 (v200 + midFeedMinTiles=900): 38.3%/60 FAIL** — mid-feed on 600-900 maps was HELPING, removing it lost weakhold/dilemma/stripes. Keep midFeed>=600.
+- **v203 (champFeedDist 2->4): 35.7%/14 dead** — ring-widen loses.
+- **v202 (queen plant): 48.7%/76 flat-neg.** Autarky explains: dead code again — feeder preference `chId==ourQueen` never true (chId tracks champ). Untested, parked.
+- **v201 deadEnd: 43.8% gate** — mechanism sound (wall->0) but dedie zaps dilemma STARTERS spawned on dead-end cells r0-1.
+- Queen-feed provenance (10 loss replays): queens eat ONLY death-drops; ours 12 vs winners 9 — a win-more amplifier on bells, not a loss-prevention lever.
+- **v206 = v200 + leash gate NC>=400** (off only on <=300 knife fights, on for dilemma/TD/devil): FULL 220g gate fired.
+- **v207 = v206 + queenHideUntil 100** (unhide-inside-leash): small board running.
+- **v208 = v206 + deadEnd w/ r>=30 gate** (starter-zap fixed): small board running.
+- Dead-pile added: v174 splitLen3, v180 region-discount, v188 openUntil0 (~40%/32), v194 rad20, v195 workerRam, v196 graze, v197 champ-sweep.
+- Elo 1600. refill4 +EV loop running.

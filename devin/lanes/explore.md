@@ -137,3 +137,19 @@ Record **9-14 (39%) — a regression vs v157's 17-13 (57%).** Opponents: 1234@17
 **Small-map pearls (our eaten60 vs audit baseline):** default 18 (recovered vs v157's 8-11), dilemma 7-10 ↓, trophy 25 ↓, autarky 34/19 ≈, maze 32 ≈, weakhold 9 ↑, schooltime 9 ↓, stripes 3-6 ≈. Losses remain queen-driven not pearl-driven.
 
 **v168 vs v157 read:** the both-dead-longest funnel persists (6→3 only because opponents' queens now often survive OUR death — solo-dead went 4→7). Headline: **something in v168 makes our queen die far more — 8 h2h + 3 hitSelf, only 17% reaching bells.** hitSelf tripling is the sharpest new signal (queen walking into her own body — champ-funnel/anchor interaction?); h2h surge consistent with the reach-model/trade-ok zone changing around her. Recommend: replay-pull the 3 queen-hitSelf kills (m1098343@326, m1098353@291, m1098354@195) for the trap geometry before any more ship decisions.
+
+## sub#118/v168 60-game loss census, pocket taxonomy — 2026-10-05 (replays DO download — classified from real qDeadReason + alive@r50, not score-line guesses)
+
+Last 60: **30-30**; v168-era (post-02:00Z) **9-14**, pre-era 21-16. Our elo fell 1617→1572 across the skid.
+Classes: **1** = queen self-kill (hitWall/hitSelf/hitOtherBody), **2** = elim or early-deficit→h2h (alive50 gap ≥4), **3** = bells/other.
+
+**(a) Class dominance by opponent band:**
+- vs 1500-1750 (17 losses): **CLASS 2 dominates — 8/17** (6 elims + 2 deficit-h2h), CLASS 3 bells 5, CLASS 1 4.
+- vs 1750+ (13 losses): **CLASS 3 bells 6/13**, CLASS 1 selfkill 4, CLASS 2 elim 3. Top band kills us on bells after queen h2h deaths (their queens reach end-state, ours die @110-257), not by out-splitting us early.
+- vs <1500: 0 losses in window.
+
+**(b) Early-deficit→elim correlates with SMALL/pocket maps:** Devil (5v21 — biggest gap), Trophy ×2 (4v14, 3v8), Trauma (4v10), Stripes (2v5), Tower Defense ×2 (2v4, 2v2), weakhold (4v4), Dilemma (6v3), qOS (3v4) + 1 deficit-h2h on Australia (14v18). True open-map elims: none — the elim class is pocket/small-map territory where a few-dragon deficit compounds to full elimination. Caveat: ~half the 2-elims had EVEN a50 (weakhold 4v4, td 2v2, qOS 3v4) — those are queen-pickoff→snowball elims, not early-split deficits; real opening-race losses are Devil/Trophy/Trauma/Stripes.
+
+**Diagnostic games 1098973-80 + 1099009-17 (12g vs 1234/okbro/DeepSeek): v168 went 4-8.** Wins: weakhold, dilemma, stripes(elim of them), default. Losses: CLASS3-bells 5 (australia, trauma×2, autarky, schooltime, stripes), CLASS2 3 (td elim, dilemma elim, trauma deficit-h2h). Pattern matches the census: no CLASS1 selfkills in the diagnostic set, bells losses are post-queen-death on open maps, elims on small maps.
+
+**Headline:** queen-mortality story from the v168 replay-census holds — h2h queen deaths drive both the bells losses (1750+ band) and the pickoff→elim games (1500-1750); CLASS1 selfkills cluster on maze/autarky/australia wraps (4 vs each band); true early-swarm-deficit losses are a small-map-only phenomenon.

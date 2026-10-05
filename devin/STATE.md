@@ -92,3 +92,20 @@
   the cap to champLen_-1 once a champ exists (true consolidation).
 - v174 (swarmSplitLen 4→3), v175 (C7 queenSealed + champMargin=3),
   v176 (feedMaxLen relax), v177 (qRamAdj-only) queued/built. v177 smoking now.
+
+## ~06:10 UTC — live census + v174 dead
+
+- **Live v168 record ~39%**: SuitedConnectors(1563) 1-4, STAR(1700) 2-3,
+  1234(1700) 1-3, DeepSeek(1768) 2-2, okbro(1783) 2-3, wawow(1618) 3-2.
+  Map bleeds: TowerDefense 0/3, Trauma 0/3 (live replays: hitWall dominates
+  fleet deaths — TD elims r132-210 w/ 13-25 wall deaths; trauma r499 grinds
+  275-327 wall deaths. Cornered units pick lethal least-bad moves.)
+- **v174 FAIL 0%/24, 0/12 pairs**: splitLen 4->3 HALVED production
+  (splits@r60 4.5 vs 10.75; alive@r50 2.2 vs 8.8) — len-3 children too
+  fragile; workers split instead of eating (pearls@r60 9.7 vs 24.8).
+  H-EARLYDEF production arm disproven: deficit is fragility/intake.
+- **v177 wash 50%/48 identical metrics** — qRamAdj ungate mergeable as
+  insurance (dims-table fix, zero cost).
+- v175 (C7+champMargin) running now, v176 (feedMaxLen) queued.
+- pocket -> room-shrink trajectory mechanism (abyss_qshrink vs v168).
+  autarky -> champStep on v168 base. Lanes all producing.

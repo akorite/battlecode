@@ -148,3 +148,19 @@ longest@end gain (over-consolidation into a dead champ).
 wh_=pocketMap_ suppressed budding on pocket maps (splits@r60 -16%, the
 documented pin regression), queen-dead flat 0.75 — pure cost. Reverted;
 wh_ dims table stays pending a legal feature. qRamAdj isolated to v177.
+
+## H-WALLBLEED — fleet hitWall attrition is one-sided (OPEN)
+
+**Data** (m1100855 trauma live loss, team-B=us): 275 hitWall + 55 noValidAction
+vs opponent's 14 total. Deaths spread all rounds (peak r350-400), clustered in
+OUR territory (x0-39, y0-23 of 48-wide board) — foraging into dead-end pockets,
+then least-bad = wall death. Opponent never does this.
+
+**Mechanism**: workers forage into shrinking pockets with no region-awareness;
+when cornered the eval has only lethal moves. Same root cause as queen
+self-kill but fleet-wide. Worker-side fix must be scoring/foraging-target
+(rules ban worker vetoes only on splits/openings; a pocket-avoidance bias in
+forage scoring is a legal preference, not a safety veto — needs care).
+
+**Kill condition**: if pocket's room-shrink variant (queen-only) drops
+wall-deaths/game in its gate, extend the mechanism to worker forage targets.

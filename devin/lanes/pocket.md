@@ -584,3 +584,102 @@ for workerRegionNorm) — C7 becomes a 4-line port:
   sealed := openNb(cell) <= 2 || regionSize_[cell] <= qlen + 8
 exactly the autarky spec (head-degree bound + pocket-capacity bound),
 foreign bodies open by construction.
+
+== v201 deadEnd gate (v201_corr_local, 16g: trauma/slithery/weakhold/dilemma x2 seeds, both seats, vs abyss_v200) ==
+Ran locally (gate not pushed when tasked): **43.8% ALL** — 2W/3S/3L.
+weakhold + trauma 75% each (1W/1S/0L), slithery 25% (0/1S/1L),
+**dilemma 0/4 — all four games IDENTICAL r97 teamEliminated c0/b3**,
+both seeds both seats = deterministic, not noise. ALL-unlocked 50%.
+
+VERIFICATION vs the three checks:
+(1) walls ->0 on deg<=2 branches: VACUOUS — this fixture produces ZERO
+    hitWall on both sides (corridor hitWall bleed needs ladder/live-opp
+    replays; self-play gives hitSelf not hitWall). What IS measurable:
+    dn1_hitSelf (deaths at dead-end TIPS): **0.94/g vs 15.81/g on base**
+    — the tip-grind class is eliminated. dn2_hitSelf 20.8 vs 27.1.
+(2) dedie nva fires: dn2_nva 10.4/g vs 4.5, dn1_nva 1.6 vs 0 — the
+    inside->die-in-place triggers ~12/g on narrow cells. Total nva flat
+    (66.6 vs 68.1) since base churns more overall. Total hitSelf
+    34.1/g vs 55.4 (-21/g converted). slithery: 385 vs 783 over 4g.
+    Counter-signal: weakhold hitSelf 150 vs 61 — v201 self-plugs MORE
+    on weakhold (forage denial pushes workers into open-cell suicides?).
+(3) freeze/starve pathology: CONFIRMED + FATAL on dilemma — see below.
+
+DILEMMA FORENSICS (the 0/4): map marks only 3% cells deadEnd (16/512;
+4 chains: tips at (14,0),(17,0),(14,15),(17,15) -> junctions y4/y11 on
+x=14,17 columns). But BOTH len-11 starters' bodies span those columns:
+B id=3 head (17,13) sits inside the y12-15 chain; its r0 split throws
+child id=7 at (17,3) inside the y0-3 chain. dedie kills the child at
+r0 (nva) and the parent at r1 — **spawned-on-deadEnd starters and fresh
+split children suicide instantly**. The len-11 is geometrically doomed
+either way (facing the tips, no U-turn — v200's mirror dies hitSelf at
+the tips too, e.g. r4@(14,0)), but v200's slow death produces 3-4
+split generations that keep the early swarm alive; v201's instant nvas
+strip the reproductive runway: B side total 114 dragon-turns vs A 853,
+wiped r97.
+
+Mechanism verdict: entry-price + dedie is GEOMETRICALLY CORRECT (the
+doomed dragons it kills really are doomed) but STRATEGICALLY BLIND —
+it cannot distinguish "entered a trap" from "born in a trap". Fixes,
+ranked:
+  (a) dedie only when the dragon has no legal path to a junction
+      (escape check — fires only when certain; still wouldn't save
+      id=3 but is the correct semantic);
+  (b) per-dragon enteredDeadEnd flag set on stepping onto deadEnd_
+      from outside — spawned-inside dragons never dedie (lets doomed
+      starters run their productive endgame like v200's);
+  (c) dedie grace window (skip r<K) — cheap but weaker than (b).
+  (b) is the honest fix: the pathology we measured is forage ENTRY,
+  not spawn position. Entry price (a) stays as-is.
+Also note: dilemma x=14/17 len-11 starters are inherently doomed — a
+map-level fact both bots pay; it only decides the game because dedie
+front-runs the death and forfeits the splits.
+
+Side metrics worth keeping: qlen@end 8.1 vs 4.6 UP, queen alive@end
+0.583 vs 0.417 UP, longest@end 21.9 vs 19.4 UP, alive@r499 5.9 vs 7.7
+DOWN, adjacent free pearl taken 0.540 vs 0.661 DOWN, eaten/g 443 vs
+527 (-16%), small-map pearls@r60 2.9 vs 13.1 (4.6x down — forage
+denial costs real intake on small maps), alive@r50 3.0 vs 6.75 DOWN.
+
+VERDICT: REJECT as built — fix (b) first (spawned-inside exemption),
+then re-gate with dilemma included; off-dilemma board is ~58% and the
+tip-grind elimination is the real win.
+
+== FUNNEL COLLAPSE STUDY: how winners' feeders get adjacent ==
+Corpus: 51 replays (topreplays t70/t226/t501/t952 + 12 okbro/dseek/1234
+ladder). tooling/feed_origin.py: per deliberate death ->
+sd=spawn->death cheb, dc=death->rolling-longest-head cheb. 36/102
+sides produced a champ >=30.
+
+ANSWER: NEITHER path-to-champ NOR spawn-adjacent budding — it's
+CHURN-COMPACTNESS. Feeders die where they spawn, inside the swarm blob:
+  - sd_med = 3-4 cells (all sides, monster and non-monster games alike)
+    — feeders do NOT travel to the champ; even in monster games the
+    median feeder dies 4 cells from where it was budded.
+  - dc_med = 8-10 cells — deaths land ~10 cells from the rolling
+    longest, i.e. inside the swarm blob, not at its head. Deliberate
+    deaths literally adjacent (<=2 of longest): only 7-12%.
+  - NOT champ-budded (prior finding holds): children land 12-23 cells
+    from the current longest; parent==longest only 0-15% late.
+  - Path-to-anchor DOES occur but only in the minority deep-funnel
+    games: 1234 m1099017 sd=18/dc=22 (champ 36); okbro m1098976
+    sd=9 (champ 33 with n=32 swarm — mass-churn mode). Median mode is
+    die-in-blob.
+  - The real discriminator is VOLUME: monster-game sides split 426-591
+    /game vs 84 for loser sides without a monster. okbro/dseek/1234
+    median splits 164 vs our ~44 (3-5x). Deliberate deaths up to 93/g
+    vs our ~40 cap.
+  - Winners end en=5-25 (some exceptions: okbro n=32); the funnel is a
+    side-effect of a swarm that stays within ~10 cells of its anchor
+    and replaces itself constantly — pearls drop in the blob, the
+    champ grazes the field.
+
+IMPLICATION (mechanism direction): bud-placement and per-feeder routing
+are BOTH wrong targets. The funnel = (a) high split volume +
+(b) compact swarm around the anchor + (c) deliberate death-in-blob.
+Our midFeedRound=120 die-at-centroid already implements (c) correctly
+(die in the blob == die near rolling longest when swarm is compact).
+The residual gap is (a)+(b): they bud 3-5x more and stay tighter.
+Constraint on (a) is food intake (they eat 2-4x more — churn economy),
+so the funnel fix is upstream: swarm density near the anchor +
+forage throughput, not the death mechanism.

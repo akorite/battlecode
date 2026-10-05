@@ -121,3 +121,17 @@
 - **Pocket's live read**: self-kill FIXED in v168 (0/12 fresh vs 6/11 old);
   ram h2h = 8/9 remaining losses, all on non-weakhold maps where adj was off.
 - v176 (feedMaxLen relax, BIG maps) gating now; v178 queued behind.
+
+## ~07:20 UTC — v175 + v176 verdicts
+
+- **v175 (C7+champMargin): 47.9%/48 FAIL.** wall-deaths -12% but alive@end
+  -37%. champMargin stays an autarky option; C7 parked.
+- **v176 (feedMaxLen relax): 46.9%/32 FAIL.** longest@end +15% (35.4 vs 30.8 —
+  consolidation mechanism works) but queen dead 0.812 vs 0.750, qlen@end
+  1.29 vs 2.33 — mid-size feeders were her screen. Lexicographic scoring
+  makes the queen cost dominant. Parked; front-load feeders (earlyecon
+  62.5% verified) is the consolidation lever instead.
+- Pattern from both fails: ANY change draining units near the queen kills
+  her more, and queen-death forfeits key-1 regardless of longest. Every
+  candidate must be evaluated on queen-alive@end FIRST.
+- v178 (close-cover escorts) gating next.

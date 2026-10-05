@@ -60,3 +60,7 @@
 - Ladder ~1610 (14/20 autoscrims).
 - **v168 vs v149: 58.3%/60 W7S21L2** — ties v157's margin + verified pieces. BIG 63.9%, autarky/trauma/unsw 100%, qlen@end 3.14 vs 2.08 (+51%), wall/self/body deaths 59.4 vs 71.2. Equal-vs-live; v169 (+feedBurst) boarding now.
 - v157 live & earning; ladder ~1610.
+- **v168 SUBMITTED + ACTIVE** (server v118): v157 + reachBoost + qRamAdj + die-in-place. 58.3%/60 vs v149. Tag ladder-v168.
+- v169 (+feedBurst) 55.0%/60 — dilutes margin, parked (feedBurst may go back in behind a different base later).
+- Lanes re-tasked: pocket→C7 sealed-queen (autarky spec), autarky→champ ceil(L/4) multi-step, earlyecon→echo reads/sonar recon, explore→v168 live-loss census.
+- Confirmed in replay: v168 produced a 45-length champ on autarky — consolidation machinery delivers when it converges.

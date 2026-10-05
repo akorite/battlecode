@@ -403,3 +403,37 @@ Fix sketch (no protocol change needed): workers already receive fresh queenCell 
 1. **v202: fix before gating** — the anchor-propagation + `chId==ourQueen` gate make the intended mechanism unreachable; a v202-vs-v200 gate currently measures only "queen self-orbits a post". Two-line-ish fix via client-side queenCell stability derivation.
 2. **v201: gate-ready** — no reachable-states or legality defects; edges are low-impact.
 3. **v200: gate-ready** — anchor verified live; the NC≥600 gates carry the recurring area-vs-shape caveat on qOS/trophy/weakhold.
+
+---
+
+# Adversarial review — abyss_v213 vs v209 (queen escape sprint)
+
+Scope: escape mechanism only (94-line diff). Verified against engine truth at engine/engine/src/actions.cc (`Move()`/`Step()`).
+
+## Kill defects, ranked
+
+**K1 (high) — the path cap admits engine-illegal escapes for exactly the queens it serves (L≥5).** The cap `min(freeSteps(L)+L-2, qEscapeMax)` models "ceil(L/4) free steps + paid steps to len-2". The engine implements neither: `mustPayForStep = stepIndex > 0` — only step 0 is free; EVERY later step requires `body.size() > 2` and pops an extra segment. True max path = `1 + (L-2) = L-1`. Deviation = `freeSteps(L)-1`: L=5 → allows 5 vs legal 4; L=9 → allows 10 vs legal 8; L≥11 → qEscapeMax=10 binds below L-1 (safe). A path longer than L-1 dies mid-flight: at the paid step where body hits 2 the engine emits "can't pay for step N" → **NoValidAction kill** — the queen suicides mid-escape having bled ~L-2 segments, strictly worse than eating the ram (same death, body scattered along a corridor instead of dropped at the pin). Fix: `maxSteps = min(L_-1, p_.qEscapeMax)`.
+
+**Corollary for the board — the "ceil(L/4) free moves" premise is wrong.** Rules doc (handoff/knowledge/01_rules.md) + engine agree: 1 free cell, each extra costs 1 segment. `freeSteps` is a codebase-wide fiction with asymmetric damage: `reachOf()` over-screens enemy reach by ceil(len/4)-1 (conservative, harmless); twoStep's `paid = freeSteps(L)<2` under-charges (len≥5 2-steps do pay 1); the slay-reach cap at :608 has the same over-allow suicide hole as this escape; my v158 champStep silently paid more than modeled. Recommend one sweep over every `freeSteps(...)+L-2` and `paid`-model site — the formula should be `steps-1` paid, `L-1` cap everywhere.
+
+**K2 (medium) — `pathCost` under-models payment → bookkeeping drift → compounds K1.** `pathCost = max(0, len-freeSteps(L))` but the engine charges `len-1`. main.cpp pops `pathCost` segments for its own body model (`i>0 && pay-->0 && body.size()>2`) → the model lands `freeSteps(L)-1` segments too long → next turn's `L_`/markBody computed on a phantom tail → inflates the NEXT escape's affordability and blocks cells she no longer occupies. Fix: `pathCost = (int)pth.size() - 1`.
+
+**K3 (medium) — phantom pins via heard ghosts.** `heardEnemies_` persist to `heardEnemyMemory=8` and `rammed()` weights them identically to seen enemies. An 8-round-stale relay's reach field can make all landings read "rammed" → the escape pays real body fleeing nothing. Soft-pricing conventions tolerate ghosts; a mechanism that spends body on the pin-test should use seen enemies (or `heardFresh<=3`) for the *trigger*, heard fields only for terminal safety.
+
+**K4 (low-med) — terminal safety under-screens.** `e.dist` BFS walls her ENTIRE current body — enemies can't route through cells she is vacating this turn → a terminal reading `!rammed` may be reachable through her vacated trail (enemy moves after her action resolves). Same convention as the ~1730 screen but for destination choice it yields false-safe terminals: pays, lands, dies anyway. Bounded; acceptable as-is but worth knowing.
+
+**K5 (low) — conservative under-triggers, benign.** `blk<=1` excludes the vacating tail (markBody stamps it 2 — matches the engine's still-body-at-step-time rule ✓) but also every teammate cell and teammate-exit reservation → `anyLegal`/`queenEscape` miss paths through cells vacating at step ≥2 or cells a teammate is leaving. Safe direction. hiding_ queen (len 2) → `maxSteps<2` → benign dead branch. grower_/lead_ queens can escape — correct.
+
+## Verified correct (explicitly checked, no defect)
+
+- **Mid-path interception is impossible**: the engine resolves each dragon's whole MOVE atomically — enemies can only hit her terminal head (or her body, which kills *them*). The comment's claim holds.
+- **blk completeness**: ownBlk = base_ (all `w_.occ` occupied cells → INF, enemies AND teammates) + ownExtra + teammate-exit reservations + own body → the BFS cannot route through other dragons.
+- **Trigger semantics**: `anyLegal && !anySafe` = "every legal landing is inside ram reach" — the right pin test. Placement after trySplit is correct (a blocking split preempts; a pinned queen's own split leaves her head on the cell anyway).
+- **`rammed` ≡ the screen's formula**: per-enemy `e.dist` is a BFS field from the enemy head over `blk` (horizon-bounded, capped by maxRivalFields/maxHeardEnemyFields); `dist[cell] <= reachOf(visible)+reachBoost+bonus` with the same NC≥600 `qRamAdj` gate — equivalent to lines ~1730-1750.
+- **`e.dest=-1` + path emit**: matches the established slay-reach convention (dest unused in the `!c.path.empty()` emit branch); safeFirst redirect is a benign fallback.
+- **Portal hops are legal mid-path** (nb routes through paired portals) — the escape can genuinely teleport; upside, not a bug.
+- **Pearls en route offset payment** (paid step onto pearl = net 0 in the engine) — the BFS ignores this; misses longer food-path escapes, conservative direction.
+
+## Verdict
+
+Fix K1+K2 before gating (both are one-expression changes; K1 can convert "rammed anyway" into a strictly worse suicide). K3 worth the seen-only trigger guard. Mechanism itself is sound: reachable, well-placed in decide(), and the engine semantics it relies on check out.

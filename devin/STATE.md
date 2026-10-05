@@ -58,3 +58,5 @@
 - v153-pure full board: 50%/68 — fixture lift doesn't transfer; queen module parked as pieces.
 - Built + staging: v168 = v157 + reachBoost + qRamAdj + die-in-place (SPLIT-0 noValidAction vs neck-step). Board vs v149 running.
 - Ladder ~1610 (14/20 autoscrims).
+- **v168 vs v149: 58.3%/60 W7S21L2** — ties v157's margin + verified pieces. BIG 63.9%, autarky/trauma/unsw 100%, qlen@end 3.14 vs 2.08 (+51%), wall/self/body deaths 59.4 vs 71.2. Equal-vs-live; v169 (+feedBurst) boarding now.
+- v157 live & earning; ladder ~1610.

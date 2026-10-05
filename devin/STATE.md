@@ -253,3 +253,19 @@
 - Lanes re-tasked: earlyecon→elim classification Dilemma/Trauma,
   pocket→corridor attrition study, autarky→conveyor telemetry + v182
   adversarial review, explore→live-loss census + Elo.
+
+## ~13:10 UTC — elim fix doesn't port; conveyor variants racing
+
+- **v182 killed at 43%/70** (was tracking below 55% — stale-anchor feeds
+  wasted). Replays kept for lanes.
+- **v184_rad vs v182: 56%/16 on feed maps** — feedRadius=12 verified as
+  conveyor fix (big_empty 60-68 champs vs v182's 43-44).
+- **v186 (territory+persistent anchor on feedBurst): ~25% s1** —
+  territory anchor alone insufficient.
+- **v188 (openUntil=0 ported from earlyecon): FAIL 40.6%/32** — mechanism
+  doesn't transfer to v168: splits@r60 8.2 vs 10.3 DOWN, pearls 18.8 vs
+  23.8 DOWN, longest@end 11.5 vs 21.3. Same as mirror-hunt: won on v120,
+  loses on current base. The open_ stall doesn't reproduce here.
+- v187 (territory+radius+persistent+burst) smoking; v179 fallback gate
+  ~75/308.
+- Ranked refill 429'd (fired into still-active cap; needs retry loop).

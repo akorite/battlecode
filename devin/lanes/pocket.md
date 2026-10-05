@@ -418,3 +418,54 @@ failed' from 'never fired', but two identical 50% mirrors bound the effect
 to ~0 either way. Params parked: qShrinkOn=1, qShrinkMin=48, qShrinkDrop=0.30,
 wQShrink=2.5 in abyss_qshrink/common.hpp if a different trigger (e.g. enemy-
 body-frontier proximity rather than region-size trajectory) is wanted later.
+
+== Top-team corridor replay study (teams 952/70/501/226 + ours) ==
+
+39 corridor replays (maze/trauma/stripes/weakhold/portals/slithery) via
+ladder.py + tooling/pocket_metric.py (new: per-cell walls-only region size;
+pocket = region<40 cells; measures turns/eats/deaths by pocket band).
+OURS = 15 ladder + 12 challenge + 40 self-play corridor replays.
+
+ANSWER 1 — do they forage dead-end pockets? YES, MORE than us.
+  pocket-turns:  cheji 6.4% | Knight 3.3% | Cache 2.4% | Quaker 0.9% | OURS 1.0-1.1%
+  pocket intake: cheji 209/1058 (19.8% of all eaten!) | Knight 223/2535 (8.8%)
+                 Cache 52/368 (14.3%) | Quaker 35/1295 (2.7%) | OURS 14.5/600 (2.4%)
+  Pocket forage is FOOD INCOME. v180's premise inverted — blocking pocket
+  forage cut intake, hence 41.7%. The defect was never pocket ENTRY, it is
+  that some of ours can't get OUT (see wall deaths).
+
+ANSWER 2 — wall-death rates (the real diff):
+  cheji + Cache: ZERO hitWall. Not low — zero, across 19 replays, ~400 deaths.
+  Quaker 191.8/game (41%), Knight 522.5/game (58%) — wall deaths don't
+  disqualify when the econ runs hot, but the zero-wall cohort shows a perfect
+  wall discipline is achievable on the same maps.
+  OURS: 26.5 wall/game vs 1700s (18%), 15.2 self-play — we choose wall moves
+  as cornered least-bad ~10-27x/game. Pocket-wall subset is small (~0.7/g) —
+  our walls are corridor-open, not pocket-wedge.
+
+ANSWER 3 — where they send workers: everywhere, with a churn economy.
+  deaths/game: Knight 902.8 | Quaker 462.5 | cheji 263.5 | Cache 144 | OURS 60-148
+  eaten/game:  Knight 2535   | Quaker 1295   | cheji 1058  | Cache 368 | OURS 224-600
+  Top teams run 3-6x our death volume — turnover IS the corridor engine.
+  Death-mix flip: cheji 81.5% noValidAction + Cache 62% hitSelf = deliberate
+  feeding-kills (die-in-place at ~10-25x our rate: their pkDeaths 74/game in
+  pockets are nva/h2h feed-drops, never wedge). OURS: h2h 42-54% of deaths —
+  we die FIGHTING, they die FEEDING.
+
+BEHAVIORAL DELTAS to clone (ranked by measured gap):
+  1. die-in-place feed volume: cheji ~215 nva/game, ours ~8 — the champ-feed
+     channel is real but running at ~4% of their rate. (v150 merge showed the
+     mechanism works; volume is the gap — feed earlier/more of the swarm.)
+  2. wall-move discipline: cheji/Cache never produce a wall move. Ours leak
+     ~18% of deaths to least-bad wall picks — cornered-eval needs a non-
+     suicidal least-bad (idle/suicide-to-feed beats hitWall if it's dying anyway:
+     a wall death drops ceil(L/2) pearls where it stands — deliberately
+     splitting first (hitSelf) or noValidAction preserves the drop value).
+  3. pocket extraction, not pocket fear: raise pocket forage to ~5-15% of
+     intake like winners — gated so workers exit when the pocket's pearls
+     are cleared (they leave, we wedge).
+  4. swarm throughput: their eaten/game is 4-10x ours on the same maps —
+     split-rate/econ, not positioning, is the corridor gap.
+
+REPLAY EVIDENCE on file: workspace/topreplays/t{952,70,501,226}/ + sides.json,
+pm_*.json aggregates. Analyzer: tooling/pocket_metric.py.

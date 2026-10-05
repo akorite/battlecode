@@ -187,6 +187,7 @@ struct Params {
     int champStepMax = 4;             // champion path cap: freeSteps(L)=ceil(L/4) gives a 45-champ 12 — extend to this many
     int champStepSrc = 8;             // best (len-1)-step candidates extended per level
     int champStepCap = 48;            // extra evaluations budgeted for champion path extension
+    double champStepMargin = 1.0;     // a longer path must beat its own prefix by this much
     double wStepRisk = 0.0;           // per paid segment in a multi-step move (reserved)
 
     // economy / attrition

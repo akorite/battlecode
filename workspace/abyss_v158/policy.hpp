@@ -250,9 +250,15 @@ class Policy {
         // Champion multi-step: freeSteps(L) = ceil(L/4) — a 45-champ gets 12 free
         // steps a turn but the path cap above stops at 2. Extend the best
         // candidates to 3-4 steps while every step is free, so a long champion
-        // can chase pearls/drops across the local field (v3 item 5). Gated to
-        // the champion (queen or elected self-champ): workers keep the 2-step cap.
-        bool champ_ = selfChamp_ || (queen_ && !hiding_);
+        // can chase pearls/drops across the local field (v3 item 5). Elected
+        // self-champ only: the queen's anchor/escort duties and h2h fragility
+        // make blind multi-step paths a liability for her (r341-373 zigzag in
+        // the v158a smoke preceded her r397 ram death). Workers keep 2-step.
+        // Smoke-2 fixes: intermediate cells must be uncontestable (no enemy
+        // head within BFS dist 1 — a multi-step path commits blind), and a
+        // longer path must beat its own prefix by champStepMargin (argmax
+        // jitter made champs oscillate instead of travel).
+        bool champ_ = selfChamp_;
         if (champ_ && p_.twoStep && !lean_ && freeSteps(L_) >= 3) {
             int maxSteps = std::min(freeSteps(L_), p_.champStepMax);
             int extEvals = 0;
@@ -280,6 +286,25 @@ class Policy {
                         extEvals++;
                         std::vector<int> eatenK = cd0.stepped;
                         eatenK.push_back(cd0.c.dest);
+                        // Mid-path safety: every cell the path commits to must be
+                        // uncontestable this round — an enemy head at BFS dist 1
+                        // can step onto it while our head is passing through.
+                        bool hot = false;
+                        for (int pc : eatenK) {
+                            for (EnemyField const& e : enemies_)
+                                if (e.dist[pc] <= 1) { hot = true; break; }
+                            if (hot) break;
+                            for (EnemyField const& e : heardEnemies_)
+                                if (e.dist[pc] <= 1) { hot = true; break; }
+                            if (hot) break;
+                        }
+                        if (!hot)
+                            for (EnemyField const& e : enemies_)
+                                if (e.dist[t] <= 1) { hot = true; break; }
+                        if (!hot)
+                            for (EnemyField const& e : heardEnemies_)
+                                if (e.dist[t] <= 1) { hot = true; break; }
+                        if (hot) continue;
                         Choice cK = scoreFrom(cd0.body, cd0.c.newL, dd, 0, eatenK, &bodyK);
                         if (cK.dest < 0) continue;
                         Cand cd;
@@ -291,6 +316,11 @@ class Policy {
                         cd.eatSum = cd0.eatSum + (cd0.c.eat ? p_.eatBonus : 0.0);
                         cd.c.stepTerm = cK.stepTerm + cd.eatSum;
                         cd.c.score = cK.score + cd.eatSum;
+                        cd.c.midEat = (cd.c.pathEat & 1) != 0;  // first-step eat, for wallguard
+                        // Strict dominance: the longer path must beat its own
+                        // prefix by margin, else the shorter option stands —
+                        // stops 4-step argmax churn from oscillating the champ.
+                        if (cd.c.score <= cd0.c.score + p_.champStepMargin) continue;
                         cd.body = bodyK;
                         cd.eaten = cd0.eaten;
                         if (cK.eat) cd.eaten.push_back(cK.dest);

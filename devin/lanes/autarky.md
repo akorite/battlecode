@@ -225,3 +225,21 @@ SMALL 52.5% / BIG 50.0% / ALL-unlocked 51.5%. Decisive pairs 4W/37S/3L.
 **Options if you want the upside without the corridor tax**: gate `champStepMax>2` on open-class — cheapest honest axis is `!maze_` (kelp frac ≤ 0.22, already computed per-map) though autarky isn't maze-class so the better axis may be `w*h` large-open like unsw/schooltime/australia/big_empty, or a seen-topology openness measure. One param + a re-gate.
 
 Replays kept under `results/v158_board/`; smoke tags `v158_smoke` (pre-fix) / `v158_smoke2` (current build).
+
+---
+
+# abyss_v158d — champStep ported onto v168 (flagship queue) vs abyss_v168
+
+**Build**: `workspace/abyss_v158d` = v168 + champStep, verbatim port of v158b: `selfChamp_` dragons extend top-8 (len−1)-step cands to `min(freeSteps,4)` via scoreFrom continuations, pathEat bitmask emit, mid-path cells rejected when any enemy head (seen or heard) is at BFS dist ≤1, extension must beat its own prefix by `champStepMargin=1.0`. One v168-specific addition: **anchored champs excluded** (`w_.champAnchor < 0`) — chasing while planted over the drop field was the corridor tax on the v157-based gate; an anchored champ now always holds. v168's EnemyField.reachBoost/qRamAdj untouched.
+
+Gate: `--cand abyss_v158d --base abyss_v168 --maps autarky,australia,unsw,big_empty,Colosseum,maze --seeds 2 --jobs 2 --tag v158d_bell --keep-replays` = 24g.
+
+### Result: 50.0% — all 12 pairs split W/L, below the 55% merge bar
+
+Every map 50%; every metric flat to the decimal: longest@end **33.3 vs 33.2** (+0.1), qlen@end 0.15 = 0.15, queen-dead 0.875 = 0.875, h2h 125.625 = 125.625 (identical), alive@r499 23.65 vs 23.75. Pure seat-lock everywhere — australia pairs went c5/b28 then c28/b5, unsw c51/b22 then c21/b52.
+
+**Mechanism check**: fires but rarely — 427×3-step + 5×4-step emits total; per-game ~65 on big_empty, ~20 unsw, ~5 autarky/maze (vs ~110/75+/30+ on the v157-based build — anchor exclusion + margin restrict it to genuinely-better unplanted chases). No TLE/instruction-exceeded flags; one anomalous 6-step action is the kill-move normalization artifact seen before, not an emit. CPU per game 67-194s wall = same distribution as the v168 base rows in prior gates.
+
+**Read**: on v168 the piece is a true coin-flip — safe (no metric regression anywhere, the v158a failure modes stayed fixed) but earns nothing measurable on this set. The chase window it helps (pre-window, unplanted, clear field) is narrow because the champAnchor plant already owns the high-value window. If merged it'd be for the rare games where it fires, not this gate's evidence. Recommendation: **don't merge at 50%** — unless you want it as a free option; if you do, keep `champStepMargin=1.0` and the anchor exclusion (they're what made it safe).
+
+Replays: `results/v158d_bell/`.

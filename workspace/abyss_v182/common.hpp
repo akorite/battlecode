@@ -306,7 +306,8 @@ struct Params {
     int champFallbackRound = 330;     // queen-less champion (longest known dragon) from this round — WC locks ~r330 so the feed has ~150 rounds to converge
     int champFeedDist = 2;            // champion feeds die when this close to a tile beside its head (feedDist 1 let her walk away)
     int feedFar = 1;                  // 1: feed pull uses the long-range discount gammaFar (+ manhattan pull past the BFS horizon)
-    int feedHeardDie = 2;             // die in place beside a champion we only HEARD if the report is <= this many rounds old (0 off)
+    int feedHeardDie = 30;            // die in place beside a champion reported within this many rounds — the conveyor stalls if it needs a live sighting
+    int champAnchorAge = 40;          // feed at the last-known champ position while the report is this fresh             // die in place beside a champion we only HEARD if the report is <= this many rounds old (0 off)
     int boxFeedDist = 6;              // boxed-in dragon within this many tiles of the champion dies in place (0 off)
     int feedMinUnits = 3;             // a feeder dies only while the team has >= this many dragons (do not wipe a remnant out)
     int champRelay = 1;               // 1: dragons that know the champion's position forward it (MsgChamp)

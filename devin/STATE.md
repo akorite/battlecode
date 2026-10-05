@@ -213,3 +213,19 @@
 - Conveyor finding (standing): winners run ~80 nva die-in-place/game,
   champs 53-105; we produced ZERO on ladder (feedHeardDie=2 stalls).
   v182 anchor fix raises nva ~4x locally (S0 verified).
+
+## ~11:40 UTC — v181 verdict: wash with queen cost
+
+- **v181 (adj-ungate + feedBurst on v168): 50.0%/48, W5/S14/L5.** BIG
+  60.7% (islands 4/4, maze/big_empty/unsw 75%) vs SMALL 35% (dilemma
+  0/4, weakhold+trauma 25%). Mechanism works on big maps; bleeds early
+  on small ones.
+- **Queen cost on corridor set**: dead 0.833 vs 0.688, qlen@end 1.5 vs
+  4.7, kept-after-theirs 0.18 vs 0.50. Champ-feed pulls escorts on
+  cramped maps — same class as the early-fragility cluster.
+- alive@end +13%, longest@end +3% — the feedBurst side still pays.
+- v182 220-gate running; v183 (territory anchor) built, queued.
+- Benchmark teams resolved: FtM 264, Vibing 306, SSS 91, Computers 112,
+  Sponge 213, WC 782 (ranked-off). None in our last 100 autoscrims —
+  benchmark must be fired post-upload; baseline ~0-10% vs top-4.
+- Ladder 1579 (Ron Squad 1700 new wall 1/5, UNSW map 1/3).

@@ -735,3 +735,92 @@ v201 43.8, v208 45, plus the 16-cell dilemma spawn zap). If anything
 remains, it's a *tip-death conversion* (hitWall->nva) worth ~0 since
 pearl position is identical. Corridor attrition's real lever is the
 churn economy — eat more, die deliberately, repeat.
+
+=== QUEEN-DEATH CENSUS: v209_full (220g locally reproduced, abyss_v209 vs abyss_v168, --maps all --seeds 5) ===
+Corpus note: the orchestrator's v209_full replays were never committed; I
+reproduced the identical fixture on this box (results/v209_full_local,
+220/220 replays). Final score 52.7% — matches the ~53% composite, so the
+corpus is representative.
+
+HEADLINE: 93/104 losses include our queen dying (89.4%). She is alive in
+ALL 116 wins — survival is a perfect bell gate on this corpus. Zero
+elim-cascade losses; zero h2h-initiated cases identifiable from events
+(move order not exposed; both parties die same round).
+
+CLASS COUNTS (of 104 losses / of 93 queen-death losses):
+  a-ram-isolated    49  (47% / 53%)  h2h, no ally within 2 tiles
+  b-ram-escorted    22  (21% / 24%)  h2h WITH ally at 0-2 tiles
+  d-self-wall-body  22  (21% / 24%)  hitSelf 16 + hitOtherBody 6, med r209
+  e-elim-cascade     0
+  queen-alive-loss  11  schooltime x4, trauma x4, stronghold-s2,
+                        slithery_fight-s5 (second/third-key losses)
+
+CLASS (a) — rammed isolated, n=49 (med kill r137, range 14-464):
+  Killer distance at k-5: med 4 cells, 1-7 in 38/49 cases. The rammer is
+  VISIBLE 5 rounds out — approaching from inside vision range, not
+  materializing from fog. Only 2/49 beyond 8 cells (big_empty-s5 @29,
+  default-s1 @10).
+  11/49 killers were NEWBORN SPLITS (absent at k-5, born age 0-4):
+  Colosseum-s2 (split@24 kill@28), arena-s1/s2/s4/s5 (children born r8-13
+  kill r12-16), devil-s4 (born@153 kill@157), default-s5 + dilemma-s3 +
+  slithery_fight-s5 (born and killed same/adjacent round). The enemy
+  births a len-2 child adjacent to her and it rams immediately — no
+  travel, no warning window, only body-geometry prevents it.
+  Queen drift over the last 5 rounds: med 3 cells — she is wandering, not
+  sprinting away. Spawn-dist med 8: mid-map roaming, not leash-pinned.
+  Refs: Colosseum-s1 r35, arena-s2 r14, australia-s5 r173, autarky-s4
+  r138, big_empty-s1 r146, weakhold-s3 r405.
+
+CLASS (b) — rammed WITH escort, n=22 (med kill r113):
+  ally_d 0-2 by construction; killer@k5 med 5 (3-6 typical). She is
+  INSIDE the swarm and the rammer still connects — escort PRESENCE does
+  not stop the dive; nobody was interposed on the approach lane. drift
+  med 3, spawndist med 8 — she was wandering with the pack, not evading,
+  not leash-pinned. h2h trades the rammer too — a len-2 child diving her
+  inside our own pack is a net-positive trade for the attacker (auto-
+  bell under lexicographic scoring).
+  Refs: arena-s1 r12 (ally_d 1!), tower_defense-s3/s4/s5 r174-278,
+  big_empty-s2..s4 r60-120 (4 kills — open map, escort can't screen all
+  arcs), unsw-s4 r222, devil-s2 r90 (ally_d 2, enemy_d 0 — adjacent kill).
+
+CLASS (d) — self/wall/body, n=22 (med kill r209, range 67-351):
+  All hitSelf/hitOtherBody, mid-map with allies nearby (ally_d med 2) —
+  she collides with her own swarm while roaming, not cornered in fog.
+  DETERMINISTIC BUG: weakhold A-side queen dies hitSelf @r132 cell
+  [15,14] in ALL THREE cand-A losses (s1,s2,s4) — same round, same cell,
+  different seeds. A scripted self-collision in v209's policy on the
+  weakhold A-side path — worth a direct replay-stepped fix. Other refs:
+  schooltime-s1 r316 [3,1] (top-row edge), schooltime-s3 r132 [56,1],
+  islands-s4/s5 both r238, portals-s2/s3/s5 r225-243 (portal-map
+  clustering suggests a portal-exit self-crossing pattern too).
+
+ANSWER TO THE BUILD QUESTION:
+  Post-v209 queen deaths are "isolated and doomed ~5 rounds out", NOT
+  sudden pins from fog, NOT leash-pinning. Evidence: rammer at med 4
+  cells at k-5 and visible in 38/49 class-a cases; queen drift med 3
+  (no evasion attempted); spawndist med 8 (roaming free). The v213
+  fog-escape sprint addresses a failure mode that barely exists here
+  (2/49 killers genuinely far at k-5). What the corpus actually shows:
+    1. A len-2/3 rammer (incl. NEWBORN splits, 11 cases born 0-4 rounds)
+       walks up to an unescorted queen over 4-6 visible rounds and she
+       does not react — there is no dodge/evade trigger on approach.
+    2. Escorts that merely stand near her fail 22 times: presence !=
+       geometry. The screen needs to interpose on the threat arc, or
+       she needs to retreat behind the swarm when a head closes.
+    3. Fix class = approach-reaction + escort geometry (body on the
+       lane), not vision extension. The killer is already seen; the
+       queen just keeps wandering.
+    4. Secondary, cheap: the weakhold r132 [15,14] deterministic
+       hitSelf is one scripted bug — fixing it erases ~3% of losses by
+       itself; portals/islands self-crossings (r225-243) look like a
+       second scripted pattern.
+  Corpus: /tmp census jsonl + 220 replays under results/v209_full_local/
+  on branch; analyzer tooling/queen_forensics.py (committed).
+
+CORRIDOR SIDEBAR (per your ask): winners' workers on trauma/PD do NOT
+avoid dead-end entries — measured last report: they ENTER dead-end
+corridors 5-34x more than us (entry avoidance inverted). The deadEnd
+family is retired on 3 gates (v201 43.8%, v208 45%/20 + dilemma zap);
+corridor answer is the churn economy (forage-in, deliberate tip-death,
+len-1 sweeps), not routing. No new work needed here unless you want the
+tip-death conversion (~0 value, same drop cell).

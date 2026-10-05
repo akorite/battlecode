@@ -181,3 +181,11 @@ if it taxes her escort or her drop supply.
 - v176 (feedMaxLen relax): 46.9%/32 — consolidation works but taxes queen.
 - v177 (adj-ungate): 50%/48 identical — keep as zero-cost insurance (the
   ungate only fires vs ladder rams; self-play can't produce them).
+
+## 2026-10-05 ~19:00Z — Full-gate verdicts (v206, v208, v209)
+- v206_full (leash≥400 composite): 52.7%/201 — FAILS ≥55/LB>50. Killed at 201.
+- v208_corr (deadEnd r≥30 on trauma+TD): 45%/20 — dead on its own target maps.
+- v209_full (v206 + tradeSlack=0 NC≤900): ~52.7%/203 — fails. Small-arm 54.0 zero-ish pairs was real; BIG arm drifted to ~51.5 (the marginal doesn't transfer to >900 boards where slack=1 still applies).
+- v210 fired: tradeSlack=0 globally — tests whether the -1-trade bleed exists on open boards too (smoke on the >900 subset).
+- earlyecon closure: presence-priced worker evasion dead BOTH sides of reach boundary (inside-reach dodge converts death mode, outside-reach buffer taxes forage w/ h2h flat). Remaining surfaces: body-geometry escort screens, spawn placement.
+- Honest arithmetic: v200-lineage ≈ +3pts vs live. The 55/LB50 bar needs ~56% — nothing in the lineage reaches it without another mechanism-class gain.

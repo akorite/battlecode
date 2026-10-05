@@ -380,3 +380,19 @@ Mechanism: production-throttle releases — matches pocket's funnel
 finding (winners split 164/g median vs our 44; their swarm stays
 ~10 cells around anchor). Compactness lever = autarky's cohesion proto.
 Elo ~1608, refill firing.
+
+## 2026-10-05 PM5 (live)
+v235_live FINAL: ~53.6%/335 — fails. Decomp: BIG 57.1%, SMALL 49.7%.
+midFeed-everywhere was the only small-map-touching piece (idle fighters
+die at centroid beacon -> pulls units off melee fronts).
+v237_live = v235 minus midFeed-everywhere (midFeedMinTiles back to 600):
+TRACKING 55.5%/119 (12W-6L pairs), restarted at jobs=4 for speed.
+v239_live (workerBud len10->5): 51.2%/80 fading — L>=10 bud rarely fires
+on our boards; killed to free slots.
+v240_live = v237 + straggler suppression (worker dest penalty when
+friendDist>8, wStraggler=0.4, capped +12): fired, early.
+v238 (stalk-on-small): dead ~45%.
+Throughput diagnosis governing: pearl intake parity but winners' deaths
+drop in-blob -> parents re-eat ~1 move; ours forage ~8. Straggler
+penalty attacks the death-location side; cohesion pull falsified.
+Elo 1607, refill5c on proven targets (floor ~1546).

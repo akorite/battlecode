@@ -164,3 +164,20 @@ forage scoring is a legal preference, not a safety veto — needs care).
 
 **Kill condition**: if pocket's room-shrink variant (queen-only) drops
 wall-deaths/game in its gate, extend the mechanism to worker forage targets.
+
+## H-QUEENCOST — the dominant evaluative frame (CONFIRMED PATTERN)
+
+Every candidate that drains units near the queen kills her more, and a dead
+queen forfeits key-1 regardless of longest. v176 proved the mechanism works
+(longest@end +15%) yet lost (queen-dead 0.812 vs 0.750). v175 same shape.
+Rule for all future candidates: queen-alive@end and queen-dead/game are the
+PRIMARY gate metrics — a variant can win longest/alive and still be a kill
+if it taxes her escort or her drop supply.
+
+## v174/v175/v176 post-mortems
+- v174 (splitLen 3): 0%/24 — len-3 children too fragile; production halved.
+  The early deficit is INTAKE/fragility, not split rate. DEAD.
+- v175 (C7+champMargin): 47.9%/48 — champMargin stays autarky-only.
+- v176 (feedMaxLen relax): 46.9%/32 — consolidation works but taxes queen.
+- v177 (adj-ungate): 50%/48 identical — keep as zero-cost insurance (the
+  ungate only fires vs ladder rams; self-play can't produce them).

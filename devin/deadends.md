@@ -40,3 +40,6 @@ The 2x-throughput gap vs combat is NOT a knob:
 Bud engine diagnosis for whoever picks this up: queen buds only when
 L_>=keep+2 where keep=4+round/30 (len>=8@r60, >=16@r300), worker splits need
 len>=4 + enemy-ban 2 + roomy-move both halves — under contest neither fires.
+
+## heard/beacon queen escorts (3rd failure, v170)
+Workers volunteering onto the queen's heard-beacon cell: qlen@end 1.43 vs 3.86, queen dead 0.70 vs 0.65 — net negative AGAIN (also failed as pocket's qEscortHeard converge and v153 threat-conditional at board scale). Every escort form either drains econ or crowds her lanes. Escort for queen defense is dead until a mechanism that doesn't displace her feeders is designed.

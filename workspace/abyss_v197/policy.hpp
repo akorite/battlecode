@@ -563,7 +563,7 @@ class Policy {
     bool sweepDrops(Choice& out) {
         Board const& b = w_.board;
         int fs = freeSteps(L_);
-        if (fs < 3 || lead_ || !(selfChamp_ || L_ >= 12)) return false;
+        if (fs < 3 || lead_ || !selfChamp_) return false;  // champ only: growers must keep splitting (sweep pre-empted trySplit and starved the fleet)
         if (!enemies_.empty()) return false;
         for (World::Heard const& h : w_.heard)
             if (h.cell >= 0 && w_.t.round - h.round <= 2 && b.cheb(h.cell, w_.head) <= fs + 2)

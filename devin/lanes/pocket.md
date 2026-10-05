@@ -268,3 +268,43 @@ Spec metrics on the shipped build (gate-1): qlen@end 2.875 vs 2.125 UP,
 queen-dead 0.750 vs 0.800 DOWN, longest@end 29.6 vs 32.4 DOWN (stronghold
 s2-B 28-vs-58 monster outlier; medians closer). VERDICT: SHIP escort +
 localization + die-in-place; REJECT locked queen pivot; leash stays 3x-rejected.
+
+== v153c7 — C7 sealed-queen (autarky spec), on abyss_v153 ==
+
+SPEC: queenSealed(queenCell, queenLen) replaces `queenReach() < 20` in
+locateChamp. Map-walls-only flood, foreign bodies treated open (b.nb is the
+static graph so bodies are open by construction). Three clauses:
+(a) head-degree bound — openNb <= 2 at her cell => sealed;
+(b) pocket-capacity bound — flood capped at qlen + queenSealSlack(8), region
+    <= cap => sealed (early exit as soon as q.size() > cap);
+(c) else unsealed. Unknown cell (cell<0) => NOT sealed (election wants evidence).
+
+Site changes vs v153 (only two call points):
+- locateChamp: queenReady && queenSealed(w_.queenCell, w_.queenLen) => unready
+  (was queenReach() < 20 — a raw region-size <20 test at the reported cell).
+- queen soft-anchor gate: `!queenSealed(w_.head, L_)` replaces `queenReach() >= 20`
+  — same eligibility question, evaluated at her live head; an elected-but-sealed
+  queen keeps roaming instead of anchoring (the latch is still the WEAK chase-
+  the-head hover from v153, do not re-lock it).
+queenReach() left defined (unused now).
+
+GATE (v153c7-g1): cand=v153c7 vs base=v153, unsw/islands/stronghold/autarky/
+default x2 seeds both seats, 20g — isolates C7 against the shipped build.
+
+Score: 55.0% (1W/9S/0L), CI [34.2,74.2]; pairs [50,65]. stronghold the only
+non-split map: 1W/1S/0L (s1 cand won both seats). Zero pair losses.
+
+Metrics cand vs base: longest@end 27.6 vs 26.4 UP (spec: not down);
+queen-dead 0.700 vs 0.750 DOWN; qlen@end 2.0 = 2.0 (unchanged — she still
+dies pre-window on the heavy maps); alive@r499 13.7 vs 14.0;
+h2h deaths 62.9 = 62.9 literally identical; all blitz metrics to 3 decimals.
+
+VERDICT: parity-or-better, ship-safe. C7 doesn't move the score on this fixture
+because the two tests overlap in effect where it matters: reach<20 sealed a
+<20-cell room; C7 seals <=2-exit heads (missed by reach) and rooms <= qlen+8
+(len2->10, len5->13, len10->18 — comparable magnitudes). The boundary shifted,
+the volume didn't. Real value is correctness, not score: a head-pinched queen
+(openNb 2 in a big open room) now reads sealed — reach saw the room, not the
+pinch — and a len-12 queen in a 19-cell room now reads unsealed instead of
+excluded. Election changes are rare because most fixture queens die r205-345,
+before the r360 anchor window where the test gates.

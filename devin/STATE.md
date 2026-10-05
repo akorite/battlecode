@@ -229,3 +229,27 @@
   Sponge 213, WC 782 (ranked-off). None in our last 100 autoscrims —
   benchmark must be fired post-upload; baseline ~0-10% vs top-4.
 - Ladder 1579 (Ron Squad 1700 new wall 1/5, UNSW map 1/3).
+
+## ~12:30 UTC — v182 mid-gate + conveyor telemetry
+
+- **Ladder: Elo 1579, last-40 19/21.** Ron Squad (1700) new wall 1/5
+  (+121 gap needs ~25% to be +EV — off farming list). wawow830 flipped
+  to 8/15 for us; zzz3nith 5/10, nooberGamer 5/10.
+- **v182 mid-gate: 16W/41 (~39%)** — pair losses on autarky, big_empty,
+  default_small, dilemma, portals, schooltime; pair wins maze+slithery.
+  Trending below 55% — persistent-anchor feeding looks net-negative.
+- **Conveyor telemetry (big_empty s1 replays):** feed window r360-499,
+  cand-side deaths — nva 14 (base 0), h2h 31-33, self 12, body 4-9.
+  longest@end 43-44 vs base 46 both seats. Feeders die at stale
+  last-known positions → wasted bodies + champ gains nothing.
+- **Per steering metric: transit h2h losses (31-33/game) > nva gains
+  (~14) → cap the radius.** v184 = v182 + feedRadius=12 built, 16-game
+  smoke on feed maps running.
+- **v183 = v182 + territory anchor** (champ locks at roomiest cell near
+  spawn, cheb<=2) — the stationary-champ fix that makes last-known
+  positions stay fresh. Queued behind v184_rad.
+- Refill scripts re-fired (both had died silently — nohup env);
+  ranked refill ~05:26, top-team salvo ~05:34.
+- Lanes re-tasked: earlyecon→elim classification Dilemma/Trauma,
+  pocket→corridor attrition study, autarky→conveyor telemetry + v182
+  adversarial review, explore→live-loss census + Elo.

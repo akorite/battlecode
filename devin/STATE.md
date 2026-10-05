@@ -291,3 +291,5 @@
 - Next: if v192 clears -> submit + fire benchmark challenges + push. If v193 reads >v192 -> gate it next.
 - v193 (queenHideUntil 390->100): FAIL. Fleet -33% (queen is the early factory; unhiding stops her budding), qlen flat 4.4v4.6, queen-alive +33% can't pay for it. Hide-vs-grow is structural: she produces OR grows, not both. Dead end logged.
 - v194 (feedRadius 12->20): FAIL 45.2%/42 vs v192. Autarky's rad study (on v182) doesn't transfer: inside v192 rad12 wins — fewer far-feeder transit deaths, fleet +23%, qlen 5.25v4.0. Radius correct at 12.
+- v195 (workerRam soft screen): FAIL 44.4%/18. Soft evasion tax degrades foraging (longest -16%), trauma pair-loss. 4th mobility-touch that costs more than it saves (region, unhide, rad20, workerRam) — victim-ram needs a different fix class.
+- Conveyor metric (gate replays): v192 nva feeds 8-11/window vs base 1-2 (5-10x); h2h transit losses ~3/game both sides — gains >> losses, radius holds at 12.

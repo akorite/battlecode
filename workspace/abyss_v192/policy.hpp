@@ -121,22 +121,29 @@ class Policy {
         feedAge_ = 0;
         feedBurst_ = false;
         // Mid-window die-in-place (pocket): our r120+ dead-pool already
-        // dies ~45/game at open cells for nothing. An idle short worker
-        // (no food target, no hunt, no escort) recycles early — dies
-        // beside the QUEEN so the drop feeds tiebreak-1 directly.
+        // dies ~45/game at open cells for nothing; winners churn their
+        // len<=3s ON the swarm so the drops get re-collected. An idle
+        // short worker (no local food, no hunt, no escort) recycles on the
+        // swarm centroid — every position comes from live role-0 beacons.
         if (feedHead_ < 0 && worker_ && !grower_ && p_.midFeedRound > 0
             && w_.t.round >= p_.midFeedRound && w_.t.round < p_.feedStop
-            && L_ <= p_.midFeedMaxLen && w_.ourQueen >= 0
-            && !w_.queenDead(w_.ourQueen) && w_.queenCell >= 0
-            && w_.queenRound >= 0 && w_.t.round - w_.queenRound <= p_.feedHeardDie
-            && regionReach(w_.queenCell) >= 20
-            && hunts_.empty() && escortOf_ < 0) {
+            && L_ <= p_.midFeedMaxLen && hunts_.empty() && escortOf_ < 0) {
             bool foodNear = false;
             for (Target const& t : targets_)
-                if (t.belief > 0.02 || t.countdown >= 0) { foodNear = true; break; }
+                if ((t.belief > 0.02 || t.countdown >= 0)
+                    && distToHead(myDist_, t.cell) <= p_.midFeedFoodDist) { foodNear = true; break; }
             if (!foodNear) {
-                feedHead_ = w_.queenCell;
-                feedAge_ = std::max(1, w_.t.round - w_.queenRound);
+                long sx = 0, sy = 0; int n = 0;
+                for (World::Seen const& o : w_.others)
+                    if (!isEnemy(o) && o.head >= 0) { sx += b.X(o.head); sy += b.Y(o.head); n++; }
+                for (World::Heard const& h : w_.heard)
+                    if (h.cell >= 0 && h.role == 0 && w_.t.round - h.round <= p_.heardMemory) {
+                        sx += b.X(h.cell); sy += b.Y(h.cell); n++;
+                    }
+                if (n >= 3) {
+                    feedHead_ = b.id((int)(sx / n), (int)(sy / n));
+                    feedAge_ = 1;
+                }
             }
         }
         if (!lead_ && !queen_ && !assassin_ && w_.t.round >= feedAt && w_.t.round < p_.feedStop && L_ <= p_.feedMaxLen) {

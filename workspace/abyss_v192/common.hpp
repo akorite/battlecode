@@ -310,6 +310,8 @@ struct Params {
     double wQueenLeash = 0.8;         // penalty per tile past queenLeashDist
     int midFeedRound = 120;           // idle len<=midFeedMaxLen workers recycle at the anchor from this round
     int midFeedMaxLen = 3;            // only short workers mid-feed (the dead-pool profile)
+    int midFeedFoodDist = 10;         // mid-feed only when no food target within this many tiles
+            // only short workers mid-feed (the dead-pool profile)
     int feedRadius = 12;              // only recycle within this many tiles of the feed target
     int feedHeardDie = 30;            // die in place beside a champion reported within this many rounds — the conveyor stalls if it needs a live sighting
     int champAnchorAge = 40;          // feed at the last-known champ position while the report is this fresh             // die in place beside a champion we only HEARD if the report is <= this many rounds old (0 off)

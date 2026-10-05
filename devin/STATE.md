@@ -79,3 +79,16 @@
   every map — attacks the self-kill leak). Smoke on the 12 diagnostic maps running.
 - Feed census: ~13 chfeed deaths/feed-game — supply OK; champ ends ~26 vs 45+ —
   the gap is convergence/capture, not feed volume.
+
+## ~05:40 UTC — v173 verdict + queue state
+
+- **v173 FAIL: 39.6%/48, 6 pair losses.** wh_→pocketMap_ suppressed budding on
+  pocket maps (splits@r60 8.65 vs 10.35, alive@r50 5.2 vs 6.9) — the documented
+  pin regression. queen-dead flat at 0.75 anyway. REVERTED; dims-table fix
+  abandoned for wh_ (needs a real feature, not a blind conversion).
+- Australia replay (m1098277): we fielded 43 dragons/462 total, lost longest
+  24 vs 28 — they consolidated to ONE champ. **feedMaxLen=6 caps feeders**:
+  mid-size dragons can't feed AND can't be champ → dead weight. v176 lifts
+  the cap to champLen_-1 once a champ exists (true consolidation).
+- v174 (swarmSplitLen 4→3), v175 (C7 queenSealed + champMargin=3),
+  v176 (feedMaxLen relax), v177 (qRamAdj-only) queued/built. v177 smoking now.

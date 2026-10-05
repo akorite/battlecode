@@ -1315,14 +1315,7 @@ class Policy {
             // Keep the fog scan where it was calibrated (weakhold 40x15); elsewhere
             // read v104's optimistic scan for tiny/tree/loopRoom and keep only the
             // unproven mouth veto from a second seenOnly scan.
-            // dims table removed. Queen self-kill is the top band-loss leak
-            // (pocket diag: 6/11 losses = she corners herself r195-494) — she
-            // gets the calibrated fog scan + unproven-trap veto on EVERY map;
-            // workers keep it on pocket maps only (the pin cost was theirs).
-            // dims table removed -> the pocket-map class: the calibrated fog
-            // scan stays where pockets make it true; on open maps its fog-
-            // shrunk tiny/tree vetoes pin the queen (dilemma r27 elim).
-            bool wh_ = pocketMap_;
+            bool wh_ = b.W == 40 && b.H == 15;
             Scan sc = nav_.deadEnd(b, dest, wallScratch_, p_.trapScanCells, so && wh_);
             bool loopRoom = sc.cycle && sc.cells > newL && sc.frontier == 0;
             bool tiny = sc.cells <= newL + p_.trapMargin && sc.frontier == 0;
@@ -1607,7 +1600,7 @@ class Policy {
             // Queen ram screen: 94% of queen deaths are len2-3 rams stepping onto her.
             // A tile inside a seen OR fresh heard enemy's sprint reach is priced fatal —
             // not soft — so she never ends a turn where a rammer can arrive this round.
-            bool adj = p_.qRamAdj > 0;
+            bool adj = p_.qRamAdj > 0;  // dims gate removed: band rams land off weakhold too
             int floor_ = adj ? 0 : 1, bonus = adj ? p_.qRamAdj : 0;
             for (EnemyField const& e : enemies_) {
                 int dd = e.dist[dest];

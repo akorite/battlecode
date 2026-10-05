@@ -119,7 +119,12 @@ class Policy {
         // closer queenFeedMargin; before feedRound the queen is the only target.
         int feedAt = p_.queenHide ? std::min(p_.feedRound, p_.queenFeedRound) : p_.feedRound;
         feedAge_ = 0;
-        if (!lead_ && !queen_ && !assassin_ && w_.t.round >= feedAt && w_.t.round < p_.feedStop && L_ <= p_.feedMaxLen) {
+        // feedMaxLen gates only while no champion exists: once one is elected,
+        // ANY dragon shorter than it may feed (Australia: 43 mid-size dragons
+        // stuck between "too long to feed" and "not the longest" = dead weight).
+        int fMax = p_.feedMaxLen;
+        if (p_.champOne && champHead_ >= 0) fMax = std::max(fMax, champLen_ - 1);
+        if (!lead_ && !queen_ && !assassin_ && w_.t.round >= feedAt && w_.t.round < p_.feedStop && L_ <= fMax) {
             int bestLen = L_ + p_.feedMargin - 1;
             int qMargin = p_.queenHide ? p_.queenFeedMargin : p_.feedMargin;
             if (p_.champOne) {
@@ -1315,14 +1320,7 @@ class Policy {
             // Keep the fog scan where it was calibrated (weakhold 40x15); elsewhere
             // read v104's optimistic scan for tiny/tree/loopRoom and keep only the
             // unproven mouth veto from a second seenOnly scan.
-            // dims table removed. Queen self-kill is the top band-loss leak
-            // (pocket diag: 6/11 losses = she corners herself r195-494) — she
-            // gets the calibrated fog scan + unproven-trap veto on EVERY map;
-            // workers keep it on pocket maps only (the pin cost was theirs).
-            // dims table removed -> the pocket-map class: the calibrated fog
-            // scan stays where pockets make it true; on open maps its fog-
-            // shrunk tiny/tree vetoes pin the queen (dilemma r27 elim).
-            bool wh_ = pocketMap_;
+            bool wh_ = b.W == 40 && b.H == 15;
             Scan sc = nav_.deadEnd(b, dest, wallScratch_, p_.trapScanCells, so && wh_);
             bool loopRoom = sc.cycle && sc.cells > newL && sc.frontier == 0;
             bool tiny = sc.cells <= newL + p_.trapMargin && sc.frontier == 0;
@@ -1607,7 +1605,7 @@ class Policy {
             // Queen ram screen: 94% of queen deaths are len2-3 rams stepping onto her.
             // A tile inside a seen OR fresh heard enemy's sprint reach is priced fatal —
             // not soft — so she never ends a turn where a rammer can arrive this round.
-            bool adj = p_.qRamAdj > 0;
+            bool adj = p_.qRamAdj > 0 && b.W == 40 && b.H == 15;
             int floor_ = adj ? 0 : 1, bonus = adj ? p_.qRamAdj : 0;
             for (EnemyField const& e : enemies_) {
                 int dd = e.dist[dest];

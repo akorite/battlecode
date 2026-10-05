@@ -1012,3 +1012,55 @@ len2-3 rammers picking trades against our len3-4) — evasion-geometry,
 same door as the queen work; or the devil corridor crowding fix
 (spawn-spread) for the 28% self-traffic class. Neither is a forage-value
 change. Recommend scoping one of those two next; v168y parked.
+
+## Top-team early-split study (24 ladder loss replays, all eliminations)
+
+Corpus: ladder_replays/ — our losses vs stronger bots. Every axis measured
+per len<=3 non-queen dragon, r10-50, split by winner-side (W = opponents)
+vs our side (L), and by survivor vs died<=r50 cohorts.
+
+**Result: winners' short-dragon survival is NOT a behavior diff — it's
+production volume.** Every behavioral axis matches ~1:1:
+
+| axis | W_surv | W_died | L_surv | L_died |
+|---|---|---|---|---|
+| dAlly (clump) | 4.64 | 4.45 | 5.13 | 3.69 |
+| dEnemy mean | 5.56 | 3.07 | 6.02 | 3.46 |
+| dEnemy<=3 frac | 0.50 | 0.67 | 0.43 | 0.76 |
+| threatened flee/hold/engage | .36/.48/.16 | .23/.43/.34 | .39/.44/.17 | .28/.47/.26 |
+| rel-frontier pos | +0.02 | — | +0.09 | — |
+| outnumbered at death | — | 0.47 | — | 0.29 |
+
+- Their shorts ride the same frontier, keep the same ~2.5-cell enemy
+  buffer as ours, flee/hold/engage at the same rates, clump LESS than
+  ours (we are the more-clustered swarm and still die). Our dead are
+  actually MORE supported at kill sites (29% outnumbered vs their 47%).
+- Winners' dead shorts die MORE isolated — they push children into
+  fights alone: trade ammunition, not escorted foragers.
+
+**The actual diff — split cadence:** splits <=r60, W 276 vs L 113 (2.4x),
+92% len-2 children both sides. By 10-round window:
+
+| rounds | W splits | L splits |
+|---|---|---|
+| 0-9 | 40 | 33 |
+| 10-19 | 23 | 12 |
+| 20-29 | 32 | 10 |
+| 30-39 | 52 | 14 |
+| 40-49 | 62 | 24 |
+| 50-59 | 60 | 19 |
+| 60 | 7 | 1 |
+
+Winners ACCELERATE through the trade war (r30-60 spawn rate ~2.6x ours);
+our production tapers to near zero after the opening while alive@50 is
+near-equal (37-89/team — these games are volume wars, not the a3-5 early-
+deficit profile). Their doctrine: churn len-2 ammunition faster than the
+attrition burns it. Ours: conserve and lose the exchange rate.
+
+Mechanism candidates this points at (not yet gated): sustained len-2
+production r30+ on elim maps — the bud/keepBase floor stops splitting
+after the opening; winners keep spawning through the fight. Aligns with
+v174's negative result direction: len-3 children too fragile, but len-2
+is exactly what winners spam. Also connects to the 63% victim-h2h read:
+if their rammers are disposable ammunition, dying to them isn't a
+survival problem — it's a replacement-rate problem.

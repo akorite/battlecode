@@ -804,3 +804,88 @@ is already low where it matters. No NC gate in code — it fires on
 every map during the breed phase, not just NC<=700.
 
 Candidate for staging: workspace/abyss_v158.
+
+## Enemy echoes + cheap sonar recon (v3 item 5) — detection surface dump
+
+Goal: earlier queen-ram warning via sonar. What the protocol actually carries
+(common.hpp, io.hpp, world.hpp, emitSonar in policy.hpp):
+
+- `t.echoes[5]` (ECHOES line, protocol 3): per-TURN aggregate hit counts of OUR
+  OWN pings by kind {kelp, ally, allyHead, enemy, enemyHead} — a count, no
+  direction, no position. `w_.echoEnemy = echoes[3]+echoes[4]` is populated in
+  world.hpp:322 but NOTHING in policy reads it — the alarm hook exists unwired.
+- `heardEnemies` (world.hpp:295+): teammate-relayed MsgEnemy sightings
+  {id, cell, len<=15, role(isQueen), round}, deduped by cell within 4 rounds,
+  fresh <= heardEnemyMemory=8. Already feeds grower danger (wHeardEnemy),
+  the queen's soft heard-ram screen (wQueenRamHeard=2.0 vs wQueenRam=30),
+  and the assassin squad.
+- Enemy beacons/pings CANNOT be decoded: `msgOursKeyed` (round-keyed hash +
+  team secret) rejects every non-ours msg before parsing — deliberate
+  anti-spoof hardening. "Their own beacon traffic" is unreadable by design.
+  Per-ping direction is not returned to the sender (aggregate only), so even
+  our own echo is directionless.
+
+Replay measurement (v158_frontload/replays, 24 kept, 5 maps, sonarPing +
+dragonUpdate + dragonDeath events):
+
+- Queen echo selectivity: her pings hit an enemy on only 1-9% of her turns
+  (autarky 250/2664, unsw 17/1316, islands 14/1584, default 74/1552).
+- Predictive power: 6/20 queen h2h deaths had an echo <=5 rounds before death
+  — ~5-30x over-represented vs base rate. Rare, high-precision alarm.
+- Warnability ceiling: the killer was VISIBLE TO ANY of our dragons within the
+  9 rounds before her death in only 4/20 deaths (autarky 2/4, islands 2/3,
+  default 0/6, unsw 0/7). Most rammers traverse fog nobody watches: the heard
+  relay has nothing to relay. Combined echo+heard coverage <= ~half of deaths;
+  detection alone cannot fix the invisible majority.
+
+Prototype abyss_v157e (= v157s + echo guard, ~4 compares in the queen heard
+loop): EnemyField gains `round` (staleness); heard-enemy reach widens
++(age/qEchoAge=2); when echoEnemy>0 the heard report prices at wQueenRam
+(full fatal) instead of wQueenRamHeard=2.0 (param qEchoRam). Gate:
+autarky,islands,unsw,default,stronghold x2 seeds both seats vs abyss_v157s,
+tag v157e_echo.
+
+Replay payload evidence (default-s1-abyss_v158-abyss_v149v2): 21565 sonarPing
+events total, ~10.7k per team — BOTH teams' pings are recorded at replay level
+with {senderId, dir, origin, end, hitKind, hitId, value}. Enemy pings hit OUR
+bodies 110x that game (their 'enemy'/'enemyHead' = us) yet their value field is
+an opaque keyed hash — nothing decodable reaches us at runtime; the replay
+visibility does NOT correspond to a runtime channel.
+
+Gate v157e (echo guard: echoEnemy>0 -> heard price wQueenRam, heard reach
++age/2), 20g vs abyss_v157s, tag v157e_echo:
+| map | pair | tl100 c/b | verdict |
+|---|---|---|---|
+| islands | 2/4 | 86.5/86.5 | bit-mirror |
+| unsw | 2/4 | 152.5/152.5 | bit-mirror |
+| stronghold | 3/4 | 58.2/58.2 | mirror + 1W |
+| default | 2/4 | 31.7/15.3 | +107% tl, real win |
+| autarky | 1/4 | 33.5/36.5 | -8%, loss |
+| ALL | 10/20 (50%) | 72.5/69.8 | neutral-positive |
+
+Queen deaths by reason (20g): h2h c10/b9, nonRam c9/b10, alive@end 1/1 —
+survival identical; the echo slice is too thin to move her death rate at 20g.
+The mechanism fires where signals exist (default won) and is bit-inert where
+they don't (3 maps mirror) — consistent with the ~50% warnable ceiling.
+
+Gate v157e2 = e1 + qEchoFog umbrella (echo>0 -> wQueenFog x6): BIT-IDENTICAL
+to e1 on all 20 games — on echo turns her chosen dests were already visible;
+the fog response was saturated. Adds zero; not counted separately.
+
+Gate v157e3 = e1 + qEchoAim (queen beacon aims at freshest heard enemy):
+45% pair (9/20). Replay-verified firing: queen enemy-hit rate 2.6%->3.0%
+(+15%), pings 9635 vs 8379 — the aim works, but its coverage gain is too
+small to matter and it costs beacon reach (stronghold lost e1's +1W).
+default still positive (35.0/15.0 tl100). qd<50 3/3, h2h 10/10.
+
+VERDICT (v3 item 5): the sonar channel is real but signal-starved.
+(a) Enemy beacon traffic is unreadable by design — keyed filter.
+(b) Our own echo is directionless and rare (queen hits enemy 1-9% of turns).
+(c) Warnable ceiling ~half of queen h2h deaths; killers are seen by any
+    teammate only 4/20 — fog rams are invisible to every instrument.
+(d) e1 is a marginal keepable: +107% default tl100, zero measured regression,
+    ~4 compares — mirrors qs2 in the "free upside on open maps" bucket.
+    workspace/abyss_v157e, params qEchoRam/qEchoAge (+inert qEchoAim knob).
+(e) Ram-warning at coverage level needs vision/escort geometry, not pings.
+    Sonar detection lane closed at honest marginal; no further variants worth
+    the quota-free gate time.

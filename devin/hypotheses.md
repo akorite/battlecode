@@ -131,3 +131,20 @@ dilemma).
 
 ## Gate rule change: 75% (was 70%) — increments are dead; only structural
 moves ship now. v168 stays live until a candidate clears 75%/≥100g.
+
+## H-FEEDCAP — feedMaxLen=6 leaves consolidation half-done (OPEN, built)
+
+**Mechanism** (m1098277 Australia, 43 dragons/462 total lost longest 24 vs 28):
+only len<=6 dragons feed; mid-size units (7-23) can neither feed nor be elected
+→ swarm stays distributed, champ underfed. 45 noValidAction deaths fired but
+drops went to a churning election target (autarky saw 9 champs re-elected).
+
+**Prediction**: fMax = champLen_-1 when champHead_>=0 (v176) converges to one
+long dragon on BIG maps; longest@end rises on australia/unsw/autarky without
+attrition collapse (feedMinUnits=3 floor). Kill: alive@end drops >20% with no
+longest@end gain (over-consolidation into a dead champ).
+
+## v173 post-mortem — FAIL 39.6%/48
+wh_=pocketMap_ suppressed budding on pocket maps (splits@r60 -16%, the
+documented pin regression), queen-dead flat 0.75 — pure cost. Reverted;
+wh_ dims table stays pending a legal feature. qRamAdj isolated to v177.

@@ -196,3 +196,26 @@ if it taxes her escort or her drop supply.
 - v209_full FINAL: 52.7%/220 — fails gate. Lineage maxes ~+3 vs live.
 - Refill retargeted to proven-only set (Knight Capital/chad gdp/nooberGamer/1234/verity/tozoman/Wapowpow/TonyS/Sarvottam/Oswald/Nexus/Larper/JRN/Hydra), 72 queued.
 - Elo 1600, last-80-set window -51 elo net (challenge drift, autoscrims at parity).
+
+## 2026-10-04 swarm-metrics reframe (v209_full cross-tab, decisive)
+
+Parse of all 220 v209_full replays cross-tabbed queen deaths x outcome:
+- LOSSES (104): bothQdead 64 | ourQdead+theirQlive 31 | bothQlive 9
+- WINS (116): bothQdead 64 | theirQdead+ourQlive 37 | bothQlive 15
+
+IMPLICATION: 70% of losses are decided by swarm metrics (longest/total),
+NOT queen survival — both queens die in 64 and key-2 longest still loses.
+Queen-defense mechanisms have a ~31-game theoretical ceiling minus their
+mobility costs = net ~0 (confirmed: v213 52%, v215 45%, v216 46%).
+THE GAME IS PRODUCTION VOLUME: winners split ~164/game vs our ~44,
+eat 2-4x. Remaining avenue with +5 headroom = grower-scarcity fix
+(promoteLen) + budding rate (growerKeepBase) + spawn placement
+(earlyecon spec: split only near density centroid).
+
+Verdicts: v213 queen-escape WASH 51.7%/118 (fires ~2/34 by design — rescue
+not shield); v214 selfChamp-escape DEAD 46%/76 (champ pays tail to flee =
+shrinks its own score); v215 escort-ring-2 DEAD ~45%/38 (clogs queen);
+v216 qRamAhead+2 DEAD ~46%/50 (wider ring = more flee tax); v217
+queen-champ anchor staleness SAFE 47%/34 0-pair-loss (rare-state fix,
+kept for composite); v218 promoteLen 10->7 in flight; v219
+growerKeepBase 4->2 in flight.

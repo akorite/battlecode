@@ -953,3 +953,62 @@ full 45.8% (net negative: starves longest@end feeding non-queen champs),
 queen-only 50% (marginal free-upside: +autarky qlen, bit-mirror elsewhere).
 If the integrator still wants it, abyss_v158d is the safe param'd form —
 qEcho-style "open-map upside" bucket, not a flagship merge at this base.
+
+## Early-swarm fragility classification (r10-50 deaths, elim maps)
+
+Corpus: a_nods_v135 + ee_fix120 replay dirs (v135/v120-era self-play —
+representative early game; v168 shares the same r<60 mechanics). Taxonomy
+per coordinator: rammed = hitHeadToHead (initiator = our last move closed
+distance to killer's pre-move head; else victim), cornered = hitSelf/
+hitOtherBody, wall = hitWall fog-dive, trapped = noValidAction, len-at-death
+= manhattan head-tail proxy.
+
+| map | deaths | rammed victim | rammed init | cornered | wall | splits A/B |
+|---|---|---|---|---|---|---|
+| devil | 424 | 171 (len2 65/3 62/4 44) | 92 | 118 (28%) | 32 | 464/459 |
+| trophy | 128 | 89 (len2 44/3 37/4 8) | 26 | 2 | 2 | 213/163 |
+| dilemma | 136 | 96 (len2-4 even) | 24 | 8 | 0 | 184/120 |
+| default | 240 | 140 | 88 | 6 | 2 | 282/252 |
+| weakhold | 64 | 0 | 0 | 0 | 64 | 64/80 |
+| stripes | 25 | 17 | 2 | 0 | 1 | 24/53 |
+| qos | 68 | 32 | 8 | 8 | 16 | 60/88 |
+| autarky | 224 | 160 | 64 | 0 | 16 | 238/236 |
+| td | 8 | 0 | 0 | 0 | 8 | 15/16 |
+
+Findings:
+1. **Victim-side rams ~60-70% on devil/trophy/dilemma/autarky** — their
+   len2-3 rammers pick the trade; len3 is the modal victim length (94+37+
+   62+32...). Early units die outgrown, not out-built.
+2. **devil cornered = 118/424 (28%)**: self/body collisions — corridor
+   self-traffic, the only class spawn-spread would directly shrink.
+3. **weakhold + td early deaths are ~100% hitWall** — fog nav on open
+   maps; separate class, not attrition-vs-them.
+4. **Split cadence is seat-asymmetric** (dilemma 184 vs 120 A/B, stripes
+   24/53, qos 60/88, trophy 213/163) — map-side effect, not a
+   bot-vs-bot production gap visible in self-play.
+5. Adjacent-eat rate 0.76: short dragons skip ~1/4 of adjacent pearls
+   chasing far targets — the eat-adjacent mechanism's headroom.
+
+Mechanism gated: abyss_v168y = v168 + youngEat (+1.0 eatBonus for
+L<=3 && round<60, workers only) — growth-over-move for early units.
+Gate 20g trophy,devil,stripes,dilemma,weakhold vs abyss_v168, tag
+v168y_youngeat.
+
+Gate v168y (youngEat +1.0 for L<=3 workers r<60), 20g vs abyss_v168:
+**50% pair (10/20, 2W/6S/2L) — flat/negative.** devil +1 pair, stripes +1,
+trophy -1, weakhold -1, dilemma mirror.
+
+Mechanism failed to move its own lever: adjacent-eat rate 0.750 vs 0.760
+(DOWN). splits@r60 10.7/10.3, alive@r50 6.83/6.78, pearls@r60 24.5/23.1 —
+all inside noise. Side effect: wall+self+body deaths 24.5 vs 15.95/game
+(+54%) — young dragons pay the higher eat-value stepping INTO pockets/
+fog cells (the pocketEatLen waiver already covered their eat steps; the
+added bonus just picks dead-end eats more often).
+
+Verdict: growth-over-move is not the bleed — the classification already
+said it (victim-rams ~63% + cornered-traffic ~28%-devil, not intake).
+Early fragility needs the dodge-when-outgrown defense for workers (their
+len2-3 rammers picking trades against our len3-4) — evasion-geometry,
+same door as the queen work; or the devil corridor crowding fix
+(spawn-spread) for the 28% self-traffic class. Neither is a forage-value
+change. Recommend scoping one of those two next; v168y parked.

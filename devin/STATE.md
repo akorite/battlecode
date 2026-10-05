@@ -269,3 +269,15 @@
 - v187 (territory+radius+persistent+burst) smoking; v179 fallback gate
   ~75/308.
 - Ranked refill 429'd (fired into still-active cap; needs retry loop).
+
+## 05:20 UTC — conveyor line decomposition + lane findings landed
+
+- Ladder: Elo ~1582, but the ranked top-salvo hit a wall: 3W-37L vs 2000+ (Cache 0/18, chad gdp 2/18). Below the ~8% +EV breakeven -> killed 2100+ targets; refill3 fires only vs measured-beatable (nooberGamer 1876 = best EV at ~50%).
+- v182 gate: KILLED 43%/70 (stale-anchor die-in-place).
+- v184 (radius 12): +56% vs v182 only — never verified vs v168. Methodology note: vs-variant %s are not vs-live %s.
+- v186 (territory anchor) 41%/22 FAIL; v187 (+radius) 43%/14 tracking FAIL; v188 (openUntil=0 port) 40.6% FAIL; v179 fallback gate ~50%/78 tracking flat.
+- **Lane findings (decisive)**: autarky — top queens orbit ~5.6 INSIDE swarm (never isolated); ours drifts to 13.7. Top champs plant FORWARD midfield (~25 from queen start, spread ~5) NOT home. nva-mix 45% vs 17% is the real conveyor gap. v182 adversarial: 6 concrete defects (age laundering ~69r, known-empty dies, dead-champ poisoning, zombie feeders, selfChamp self-feed, burst ghosts).
+- pocket — corridor study INVERTS the attrition read: top teams churn MORE corridor deaths deliberately (walls 4.2x, feed 6.4x) = feed production, not bleeding.
+- earlyecon — PD/Trauma r150-250: elim class is production volume (they out-birth us), not survival behavior.
+- In gate now: v190 (v182 + all 6 autarky fixes + feedRadius12, anchor stays forward), v191 (queen swarm-leash: wQueenLeash 0.8 past dist 6 — keeps queen inside cover vs the 87% queen-death rate), v189 (bed-anchor, likely dead after forward-champ finding).
+- Composite metric insight: conveyor strips fleet (alive@end 12 vs 22.8) for +3.4 longest — net negative WHILE queen dies 87% (dead queen forfeits tiebreak-1). Queen survival gates everything else.

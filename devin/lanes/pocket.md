@@ -683,3 +683,55 @@ The residual gap is (a)+(b): they bud 3-5x more and stay tighter.
 Constraint on (a) is food intake (they eat 2-4x more — churn economy),
 so the funnel fix is upstream: swarm density near the anchor +
 forage throughput, not the death mechanism.
+
+== CORRIDOR ENTRY-AVOIDANCE: inverted again (deadend_visit.py, 39 top-team + 12 ladder replays) ==
+Steering hypothesis: winners don't enter dead-end corridors at all.
+VERDICT: **winners enter deadEnd branches 5-34x more than us. Entry
+avoidance is a fabricated discipline — nobody does it.**
+
+Per-side rates on deadEnd-marked cells (v201 marking: deg1-tip ->
+deg<=2 chain -> junction):
+| team        | enter/g | dwell/g | exit/g | wall | self | nva  | h2h |
+|-------------|---------|---------|--------|------|------|------|-----|
+| cheji       |   124.1 |   552.7 |   97.7 |  0.0 |  0.4 | 45.3 | 1.8 |
+| Knight      |   481.6 |  1911.7 |  254.1 |266.3 | 20.9 |  0.5 |15.3 |
+| Quaker      |   156.4 |   590.5 |   71.2 | 89.5 | 16.0 |  0.4 | 5.1 |
+| Cache       |    33.8 |   126.8 |    6.5 |  0.0 | 33.0 |  0.0 | 0.0 |
+| their-opp   |    87.0 |   348.7 |   32.8 | 13.8 | 26.4 | 35.4 | 2.5 |
+| US (ladder) |     6.6 |    40.2 |    5.7 |  2.2 |  2.2 |  0.0 | 0.5 |
+
+Secondary facts:
+- len@entry is le2-dominated EVERYWHERE (dead-end entries and deaths
+  are a len-2 phenomenon — the swarm's default worker size), le3 next.
+  len@death inside: 95%+ ld2.
+- Tip-distance of in-deadEnd deaths: **~90% at td0 (the tip itself)**,
+  all teams — winners included. They walk the whole branch to the tip
+  and die there; the ONLY difference is death reason: cheji 561 nva,
+  Cache 132 hitSelf, Knight 2929 hitWall, Quaker 716 hitWall at td0.
+- cheji "exit" 98% of entries = len-1s darting in/out (U-turn legal
+  at len-1). len>=2 entry is a one-way trip ending at the tip for
+  every team.
+
+REREAD OF THE MECHANISM LINE:
+(a) v201 entry-fatal-price: backwards — we already enter dead-ends
+    least of all (6.6/g vs winners 34-482/g). We banned ourselves from
+    a forage channel winners exploit; eaten/g -16% on the v201 gate is
+    the mechanism eating real income, not noise.
+(b) v208 dedie r>=30: kills dragons at the MOUTH for a death winners
+    take at the TIP — same pearl position either way (own-cell drop),
+    so dedie saves nothing positionally and forfeits the corridor's
+    pearls en route. Its 45%/20 fits.
+(c) What winners actually do in corridors = treat them as one-way
+    forage channels: len-2 walks in eating pearls, dies at the tip,
+    len-1s sweep the drops (only len-1 can U-turn out). The corridor
+    economy is income + churn, not a trap to avoid.
+(d) Our corridor deficit is entry VOLUME and overall churn, not
+    death-geometry. Dead-end branch cells should be forage-valued
+    (they're the last untouched income on corridor maps) with the
+    tip-death accepted as the cost — the Knight profile.
+
+RECOMMENDATION: retire the deadEnd family (3 gates, all dead/negative:
+v201 43.8, v208 45, plus the 16-cell dilemma spawn zap). If anything
+remains, it's a *tip-death conversion* (hitWall->nva) worth ~0 since
+pearl position is identical. Corridor attrition's real lever is the
+churn economy — eat more, die deliberately, repeat.

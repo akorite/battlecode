@@ -323,3 +323,32 @@
 - **v208 = v206 + deadEnd w/ r>=30 gate** (starter-zap fixed): small board running.
 - Dead-pile added: v174 splitLen3, v180 region-discount, v188 openUntil0 (~40%/32), v194 rad20, v195 workerRam, v196 graze, v197 champ-sweep.
 - Elo 1600. refill4 +EV loop running.
+
+## 2026-10-05 ~12:30 swarm-metrics reframe + volume/geometry tests
+
+DECISIVE reframe from v209_full cross-tab (all 220 replays):
+- Losses: bothQdead 64 | ourQdead-only 31 | bothQlive 9 => 70% decided by
+  swarm metrics, NOT queen survival. Queen-defense mechanisms net ~0
+  (v213 52%, v215 45%, v216 50% all confirm).
+- Death-order wash: we win 56% even dying first (median gap 48r).
+- Attrition symmetric: deaths 76/g each side across all reasons.
+- THE REAL GAP = churn economy: opp splits ~295/game vs our ~44 in
+  ladder games (median), sustains to the bell; their deaths land ~9
+  cells from the rolling longest, ours 27 cells (66% at >=20).
+- Winners never hitWall: cornered units die deliberately on the feed
+  anchor. Our workers wedge-die 14.8/g in deg<=2 corridor cells.
+
+IN FLIGHT (all vs abyss_v209, seeds3 all-maps both-seats):
+- v217 queen-champ anchor staleness ~51%/71 0-pair-loss -> SAFE merge
+- v218 promoteLen7 ~41%/34 dead | v219 keepBase2 ~46%/26 |
+  v220 growerChild3 ~46%/26 | v221 slack-to-1700 ~44%/18
+- v222 champ-pull (forage discounted by dist to rolling-longest head)
+- v223 dedie (len<=3 cornered worker -> nva on own cells, retrievable drop)
+
+Strategic: queen-survival avenue exhausted (~31-game ceiling minus costs).
+Churn geometry is the only remaining +5 avenue: compact-blob production,
+deaths landing near the champ, deliberate die-cell choice. earlyecon on
+spawn-placement (split only near density centroid) is the third seed.
+
+Elo ~1605. Gate: 55%/200+/LB50 + benchmark parity; nothing within reach
+yet — composites will only ship if volume/geometry stack clears it.

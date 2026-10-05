@@ -1064,3 +1064,83 @@ v174's negative result direction: len-3 children too fragile, but len-2
 is exactly what winners spam. Also connects to the 63% victim-h2h read:
 if their rammers are disposable ammunition, dying to them isn't a
 survival problem — it's a replacement-rate problem.
+
+## PD/Trauma r150-250 death classification (10 ladder losses, team A = us)
+
+Corpus: pdtd_replays/ — 4 Prisoners Dilemma + 6 Trauma losses (ladder.py
+replays --team 351, opponents 1432-1790 Elo). All team-A losses.
+
+**Prisoners Dilemma — colony-wipe class, driven by split-volume deficit
+(NOT pearl race, NOT queen ram):**
+
+| match | end | eats<=50 A/B | splits<=50 A/B | queen deaths | A deaths r150-250 |
+|---|---|---|---|---|---|
+| m1106137 zzz3nith 1639 | teamElim@58 | 52/33 | 7/29 | B h2h@58 | — |
+| m1100125 STAR 1688 | teamElim@76 | 40/37 | 8/24 | A h2h@26, B wall@27 | — |
+| m1102882 Quantify 1432 | teamElim@195 | 21/23 | 10/14 | B h2h@40, A h2h@195 | 5 self, 2 h2h |
+| m1098973 okbro 1790 | teamElim@448 | 45/6 | 9/17 | B h2h@446 | 14 hitWall |
+
+- We OUT-EAT them on PD (21-52 vs 6-37) — intake is not the loss.
+- They out-PRODUCE 2-4x (14-29 children vs our 7-10 by r50) and convert
+  the volume into colony elimination at r58-448. Same mechanism as the
+  top-team study: len-2 ammunition churn vs our taper.
+- Queen ram is a co-factor only once (m1100125 mutual queen death ~r26);
+  in 2/4 the ELIMINATION happens with their queen already dead — the
+  swarm finishes the job without her.
+
+**Trauma — bells-attrition class, all 6 roundLimit (never wiped):**
+
+| match | A deaths r150-250 (reasons) | B | queen deaths | eats<=50 A/B |
+|---|---|---|---|---|
+| m1098980 DeepSeek 1761 | 39 (26 wall/5 h2h/6 self/2 body) | 32 | A h2h@393 | 2/5 |
+| m1099009 1234 1698 | 68 (62 wall/6 h2h) | 73 | A wall@168, B h2h@349 | 27/6 |
+| m1100855 SuitedConn 1587 | 33 (25 wall/7 body/1 nv) | 34 | B h2h@343 | 19/5 |
+| m1104492 nooberGamer 1641 | 35 (33 self!) | 30 | — | 2/6 |
+| m1106113 wawow830 1590 | 1 | 1 | B wall@155 | 4/1 |
+| m1106125 wawow830 | 0 | 0 | — | 5/1 |
+
+- ~80% of mid-window deaths are hitWall/hitSelf — corridor/fog nav
+  bleed, symmetric-ish both sides but we lose the longest@end margin
+  (e.g. 16L vs 17L). Queen rammed in only 1/6; our queen even hitWall'd
+  herself @168 in one.
+- eats<=50 on Trauma are 1-27/side (sparse map); we out-eat opponents
+  here too. The r50 pearl benchmark (~29) is not the discriminating
+  variable on these maps — attrition to the bells is.
+- Classification: NAV-class loss (wall/self in fog corridors), not an
+  early-econ class. Flagging for the nav/geometry lane, not solvable
+  by production.
+
+**Candidate built: abyss_v168c = v168 + churn floor**
+`churnTiles=900, churnAlive=28, churnKeep=3` — on <=900-tile elim maps,
+non-queen growers bud at flat keep 3 (vs keepBase + round/30 ratchet)
+while units < 28. Directly targets the measured PD gap (splits 7-10 vs
+14-29): our keep ratchet prices out budding exactly when the exchange
+war starts. ADDS growth; no mobility/econ restriction. Queen untouched
+(she already has the keepBase<=2 bud floor). Gate: 24g elim set vs v168.
+
+### abyss_v168c churn floor — gate results (24g elim set vs v168)
+
+- **v1 (grower-keep only): bit-identical** — non-queen growers barely
+  exist on elim maps; splits flow from the queen (keep<=2 floor, ~1/game)
+  and the swarm half-path. churn_ never bound a decision.
+- **v2 (+ worker-bud: swarm workers bud child=2 keeping churnKeep=3 at
+  L>=5 instead of halving): 41.7% pair (10/24), dilemma 0/4.**
+  splits@60 10.4 vs 11.4 (DOWN), queen dead 0.792 vs 0.625 (UP),
+  pearls@60 22.7 vs 24.9. All other maps bit-mirror.
+- Mechanism of the miss: at L>=6 bud gives child len-2 where halving
+  gave len-3; len-3 children out-survive len-2 in self-play (v174:
+  len-3 already fragile), so the bud chain produces weaker ammunition
+  and fewer second-generation splitters. Parent keep identical (3).
+  Net: churn bud trades child strength for shape — wrong trade vs a
+  halving swarm.
+- **Deeper conclusion: the PD production gap is upstream of split
+  rules.** Opponents' worker-parent splits 14-29 need len-4+ workers
+  reaching the front; ours die at len 2-3 (the 63% victim-ram class)
+  before producing anything. alive@~50 is near-equal (37-89/team) —
+  the winners' churn and our conservation arrive at similar counts, but
+  their dead children bought trade geography; ours' dead children
+  bought nothing. The fixable surface remains worker survival/evasion
+  (evasion-geometry lane), not production knobs — both knobs tested
+  (flat keep, worker-bud) are inert or negative.
+
+**Parked:** abyss_v168c (both forms) — results/v168c_churn{,2}/.

@@ -15,7 +15,7 @@ def get(url):
     return urllib.request.urlopen(req, timeout=30).read()
 
 MATCH_RE = re.compile(
-    r'\{id:(\d+),ranked:(?:true|false),status:"(\w+)",winner:"(\w+)",hasReplay:(true|false),'
+    r'\{id:(\d+),ranked:(true|false),status:"(\w+)",winner:"(\w+)",hasReplay:(true|false),'
     r'challenge:(?:true|false),tournament:(?:true|false),at:new Date\((\d+)\),mapName:"([^"]+)",'
     r'a:\{id:(\d+),name:"([^"]+)",elo:([\d.]+)\},b:\{id:(\d+),name:"([^"]+)",elo:([\d.]+)\}')
 
@@ -28,10 +28,10 @@ def matches(team, pages=3):
             break
         for m in found:
             out.append({
-                'id': int(m[0]), 'status': m[1], 'winner': m[2],
-                'hasReplay': m[3] == 'true', 'at': int(m[4]), 'map': m[5],
-                'a': {'id': int(m[6]), 'name': m[7], 'elo': float(m[8])},
-                'b': {'id': int(m[9]), 'name': m[10], 'elo': float(m[11])},
+                'id': int(m[0]), 'ranked': m[1] == 'true', 'status': m[2], 'winner': m[3],
+                'hasReplay': m[4] == 'true', 'at': int(m[5]), 'map': m[6],
+                'a': {'id': int(m[7]), 'name': m[8], 'elo': float(m[9])},
+                'b': {'id': int(m[10]), 'name': m[11], 'elo': float(m[12])},
             })
     return out
 

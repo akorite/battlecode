@@ -221,3 +221,31 @@ Method: tooling/queenfeed.py — attributes each pearl-eat to the eater id (head
 - Feed rates: Knight isles-B 108, noober isles-B 57, Nitronics dil-A 56, unsw-A 50, maze-B 49, unsw-B 48 — vs our losses 0-18.
 
 **Prediction for v202 queen-plant (stationary anchor r320+):** a planted queen's eat ceiling ≈ respawns on her own tile (~0/100r) — anchor+hover CANNOT match roaming feed-rate; hoverers can't deliver (no feed action exists). Plant's real value = queenEnd-bell survival conversion (0→small-len vs the dead-queen 0s we keep posting — 9 own-fault deaths this window argues FOR the plant). But it CONCEDES the qlen bell vs surviving roamers (elite fed queens post len 25-108). NET: plant is a loss-reducer vs bothdead/queen-dead bleeds, not a feed engine; if the goal is matching elite qEaten, the mechanism to copy is escorted-roam (escort screen + safe pearl-field pathing r300+), not planting.
+
+## Census — 30 newest RANKED games (2026-10-05 ~13:34Z, v168)
+
+**Record 11-19** (vs mostly 1440-2050 band). Losses classified from replays (map/end/qDead/longest/total per side).
+
+**Per-cause × per-map table:**
+
+| map | losses | causes |
+|---|---|---|
+| Around UNSW | 4 | bothdead ×4 |
+| Islands | 4 | bothdead ×3, elim ×1 |
+| Schooltime | 2 | live-queen ×2 (tot/longest bells) |
+| Australia | 2 | bothdead ×1, elim ×1 |
+| Maze | 1 | bothdead |
+| Slithery Fight | 1 | bothdead |
+| Trauma | 1 | queen-dead |
+| Portals | 1 | live-queen (qlen 6v24) |
+| Devil | 1 | elim |
+| Trophy | 1 | elim (early — queen h2h@63, elim@100) |
+| weakhold | 1 | elim |
+
+**Totals: bothdead 10 (53%), elim 5 (26%), live-queen bell 3 (16%), queen-dead-solo 1.** vs the 07:41Z census: same shape — bothdead dominant at ~50%, elims stable ~26%, queen own-fault deaths 8/19 (hitWall×6, hitSelf×1@67 isles, hitOtherBody×1) vs h2h×8 — self-kill cluster persists.
+
+**Opponent signatures:**
+- **chad gdp @2049 (0-6 this window):** econ steamroll on every map type — eaten 1279-3534, longest 43-110; wins BOTH ways (2 elims, 3 bothdead, 1 live-queen). Signature quirk: their queen dies early by noValidAction (@2-3, twice!) or trades cheaply — they don't need a live queen; the funnel swarm IS the queen.
+- **Mid-band beaters:** Oswald@1556 ×3 (mixed: our queen dies then bells/elim), Hydra@1575 ×3 (bothdead×2 + trophy early-elim), Wapowpow@1659 ×2 (bothdead×2), single losses to 1234/tozoman/Nexus/nooberGamer — all same signature: our queen dies early-ish (67-239) → their funnel out-lives us at bells.
+- **Anomaly:** "That's That, and This is This" @1441 beat us on Devil — queen h2h@106 → elim@418 (low-elo elim loss, worth a replay pull for mechanism).
+- **Pattern:** nobody beats us while our queen lives — all 3 live-queen losses are bells where BOTH queens survived (schooltime×2 + portals qlen 6v24); every other loss has our queen die @63-408.

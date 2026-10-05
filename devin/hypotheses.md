@@ -81,3 +81,14 @@
   reachBoost if v160 passes + pocket's v153 queen module (anchor +
   threat-conditional escort + evasion) when delivered + v159 seam fix.
 - Each piece only merges if its own gate passes — v142 composite lesson.
+
+## H-QMOD composite (v163) — 2026-10-04
+- v163 = v157( portal+C5 ) + portalGuess=0 + reachBoost + qRamAdj +
+  pocket v153 (queen soft-localization + threat-escort + die-in-place).
+- pocket's three-gate attribution on the SAME 20g set: latch 65% /
+  locked pivot 50% / none 40% — the soft-latch IS the mechanism.
+- Note: v153 gates used champFallbackRound=360 (live semantics);
+  v163 keeps 360 for measurement fidelity, flagged in review.
+- Prediction: ≥55% vs v149 on 17-map board, qlen@end up,
+  queen-dead down on escort maps.
+- Status: GATING (tag v163_full, 68g).

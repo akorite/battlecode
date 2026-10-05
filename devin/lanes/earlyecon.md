@@ -1324,3 +1324,44 @@ timing falsified, the only untested member of the closure list is
 fear price. Caveat: ally-clump is already measured-flat (dAlly
 4.64/5.13, we clump MORE and die more) so a body-screen must change
 positions relative to THREAT vectors, not allies alone.
+
+## Early-elim classification (19 ladder/pdtd losses, teamEliminated <=r300)
+
+### Cause counts
+| class | n | share |
+|---|---|---|
+| (a) our queen rammed (h2h, theirs outlives) | **10** | 53% |
+| (b) queen-v-queen mutual | 0 | 0% |
+| (c) colony attrition (queen outlives or dies non-h2h) | 6 | 32% |
+| (d) pearl deficit at r50 (<50% of winner's) | 3 | 16% |
+
+Queen-ram is the top class and it is EARLY: death rounds
+26,32,33,39,47,50,57,88,168,184 — median ~50. Matches STATE.md
+"lone len-2/3 rammer onto stationary queen" (pocket lane owns).
+On PD specifically the wipe is colony-class (worker-parent split
+deficit) per the earlier study — attrition/ram overlap: 3 of the
+"attrition" games also end with queen h2h but AFTER their queen
+already died (the wipe decides it, not the queen).
+
+### Winner vs loser state (all 19 losses; L=us, W=them)
+| round | alive L/W | splits L/W | pearls L/W |
+|---|---|---|---|
+| r25 | 3.5/2.9 | **1.9/3.6** | 4.9/5.5 |
+| r50 | 5.4/5.1 | **3.2/9.9** | 15.6/13.7 |
+| r100 | 8.2/8.2 | **6.3/21.8** | 32.8/33.4 |
+
+### Decisive answer: winners do NOT field a bigger standing army —
+they run ~3x unit THROUGHPUT. Standing alive is equal at every
+checkpoint (3.5/2.9, 5.4/5.1, 8.2/8.2) while cumulative splits go
+1.9x -> 3x -> 3.5x. Their children die faster (ammunition churn);
+ours die slower but produce less. Pearl intake is at PARITY
+(15.6/13.7 @r50, 32.8/33.4 @r100) — food is not the bottleneck;
+conversion of food into births is.
+
+### "Is our opening too slow?" — yes, measurably: 1.9 vs 3.6 splits
+by r25. The deficit is front-loaded (already ~2x by r25, not just
+the r30-60 taper from the earlier study). Consistent with the
+queen-bud reading: their queens/parents split from ~9.7 pre-split
+len r0-30 vs our ~7.2 — they reach productive length sooner and
+cycle immediately. The opening speed gap is upstream of every
+later production deficit measured in this lane.

@@ -193,3 +193,23 @@
   region topology. earlyecon: early-split survival r10-50. explore:
   census + rank tracking.
 - v181: workerRegionNorm=0 (piece killed), then gate vs v168.
+
+## ~11:00 UTC — steering r5 applied + v182 full gate
+
+- **NEW PROMOTION GATE**: >=55% vs live over >=200 games both seats all
+  maps, 95% LB > 50%, + no-worse vs top-team benchmark (FtM/Vibing++/
+  SSS/Computers/Sponge/WaterCandle). Composite bundling per upload.
+  Rollback always allowed. (Replaces unreachable 75%.)
+- **Conveyor radius rule** (next build): anchor champ in own territory
+  near queen start; recycle feeders only within ~N tiles of anchor;
+  far feeders forage-then-walk-in. Metric: feeder ram losses vs champ
+  length gained — cap radius if losses > gains.
+- **v182 220-game gate fired** vs v168 (22 maps, 5 seeds, both seats).
+- **v181 smoke** at ~35/48 tracking ~45-50% — read at completion.
+- **Lanes**: earlyecon -> Dilemma/Trauma r150-250 elim classification
+  + r25/r50 benchmarks (growth/evasion fixes only, no restrictions);
+  autarky -> champ-anchor/feed-radius telemetry from top replays;
+  pocket -> corridor worker diff; explore -> census/rank.
+- Conveyor finding (standing): winners run ~80 nva die-in-place/game,
+  champs 53-105; we produced ZERO on ladder (feedHeardDie=2 stalls).
+  v182 anchor fix raises nva ~4x locally (S0 verified).

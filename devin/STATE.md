@@ -618,3 +618,6 @@ survival is scrum density / birth placement inside the melee
 - v266 coveredFavour 0.35: FAIL 47.9%/48 — more fear-when-covered costs; 0.15 optimal.
 - Live: Elo recovering post-refill-kill; v122 organic +63 in ~2h after farming tail drained.
 - Lane census (earlyecon): len<=3 deaths are scrum deaths — 59% friendly-geometry, 65-79% died with ally within cheb-2, 84-87% enemy within cheb-3. Cover-seek counterfactual DOA (fires 27%, saves ~6%, grows the scrum). Open surface = BIRTH PLACEMENT inside melee, not isolation.
+- v269 tail-enemy-ban (birth placement): FAIL 35%/20 — 5th consecutive split-restriction dead end. Even temporal vetoes starve production. CLOSED: no more split gates of any kind.
+- v267 midFeed len7/r80: tracking negative (41.7%/12) — churn ceiling hit at len5/r100.
+- v268 feedMaxLen 6->10: tracking +62.5%/8 — bigger dragons recycle into champ, drop volume up. Watching.

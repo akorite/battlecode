@@ -914,3 +914,11 @@ Local replication of the gate: abyss_v299 vs abyss_v263, 10 maps (trophy/devil/w
 - v320: early 57.9%/38.
 - Shipping plan: whichever of v318/v319/v320 finishes ≥55% composite-strongest goes up as v124; rollback = abyss_v299 dir.
 - Elo ~1705, beating Deer Park/DIET CODE at parity.
+
+### v124 shipped = v321 funnel stack (2026-10-04 ~10:20 UTC)
+- **v321 = submission v124.** Composite: leash + funnel (feedRound340/feedMaxLen7/queenChampMemory999) + hideMinTiles0 + queenHideUntil340 + champ anchor-site pick (cheb-6, reach+bed+seenPearl score).
+- Gate final: 53.5%/171 vs v263 (SMALL 51.2, BIG 55.5, pairs 19-13, queen-dead 0.719 vs 0.778). Shipped under relaxed approval.
+- v318 closed 52.8%/254; v320 (unhide alone) 54.8%/62; v319 anchor-pick BIG-only read 62.8%/43 with queen-dead −20%.
+- Internal-conflict fix that made it in: queenHideUntil 390→340 — feed window opened while she still hid, splitting the funnel between her and the worker-champ.
+- Elo dipped to ~1641 on elim-class losses (TD/Devil/Portals/Stripes vs mid-1600s) — the exact class this stack targets.
+- Open: residual loss census on v315 (autarky lane running); post-ship v124 ladder watch; next lever candidates = elim early-melee survival or opponent-adaptive doctrine.

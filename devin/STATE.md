@@ -614,3 +614,7 @@ param coverSeek ~0.3, fires only when isolated-and-threatened
 negative via extra scrum density. Real open surface for len<=3
 survival is scrum density / birth placement inside the melee
 (hits the 59% friendly-geometry class), not isolation-seek.
+- v265 kamikaze-over-self: WASH 48.5%/33 — fires too rarely (feeders die beside ally champ, not adjacent to enemy heads). Dead end.
+- v266 coveredFavour 0.35: FAIL 47.9%/48 — more fear-when-covered costs; 0.15 optimal.
+- Live: Elo recovering post-refill-kill; v122 organic +63 in ~2h after farming tail drained.
+- Lane census (earlyecon): len<=3 deaths are scrum deaths — 59% friendly-geometry, 65-79% died with ally within cheb-2, 84-87% enemy within cheb-3. Cover-seek counterfactual DOA (fires 27%, saves ~6%, grows the scrum). Open surface = BIRTH PLACEMENT inside melee, not isolation.

@@ -526,3 +526,33 @@ Scope: workspace/abyss_v237 on origin/devin/v120 @ daa44c4 vs abyss_v168. Diff =
 ## Verdict
 
 Ship-risk concentrated in items 1-2: the escape's cap/cost model still assumes ceil(L/4) free steps that the engine never grants — for the len 5-6 queens most likely to trigger it, a max-range escape is certain death, worse than the pin it flees. One-expression fixes (`min(L_-1, qEscapeMax)`, `pathCost=len-1`). Item 3-4 are semantic: the release/bud extensions are real but truncated by the feedRound veto — if that's the intended design, correct the comments; if to-the-bell churn was the goal, the veto needs carving. Everything else is bounded or pre-existing.
+
+---
+
+## v310 champ-hunter forensics (mechanism verdict) — 2026-10-04
+
+**Method:** v310_smoke replays aren't on this box and aren't in origin/devin/v120 (they live on the integrator's machine), so I replicated locally: built `workspace/abyss_v310dbg` = v310 + `#define BC_DEBUG` + two `out_.log` lines in buildSquadTargets (`chelig` fires per-dragon-round whenever a len>=8 non-queen enemy candidate exists, logging its len/seen-flag/myDist/swarmRank; `chassign` logs assignment with gain+mult). Ran `kmatch --cand abyss_v310dbg --base abyss_v263 --maps all --seeds 1 --jobs 2 --keep-replays` (44g, both seats), parsed all replays (`analysis/champhunt_audit.py`). Bot LOG lines land in replays as `dragonLog` events — cheap, exact instrumentation. Note the dbg build pays a logging overhead tax; pair score ~43% here vs their flat-50% — same read (every map pair seat-locked).
+
+### Verdict: THE MECHANISM FIRES. The flat smoke is a map-set artifact, not a dead mechanism.
+
+**(a) eligible-enemy frequency:** len>=8 non-queen enemy candidates exist in only ~30% of games (13/43 had any). On every small/elimination map — trophy, devil, Colosseum, queen_of_spades, stripes, tower_defense, dilemma, autarky, portals, schooltime, stronghold, trauma, weakhold, prisoners — **zero eligible dragon-rounds**: games end by elimination before any enemy reaches len 8 (also matches: enemies there die before len 8 — sonar reports show no len>=8 sightings at all). On open maps (big_empty, default, australia, around, slithery, maze, islands) eligibility is frequent once it starts (~2 eligible dragons/round in an eligible round). If the 34-game smoke ran `std`/`small`-weighted maps, ~0 hunts is the expected outcome — the flat 50%/34 and unchanged end-longest are *predicted* by map composition alone.
+
+**(b) assignments + convergence:** gates pass when eligible — 1084/1344 eligible dragon-rounds passed both `myDist<=20` and `swarmRank<3`; 1238 assignments fired. The binding constraint is eligibility existing at all, not the gates. BUT convergence is mostly solo: median **1 distinct hunter per (target, 20r window)** (max 6) — rarely are 3 workers inside dist-20 of the same target. Hunters do converge: med dist at assign 5 → min 3 within 12r; 580/1230 reach cheb<=2 of the target cell; 216/1230 never got closer (target moved / hunter died / reassigned). Then they disengage (med dist back to 6 by +12r) — expected on negative-trade hunts: they come, ram or fail, and the assignment drops.
+
+**(c) hunted vs unhunted death rate:** modest uplift — hunted len>=8 enemies died **30% (8/27)** vs unhunted len>=8 **25% (28/114)**. Within 15r of an assignment, hunted targets logged 193 hitHeadToHead deaths (+31 hitSelf = head-into-body ram attempts) — the kills DO happen. On big_empty specifically hunted 12/17 (71%) vs unhunted 59/79 (75%) — on brawl maps everything dies at that rate anyway, so the marginal effect there is nil. Small pools; the honest read is "fires and kills sometimes, no big delta".
+
+### Code defects found (in buildSquadTargets/scoring — none block the mechanism)
+
+1. **`champ-ram` cand is unreachable dead code** (policy.hpp ~1413). The champ target is always pushed into `hunts_` at assignment, so `huntAt(s.head)` in the occupied-dest branch above it always matches first → every ram of the hunt target is scored `100.0 + h->gain` with why="trade"/"defend", never reaching the `champHunt_ && s.id == champHuntId_` else-if. Consequence is observability only: the *intended* behavior (ram even at negative trade) still runs through the huntAt branch, which has no `tradeOk` guard — verified live: 0 champ-ram turns logged, yet 193 h2h kills on hunted targets. If the dedicated branch is wanted for the higher 70+visible bid or for visibility in logs, it must move ABOVE the `h &&` branch or set a flag why like `h->threat ? "defend" : (s.id==champHuntId_ ? "champ-ram" : "trade")`.
+
+2. **Suspected negative-gain repulsion: FALSIFIED.** `gain = tgtSeen->visible - L_` (enemy minus hunter) — longer enemies give *larger* gain → `1.0+gain/4` multiplier is 1.25-6.0x ATTRACTION, never repulsion. Empirical: median gain +6, only 3/516 seen-assignments negative (hunters were len 3-6 vs targets len ~9). No bug here — I had the sign backwards.
+
+3. **Real efficacy limiter (suspected, unverified): covered-victim veto.** scoreFrom occupied-dest branch: `cover>0 && !queen_ → return c` vetoes ANY head-ram when another enemy is within cheb-2 of the target's head. Winners' champs are escorted (queen study: escort ~5.6) → the exact targets this feature hunts are the ones rams can't touch. Likely binds harder than any other gate on open maps. If champ-hunt is meant to eat escorted champs, the veto needs a champHunt_ exemption (`if (cover>0 && !queen_ && !(champHunt_ && hid==champHuntId_))`).
+
+4. **Stale-cell chasing:** heard-only hunters (champHuntId_<0) get +wChampHunt pull toward a last-heard position up to 20r old — 716/1230 assignments were heard-only, med dmin 4.0 vs 2.0 for seen — they converge on ghosts. Cap heard-target distance or use MsgChamp-style freshest-position relay for enemy champs.
+
+5. Minor: swarmRank counts only `friends_` (visible teammates) — heard teammates don't vote, so two workers that can't see each other both self-assign as "nearest" — harmless (cap is soft anyway).
+
+### Fix suggestion
+
+Mechanism works; the smoke just needs a map set where len>=8 enemies exist: re-gate on `big` or open maps only (big_empty, default, australia, unsw, around, slithery, maze, islands ~x2 seeds) — ~16-20g shows the truth fast. If uplift still reads nil, the highest-leverage change is the covered-victim exemption (3): the feature's purpose is killing planted, escorted champs, and that single veto blocks most of those rams. champ-ram ordering fix (1) is free to fold in. Replays: `results/v310dbg_audit/replays/`; analyzer: `analysis/champhunt_audit.py`; instrumented copy: `workspace/abyss_v310dbg/` (local only, not pushed).

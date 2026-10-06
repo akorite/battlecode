@@ -581,3 +581,36 @@ midFeed NC400 dead (44%). Elo ~1642.
 - Pipeline next: lane reports (kamikaze-over-self, spawn-trap room-check, survival-to-4), benchmark parity vs top-6, live watch on v122.
 - v264 spawn-trap region-check: FAIL 43.3%/30 on corridor/pocket maps. 4th consecutive split-restriction dead end (v253, v251, v174, v264): ANY reduction in split volume starves production. hasRoomyMove already adequate; ~3-4% spawn-trap residual not worth the starve.
 - v122 live: Elo rebounded 1518->1565 within ~2h of ship.
+
+## 2026-10-05 PM9 — len<=3 death-geometry census (earlyecon)
+results/v263_gate/replays didn't exist; generated equivalent:
+v263 vs v168, 6 elim maps x2 seats (12g, tag v263_deathgeo on
+devin/earlyecon). 783 len<=3 deaths total.
+WHERE they die (symmetric cand/base — v168-vs-v263 caveat):
+- reason mix: hitSelf 42%, hitHeadToHead 32%, hitOtherBody 17%,
+  noValidAction 6%, hitWall 3%. Friendly-geometry = 59%.
+- d_ally median 2 (65-79% had an ally within cheb-2): they die
+  IN the scrum, not isolated. hitSelf median r168, body r154 —
+  mid/late crowding, not early foraging attrition.
+- enemy within cheb-3 of death cell: 84-87% (contested space).
+COVER-SEEK counterfactual (enemy<=4 && no ally<=2 -> pull to ally):
+- rule fires on 27% of deaths; plausibly saves only 6% overall
+  (one-step model: toward-ally step increases enemy-dist on a free
+  cell, h2h only). Per-map ceiling: trophy 20%, td/dilemma 15%,
+  qOS 5%, devil 2%, weakhold 1%. As fraction of h2h deaths: 19%.
+- Of the 209 fireable deaths, 79 are hitSelf + 26 hitOtherBody —
+  pulling isolated units toward allies GROWS the scrum producing
+  the top death class. Expected saves/game <= 1-2.
+VERDICT: below the >20% bar — do not build. And v263 already
+carries coveredFavour (friendDist<=2 discounts danger favour), so
+the cover channel is partially live; the deaths it prices still
+happen because the killer out-lengthens the cover, not because the
+unit lacked a pull.
+The one concrete diff (if built anyway): in the move-score loop
+for !queen_ && L_<=3, `if (enemyDist_[dest] <= 4 && friendDist_[dest] > 2)
+v += p_.coverSeek * (friendDist_[w_.head] - friendDist_[dest]);`
+param coverSeek ~0.3, fires only when isolated-and-threatened
+(27% of turns-at-risk) — expected saves ~1-2/game, net probably
+negative via extra scrum density. Real open surface for len<=3
+survival is scrum density / birth placement inside the melee
+(hits the 59% friendly-geometry class), not isolation-seek.

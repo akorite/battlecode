@@ -156,6 +156,7 @@ struct Params {
     int growerChild = 2;              // growers bud off children this long
     double growerDanger = 3.0;        // extra danger multiplier for growers
     int swarmSplitLen = 4;            // swarm dragons split in half at this length
+    int floodUntil = 80;              // opening: any dragon halves at len-4 — max unit count by r50
     int swarmBudLen = 6;              // worker-bud: long parents bud a fixed len-4 child
     int swarmBudChild = 4;            // child born split-ready -> throughput compounds
     int splitEnemyDist = 1;           // no split with an enemy head this close
@@ -326,11 +327,6 @@ struct Params {
     int feedHeardDie = 30;            // die in place beside a champion reported within this many rounds — the conveyor stalls if it needs a live sighting
     int champAnchorAge = 40;          // feed at the last-known champ position while the report is this fresh             // die in place beside a champion we only HEARD if the report is <= this many rounds old (0 off)
     int boxFeedDist = 6;              // boxed-in dragon within this many tiles of the champion dies in place (0 off)
-    int feedShare = 3;                // every Nth worker becomes a champ-anchored conveyor unit
-    int feedFrom = 100;               // conveyor units activate from this round
-    double wFeedOrbit = 6.0;          // pull toward the champ's ring for conveyor units
-    int feedOrbitDist = 3;            // ring radius — near enough to die within reach, far enough not to block the queen
-    int conveyorMaxLen = 8;           // conveyor feeders only die-in-place at or below this length            // ring radius — near enough to die within reach, far enough not to block the queen          // pull toward the champ's ring for conveyor units
     int feedMinUnits = 3;             // a feeder dies only while the team has >= this many dragons (do not wipe a remnant out)
     int champRelay = 1;               // 1: dragons that know the champion's position forward it (MsgChamp)
     int champRelayAge = 30;           // forward only reports at most this old (the age is coarsely coded)

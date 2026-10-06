@@ -800,3 +800,11 @@ stands as the h2h lever.
 - v291b ring-3 orbit: 46.7%/30 — queen spared (0.700 both) but benefit gone too (longest 15.7 vs 18). Die-at-head feeds, orbit-at-3 doesn't.
 - VERDICT: conveyor-role class washes at ~46%. Redirecting our deaths doesn't close the swarm-economy gap — winners' edge is 3x total spawns (intake volume), not death placement. Param + role surface on the v263 lineage is exhausted; ~30 consecutive washes.
 - Elo 1661 organic climb continues (62%+ WR vs 1550-1650 field). refill8b on TonyS/unemployed/MilkDragon/cactus/Nexus/Oswald.
+
+### WIN-CONDITION CORRECTION (2026-10-03 ~15:30 UTC) — read scoring.cc
+- RoundLimit rank = (longestDragon, totalLength) lexicographic. NO queen key. The "queen end-length decides the bell" belief was WRONG — it's the longest dragon (usually the fed champ).
+- Reframe: our longest ends ~15-19 vs winners' 40-90 → the conveyor IS the bell mechanism, not optional. Queen-survival work (leash/screens) addressed a non-existent key.
+- v291a bug found: conveyor feeders orbited year-round but the chfeed die-in-place sits inside the r360 feed-window gate — feeders NEVER died outside the window. Orbit-only = cost without feed.
+- v291c: ring-3 orbit + year-round die-in-place (d<=champFeedDist, L<=conveyorMaxLen=8) → drops land adjacent to champ every game phase.
+- Ladder replay census: split volumes hundreds/game both sides on big maps; throughput theory confounded (Sarvottam out-split 74:40 & won; cactus out-split 109:41 & lost). Not the lever.
+- v292 flood opening: 46.4%/28, alive@end REDUCED 2.7 vs 4.5 — fragile len-2s die. Wash #31.

@@ -107,10 +107,6 @@ class Policy {
         if (pocketMap_) noteFoodReach();
         buildSquadTargets();
         worker_ = !queen_ && !grower_ && !lead_ && !assassin_;
-        bool queenKnown = w_.ourQueen >= 0 && !w_.queenDead(w_.ourQueen)
-                          && w_.queenRound >= 0 && w_.t.round - w_.queenRound <= p_.champMemory;
-        feeder_ = worker_ && !selfChamp_ && (champHead_ >= 0 || queenKnown)
-                  && w_.init.id % p_.feedShare == 0 && w_.t.round >= p_.feedFrom;
         // Starving on safe food: nothing edible in reach that isn't a bait bed.
         // Then a suicide-eat (enter the appendage, take its pearls, wedge-die)
         // out-values orbiting a food desert — v119's swarm economy tolerates
@@ -242,35 +238,6 @@ class Policy {
             }
         } else if (!assassin_ && w_.t.round >= p_.feedRound && L_ >= p_.feedMargin && !p_.champOne) {
             grower_ = true;  // nobody visible is longer: we are the one being fed
-        }
-
-        // Conveyor-unit role: a share of workers live anchored to the champ —
-        // their forage, fights and deaths all happen in her ring, so every
-        // death mode recycles within reach instead of ~27 cells out.
-        if (feeder_ && feedHead_ < 0) {
-            if (champHead_ >= 0) {
-                feedHead_ = champHead_;
-                feedAge_ = champAge_;
-            } else {
-                feedHead_ = w_.queenCell;
-                feedAge_ = w_.t.round - w_.queenRound;
-            }
-        }
-        // Conveyor die-in-place, year-round: a feeder that drifts inside the
-        // drop radius suicides beside the champ so the pearls land in reach —
-        // the winners' bell mechanism is just (longest, total), and this is
-        // the only lever that grows the champ past ~19.
-        if (feeder_ && feedHead_ >= 0) {
-            int d = distToHead(myDist_, feedHead_);
-            if (d != INF && d <= p_.champFeedDist && L_ >= 2 && L_ <= p_.conveyorMaxLen
-                && w_.t.units >= p_.feedMinUnits) {
-                Choice c;
-                c.split = true;
-                c.n = 0;
-                c.why = "conveyor";
-                c.score = 1e9;
-                return c;
-            }
         }
 
         // Depth 1 is the plain one-step evaluation; then deepen while the CPU budget lasts.
@@ -598,7 +565,6 @@ class Policy {
     Nav nav_;
     double foodReach_ = 0;          // reachable, collectible belief (starving signal)
     bool worker_ = true;            // no doctrine role: not queen/grower/lead/assassin
-    bool feeder_ = false;           // conveyor-unit: anchored to the champ's ring
     bool anyBait_ = false;          // a bait cell (deg<=1 provable) seen this game — raw detector
     bool pocketMap_ = false;        // anyBait_ && small map — gates pocket mechanisms
     bool starving_ = false;         // worker with little reachable non-bait food — suicide-eats allowed
@@ -1673,10 +1639,6 @@ class Policy {
             }
             why = "to-feed";
         }
-        if (feeder_ && feedHead_ >= 0) {
-            int cd = distToHead(dist, feedHead_);
-            if (cd != INF) value += p_.wFeedOrbit * gp(std::abs(cd - p_.feedOrbitDist));
-        }
         if (escortOf_ >= 0) {
             int dd = distToHead(dist, escortOf_);
             if (dd != INF) value += p_.wEscort * gp(std::abs(dd + k - p_.escortRing));
@@ -1976,8 +1938,13 @@ class Policy {
             // brood is still building, gated on the breed phase not a tile count.
             if (queen_ && bud_ && w_.t.round < 100) keepBase = std::min(keepBase, 2);
             int keep = keepBase + w_.t.round / p_.growerKeepEvery;
-            if (L_ < keep + p_.growerChild) return false;
-            n = p_.growerChild;
+            if (w_.t.round < p_.floodUntil) {
+                if (L_ < p_.swarmSplitLen) return false;
+                n = L_ / 2;
+            } else {
+                if (L_ < keep + p_.growerChild) return false;
+                n = p_.growerChild;
+            }
         } else {
             if (L_ < p_.swarmSplitLen) return false;
             // Late game: the tiebreak is the longest dragon, so stop splitting and let
@@ -1986,6 +1953,9 @@ class Policy {
             // Worker-bud: a long parent buds off a child already at split
             // length; short parents halve as before.
             n = (L_ >= p_.swarmBudLen) ? p_.swarmBudChild : L_ / 2;
+            // Flood opening: before r80 split as soon as len-4 — winners field
+            // 8-21 units at r50 vs our 3-5 and the compounding does the rest.
+            if (w_.t.round < p_.floodUntil && L_ < p_.swarmBudLen) n = L_ / 2;
         }
         int enemyBan = open_ ? p_.openEnemyDist : p_.splitEnemyDist;
         for (World::Seen const& s : w_.others)

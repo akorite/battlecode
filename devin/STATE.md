@@ -1,5 +1,16 @@
 # Cognoscenti state — 2026-10-04 (post v3-prompt restart)
 
+## v124 residual decomposition (corrected, 176 games)
+- elim 38 (46%): swarm-wipes r62-448, hidden queen starves at len-2 (needs L>=4 to bud, no donations until r340 funnel)
+- longest 30 (37%): thin margins (21v22, 35v52, 49v60); our totals often BIGGER (309v73) but mass spreads across feeders instead of concentrating
+- queenEnd 14 (17%): her dead, theirs alive at bell
+
+## In flight (2 Oct late)
+- v324 = v321 + queen early-feed on NC<=700 (feedAt 120, queenReady while hidden): melee swarm regen vs elim class. 53.1%/49 early.
+- v325 = v321 + feedMaxLen 9 (big only): concentration for longest class. 64.3%/14 early.
+- v326 = v321 + post-mortem kamikaze (ported from v307): free insurance, fires only when our queen dead + theirs alive. Flat 50%/26 as designed (subset too small to resolve in mirror).
+- v323 dead flat 50%/60 killed.
+
 ## Rating / live
 - Elo 1621 (was 1696 peak, -75 drift on autoscrims). Live: **v149 (sub #116)** — 55.1%/68 vs v138 board.
 - vs 1600-1950 band: ~61%. vs 2000+: ~17%. Ranked-eligible foes: FtM(264) Vibing++(306) SSS(91) Preyas(1101) 1234(919) Sponge(213) Computers(112). WaterCandle/Citadel ranked-off.

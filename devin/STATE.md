@@ -834,3 +834,19 @@ stands as the h2h lever.
 - KEY-2 INSIGHT: we win key-1 (longest) but lose key-2 totalLength 2-3x. Their swarm SURVIVES denser — not churn, persistence. Root: our units die spread out (drops land 27 cells away = isolated deaths), theirs die adjacent.
 - Open lane task (explore): census last ~80 ladder losses for loss-mode decomposition vs the r360 freeze.
 - Standing: v263 live, Elo 1711 climbing organically. All param/conveyor surface exhausted (~37 washes). Organic path only.
+
+## 2026-10-06 field census (explore lane — 80 newest ladder replays, v168 live)
+
+**Record 53-27 (66%)** vs band 1176-1778. Tooling: tooling/fieldcensus.py on devin/explore-modes.
+
+**SCORING MODEL CORRECTION — replay-falsified:** roundLimit scoring is **(queenEnd → longestDragon → totalLength) lexicographic — the queen key IS real and sits FIRST**. 4 losses won BOTH longest and total and still lost, decided by queenEnd: TD ql 2v6 despite ln 36v6 tot 49v22; maze ql 0v23 despite ln 39v23; dilemma ql 0v5 despite ln 31v13; slithery ql 0v10 despite ln 39v35. The "no queen key" claim is wrong — queenEnd (her length, 0 if dead) decides before longest.
+
+**Loss-mode decomposition (n=27):**
+- **key0-queenEnd: 12 (44%)** — 10 = our queen dead vs alive (ql 0 vs 3-35); 2 = BOTH alive but shorter queen (ql 22v34, ql 2v6 — we win longest+total and still lose).
+- **key1-longest: 9 (33%)** — all mutual queen deaths (ql 0v0) decided on longest. Two sub-shapes: (a) tot-dominant longest loss (australia×3: tot 237-315 vs 90-119 — we out-mass 2-3x but fragmented); (b) swarm-deficit (autarky/qOS/trophy/trauma/devil/default/islands: tot 2-51 vs 47-238).
+- **elim: 6 (22%)** — all preceded by queen h2h death (qd@4-378; two early mutual queen kills @4-49).
+- **key2-total: 0** — zero losses decided on total this window (the suspected key-2 mode doesn't exist).
+
+**r360-500 split-freeze correlation (17 roundLimit losses):** our splits mean 16.1 vs opp 57.7 (3.6x); frozen ≤2 splits in 5/17 ours vs 0/17 theirs; dc450 ours 7.8 vs theirs 19.3. Correlation REAL but incomplete: in the tot-dominant australia losses we out-produced anyway (tot 315v90 with sp 30v13) — there the bleed is longest-CONCENTRATION not count. The freeze explains the swarm-deficit sub-shape, not the funnel one.
+
+**Read for next levers:** (1) queen survival still = ~44% of losses by itself (keep her alive → queenEnd key can't be lost); (2) when both queens die the game is decided on longest — concentration/funnel, not swarm size; (3) eliminations all route through queen h2h first.

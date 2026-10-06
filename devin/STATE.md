@@ -857,7 +857,6 @@ stands as the h2h lever.
 - Cumulative: ~38 variants washed/failed on the v263 lineage. Param surface, forage modifiers, split gates, conveyor roles, queen handling — all ~46-52% mirror reads.
 - The mechanism gaps proven but unfixed: (a) totalLength persistence deficit (their swarm stays dense, ours dies isolated 27 cells out); (b) every lever that compresses the swarm costs as much as it gains.
 - Next: explore lane's field-loss census is the last diagnostic running; organic grind continues.
->>>>>>> 4939442 (STATE: 38 washes, Elo 1711, refill dead, census pending)
 
 ### Scoring correction + roam-leash breakthrough (2026-10-03 ~17:45 UTC)
 - **SCORING MODEL RESOLVED — replay-verified:** production ranking at bell = **(queenEnd → longestDragon → totalLength)** lexicographic. The local engine source (engine/src/scoring.cc) lacks the queen key — deployed build differs. Evidence: 4 losses won BOTH longest and total and still lost; only explainable by queenEnd first.
@@ -868,8 +867,6 @@ stands as the h2h lever.
 - Elo 1701, organic 17-13 last 30 (SHINK AI 6500 at 1849 = the wall, 1/5).
 - Pipeline: v301 queen-hug escort ring-2 smoke, v302 queen-permanent-feed-target smoke, v303 tighter leash (8/0.3), v304 leash extended to the queen herself.
 - Next candidates: ship v299 if gate ≥54%; composite v299+best-of{301,302,303,304}; conveyor v2 with in-territory radius if longest losses persist after the queen fix.
-<<<<<<< HEAD
-
 ### v299 roam-leash mechanism audit — explore lane, 40 replays (2026-10-04)
 
 Local replication of the gate: abyss_v299 vs abyss_v263, 10 maps (trophy/devil/weakhold/qOS/islands/unsw/slithery/australia/autarky/schooltime) x2 seeds both seats, tag v299_audit. Result **24-16 (60%), pairs 5W-14S-1L** — islands/schooltime 4-0, unsw 1-3, everything else split. Replays parsed with tooling/v299audit.py (full-body tracking per dragon per round).
@@ -888,3 +885,14 @@ Local replication of the gate: abyss_v299 vs abyss_v263, 10 maps (trophy/devil/w
 - v303 tighter leash: 47.4%/76 killed. v307 (leash+queen-feed+post-mortem): 46.7%/75 killed — the add-ons cost ~5pts, NOT mirror-neutral as hoped. v304 queen-leashed forage: dead. v308 soft density-cover: 46.7% killed.
 - **v310 champ-hunter in flight:** enemy dragons len≥8 get nearest-3 kamikaze workers converging; ram bypass on the hunted id — a len-2 head kills any length. Directly attacks the 33% longest-loss class.
 - Elo 1701 organic, refill dead. ~41 variants washed on v263 lineage; the only reads ≥55% are single-mechanism composites on favorable seed subsets.
+
+### v123 shipped = v299 roam-leash + funnel variants (2026-10-04 ~05:30 UTC)
+- **v299 = submission v123, ACTIVE on server.** Ship case: two-line diff (worker forage beyond fd>10 discounted ×0.4) read 53.4%/208 vs live, BIG arm 56.5%, decided pairs 20-13; explore-lane audit confirmed −21% congestion deaths (89.5 vs 112.7/game) as the real channel. Shipped under relaxed approval (probable improvement, rollback = resubmit abyss_v263).
+- Final gate drift settled ~52%/239 — BIG-map edge persistent, SMALL flat.
+- Live record opening: 4-0 vs shark++ (1541). Elo ~1695.
+- **Audit's loss census on v299 (16 losses):** longest 44%, elim 38% (all opened by small-map queen h2h), queenEnd 12%, total 6%. Post-mutual-death games decided on longest concentration.
+- **v311 (v299 + queenChampMemory=999 — permanent feed funnel to her, audit's queen-as-longest channel):** early gate 56%/32, BIG 66.7%.
+- **v312 (v311 + queen pocket-gradient pull `wQueenPocket=1.5` on (enemyDist−friendDist) up to ±12, NC≥400):** smoking — the joint metric cover lacked (allies-near AND enemies-far = protected interior, not contested density).
+- **v313 (v312 + stalkMinLen=4 — len≤3 workers no longer pulled toward heard enemies; transit-h2h prey fix):** smoking.
+- v310 champ-hunter: flat 50%/36, base longest@end unchanged — mechanism may not fire; autarky lane on the forensic.
+- Shipping rule reminder: ≥55%/>200g/17maps LB>50 preferred; probable-improvement composites ship under relaxed approval with rollback.

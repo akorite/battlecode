@@ -772,3 +772,11 @@ mix-neutral on the fight channel, +5-6 deaths/game reclassified to feed.
 Consistent with the +4-7% gate delta: same deaths, better death timing.
 The len<=3-neutral-collision fix (tradeOk free-parking, below) still
 stands as the h2h lever.
+
+### Variant sweep on v263 (dead/wash, 2026-10-03 07:00-09:30 UTC)
+- v273 herd-graze (soft friend-yield + ally-graze bonus): 50%/32 FLAT. Forage-yield surface closed.
+- v274 splitRoomSmall=4 for len<=3 halves: 50%/44 FLAT. Room gate isn't the scrum-split blocker.
+- v275 growerChild=4 (growers bud split-ready): 35.7%/14 FAIL.
+- v276 queen-factory (keep=2 flat, bud every len-4 to r450): 47.2%/36 — and replay audit showed TOTAL SPLITS IDENTICAL (3362=3362). Queen can't reach len-4 hiding; production purely intake-bound. Dead.
+- v277/v278/v279/v280 in flight (small-head-fear, keepEvery120, bait-ungate, bed-camping).
+- Mechanism confirmed: winners camp pearl beds — eat each respawn, split, children camp adjacent beds. Our units transit between beds and die in transit. v280 tests graze-lock (far targets *0.25 when within 3 of a live bed).

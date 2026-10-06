@@ -690,3 +690,7 @@ Tooling: devin/pocket:tooling/deathmix.py, hitself_census.py (h2h+body).
 - v268 feedMaxLen 6->10: FAIL 42%/38 on full gate despite +55% smokes — map-slice smokes hid the cost; bigger-dragon feed pull starves elim boards. Feed levers that pull mid-size units = starve (same law as splits).
 - v267 midFeed len7/r80: confirmed dead 41%/17.
 - Elo ~1527 flat; Milk Dragon (1515-1520) challenging US at parity — coin-flip matchup.
+- v270 free-parking fix (tradeShortLen on BIG): FAIL 37.5%/24 — mutual-collision trades were net-neutral; removing them cedes contested pearls. CLOSED: h2h-pricing channel.
+- v271 feedRound 400->340: FLAT 50%/30 — feed timing makes no difference.
+- v272 doomed-feeder redirect: WASH ~49%/37 — transit cost eats the drop relocation. Dead.
+- Elo ~1499: organic record ~par vs 1500-1680 band; ~160 of the drop was killed-farming tail. Rollback dir ready: abyss_v255 (v121).

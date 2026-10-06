@@ -864,3 +864,45 @@ lift is where the bell gains live (key-3), and nva-feed supply rising
 +39% is the key-2 helper. Watch item: queenEnd means sit lower on cand
 side despite flat death rate — worth one more board before shipping if
 the composite margin is thin. Analyzer: tooling/v225_units.py.
+
+=== DROP-RECYCLE AUDIT (v237_live replays absent from all branches — locally reproduced gate v237 vs v168 all-maps s3, 30-44g; + top-team corpus t70/t226/t501/t952 103g; + ladder_replays 12g live vs foreign) ===
+Analyzer tooling/drop_recycle.py: per dragonDeath -> drop cells = own-cell
+True pearl flips within r+2 (verified against head-path positions), fate =
+next False flip <=5r attributed to the side+id whose head was on the cell.
+Travel = drop-cell to eventual eater's head at death round (the "~1 vs ~8
+moves" quantity). Parent-recycle = literal split-parent eats the drop.
+
+VERDICT: the donation claim is FALSIFIED on every axis, in all 3 corpora.
+  corpus            ally_d med | eater-travel med | us/them/decay(5r)
+  TOP (103g)          1            2            29 / 30 / 41
+  TOP-opps            1            2            29 / 30 / 41
+  v237 self-play      1            2            31 / 32 / 38
+  v168 self-play      1            2            30 / 31 / 40
+  US live ladder      2            2            25 / 25 / 49
+  OPP live ladder     1            2            30 / 28 / 41
+
+- Winners' drops are eaten at med travel 2 (not ~1); ours at 2 (not ~8).
+  Far-travel tail (>=8): us ~5%, opponents ~7%. No donation asymmetry.
+- Live ladder specifically: our drops 25% self-recycled vs 25% donated —
+  a dead-even mirror, not a midfield giveaway. Unlimited window: 49/43/9
+  vs their 48/46/6 — still symmetric.
+- Parent-recycle: TOP 9.6%, v237 7.7%, us-live 7.5%, opp-live 4.7% —
+  ours slightly ABOVE opponents, not broken.
+- ally_d (death->nearest ally head): med 1-2 everywhere; opponents die at
+  med 1 vs our 2 on the ladder — they die marginally nearer friends.
+
+THE REAL (SMALL) RESIDUAL: our live-ladder decay rate is 49% vs their 41%
+— our drops rot ~8pts more because they land in thinner neighborhoods
+(same ally-density cause as everything else: volume, not geometry). The
+dominant gap remains death VOLUME (~87-140 deaths/game ours vs ~300
+top-team) — not where drops land or who retrieves them.
+
+IMPLICATION FOR die-toward-allies: the imagined mechanism targets a leak
+that measures ~zero. Best case it shifts the ~8pt decay gap — worth a
+fraction of a bell at most. Recommend NOT building it as specced; if the
+decay residual matters, the lever is swarm density at death sites (same
+churn-economy fix as everywhere), not death-cell selection.
+
+Replays: results/v237_live_local/ on branch (30g used in audit, gate
+finishing 44). Local gate read at 30g: ~55% cand — consistent with your
+live tracking 55.5%/119. Tooling committed.

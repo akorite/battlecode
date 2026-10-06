@@ -571,3 +571,11 @@ self-deaths are intended feed suicides <=6 cells of an ally — the
 conveyor, not a bug. Spawn-trapped residual ~3-4%.
 v258 brood-flinch 51.6%/62 drifting flat; v256 qbud flat; v257
 midFeed NC400 dead (44%). Elo ~1642.
+
+## v122 ship (03 Oct ~06:45 UTC)
+- **v263-covernets LIVE** = v255 + covered-ram veto (enemy cover count within cheb-2 of ram target, both single-step ~1339 and sprintTrade ~2004) + cover-aware adjacent exposure (friendDist<=2 discount in the adjacent-to-enemy-head danger branch ~1711).
+- Gate reads: v263 55.6%/126 vs live (SMALL 55.0, BIG 58.3 peak); v262 (veto alone) 53.9%/180. Shipped under relaxed rule (probable improvement, rollback = v255 dir → resubmit).
+- Elo at ship: 1518 (post-refill-kill low; refill stopped — asymmetric EV model falsified, -44E bleed).
+- Refill7 DEAD: chad gdp/Knight Capital/etc went 0-5 vs v121 — targets updated or our edge decayed. No more farming.
+- Lanes: hitSelf = conveyor working (93% intended); split-reject = survival-to-4 choke; drop-recycle = in-blob volume gap (opp 141-175 deaths + 142-182 splits vs our ~30-60).
+- Pipeline next: lane reports (kamikaze-over-self, spawn-trap room-check, survival-to-4), benchmark parity vs top-6, live watch on v122.

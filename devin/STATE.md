@@ -906,3 +906,11 @@ Local replication of the gate: abyss_v299 vs abyss_v263, 10 maps (trophy/devil/w
 - Lane forensics (autarky): v310 champ-hunter fires and kills (hunted 30% vs 25% die) but covered-victim veto blocks the escorted-champ rams that are the point; exemption insufficient alone. v237-era anchor id dead code previously fixed.
 - Elo ~1690-1721 oscillating; v123 (leash) live record: beat shark++ 5-0, 1-4 vs SHINK AI 6500 (1849).
 - Residual loss census on the funnel composite running (autarky lane).
+
+### v318/v319/v320 funnel stack (2026-10-04 ~08:30 UTC)
+- v318 (v315 + hideMinTiles 0): tracking 53.5-58% — decaying like all reads but mechanism gains hold: queen-dead 0.711-0.729 vs 0.782-0.838. Pairs 21-15.
+- **v318 internal conflict found+fixed in v320:** queenHideUntil=390 vs feedRound=340 — 50 rounds where the funnel feeds the worker-champ while she buds donations off at len-2. v320 sets queenHideUntil=340 (unhide when funnel opens).
+- v319 (v318 + anchor-site pick within cheb-6 on reach+bed+seenPearl): early 63.6%/22, queen-dead 0.647 vs 0.818.
+- v320: early 57.9%/38.
+- Shipping plan: whichever of v318/v319/v320 finishes ≥55% composite-strongest goes up as v124; rollback = abyss_v299 dir.
+- Elo ~1705, beating Deer Park/DIET CODE at parity.

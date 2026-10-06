@@ -329,6 +329,7 @@ struct Params {
     int feedShare = 3;                // every Nth worker becomes a champ-anchored conveyor unit
     int feedFrom = 100;               // conveyor units activate from this round
     double wFeedOrbit = 6.0;          // pull toward the champ's ring for conveyor units
+    int feedOrbitDist = 3;            // ring radius — near enough to die within reach, far enough not to block the queen          // pull toward the champ's ring for conveyor units
     int feedMinUnits = 3;             // a feeder dies only while the team has >= this many dragons (do not wipe a remnant out)
     int champRelay = 1;               // 1: dragons that know the champion's position forward it (MsgChamp)
     int champRelayAge = 30;           // forward only reports at most this old (the age is coarsely coded)

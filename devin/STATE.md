@@ -794,3 +794,9 @@ stands as the h2h lever.
 - Elo 1661 (not 1631) — refill working vs proven targets (777 2-0, cactus, risq-v 2-1, Tony S 1-1). Spearhead (1795) stale-queue losses observed 0-3 — target cut, refill8b restarted with Tony S/unemployed/MilkDragon/cactus/Nexus/Oswald only.
 - v291 conveyor-unit role: every 3rd worker (id%3==0) anchored to champ's ring from r100 via wFeedOrbit=6 pull + year-round feedHead_ anchor (queenCell fallback when champ unknown). Mechanics: their forage/fights/deaths all land in the champ ring → recycle within reach instead of ~27 cells out. Smoke fired on all maps.
 - ~20-variant wash streak on v263 lineage; single-lever param space exhausted. Conveyor-unit is the first structural role change since grower_.
+
+### v291 conveyor-unit verdicts (2026-10-03 ~14:30 UTC)
+- v291 adjacency-orbit: 45.5%/33 — mechanism WORKS (alive@end 9.7 vs 5.9, longest 28 vs 19) but queen dead 0.788 vs 0.667, qlen 3.3 vs 5.0: feeders crowd her ring → she gets rammed. Net negative.
+- v291b ring-3 orbit: 46.7%/30 — queen spared (0.700 both) but benefit gone too (longest 15.7 vs 18). Die-at-head feeds, orbit-at-3 doesn't.
+- VERDICT: conveyor-role class washes at ~46%. Redirecting our deaths doesn't close the swarm-economy gap — winners' edge is 3x total spawns (intake volume), not death placement. Param + role surface on the v263 lineage is exhausted; ~30 consecutive washes.
+- Elo 1661 organic climb continues (62%+ WR vs 1550-1650 field). refill8b on TonyS/unemployed/MilkDragon/cactus/Nexus/Oswald.

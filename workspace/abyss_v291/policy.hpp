@@ -1659,7 +1659,7 @@ class Policy {
         }
         if (feeder_ && feedHead_ >= 0) {
             int cd = distToHead(dist, feedHead_);
-            if (cd != INF) value += p_.wFeedOrbit * gp(cd + k);
+            if (cd != INF) value += p_.wFeedOrbit * gp(std::abs(cd - p_.feedOrbitDist));
         }
         if (escortOf_ >= 0) {
             int dd = distToHead(dist, escortOf_);

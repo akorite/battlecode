@@ -290,3 +290,12 @@ Zero live-queen losses this window; queen survival is still the whole game.
 **Opponent signatures:** chad 1-4 again — nva churn 211-354/game vs our 25-35, plus their queen suicides early (nva@27,37) and still wins. Milk Dragon@1537 went 2-3 but beat us on Devil/Trophy via queen-ram@50-68 — mid-elo teams CAN ram our queen now.
 
 **Delta vs last window:** elim share 5/8 (was 5/9), queen-dead share 8/8→7/8 (schooltime live-queen crept in), hitSelf/self-kill 0/8 this window.
+
+## v299 roam-leash audit (explore lane — 40 replay mechanism verification)
+
+Replicated the gate locally: v299 vs v263, 10 maps x2 seeds both seats → **24-16 (60%)**. Analyzer: tooling/v299audit.py. Same findings pushed to devin/v120 STATE.md @1371cb6.
+
+- (a) Drop-recycle falsified: deaths land no closer to longest (19.3 vs 17.9) or nearest ally (3.2 vs 3.1). Real channel: −21% wall+self+body deaths (89.5 vs 112.7/game) — leashed workers die less in open space.
+- (b) Queen cover ≠ worker density: not-longest survival 6/36 vs 7/40 (no delta). Entire queenEnd edge = 4 games where she ends AS the longest (base: 0) — funnel concentrates around her. Dead queens die with MORE allies nearby (2.5-3.1 vs live 0.2-0.8@r450) — allies mark contested space, not cover.
+- (c) Residual 16 losses: key1-longest 7, elim 6 (all small-map, queen h2h first), key0 2, key2 1. Leash didn't fix the funnel-concentration bleed (unsw tot 283v188 won, lost ln 20v24).
+- Implied next variant: v304 (leash extended to queen) — the accidental win was queen-as-longest.

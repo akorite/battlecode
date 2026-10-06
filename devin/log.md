@@ -153,3 +153,4 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
 - rank30 census 11-19: bothdead 10/elim 5/live-q 3; UNSW x4 bothdead; chad@2049 sweeps via econ+dead-queen swarm; own-fault qd 8/19 (hitSelf persists)
 - v168-15g: 6-9, ALL 9 losses queen-dead, 8/9 h2h ram; no live-q losses; chad nva 175-241 vs our 11-52; v237 builds, bench needs activation (blocked)
 - v168-20g: 12-8 improving; queen-h2h 7/8 losses; mutual-death swarm fight 6/8; chad nva churn 211-354; schooltime live-q econ loss
+explore lane: v299 mechanism audit — -21% congestion deaths real, recycle+cover falsified; funnel bleed persists

@@ -119,7 +119,7 @@ def analyze(path, cand):
                                   [tuple(x) for x in e['parentBody']]))
         elif ty == 'dragonDeath':
             i = e['id']
-            if e['reason'] != 'hitSelf':
+            if e['reason'] not in ('hitSelf', 'hitOtherBody', 'hitHeadToHead'):
                 body.pop(i, None); heads.pop(i, None); facing.pop(i, None)
                 continue
             s = team.get(i)
@@ -229,6 +229,26 @@ def analyze(path, cand):
             rec['open_min_age'] = min(
                 (v for d, v in rec['opt_age'].items() if opts[d] in ('open', 'portal:open') and v is not None),
                 default=None)
+            rec['end_cell'] = list(pos)
+            eh = [hh for j, hh in heads.items()
+                  if team.get(j) and team[j] != s]
+            # per-open-dir: cheb to nearest enemy head pre-move (true-safe test)
+            rec['opt_ehead'] = {
+                d: min((max(abs(c[0] - hh[0]), abs(c[1] - hh[1])) for hh in eh),
+                       default=None)
+                for d in 'NSWE'
+                for c in [step_cell(h, d)[0]]
+                if c is not None and opts.get(d) in ('open', 'portal:open')}
+            rec['safe_dirs'] = sum(1 for v in rec['opt_ehead'].values()
+                                   if v is not None and v >= 2)
+            if e['reason'] == 'hitHeadToHead':
+                eh = [hh for j, hh in heads.items() if team.get(j) and team[j] != s]
+                rec['end_d_enemyhead'] = (min(
+                    max(abs(hh[0] - pos[0]), abs(hh[1] - pos[1])) for hh in eh)
+                    if eh else None)
+                rec['d_enemyhead'] = (min(
+                    max(abs(hh[0] - h[0]), abs(hh[1] - h[1])) for hh in eh)
+                    if eh else None)
             rec['cls'] = ('safe-existed' if rec['open_dirs'] > 0
                           else 'kamikaze-available' if rec['kam_dirs'] > 0
                           else 'truly-forced')

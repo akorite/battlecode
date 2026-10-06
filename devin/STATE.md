@@ -738,3 +738,37 @@ Split-event anatomy (3351 W vs 1054 L splits):
   gain — current data says it isn't on elim maps; a "bud only when
   len>=8" or "split-at-4 always, bud opportunistic" form may keep
   both). Numbers only per task — no code change made.
+
+## 2026-10-04 ~04:15 UTC — VETO-SHIFT CHECK (v263 cand vs v255 base, same 88g)
+Did covered-ram veto move the mix? h2h: NO — flat on both classes.
+The growth bucket is **noValidAction**, concentrated r200-399.
+
+BIG (56g):        cand v263        base v255        delta
+  hitWall          0.0   0%         0.0   0%        —
+  hitSelf         50.2  20%        50.6  21%      -0.4
+  hitOtherBody    18.1   7%        18.9   8%      -0.8
+  hitHeadToHead  101.4  40%       101.6  41%      -0.2
+  noValidAction   81.9  33%        75.0  30%      +6.9
+  deaths         251.6             246.1           +5.5 (all nva)
+
+SMALL (32g):      cand             base             delta
+  hitSelf         29.3  45%        26.2  44%      +3.1
+  hitOtherBody    10.0  15%         9.9  17%      +0.1
+  hitHeadToHead   20.9  32%        21.3  36%      -0.4
+  noValidAction    5.2   8%         2.2   4%      +3.0
+  deaths          65.4              59.7           +5.7
+
+nva gain bands (all maps, deaths per 100-round window):
+  r0-99 +87 | r100-199 +87 | r200-299 +218 | r300-399 +139 | r400+ +34
+  (gain is the r200-399 feed window)
+h2h round profile: identical both sides (r0: 1053v1059, r1: 1905v1901,
+  r2: 1974v1978, r3: 1185v1203, r4: 230v232) — no band shifted.
+h2h len<=3 share: cand 74.8% vs base 76.4% — unchanged.
+
+READ: the veto doesn't reduce our h2h death count (enemy rams replace
+blocked ones symmetric), it converts would-be trades into delayed deaths
+that land as deliberate die-in-place in the feed window (r200-399) —
+mix-neutral on the fight channel, +5-6 deaths/game reclassified to feed.
+Consistent with the +4-7% gate delta: same deaths, better death timing.
+The len<=3-neutral-collision fix (tradeOk free-parking, below) still
+stands as the h2h lever.

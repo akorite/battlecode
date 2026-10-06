@@ -621,7 +621,6 @@ survival is scrum density / birth placement inside the melee
 - v269 tail-enemy-ban (birth placement): FAIL 35%/20 — 5th consecutive split-restriction dead end. Even temporal vetoes starve production. CLOSED: no more split gates of any kind.
 - v267 midFeed len7/r80: tracking negative (41.7%/12) — churn ceiling hit at len5/r100.
 - v268 feedMaxLen 6->10: tracking +62.5%/8 — bigger dragons recycle into champ, drop volume up. Watching.
-||||||| parent of 215c560 (death-mix census v263: h2h 40% BIG, tradeOk free-parking root cause + diff)
 
 ## 2026-10-04 ~02:30 UTC — DEATH-MIX CENSUS (v263, both seats)
 Corpus: orchestrator v263_gate replays absent (never on box/branch);
@@ -688,3 +687,6 @@ RESIDUALS (not worth a build): hitSelf 75% forced trapped-path (least-
 bad working as designed); hitOtherBody 92% truly-forced (crowding);
 hitWall 0. Queen h2h ~0.4/g (small; covered by escort/dodge lanes).
 Tooling: devin/pocket:tooling/deathmix.py, hitself_census.py (h2h+body).
+- v268 feedMaxLen 6->10: FAIL 42%/38 on full gate despite +55% smokes — map-slice smokes hid the cost; bigger-dragon feed pull starves elim boards. Feed levers that pull mid-size units = starve (same law as splits).
+- v267 midFeed len7/r80: confirmed dead 41%/17.
+- Elo ~1527 flat; Milk Dragon (1515-1520) challenging US at parity — coin-flip matchup.

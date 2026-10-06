@@ -396,3 +396,18 @@ Throughput diagnosis governing: pearl intake parity but winners' deaths
 drop in-blob -> parents re-eat ~1 move; ours forage ~8. Straggler
 penalty attacks the death-location side; cohesion pull falsified.
 Elo 1607, refill5c on proven targets (floor ~1546).
+
+## 2026-10-05 PM6 (live)
+v237_live FINAL: 52.0%/325. Decomp: BIG 56.3%, SMALL 47.5% — the
+small-arm regression persists even without midFeed-everywhere. The
+economy releases (keepEvery60/budUntil450/lateSplit) win open boards
+but lose melee boards.
+v243_live = v237 + workerBud(L>=6->child4) + queen unhide (hideMinTiles
+960): TRACKING 55.2%/125, SMALL 51.7% BIG 58.5%, alive@r50 +1.3 units
+on elim maps. If it holds >=54%/n200 it ships under relaxed approval.
+v241 (bud alone): 54.5%/112 converging. v242 (unhide alone): dead 49%.
+v240 (straggler penalty): dead 50%/42.
+Lanes re-tasked: earlyecon=trySplit reject census, pocket=drop-recycle
+distance audit, autarky=adversarial review of v237 diff, explore=bench
++ fresh census.
+Ship plan: v243 is a v237-superset; ship whichever ends highest >=54%.

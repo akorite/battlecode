@@ -823,3 +823,14 @@ stands as the h2h lever.
 - v298 = remove the feedRound split-stop (growers already stop at midEnd=450, workers now churn through).
 - v297 workhorse-crown-clean: conveyor never anchors queen (queenCrown branch disabled); crowns longest non-queen from champFallbackRound=330; feedHead_ no longer falls back to queenCell.
 - Monster-champ note: conveyor lifts longest +7.5 but key-1 wasn't the deficit — deprioritized vs the totalLength fix.
+
+### Elo surge + conveyor family verdicts (2026-10-03 ~19:00 UTC)
+- Elo 1711 (was 1652 1h ago) — organic climb strong; Tony S now floor-blocked too (needs 1661+). All refill done.
+- v298 unfreeze-splits-r360: 42.9%/28 NEGATIVE, longest 9.1 vs 13.6 — splitting the champ fragments key-1. Churn is wrong for us: winners churn because they can afford it; we need length consolidated.
+- v295 total-feed: 45%/40, alive@end 9.1 vs 13.8 — liquidated swarm = fewer end units. Dead.
+- v296 workhorse: 47.8%/23, v297 workhorse+no-queen-fallback: 46.7%/30 (longest +7.7 but queen dead +6.7% — convergence tax persists).
+- v291c conveyor ring-3: 48.6%/37 — best of family but still negative.
+- CONVEYOR FAMILY VERDICT: every variant ~45-49%. Mechanism works (longest +5-8, alive +2x) but queen/convergence costs cancel it. Mirror also can't value it (both sides self-feed). Deprioritize.
+- KEY-2 INSIGHT: we win key-1 (longest) but lose key-2 totalLength 2-3x. Their swarm SURVIVES denser — not churn, persistence. Root: our units die spread out (drops land 27 cells away = isolated deaths), theirs die adjacent.
+- Open lane task (explore): census last ~80 ladder losses for loss-mode decomposition vs the r360 freeze.
+- Standing: v263 live, Elo 1711 climbing organically. All param/conveyor surface exhausted (~37 washes). Organic path only.

@@ -1365,3 +1365,71 @@ queen-bud reading: their queens/parents split from ~9.7 pre-split
 len r0-30 vs our ~7.2 — they reach productive length sooner and
 cycle immediately. The opening speed gap is upstream of every
 later production deficit measured in this lane.
+
+## trySplit reject census — WHICH gate eats our splits (abyss_v237sp, 12g vs abyss_v168)
+
+Instrumented v237's trySplit with per-reason counters (every early
+`return false` -> spReject(i); success -> ok) dumped via dragonLog
+every 25r under BC_DEBUG; aggregated last-dump-per-dragon per side
+(tooling: devin/lanes/sprej_agg.py). 12 games, 6 maps x s1 both
+seats. Counts are share-of-split-opportunities (trySplit is called
+every dragon-turn): which gate BLOCKS when a split was attempted.
+
+### Mix per map/seat (cand = v237sp side)
+| map-seat | ok | unitLimit | eat | hunt | feed | hideLen | keepFloor | len<4 | roomyP/C |
+|---|---|---|---|---|---|---|---|---|---|
+| big_empty B | 360 | **9847** | 763 | 212 | 4944 | 122 | 29 | 4587 | 0/0 |
+| big_empty A | 361 | **11486** | 690 | 134 | 4007 | 90 | 24 | 3742 | 1/0 |
+| devil A(W) | 142 | 106 | 476 | 79 | 0 | 0 | 246 | **5350** | 85/6 |
+| devil B(L) | 17 | 0 | 0 | 40 | 0 | 0 | 73 | **548** | 0/0 |
+| dilemma A | 5 | 0 | 0 | 81 | 0 | 0 | 100 | **253** | 0/0 |
+| dilemma B | 2 | 0 | 0 | 18 | 0 | 0 | 125 | **127** | 0/0 |
+| islands A | 305 | 2513 | 884 | 240 | 3504 | 301 | 614 | **8745** | 31/27 |
+| islands B | 248 | 0 | 735 | 350 | 1540 | 196 | 346 | **8128** | 48/24 |
+| schooltime A(W) | 155 | **9634** | 629 | 43 | 3974 | 193 | 4 | 2776 | 22/9 |
+| schooltime B(L) | 163 | 0 | 508 | 627 | 1455 | 358 | 89 | **6306** | 25/16 |
+| stronghold A(W) | 120 | 0 | 326 | 197 | 1419 | 271 | 0 | **6812** | 17/16 |
+| stronghold B(W) | 85 | 0 | 219 | 171 | 419 | 162 | 0 | **6312** | 31/15 |
+
+### Answer to the question: len<4 dominates — the constraint is
+MASS-side, not geometry, not scheduling.
+
+- **len (L<swarmSplitLen) is the #1 reject on 9 of 12 sides** —
+  4k-8.7k counts vs eat at 200-900 and roomy at ~0-85. On the elim
+  maps (devil/dilemma) it's 25-50x the next gate: devil-A 5350 len
+  vs 476 eat; dilemma 127-253 len vs ~100 keepFloor.
+- **hasRoomyMove is dead last** — 0-85 combined P+C across all
+  games. Geometry/packing never binds: when a dragon is long
+  enough, a roomy move always exists.
+- **bestMove.eat (scheduling) is a distant second-tier** —
+  hundreds, not thousands. Foraging priority isn't eating the
+  splits either.
+- **unitLimit only dominates where the colony actually fills to
+  64** — big_empty both seats (9.8-11.5k), schooltime-A winner,
+  islands-A. On every map where we LOSE the production war the
+  cap is irrelevant: the colony never gets near it.
+- feed (post-feedRound ban) is mechanical on r499 games —
+  1.4-4.9k, expected, not a deficit.
+- keepFloor (bud keep floor) is the runner-up on elim maps
+  (73-614): the bud path keeps parents ≥ keep so they never reach
+  the swarm path — consistent with the keep-floor playing the
+  rationing role we designed it for.
+
+### Mechanism interpretation
+The split deficit is upstream of trySplit's gates entirely: our
+dragons spend their lives at L<4 — they die (victim-ram class)
+or never eat to length. When a dragon DOES reach len≥4 the
+policy splits readily (ok counts track dragon count, roomy never
+binds). This confirms the throughput chain measured before:
+pearl intake at parity → mass never accumulates → len<4 blocks
+the vast majority of split opportunities. **Intake-side /
+survival-to-length is the binding constraint** — exactly the
+"workers die at len2-3 before reaching productive length"
+finding, now measured inside the policy itself.
+
+Implication for fixes: anything that raises the distribution of
+worker length (survival past len-3, or faster early eating on
+len≤3) converts directly into splits — the gate behind len is
+essentially free (roomy ~0, eat ~hundreds). The deficit is not a
+policy tuning problem; it's the same mass-retention problem the
+evasion closures circled.

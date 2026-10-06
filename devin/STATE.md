@@ -694,3 +694,7 @@ Tooling: devin/pocket:tooling/deathmix.py, hitself_census.py (h2h+body).
 - v271 feedRound 400->340: FLAT 50%/30 — feed timing makes no difference.
 - v272 doomed-feeder redirect: WASH ~49%/37 — transit cost eats the drop relocation. Dead.
 - Elo ~1499: organic record ~par vs 1500-1680 band; ~160 of the drop was killed-farming tail. Rollback dir ready: abyss_v255 (v121).
+
+### v273 herd-graze (dead, 2026-10-03 ~06:20 UTC)
+- Soft-yield shared beds (herdYield 0.4) + graze bonus near allies (herdGraze 1.4): 50%/32 on 6-map board. Flat. The forage-yield surface is closed — units already graze fine.
+- v274 in flight: splitRoomSmall=4 for halves len<=3 (child born into parent's vacated tail is roomy by construction; the 8-cell floor vetoes exactly the scrum splits winners spam).

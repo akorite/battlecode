@@ -868,6 +868,7 @@ stands as the h2h lever.
 - Elo 1701, organic 17-13 last 30 (SHINK AI 6500 at 1849 = the wall, 1/5).
 - Pipeline: v301 queen-hug escort ring-2 smoke, v302 queen-permanent-feed-target smoke, v303 tighter leash (8/0.3), v304 leash extended to the queen herself.
 - Next candidates: ship v299 if gate ≥54%; composite v299+best-of{301,302,303,304}; conveyor v2 with in-territory radius if longest losses persist after the queen fix.
+<<<<<<< HEAD
 
 ### v299 roam-leash mechanism audit — explore lane, 40 replays (2026-10-04)
 
@@ -880,3 +881,10 @@ Local replication of the gate: abyss_v299 vs abyss_v263, 10 maps (trophy/devil/w
 **(c) Residual loss classes in v299's 16 losses:** key1-longest 7 (44%), elim 6 (38%), key0-queenEnd 2 (12%), key2-total 1 (6%). 13/16 have BOTH queens dead → post-mutual-death is decided on longest (unsw s2A tot 283v188 won but lost ln 20v24; australia s1 tot 285v116 lost ln 22v30 — concentration deficit persists under the leash) or snowballs to elim on small maps (devil/qOS×2/trophy×2/weakhold, all opened by queen h2h @34-269).
 
 **Read for integrator:** ship the leash for the −21% congestion-death channel, not for recycling. Next levers in order: (1) longest-concentration post-mutual-death (44% of residual — leash didn't fix funnel); (2) queen-as-longest was the accidental win — v304 (leash extended to queen) is the directly-implied variant; (3) small-map queen h2h still opens every elim.
+
+### v299 gate + wash #40 + champ-hunter (2026-10-03 ~19:00 UTC)
+- **PRODUCTION RESCORE built (tooling/rescore.py):** recomputes every board under real rules (queenEnd→longest→total) from games.jsonl. Verdict on all current gates: **0 flips** — queen and longest correlate too tightly in mirror for the key to bind (the fed queen IS the longest). Gate reads stand as-is.
+- v299_gate: settled ~52.6%/173 — BIG arm 56% (13 pair-wins) but SMALL 48.8%; pair record 15-60-11 says map-conditional not general. Probable small improvement, below strict bar.
+- v303 tighter leash: 47.4%/76 killed. v307 (leash+queen-feed+post-mortem): 46.7%/75 killed — the add-ons cost ~5pts, NOT mirror-neutral as hoped. v304 queen-leashed forage: dead. v308 soft density-cover: 46.7% killed.
+- **v310 champ-hunter in flight:** enemy dragons len≥8 get nearest-3 kamikaze workers converging; ram bypass on the hunted id — a len-2 head kills any length. Directly attacks the 33% longest-loss class.
+- Elo 1701 organic, refill dead. ~41 variants washed on v263 lineage; the only reads ≥55% are single-mechanism composites on favorable seed subsets.

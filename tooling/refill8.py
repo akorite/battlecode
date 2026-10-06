@@ -3,10 +3,9 @@ sys.path.insert(0,'/home/ubuntu/bc/tooling')
 import challenge
 # Proven-beatable targets only (>=55% observed WR at near-par or better Elo).
 # No +400 asymmetric shots (falsified: -9 to -26 per lost series).
-targets = [(421,'unemployed',8),(141,'Sarvottam',8),(324,'Mr Aura',6),
-           (190,'risq-v',6),(230,'my cactus died',8),(420,'ThatsThat',6),
-           (799,'Tony S',6),(849,'Milk Dragon',8),
-           (796,'Nexus Lab',5),(303,'Oswald',5)]
+targets = [(799,'Tony S',8),(421,'unemployed',4),(849,'Milk Dragon',8),
+           (230,'my cactus died',4),(796,'Nexus Lab',6),(303,'Oswald',5),
+           (141,'Sarvottam',4),(190,'risq-v',4)]
 todo = {tid:n for tid,name,n in targets}
 names = {tid:name for tid,name,n in targets}
 deadline = time.time()+6*3600

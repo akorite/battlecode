@@ -788,3 +788,9 @@ stands as the h2h lever.
 - v277 small-head-fear 50%/24 flat; v278 keepEvery120 41.7%/36 dead; v279 bait-ungate ~41% dead.
 - v284 composite (camp+bud8): 58.7%/52 8-map board (6-2 pairs, both arms >55). Full 17-map gate v284_full fired ~11:40 UTC.
 - Lanes: earlyecon delivered throughput forensics; pocket confirmed veto reclassifies deaths to nva feeds r200-399 (+5-6/g).
+
+### v290 bundle + v291 conveyor-units (2026-10-03 ~13:00 UTC)
+- v290 (campNC900+bud8+feedDist5 all-in): BIG arm 28.6%/14 — bundle bleeds big maps. KILLED. Final word on the camp/feed/cadence wave: every piece net-zero on honest gates.
+- Elo 1661 (not 1631) — refill working vs proven targets (777 2-0, cactus, risq-v 2-1, Tony S 1-1). Spearhead (1795) stale-queue losses observed 0-3 — target cut, refill8b restarted with Tony S/unemployed/MilkDragon/cactus/Nexus/Oswald only.
+- v291 conveyor-unit role: every 3rd worker (id%3==0) anchored to champ's ring from r100 via wFeedOrbit=6 pull + year-round feedHead_ anchor (queenCell fallback when champ unknown). Mechanics: their forage/fights/deaths all land in the champ ring → recycle within reach instead of ~27 cells out. Smoke fired on all maps.
+- ~20-variant wash streak on v263 lineage; single-lever param space exhausted. Conveyor-unit is the first structural role change since grower_.

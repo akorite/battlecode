@@ -858,3 +858,13 @@ stands as the h2h lever.
 - The mechanism gaps proven but unfixed: (a) totalLength persistence deficit (their swarm stays dense, ours dies isolated 27 cells out); (b) every lever that compresses the swarm costs as much as it gains.
 - Next: explore lane's field-loss census is the last diagnostic running; organic grind continues.
 >>>>>>> 4939442 (STATE: 38 washes, Elo 1711, refill dead, census pending)
+
+### Scoring correction + roam-leash breakthrough (2026-10-03 ~17:45 UTC)
+- **SCORING MODEL RESOLVED — replay-verified:** production ranking at bell = **(queenEnd → longestDragon → totalLength)** lexicographic. The local engine source (engine/src/scoring.cc) lacks the queen key — deployed build differs. Evidence: 4 losses won BOTH longest and total and still lost; only explainable by queenEnd first.
+- **Loss decomposition (80-replay census):** queenEnd 44%, longest 33%, elim 22% (all routed through queen h2h death first), pure-total 0%. ~66% of losses are queen-routed.
+- **Mirror-gate blindness found:** queen-survival levers read ~50% mirror BECAUSE queen deaths are symmetric in mirror — the gate cannot see value that flips queenEnd on ladder. Ship decisions for queen levers must weigh mechanism metrics (queen-dead%, queenEnd wins), not just mirror WR.
+- **v299 roam-leash (fd>10 → forage×0.4 for workers):** smoke **60.5%/38, BIG arm 72.2%, 5 pair-wins, queen-dead 0.684 vs 0.789 (−13%), queen-alive@end +67%**. Mechanism: swarm cohesion → deaths recycle in-blob → persistence AND queen cover from the same leash. Full 476-game gate running vs v263.
+- v300 cover-2 hard leash: flat 50%/30, queen metrics worse (too restrictive in sparse late swarms) — killed.
+- Elo 1701, organic 17-13 last 30 (SHINK AI 6500 at 1849 = the wall, 1/5).
+- Pipeline: v301 queen-hug escort ring-2 smoke, v302 queen-permanent-feed-target smoke, v303 tighter leash (8/0.3), v304 leash extended to the queen herself.
+- Next candidates: ship v299 if gate ≥54%; composite v299+best-of{301,302,303,304}; conveyor v2 with in-territory radius if longest losses persist after the queen fix.

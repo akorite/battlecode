@@ -556,3 +556,45 @@ Ship-risk concentrated in items 1-2: the escape's cap/cost model still assumes c
 ### Fix suggestion
 
 Mechanism works; the smoke just needs a map set where len>=8 enemies exist: re-gate on `big` or open maps only (big_empty, default, australia, unsw, around, slithery, maze, islands ~x2 seeds) — ~16-20g shows the truth fast. If uplift still reads nil, the highest-leverage change is the covered-victim exemption (3): the feature's purpose is killing planted, escorted champs, and that single veto blocks most of those rams. champ-ram ordering fix (1) is free to fold in. Replays: `results/v310dbg_audit/replays/`; analyzer: `analysis/champhunt_audit.py`; instrumented copy: `workspace/abyss_v310dbg/` (local only, not pushed).
+
+## v315 forensic — funnel composite loss classification + mechanism verification
+
+Candidate: `workspace/abyss_v315` = v311 + `feedRound 340` + `feedMaxLen 7` + `queenChampMemory 999` (3-line diff vs v311 — queenChampMemory was already 999 in v311; effective delta = feedRound 360→340, feedMaxLen 6→7). Their smoke read 58%/81 (BIG 70%), queen-dead −9% — first funnel composite with a queen-survival gain.
+
+Replays were not on this box or in origin/devin/v120 → replicated locally: **88g audit** (`--cand abyss_v315 --base abyss_v263 --maps all --seeds 2 --keep-replays`, tag `v315_audit`: **58.0% / BIG 66.7%** — matches their smoke) + **48g instrumented run** (`abyss_v315dbg` = v315 + `BC_DEBUG` → per-turn dragonLog telemetry, big maps only where the feed window engages, tag `v315_dbg`). Analyzer: `analysis/v315_funnel.py`.
+
+### Loss classification (production rules: elim → longest → total LEXICOGRAPHIC — no queen term; verified engine scoring.cc)
+
+37 cand losses: **18 ELIM / 17 LONGEST / 1 TOTAL / 1 DRAW**.
+
+**ELIM — 18 (49%), proximate mechanism: pre-window swarm attrition, not funnel.** Our queen died in **18/18** (median r66, hitHeadToHead 13/18); theirs died in 13/18 (median r61). Median elimination r173 — all small maps + default/devil/weakhold corridor-adjacent. The feed window (r340+) never engaged; both sides trade queens early and our swarm loses the knife-fight. The −9% queen-dead arm can't help here — deaths are symmetric and early.
+
+**LONGEST — 17 (46%), proximate mechanism: their champ out-consolidates ours post-queen-death.** Both queens died in 14/17 each side (ours med r345, theirs med r176 — queenChampMemory's queen-as-champ rarely survives to end: `queenEnd==longest` for us in only 2/17). Median gap 9 (mean 12.8, worst stronghold s1 A gap-60). **Their funnel recycled more bodies in 10/17** (nva med 58 vs our 35). But 4 losses break the volume story — we recycled *more* and still produced a shorter champ (queen_of_spades 35v3, stronghold 124v84, maze 121v115, australia 131v122) → **drop quality/lock precision differs, not just body count** (see funnel verification). big_empty s2 A was the opposite profile: minimal recycling both sides (18v15), their alive-60 swarm simply out-grew our champ.
+
+**TOTAL — 1** (autarky s1 A: longest tied, total −6). **DRAW — 1** (portals s2 A).
+
+### Funnel verification (instrumented, dbg side)
+
+Production emit chain verified in code: `feedHead_` = queenCell (queenChampMemory≤999 stale) → MsgChamp fallback cell (≤champMemory) → champAnchor (≤30r, evidence-stamped, visible-clear) → emit requires `distToHead ≤ champFeedDist=2` where distToHead = BFS to the target's **neighbor cells** — emit-legal = manhattan ≤3 to the head (distToHead measures "distance to a cell adjacent to the target", not to the target — audit metric fixed accordingly).
+
+Window-era emits (48g big-map instrumented run, dbg side): **100% of window nva deaths are `chfeed` emits on every map** (903/903) — zero can't-pay crashes in the feed window; the die-in-place is the ONLY nva source. 99.8% emit-legal (manh<=3 of locked feedHead_; the 2 outliers are log artifacts). Feeder lens 100% <= feedMaxLen=7 (med len 3; hist len2 364 / len3 273 / len4 128 / len5 66 / len6 44 / len7 28). Lock freshness: **87% locked a LIVE-seen champ (fa=0)**, 10% fa=1, 3% fa>=2 stale. Feed-locked dragon-rounds: 16,329 (18% live-sighting, 78% heard<=30, 4% stale>30); whys while locked: to-feed 16,065 (98%).
+
+**Drop capture (ground truth, no sonar ambiguity): 847/903 (93.8%) of window drops had a teammate head within manh<=1 within 10 rounds.** The conveyor delivers — drops land where teammates are and get eaten. The raw "locked fh vs freshest team champ ping" distance reads med 17 (>6: 77%), but that is a *ping-consensus* artifact, not feeder error: MsgChamp pings on big maps report 2-21 distinct champ ids per round (split-brain election — each dragon pings ITS elected champ), so "the freshest ping" is usually about a different dragon than the feeder's lock. The feeder's own live sighting (fa=0, 87% of emits) is the real lock.
+
+MidFeed era (r<340, NC>=600 boards): 3,604 chfeed emits across 48 games (~75/game) — the density-centroid recycling runs at volume and is also ~100% emit-legal (len<=5 99.6%).
+
+Front-load confirmed by design (each side timed from its own feedRound — 340 vs 360): **54% of cand window nva inside the first 20r** vs base 33%; both med r+17. Base still recycles MORE overall (1,015 vs 903 — 12% more bodies) despite starting 20r later: our burst burns through the nearby-donor pool early then starves.
+
+qlen@end (big maps, 48g): cand mean 3.79 / 10 nonzero of 48 vs base 3.17 / 6 of 48; queen-dead −5/48.
+
+### qlen@end vs v263
+
+Cand queenEnd mean 2.12 / med 0 (8/88 nonzero) vs base 1.58 / med 0 (6/88). On r500 games: queen alive at end **29.8% vs 17.5%**, queen len 3.11 vs 2.25, queen-dead/game 0.761 vs 0.830 (**−7pp**, matches their −9%). queenChampMemory works as designed while she's alive — she stays champ however stale her cell (pings reporting queen: cand 27% vs base 16% of all champ pings). But at ~76-83% queen mortality the effective funnel target is mostly the post-queen fallback champ — qlen@end is a thin tail statistic, not the funnel's main channel.
+
+### Interpretation for the composite
+
+- ELIM losses are funnel-independent — the 18 elim games are decided before r340 on small maps. The composite's BIG-map gains (66.7%) can't reach them.
+- LONGEST losses are the funnel battleground: volume favors them (med nva 58 vs 35) and 4 losses show us out-recycling yet out-consolidated — precision is NOT the leak (94% capture); the lever is target-switch timing + donor allocation (see verdict).
+- **Funnel verdict: WORKS AS DESIGNED — the loss channel is volume + target-switch timing, not drop precision.** (a) Emit machinery is airtight: every window death is a designed feed, 87% at a live-seen champ, 94% of drops eaten within 10r. (b) The LONGEST-loss mechanism is donor *volume* (their nva med 58 vs our 35) plus a **post-queen target switch**: in LONGEST losses our queen survives to med r345 (theirs dies med r176) — queenChampMemory keeps her champ-of-record until she dies right at window open, the anchor/election scrambles mid-window, and the burst has already spent the donor pool; their champ has been one stable feed target since ~r300. The 4 losses where we out-recycled yet still lost (maze 121v115, stronghold 124v84, australia 131v122, qOS 35v3) fit exactly that shape — mass went to a dying-then-dead queen and a late-elected champ instead of one consolidated target. (c) queenChampMemory's queen-survival arm is real but thin (alive@end 29.8% vs 17.5%) — it delays OUR queen's death into the window where it now costs a target switch.
+
+Suggested levers, ranked: (1) when ourQueen dies, re-elect the champ from the FRESHEST teammate sighting and re-stamp champAnchorRound_ immediately (kill the ≤30r anchor drift at the switch); (2) let feeders who locked the dead queen convert her corpse-pile into the NEW champ's feed (they already die there — the drop is capturable by anyone within ≤1); (3) burst drain: 54% of feeds inside the first 20r of the window empties the radius-12 donor pool before the elected champ stabilizes — spread feedBurstRounds 20->40 or drop feedBurstMult 3->2 so donors arrive after the switch. None of these is a gating bug — the composite's gains are real; the LONGEST tail is a timing/donor-allocation inefficiency.

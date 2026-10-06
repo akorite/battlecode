@@ -808,3 +808,11 @@ stands as the h2h lever.
 - v291c: ring-3 orbit + year-round die-in-place (d<=champFeedDist, L<=conveyorMaxLen=8) → drops land adjacent to champ every game phase.
 - Ladder replay census: split volumes hundreds/game both sides on big maps; throughput theory confounded (Sarvottam out-split 74:40 & won; cactus out-split 109:41 & lost). Not the lever.
 - v292 flood opening: 46.4%/28, alive@end REDUCED 2.7 vs 4.5 — fragile len-2s die. Wash #31.
+
+### Bell-key lever family (2026-10-03 ~17:00 UTC)
+- Engine truth: death drops pearls on every OTHER body segment (0,2,4..) — persist forever until eaten. Eating = +1 segment.
+- v294 queenBudUntil=150: FLAT no-op (she doesn't bud via that path anyway). Killed.
+- v295 total-feed (every worker conveyor from r300): 51.6%/31, longest 27.4 vs 25.8 — but queen len 1.46 vs 3.64 (convergence strips her cover again). The queen cost is the recurring tax on any champ-anchored convergence.
+- v296 workhorse-crown: from feedAllFrom=300 the conveyor elects the longest NON-QUEEN as champ — feed a monster worker, leave the queen alone. If the bell truly ranks (longest,total), this decouples feed-benefit from queen-cost.
+- Insight: mirror-gates understate conveyor levers (base self-feeds too, both sides' longest inflate ~25). Real deficit only shows vs winners (their 40-90).
+- Elo 1652; refill floor-starved (only Tony S/unemployed pass the 1606 floor).

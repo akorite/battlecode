@@ -621,3 +621,70 @@ survival is scrum density / birth placement inside the melee
 - v269 tail-enemy-ban (birth placement): FAIL 35%/20 — 5th consecutive split-restriction dead end. Even temporal vetoes starve production. CLOSED: no more split gates of any kind.
 - v267 midFeed len7/r80: tracking negative (41.7%/12) — churn ceiling hit at len5/r100.
 - v268 feedMaxLen 6->10: tracking +62.5%/8 — bigger dragons recycle into champ, drop volume up. Watching.
+||||||| parent of 215c560 (death-mix census v263: h2h 40% BIG, tradeOk free-parking root cause + diff)
+
+## 2026-10-04 ~02:30 UTC — DEATH-MIX CENSUS (v263, both seats)
+Corpus: orchestrator v263_gate replays absent (never on box/branch);
+reproduced identical fixture locally — results/v263_gate_local on
+devin/pocket: 22 maps x s3+s4 x both seats, 88 games, 52.3% overall
+(SMALL 53.1 / BIG 51.8) — consistent with ship log.
+
+DEATH MIX, cand-side per game (games.jsonl d_* + replay cross-check):
+                  SMALL (32g, NC<600)   BIG (56g, NC>=600)
+  hitWall           0.0    0.0%         0.0    0.0%
+  hitSelf          29.3   44.8%        50.2   19.9%
+  hitOtherBody     10.0   15.3%        18.1    7.2%
+  hitHeadToHead    20.9   31.9%       101.4   40.3%
+  noValidAction     5.2    8.0%        81.9   32.5%
+  TOTAL            65.4               251.6
+  deliberate(self+nva) 52.8%              52.5%
+
+VS WINNERS (top-team study): cheji 81.5% nva, Cache 62% self, OPP-corridor
+92% self+nva — deliberate share 81-92% vs our 52.5-52.8%. Same wall=0.
+The gap is one channel: **hitHeadToHead 40.3% on BIG** (101/g) — we still
+die fighting; winners die feeding.
+
+h2h DECOMPOSITION (full census, 6263 cand h2h deaths):
+- 70% had a TRUE ESCAPE (open dir >=2 cheb from every enemy head);
+  28% reach-locked; 2% forced.
+- Of escape-existed: 90% stepped to a NEUTRAL open cell adjacent to an
+  enemy head (mutual arrival -> collision); only 3% rammed enemyHead.
+- len<=3 = 74% of escape-existed.
+- Per class: BIG neutral-collision len<=3 = 50.0/g; SMALL = 7.5/g.
+
+ROOT CAUSE — policy.hpp:1710 `wanted`: under exposureMode=0,
+`favour = wanted ? 0.0 : 1.0` — parking adjacent to an enemy head costs
+ZERO danger whenever tradeOk(newL, enemyLen). tradeOk(918) passes even
+trades on every board (slack 1 big / 0 small, even always ok). So len-2/3
+workers park next to enemy heads for free, both sides step in, mutual
+kill. v263's coveredFavour only discounts the danger when cover exists —
+it never removes the tradeOk free pass.
+
+PROPOSED DIFF (one): workers len<=3 on BIG boards don't call an even
+trade "wanted" — they pay full wDanger for enemy-head adjacency instead
+of trading our feeders contested. Elim boards unchanged (even trades =
+net-length parity, measured decisive on elim maps; tradeSlackSmall
+comment at 919-921). Hunts/queen-kills untouched (huntNext branch kept);
+offensive ram picks (1362/2004) untouched — this only removes the
+free-parking subsidy.
+
+  // policy.hpp ~1710
+  bool wanted = !grower_ && !queen_ &&
+      (huntNext ||
+       ((w_.board.NC <= p_.tradeSlackMaxTiles || newL > p_.tradeShortLen)
+        && tradeOk(newL, enemyLen)) ||
+       (enemyId == w_.enemyQueen() &&
+        (assassin_ || newL + p_.queenTradeSlack >= enemyLen)));
+  // common.hpp: int tradeShortLen = 3;
+
+ESTIMATE: ~50 h2h deaths/game on BIG maps sit in the target slice
+(len<=3 neutral collisions with a true escape). Some die reach-locked
+later anyway; honest cut ~25-40 h2h deaths/game on BIG, ~0 on SMALL.
+Score effect is mix conversion, not raw savings: contested mid-field
+trades become alive-longer feeders that later die anchored (deliberate
+share 52.5% -> ~60%+ on BIG, toward the winners' 81-92%).
+
+RESIDUALS (not worth a build): hitSelf 75% forced trapped-path (least-
+bad working as designed); hitOtherBody 92% truly-forced (crowding);
+hitWall 0. Queen h2h ~0.4/g (small; covered by escort/dodge lanes).
+Tooling: devin/pocket:tooling/deathmix.py, hitself_census.py (h2h+body).

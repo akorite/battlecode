@@ -908,3 +908,13 @@ won vs lost games — med 1 both, shape near-identical (win n=2403 med 1;
 loss n=4170 med 1). Losses simply contain MORE deaths; the recycle
 geometry doesn't change. Replays: results/v237_live_local/ (all 44).
 Tooling committed.
+
+=== DROP→LONGEST GEOMETRY (orchestrator's 27-vs-9 claim) ===
+Full report appended to devin/STATE.md on origin/devin/v120 @84e31d6.
+Does NOT reproduce on 56 games / 8 metric variants: dc ~7-8 med for all
+sides. Ours die CLOSER to the longest when deliberate (nva dc 4 vs 9).
+In-blob churn = volume inside same geometry, not death positioning.
+Only unreproducible axis: distance to the elected champ's REPORTED cell
+(bot-internal anchor staleness — flagged to orchestrator as likely
+metric source; different fix if confirmed).
+Tooling: tooling/churn_blob.py.

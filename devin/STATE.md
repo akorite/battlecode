@@ -433,3 +433,15 @@ Bud sweep vs v241 on small arm (seeds6 x10 maps):
 - v245 bud(8,5): fired   - v246 bud(5,3): fired
 - v247 post-r100 bud-only (L<6 can't split after r100): fired all-maps
 Next composite candidates ordered by the sweep.
+
+## 2026-10-06 AM (live)
+SHIP: v252 -> sub v120. = v241 + eat-split (workers may split while
+on food) + coveredFavour=0.15 (ally<=2 halves ram fear) + slay-stalk
+(wHuntHeard1.5, assassinMaxAge8). Gate: 55.3%/208 vs v241, SMALL 54.0
+BIG 56.5, pair-LB 50.0, decided pairs 21-10. Rollback = resubmit v168.
+DEAD: v253 blob-split gate 14% (production gates always starve),
+v254 asym split 50% flat, v251 bud-only 8% (len-7 unreachable).
+Lane notes: drop geometry 7-8 cells BOTH sides (not 27-9); in-blob
+churn is VOLUME; trySplit rejects dominated by len<4 (workers die
+young). Survival-before-split is the confirmed choke.
+Elo ~1634, refill7 on +400 asymmetric + proven->60% targets only.

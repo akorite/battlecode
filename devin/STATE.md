@@ -423,3 +423,13 @@ throughput compounds; len-2 nub parents donate in-blob drops).
 Ablations: bud alone carries most of it (v243 unhide added -2, v244
 n=L-2 extreme -5, v240 straggler dead).
 Watch: benchmark record vs top-6 post-ship; rollback = resubmit v168.
+
+## 2026-10-05 PM7b (post-ship)
+v241 LIVE (sub v119, elo 1607). Bud audit on gate replays: only 3/437
+children born len-4 — parents split at swarmSplitLen=4 and die before
+reaching budLen=6, so the bud rarely fires; v237 pieces carried the
+gate. The real throughput lever is still unexploited.
+Bud sweep vs v241 on small arm (seeds6 x10 maps):
+- v245 bud(8,5): fired   - v246 bud(5,3): fired
+- v247 post-r100 bud-only (L<6 can't split after r100): fired all-maps
+Next composite candidates ordered by the sweep.

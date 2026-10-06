@@ -69,7 +69,8 @@ def analyze(path, cand):
             return (cell, 'portal') if cell is not None else (None, 'portal?')
         dx, dy = D[d]
         return ((x + dx) % W, (y + dy) % H), 'open'
-    body, team, heads, facing = {}, {}, {}, {}
+    body, team, heads, facing, born = {}, {}, {}, {}, {}
+    recent_splits = []
     for e in ev:
         if e['type'] == 'roundStart': break
         if e['type'] == 'dragonUpdate' and e['id'] < len(dr):
@@ -110,6 +111,12 @@ def analyze(path, cand):
             team[e['childId']] = s
             heads[e['parentId']] = tuple(e['parentBody'][0])
             heads[e['childId']] = tuple(e['childBody'][0])
+            born[e['childId']] = (rnd, e['parentId'],
+                                  tuple(e['childBody'][0]),
+                                  tuple(e['childBody'][-1]))
+            recent_splits.append((rnd, s,
+                                  [tuple(x) for x in e['childBody']] +
+                                  [tuple(x) for x in e['parentBody']]))
         elif ty == 'dragonDeath':
             i = e['id']
             if e['reason'] != 'hitSelf':
@@ -185,6 +192,23 @@ def analyze(path, cand):
             rec['enemybody_dirs'] = sum(1 for v in opts.values()
                                       if v == 'otherBody')
             rec['is_queen'] = i in (0, 1)
+            # was the victim a split child, and how old?
+            if i in born:
+                br, pid, chd0, chdT = born[i]
+                rec['split_child'] = True
+                rec['birth_round'] = br
+                rec['age'] = rnd - br
+            else:
+                rec['split_child'] = False
+                rec['age'] = rnd  # starter
+            # any same-team split within cheb-2 of the kill cell, same/prior round?
+            if kill_cell is not None:
+                near = [sr for sr, st, cells in recent_splits
+                        if st == s and rnd - sr <= 1
+                        and min(max(abs(c[0]-kill_cell[0]), abs(c[1]-kill_cell[1]))
+                                for c in cells) <= 2]
+                rec['split_near'] = bool(near)
+            recent_splits = [x for x in recent_splits if rnd - x[0] <= 2]
             ally_heads = [hh for j, hh in heads.items()
                           if j != i and team.get(j) == s]
             rec['d_ally'] = (min(max(abs(hh[0] - h[0]), abs(hh[1] - h[1]))

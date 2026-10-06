@@ -816,3 +816,10 @@ stands as the h2h lever.
 - v296 workhorse-crown: from feedAllFrom=300 the conveyor elects the longest NON-QUEEN as champ — feed a monster worker, leave the queen alone. If the bell truly ranks (longest,total), this decouples feed-benefit from queen-cost.
 - Insight: mirror-gates understate conveyor levers (base self-feeds too, both sides' longest inflate ~25). Real deficit only shows vs winners (their 40-90).
 - Elo 1652; refill floor-starved (only Tony S/unemployed pass the 1606 floor).
+
+### KEY-2 DEFICIT FOUND (2026-10-03 ~18:00 UTC) — ladder replay forensics
+- We actually WIN key-1 longest (39v35, 31v29) — the loss is totalLength: 84-116 vs 232-274.
+- Root cause candidate: trySplit has `round >= feedRound(360) return false` — we freeze ALL worker splits r360-500 while winners churn ~2-3x. End-state: they keep 15-25 units, we keep 5-8.
+- v298 = remove the feedRound split-stop (growers already stop at midEnd=450, workers now churn through).
+- v297 workhorse-crown-clean: conveyor never anchors queen (queenCrown branch disabled); crowns longest non-queen from champFallbackRound=330; feedHead_ no longer falls back to queenCell.
+- Monster-champ note: conveyor lifts longest +7.5 but key-1 wasn't the deficit — deprioritized vs the totalLength fix.

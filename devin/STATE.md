@@ -433,3 +433,25 @@ Bud sweep vs v241 on small arm (seeds6 x10 maps):
 - v245 bud(8,5): fired   - v246 bud(5,3): fired
 - v247 post-r100 bud-only (L<6 can't split after r100): fired all-maps
 Next composite candidates ordered by the sweep.
+
+## 2026-10-05 PM8 — trySplit reject census (earlyecon lane)
+Instrumented v237 trySplit with per-gate reject counters (12g vs
+v168, BC_DEBUG dragonLog dumps). Full table: devin/lanes/earlyecon.md
+@ 9698aa0.
+WHY splits don't fire: **len<swarmSplitLen dominates 25-50x on elim
+maps** (devil-A 5350 len vs 476 eat; dilemma 127-253 vs ~100). On
+9/12 sides len is #1 (4k-8.7k). bestMove.eat = hundreds (distant
+second), hasRoomyMove ~0-85 total (geometry NEVER binds — a len>=4
+dragon always finds a roomy move), enemyBan single digits.
+unitLimit(64) dominates only where colony fills (big_empty,
+schooltime-A, islands-A) — irrelevant on the maps we lose.
+Reading vs PM7b bud audit (3/437 len-4 children): same fact both
+sides — parents die short, so len>=6 machinery barely runs. The
+throughput deficit is mass-retention (die at len2-3 / never eat to
+4), upstream of every split gate. Winners' len-5 = 2-step movers
+(freeSteps=(len+3)/4) means their children out-maneuver AND
+out-survive at the exact length band where ours die — evasion/
+survival-to-4 is the only lever class that converts to splits.
+Prior earlyecon closures (do-not-retest): exposureMode dodge,
+wBuffer ring, spawnInner {6,10,14}, spawn-timing veto, feedBurst
+on v168 base, worker-bud len-2, youngEat, splitLen-3.

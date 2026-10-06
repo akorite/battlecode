@@ -411,3 +411,15 @@ Lanes re-tasked: earlyecon=trySplit reject census, pocket=drop-recycle
 distance audit, autarky=adversarial review of v237 diff, explore=bench
 + fresh census.
 Ship plan: v243 is a v237-superset; ship whichever ends highest >=54%.
+
+## 2026-10-05 PM7 — v241 SHIPPED (sub v119)
+v241_live FINAL: 55.4%/345, game-LB 50.1, pair-LB 50.9 — PASSES the
+strict gate (>=55%, >200, both seats, 22 maps, LB>50). SMALL 53.1,
+BIG 57.3. dilemma 16-0 sweep; worst map 43.8%.
+Shipped as submission v119. Candidate = v237-composite (lateSplit,
+keepEvery60, budUntil450, anchor fix, feedRadius12, leash/ram gates)
++ workerBud: parents L>=6 bud len-4 children (split-ready at birth ->
+throughput compounds; len-2 nub parents donate in-blob drops).
+Ablations: bud alone carries most of it (v243 unhide added -2, v244
+n=L-2 extreme -5, v240 straggler dead).
+Watch: benchmark record vs top-6 post-ship; rollback = resubmit v168.

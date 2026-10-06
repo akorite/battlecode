@@ -865,7 +865,7 @@ lift is where the bell gains live (key-3), and nva-feed supply rising
 side despite flat death rate — worth one more board before shipping if
 the composite margin is thin. Analyzer: tooling/v225_units.py.
 
-=== DROP-RECYCLE AUDIT (v237_live replays absent from all branches — locally reproduced gate v237 vs v168 all-maps s3, 30-44g; + top-team corpus t70/t226/t501/t952 103g; + ladder_replays 12g live vs foreign) ===
+=== DROP-RECYCLE AUDIT (v237_live replays absent from all branches — locally reproduced gate v237 vs v168 all-maps s3, FULL 44g = 52.3% (4W/15S/3L) matching live tracking; + top-team corpus 103g; + ladder_replays 12g live vs foreign) ===
 Analyzer tooling/drop_recycle.py: per dragonDeath -> drop cells = own-cell
 True pearl flips within r+2 (verified against head-path positions), fate =
 next False flip <=5r attributed to the side+id whose head was on the cell.
@@ -876,8 +876,8 @@ VERDICT: the donation claim is FALSIFIED on every axis, in all 3 corpora.
   corpus            ally_d med | eater-travel med | us/them/decay(5r)
   TOP (103g)          1            2            29 / 30 / 41
   TOP-opps            1            2            29 / 30 / 41
-  v237 self-play      1            2            31 / 32 / 38
-  v168 self-play      1            2            30 / 31 / 40
+  v237 self-play(44g) 1            2            29 / 29 / 42
+  v168 self-play(44g) 1            2            28 / 28 / 44
   US live ladder      2            2            25 / 25 / 49
   OPP live ladder     1            2            30 / 28 / 41
 
@@ -903,6 +903,8 @@ fraction of a bell at most. Recommend NOT building it as specced; if the
 decay residual matters, the lever is swarm density at death sites (same
 churn-economy fix as everywhere), not death-cell selection.
 
-Replays: results/v237_live_local/ on branch (30g used in audit, gate
-finishing 44). Local gate read at 30g: ~55% cand — consistent with your
-live tracking 55.5%/119. Tooling committed.
+Wins-vs-losses (task item a): v237-death ally_d histogram identical in
+won vs lost games — med 1 both, shape near-identical (win n=2403 med 1;
+loss n=4170 med 1). Losses simply contain MORE deaths; the recycle
+geometry doesn't change. Replays: results/v237_live_local/ (all 44).
+Tooling committed.

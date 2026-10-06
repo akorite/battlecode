@@ -780,3 +780,11 @@ stands as the h2h lever.
 - v276 queen-factory (keep=2 flat, bud every len-4 to r450): 47.2%/36 — and replay audit showed TOTAL SPLITS IDENTICAL (3362=3362). Queen can't reach len-4 hiding; production purely intake-bound. Dead.
 - v277/v278/v279/v280 in flight (small-head-fear, keepEvery120, bait-ungate, bed-camping).
 - Mechanism confirmed: winners camp pearl beds — eat each respawn, split, children camp adjacent beds. Our units transit between beds and die in transit. v280 tests graze-lock (far targets *0.25 when within 3 of a live bed).
+
+### v280/v281/v284 breakthrough (2026-10-03 ~11:30 UTC)
+- v280 bed-camping: 61.0%/50 (6-1 pairs). Worker within campNear=3 of live bed site discounts far targets *0.25 (campFar) — farms respawns, doesn't die in transit. Matches winner replay anatomy.
+- v281 cadence: 56.4%/47 (2-0). swarmBudLen 6->8: len-6/7 halve immediately (keep 3) vs bud (keep 2). Earlyecon forensics: gap is split CADENCE not survival — children reach len-4 at identical 60-62%.
+- v283 never-bud: 44.4%/18 — confirms len-4 children matter; bud at len>=8 is the sweet spot.
+- v277 small-head-fear 50%/24 flat; v278 keepEvery120 41.7%/36 dead; v279 bait-ungate ~41% dead.
+- v284 composite (camp+bud8): 58.7%/52 8-map board (6-2 pairs, both arms >55). Full 17-map gate v284_full fired ~11:40 UTC.
+- Lanes: earlyecon delivered throughput forensics; pocket confirmed veto reclassifies deaths to nva feeds r200-399 (+5-6/g).

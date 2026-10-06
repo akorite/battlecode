@@ -562,3 +562,12 @@ Expected gain ~0.1% of hitSelf (1-2 missed trades per ~3000 deaths) — principl
 - **split_near baseline caution**: 47% of deaths had a same-team split within cheb-2 of the kill cell in the same/prior round — but that is roughly the random baseline for deaths inside a churning blob (splits ~1.5/round in-blob), not evidence of mechanism. The causal version is the born-boxed subset above.
 - **Len profile for the record**: len2 947 (55%), len3 483 (28%) — short workers dominate, but len≥8 = 124 deaths (7%) including the fresh-child class.
 - **Actionable residual**: a room-check before split — if the child's projected spawn head has <1 legal exit AND the goal is "child walks off to free room" (the box-feed rationale), the split should instead be a die-in-place or skipped; when the goal is a drop, the instant-death split already delivers it. ~125-150 born-trapped deaths/corpus ≈ 3-4% of hitSelf.
+
+## 2026-10-06 PM (live)
+SHIP: v255 -> sub v121. = v252 + midFeed churn (len<=5 idle workers
+die-in-place from r100). Gate 52.7%/205 vs v252: BIG +7% (57.1),
+SMALL 48 same-code variance. hitSelf census resolved: 93% of
+self-deaths are intended feed suicides <=6 cells of an ally — the
+conveyor, not a bug. Spawn-trapped residual ~3-4%.
+v258 brood-flinch 51.6%/62 drifting flat; v256 qbud flat; v257
+midFeed NC400 dead (44%). Elo ~1642.

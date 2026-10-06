@@ -896,3 +896,13 @@ Local replication of the gate: abyss_v299 vs abyss_v263, 10 maps (trophy/devil/w
 - **v313 (v312 + stalkMinLen=4 — len≤3 workers no longer pulled toward heard enemies; transit-h2h prey fix):** smoking.
 - v310 champ-hunter: flat 50%/36, base longest@end unchanged — mechanism may not fire; autarky lane on the forensic.
 - Shipping rule reminder: ≥55%/>200g/17maps LB>50 preferred; probable-improvement composites ship under relaxed approval with rollback.
+
+### Funnel composite tracking + elim-hide breakthrough (2026-10-04 ~06:40 UTC)
+- v311 (queenChampMemory alone): DEAD 50.6%/162 — mirror can't see the funnel value (expected).
+- **v315 (v311 + feedRound 340 + feedMaxLen 7): 58.0%/81, BIG 70%, queen-dead 0.728 vs 0.802 (−9%)** — the wider funnel window keeps her planted on drops instead of roaming into fights.
+- **v317 (v315 + hideMinTiles 600→0 — universal queen hide): 52.9%/51 on the SMALL/elim fixture, queen-dead 0.725 vs 0.843 (−14%)** — len-2 flee-hide survives knife fights.
+- v312 pocket-gradient DEAD (43.8%, 0 pair wins — ally-density pull = contested-space drag, audit falsification replicated). v313 stalk-gate DEAD (BIG 27% — stalk mass wins open maps). v316 champ-hunter+cover-exemption DEAD (45.9%).
+- **v318 = v315 + universal hide: full 264-game gate fired** — ship candidate for v124.
+- Lane forensics (autarky): v310 champ-hunter fires and kills (hunted 30% vs 25% die) but covered-victim veto blocks the escorted-champ rams that are the point; exemption insufficient alone. v237-era anchor id dead code previously fixed.
+- Elo ~1690-1721 oscillating; v123 (leash) live record: beat shark++ 5-0, 1-4 vs SHINK AI 6500 (1849).
+- Residual loss census on the funnel composite running (autarky lane).

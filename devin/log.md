@@ -152,3 +152,4 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
 - census4 19-21: bothdead 10/elim 6/qdead 4; queen own-fault x10 (hitSelf BACK x2); elite queen feed=escorted ROAM 97pct, 68pct at r200+, feed=win-spoils not plan; v202 plant cant match feed-rate
 - rank30 census 11-19: bothdead 10/elim 5/live-q 3; UNSW x4 bothdead; chad@2049 sweeps via econ+dead-queen swarm; own-fault qd 8/19 (hitSelf persists)
 - v168-15g: 6-9, ALL 9 losses queen-dead, 8/9 h2h ram; no live-q losses; chad nva 175-241 vs our 11-52; v237 builds, bench needs activation (blocked)
+- v168-20g: 12-8 improving; queen-h2h 7/8 losses; mutual-death swarm fight 6/8; chad nva churn 211-354; schooltime live-q econ loss

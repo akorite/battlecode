@@ -277,3 +277,16 @@ Zero live-queen losses this window; queen survival is still the whole game.
 - Bench ids verified: FtM=264(2411), Vibing++=306(1680), SSS=91(2328), Computers=314(1994), Sponge=213(2248), WaterCandle=782(1646). SSS/Computers/WaterCandle have ranked OFF.
 - **API reality:** POST /battles {teamId, ranked, mapIds} plays the ACTIVE submission — no version pin. Benchmarking v237 remotely requires POST /submissions/:id/activate → it becomes the live bot → plays ranked (elo cost + elo-history reset + census pollution). No unranked-only way to field a candidate remotely.
 - v168-vs-bench rates from battle history (200-battle window): only WaterCandle present (0-5 in 1 ranked series); the rest of the set never appears in our ranked feed — benchmark would be fresh data either way.
+
+## Census — v168 newest 20 ranked games (4 battles, ~00:41Z 2026-10-06)
+
+**Record 12-8** (Milk Dragon 3-2, Sarvottam 4-1, cactus 5-0, chad gdp 1-4) — improving vs the 6-9 prior window.
+
+**Top-3 kill causes NOW (n=8):**
+1. **Queen-ram (hitHeadToHead): 7/8** — qd@24-264. Every elim and every bell loss except schooltime runs through her h2h death. Confirmed across 4 consecutive windows now: queen-h2h is THE live kill mechanism.
+2. **Post-mutual-death swarm fight → elim/bell: 6/8** — in most losses BOTH queens die early (trophy mutual @21-24, devil 68v40, trauma 264v37, weakhold 436v27) and their queenless swarm wins; ours flatlines after losing her (ln 0 or 10-47 vs 32-171). When their queen dies too, our swarm still loses — the funnel gap is independent of her.
+3. **Bell-race / econ: schooltime live-queen loss (ql 3v3, tot 57v227)** — the only queen-alive loss; pure economy defeat.
+
+**Opponent signatures:** chad 1-4 again — nva churn 211-354/game vs our 25-35, plus their queen suicides early (nva@27,37) and still wins. Milk Dragon@1537 went 2-3 but beat us on Devil/Trophy via queen-ram@50-68 — mid-elo teams CAN ram our queen now.
+
+**Delta vs last window:** elim share 5/8 (was 5/9), queen-dead share 8/8→7/8 (schooltime live-queen crept in), hitSelf/self-kill 0/8 this window.

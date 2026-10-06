@@ -868,3 +868,15 @@ stands as the h2h lever.
 - Elo 1701, organic 17-13 last 30 (SHINK AI 6500 at 1849 = the wall, 1/5).
 - Pipeline: v301 queen-hug escort ring-2 smoke, v302 queen-permanent-feed-target smoke, v303 tighter leash (8/0.3), v304 leash extended to the queen herself.
 - Next candidates: ship v299 if gate ≥54%; composite v299+best-of{301,302,303,304}; conveyor v2 with in-territory radius if longest losses persist after the queen fix.
+
+### v299 roam-leash mechanism audit — explore lane, 40 replays (2026-10-04)
+
+Local replication of the gate: abyss_v299 vs abyss_v263, 10 maps (trophy/devil/weakhold/qOS/islands/unsw/slithery/australia/autarky/schooltime) x2 seeds both seats, tag v299_audit. Result **24-16 (60%), pairs 5W-14S-1L** — islands/schooltime 4-0, unsw 1-3, everything else split. Replays parsed with tooling/v299audit.py (full-body tracking per dragon per round).
+
+**(a) Drop-recycle hypothesis FALSIFIED; real channel = fewer congestion deaths.** Cand deaths land *no closer* to the rolling longest than base (mean 19.3 vs 17.9 tdist to longest body; 12% <=4 both) and no closer to nearest ally head (3.2 vs 3.1). What changed: **10% fewer deaths overall (10275 vs 11397) and −21% wall+self+body deaths (89.5 vs 112.7 per game)** — leashed workers stop wandering into trap geometry and die less in open space. Persistence comes from not dying, not from dying nearer the blob.
+
+**(b) Queen cover = her own positioning, NOT worker density.** Survival when queen is NOT the longest: cand 6/36 vs base 7/40 — zero delta. The entire queenEnd edge (alive@end 27.6% vs 13.8%, qlen 1.24 vs 0.62) comes from **4 cand games where the queen ends AS the longest** (base: 0) — the leash's funnel concentrates around HER. Density is anti-correlated with survival: dead queens die with 2.5-3.1 allies within Chebyshev-4 (contested space), live queens at r450 have only 0.2-0.8 nearby. Cover does not protect her; nearby allies mark contested space where she dies.
+
+**(c) Residual loss classes in v299's 16 losses:** key1-longest 7 (44%), elim 6 (38%), key0-queenEnd 2 (12%), key2-total 1 (6%). 13/16 have BOTH queens dead → post-mutual-death is decided on longest (unsw s2A tot 283v188 won but lost ln 20v24; australia s1 tot 285v116 lost ln 22v30 — concentration deficit persists under the leash) or snowballs to elim on small maps (devil/qOS×2/trophy×2/weakhold, all opened by queen h2h @34-269).
+
+**Read for integrator:** ship the leash for the −21% congestion-death channel, not for recycling. Next levers in order: (1) longest-concentration post-mutual-death (44% of residual — leash didn't fix funnel); (2) queen-as-longest was the accidental win — v304 (leash extended to queen) is the directly-implied variant; (3) small-map queen h2h still opens every elim.

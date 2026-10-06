@@ -579,3 +579,5 @@ midFeed NC400 dead (44%). Elo ~1642.
 - Refill7 DEAD: chad gdp/Knight Capital/etc went 0-5 vs v121 — targets updated or our edge decayed. No more farming.
 - Lanes: hitSelf = conveyor working (93% intended); split-reject = survival-to-4 choke; drop-recycle = in-blob volume gap (opp 141-175 deaths + 142-182 splits vs our ~30-60).
 - Pipeline next: lane reports (kamikaze-over-self, spawn-trap room-check, survival-to-4), benchmark parity vs top-6, live watch on v122.
+- v264 spawn-trap region-check: FAIL 43.3%/30 on corridor/pocket maps. 4th consecutive split-restriction dead end (v253, v251, v174, v264): ANY reduction in split volume starves production. hasRoomyMove already adequate; ~3-4% spawn-trap residual not worth the starve.
+- v122 live: Elo rebounded 1518->1565 within ~2h of ship.

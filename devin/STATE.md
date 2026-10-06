@@ -504,3 +504,50 @@ swarm. The fix direction stays churn-economy (mass retention to len>=4
 per the trySplit census above), not death-positioning.
 
 Tooling: devin/pocket tooling/churn_blob.py (dc/sc/liveR/sd/drift).
+
+## HITSELF CENSUS — the third of deaths that is friendly-body (pocket lane, v252 corpus)
+
+Corpus: `results/v252_cmp_local` reproduced locally (your v252_cmp replays never landed on any box/branch I can reach): abyss_v252 vs abyss_v241, all-22-maps s3 both seats, 44g — currently 34 done, **61.8% (21W/0S/13L)**, consistent with your 55.3%/208 composite. Analyzer: `devin/pocket:tooling/hitself_census.py` — engine-truth occupancy rebuilt per death (deque bodies, dragonSplit explicit bodies, portal pairs by shared EDGE pid, landing = cell on the step-direction side of the partner boundary — decode verified against live crossings).
+
+Method per task: for every hitSelf death on the cand side, replay the dragonAction before it — was a legal safe move available? Three classes: **truly-forced** (all 4 first-step dirs engine-fatal), **kamikaze-available** (an enemy-head dir existed), **safe-existed** (≥1 open dir existed).
+
+### Verdict on Q1: neither forced-least-bad nor tail-vacate — the dominant class is DELIBERATE die-in-place
+
+| class | v237-side (44g) | v252-side (34g partial) |
+|---|---|---|
+| truly-forced | 1188 / 1625 (73%) | 876 / 1312 (67%) |
+| safe-existed | 437 (27%) | 436 (33%) |
+| kamikaze-available | ~0 | ~0 |
+
+- **safe-existed = intentional feed suicides, not desync.** 93–96% die within cheb-6 of an ally head (median 2); ~97% are r≥120 (the midFeed/feed windows); 81–87% take a *reverse* step. Signature matches `box-feed` at policy.hpp:458 — `c.dir = w_.t.dir ^ 2`, `score = 1e9`, bypasses legality entirely: boxed-in workers beside the champion U-turn onto their own neck so the drop lands at the anchor. Late-window anchor deaths ride the same shape. A truth-open side-exit existed because the planner wasn't trying to survive — it was executing the churn economy.
+- **truly-forced = the trapped path working as designed.** Rank order (policy.hpp:398): enemyHead 0 > physFree 4/6 > body 7 > wall 8 > friendHead 9 > qRes 10 — it already picks kamikaze first and dies on friend heads last. Zero enemyHead opportunities in ~2900 deaths (self-deaths happen inside our own blob); ally heads were adjacent in ~500 forced deaths and correctly avoided. Kill segment is own-neck (seg1) in ~97%, kill dir = reverse in ~89% — the universal suicide step: `dir^2` is always fatal for len≥2, needs no target.
+- **Tail-vacate hypothesis: n/a.** The engine has no vacate rule (own-tail kills measured directly); the planner's reject-all-own-cells is correct. The residual model gap is narrower: ~115 deaths/game corpus-step through *portals* onto recently-vacated own cells (83% land on a cell the head itself occupied within the last few rounds — the tracked tail can't survive an unpaired-portal crossing, so post-scout reverses land on the real neck the model never recorded).
+- Lengths: len-2/3 dominate (the dead-pool), but **~90 deaths are len≥8** — long workers also box-feed (the gate is only L_≥2 + score<−500 + champ within 6 cells + champAge≤33r).
+
+### Q2 — the kamikaze diff
+
+In the all-fatal path kamikaze is **already implemented**: `enemyHead` ranks 0 of 10 in the trapped path. It just never gets to fire — enemy heads are ~never adjacent to our dying workers (they die inside our swarm). The actual gap is the *deliberate* path: `box-feed` emits a blind `dir^2` without checking what it dies on. Proposed patch (policy.hpp ~464):
+
+```cpp
+Choice c;
+c.dir = w_.t.dir ^ 2;
+// die on the best cell: enemy head first (h2h trades the kill),
+// then the fatal cell closest to the anchor; fall back to dir^2.
+for (int d = 0; d < 4; d++) {
+    int n = b.nb[w_.head * 4 + d];
+    if (n < 0) continue;
+    int hid = w_.occHeadId[n];
+    for (World::Seen const& s2 : w_.others)
+        if (s2.id == hid && isEnemy(s2)) { c.dir = d; break; }
+}
+c.dest = b.nb[w_.head * 4 + c.dir];
+```
+
+Expected gain ~0.1% of hitSelf (1-2 missed trades per ~3000 deaths) — principled but tiny.
+
+### The real lever the census exposes
+
+"A third of deaths are self-inflicted" is mostly *designed* sacrifice volume — the feed mechanism working. Two tunables look unmeasured rather than wrong:
+
+1. **len-8+ suicides**: ~90/game-corpus long workers die beside anchors; a len-12 death drops 6 pearls but costs a real fighter. Box-feed has no length ceiling; consider `L_ <= feedMaxLen`-style gating beyond midFeedRound, or requiring the anchor's occupant to be *visible* (not a ≤33r-stale report) for dragons above len~4.
+2. **Anchor staleness**: champAge_ up to 33 rounds means suicides land where the champion *was*. Deaths already land med-2 from an ally so drops are retrievable — but worth gating whether the anchor cell shows a live ally part, else hold the death one round.

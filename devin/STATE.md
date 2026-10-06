@@ -698,3 +698,43 @@ Tooling: devin/pocket:tooling/deathmix.py, hitself_census.py (h2h+body).
 ### v273 herd-graze (dead, 2026-10-03 ~06:20 UTC)
 - Soft-yield shared beds (herdYield 0.4) + graze bonus near allies (herdGraze 1.4): 50%/32 on 6-map board. Flat. The forage-yield surface is closed — units already graze fine.
 - v274 in flight: splitRoomSmall=4 for halves len<=3 (child born into parent's vacated tail is roomy by construction; the 8-cell floor vetoes exactly the scrum splits winners spam).
+
+## 2026-10-05 PM10 — winner throughput forensics (earlyecon, 37 replays: 25 ladder + 12 v263-vs-v168 kmatch)
+Answers to the three questions — all numbers W vs L team:
+
+(1) Midgame alive-length dist r100-300: IDENTICAL.
+    W: len2 57%, len3 35%, len4-9 5%, len10+ 4% (>=4: 8%)
+    L: len2 56%, len3 35%, len4-9 5%, len10+ 4% (>=4: 9%)
+    Winners do NOT keep more len>=4 units — both swarms are 92%
+    sub-split-length. The distribution is not the differential.
+
+(2) Split milestones (median round, n=games where team ever hit it):
+    20 splits: W r87 (32/37 games) vs L r137 (only 11/37)
+    50 splits: W r138 (25/37) vs L r233 (3/37)
+    100 splits: W r222 (11/37) vs L ~never (2/37)
+    The gap is front-loaded (~50r at the 20 mark) and compounds.
+
+(3) len-2/3 children reaching len>=4: W 62% vs L 60% — EQUAL.
+    Winners' children do NOT survive better. Position: losers'
+    children actually sit slightly FARTHER from own queen (13.7 vs
+    12.3) and own longest (15.6 vs 13.2) — but survivors sit only
+    ~0.5-1.5 cells closer on both sides; weak geographic effect.
+
+Split-event anatomy (3351 W vs 1054 L splits):
+- post-split parentBody median = 2 both sides (parents split down
+  to the minimum). Children: W 93% len-2, 4% len>=4; L 77% len-2,
+  14% len>=4 (our v241+ bud path IS firing — we make the better
+  children and still lose 3x on volume).
+- MECHANISM: the edge is split CADENCE at threshold, not child
+  quality or survival. Winners split at len-4 immediately, every
+  cycle; the len-2 children they spam survive to 4 at the same
+  rate ours do — volume compounds. Our bud path trades cadence
+  for child quality (parents hold len>=6 for the len-4 child) and
+  loses net throughput 3:1. Consistent with the trySplit census:
+  keepFloor was the #2 reject on elim maps — our len>=4 parents
+  are parked holding length for bud instead of cycling.
+- LEVER for integrator: reduce split-delay on len-4/5 parents
+  (bud is a net win only if its cadence cost is < the child-quality
+  gain — current data says it isn't on elim maps; a "bud only when
+  len>=8" or "split-at-4 always, bud opportunistic" form may keep
+  both). Numbers only per task — no code change made.

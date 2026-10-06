@@ -445,3 +445,62 @@ Lane notes: drop geometry 7-8 cells BOTH sides (not 27-9); in-blob
 churn is VOLUME; trySplit rejects dominated by len<4 (workers die
 young). Survival-before-split is the confirmed choke.
 Elo ~1634, refill7 on +400 asymmetric + proven->60% targets only.
+
+## 2026-10-05 PM8 — trySplit reject census (earlyecon lane)
+Instrumented v237 trySplit with per-gate reject counters (12g vs
+v168, BC_DEBUG dragonLog dumps). Full table: devin/lanes/earlyecon.md
+@ 9698aa0.
+WHY splits don't fire: **len<swarmSplitLen dominates 25-50x on elim
+maps** (devil-A 5350 len vs 476 eat; dilemma 127-253 vs ~100). On
+9/12 sides len is #1 (4k-8.7k). bestMove.eat = hundreds (distant
+second), hasRoomyMove ~0-85 total (geometry NEVER binds — a len>=4
+dragon always finds a roomy move), enemyBan single digits.
+unitLimit(64) dominates only where colony fills (big_empty,
+schooltime-A, islands-A) — irrelevant on the maps we lose.
+Reading vs PM7b bud audit (3/437 len-4 children): same fact both
+sides — parents die short, so len>=6 machinery barely runs. The
+throughput deficit is mass-retention (die at len2-3 / never eat to
+4), upstream of every split gate. Winners' len-5 = 2-step movers
+(freeSteps=(len+3)/4) means their children out-maneuver AND
+out-survive at the exact length band where ours die — evasion/
+survival-to-4 is the only lever class that converts to splits.
+Prior earlyecon closures (do-not-retest): exposureMode dodge,
+wBuffer ring, spawnInner {6,10,14}, spawn-timing veto, feedBurst
+on v168 base, worker-bud len-2, youngEat, splitLen-3.
+
+DROP→LONGEST GEOMETRY (pocket, 2026-10-04 — counters the 27-vs-9 figure):
+Measured death→rolling-longest (longest live same-side, torus cheb; maps
+wrap) on 56 games across 3 corpora — the 27-vs-9 split does NOT
+reproduce under any replay-visible metric:
+  corpus            dc_med   dc_cheb   by reason (h2h/self/nva)
+  US live (12g)      7.0      8.0       7 / 7 / 4
+  OPP live           7.5     10.5      13 / 9 / 9
+  v237 self (44g)    8.0     10.0      10 / 9 / 9
+  v168 self          8.0     11.0       9.5 / 10 / 7.5
+Variants all ~7-12 both sides: len>=4 feeders only (us 7 vs opp 10),
+death→final-champ position (us 9 vs opp 10), spawn→death displacement
+(us 5.5-7 vs opp 4-5), live swarm radius around longest (us 7.0-7.5 vs
+opp 7.5-8), split-spawn→longest (us 8 vs opp 7), champ 25r drift
+(us 5.5 vs opp 6.5). Deliberate deaths specifically: OUR nva dc med 4
+vs their 9 — our die-in-place lands closer when it fires.
+
+WHERE THE 27 COULD LIVE (can't see it in replays): distance death→the
+elected champ's REPORTED/anchor cell (bot-internal, not in events). Our
+anchor broadcast has measured staleness issues (feeders die beside
+2-round-stale heads). If the 27 was measured against a stale anchor
+rather than the live longest, the real defect is anchor freshness —
+different fix than die-toward-allies. Recommend re-checking which cell
+the source metric used.
+
+WHAT ACTUALLY KEEPS THEIR CHURN IN-BLOB (measured):
+Not geometry — volume inside the same geometry. Both swarms are ~8-cell
+blobs around their longest; both spawn at sc~7-8 and die sd~4-5 from
+birth. Difference is throughput inside the blob: OPP 141-175 deaths +
+142-182 splits per game vs US 29-61 / 29-62 (3-5x), deliberate deaths
+25-36 vs 12-16. Their churn LOOKS in-blob because there is 4x more of
+it covering the blob. Consistent with the drop-recycle result: drops
+recycle at identical distances; there are just more drops inside more
+swarm. The fix direction stays churn-economy (mass retention to len>=4
+per the trySplit census above), not death-positioning.
+
+Tooling: devin/pocket tooling/churn_blob.py (dc/sc/liveR/sd/drift).

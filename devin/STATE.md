@@ -850,3 +850,11 @@ stands as the h2h lever.
 **r360-500 split-freeze correlation (17 roundLimit losses):** our splits mean 16.1 vs opp 57.7 (3.6x); frozen ≤2 splits in 5/17 ours vs 0/17 theirs; dc450 ours 7.8 vs theirs 19.3. Correlation REAL but incomplete: in the tot-dominant australia losses we out-produced anyway (tot 315v90 with sp 30v13) — there the bleed is longest-CONCENTRATION not count. The freeze explains the swarm-deficit sub-shape, not the funnel one.
 
 **Read for next levers:** (1) queen survival still = ~44% of losses by itself (keep her alive → queenEnd key can't be lost); (2) when both queens die the game is decided on longest — concentration/funnel, not swarm size; (3) eliminations all route through queen h2h first.
+
+### Plateau + Elo surge (2026-10-03 ~20:00 UTC)
+- Elo 1707-1711, organic +60/day. ALL refill targets now below the 1661 floor — refill permanently done; organic WR alone carries the rest.
+- v299 roam-leash (worker forage discounted >10 from all friends): 50%/24 flat, wall+self+body deaths +3/game (density crowds into walls). Wash #38.
+- Cumulative: ~38 variants washed/failed on the v263 lineage. Param surface, forage modifiers, split gates, conveyor roles, queen handling — all ~46-52% mirror reads.
+- The mechanism gaps proven but unfixed: (a) totalLength persistence deficit (their swarm stays dense, ours dies isolated 27 cells out); (b) every lever that compresses the swarm costs as much as it gains.
+- Next: explore lane's field-loss census is the last diagnostic running; organic grind continues.
+>>>>>>> 4939442 (STATE: 38 washes, Elo 1711, refill dead, census pending)

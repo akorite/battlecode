@@ -413,3 +413,11 @@ Also: real date ~Oct 7 — qualifier Oct 10 is ~3 days out.
 - Ladder-derived: replay forensics showed opponents out-contest us 10:1 on
   shared beds at identical swarm size. Rollback = resubmit abyss_v263.
 - v422 contest-alone 55.3%/114, v423 starveall-alone 55.5%/110 — both positive.
+
+## Oct 8 ~06:30 — camp port dead a third time
+- v426 = v424 + bed-camp: 36.8%/19. Camp mechanism confirmed non-portable to
+  the v263 lineage on three separate attempts (v419 45.7%, v426 36.8%).
+- v425 queen-scan x4: 51.6%/31 — wash in mirror (trap deaths too rare to move it).
+  Cheap protection, may keep for the next composite anyway.
+- Portals anomaly: opp won a bell game having eaten 2 pearls — queenEnd 5 beat
+  our dead queen (hitWall r354). queenEnd decides when their queen survives.

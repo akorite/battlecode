@@ -1433,3 +1433,50 @@ len≤3) converts directly into splits — the gate behind len is
 essentially free (roomy ~0, eat ~hundreds). The deficit is not a
 policy tuning problem; it's the same mass-retention problem the
 evasion closures circled.
+
+## r0-99 conveyor-death forensics — 30 fresh ladder replays (m129*, vs Spearhead 1787/Squishy 1726/STAR 1687/Bhole 1684/CURSE 1637)
+Tooling: devin/lanes/conveyor.py; corpus ~/bc/ladder_replays129 (seat map
+seats.json — botA/botB empty in ladder replays, seat via match API).
+Premise check vs the quoted 67%-them/37%-us: DOES NOT REPLICATE on
+this opponent set — conveyor share r0-99 is them 28% (137/487) vs us
+31% (147/469), near-symmetric. (The 67/37 may come from a different
+opponent/map mix — flagging the discrepancy honestly.)
+
+### (1) WHO dies conveyor-style — len2 fodder in-blob, both sides
+- victim len: len2 = 72-76%, len3 ~23%, len>=4 rare (their hist
+  {2:99,3:31,4:1,...}; ours {2:105,3:36,4:2,...}) — same profile.
+- d_ally median 2-3, <=2 48-52%: conveyor deaths happen INSIDE the
+  blob, not isolated — same on both sides.
+
+### (2) WHO eats the drops — the nearest ally, rarely the queen
+- an ally head within cheb-2 of the death cell on only ~half
+  (them 48%, us 52%); the eater is whoever's adjacent.
+- queen as eater: them 9% vs us 5%; longest as eater: 9% both.
+  Feeding is DIFFUSE — drops go to the swarm edge, not a named unit.
+
+### (3) WHEN conveyor switches on — no switch, it's a smooth ramp
+- share by 25r bucket is nearly IDENTICAL us-vs-them at every round:
+  r0-24 30%/53%, r50-74 32%/31%, r150-174 51%/46%, r225-249 54%/51%,
+  r350+ ~61-65%/64%, r475-499 77%/65%. Conveyor is an ENDGAME
+  mechanic ramping 30%->75% as colonies fill; there is no r0-99
+  feed phase on either side in this corpus.
+- ONE real asymmetry: r0-24 us 53% vs them 30% — OUR early deaths
+  are inflated conveyor (spawn collisions / box-ins — matches the
+  spawn-collision census "12% die age-0"); theirs are combat.
+
+### (4) WHERE feeders die — swarm front, ~12 cells from everything
+- d_queen median 13, d_longest median 11-13, d_centroid ~12 — deaths
+  land on the foraging perimeter, NOT adjacent to queen/champ.
+- Subtle targeted-feeding signal: their conveyor deaths sit ~2
+  cells closer to longest (11 vs 13) and queen-ate 9% vs 5% —
+  same volume, slightly better delivery to the big unit.
+
+### Verdict
+The quoted early-feed gap doesn't exist vs this opponent set —
+conveyor intensity is symmetric and endgame-loaded. Two narrower
+levers instead: (a) our r0-24 conveyor excess (53% vs 30%) = early
+self-collision waste, overlaps the spawn-collision census lane;
+(b) drop PLACEMENT — their feeders die ~2 cells closer to the
+longest (champ-adjacent delivery) vs our diffuse perimeter deaths.
+If a feed lever is wanted: aim feeder deaths at the longest's
+neighborhood, not just "in the blob".

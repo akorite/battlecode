@@ -315,3 +315,21 @@ Pulled newest games for aAah/FtM/chad/egypt-team/devtest/larp/Cultery/horse/WeHa
 **Game-shape context:** 124/234 (53%) top-team games end teamEliminated — elim-dominated play. In roundLimit games the banked-queen mode decides: 42/110 winners held qEnd≥17 vs 14/110 losers.
 
 **Implications vs us:** (a) their queen is expendable — she rams/feeds early, dies, and the swarm wins anyway (72% of their queens die before r200 in losses AND wins alike); (b) the 17-110 queen is grown by LOCAL grazing near spawn + eating, not expeditions — our queen's feed problem may be pearl-territory not travel; (c) buds never carry length — no "queen produces a big heir" mechanic exists in anyone's playbook; (d) the elim-vs-bells split in their games suggests two win modes — when we hold a big queen we should force bells games, not fights.
+
+## Opening-split forensics (explore lane — top-10 vs ours, r≤120)
+
+234 top-team replays (~bc/ladder_replays, leaderboard 1-10) + 80 of ours (ladder_replays_v168). Every dragonSplit in r0-120: parentPreLen = len(parentBody)+len(childBody), childLen, round.
+
+**(a) Parent-len at split — identical shape, NOT len-9.7.** Winners' sides: median 4, mean 4.5, 91% of splits at parent 4-5, only 3.2% at ≥8. Losers: median 4, mean 4.5, same. Ours: median 4, mean 5.0. **Everyone halves at len-4/5 — the "winners grow big parents" hypothesis is false.**
+
+**(b) Child-len at birth — len-2 for everyone.** Winners: median 2 (84% exactly 2), mean 2.3; only 5% of children born ≥4. Losers: median 2, mean 2.3. Ours: median 2, mean 2.7 (our swarmBudChild=4 inflates the tail slightly). Nobody produces big children — even len-50 parents bud len-2 (prior forensics).
+
+**(c) Cadence/volume — THE recipe is rate, not size.**
+- Winners' sides: **77 splits in r≤120** (17958/234 games).
+- Losers' sides: 57 (13223/234) — winners out-split losers +35% inside top-team games.
+- **Ours: 43 splits/side** — we run at ~56% of winners' rate.
+- Family cadence (rounds between consecutive splits in a parent→child lineage): top teams med **1 round**, ours med **2**.
+
+**Why ours lags — gates in trySplit (abyss_v299/policy.hpp:1922):** swarmSplitLen=4 already matches their shape, but we veto on: bestMove.eat for non-workers (eat-turn can't split), Job::Attack hunts, hasRoomyMove for BOTH halves (dense-leash v299 makes this fail more), enemy head ≤1, and the growRound=300/feedRound stop-gates. None of these are per-dragon cooldowns — our lower volume means fewer dragons are at split-eligible length in more rounds, i.e. a throughput problem (their swarm eats more → regrows to 4 faster → splits again). Cadence med 1r for them = children/lineages splitting back-to-back across the swarm.
+
+**Lever read:** don't tune child size — copy the RATE. ~77 splits/side by r120 needs parents regrowing len2→4 every ~2 rounds (2 eats), which is a pearl-density requirement, not a param. If we want the same count, the constraint to relax is the eat-turn veto + roomy-move strictness, and the funnel is where those lost children matter (alive@50, then dc450 for totalLength).

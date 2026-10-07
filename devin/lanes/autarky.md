@@ -802,3 +802,60 @@ or losing = queen forced off-swarm). Winners keep ~12 through the bell.
   roundStart head snapshot (a dragon that moved this turn dies at its last
   snapshot — sub-cell error, fine at chebyshev scale).
 - Centroid is naive mean (seam-safe enough on these maps).
+
+
+---
+
+# Endgame sprint forensic — is there a scripted liquidation at the bell? (autarky lane)
+
+Data: toptop_replays (top-10 v top-10), filtered to games reaching roundLimit:
+10/14 (4 eliminated early at r56-234). Window = last 60 rounds of each.
+Analyzer: analysis/endgame_sprint.py.
+
+## (a) nva deaths in last 60r — steady churn, NOT a bell-spike
+
+| side | total | med/game | r440s | r450s | r460s | r470s | r480s | r490s |
+|------|-------|----------|-------|-------|-------|-------|-------|-------|
+| W | 129 | 15 | 22 | 25 | 25 | 26 | 16 | 12 |
+| L | 177 | 4.5* | 16 | 34 | 24 | 28 | 27 | 47 |
+
+*loser median skewed: Slithery Fight loser ran 93 nva deaths (see below).
+
+Winners hold a FLAT ~22-26 nva per 10r through r440-490, tapering to 12 at the
+bell — continuous feed, not a scripted liquidation spike. Losers' nva count
+grows to 47 in r490s — but theirs are starvations, not feeds:
+
+| side | nva n | med dChamp | med dQueen | <=8 | <=12 |
+|------|-------|-----------|-----------|-----|------|
+| W | 129 | 7 | 7.5 | 56% | 70% |
+| L | 177 | 17 | 19 | 23% | 36% |
+
+## (b) winner totalLength last 60r — flat/churn
+
+med 124 -> 121.5; delta med +1.5, mean -4.7; 5/10 grew. No mass liquidation
+(would show as steep totlen decline into the champ/queen).
+
+## (c) worker dist-to-queen trend — flat ~11-12, no convergence
+
+| side | r440 | r450 | r460 | r470 | r480 | r490 |
+|------|------|------|------|------|------|------|
+| W | 12.0 | 11.8 | 11.8 | 11.5 | 11.1 | 12.2 |
+| L | 14.9 | 14.4 | 16.0 | 15.5 | 12.7 | 12.4 |
+
+No regroup-to-queen at the bell for winners; losers' apparent convergence is
+swarm shrinkage.
+
+## Verdict
+
+NO scripted endgame sprint exists on top teams. They run the same funnel
+churn they run all game — feed deaths landing inside the ring-4-8 donor band
+(med 7 from champ) at a steady ~2.4 nva deaths/round — and stop only because
+the clock does. The endgame separator is purely GEOMETRIC: winner nva deaths
+med 7 from champ vs loser 17 (diffuse starvation). Combined with the conveyor
+study: their mechanism is "champ rides inside the swarm + continuous
+feed-churn", and nothing changes at r440+.
+
+For us: matching their endgame means matching mid-game geometry — keep the
+champ within ~8 of the donor cloud so our nva budget lands in the band —
+not a new bell-routine. A last-60 "sprint" toggle would be a mechanism they
+don't have.

@@ -245,8 +245,7 @@ struct Params {
     // 2x2 orbit at corridor mouths — every direction scores ~0, so junction
     // noise flips the argmax each turn. Pay its current heading so it keeps
     // walking until something edible is in reach.
-    double starveLocal = 2.5;
-    double wBaitEat = 3.0;           // pull into bait beds while starving (suicide-eat banks pearls)        // reachable belief below this = starving
+    double starveLocal = 2.5;         // reachable belief below this = starving        // reachable belief below this = starving
     double wPersist = 0.5;            // bonus for continuing the last move's heading
     int workerScan = 1;               // deadEnd scan on workers (k==0 only)
     int pullAfter = 60;               // fog/frontier pulls only after this round (queen lanes resolve early)

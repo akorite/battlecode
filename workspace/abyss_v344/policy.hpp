@@ -1583,11 +1583,7 @@ class Policy {
             // Bait cells: a bed behind a single exit is lethal below baitLen
             // (the only way out runs through our own body, and reverse needs 4).
             // It is not food for us — count it out of the pull entirely.
-            if (bait(t.cell)) {
-                // Starving: the bed IS the meal — die for the pearls on it.
-                if (starving_) value += p_.wBaitEat * gp(dd + k);
-                continue;
-            }
+            if (bait(t.cell)) continue;
             if (!eaten.empty() && std::find(eaten.begin(), eaten.end(), t.cell) != eaten.end()) continue;
             int m = dd + 1 + k;  // moves from now, counting the ones already planned
             double v = t.belief * gp(m);

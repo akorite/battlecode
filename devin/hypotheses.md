@@ -299,3 +299,33 @@ NET FAMILY at local optimum; all five extensions negative/wash.
   v384 retries queen's early bud at smaller child sizes.
 - Queen orbit ~8-12 (earlier 5.6 did not replicate on this set).
 - nva deaths inside swarm for everyone (med dAlly 2).
+
+## 2026-10-07 ~11:30Z forensic-port cycle
+LANE FINDINGS LANDED:
+- pocket corridor census: winners forage dead-end branches 34-482
+  entries/g vs our 6.6 — len-2 walks in eating pearls, dies at tip,
+  len-1s sweep. We BANNED ourselves from that income (v201 veto
+  cost -16% eaten/g). Retired for len<=3 workers.
+- pocket queen census (220g): queen alive in ALL wins, dead in 89%
+  of losses. Killers approach visibly 4-7 cells for ~5r while she
+  drifts ~3 (no evasion). 11/49 rammers were newborn len-2 splits
+  born adjacent — no warning window possible.
+- autarky conveyor geo: feed ring dChamp 4-8, champ inside ~8 of
+  swarm centre (ours resolve ~19.5 out). v385 adds wChampHome pull.
+- autarky r0-bud: winners' queens split r0-1 at 86% vs our ~53%
+  (measured on v376 replays, roomy-check blocks at spawn).
+- pocket stub-churn: winners suicide len-2 stubs ~250/g in-blob
+  beside pearls vs our ~10/g len-3. Volume gap, not site.
+
+VERDICTS:
+- v384 queen-bud-retry: DEAD FLAT 50%/74 — retrying bud sizes
+  doesn't move the needle.
+- v385 champ-home: 53%/32 borderline positive, folded into v390.
+- v386 corridor-len<=3: 53.3%/60 POSITIVE (weakhold splits 2->78
+  in unlocked-channel test).
+- v387 queen see-flee: flat 50%/24 — wash.
+- v388 churn-max (foodDist 3, maxLen 3): DEAD 27%/11 — over-churn.
+- v389 splitLen3 on big: DEAD 33%/9 — len-3 fatal even open maps.
+- v263 vs v376 head-to-head: 45%/30 — lineage did NOT drift;
+  v263's 61% record was a weaker-field artifact.
+IN FLIGHT: v390 = v386 + v385 composite, 176g vs v376.

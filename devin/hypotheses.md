@@ -263,3 +263,20 @@ EXPERIMENTS FIRING vs live: v237 (composite minus midFeed-small),
 v238 (v237+slay-stalk<=900), v239 (v237+workerBud len10->child5).
 v235_live final ~53.6%/335 — fails bar; BIG arm 57% worked, SMALL
 arm 49.7% dragged by midFeed-everywhere.
+
+## 2026-10-07 ~04:45Z ladder-forensics cycle
+- Portals paralysis root cause hunt: m1326800 ddabap W — we produced
+  2 splits all game (3 units trapped/starving 400r) vs their 571.
+  Mirror games show BOTH sides produce only 2-4 on portals — map is
+  starvation-class for our code; ddabap portals-navigates to food.
+  Suspected unrouteable portals: board.NC > portalGuessMinTiles(512)
+  was strict -> portals (NC=512) excluded; manyPortals_ kills dense
+  guesses too. v380 (guessEnds 24, minTiles 500): 46%/26 — guess
+  routing did NOT unlock production. Scout-crossing machinery exists
+  but units still starve. Verdict: mechanism deeper than routing.
+- v379 splitRoom 8->4 gated NC<900: 48.8%/41 — dead, roomy veto was
+  not the corridor blocker.
+- v376 mirror (ship-relevant): BIG 55.6%/45 SMALL 47.5%/40 ~n85.
+  Ladder read since ship: Elo 1608->1649 net-positive organic.
+- ~105 variants on lineage. Param space exhausted; next levers are
+  map-doctrine or search, not params.

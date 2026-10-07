@@ -1009,3 +1009,19 @@ Dead this cycle: v338 anchorPull0.6 (46%/39), v339 donate (43%/44), v340 qbind
 - CURSEYOUBAYLE bleeds us 4-11 (early queen rams + production); Ciallo 1-4. Beatable: MartinShkreli/slither (ranked floor 1647 limits challenges).
 - v126 (budAlive30) shipped. Elo 1526→1654 on organic + refill.
 - Remaining: composites wash via interference; deep melee search or per-map doctrine are the only untested structural levers.
+
+## 2026-10-07 — ~101 variants washed; sonar/sharing forensic
+
+**Ladder:** rank 135/985, Elo ~1616 (oscillates 1511-1705). Top-20 cutoff = 2169 (Cache me outside). Gap +553 — unreachable by marginal composites; only a breakout bot + provisional-K rating climb can close it. New Elo mechanics discovered: each submission keeps its own rating, new bots "move quickly" (provisional), switching back to an old submission restores its rating — shipping plausible-positive candidates is near-free downside.
+
+**Challenge grind killed:** 26-54 vs Martin Shkreli's at -51 Elo gap = negative EV. All refills off permanently.
+
+**Sonar sharing forensic (the big find):** top-team ladder games have 41k-114k sonar pings/500r (~200/round) vs our ~10-15k (~21/round). They run dense gossip networks; echoes also reveal enemy-head ray hits. Our protocol carries beacon/enemy/champ only — NO food broadcast. Units forage on solo belief while winners' swarm pools food intel.
+
+**v373 built:** msgFood broadcast (best visible pearl cluster → sonar) + heard-food pull (mirrors hot-bed pull, friend-yield, dist<=18). Early read 42.9%/21 (SMALL arm weak — may need BIG gating).
+
+**v370-372 dead:** escortCount 3→1 (41%), squadSize 5 on small maps (46%), pacifist-no-missions on NC>=900 (50.7%).
+
+**Swarm-size model (refined):** cadence gap 16-17r vs 22-24r at identical len-4 halve regrowth = per-unit intake rate gap ~35%. Not food availability, not bed proximity, not queen survival. Best remaining theory: shared food map (v373 tests) + fewer non-eating roles.
+
+**Lineage verdict:** ~101 param variants all land 44-56%; v344/v357 is a true local optimum. Only structural additions (new mechanisms, not tuning) can move it.

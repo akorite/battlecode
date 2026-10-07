@@ -299,3 +299,19 @@ Replicated the gate locally: v299 vs v263, 10 maps x2 seeds both seats → **24-
 - (b) Queen cover ≠ worker density: not-longest survival 6/36 vs 7/40 (no delta). Entire queenEnd edge = 4 games where she ends AS the longest (base: 0) — funnel concentrates around her. Dead queens die with MORE allies nearby (2.5-3.1 vs live 0.2-0.8@r450) — allies mark contested space, not cover.
 - (c) Residual 16 losses: key1-longest 7, elim 6 (all small-map, queen h2h first), key0 2, key2 1. Leash didn't fix the funnel-concentration bleed (unsw tot 283v188 won, lost ln 20v24).
 - Implied next variant: v304 (leash extended to queen) — the accidental win was queen-as-longest.
+
+## Top-team queen forensics (explore lane — 234 replays, top-10 leaderboard teams)
+
+Pulled newest games for aAah/FtM/chad/egypt-team/devtest/larp/Cultery/horse/WeHaveQuizzes/SSS (leaderboard 1-10, ids 454/264/70/55/545/157/306/842/87/91) → 234 replays at ~/bc/ladder_replays. Analyzer: tooling/qforensics.py. Queen = min starter id per side.
+
+**(1) Queens DO bud — and children are always ~len-2.** 413/468 queens budded at least once (n=1920 queen-splits). Parent-len histogram is bimodal: 64% of buds at parentLen <5 (cheap workers) but a fat tail — 265 buds at 5-9, 92 at 15-19, 83 at 20-24, 34 at 50+. Critically, childBody len ≈ 2 in 98% of cases — even a len-50 queen buds only a len-2 child. Splits never transfer bulk length: queen size is built by EATING only, never concentrated via splitting. Same for workers: 116169/117446 worker buds at parentLen <5 — everyone buds len-2 children.
+
+**(2) Queens hover locally, not far-roam.** Winner queens' distance-from-spawn stays ~7-12 cells all game (r0+ 7 → r400+ 9). Losers' sit even closer (~5-8). Even the biggest banked queens (qEnd 105-113) averaged 6-16 cells out, one true roamer hit 27. Their roam = feeding within a ~10-cell home radius — escorted LOCAL grazing, not expeditions.
+
+**(3) Ending length — bimodal, the 17-38 queen is a ~40% mode not the norm.** roundLimit winners (110): mean 21.6 but median 3 — 42/110 banked qEnd≥17 (top: 113,110,105,96,85,81,80,80,77,72,71), 38 won with her dead anyway. Elim winners (124): qEnd mean 2.5 — their queen is dead-or-baby; they win by killing OURS. Losers: 92% end with queen dead (all 124 elim losers qEnd 0; 70/110 roundLimit losers 0).
+
+**(4) What kills her: head-to-head rams, early.** 284 queen deaths: hitHeadToHead 226 (80%), hitSelf 25 (9%), noValidAction 18 (6%), hitWall 11 (4%), hitOtherBody 4. Timing: 111 in r0-99, 94 r100-199, 38 r200-299, 23 r300-399, 18 r400+. **205/284 (72%) of queen deaths happen before r200** — even top queens die early by ram; their edge is what the SWARM does next, not queen survival per se.
+
+**Game-shape context:** 124/234 (53%) top-team games end teamEliminated — elim-dominated play. In roundLimit games the banked-queen mode decides: 42/110 winners held qEnd≥17 vs 14/110 losers.
+
+**Implications vs us:** (a) their queen is expendable — she rams/feeds early, dies, and the swarm wins anyway (72% of their queens die before r200 in losses AND wins alike); (b) the 17-110 queen is grown by LOCAL grazing near spawn + eating, not expeditions — our queen's feed problem may be pearl-territory not travel; (c) buds never carry length — no "queen produces a big heir" mechanic exists in anyone's playbook; (d) the elim-vs-bells split in their games suggests two win modes — when we hold a big queen we should force bells games, not fights.

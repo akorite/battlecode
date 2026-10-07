@@ -154,3 +154,4 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
 - v168-15g: 6-9, ALL 9 losses queen-dead, 8/9 h2h ram; no live-q losses; chad nva 175-241 vs our 11-52; v237 builds, bench needs activation (blocked)
 - v168-20g: 12-8 improving; queen-h2h 7/8 losses; mutual-death swarm fight 6/8; chad nva churn 211-354; schooltime live-q econ loss
 explore lane: v299 mechanism audit — -21% congestion deaths real, recycle+cover falsified; funnel bleed persists
+explore lane: top-team queen forensics 234g — queens bud len-2 children, hover ~10 cells, 72% die<r200 by h2h; qEnd>=17 banks only 38% of bells wins

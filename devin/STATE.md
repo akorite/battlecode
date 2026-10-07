@@ -945,3 +945,33 @@ Local replication of the gate: abyss_v299 vs abyss_v263, 10 maps (trophy/devil/w
 - Internal-conflict fix that made it in: queenHideUntil 390→340 — feed window opened while she still hid, splitting the funnel between her and the worker-champ.
 - Elo dipped to ~1641 on elim-class losses (TD/Devil/Portals/Stripes vs mid-1600s) — the exact class this stack targets.
 - Open: residual loss census on v315 (autarky lane running); post-ship v124 ladder watch; next lever candidates = elim early-melee survival or opponent-adaptive doctrine.
+
+=== 2026-10-03 ~02:00 UTC — weakhold starvation ROOT-CAUSED + feed-window forensics ===
+
+Spearhead 5/0 replays: our conveyor DOES scale on ladder (658 splits/246 nva on
+UNSW) but loses concentration (35 vs 55 longest). On weakhold we collapsed:
+3 total splits, units paced len-3 for 400r beside bait beds.
+
+ROOT CAUSE: starving_ makes bait beds LEGAL but nothing makes them ATTRACTIVE —
+pull loop `if (bait(t.cell)) continue` excludes them even while starving, so
+workers orbit pocket mouths forever. v344 = bait-bed pull when starving
+(wBaitEat=3.0) + starveLocal 0.75->2.5. Result: 6/6 weakhold (was 0/2 bleed),
+longest 19.7v12.8, queen alive 92%v67%. Mechanism-verified.
+
+Autarky lane forensics (176 dual-instrumented games):
+- Funnel WORKS: 93.8% of feed drops eaten by teammate <=10r. Precision is NOT
+  the leak.
+- Real leaks: (a) champ-anchor can't recapture a displaced champ (pull decays;
+  our locks sit med 19.5 away vs their 11 -> feedRadius12 aborts 72%); (b)
+  queen-death mid-window scrambles election ~30r stale; (c) burst drains
+  radius-12 donor pool in first 20r; (d) mass-spread = our 2-3 rival champs
+  vs their one dominant.
+- ELIM class FALSIFIED: opening-melee loss, not queen starvation. Hidden queen
+  dies r67 h2h = pure liability; 8/32 never reach L>=4 bud gate.
+
+v345 = v321 + feedRadius16 + champAnchor clear on queen death + feedBurst
+20r->40r/mult3->2 + selfChamp anchor-leash floor. Tracking 55.0%/40.
+
+Dead this cycle: v338 anchorPull0.6 (46%/39), v339 donate (43%/44), v340 qbind
+(43%), v342 queen-duel (49%/35), v335 leash (49%/85), v337 (50%/46), v326 pm
+(51%/87), v341 anchorPull1.2 (47%/30). ~70 variants washed on the lineage.

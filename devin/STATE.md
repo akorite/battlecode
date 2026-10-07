@@ -1045,3 +1045,15 @@ Dead this cycle: v338 anchorPull0.6 (46%/39), v339 donate (43%/44), v340 qbind
   food intel). Boards racing, composite ship on positive gates.
 - ~107 variants on lineage. Param space exhausted; shipping the
   food-net family is the only line still paying.
+
+
+## 2026-10-07 ~20:00Z — sweep era
+- Live: v127 (abyss_v376) 31-22, Elo ~1643, rank ~133.
+- Forensic cycle verdicts: corridor wash (50.4%/250 combined), champ-home dead,
+  heardEnemy dead, split-rate wash (v392 51.8%/164). ~15 straight dead on v376.
+- Explore lane: winners split 77 vs our 43 by r120 — RATE not size (everyone
+  buds len-2 at len-4/5); rate is intake-bound, circular constraint.
+- NEW: automated param sweep running (sweep.py, 52 tunables, random search
+  ~60-80 evals @ 34 games each vs v376). Survivors ≥53% confirm on fresh seeds.
+- Lanes: autarky → endgame-sprint forensics; pocket → intake-per-unit census;
+  explore → delivered; earlyecon → idle.

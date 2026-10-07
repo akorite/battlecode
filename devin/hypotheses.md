@@ -367,3 +367,11 @@ v376 + roam-leash gated r>=150. Gate: 115/206=55.8%, LB(90)=50.1,
 seats 58/103+57/103. First replicated mechanism in ~130 variants:
 leash strangled r0-120 forage (pocket +73% intake gap lives in ramp);
 tl100 +65% mechanism-verified. Rolled back instantly if it regresses.
+
+## 03-Oct ~15:00Z — v129 SHIPPED = abyss_v407
+v400 + bed-camping (worker within 3 of live bed: far targets x0.25).
+Combined gate: 59.0%/117 vs v400 over two independent seed sets.
+The parked-crop mechanism from pocket's census transferred on the
+v400 base. Micro-variants racing: v412 campFar .12, v413 campNear 4.
+Dead: v409 splitskirm 43%, v410 regroup pull 21%, v411 widefeed 46%,
+v406 noleash 42.5% (leash is net-positive post-150 — phase-gate optimal).

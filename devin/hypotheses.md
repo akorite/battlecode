@@ -375,3 +375,13 @@ The parked-crop mechanism from pocket's census transferred on the
 v400 base. Micro-variants racing: v412 campFar .12, v413 campNear 4.
 Dead: v409 splitskirm 43%, v410 regroup pull 21%, v411 widefeed 46%,
 v406 noleash 42.5% (leash is net-positive post-150 — phase-gate optimal).
+
+## 2026-10-07 — THE GATE FALSIFIED (major methodology finding)
+Ladder audit: v122 (abyss_v263) 157W-100L = 61.1% REAL; v123-v129 combined ~46%.
+Every post-v122 ship passed its mirror gate (53-59% vs parent) yet the lineage
+regressed on ladder. Mirror gates measure delta-vs-parent, not ladder strength —
+mechanisms can beat the mirror while being weaker vs real opponents.
+Elo 1610->1496 in ~1h under v129 (2-8). ROLLBACK: resubmitted v263 as v130.
+New protocol: candidate must ALSO beat abyss_v263 (best-ladder build), not just
+live. Experiment running: v407 vs v263 head-to-head.
+Also: real date ~Oct 7 — qualifier Oct 10 is ~3 days out.

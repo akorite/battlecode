@@ -1001,3 +1001,11 @@ Dead this cycle: v338 anchorPull0.6 (46%/39), v339 donate (43%/44), v340 qbind
 - v357 budAlive30 tracking +5% at 40g — best active.
 - v354 mf7 flat 48.4%/93 done. v358 leash7 flat 50%/40 killed.
 - Ladder: v125 @ 1589, parity vs 1650-1730 set (Ciallo/slither/CURSEYOUBAYLE).
+
+## 2026-10-04/07 — param exhaustion verdict
+
+- ~97 variants on v344 lineage: suicide economy (4 flavors), rationing, pfeed, stub-feedback, spread, density, roamDelay, bigcombo, sfood — all 47-56%, nothing holds >55.
+- Forensics: everyone camps ~1 from beds; food always available; h2h kills both regardless of length; splits all 4→2+2; suicide counts are downstream of swarm size not upstream.
+- CURSEYOUBAYLE bleeds us 4-11 (early queen rams + production); Ciallo 1-4. Beatable: MartinShkreli/slither (ranked floor 1647 limits challenges).
+- v126 (budAlive30) shipped. Elo 1526→1654 on organic + refill.
+- Remaining: composites wash via interference; deep melee search or per-map doctrine are the only untested structural levers.

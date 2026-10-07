@@ -1,5 +1,17 @@
 # Cognoscenti state — 2026-10-04 (post v3-prompt restart)
 
+## Cycle verdicts (2 Oct late cont.)
+- v324 queen early-feed melee: 53.3%/60 vs v263, DEAD vs v321 (v329 composite 41.4%)
+- v325 feedMaxLen9: dead 45%/20. v326 post-mortem: flat. v327 brawler: dead 48.3%.
+- v328 hunt-depth: flat 50%/60. v329 local-force+earlyfeed: 55.6% vs v263 but 41.4% vs v321 DEAD.
+- v330 funnel r320: flat 50%/42. v331 death-drift: flat 50%/60.
+- v332 queen-conveyor (feed hidden queen + hideLen6): DEAD 38.3%/60 — converts len-7 fighters into len-2 babies at split-parity, alive@end halves. Conveyor needs surplus production.
+- v333/v334 conveyor splits/banking: killed early (same mechanism).
+- v335 leash 8/0.3: TRACKING 53.8%/26 vs v321. v336 leash 12: 48.4% (tighter > looser).
+- v337 midFeed cap7: early.
+- Economy at parity: splits 191v194, deaths 182v183, h2h 70v70 — residual is end-state concentration + adjAte (559v592).
+- Ladder v124: bleed spread (Trauma 1/4, Australia 0/3, UNSW 0/2, Slithery 0/2, weakhold 0/2); CURSEYOUBAYLE 5/10, Spearhead 0/5.
+
 ## v124 residual decomposition (corrected, 176 games)
 - elim 38 (46%): swarm-wipes r62-448, hidden queen starves at len-2 (needs L>=4 to bud, no donations until r340 funnel)
 - longest 30 (37%): thin margins (21v22, 35v52, 49v60); our totals often BIGGER (309v73) but mass spreads across feeders instead of concentrating

@@ -1076,3 +1076,13 @@ v403 starving-unleash early. Next ship = composite of whatever holds.
 - Protocol change: candidates now gate vs abyss_v263 AND the panel, not just parent.
 - In flight: v419 = v263+bedcamp port, v420 = v263+leash(r150) port.
 - Real date ~Oct 7; snapshot Oct 10 = ~3 days.
+
+## Oct 7 ~22:00 — plan locked for final stretch
+- v407_vs_v263 settled ~50%: lineages dead-even in self-play, 61%-vs-33% on ladder.
+  Mirror CANNOT rank candidates for ladder. Only real games can.
+- v130 live at ~1690 and stable. Plan: hold it. Any candidate now needs LADDER proof,
+  which costs a submission slot + Elo swing — only worth it if a candidate dominates
+  BOTH lineages in mirror first (v421 restore-doctrine is the last such test running).
+- Freeze rule: no submissions in the final ~24h before the Oct 10 snapshot — let the
+  live record settle at whatever Elo v130 earns.
+- Kill list updated: v419 camp-port (45.7%), v420 leash-port (43.5%), v418 qforage (34.6%).

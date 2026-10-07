@@ -342,3 +342,13 @@ tips dropping pearls, but our swarm lacks the len-1 sweeper density
 winners field to collect them). Seed-1-4 positivity was luck.
 STATUS: ~120 variants on v376 lineage, 10 consecutive fails/washes.
 Forensic-port vein exhausted this round. Elo ~1643 stable.
+
+## 2026-10-07 ~19:30Z
+- v392 split-rate (eat-veto off growers + parent roomy->1): 51.8%/164
+  WASH. The explore lane's rate-prescription (77 vs 43 splits by r120)
+  didn't convert: extra splits die as fast as they spawn.
+- ~15 consecutive dead/wash mechanisms on v376 lineage.
+CONCLUSION: the rate gap is a DOWNSTREAM symptom — intake per unit
+is the binding constraint, bound by swarm coverage, bound by rate.
+Circular: no single lever enters the loop. v376 architecture at its
+local ceiling (~50-52% vs any perturbation).

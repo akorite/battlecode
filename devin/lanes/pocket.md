@@ -1013,3 +1013,54 @@ that eats pearls as they spawn. Combined with the funnel census
 is: bed-adjacent residents + churning stubs, not roaming foragers.
 Parking itself is not a win lever (losers match the rate); the
 lever stays volume + where the parked crop sits relative to beds.
+
+================================================================
+INTAKE CENSUS — pearls eaten per unit-round + starvation
+================================================================
+Corpus: top-10 ladder replays re-pulled (42 top side-obs, 36
+games) + 30 Cognoscenti ladder replays (our live flagship —
+"our v376" replays don't exist on any box/branch; newest on
+devin/v120 is v341; ladder replays ARE the current live build).
+60 opp side-obs as mid-ladder reference.
+Eats: tileChange hasPearl->False, attributed to nearest alive
+head (validated 96.5% d0, 3% d1 ordering, 0.4% noise).
+Analyzer: tooling/eat_census.py.
+
+                     top(42)   ours(30)   opp(60)
+ eaten/game            762       354        257
+ eaten r0-120          150        54         64
+ unit-rounds         10574      4631       4515
+ unit-rounds r0-120   1788      1081        934
+ EFF (eaten/ur)       .0719     .0576      .0602
+ EFF120              .0788     .0455      .0621
+ starve@60           .417      .578       .471
+ starve@120          .496      .482       .604
+ alive@60            ~21       ~11        ~13
+ alive@120           ~36       ~18        ~21
+
+(a) ARE THEIR UNITS BETTER FED? YES — +25% per unit-round over the
+full game (.074 vs .060 mean) and +73% in the ramp (.079 vs .0455).
+Not a denominator artifact: vs our own ladder opponents we're dead
+even (paired eff120 diff -0.0006, 30 pairs) — our per-unit forage
+is mid-ladder par, top-10 is a genuinely better class.
+
+(b) THE RAMP WINDOW is where the gap concentrates: eaten120 top
+150 vs ours 54 (2.8x). Decomposed: ~1.65x unit-rounds (1788 vs
+1081) x ~1.7x per-unit efficiency. BOTH effects real, roughly
+equal weight — swarm coverage AND forage efficiency.
+
+(c) STARVATION: @60 we starve 58% of alive units vs their 42%
+(opp 47%) — 4-in-7 of our early units go 10+ rounds unfed. @120
+converges ~50% everywhere (churn makes the alive-pool young;
+residual diffs are survivorship noise — ours .482 < opp .604
+because our units die before they can starve).
+
+VERDICT: forage targeting IS a broken piece — specifically in
+r0-120. Top teams' per-unit intake is +73% in the ramp while
+holding the same len-2-peel split recipe. The mechanism to copy
+isn't child size or split policy — it's early forage throughput:
+each of their units converts ~2x the pearls ours does in the
+window where split cadence is decided. Second factor is unit
+count (~1.65x unit-rounds) — which itself is downstream of
+intake (eat more -> resplit faster). Fix forage in r0-120 and
+the unit-count half follows.

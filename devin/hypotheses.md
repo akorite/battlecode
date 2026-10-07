@@ -352,3 +352,12 @@ CONCLUSION: the rate gap is a DOWNSTREAM symptom — intake per unit
 is the binding constraint, bound by swarm coverage, bound by rate.
 Circular: no single lever enters the loop. v376 architecture at its
 local ceiling (~50-52% vs any perturbation).
+
+## Cycle 03-Oct (~05:00Z)
+- v396 blob-bot negative control: 4.9%/41 — doctrine stack load-bearing, no churn shortcut
+- v398 all-in kamikaze (swarm hunts enemy queen when our queen dead + theirs alive): 50%/36 dead — killing their queen doesn't convert
+- v399 coveredFavour 0.15→0.32: 55%/40 — drifting, borderline
+- v400 roam-leash OFF until r150 (pocket intake census: +73% gap lives in r0-120; leash strangles ramp): 60%/30 tracking — tl100 +65% mechanism-verified
+- v401 centroid-leash (nearest-friend → swarm centroid): 56%/25 — noise
+- sweep.py automated param search ~19 evals: 5 flags, all confirms regressed to ~50% — seed-luck screen needs >=58% stage-A
+- Standing: everything converges 50-53%; intake loop is circular; v400 is the live shot

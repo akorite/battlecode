@@ -598,3 +598,68 @@ Cand queenEnd mean 2.12 / med 0 (8/88 nonzero) vs base 1.58 / med 0 (6/88). On r
 - **Funnel verdict: WORKS AS DESIGNED — the loss channel is volume + target-switch timing, not drop precision.** (a) Emit machinery is airtight: every window death is a designed feed, 87% at a live-seen champ, 94% of drops eaten within 10r. (b) The LONGEST-loss mechanism is donor *volume* (their nva med 58 vs our 35) plus a **post-queen target switch**: in LONGEST losses our queen survives to med r345 (theirs dies med r176) — queenChampMemory keeps her champ-of-record until she dies right at window open, the anchor/election scrambles mid-window, and the burst has already spent the donor pool; their champ has been one stable feed target since ~r300. The 4 losses where we out-recycled yet still lost (maze 121v115, stronghold 124v84, australia 131v122, qOS 35v3) fit exactly that shape — mass went to a dying-then-dead queen and a late-elected champ instead of one consolidated target. (c) queenChampMemory's queen-survival arm is real but thin (alive@end 29.8% vs 17.5%) — it delays OUR queen's death into the window where it now costs a target switch.
 
 Suggested levers, ranked: (1) when ourQueen dies, re-elect the champ from the FRESHEST teammate sighting and re-stamp champAnchorRound_ immediately (kill the ≤30r anchor drift at the switch); (2) let feeders who locked the dead queen convert her corpse-pile into the NEW champ's feed (they already die there — the drop is capturable by anyone within ≤1); (3) burst drain: 54% of feeds inside the first 20r of the window empties the radius-12 donor pool before the elected champ stabilizes — spread feedBurstRounds 20->40 or drop feedBurstMult 3->2 so donors arrive after the switch. None of these is a gating bug — the composite's gains are real; the LONGEST tail is a timing/donor-allocation inefficiency.
+
+---
+
+## v321 residual forensics (sub v124, gate replays)
+
+Replays for `/home/ubuntu/bc/results/v321_gate/` were not on this box, so the gate was replicated locally at `--maps all --seeds 4 --jobs 2` with BOTH sides BC_DEBUG-instrumented (`workspace/abyss_v321dbg`, `abyss_v263dbg` — every alive dragon logs `L= id= fh= fa= sc= ch= hx= hy=` per turn). Analysis at partial run (~86/176 games, cand 58.1%, classes 18E/13L/4Q/1T — tracking their 53.5%/46-37-17 mix): `analysis/v321_residual.py`.
+
+### Q1 — LONGEST class: concentration is real but the mechanism is conversion inefficiency, and it comes in three shapes
+
+End-state top-3 + totals per loss (L = loss side, W = winner):
+
+```
+map        seed seat  our top3 (tot)      their top3 (tot)     longest-holders
+australia  s1   A     [21,21,20] (308)    [22,20,17]  (72)     42v63
+australia  s1   B     [21,21,20] (286)    [28,16,3]   (49)     65v73
+australia  s2   A     [19,10,5]   (36)    [34,24,22]  (315)    87v33
+australia  s2   B     [23,23,22]  (163)   [31,25,23]  (271)   120v103
+maze       s1   A     [55,49,18]  (152)   [70,10,8]   (104)     5v6
+stronghold s1   B     [47,27,21]  (98)    [50,10,5]   (70)     20v20
+stronghold s2   A     [32,15,13]  (102)   [62]        (62)     56v44
+big_empty  s1   B     [41,40,36]  (247)   [59,43,41] (1078)    45v29
+big_empty  s2   A     [41,38,37]  (307)   [49,48,40] (1135)    42v22
+big_empty  s2   B     [55,52,38]  (408)   [61,48,47] (1023)    48v35
+autarky    s1   A     [35,5]      (40)    [52,16]     (68)     25v31
+autarky    s1   B     [50,10]     (60)    [58,14,14] (100)     40v40
+slithery   s2   B     [24,23,15]  (140)   [45,26,11] (128)     73v60
+```
+
+Three distinct loss shapes:
+
+- **CONCENTRATION (australia s1, the cited shape):** we hold 4-6x their total mass but spread it over ~37 equal workers + three near-equal rivals ([21,21,20]); they condensed to a champ + escorts. Median end top-1 share in losses 0.17 vs winners 0.35; on australia specifically 0.07 vs 0.31.
+- **VOLUME (big_empty x3):** they never consolidate — they keep 44-64 alive mid-dragons (total 1023-1135) and simply out-grow our champ (41-55 vs 59-61). Not a funnel race; a forage/survival scale gap.
+- **KNIFE-EDGE (corridor maps):** symmetric funnels, 3-15 length gap.
+
+Funnel-to-bell measurement (nva deaths per era, both sides, all 13 losses; feedAt=320 corridor/340 open):
+
+```
+era          nva W/L      near<=3      chfeed W/L    alive-pool W/L   med worker->longest dist W/L
+era0         264/271      17%/18%      305/288       72/55            14/13
+era1          58/26       19%/19%       88/54        29/16            16/14
+era2          26/20       12%/30%       49/40        19/14            15/20
+era3          20/23       20%/0%        39/44        12/16            18/17
+```
+
+**Neither funnel "runs to bell" — both fire the same era0 burst (identical 264v271 nva, near-adjacency rate identical ~18%).** The difference is what happens after: their pool collapses (72→12, feed conversions consume it), ours keeps ~16 residual donors drifting (medD rises to ~20) who emit a useless trickle far from the champ (era3 chfeed 44v39 — we emit MORE late, just too far to matter).
+
+Where the concentration loss is born (australia s1 A, instrumented): our workers resolve a champ 86% of rounds (`ch+`) but lock a feed target only **1.0%** of eligible worker-rounds vs their 19.1% — the `feedRadius=12` abort kills us because our resolved targets sit med 19.5 away vs their 11.0 (only 28% of our resolved-target rounds are within 12 vs their 57%). Root cause is **target placement, not gate precision**: our champ-of-record free-ranges (traced id649: sc=1 continuously r420-499 while roaming 20+ cells/10r through all four map quadrants — the anchor pull `{champAnchor, 1.2, -1, 0.0}` decays `belief*gp(dist)` exactly like food, so once grazing carries it >~10 tiles off-anchor the pull can never recapture it). Their v263 champ anchors `=head` wherever it stands at plant time — inside the swarm by construction — so their workers resolve near targets and convert. Split-brain churn amplifies it: 14-19 distinct reported ch targets/round on our side at window open (multiple concurrent selfChamps because no dragon dominates — and no feeding because targets scatter — bistable failure).
+
+**Q1 answer:** their post-death length concentrates in one champ parked inside the swarm remnant; ours distributes across 2-3 rival champs + a 30-50-strong foraging residue. Their funnel does NOT run to bell — it finishes in the first ~80 rounds by eating the whole pool; ours never engages the bulk of the pool because the feed target lives too far away (geometric starvation on big maps) or the body mass simply out-scales us (big_empty). Where our funnel does engage symmetrically (corridors), we lose knife-edge by 3-15.
+
+### Q2 — ELIM class: hypothesis FALSIFIED — the queen does not starve; the swarm loses the melee first
+
+18 elims, 15 replays analyzed. **Queen alive at elim round: 1/15.** Dead-queen timing: med **r67** (range r6-202), reasons **13x hitHeadToHead + 1x noValidAction** (weakhold — boxed, the dedie/pocket path). None die of starvation — noValidAction donations to her are ~0 both directions (nva 0-1/game; pre-window nva doesn't exist by design since the funnel targets the champ, never her).
+
+Queen length trajectory r100→death: **flat L2-3** (L100 2-3, max 4; 4/15 never reached L>=4 so the `L>=hideLen+2` bud gate never even armed). Buds: 0-7 total (median 1). Team splits DO happen ([2-68/era in era0]) — the swarm grows by worker splits, not queen buds; her spawning contribution is ~0 by hide doctrine.
+
+Causality runs the OTHER direction from the hypothesis: `cross` (first round our alive < theirs) lands r12-96, and at her death the swarm is already outnumbered 2v11 / 4v14 / 4v19 / 4v16 / 1v20 (or at parity 7v7/4v4 then bleeds out). Their queens die early too (med ~r100, mostly h2h) — but their swarm wins the opening melee, then their survivors mop up our len-2 queen.
+
+**The elim mechanism: our swarm loses the r0-96 melee while the queen sits hidden at L2 contributing nothing (0-7 buds, zero combat power), then she's killed h2h as an exposed soft target.** "Starving queen" is wrong twice: (a) she doesn't starve, she's killed; (b) the donations that could feed her don't exist for either side pre-window. What the hide doctrine actually costs here is that our queen is a *pure liability* — no buds, no fight, can't even trade — so the effective early roster is workers-only vs their workers+queen.
+
+### Combined read for v321
+
+- ELIM (46%) is a pre-window melee problem, funnel-independent — queen-hide turns her into dead weight while the swarm bleeds out outnumbered. Lever: queen combat contribution before hideUntil, or bud-earlier doctrine (L3-4 buds) — the L>=4 gate starves her only function.
+- LONGEST (37%) splits three ways: geometric conveyor starvation (anchor/pull + churn on open maps), volume out-scaling (big_empty — not a funnel problem), and corridor knife-edges (symmetric, small fixes). The single highest-leverage fix for the australia shape: **anchor-site or champ retention must keep the feed target inside the swarm** — e.g. score anchor candidates by own-swarm density/centroid distance, or make the anchor pull distance-flat (belief floor, not `bel*gp(dist)`) so a displaced champ actually returns.
+- QUEENEND (17%, 4 here): theirs survive to end (qE 21/22 vs ours 0-18 on trauma) — same hide doctrine different outcome; worth a separate look but small class.

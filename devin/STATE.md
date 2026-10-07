@@ -1025,3 +1025,23 @@ Dead this cycle: v338 anchorPull0.6 (46%/39), v339 donate (43%/44), v340 qbind
 **Swarm-size model (refined):** cadence gap 16-17r vs 22-24r at identical len-4 halve regrowth = per-unit intake rate gap ~35%. Not food availability, not bed proximity, not queen survival. Best remaining theory: shared food map (v373 tests) + fewer non-eating roles.
 
 **Lineage verdict:** ~101 param variants all land 44-56%; v344/v357 is a true local optimum. Only structural additions (new mechanisms, not tuning) can move it.
+
+## 2026-10-07 05:00Z — v127 climbing, food-net line extended
+
+- **Elo 1649** (+51 since v127 ship at 1598). v376 (food-net, NC>=900)
+  is live and net-positive organically.
+- Mirror evidence food-net works: +40-90 total splits for the net
+  side on australia (299->343, 315->406) — production lift confirmed.
+- Sonar rate parity: top teams ~3.3 pings/unit/round vs our ~3 —
+  the 41k-vs-12k ping gap is a SWARM SIZE gap, not a rate gap.
+- Portals forensics: our production paralyzes (2 splits/game on
+  ladder). v379 (roomy 4 on confined) dead 48.8%; v380 (portal
+  routing guess on dense maps) dead 46% — paralysis is deeper than
+  routing; portals-edge scout machinery exists but food stays
+  unreachable. Open.
+- In flight vs live v376: v381 young-cover (len<=3 units stay near
+  blob, heard-food cap 6), v382 heardFoodDist 18->40 (span the map
+  like winner nets), v383 broadcast bed-countdown sites (predictive
+  food intel). Boards racing, composite ship on positive gates.
+- ~107 variants on lineage. Param space exhausted; shipping the
+  food-net family is the only line still paying.

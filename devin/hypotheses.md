@@ -405,3 +405,11 @@ Also: real date ~Oct 7 — qualifier Oct 10 is ~3 days out.
   persistent win of the campaign, and it targets a REAL divergence not a mirror artifact.
 - v130 holding ~1690. If v423 finishes ~58%+ combined it ships as v131 — its
   payoff shows on ladder, rollback = resubmit v263 again.
+
+## Oct 8 ~03:00 — v131 SHIPPED (abyss_v424)
+- v263 + starveall (starving_ all maps) + contest (enemyCloserFactor .85)
+- Mirror: 56.2%/64 vs v263 — thin edge but the mechanism is mirror-blind by
+  construction (contesting only pays vs opponents that actually push).
+- Ladder-derived: replay forensics showed opponents out-contest us 10:1 on
+  shared beds at identical swarm size. Rollback = resubmit abyss_v263.
+- v422 contest-alone 55.3%/114, v423 starveall-alone 55.5%/110 — both positive.

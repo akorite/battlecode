@@ -1086,3 +1086,10 @@ v403 starving-unleash early. Next ship = composite of whatever holds.
 - Freeze rule: no submissions in the final ~24h before the Oct 10 snapshot — let the
   live record settle at whatever Elo v130 earns.
 - Kill list updated: v419 camp-port (45.7%), v420 leash-port (43.5%), v418 qforage (34.6%).
+
+## Oct 8 ~03:00
+- SHIPPED v131 = abyss_v424 (starveall+contest on v263). v130 (v263) was
+  holding ~1690 at rank ~126.
+- Watch v131 first ~15-20 games vs Elo band; rollback if clearly losing.
+- All ports of new-lineage mechanisms to v263 failed; ladder-derived
+  mechanisms (contest/starve) are the only family still paying.

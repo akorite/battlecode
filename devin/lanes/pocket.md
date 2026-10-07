@@ -918,3 +918,41 @@ Only unreproducible axis: distance to the elected champ's REPORTED cell
 (bot-internal anchor staleness — flagged to orchestrator as likely
 metric source; different fix if confirmed).
 Tooling: tooling/churn_blob.py.
+
+== Suicide geography (nva death-cell census) — 2026-10-04 ==
+Corpus: workspace/topreplays t{70,226,501,952} (39g, 8739 nva deaths)
++ ladder_replays (12g, 80 nva). Per death: cheb to longest-ally head,
+queen head, nearest LIVE pearl (tileChange-tracked), ally heads <=4,
+dead unit len. Analyzer: tooling/suicide_geo.py.
+
+MEDIANS (torus cheb):
+                TOP-win (n5135)  TOP-lose (3604)  US ladder (80)
+ d_long         9                11                4
+ d_queen        14               16                9-10
+ d_pearl        2                2                 2
+ ally4          5 (97%>0)        4 (95%>0)         2-4 (100%>0)
+ len med        2                2                 3
+ len hist       1:7 2:67% 3:24% 4+:9%   similar    2:39% 3:40% 4+:21%
+ isLongest      3%               6%                10%
+
+ANSWER 1 — consumer: NO single consumer. Winners' suicides land ~9
+cells from the longest head and ~14 from the queen — NOT beside the
+champ. They die INSIDE the swarm blob (5 ally heads within 4 cells)
+beside a live pearl (d=2). "Densest patch" is closest to true, but
+the site is swarm-relative, not anchor-specific. (Drop-recycle audit:
+the actual eater is ~2 cells away — whoever's adjacent in the blob.)
+Ours land TIGHTER on the longest (d=4) — die-at-centroid already
+overshoots their geometry.
+
+ANSWER 2 — length signature: REAL. Winners' dead are len-2 stubs
+(67%; med 2). Ours med 3 (len2 39%, len3 40%). They recycle a unit
+the moment it's jobless, while it's still a 1-pearl stub; we hold
+to len-3+ before the die-in-place fires. Combined with 25x rate gap
+(250/g vs our ~10/g): the discriminator is LIFECYCLE, not site —
+they churn stubs early and often in-blob; we suicide rarely and late.
+
+IMPLICATION: midFeed's len<=3+centroid is pointed at the wrong axis.
+Winners' version is closer to "len-2 unit in the dense blob with no
+job -> die now beside the nearest pearl". If a next build relaxes
+eligibility, the measured targets are: fire at len==2 (not len<=3),
+site = near swarm density+pearl (not necessarily the centroid anchor).

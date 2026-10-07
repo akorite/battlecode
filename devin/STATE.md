@@ -975,3 +975,11 @@ v345 = v321 + feedRadius16 + champAnchor clear on queen death + feedBurst
 Dead this cycle: v338 anchorPull0.6 (46%/39), v339 donate (43%/44), v340 qbind
 (43%), v342 queen-duel (49%/35), v335 leash (49%/85), v337 (50%/46), v326 pm
 (51%/87), v341 anchorPull1.2 (47%/30). ~70 variants washed on the lineage.
+
+## 2026-10-07 ~04:45 UTC — v125 = v344 SHIPPED (starveLocal 2.5)
+- v344 = v321 + starveLocal 0.75->2.5 ONLY (cleaned dead pull code before ship; starving_ implies !short_ so the added bait pull was unreachable — real mechanism: starving widened => short workers take the unexcluded pull loop and suicide-eat bait beds).
+- Gate: 54.2%/118 vs v321 live. SMALL 61.7% [49,73], BIG 46.6% (same-code variance). weakhold 6/6 local.
+- Ship rule: relaxed (probable improvement + rollback ok). Rollback = workspace/abyss_v321 dir.
+- Dead this cycle: v345 feedRadius16-global 44.1%/68 (small maps collapse), v346 gated-feedRadius 46.7%/45, v347 bigger donors 50%/26, v348 queenFeedRound60 43.8%/16.
+- Ladder ~1604; tight 40% series vs Squishy 1728 / Spearhead 1797 / CURSEYOUBAYLE 1641.
+- NEXT: early-feed gap (our conveyor share r0-99 = 37% vs winners 67%); lane earlyecon on it.

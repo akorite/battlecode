@@ -700,3 +700,105 @@ Claim checked: top teams run dense gossip (~200 pings/round) vs our ~21/round.
 **What this means for us**: our ~21/round is ~2 orders of magnitude below a full mesh (~4/dragon/round → at 30 alive that's ~120/r). Sonar is a free extra action per turn — the cost is only implementation. A minimal replicable version: every dragon pings all 4 directions each turn with `(id<<32)|payload` + checksum, and each inbox value is re-pinged verbatim for a TTL (~10-15r) — that alone reproduces the flood topology. The missing piece is payload semantics (positions of pearls? enemy sightings? election state?) — receivers don't show overt pull, so the value is in a shared world-model, likely feeding targeting/consolidation decisions we can't observe from heads alone.
 
 Artifacts: `analysis/sonar_study{,2}.py` (committed), `ciallo_replays/` + `cursey_replays/` kept locally (50 games), `/tmp/battles_meta_sonar.json`. Zero game slots used.
+
+
+---
+
+
+# Conveyor geometry — top-10 forensics (autarky lane)
+
+Data: 14 fresh ladder replays, top-10-vs-top-10 (leaderboard 2026-10-03):
+SSS(91) vs dev test 1 :P(545) ×13 all map classes; forgot to mention(264) vs
+fandagong(552) Autarky. Pulled via /games + /api/matches/{id}/replay, kept at
+toptop_replays/. Analyzer: analysis/conveyor_geom.py. n=7085 death events.
+
+## 1) Where do deaths happen relative to the champ? — ring-4-8, not ring-2
+
+Distance from death cell → own rolling-longest dragon's head (toroidal chebyshev):
+
+| side | n | med | <=2 | 3-5 | 6-10 | >10 |
+|------|-----|-----|-----|-----|------|-----|
+| winner | 3370 | 10 | 10% | 18% | 25% | 47% |
+| loser  | 3558 | 11 |  7% | 17% | 23% | 54% |
+
+All-causes is mostly noise (combat + accidental). The signal lives in
+**noValidAction deaths** (the only "chosen" death — starve/boxed/suicide-feed):
+
+| era | side | n | med dChamp | <=4 | <=8 | <=12(feedRadius) |
+|-----|------|---|-----------|-----|-----|-----|
+| r0-99  | W | 131 | 6  | 44% | 69% | 85% |
+| r0-99  | L | 154 | 8  | 25% | 56% | 71% |
+| r200-299 | W | 316 | 11 | 20% | 37% | 61% |
+| r200-299 | L | 400 | 12.5 | 23% | 35% | 50% |
+| r300-399 | W | 448 | 8  | 35% | 52% | 73% |
+| r300-399 | L | 467 | 14 | 23% | 31% | 43% |
+| r400+  | W | 238 | 6  | 46% | 58% | 72% |
+| r400+  | L | 300 | 17 | 18% | 26% | 35% |
+
+**Winners' feeding ring tightens to 4-8 by endgame (med 6, 72% inside
+feedRadius=12); losers' drifts out to 17 (only 35% inside 12).** A loser's nva
+deaths far from the champ are accidental starvations — same event type, two
+causes, and dChamp cleanly separates them.
+
+Normalize by volume: losers run MORE nva per alive-dragon (r400+: 18.1 vs 12.3
+per 1000 alive-rounds) — losing teams' units starve off-funnel, they don't
+under-feed.
+
+Distance to nearest ALLY at death is identical (med 2, 70% <=2, 96% <=5) —
+deaths happen inside the swarm; nobody dies isolated. 44% of nva deaths have
+an ally adjacent (dAlly<=1) to capture the drops.
+
+## 2) First split timing — the queen buds at round 0
+
+- Median round of each dragon's FIRST split: W 227 vs L 241.
+- Team's first-ever split: med 0 both — the queen herself.
+- **Queen's first split: W med r0.5 (12/14 measured, 6× r0-1) vs L med r8**
+  (long tail: 46, 120, 272 — losing queens delay or never bud).
+- 8/14 games had >=4 splits within the first 5 rounds.
+- Every dragon (queen included) spawns at len 7 — r0 splits are legal.
+- Contrast: in our_replays (v-gate era), parentId==0 split NEVER occurs in
+  30/30 games. Our hide-at-len-2 queen forfeits exactly the head-start winners
+  take for free at r0.
+
+## 3) Queen orbit — ~8-12, not 5.6
+
+Queen head -> own-team head centroid, median by era:
+
+| era | W | L |
+|-----|-----|-----|
+| r0-99 | 7.9 | 8.2 |
+| r100-199 | 9.7 | 10.9 |
+| r200-299 | 10.2 | 9.9 |
+| r300-399 | 11.3 | 11.5 |
+| r400+ | 11.7 | 15.2 |
+
+The earlier "orbit ~5.6" does not replicate on these replays: top queens ride
+~8-12 from the centroid, drifting outward as armies spread. The one
+divergence is losers' queens fleeing to 15 late (disengaging when losing —
+or losing = queen forced off-swarm). Winners keep ~12 through the bell.
+
+## Mechanisms to port
+
+1. **Immediate queen bud (r0-1).** The strongest single start signal in the
+   set: winning queens split r0-1 (med 0.5). Every len-7 queen can legally
+   split two len-2/len-5 pieces at t=0. Ours hides at len<4 and forfeits the
+   free worker. If the hide is retained, at minimum bud once immediately —
+   production from r0 compounds all game.
+2. **Feed ring is 4-8, not point-blank.** Winners converge nva deaths to
+   dChamp ~6-8 endgame inside feedRadius=12 — our radius is right; our champ
+   position is the failure (resolved targets med 19.5 away in v321 — same
+   disease, different cause: our champ roams >12 from the swarm, theirs stays
+   inside the donor cloud). Port: keep champ INSIDE ~8 of swarm centroid —
+   their geometry IS the anchoring spec.
+3. **nva-outside-12 is the starvation diagnostic.** Any of our dragons dying
+   nva at dChamp>12 is an accidental starvation, not a feeder — measure our
+   own games with the same split to size accidental loss vs funnel credit.
+4. **Queen rides at ~10-12, not in the pack.** Looser orbit than assumed; she
+   trails the swarm rather than sitting inside it.
+
+## Caveats
+- One pairing dominates (SSS v dev test ×13); second pair n=1.
+- dChamp uses rolling-longest by reconstructed body length; death cell uses
+  roundStart head snapshot (a dragon that moved this turn dies at its last
+  snapshot — sub-cell error, fine at chebyshev scale).
+- Centroid is naive mean (seam-safe enough on these maps).

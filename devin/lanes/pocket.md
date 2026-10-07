@@ -956,3 +956,60 @@ Winners' version is closer to "len-2 unit in the dense blob with no
 job -> die now beside the nearest pearl". If a next build relaxes
 eligibility, the measured targets are: fire at len==2 (not len<=3),
 site = near swarm density+pearl (not necessarily the centroid anchor).
+
+================================================================
+PARKED-UNIT CENSUS — big-map unit geometry, top teams
+================================================================
+Corpus: ~/bc/ciallo_replays + ~/bc/cursey_replays (pulled 30+30 via
+ladder.py, teams 1064 Ciallo / 784 CURSEYOUBAYLE). 41/60 games ran
+the full 500 rounds (19 ended early — excluded per spec). fv2,
+botA/botB fields empty so sides reported as winner vs loser.
+Parked def: head within cheb-2 of its position 10 rounds earlier
+for all 10 trailing rounds. Beds: cells with >=3 hasPearl
+tileChange events. Torus cheb. Analyzer: tooling/parked_census.py.
+
+PARKED FRACTION OVER TIME (median per 25-round bin):
+
+ bin (r)   0   1    2    3    4    5    6    7    8    9
+ winner   .03 .11  .12  .13  .15  .14  .15  .15  .15  .16
+ loser    .04 .14  .14  .11  .13  .15  .13  .13  .13  .14
+
+ bin (r)   10   11   12   13   14   15   16   17   18   19
+ winner   .15  .15  .16  .14  .15  .14  .14  .10  .10  .11
+ loser    .16  .16  .14  .17  .15  .12  .13  .12  .12  .11
+
+Profile: ramp to ~13-16% by r50-75 (new units can't be parked for
+their first 10 rounds), plateau through r450, tail-off ~10-12% in
+the final 50. Winners and losers park at the SAME rate — the
+fraction is not a discriminator (win 22.3% of unit-rounds vs
+lose 21.2% overall).
+
+BED GEOMETRY (per-game medians):
+                 win (41)   lose (41)
+ d_bed parked     1          1
+ d_bed moving     1          2
+ adj<=1 parked    .697       .651
+ adj<=1 moving    .513       .478
+ parked unit-rnd  2125       1264  (winners field more units)
+
+ANSWER — camp on fountains: CONFIRMED for both sides. ~70% of
+parked unit-rounds sit adjacent (cheb<=1) to a natural pearl bed
+vs ~51% of moving unit-rounds; parked median d_bed = 1 vs moving
+1-2. Parked units are not scattered mid-map — they hold position
+next to a pearl spawn cell. Residual ~30-35% of parked rounds are
+off-bed (d>1): med 2-3, i.e. still within one step of a bed —
+perimeter/body-plug camping rather than remote stalls.
+
+WINNER vs LOSER differences are small and consistent: winners'
+parked units sit slightly tighter on beds (adj 0.70 vs 0.65) and
+winners generate ~70% more parked unit-rounds (2125 vs 1264) —
+but the parked SHARE is equal, so the driver is unit volume, not
+parking behavior. Losers die off — fewer units to park.
+
+IMPLICATION for our build: on big maps the top teams run a
+~15%-of-units standing crop sitting on beds — a feed/guard layer
+that eats pearls as they spawn. Combined with the funnel census
+(feeders die where they spawn inside a ~10-cell blob) the model
+is: bed-adjacent residents + churning stubs, not roaming foragers.
+Parking itself is not a win lever (losers match the rate); the
+lever stays volume + where the parked crop sits relative to beds.

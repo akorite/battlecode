@@ -992,3 +992,12 @@ Dead this cycle: v338 anchorPull0.6 (46%/39), v339 donate (43%/44), v340 qbind
 - v350 champ-halo (workers within cheb-5 of champAnchor suppress eat x0.3 from r280): 53.4%/174, BIG +8.5 SMALL -2.5.
 - v353 = halo gated NC>=600: tracking ~51%/121 mid-board.
 - v354 = midFeedMaxLen 5->7 (big maps): early.
+
+## 2026-10-04 cycle — suicide economy forensic
+
+- Top teams suicide 131/game vs our 27 (both sides of our games ~27). 5x gap = the conveyor is an explicit die-in-place economy all game, not windowed feeding.
+- Winners' cadence 16-17r vs our 22-24r → ~30% production gap. Lane tasked with the bottleneck question (dist-to-food vs beds vs density).
+- v359 recycler (starving+crowded→dedie): mass-detonation killed it (40%/45). v360 = rationed drip (nearAllies>=3, (round^id)&3==0, units>=14).
+- v357 budAlive30 tracking +5% at 40g — best active.
+- v354 mf7 flat 48.4%/93 done. v358 leash7 flat 50%/40 killed.
+- Ladder: v125 @ 1589, parity vs 1650-1730 set (Ciallo/slither/CURSEYOUBAYLE).

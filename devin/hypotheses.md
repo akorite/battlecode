@@ -421,3 +421,11 @@ Also: real date ~Oct 7 — qualifier Oct 10 is ~3 days out.
   Cheap protection, may keep for the next composite anyway.
 - Portals anomaly: opp won a bell game having eaten 2 pearls — queenEnd 5 beat
   our dead queen (hitWall r354). queenEnd decides when their queen survives.
+
+## Oct 8 ~09:00 — food-net port dead; boxed-child churn testing
+- v427 food gossip on v424: 48.5%/68 — third mechanism-class that dies on the
+  v263 lineage (camp, leash, food-net all fail to transfer).
+- v425 queen-scan: 45.3%/75 dead.
+- v428 = v424 + boxed-child splits (small children born sealed still allowed in
+  economy phase — churn babies): early 57%/14.
+- v131 ladder: 10-12 vs upward-matched field, ~par. Verdict at ~25 games.

@@ -361,3 +361,9 @@ local ceiling (~50-52% vs any perturbation).
 - v401 centroid-leash (nearest-friend → swarm centroid): 56%/25 — noise
 - sweep.py automated param search ~19 evals: 5 flags, all confirms regressed to ~50% — seed-luck screen needs >=58% stage-A
 - Standing: everything converges 50-53%; intake loop is circular; v400 is the live shot
+
+## v128 SHIPPED (~10:30Z) = abyss_v400
+v376 + roam-leash gated r>=150. Gate: 115/206=55.8%, LB(90)=50.1,
+seats 58/103+57/103. First replicated mechanism in ~130 variants:
+leash strangled r0-120 forage (pocket +73% intake gap lives in ramp);
+tl100 +65% mechanism-verified. Rolled back instantly if it regresses.

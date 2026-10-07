@@ -280,3 +280,22 @@ arm 49.7% dragged by midFeed-everywhere.
   Ladder read since ship: Elo 1608->1649 net-positive organic.
 - ~105 variants on lineage. Param space exhausted; next levers are
   map-doctrine or search, not params.
+
+## 2026-10-07 ~05:30Z food-net extension verdicts
+- v381 young-cover (len<=3 stay near blob, foodDist cap 6): 48.6%/37
+  BIG 52.9 SMALL 45 — dead.
+- v382 heardFoodDist 18->40: 44.4%/18 — dead.
+- v383 broadcast bed countdowns (foodBedWindow 10): 44.4%/18 — dead.
+- v379 splitRoom4 NC<900: 48.8%/41 — dead.
+- v380 portalGuess on dense maps + Portals NC: 46.2%/26 — dead.
+NET FAMILY at local optimum; all five extensions negative/wash.
+
+## Autarky lane conveyor-geometry forensic (top-10 replays)
+- Feed ring is dChamp 4-8 (not point-blank); champ anchors inside
+  ~8 of swarm centre. OUR anchors resolve ~19.5 out — v385 adds
+  wChampHome pull toward densest-beacon centre.
+- Winners' queens bud at r0-1 med 0.5 (~86%); ours ~53% r0-1
+  (55/123 measured on v376 replays — roomy check blocks the rest).
+  v384 retries queen's early bud at smaller child sizes.
+- Queen orbit ~8-12 (earlier 5.6 did not replicate on this set).
+- nva deaths inside swarm for everyone (med dAlly 2).

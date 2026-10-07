@@ -983,3 +983,12 @@ Dead this cycle: v338 anchorPull0.6 (46%/39), v339 donate (43%/44), v340 qbind
 - Dead this cycle: v345 feedRadius16-global 44.1%/68 (small maps collapse), v346 gated-feedRadius 46.7%/45, v347 bigger donors 50%/26, v348 queenFeedRound60 43.8%/16.
 - Ladder ~1604; tight 40% series vs Squishy 1728 / Spearhead 1797 / CURSEYOUBAYLE 1641.
 - NEXT: early-feed gap (our conveyor share r0-99 = 37% vs winners 67%); lane earlyecon on it.
+
+## 2026-10-07 ~07:30 — forensics reframe + halo pipeline
+- TOP-TEAM FORENSICS (fresh replays 55/70/454/SSS/WeHaveQuizzes): winner ends med 38 units vs loser 1 — ELIM grinds not bell races. Winners' queens die at SAME ~70% rate. Splits 562 vs 315. Resplit cadence 16-17r vs our ~22-24 (30% production gap = the whole game).
+- OUR replays same signature: winners split 334 vs 194, end count 19 vs 3.
+- earlyecon FALSIFIED early-feed gap: conveyor share symmetric ~30% r0-24 vs this opponent set. Real diffs: our early self-collision excess + their deaths land ~2 cells closer to champ.
+- VERDICTS: v349 exit-gate DEAD 47.7%/176. v351 c3 dead, v352 b5 dead (cadence can't be bought by gates — food-bound).
+- v350 champ-halo (workers within cheb-5 of champAnchor suppress eat x0.3 from r280): 53.4%/174, BIG +8.5 SMALL -2.5.
+- v353 = halo gated NC>=600: tracking ~51%/121 mid-board.
+- v354 = midFeedMaxLen 5->7 (big maps): early.

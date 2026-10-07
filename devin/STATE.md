@@ -1057,3 +1057,11 @@ Dead this cycle: v338 anchorPull0.6 (46%/39), v339 donate (43%/44), v340 qbind
   ~60-80 evals @ 34 games each vs v376). Survivors ≥53% confirm on fresh seeds.
 - Lanes: autarky → endgame-sprint forensics; pocket → intake-per-unit census;
   explore → delivered; earlyecon → idle.
+
+=== 03-Oct ~11:30Z ===
+v128 LIVE = abyss_v400 (v376 + roam-leash gated r>=150).
+Gate: 55.8%/206 vs live, seats balanced, two seed sets both >=55%.
+Surprise: gains concentrate on SMALL maps (55.7%) — 10-tile leash
+covered half of small boards. BIG 52.1%.
+Boards: v401 centroid-leash 55.5%/119 combined; v402 combo 55.9%/34;
+v403 starving-unleash early. Next ship = composite of whatever holds.

@@ -647,3 +647,34 @@ The australia-s1 geometric-starvation mechanism (verified instrumented): workers
 - QUEENEND (13/176 = 7% of games, 13 of 81 losses): their queens survive to end (qE 3-22) — same hide doctrine, different melee outcome. Small class.
 
 Artifacts: `analysis/v321_residual.py` (committed), `results/v321_dbg/` replays kept (dual-instrumented — reusable), `workspace/abyss_v321dbg` + `abyss_v263dbg` (local only).
+
+## Cadence bottleneck forensic (m1105/m1106 + m995 replays)
+
+Claim checked: winners resplit parents every 16-17r vs our 22-24r (~30% production gap).
+
+**Data**: 137 replays — 100 top-team mutual games (`top_replays/`, both sides = cohort `top`), 37 of ours (`our_replays/` + `ladder_replays/`; we are side A=team 351 in all; opponents = mid-tier control `ouropp`). Match metadata re-fetched via `/battles/{id}` (the `/tmp/matches_*.jsonl` from the queen study was wiped). Per-parent consecutive `dragonSplit` intervals (id keeps front `len-childSeg` segments, child = shed tail — engine `Split` confirmed). Analyzer: `analysis/cadence_study.py`.
+
+**The cadence model is simpler than stated**: ~84-93% of resplits shed a minimal 2-segment child leaving a len-2 parent (shedLen med 2, parentKeeps med 2 in all cohorts). So "resplit cadence" = **time for a len-2 stub to eat 2 pearls** = pure foraging rate. ~2 resplits/parent median, all cohorts.
+
+**Answer: (a) distance-to-food, essentially 100% of the gap.**
+
+- Resplit interval (all parents): top med **9-10** (mean 20.0) vs our med **14-16** (mean 30.1) — same ~1.6× ratio as the claim (their 16-17/22-24 was likely a different pooling; direction and magnitude consistent).
+- THE separating number: **median dist-to-nearest-pearl 2 vs 3**, and only **21% of our parent-intervals run at dist<2 vs 34% top** (vs 43% for our own opponents on the same boards — kills any map-content excuse).
+- At matched distance the cadence equalizes: dFood<2 → iv 4 both; 2-4 → 11v14; 4-7 → 23v28. **No mechanism gap — pure placement.** Counterfactual: our mix at top's per-bucket rates predicts 15.4 vs our actual ~14 — our parents are already at par-or-better *given* where they stand; they just stand in worse places.
+- (b) on-bed: **falsified correlate** — mean on-bed fraction ~0.00 in every cohort; nobody blocks respawns.
+- (c) local ally density: weak/non-monotone (top: sparse→iv 5, dense→iv 11; ours flat 13-16). Doesn't separate.
+
+**Within-bucket residual** (~2-4r slower at same dFood, e.g. iv 14 vs 11 at 2-4; p5-density-matched also worse): our parents move MORE (moveFrac/statFrac: parked-fraction 0.14 vs 0.18) but regrow slower (0.216 vs 0.276 seg/r) — **re-targeting churn, not parking**. Consistent with the v321 findings (anchor pull decayed by distance, feedRadius aborts) — our workers keep getting their targets pulled/churned instead of parking on a pearl line.
+
+**Local crowding**: allies-per-pearl within cheb-5 med 2.11 vs 1.95 (top) vs 1.63 (ouropp) — our parents forage in slightly more-contested, slightly sparser neighborhoods (p5 med 4 vs 5). Small second-order drag on top of the distance effect.
+
+**Queen asymmetry (top-team signature, partly our hide design)**: top queens resplit 4.2×/game (med interval 7r) vs our 1.9 (med 21r) — our hidden queen sits len<4 and physically cannot split (needs len>=4, eat while hidden ~0). But mid-tier opponents also only hit ~1.7 — queen farming is how the elite teams pull ahead, not what separates us from ladder-average.
+
+**Censoring**: ~90% of last-splits end in the parent's death at med wait ~20r — most parents die before a long chain; cadence is dominated by the first 1-3 resplits.
+
+**Levers** (production-axis):
+- Forage targeting: prefer pearls in less-crowded neighborhoods (penalize targets by allies-within-5 already contesting) — our parents crowd each other onto the same patch (2.11 vs 1.63 crowd ratio vs our own opponents).
+- Reduce target churn on worker parents: the statFrac deficit says our stubs roam instead of park-and-eat — same re-targeting disease as the anchor-decay bug; a park-on-dense-food mode for stubs (hold position on a bed patch, eat respawns) is what the top 6% of intervals do (iv<=3 runs: 4986 top vs 416 ours).
+- Queen farming is real (4.2 vs 1.9 splits/game) but our hide doctrine forbids it — a trade-off to revisit only if the elim-melee problem (queen dead r67 med in elims) is ever solved for keeping her len>=4 while hidden is impossible by construction.
+
+Artifacts: `analysis/cadence_study.py` (committed), `/tmp/cadence_rows.json` (per-interval rows), `/tmp/battles_meta.json` (match->team map). No game slots used.

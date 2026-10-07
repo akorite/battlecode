@@ -395,3 +395,13 @@ Also: real date ~Oct 7 — qualifier Oct 10 is ~3 days out.
   record re-confirming. v130 stays live unless a candidate beats BOTH v263 AND v407.
 - v421 fired: v407 + v263 queen doctrine (hideMinTiles 600, unhide 390) — tests whether
   the universal-hide is what breaks transfer to real opponents.
+
+## Oct 8 ~00:30 — v423 starveall = first ladder-derived mechanism win
+- Replay forensics vs real opponents: both sides ~14 alive at r100-150 but their
+  per-unit intake is 10x ours (28 vs 1 splits/bin). Our workers yield contested
+  beds (enemyCloserFactor) then starve — and starving_ only fires on pocket maps.
+- v423 = starving_ on ALL maps (one-line: drop the pocketMap_ gate). Combined
+  60%/70 mirror on the v263 base (main 63%, independent confirm 56%) — biggest
+  persistent win of the campaign, and it targets a REAL divergence not a mirror artifact.
+- v130 holding ~1690. If v423 finishes ~58%+ combined it ships as v131 — its
+  payoff shows on ladder, rollback = resubmit v263 again.

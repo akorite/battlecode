@@ -1480,3 +1480,40 @@ self-collision waste, overlaps the spawn-collision census lane;
 longest (champ-adjacent delivery) vs our diffuse perimeter deaths.
 If a feed lever is wanted: aim feeder deaths at the longest's
 neighborhood, not just "in the blob".
+
+## Per-unit forage decomposition r0-120 — top-5 (aAah/chadgdp/SSS/𓎼𓃭𓅱𓂋, 32 replays) vs Cognoscenti (30 m129 replays)
+Tooling: devin/lanes/forage.py. Pearl state reconstructed from TILE
+bed flags + tileChange hasPearl + pearlCountdown events; vision=cheb3.
+Per unit-round metrics:
+
+| metric | top-5 | their opponents | Cognoscenti |
+|---|---|---|---|
+| eats per 100 unit-rounds | 9.2 | 8.9 | **7.2** |
+| median head->nearest pearl | 3.0 | 3.0 | 3.0 |
+| pearl within vision (<=3) | 54% | 53% | 50% |
+| contested-target count | 2652 | 2978 | 1662 |
+| contest loser re-eats <=8r | 14% | 14% | 12% |
+| **eats on fresh respawns (<=15r)** | **89%** | 89% | **78%** |
+| **eater pre-positioned on bed at spawn** | **89%** | 89% | **78%** |
+
+(a) NOT proximity — identical median distance 3.0.
+(b) NOT vision — 54% vs 50%, a 4pp nudge at most.
+(c) NOT deconfliction — nobody has it: the 2nd-closest unit re-eats
+    within 8r only 14% (us 12%); contested losers just lose the race.
+    They actually contest MORE per unit (5.0% vs 4.1% of unit-rounds)
+    because they field ~30% more live units early.
+(d) THE DIFF: bed-camping. 89% of their eaten pearls are fresh
+    respawns taken by a unit already sitting on the bed vs our 78%
+    (and our fresh-vs-standing mix is 78/22 vs their 89/11 — we spend
+    transit chasing long-standing pearls, they harvest at spawn tick).
+    This is the +28%/unit intake edge measured here (9.2 vs 7.2
+    e/100ur; the quoted +73% was a different corpus but same sign).
+
+Mechanism for integrator: forage efficiency = respawn-timing coverage.
+Workers parked on pearl beds (esp. low-countdown beds) convert bed
+cycles into eats with zero transit. Our workers chase standing pearls
+(arrive late, contest, lose 12-14%). A "camp a bed that's counting
+down" job beats "walk to a live pearl" whenever the bed's countdown
+<= walk time to any standing pearl — the policy already tracks beds'
+countdowns (world.hpp maxCd/cdObs); the lever is TARGETING
+counting-down beds as first-class forage goals, not just live pearls.

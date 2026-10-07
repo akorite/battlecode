@@ -678,3 +678,25 @@ Claim checked: winners resplit parents every 16-17r vs our 22-24r (~30% producti
 - Queen farming is real (4.2 vs 1.9 splits/game) but our hide doctrine forbids it — a trade-off to revisit only if the elim-melee problem (queen dead r67 med in elims) is ever solved for keeping her len>=4 while hidden is impossible by construction.
 
 Artifacts: `analysis/cadence_study.py` (committed), `/tmp/cadence_rows.json` (per-interval rows), `/tmp/battles_meta.json` (match->team map). No game slots used.
+
+## Sonar-gossip forensics (ciallo_replays + cursey_replays)
+
+Claim checked: top teams run dense gossip (~200 pings/round) vs our ~21/round.
+
+**Data**: 50 replays pulled via public `/api/matches/{id}/replay` + `/battles/{id}` side metadata — 25 Ciallo～(1064) games, 25 CURSEYOUBAYLE(784) games (cursey's set doubles as a sample of its opponents: life is NP hard(30), Bot(11), 🔴🔵⚪️(880), f2p, DeepSeek-V4.1, Z-A(939), 1234, Vodyanitsa). Analyzers: `analysis/sonar_study.py`, `analysis/sonar_study2.py`. Engine mechanics from `engine/src/sonar.cc` + `protocol.cc`: `SONAR <dir> <u64>` per direction each turn (≤4/turn, a *free* action alongside move/split); ray hits the FIRST dragon in line and drops the value into its `mSonarInbox`.
+
+**Correction to the premise**: the 41-114k/game is one side's traffic, not both. Gossip is a per-team protocol choice with a sharp bimodal split — sides run either ~4.0 pings/alive-dragon/round or ~0.2-1.0. Measured gossipers: Ciallo (3.7-4.0), life is NP hard (4.0), Bot (3.9), 🔴🔵⚪️, f2p, DeepSeek, Z-A (~3), 1234 — plus partial coverage CURSEYOUBAYLE (1.0-3.0, cv 0.3-0.9) and Vodyanitsa (exactly 1.0/dragon/round, cv 0.04 — a different, forward-only beacon protocol). Win share of gossip sides in this sample: 41/69 — non-decisive at this elo band (~1700), not a top-team-only trait.
+
+**Q1 — constant beacon mesh, not event-driven.** Gossip sides hold a median **4.00 pings/dragon/round = one ping per direction, every dragon, every round** (cv 0.09, sender coverage 1.00 — 100% of dragons that ever live participate). Volume rises/falls only with alive count (per-round totals 0-300 ∝ army). Per-alive rate does lift +23% within 2r of split/death rounds (3.51 vs 2.85) — mild event-responsiveness at most, mostly compositional. Direction mix is exactly uniform (25% each). The queen generates only ~2.4% of ping events — it's a worker mesh, not a queen broadcast (but see value structure below).
+
+**Q2 — no movement signature: falsified as a "go to X" mechanism.** Three independent tests on ally-ping receivers vs matched controls: (i) Δdist-to-food over +10r −0.11 vs −0.13 (null); (ii) post-burst swarm spread r→r+5/10/15 flat (16.2→16.4, tightening in only 5/23 games); (iii) Δdist-to-ping-origin +2.59 raw but **+3.87 vs +4.47 after matching starting distance — pure mean reversion**. No lag in the 5-15r window shows receivers behaving differently. Whatever the values carry, receivers don't visibly move on it — consistent with a world-model/state sync that informs local decisions, not a rally channel.
+
+**Q3 — uniform, not hubbed.** Top-5 origin cells carry only ~3.4% of pings (uniform expectation ~0.5%); no relay hubs — every dragon is an equal broadcaster, traffic follows swarm density.
+
+**Value format (decoded structurally, not semantically)**: 64-bit = `nonce/hash16 | tag8 | originatorId8 | payload32`. Bits 32-39 = originator dragon id — 82% of (sender,value) pairs match the actual sender, and the mismatches are verbatim relays carrying the ORIGINATOR's id. Flooding: med top value re-pinged ~800× by ~50+ distinct senders over ~15r each; ~330 values/game carried by ≥3 senders. Origination is continuous (first-seen spread evenly over rounds, peak mid-game). Heavy originators: in one game dragon 0 (the queen) originated **12,818 distinct values** — i.e., the queen is the biggest CONTENT source; workers relay it (queen→swarm downlink via worker mesh). Leading hi16 looks like a checksum/signature — implies messages are integrity-protected so enemies can't inject spoofed state.
+
+**hitKind mix** (gossip sides): kelp 63% / ally+allyHead 34% / enemy ~3% — a third of rays deliver to an ally inbox; walls eat most of the rest.
+
+**What this means for us**: our ~21/round is ~2 orders of magnitude below a full mesh (~4/dragon/round → at 30 alive that's ~120/r). Sonar is a free extra action per turn — the cost is only implementation. A minimal replicable version: every dragon pings all 4 directions each turn with `(id<<32)|payload` + checksum, and each inbox value is re-pinged verbatim for a TTL (~10-15r) — that alone reproduces the flood topology. The missing piece is payload semantics (positions of pearls? enemy sightings? election state?) — receivers don't show overt pull, so the value is in a shared world-model, likely feeding targeting/consolidation decisions we can't observe from heads alone.
+
+Artifacts: `analysis/sonar_study{,2}.py` (committed), `ciallo_replays/` + `cursey_replays/` kept locally (50 games), `/tmp/battles_meta_sonar.json`. Zero game slots used.

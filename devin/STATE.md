@@ -1065,3 +1065,14 @@ Surprise: gains concentrate on SMALL maps (55.7%) — 10-tile leash
 covered half of small boards. BIG 52.1%.
 Boards: v401 centroid-leash 55.5%/119 combined; v402 combo 55.9%/34;
 v403 starving-unleash early. Next ship = composite of whatever holds.
+
+## v130 ROLLBACK (Oct 7 ~20:00 UTC)
+- v129 ladder: 5-10 (33%), Elo 1610->1496 in ~1h. ROLLED BACK: resubmitted abyss_v263 as v130.
+- Ladder audit: v122 (v263) 157-100 = 61.1% real — best ever; v123-129 combined ~46%.
+- THE GATE WAS MEASURING MIRROR DELTAS, NOT LADDER STRENGTH. All post-v122 "verified" gains
+  were against a drifting-weaker base.
+- v407-vs-v263 mirror: v407 still wins ~53% — lineage not weaker in mirror, just not better
+  vs real opponents (self-play overfit).
+- Protocol change: candidates now gate vs abyss_v263 AND the panel, not just parent.
+- In flight: v419 = v263+bedcamp port, v420 = v263+leash(r150) port.
+- Real date ~Oct 7; snapshot Oct 10 = ~3 days.

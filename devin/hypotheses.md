@@ -385,3 +385,13 @@ Elo 1610->1496 in ~1h under v129 (2-8). ROLLBACK: resubmitted v263 as v130.
 New protocol: candidate must ALSO beat abyss_v263 (best-ladder build), not just
 live. Experiment running: v407 vs v263 head-to-head.
 Also: real date ~Oct 7 — qualifier Oct 10 is ~3 days out.
+
+## Oct 7 late — mechanism portability falsified twice
+- v420 (leash r>=150 on v263): 43.5%/23 — the leash HURTS on the v263 base.
+- v419 (bed-camp on v263): 45.7%/46 — camp doesn't transfer either.
+- Conclusion: mechanisms are CONTEXT-BOUND — they won mirror gates inside their own
+  lineage's coupled system, not as standalone doctrines.
+- v130 (rollback to v263 code): Elo recovered 1496 -> ~1692 in ~2h. v122's 61% real
+  record re-confirming. v130 stays live unless a candidate beats BOTH v263 AND v407.
+- v421 fired: v407 + v263 queen doctrine (hideMinTiles 600, unhide 390) — tests whether
+  the universal-hide is what breaks transfer to real opponents.

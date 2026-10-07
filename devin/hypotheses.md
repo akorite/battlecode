@@ -329,3 +329,16 @@ VERDICTS:
 - v263 vs v376 head-to-head: 45%/30 — lineage did NOT drift;
   v263's 61% record was a weaker-field artifact.
 IN FLIGHT: v390 = v386 + v385 composite, 176g vs v376.
+
+## 2026-10-07 ~15:30Z verdicts
+- v390 composite (corridor+champhome): 51.2%/80 — champhome drags it.
+- v385 champ-home solo: 50.0%/66 DEAD.
+- v386 corridor alone: 56.2%/80 looked positive; on INDEPENDENT seeds
+  (v386b s5-8): 50.0%/170. Combined 126/250 = 50.4% — SEED LUCK, wash.
+- v391 heardEnemy reach6/w2: 46.4%/69 DEAD (over-flee costs forage).
+LESSON: corridor economy port did NOT transfer — our len<=3 units
+enter corridors but don't convert the income to wins (they die at
+tips dropping pearls, but our swarm lacks the len-1 sweeper density
+winners field to collect them). Seed-1-4 positivity was luck.
+STATUS: ~120 variants on v376 lineage, 10 consecutive fails/washes.
+Forensic-port vein exhausted this round. Elo ~1643 stable.

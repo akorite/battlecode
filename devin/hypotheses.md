@@ -549,3 +549,7 @@ Escort-diag was bundled in v445 — delta not isolated.
 - v463 pawn-donation (len-2 suicide near len>=4 ally): DEAD — elim 57.8% < control; drops not consumed (no anchored champ nearby), net -1 per death.
 - v464/v465 champ-bed-anchor: BOTH DEAD (37.5%) — walking the champ to a bed cluster or anchoring there pulls her out of position; the anchor-at-head choice is load-bearing.
 - v462 feedBedStep: WINNER tracking — 60.8%/74 big maps (feed deaths step onto adjacent spent beds: body drop + freed respawn). Full-map confirm + v466 NC>=900 gate running. Ships if confirm holds.
+- v466 NC>=900-gated feedBedStep: DEAD (48.6%/74) — the big-map edge did not replicate off the dedicated seed set; seed luck.
+- v462 full: DEAD (50.9%/116).
+- v467 stub-churn (lane-corrected recipe: len-2 on/beside bed + ally<=2 + units>=45 + mod-3 throttle, wall/self/nva ram): elim 66.2%/80 vs v376 control 62.7% — VERIFIED elim-class gain (weakhold 16/16, TD 13/16). Mirror 51.3%/76. SHIPPED as v135.
+- v468 churn+bedStep composite: bedStep dilutes (elim 63.8%/47 < v467's 66.2%). Dropped bedStep from ship.

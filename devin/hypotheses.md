@@ -557,3 +557,8 @@ Escort-diag was bundled in v445 — delta not isolated.
 - Churn ablations vs v376 elim: no-bed (v470) 70.6%/68 = BEST; body-channel (v469) 67.9%/56; max-churn composite (v471: no-bed+units35+mod2+body) 63.6%/33 + mirror 50% — over-churning rots drops. Bed gate unnecessary; consumer-proximity is the causal piece.
 - v468 churn+feedBedStep: elim 60%/80 — feedBedStep confirmed dead second time.
 - v470 SHIPPED as v136 (one-param relaxation of v135: pawn dies anywhere near ally<=2).
+- Churn axes resolved: len-3 (v474) 69.6%, consumer<=3 (v475) 68.0%, body-ram (v472) 61.5%, churnFrom30 (v473) 63.2% — all below v470's 70.6%. Shipped recipe optimal.
+- v470 vs v449 on elim maps: 50%/18 — parity vs own strong build (v449 also strong there).
+- v476 churn-through-feed-window (far pawns recycle when champ feed unreachable): elim 71.9%/32, mirror 50%/26. SHIPPED as v137.
+- v136 ladder: 53%/30 early, Elo 1677 climbing — churn works on ladder.
+- FREEZE Oct 9 06:00 UTC (~11h). Pick = v137 live unless record craters <40%; rollback = resubmit abyss_v447 (v133, 57% record).

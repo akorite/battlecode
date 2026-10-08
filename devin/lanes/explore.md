@@ -333,3 +333,14 @@ Pulled newest games for aAah/FtM/chad/egypt-team/devtest/larp/Cultery/horse/WeHa
 **Why ours lags — gates in trySplit (abyss_v299/policy.hpp:1922):** swarmSplitLen=4 already matches their shape, but we veto on: bestMove.eat for non-workers (eat-turn can't split), Job::Attack hunts, hasRoomyMove for BOTH halves (dense-leash v299 makes this fail more), enemy head ≤1, and the growRound=300/feedRound stop-gates. None of these are per-dragon cooldowns — our lower volume means fewer dragons are at split-eligible length in more rounds, i.e. a throughput problem (their swarm eats more → regrows to 4 faster → splits again). Cadence med 1r for them = children/lineages splitting back-to-back across the swarm.
 
 **Lever read:** don't tune child size — copy the RATE. ~77 splits/side by r120 needs parents regrowing len2→4 every ~2 rounds (2 eats), which is a pearl-density requirement, not a param. If we want the same count, the constraint to relax is the eat-turn veto + roomy-move strictness, and the funnel is where those lost children matter (alive@50, then dc450 for totalLength).
+
+## TD/Islands death-location check (v131 losses, 12 replays)
+
+Task: do our units die at contested bed mouths (contest-foraging into kills) or home/starved?
+Note: pearl-carrying tiles cover ~40% of TD / ~35% of Islands — no discrete bed-mouths exist on these maps; answer rests on spawn-distance + death reason.
+
+**Tower Defense (6g, 4L): US deaths n=101 — 73% within 15 of own spawn; 60% congestion (hitSelf 42 + hitOtherBody 19), h2h 40.** OPP died 434 (4.3x) mostly ≤15 too but with nva 96 — they churn at home 4x and still win 4/6 (volume recycling). → **home-congestion/starvation signature, NOT contest kills.** Consistent with m1390401's eaten 23v680.
+
+**Islands (6g, 4L): mixed.** US deaths 37% at >20 from spawn, h2h 54% + nva 32% — real far-field combat exists here. OPP dies even farther out (48% >20). → contest pressure contributes on Islands, but nva+self-inflicted still ~42% combined.
+
+Verdict: TD = starvation/home congestion (fix = contest only when outnumbering locally won't help TD; the deficit is production/consumption). Islands = mixed combat+attrition (local-numbers gating has more to give there).

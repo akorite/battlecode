@@ -536,3 +536,8 @@ Escort-diag was bundled in v445 — delta not isolated.
 - v457 = openUntil 0 (kill forage-opening): elim mirror 47.2%/53 (dilemma 6/6 sweep, devil/trophy bleed), vs v376 real 55.1%/49 trophy 5/6. Conflicted — elim mirror artifact risk.
 - v456 = budMult 1.0 elim: DEAD (49.1%/116 mirror; vs-v376 testbed equal to control).
 - v134: 16-9 = 64% (tracking v133).
+- CONTROL BASELINE for elim reads: v449 vs v376 on small maps = 62.7%/110. Any candidate-vs-v376 must EXCEED this, not just beat 50%.
+- v457 openUntil=0: DEAD — elim mirror 52.3% BUT vs-v376 53.1% << control 62.7%. open_ forage-opening is net-POSITIVE on elim maps (opposite of earlyecon lane's finding on the v120 base — mechanism depends on lineage).
+- v458 claimTTL+starving-bypass: mirror 49.4%/77 (eaten -16%), vs-v376 61.8%/34 ≈ control — neutral. Likely dead.
+- v460 heard-claims-don't-veto: mirror 56.2%/32 tracking; vs-v376 testbed fired.
+- v134: 16-14 stalled (0-5 waddledee upset). v263-era record 61% still the best single-sub record ever.

@@ -477,3 +477,34 @@ v437 crumb-ban == v436 (open_ maze-vetoed on TD: kelp 0.71>0.22, NC150>200)
 | v438 dash-gate WORSE (deep pushes overextend, sealed s700-A).
 
 Param/policy space exhausted on v263 lineage. HOLD v131 through snapshot.
+
+## Cycle 12 (Oct 8-9, pre-freeze): bracket forensics + divestiture mechanism
+
+BRACKET (tournaments?tab=qualifier): seed 98 @1664 → R1 Error418(1298)
+→ R2 3.14159265/π(314, ~2044) → R3 Sabotage-d(46, ~2214) → R16 ~seed7-10.
+META across bracket tier: all three = single-champ dominance (longest 5-6x
+2nd) + early-ram queen (dies h2h @11-61 in EVERY elim loss) + massive churn
+(260-410 deaths/game). π extra-weak: noValidAction 45% — self-jams corridors;
+starves out vs aggressive contest (dev test 1 swept them 0-6, eat ratios
+0.25-0.5). Counter = contested-mouth pressure + queen-survival opening —
+exactly the v441 mechanism class.
+
+LANE VERDICTS (all 4 reported):
+- pocket opening-doctrine: r1 opener already optimal; post-opener cadence
+  gap is cycle-time (they re-split 2-4x faster); NO contest asymmetry —
+  eCF 0.85 matches field (explains v444 eCF1.0 wash: 50%/26).
+- explore combat: h2h len-discipline already matches (92-94%); escorts sit
+  on (±1,±1) diagonals not orthogonal; 3+-step paths 2.4x our rate; torus
+  not weaponized.
+- autarky conveyor: feeder suicides ambient all-game (d2 spike = die-beside
+  -head); capture is swarm-vacuum not point-to-champ; NEW mechanism —
+  shed-all divestiture: 6/22 bell games, parent keeps 2 births 28-53 champ.
+- earlyecon cadence: era2 resplit 25r vs their 8r (cycle time again).
+
+v441 = starveLocal 2.5 (v131's contested-band completion): mirror 56.0%/116
+tracking; vs-v376 testbed 56.2%/16. v442 (4.0) over-fires 48.8%. v444
+(+eCF1.0) neutral 50%. v439 move-cost engine fix wash 52.9%/170 — confirms
+co-adapted base. v440 feedRadius16 dead.
+v445 = v441 + divestiture-shed (r430+, longest dragon keeps-2 births all
+→ mobile champ + heading unlock) + diagonal-escort bias (wEscortDiag .35).
+Board vs v441: 9 maps × 8 seeds × 2 seats = 144g.

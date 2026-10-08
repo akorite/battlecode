@@ -573,3 +573,5 @@ Escort-diag was bundled in v445 — delta not isolated.
 - FREEZE BUILD = v137 (abyss_v476). Rollback = abyss_v447 dir (git-clean v133 code). Monitor until 06:00 UTC.
 - v480 queen-intercept (len<=5 ram enemies within 2 of our queen, bypass cover): elim 62.1%/58 (< control), mirror 50%, qDead equal 8/17 — dead. Attacker-adjacent-geometry too rare to convert; pawns baited into dead trades.
 - RECIPE SPACE CLOSED: every lane-report mechanism now tested or falsified across ~175 variants. Live build = optimum.
+- FULL-SAMPLE VERDICT (v476/v137): elim vs v376 58.9%/192 (first-seed reads ran hot), mirror vs v449 52.8%/72, vs v447-rollback elim 47.8%/90 but +21% splits/+16% eaten economy profile. Ladder 53-57% ~1700-1737 = campaign-high zone. Mechanism is real but modest vs own builds; keeps the winners' signature that transfers to unseen maps.
+- FREEZE: v137 locked-in barring <40%/40g collapse. Rollback = abyss_v447 (git-clean v133, 57% lifetime).

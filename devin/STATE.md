@@ -44,3 +44,12 @@
 - Bracket: R1 Error 418 (~1297) -> R2 pi (~2043, starves under contest — churn counter) -> R3 Sabotage-d (~2150).
 - Post-freeze autoscrims same map pool (churn verified there). Qualifier Oct 10 6pm Sydney, best-of-7, unseen maps.
 - Boards: v476_vs_v449 finishing; any last finds go through elim+mir gate only.
+
+## 2026-10-08 ~20:30 UTC — FREEZE ~5.5h
+
+- **v137 = abyss_v476 LIVE**: Elo 1737, 60%/30 — campaign high. Churn verified on ladder.
+- All remaining axes dead: v477 victim-margin (elim parity 69, mirror 44), v478 bed-cycle positioning (64.5% < 71.9). Recipe is complete.
+- v476 vs v449 mirror final: 51.5%/68 — churn neutral-positive vs own build.
+- v476 elim combined: 65%/60 vs 62.7% control — positive, first-seed-read ran hot.
+- Rollback ready: workspace/abyss_v447 = v133 code, git-clean.
+- Freeze decision in devin/FREEZE.md. Box cleaned of stale boards; v476_elim_b finishing for docs.

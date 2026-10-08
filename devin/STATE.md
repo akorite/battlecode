@@ -1104,3 +1104,15 @@ v403 starving-unleash early. Next ship = composite of whatever holds.
 - Plan: hold v131 through the Oct 10 snapshot; ship only a clear winner.
   Worst ladder maps remain Islands/TD — starvation collapse reduced but
   not eliminated there.
+
+## Oct 8 ~04:45 UTC — HOLD v131
+
+v131 live: 25-23, Elo ~1700, rank ~124. Snapshot Oct 10 (~1.5-2d).
+Freeze ~24h out = ~Oct 9 evening UTC.
+
+TD/starvation class: root-caused (symmetric enclave seal race, forage
+flatline). 10 mechanisms tested on v376-testbed + mirror — all wash/dead.
+Lineage at ceiling. No ship candidate: all reads <53%.
+
+Last experiments closed: v438 killed (overextend), v435 52.0% wash,
+v432 52.8% wash. Boards free.

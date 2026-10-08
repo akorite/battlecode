@@ -458,3 +458,22 @@ Also: real date ~Oct 7 — qualifier Oct 10 is ~3 days out.
   (their units stand beside pearls ~7-10x more). Board v433_camp, seeds 400s.
 
 ## v430 starveLocal=1.5 confirm: DEAD 45.2%/42.
+
+## Cycle 11 (Oct 8): TD/Islands starvation class — 10 mechanisms, all wash/dead
+
+Root cause CONFIRMED via testbed (v424 vs v376 reproduces eaten-2v447):
+TD = symmetric 32x16, spawn enclaves exit single-corridor into shared
+central farm. Junction seal race ~r30 decides; loser starves in-enclave
+(forage flatline, not production flatline — units alive, eat ~0).
+
+Mirror-blindness doctrine: mirror boards cannot score starvation-class
+fixes (shared food in self-play). Validation = vs abyss_v376 on real
+failure seeds.
+
+Verdicts: v431 pace 36.4% DEAD | v432 dedup 52.8%/176 wash+ | v433 beds-
+as-pearls 44.7% DEAD | v434 starving-bedpark 42.4% DEAD | v435 hideMinUnits
+52.0%/125 wash | v436 open_-fp 57%/14 noise (s702 flip, s701 same) |
+v437 crumb-ban == v436 (open_ maze-vetoed on TD: kelp 0.71>0.22, NC150>200)
+| v438 dash-gate WORSE (deep pushes overextend, sealed s700-A).
+
+Param/policy space exhausted on v263 lineage. HOLD v131 through snapshot.

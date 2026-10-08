@@ -132,7 +132,7 @@ def run(a):
 
     def one(job):
         m, seed, side = job
-        na, nb = (a.cand, a.base) if side == 'A' else (a.base, a.cand)
+        na, nb = (pathlib.Path(a.cand).name, pathlib.Path(a.base).name) if side == 'A' else (pathlib.Path(a.base).name, pathlib.Path(a.cand).name)
         rp = out / 'replays' / f'{m}-s{seed}-{na}-{nb}.replay'
         t0 = time.time()
         p = subprocess.run([runners[side], str(MAPS / f'{m}.map'), '--name-a', na, '--name-b', nb,

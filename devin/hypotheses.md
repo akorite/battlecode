@@ -438,3 +438,23 @@ Also: real date ~Oct 7 — qualifier Oct 10 is ~3 days out.
   per-dragon myVisit[cell]=round on head, dest recently headed (<paceMemory=10)
   gets +2.0 danger; queen exempt (hide pacing is doctrine).
 - Board: v431_pace vs v424, all maps, seeds 200-203.
+
+## v431 dead 36.4%/33 — pace penalty kills melee
+- Re-explore bias (wPacePenalty 2.0 on recently-headed cells) wins open maps
+  (default 2/2, weakhold 2/2) but loses every elim/melee board (TD 0/2, stripes
+  0/2, maze 0/2, trauma 0/2, stronghold 0/2, portals 0/2). Avoiding revisits
+  prevents re-engagement in fights. Portability falsified again.
+
+## v432 = starving-pull dedup (testing)
+- Starving block pulls ALL workers to the same nearest unseen tile (global
+  min) — the TD home pile-up mechanism (73% deaths ≤15 of spawn, 60%
+  self-congestion). Each unit now min-hash-picks its own unseen target
+  (h = c2*2654435761 ^ id*2246822519, argmin). Board v432_dedup, seeds 300s.
+
+## v433 = park-and-crop countdown value (testing)
+- Soon-respawn beds (cd<=8) score as live pearls at walking distance
+  (0.9*gp(m) not gp(max(m,cd+1))): waiting is free when idle. friendDist
+  yield + id-tiebreak parks ~1 worker per bed. Targets the adjN gap
+  (their units stand beside pearls ~7-10x more). Board v433_camp, seeds 400s.
+
+## v430 starveLocal=1.5 confirm: DEAD 45.2%/42.

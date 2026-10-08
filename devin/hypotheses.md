@@ -568,3 +568,6 @@ Escort-diag was bundled in v445 — delta not isolated.
 - v477 victim-margin DEAD: elim 69.0%/42 (parity w/ v476 71.9), mirror 44%/25. Equal-ram gate removes trades that were net-fine — mutual kill also clears their unit pre-recycle. Autarky 'children die h2h' asymmetry isn't exploitable via tradeOk margin.
 - v478 bed-cycle positioning (on-bed die unthrottled + adjacent-bed step first): elim tracking 44%/9 early — bed-walk may stall churn tempo. Pending.
 - v137 LADDER: 57%/30, Elo 1734 — campaign high. Churn verified on ladder, not just testbed.
+- v479 onBed-unthrottled (on-bed pawns die instantly, no walk-step): elim 66.7%/27, mirror 50%/22 — parity with v476, no gain. DEAD. Recipe complete.
+- v476_elim_b (fresh seeds 16+): 59.2%/71 — combined 63.1%/103 vs control 62.7% — positive but thin on larger sample; first-seed read ran hot. Mirror vs v449 51.5%/68 + ladder 56-60% are the stronger evidence.
+- FREEZE BUILD = v137 (abyss_v476). Rollback = abyss_v447 dir (git-clean v133 code). Monitor until 06:00 UTC.

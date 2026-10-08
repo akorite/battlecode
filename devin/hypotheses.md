@@ -508,3 +508,18 @@ co-adapted base. v440 feedRadius16 dead.
 v445 = v441 + divestiture-shed (r430+, longest dragon keeps-2 births all
 → mobile champ + heading unlock) + diagonal-escort bias (wEscortDiag .35).
 Board vs v441: 9 maps × 8 seeds × 2 seats = 144g.
+
+v445 divestiture-shed: DEAD 41.4%/29 — mechanism backfired. Our longest
+@r430 ~14-18 (winners' 28-53); shedding keep-2 births a ~12-16 champ while
+the mirror's champ grows to 22-24 → we LOSE the longest key we would have
+won. Mechanism only pays at winner-scale bodies; doesn't apply at ours.
+Escort-diag was bundled in v445 — delta not isolated.
+
+## cycle 13 (final push, freeze Oct-9 06:00 UTC)
+- v447_vs_v263 FINAL: 46.9%/130 mirror — stack loses to base in self-play
+- v263_vs_v376 (real-opponent testbed): 56.1%/114 — v263 does NOT lose to real opponents either; earlier 44.7%/38 was noise
+- v447_vs_v376: 60.0%/80 → vs real opposition v447 ≈ +4pts over v263, mirror undersells contest stack as predicted
+- v449 (universal hide, hideMinTiles 600→0): 51.5%/66 tracking wash — small-map queen-survival adds nothing measurable
+- v448 donor-liquidation DEAD (50%/56): feeders never adjacent enough at len≤12 window
+- v133 LIVE: 13-7 ladder (65% early tracking)
+- Doctrine update: mirror-vs-mirror gates lose ALL contest/starvation signal; vs-v376 testbed is the representative check

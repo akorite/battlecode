@@ -34,3 +34,13 @@
 - Control methodology reminder: v449-vs-v376 small-map control = 62.7%/110 seeds 1-8; elim testbeds vs abyss_v376 seeds >=21.
 - Dead this window: v462 feedBedStep (twice: 50.9% full, 48.6% gated v466), v464/465 champ-bed-anchor, v461 fightMinLen, v463 pawn-donation-v1, v471 max-churn.
 - Freeze: Oct 9 06:00 UTC (~5d). Freeze pick = best verified live build.
+
+## 2026-10-08 ~18:20 UTC — FREEZE ~11.7h (Oct 9 06:00 UTC)
+
+- **v137 LIVE (building)** = abyss_v476 = v136 + churn through feed window. elim 71.9%/32, mirror 50%/26.
+- v136 record: 53%/30 early, Elo 1677 — churn verified on ladder.
+- All churn axes dead: len-3 69.6%, consumer<=3 68.0%, body-ram 61.5%, from30 63.2%, max-churn 63.6%. v470/v476 recipe is the optimum.
+- FREEZE DECISION: v137 stays unless record <40% over >=40 games; fallback resubmit abyss_v447 (v133, 57%) — dir verified intact.
+- Bracket: R1 Error 418 (~1297) -> R2 pi (~2043, starves under contest — churn counter) -> R3 Sabotage-d (~2150).
+- Post-freeze autoscrims same map pool (churn verified there). Qualifier Oct 10 6pm Sydney, best-of-7, unseen maps.
+- Boards: v476_vs_v449 finishing; any last finds go through elim+mir gate only.

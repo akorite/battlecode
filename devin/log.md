@@ -156,3 +156,4 @@ was mislabeled. v108's gate actually ran (v108, cf) everywhere: honest read =
 explore lane: v299 mechanism audit — -21% congestion deaths real, recycle+cover falsified; funnel bleed persists
 explore lane: top-team queen forensics 234g — queens bud len-2 children, hover ~10 cells, 72% die<r200 by h2h; qEnd>=17 banks only 38% of bells wins
 explore lane: opening-split forensics — winners split at len4->2 same shape as us but 77 vs our 43/side r<=120; the lever is rate+cadence not child size
+explore lane: combat mechanics forensics — winners' 3+-step moves 2.4x ours, hunt-when-winning +58%; h2h len gate + wraps already match

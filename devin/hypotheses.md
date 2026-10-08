@@ -523,3 +523,6 @@ Escort-diag was bundled in v445 — delta not isolated.
 - v448 donor-liquidation DEAD (50%/56): feeders never adjacent enough at len≤12 window
 - v133 LIVE: 13-7 ladder (65% early tracking)
 - Doctrine update: mirror-vs-mirror gates lose ALL contest/starvation signal; vs-v376 testbed is the representative check
+- v453 queen anti-box (wQueenBox spacing while hiding): DEAD 44.8%/87, queen-dead c71/b61 — spacing penalty pushed her off cover into open-field rams. Boxing is real (ladder replays: ~33% of queen deaths hitSelf/hitOtherBody while cornered by own swarm) but spacing remedy inverts it.
+- v134 (universal hide) live: 7-3 early (70%)
+- v447_openmaps FINAL: 34.7%/95 — v447 loses ~35% on open-farm class vs v263 in MIRROR only; vs-v376 triangular check (v447 60% vs v263 56%) says v447 still better vs real opposition. Open-map bleed = mirror artifact.

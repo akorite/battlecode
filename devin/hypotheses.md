@@ -562,3 +562,6 @@ Escort-diag was bundled in v445 — delta not isolated.
 - v476 churn-through-feed-window (far pawns recycle when champ feed unreachable): elim 71.9%/32, mirror 50%/26. SHIPPED as v137.
 - v136 ladder: 53%/30 early, Elo 1677 climbing — churn works on ladder.
 - FREEZE Oct 9 06:00 UTC (~11h). Pick = v137 live unless record craters <40%; rollback = resubmit abyss_v447 (v133, 57% record).
+- v477 elim-class victim-margin (tradeOk requires enemyLen>=myLen+2 on NC<=900): elim 70.4%/27 ~ v476 parity; mirror vs v476 tracking <50% early — gate doesn't add on elim, may cost mirror. Pending.
+- ENGINE AUDIT (actions.cc): Kill DOES drop ceil(len/2) pearls on body segments 0,2,4 (lane 'bodies drop nothing' claim was wrong — drops on head cell get eaten fast, look like 'no drop'). h2h kills victim THEN rammer. Step onto ANY occupied cell (ally or enemy body) = hitOtherBody death for mover — no team check. mustPayForStep pops tail for steps 2+ (len-2 cant pay = nva death = chfeed mechanism). Eating pearl = tail kept (+1 len).
+- Lane reports closed: claimTTL v458 neutral (61.8% vs control); opening_cadence resplit-rate parity confirmed (worker 6-7r both) — gap is first-split eligibility (218 vs 87 reach len-4); hitOtherBody ally deaths 17v3 = congestion geometry not fixable via gates tested.

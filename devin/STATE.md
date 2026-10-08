@@ -1093,3 +1093,14 @@ v403 starving-unleash early. Next ship = composite of whatever holds.
 - Watch v131 first ~15-20 games vs Elo band; rollback if clearly losing.
 - All ports of new-lineage mechanisms to v263 failed; ladder-derived
   mechanisms (contest/starve) are the only family still paying.
+
+## Oct 8 ~10:00
+- v131 (starveall+contest) LIVE and WINNING: 15-12 on ladder, 53% vs >1750
+  opponents, Elo 1695 (near 1724 peak). First mechanism derived from real
+  replays that held on ladder.
+- v425 qscan 45.3%/75 dead, v426 camp 36.8% dead (3rd camp fail), v427 foodnet
+  48.5% dead, v428 boxed-child 50.0% dead. ~140 variants on v263: param/param
+  space is at its ceiling; every perturbation converges to ~50%.
+- Plan: hold v131 through the Oct 10 snapshot; ship only a clear winner.
+  Worst ladder maps remain Islands/TD — starvation collapse reduced but
+  not eliminated there.

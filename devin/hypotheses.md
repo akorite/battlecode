@@ -545,3 +545,7 @@ Escort-diag was bundled in v445 — delta not isolated.
 - autarky_elim: children die h2h <=15r at 47-67% vs winners' 3-21% — our pawns feed the ENEMY. Winners' pawns die hitWall at adj<=2 of own swarm (drops feed them). hitOtherBody 17v3. First-split eligibility 87 vs 218 reach len-4.
 - opening_cadence: gap opens r20-60 via first-split eligibility, not cadence (resplit 6-7r parity). openUntil=0 REVERSED on v449 lineage — keep 48.
 - v461 (fightMinLen=4: len<4 workers don't initiate h2h anywhere incl sprintTrade): boards fired vs v449 mirror + vs v376 elim testbed. Control: v449 beats v376 62.7% on small maps — must EXCEED to ship.
+- v461 fightMinLen=4: DEAD — mirror 41.7%, elim vs-v376 55.1% < 62.7% control. Child h2h trades were net-fair (tradeOk already gates); vetoing loses wars.
+- v463 pawn-donation (len-2 suicide near len>=4 ally): DEAD — elim 57.8% < control; drops not consumed (no anchored champ nearby), net -1 per death.
+- v464/v465 champ-bed-anchor: BOTH DEAD (37.5%) — walking the champ to a bed cluster or anchoring there pulls her out of position; the anchor-at-head choice is load-bearing.
+- v462 feedBedStep: WINNER tracking — 60.8%/74 big maps (feed deaths step onto adjacent spent beds: body drop + freed respawn). Full-map confirm + v466 NC>=900 gate running. Ships if confirm holds.

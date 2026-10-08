@@ -526,3 +526,5 @@ Escort-diag was bundled in v445 — delta not isolated.
 - v453 queen anti-box (wQueenBox spacing while hiding): DEAD 44.8%/87, queen-dead c71/b61 — spacing penalty pushed her off cover into open-field rams. Boxing is real (ladder replays: ~33% of queen deaths hitSelf/hitOtherBody while cornered by own swarm) but spacing remedy inverts it.
 - v134 (universal hide) live: 7-3 early (70%)
 - v447_openmaps FINAL: 34.7%/95 — v447 loses ~35% on open-farm class vs v263 in MIRROR only; vs-v376 triangular check (v447 60% vs v263 56%) says v447 still better vs real opposition. Open-map bleed = mirror artifact.
+- v454 three-step forage (paid 3rd step for intake tempo): DEAD HARD 32.4%/74 — eaten -10%, splits -9%. Tempo theory falsified: paid segments cost more than arrival speed gains. The 2.4x multi-step gap in winner replays = symptom of longer dragons, not cause.
+- v134 live 7-3. Freeze build decision pending v134's ~50-game record vs v133's 64%.

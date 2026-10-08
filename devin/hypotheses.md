@@ -553,3 +553,7 @@ Escort-diag was bundled in v445 — delta not isolated.
 - v462 full: DEAD (50.9%/116).
 - v467 stub-churn (lane-corrected recipe: len-2 on/beside bed + ally<=2 + units>=45 + mod-3 throttle, wall/self/nva ram): elim 66.2%/80 vs v376 control 62.7% — VERIFIED elim-class gain (weakhold 16/16, TD 13/16). Mirror 51.3%/76. SHIPPED as v135.
 - v468 churn+bedStep composite: bedStep dilutes (elim 63.8%/47 < v467's 66.2%). Dropped bedStep from ship.
+- v135 (abyss_v467) stub-churn shipped: elim 66.2%/80 vs control 62.7% (+4% on shared maps).
+- Churn ablations vs v376 elim: no-bed (v470) 70.6%/68 = BEST; body-channel (v469) 67.9%/56; max-churn composite (v471: no-bed+units35+mod2+body) 63.6%/33 + mirror 50% — over-churning rots drops. Bed gate unnecessary; consumer-proximity is the causal piece.
+- v468 churn+feedBedStep: elim 60%/80 — feedBedStep confirmed dead second time.
+- v470 SHIPPED as v136 (one-param relaxation of v135: pawn dies anywhere near ally<=2).

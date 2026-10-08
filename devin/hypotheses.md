@@ -541,3 +541,7 @@ Escort-diag was bundled in v445 — delta not isolated.
 - v458 claimTTL+starving-bypass: mirror 49.4%/77 (eaten -16%), vs-v376 61.8%/34 ≈ control — neutral. Likely dead.
 - v460 heard-claims-don't-veto: mirror 56.2%/32 tracking; vs-v376 testbed fired.
 - v134: 16-14 stalled (0-5 waddledee upset). v263-era record 61% still the best single-sub record ever.
+- ENGINE FACT (actions.cc Kill): dead dragons drop ceil(len/2) pearls on alternate body cells. Bodies DO drop — wall_churn's "bodies drop nothing" is wrong. Beds: occupancy blocks the countdown-0 spawn (pearls.cc TrySpawnPearl) — dying ON a bed drops the pearl AND frees the +4r respawn.
+- autarky_elim: children die h2h <=15r at 47-67% vs winners' 3-21% — our pawns feed the ENEMY. Winners' pawns die hitWall at adj<=2 of own swarm (drops feed them). hitOtherBody 17v3. First-split eligibility 87 vs 218 reach len-4.
+- opening_cadence: gap opens r20-60 via first-split eligibility, not cadence (resplit 6-7r parity). openUntil=0 REVERSED on v449 lineage — keep 48.
+- v461 (fightMinLen=4: len<4 workers don't initiate h2h anywhere incl sprintTrade): boards fired vs v449 mirror + vs v376 elim testbed. Control: v449 beats v376 62.7% on small maps — must EXCEED to ship.

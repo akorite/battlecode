@@ -531,3 +531,8 @@ Escort-diag was bundled in v445 — delta not isolated.
 - v455 midFeed widen (r60, len<=7): DEAD FLAT 51.6%/128, eaten +1.6%, splits +0.2% — churn window already saturated.
 - v456 small-map budMult 1.0 (workers fight through breed phase, queen keeps 1.8): mirror 50%/40 neutral. vs v376 elim testbed: tracking +2.5pts vs v449 control at low n (69.2%/26 vs 66.7%/24). First real elim-class test design: small maps only vs REAL opponent, since mirror is structurally blind to fight-while-breeding.
 - v134 (LIVE): losses still elim-class; fresh replay shows Z-A out-splitting us 31v9 by r60 on Trophy via fight-while-breeding churn (247 hitWall suicides, 598/603 adj-eat conversion on Autarky).
+- CLAIM FORENSICS (pocket lane): 91.4% seen pearls never taken (ours) vs 34-45% (opp/top); 72.7% of pearls within cheb-2 of a friendly head rot 3+ rounds. Claim = pure distance, no TTL, growers claim, starving no bypass. Adjacent-drop conversion at parity 82%.
+- v458 = claimTTL 4 (standing pearls contestable) + starving-bypass: early 46.4%/28, eaten -27% — contested convergence may waste trips. Tracking.
+- v457 = openUntil 0 (kill forage-opening): elim mirror 47.2%/53 (dilemma 6/6 sweep, devil/trophy bleed), vs v376 real 55.1%/49 trophy 5/6. Conflicted — elim mirror artifact risk.
+- v456 = budMult 1.0 elim: DEAD (49.1%/116 mirror; vs-v376 testbed equal to control).
+- v134: 16-9 = 64% (tracking v133).

@@ -528,3 +528,6 @@ Escort-diag was bundled in v445 — delta not isolated.
 - v447_openmaps FINAL: 34.7%/95 — v447 loses ~35% on open-farm class vs v263 in MIRROR only; vs-v376 triangular check (v447 60% vs v263 56%) says v447 still better vs real opposition. Open-map bleed = mirror artifact.
 - v454 three-step forage (paid 3rd step for intake tempo): DEAD HARD 32.4%/74 — eaten -10%, splits -9%. Tempo theory falsified: paid segments cost more than arrival speed gains. The 2.4x multi-step gap in winner replays = symptom of longer dragons, not cause.
 - v134 live 7-3. Freeze build decision pending v134's ~50-game record vs v133's 64%.
+- v455 midFeed widen (r60, len<=7): DEAD FLAT 51.6%/128, eaten +1.6%, splits +0.2% — churn window already saturated.
+- v456 small-map budMult 1.0 (workers fight through breed phase, queen keeps 1.8): mirror 50%/40 neutral. vs v376 elim testbed: tracking +2.5pts vs v449 control at low n (69.2%/26 vs 66.7%/24). First real elim-class test design: small maps only vs REAL opponent, since mirror is structurally blind to fight-while-breeding.
+- v134 (LIVE): losses still elim-class; fresh replay shows Z-A out-splitting us 31v9 by r60 on Trophy via fight-while-breeding churn (247 hitWall suicides, 598/603 adj-eat conversion on Autarky).

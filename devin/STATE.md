@@ -53,3 +53,10 @@
 - v476 elim combined: 65%/60 vs 62.7% control — positive, first-seed-read ran hot.
 - Rollback ready: workspace/abyss_v447 = v133 code, git-clean.
 - Freeze decision in devin/FREEZE.md. Box cleaned of stale boards; v476_elim_b finishing for docs.
+
+## 2026-10-08 ~21:10 UTC — FREEZE ~8.9h
+
+- **v137 (abyss_v476) LIVE: Elo ~1758-1772, 63%/30 — new campaign high.** Cleared the 1721 ceiling.
+- Full-sample elim verdict 58.9%/192 (first reads ran hot); mirror vs v449 52.8%; economy signature +21%/+16% holds.
+- Recipe space closed (~175 variants). Rollback ready: abyss_v447.
+- Monitoring-only to 06:00 UTC freeze. Post-freeze autoscrims set seeds on same pool.

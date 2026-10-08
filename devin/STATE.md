@@ -1116,3 +1116,24 @@ Lineage at ceiling. No ship candidate: all reads <53%.
 
 Last experiments closed: v438 killed (overextend), v435 52.0% wash,
 v432 52.8% wash. Boards free.
+
+### 2026-10-08 ~07:00 UTC — final push, bracket decoded
+
+**Deadline**: submissions freeze Oct 9 ~06:00 UTC (~23h). Post-freeze
+autoscrims set seeds; qualifier Oct 10 on UNSEEN maps.
+
+**Bracket**: seed 98 @1664 → R1 Error418(1298) → R2 π/314(~2044) →
+R3 Sabotage-d(46,~2214) → R16 ~seed7-10 (WeHaveQuizzes@2352/Sponge@2319).
+
+**Opponent profiles (explore lane)**: all 3 = champ-dominant (5-6x 2nd) +
+early-ram queen (dies h2h @11-61 in every elim loss) + churn 260-410 d/g.
+π weakest vs contest (noValidAction 45%, starved 0-6 by dev test 1).
+Counter-class = contested pressure + queen-survival opening.
+
+**Ship pipeline**: v441 (starveLocal 2.5) mirror 56%/116 → if holds, ship;
+v445 = v441 + divestiture-shed (r430 longest keeps-2 births all — autarky
+finding, 6/22 winner games) + diagonal-escort bias → board vs v441.
+v444 eCF1.0 neutral (pocket census: no contest asymmetry vs field — drop
+the axis). v442 starveLocal4.0 dead. Ladder holds ~1664 organic.
+
+**Live = v131** (v263+starving-ungated+eCF0.85). Rollback = abyss_v263.

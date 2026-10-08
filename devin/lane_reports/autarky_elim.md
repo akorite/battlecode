@@ -5,6 +5,22 @@ Devil, Trauma), Z-A (1678: Trophy m1443065 elim@r74, Autarky m1443064),
 Git Gud (1543: Autarky), Average Individuals (1628: Trauma), Quantify (1563:
 weakhold). Analyzer: analysis/elim_opening.py. Windows: r0-80.
 
+## Mechanism verdict — ranked
+
+1. **Opening production gap (decider).** In the three true elims our swarm was
+   already 4v5 / 4v17 / 4v18 when the queen died; in the roundLimit losses the
+   deficit persists mid-game (5v31, 3v32, 1v27, 16v30). Winners make 3.5× the
+   children by r60-80 via the pawn-donation loop — everything else is
+   downstream of that.
+2. **Queen h2h death ~r50-80 (proximate trigger, not root cause).** True-elim
+   queen deaths: r19, r53, r77 — all hitHeadToHead, all while outnumbered
+   3-4×. She's rammed because there is no wall of workers around her, not
+   because she mis-positioned. (Opponent queens die early too — 😹/Z-A queens
+   at r10-100 — but their swarm already won the numbers war first.)
+3. **Contested intake (symptom, same direction).** Eaten 4× theirs from r20 on
+   — a consequence of unit count and pawn-recycling, not an independent cause:
+   our feeders get fewer pearls because we field fewer mouths and recycle none.
+
 ## The recipe: a pawn-donation loop, not melee skill
 
 **1. Production gap is the whole story — they make 3.5× the children.**

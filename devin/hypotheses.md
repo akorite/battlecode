@@ -571,3 +571,5 @@ Escort-diag was bundled in v445 — delta not isolated.
 - v479 onBed-unthrottled (on-bed pawns die instantly, no walk-step): elim 66.7%/27, mirror 50%/22 — parity with v476, no gain. DEAD. Recipe complete.
 - v476_elim_b (fresh seeds 16+): 59.2%/71 — combined 63.1%/103 vs control 62.7% — positive but thin on larger sample; first-seed read ran hot. Mirror vs v449 51.5%/68 + ladder 56-60% are the stronger evidence.
 - FREEZE BUILD = v137 (abyss_v476). Rollback = abyss_v447 dir (git-clean v133 code). Monitor until 06:00 UTC.
+- v480 queen-intercept (len<=5 ram enemies within 2 of our queen, bypass cover): elim 62.1%/58 (< control), mirror 50%, qDead equal 8/17 — dead. Attacker-adjacent-geometry too rare to convert; pawns baited into dead trades.
+- RECIPE SPACE CLOSED: every lane-report mechanism now tested or falsified across ~175 variants. Live build = optimum.

@@ -429,3 +429,12 @@ Also: real date ~Oct 7 — qualifier Oct 10 is ~3 days out.
 - v428 = v424 + boxed-child splits (small children born sealed still allowed in
   economy phase — churn babies): early 57%/14.
 - v131 ladder: 10-12 vs upward-matched field, ~par. Verdict at ~25 games.
+
+## v431 = BC_PACE re-explore bias (Oct 8 ~05:00)
+- Lane census (explore, devin/explore-modes @2c1e49f): TD deaths 73% within 15
+  of own spawn, 60% self-congestion (hitSelf 42/101 + hitOtherBody 19/101);
+  Islands 37% >20 tiles, 54% h2h — TD is home-orbit starvation, not contest.
+- Port of explore lane's pace149 (12-8/60% vs v149 base on old lineage):
+  per-dragon myVisit[cell]=round on head, dest recently headed (<paceMemory=10)
+  gets +2.0 danger; queen exempt (hide pacing is doctrine).
+- Board: v431_pace vs v424, all maps, seeds 200-203.

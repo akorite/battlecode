@@ -160,3 +160,4 @@ explore lane: combat mechanics forensics — winners' 3+-step moves 2.4x ours, h
 explore lane: bracket profiles 314/46/87 — all single-champ (5-6x) + queen h2h opens every elim loss; 314 nva-trapped, 46 early-ram queen, 87 congestion
 - wall_churn.md: winner conveyor = champ anchored on bed cluster, len-2 buds die on empty beds, +4r regrow eaten by champ (242/247 verified); bodies drop no pearls — our chfeed nva-deaths donate nothing
 - queenend_check.md: 42/42 bell games explained by (queenEnd,longest,total) lexicographic; queenEnd decides 62%, median winning qEnd 21.5, shorter-surviving-queen never wins (0/13)
+- L2_graze.md: queen-graze sweep on v481 — no variant improves; grazeFrom 250 locally optimal (200: 45%, 320: 46%), grazeLen 12/15 inert, grazeDist 5 neutral (49.5% @182g); + queenEnd census (62% of bell games decided by qEnd, med winning 21.5)

@@ -44,3 +44,19 @@ Last ship crashes / <40% over >=20 games -> `unswbc submit workspace/abyss_v447`
 - ACTIVE SUBMISSION: (fill at 05:30-05:45)
 - id: (fill)
 - sha256 of submitted bytes: (fill via `sha256sum` on dir or submission API)
+
+## FINAL RECORD (recorded 05:30 UTC)
+- Active submission: **v139, id=21679, rating ~1713** — abyss_v476 bytes (=v137 code:
+  contested-starvation band + no-bed stub churn + feed-window churn + forage opening).
+- Source: workspace/abyss_v476 (7 files).
+  main.cpp 6f7143b6bdec3026274e636e5e22c076
+  board.hpp 56ea60c2ab78015c4377236cfbef548c
+  common.hpp 01fb92373b045dba66faad46367c04d0
+  io.hpp 869ddc86fcdf1d1734b437706f7c4c4f
+  nav.hpp 455ac9e42479ba0c0288df04c256368b
+  policy.hpp 026532e0bfee9156dbe3083b5a0594e6
+  world.hpp fad0199926c2fd874c0ec56c1d6d334c
+- Submitted 04:21 UTC as rollback of v138 (dipped <40% on all-elite gauntlet).
+  Rating restored 1723 on activation (API-verified 04:22).
+- Safety: lineage passed 62-game crash sweep (25 maps, both seats, roundLimit games).
+- Last submission: v139 @ 04:21 UTC — before 05:30 deadline. Protocol satisfied.

@@ -4,13 +4,13 @@ Base: workspace/abyss_v481 (extracted from origin/devin/v120 @17b6747, churnNeed
 Variants: L4a churnMod 3→2, L4b churnMinUnits 45→40, L4c churnFrom 60→50.
 Gate: `kmatch --maps all --seeds 8 --seed-start 1 --jobs 14`, paired both-sides, tags L4a/b/c.
 
-## Scores (interim, gates still running)
+## Scores (final, gates stopped at ~80g — conclusions stable)
 
 | variant | n | score | decisive pairs |
 |---|---|---|---|
-| L4a (churnMod 2) | 76 | **48.7%** (37.0) | 1 pair lost (unsw s1) |
-| L4b (minUnits 40) | 76 | **50.0%** (38.0) | 0 |
-| L4c (from 50) | 70 | **50.0%** (35.0) | 0 |
+| L4a (churnMod 2) | 82 | **47.6%** (39.0) | 2 pair losses (unsw s1, schooltime s2) — KILLED |
+| L4b (minUnits 40) | 83 | **50.6%** (42.0) | 0 — no-op |
+| L4c (from 50) | 78 | **50.0%** (39.0) | 0 divergent games at all — dead param |
 
 Every other pair splits 1-1 — no rot, but also no lift. **All three are outcome-neutral.**
 

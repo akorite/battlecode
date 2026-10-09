@@ -575,3 +575,8 @@ Escort-diag was bundled in v445 — delta not isolated.
 - RECIPE SPACE CLOSED: every lane-report mechanism now tested or falsified across ~175 variants. Live build = optimum.
 - FULL-SAMPLE VERDICT (v476/v137): elim vs v376 58.9%/192 (first-seed reads ran hot), mirror vs v449 52.8%/72, vs v447-rollback elim 47.8%/90 but +21% splits/+16% eaten economy profile. Ladder 53-57% ~1700-1737 = campaign-high zone. Mechanism is real but modest vs own builds; keeps the winners' signature that transfers to unseen maps.
 - FREEZE: v137 locked-in barring <40%/40g collapse. Rollback = abyss_v447 (git-clean v133, 57% lifetime).
+
+### v481 (sub v138) — queen-graze — SHIPPED
+- Mechanism (from 25-loss replay census): bell losses route through queenEnd — we won `longest` in 4/11 bell losses but lost anyway (hidden len-2 queen vs their 11-15). Fix: hiding queen banks length to queenGrazeLen=10 while enemyDist>7 && r>=250; sheds excess into workers under threat (stash never wasted).
+- Gate vs v476: mirror 51%/109 (neutral+, mechanism is mirror-thin but banked length does flip self-play bells); elim vs v376 testbed 66%/111 (bar 62.7% — the elim-class read where queen deaths/decided games live).
+- Loss census (25 replays): 9/16 starve-class (eat <35%), 10/16 reached bell, qDead median 193 (4 early / 5 late). Opponent wall-churn 100-250/game confirmed; ours ~50 — relaxations stay falsified.

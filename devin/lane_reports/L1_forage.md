@@ -64,3 +64,21 @@ Per-unit distance-travelled per pearl eaten r0-60 (conversion efficiency per ste
 early-stub survival curve (deaths by age r0-60). Both measurable on existing replays.
 
 Boards run to completion for the final table; ETA ~1h.
+
+## FINAL (all boards complete — 704 games L1c, 79 games L1a+L1b)
+
+| variant | n | win% | verdict |
+|---|---|---|---|
+| L1a earlyBedW=0.6 | 39 | 43.6% | KILLED |
+| L1b earlyBudLen=5 | 40 | 47.5% | KILLED |
+| L1c earlyBudAlive=40 (2 boards, seeds 1-16) | 704 | **49.1%** | WASH — coin-flip clone of v476 |
+
+L1c combined mechanism deltas: eaten60 +0.0, splits60 +0.0, alive50 +0.3, eaten +7/game (noise).
+Per-map L1c: best maze/stronghold 53.1%, worst unsw 40.6%, no map above noise.
+
+## Conclusion
+
+No L1 variant moved the intake needle. Combined with the claim-veto wash, that is now
+**five production-side knobs at ~50%**: the r0-60 2× per-unit intake gap is not in
+bud window, split length, respawn-bed weighting, or claim contention. Left standing:
+conversion quality (distance-per-pearl, early-stub survival) — the pathing lane.

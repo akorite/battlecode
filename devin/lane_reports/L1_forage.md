@@ -34,3 +34,33 @@ L1a postmortem: countdown floor already existed (0.9*gp(max(m,cd+1))); +0.6 earl
 indistinguishable — respawning beds are not the intake bottleneck.
 
 Boards live: L1c_gate (seeds 1-8), L1c_gate2 (seeds 9-16). Final numbers when complete.
+
+## Near-final read (n=320/704)
+
+| board | n | win% | eaten60 Δ | splits60 Δ | alive50 Δ |
+|---|---|---|---|---|---|
+| L1c seeds 1-8 | 180 | 50.6% | -0.0 | -0.0 | +0.3 |
+| L1c seeds 9-16 | 140 | 48.6% | -0.2 | -0.1 | +0.4 |
+| **combined** | 320 | **49.7%** | ~0 | ~0 | +0.35 |
+
+L1c is washing too — a coin-flip clone of v476 on every intake metric. The wider breed window
+adds no early-unit advantage (early buds happen anyway) and no early-intake advantage.
+
+## Verdict (all three variants)
+
+**All three L1 mechanisms wash ~50%.** The 2× per-unit intake gap r0-60 does not live in:
+- respawn-bed target weighting (countdown floor already covered it),
+- early split threshold (len-5 buds are strictly worse — len-1 stumps),
+- breed-phase unit cap (bud window is not binding early).
+
+This is the fourth consecutive ~50% production-side knob (claim-veto TTL/bypass/exclusion + these).
+The intake gap survives unchanged under forced extra production — consistent with it being
+*pathing/conversion* quality, not volume: our stubs die or wander before converting
+(starvation@60 58% vs 42% under identical spawn geometry).
+
+## Suggested next probe (not a volume knob)
+
+Per-unit distance-travelled per pearl eaten r0-60 (conversion efficiency per step), and
+early-stub survival curve (deaths by age r0-60). Both measurable on existing replays.
+
+Boards run to completion for the final table; ETA ~1h.

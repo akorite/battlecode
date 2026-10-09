@@ -159,3 +159,4 @@ explore lane: opening-split forensics — winners split at len4->2 same shape as
 explore lane: combat mechanics forensics — winners' 3+-step moves 2.4x ours, hunt-when-winning +58%; h2h len gate + wraps already match
 explore lane: bracket profiles 314/46/87 — all single-champ (5-6x) + queen h2h opens every elim loss; 314 nva-trapped, 46 early-ram queen, 87 congestion
 - wall_churn.md: winner conveyor = champ anchored on bed cluster, len-2 buds die on empty beds, +4r regrow eaten by champ (242/247 verified); bodies drop no pearls — our chfeed nva-deaths donate nothing
+- queenend_check.md: 42/42 bell games explained by (queenEnd,longest,total) lexicographic; queenEnd decides 62%, median winning qEnd 21.5, shorter-surviving-queen never wins (0/13)

@@ -14,8 +14,8 @@ Seeds 8, seed-start 1, both seats.
 |---|---|---|---|---|
 | v482_elim | v482 hide300 | v376, elim set | **81/128 = 63.3% FINAL** | PASS vs v376 |
 | v482_mir | v482 hide300 | v476, all-maps | **176/352 = 50.0% FINAL** | flat — no self-regression |
-| vL3b_all | hideUntil 330 | v481, all-maps | 113/228 = 49.6% (running) | flat — no self-regression |
-| vL3c_all | hideUntil 360 | v481, all-maps | 110/220 = 50.0% (running) | flat — no self-regression |
+| vL3b_all | hideUntil 330 | v481, all-maps | **176/352 = 50.0% FINAL** | flat — no self-regression |
+| vL3c_all | hideUntil 360 | v481, all-maps | **176/352 = 50.0% FINAL** | flat — no self-regression |
 
 ## v482_elim per-map (final, n=16/map)
 
@@ -28,7 +28,12 @@ The elim-set gain is real — un-hiding early pays where boards are small and
 the queen becomes a forager sooner. devil (5/16) and trauma (7/16) remain
 the soft maps.
 
-L3b/L3c on the v481 lineage: dead-flat mirror boards so far (these measure
-regression vs near-self, not uplift vs v376). No bleed map on either.
-v482_mir FINAL at 50.0% — hideUntil300 is regression-free vs v476 across
-all 22 maps both seats.
+ALL FINAL. Per-map on the three mirror boards: every map within noise —
+max deviation anywhere is australia/unsw/big_empty/schooltime at 7/14 on
+one board each; every other cell 8/16 or 7/16.
+
+Interpretation: the whole L3 un-hide sweep (300/330/360) is regression-free
+vs near-self on all 22 maps both seats. The only uplift signal remains
+v482 vs v376 on the elim set (63.3%) — early un-hide pays on small boards
+and costs nothing elsewhere. Note L3b/L3c measured vs v481 (no elim board
+was requested for them); their elim-side value is untested by this sweep.

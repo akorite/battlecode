@@ -580,3 +580,35 @@ Escort-diag was bundled in v445 — delta not isolated.
 - Mechanism (from 25-loss replay census): bell losses route through queenEnd — we won `longest` in 4/11 bell losses but lost anyway (hidden len-2 queen vs their 11-15). Fix: hiding queen banks length to queenGrazeLen=10 while enemyDist>7 && r>=250; sheds excess into workers under threat (stash never wasted).
 - Gate vs v476: mirror 51%/109 (neutral+, mechanism is mirror-thin but banked length does flip self-play bells); elim vs v376 testbed 66%/111 (bar 62.7% — the elim-class read where queen deaths/decided games live).
 - Loss census (25 replays): 9/16 starve-class (eat <35%), 10/16 reached bell, qDead median 193 (4 early / 5 late). Opponent wall-churn 100-250/game confirmed; ours ~50 — relaxations stay falsified.
+
+## 2026-10-09 02:30 UTC — engine-source audit (actions.cc verified against replay)
+
+CONFIRMED FROM SOURCE:
+- Step() checks own-body occupancy BEFORE popping tail: stepping onto ANY own cell = HitSelf
+  always. A len-2 dragon can never reverse; the tail cell is a permanent wall. len<=3 cannot
+  even split-reverse (both halves need len>=2). This is the hidden-queen hitSelf/hitWall death
+  mechanism — cornered with tail-side as the only exit.
+- mustPayForStep kills via NoValidAction when mBody<=2 at stepIndex>0 — len-2 cannot multi-step.
+- Engine move order: facing set -> wall check -> SELF check -> other-dragon check (h2h mutual
+  kill only when landing exactly on their HEAD; body = HitOtherBody suicide) -> push_front ->
+  pearl? keep tail : pop_back -> paid? pop_back again.
+- reachOf (freeSteps+len-1) over-screens real enemy reach (freeSteps+len-2) by ~1 — safe.
+- fewExits vetoes {head}-only nooks correctly but counted head as an exit, so 1-wide corridors
+  pass by design. v484: for L_<=3 queen, head excluded from ex count — corridors read as
+  one-way nooks (she can't U-turn through them anyway).
+- L6 falsified for free: "vacated-tail step" is ILLEGAL (hitSelf pre-pop check). Dead.
+
+HYPOTHESES QUEUE (next cycles):
+H1 [L5] len-2 can't reverse -> enemy len-2/3 hunters approaching our queen are also
+   committed: their tail blocks their retreat. If our queen's flee keeps an enemy
+   hunter's tail facing a wall/corridor, the hunter can't disengage -> squad kills it.
+   Cheap: in flee/escape scoring prefer exits where any adjacent enemy len<=4 has its
+   tail toward a wall (they can't U-turn either). UNBUILT.
+H2 [L6] enemy sonar echoes: heardEnemies role!=1 gives enemy HEAD positions+len via
+   relay — a dedicated "echo-hunt" pull for champId+5/+6 squads toward freshest
+   role-0 enemy reports r150-300 = proactive interception. UNBUILT (assassin covers role-1).
+H3 [L4-variant] churn on THREATENED stubs: current churn excludes enemyDist<=2. A len-2
+   pawn about to be eaten anyway should prefer dying on a friendly head's adjacent cell
+   (drop feeds us) vs enemy reach. UNBUILT.
+H4 [L2-verified] queen-graze works (elim +66-67%, queenEnd mechanism confirmed vs real
+   opponents, mirror-blind 50%). Shipped v138.

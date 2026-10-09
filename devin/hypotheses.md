@@ -627,3 +627,8 @@ H4 [L2-verified] queen-graze works (elim +66-67%, queenEnd mechanism confirmed v
   Probable-improvement under relaxed rule; only live ship candidate for freeze.
 - All lanes closed: L1 all dead, L2 all neutral, L3 flat, L4a killed / L4b-c no-ops,
   v482 at-bar (63.3%), v483 45% killed, v484 59-62% killed.
+- v486 FINAL: elim 66.7%/153 = exactly v481's bar; mir 50%/78. WASH — contested-phase
+  churn reach (units25+len3) does not convert. Fails 55%/100g ship bar. NOT SHIPPED.
+- v485 FINAL: mir 51.7%/116. WASH.
+- FREEZE BUILD = v138 (abyss_v481): elim bar 66.7% reference, ladder 1750 (campaign high),
+  safety-passed 25 maps. All ~185 variants of the campaign resolved into this lineage.

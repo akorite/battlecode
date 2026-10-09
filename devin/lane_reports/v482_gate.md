@@ -27,10 +27,11 @@ unsw 1/2, weakhold 3/6. No bleed map.
 
 ## FINAL
 
-- **v482_elim: 81/128 = 63.3%** (weakhold 15/16, slithery 13/16, TD 12/16,
-  trophy 11/16, portals 10/16, islands 8/16, trauma 7/16, devil 5/16)
-- v482_mir: 79/162 = 48.8% at last tally (running to 352; flat throughout,
-  no bleed map)
+- **v482_elim: 81/128 = 63.3%** vs v376 (weakhold 15/16, slithery 13/16,
+  TD 12/16, trophy 11/16, portals 10/16, islands 8/16, trauma 7/16,
+  devil 5/16)
+- **v482_mir: 176/352 = 50.0%** vs v476 — literal coin flip, every map
+  within noise of 50% (max deviation islands 7/16, unsw 8/14).
 
-Verdict: hideUntil 300 passes vs v376 on the elim set at 63.3% with no
-self-vs-self regression on all-maps.
+Verdict: hideUntil 300 on v476 = +13.3pp vs v376 on the elim set, zero
+mirror regression. PASS.

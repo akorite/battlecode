@@ -13,9 +13,9 @@ Seeds 8, seed-start 1, both seats.
 | board | diff | base | tally | verdict |
 |---|---|---|---|---|
 | v482_elim | v482 hide300 | v376, elim set | **81/128 = 63.3% FINAL** | PASS vs v376 |
-| v482_mir | v482 hide300 | v476, all-maps | 79/162 = 48.8% (running) | flat — no self-regression |
-| vL3b_all | hideUntil 330 | v481, all-maps | 51/103 = 49.5% (running) | flat — no self-regression |
-| vL3c_all | hideUntil 360 | v481, all-maps | 18/37 = 48.6% (running) | flat — no self-regression |
+| v482_mir | v482 hide300 | v476, all-maps | **176/352 = 50.0% FINAL** | flat — no self-regression |
+| vL3b_all | hideUntil 330 | v481, all-maps | 113/228 = 49.6% (running) | flat — no self-regression |
+| vL3c_all | hideUntil 360 | v481, all-maps | 110/220 = 50.0% (running) | flat — no self-regression |
 
 ## v482_elim per-map (final, n=16/map)
 
@@ -28,6 +28,7 @@ The elim-set gain is real — un-hiding early pays where boards are small and
 the queen becomes a forager sooner. devil (5/16) and trauma (7/16) remain
 the soft maps.
 
-L3b/L3c on the v481 lineage: dead-flat mirror boards so far (the v481 base
-already differs from v476 — these measure regression only, not uplift vs
-v376). No bleed map on either.
+L3b/L3c on the v481 lineage: dead-flat mirror boards so far (these measure
+regression vs near-self, not uplift vs v376). No bleed map on either.
+v482_mir FINAL at 50.0% — hideUntil300 is regression-free vs v476 across
+all 22 maps both seats.

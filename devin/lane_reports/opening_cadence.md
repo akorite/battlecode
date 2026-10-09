@@ -53,6 +53,32 @@ theirs arrive (they churn ammunition; we lose producers).
 - splitEnemyDist exposure proxy: enemy head within cheb-1 of a unit head on
   **6.7% (us) vs 7.0% (them) of unit-rounds r0-60 — symmetric**.
 
+## Resplit cadence (r0-90, observed parent→next-split intervals)
+
+The quoted "winners resplit 16-17r vs our 22-24r" does NOT replicate on this
+corpus — measured medians are far tighter and near-parity:
+
+| metric (r0-90) | us | them |
+|---|---|---|
+| queen resplit interval | 6 (n=33) | 10 (n=33) |
+| worker resplit interval | 6 (n=65) | 7 (n=115) |
+| worker age at FIRST split | 9 (n=87) | 7 (n=218) |
+| workers reaching first split | **87** | **218** |
+
+Mechanism: per-surviving-parent cadence is equal (6-7r). The volume gap is
+**first-split eligibility — 218 vs 87 workers ever reach len-4**. Ours die at
+len 2-3 before their first split; theirs survive the first threshold, then
+resplit at the same pace we do. It is one flywheel, not two rates: more
+len-4 survivors → more splits → more children → more future parents.
+
+## open_ correction (v457 test result)
+
+The earlier openUntil=0 finding does NOT carry to this lineage: abyss_v457
+(open_ disabled on v449) lost to real opponents — 53% vs the 62.7% v376
+control. The forage-first opening is net-positive on elim maps on the v449
+lineage; keep openUntil=48 (map-gated). Recorded as a do-not-retest in the
+reverse direction.
+
 ## The v449 split gates (read from workspace/abyss_v447 = v449's gates)
 
 - worker: `L<swarmSplitLen(4)` reject; `L>=swarmBudLen(6)` → bud len-4 child

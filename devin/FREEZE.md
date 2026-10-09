@@ -1,35 +1,46 @@
-# Freeze decision — Oct 9 2026 06:00 UTC
+# FREEZE — submissions close 2026-10-09 06:00 UTC (5pm Sydney)
 
-## LIVE: v137 = abyss_v476 (submitted 17:21 UTC Oct 8, active)
-v449 + stub-pool churn (len-2 pawns ram-die near teammate ≤2, mod-3 throttle,
-units≥45, r≥60, enemyDist>2) extended through the feed window.
+## Protocol
+- Last new candidate submit: **05:30 UTC**.
+- 05:30-05:45: confirm active submission via `GET /api/v1/submissions` — the entry with
+  `status=="active"` must be the intended bytes.
+- If the last ship crashes or is <40% over >=20 games: re-upload previous best bytes
+  (rating restores on re-upload of identical bytes).
+- Nothing after 05:45.
 
-## Verification summary
-- elim testbed (trophy/trauma/devil/portals/stripes/weakhold/maze, seeds 1-8): 71.9%/32 vs v376 (control bar 62.7%)
-- fresh seeds 16+: ~55%/22 (harder seed range; combined 64.8%/54 vs control 62.7%/110 — still positive)
-- mirror vs own strong build (v449, all maps): 51.5%/68 — neutral-positive
-- ladder: 56%/25, Elo 1711-1734 (campaign high)
+## Builds in contention
+| build | contents | evidence |
+|---|---|---|
+| abyss_v481 (=v138) | v476 + queen-graze (queenGrazeLen10, Dist7, From250) | elim 66-67% vs v376 across seeds 1-16 (bar 62.7%), mirror-neutral |
+| abyss_v476 (=v137) | v449 + no-bed stub-churn + feed-window churn | ladder 54-59 @1723; elim 70.6%/68 |
+| abyss_v447 | rollback fallback | ladder 57% |
 
-## Decision rule
-Keep v137 unless its record over the pre-freeze window craters <40%/40g.
-Fallback: resubmit workspace/abyss_v447 (v133 code, 57% lifetime record).
-v447_smoke board verifies the dir builds/runs.
+## Verified findings (final push)
+- len-2 CANNOT reverse: engine checks HitSelf before popping tail — own tail is
+  always a wall. len<=3 cannot split-reverse either.
+- len-2 cannot multi-step (NoValidAction kill when mBody<=2 at stepIndex>0).
+- Engine move order: facing -> wall -> SELF -> other (h2h mutual only on HEAD;
+  body = HitOtherBody) -> push_front -> pearl?keep:pop -> paid?pop.
+- Enemy reach model already over-screens ~1 (safe).
+- vacated-tail step = ILLEGAL (L6 falsified from source, free).
+- Queen-graze mechanism confirmed vs real opponents (queenEnd tiebreak won).
 
-## Post-freeze
-Autoscrims 3-4h on SAME map pool (churn verified there) -> seeds snapshot ->
-qualifier Oct 10 6pm Sydney, best-of-7 ALL UNSEEN MAPS, top-10 advance.
+## Known constants (adversarial review)
+- `b.W==40 && b.H==15` in policy.hpp (wh_ fog-scan calibration, weakhold). Deliberate
+  calibrated geometry gate; on an unseen 40x15 map the tighter rule fires. Accepted risk.
+- No map-name strings anywhere in shipped code.
+- `maze_` detection = kelpFraction (derived geometry, not a constant).
 
-## Bracket (seed ~95-98, Elo ~1700)
-R1: Error 418 (~1297) — routine
-R2: pi/3.14159265 (~2043) — self-jams corridors, starves vs contested pressure = churn's verified class
-R3: Sabotage-d (~2150)
+## In-flight at freeze call
+- v484: len<=3 queen corridor-as-nook veto (own-head no longer counts as exit).
+- L1c: bud_ gate to 40 units r<120 (only positive early-forage variant).
+- L2 graze sweep, L3 unhide, L4 churn-volume: pending lane reports.
 
-## All shipped mechanisms (verified, in live build)
-- v131: starving_ on all maps + contested forage 0.5->0.85 (replay-derived, ladder-verified)
-- v132/v133: starveLocal 2.5 (contested-starvation band fires) + hunt-when-winning slack
-- v135/v136/v137: stub-pool churn (the elim-class counter; recipe optimum after 7 ablations)
+## Rollback trigger
+Last ship crashes / <40% over >=20 games -> `unswbc submit workspace/abyss_v447`
+(or abyss_v476 if v447 unavailable). Rating restores on re-upload of same bytes.
 
-## Dead axes (do not retest without new evidence)
-len-3 churn, consumer<=3, body-ram channel, churnFrom30, max-churn, bed-cycle positioning,
-victim-margin trades, claim TTL, corridor income, champ-bed anchor (2x), feedBedStep (2x),
-divestiture-shed, conveyor orbit, paid multi-step moves.
+## Final record
+- ACTIVE SUBMISSION: (fill at 05:30-05:45)
+- id: (fill)
+- sha256 of submitted bytes: (fill via `sha256sum` on dir or submission API)

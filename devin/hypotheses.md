@@ -619,3 +619,6 @@ H4 [L2-verified] queen-graze works (elim +66-67%, queenEnd mechanism confirmed v
   no-reverse traps it prevents. KILLED unless final read >64%.
 - L4 structural: churnMinUnits=45 only fires in decided games (contested games run 15-40
   alive). v485=churnMinUnits 25, v486=25+len<=3 — gating vs v481 now.
+- SAFETY PASS v481: 62 games, 25 maps (22 pool + help/small/queen_of_spades_but_she_ages),
+  both seats, 0 crashes/timeouts, mean 607-723s incl. roundLimit 499 games. Static: no
+  map-name strings; one documented 40x15 weakhold calibration constant.

@@ -70,3 +70,11 @@
   len-2 can't multi-step (NoValidAction). v484 = corridors read as nooks for len<=3 queens.
 - Safety sweep running: 22 pool + 3 non-pool maps both seats vs self.
 - Freeze ops 05:30-45 UTC: API-confirm active, FREEZE.md id+hash, push. Nothing after 05:45.
+
+## 04:47 UTC — pre-freeze final
+- FROZEN BUILD: v139 = abyss_v476 bytes (v137 code) @1723 restored, active since 04:21.
+- v138 (v481, graze) retired at 21-38/1664 after elite-gauntlet dip below 40% trigger.
+- Campaign totals: ~185 variants; 2 mechanisms verified on real-opponent testbed
+  (stub-churn no-bed recipe 70.6%, contested-starvation band); graze at-bar.
+- Every shipped change lives on devin/v120 + candidate dirs under devin/candidates/.
+- Post-freeze: autoscrims same 22-map pool ~3-4h set seeds; qualifier Oct 10 unseen maps.

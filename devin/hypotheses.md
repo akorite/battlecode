@@ -622,3 +622,8 @@ H4 [L2-verified] queen-graze works (elim +66-67%, queenEnd mechanism confirmed v
 - SAFETY PASS v481: 62 games, 25 maps (22 pool + help/small/queen_of_spades_but_she_ages),
   both seats, 0 crashes/timeouts, mean 607-723s incl. roundLimit 499 games. Static: no
   map-name strings; one documented 40x15 weakhold calibration constant.
+- v485 units25-only: mir 52-54% — subsumed by v486.
+- v486 (units25 + len3, =v481+2 lines): elim 67.2%/137 >= v481 bar 66.7%, mir 51.3%/76.
+  Probable-improvement under relaxed rule; only live ship candidate for freeze.
+- All lanes closed: L1 all dead, L2 all neutral, L3 flat, L4a killed / L4b-c no-ops,
+  v482 at-bar (63.3%), v483 45% killed, v484 59-62% killed.

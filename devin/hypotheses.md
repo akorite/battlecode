@@ -614,3 +614,8 @@ H4 [L2-verified] queen-graze works (elim +66-67%, queenEnd mechanism confirmed v
    opponents, mirror-blind 50%). Shipped v138.
 - v483 mirror-scout KILLED 45%/58 (kill rule). Mirror-cell pull dragged scouts off forage
   for no early-queen kill — the pull only matters once the assassin net sees her.
+- v484 len<=3 corridor veto: elim 68/109=62.4% (at/below v376 bar 62.7 — v481 scored 66-67%),
+  mirror 48%/98. Wash-to-slight-negative: pinning her in rooms costs more than the
+  no-reverse traps it prevents. KILLED unless final read >64%.
+- L4 structural: churnMinUnits=45 only fires in decided games (contested games run 15-40
+  alive). v485=churnMinUnits 25, v486=25+len<=3 — gating vs v481 now.

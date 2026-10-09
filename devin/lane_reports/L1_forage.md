@@ -17,3 +17,20 @@ Boards: L1a_gate, L1b_gate, L1c_gate — cand vs abyss_v476, --maps all --seeds 
 ## Running numbers
 
 (in progress)
+
+## Gate decisions at ~40 games
+
+| variant | n | win% | eaten60 Δ | splits60 Δ | verdict |
+|---|---|---|---|---|---|
+| L1a bed-targeting | 39 | 43.6% | -0.5 | -0.2 | KILLED (<50%) — countdown-bed weight moved nothing; beds were already targeted |
+| L1b split-timing | 40 | 48.7% | -2.2 | -1.3 | KILLED (<50%) — len-5 buds hurt: parent keeps len-1, dies to any h2h, splits60 DROPPED |
+| L1c heads-by-120 | 39 | 52.6% | +0.6 | +0.1 | RUNNING — only positive variant; second board launched seeds 9-16 |
+
+L1b mechanism postmortem: earlyBudLen=5 makes len-5 workers bud len-4 children → parent keeps len-1 →
+len-1 parents die to any enemy head contact → net splits60 fell vs base. The "resplit sooner" idea
+needs keep≥2, not len-1 stumps.
+
+L1a postmortem: countdown floor already existed (0.9*gp(max(m,cd+1))); +0.6 early weight was
+indistinguishable — respawning beds are not the intake bottleneck.
+
+Boards live: L1c_gate (seeds 1-8), L1c_gate2 (seeds 9-16). Final numbers when complete.

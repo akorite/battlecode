@@ -612,3 +612,5 @@ H3 [L4-variant] churn on THREATENED stubs: current churn excludes enemyDist<=2. 
    (drop feeds us) vs enemy reach. UNBUILT.
 H4 [L2-verified] queen-graze works (elim +66-67%, queenEnd mechanism confirmed vs real
    opponents, mirror-blind 50%). Shipped v138.
+- v483 mirror-scout KILLED 45%/58 (kill rule). Mirror-cell pull dragged scouts off forage
+  for no early-queen kill — the pull only matters once the assassin net sees her.

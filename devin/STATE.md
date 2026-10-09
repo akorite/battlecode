@@ -60,3 +60,13 @@
 - Full-sample elim verdict 58.9%/192 (first reads ran hot); mirror vs v449 52.8%; economy signature +21%/+16% holds.
 - Recipe space closed (~175 variants). Rollback ready: abyss_v447.
 - Monitoring-only to 06:00 UTC freeze. Post-freeze autoscrims set seeds on same pool.
+
+## 02:26 UTC — final-push state
+- LIVE: v138 = abyss_v481 (v476+queen-graze). Opened 0-5 vs err404 1791 (chronic classes, not regression).
+- CONFIRMED: queen-graze elim 66%/119 seeds9-16 (bar 62.7%) — replicated, v138 stays.
+- DEAD: v483 mirror-scout 45%/58. v484 len<=3 queen corridor veto gating now.
+- Lanes: L1c heads-by-120 sole positive (52.6%/39, confirming). L2 graze sweep, L3 unhide, L4 churn vol running.
+- Engine audit: len-2 CANNOT reverse (tail always a wall); vacated-tail step illegal (L6 dead);
+  len-2 can't multi-step (NoValidAction). v484 = corridors read as nooks for len<=3 queens.
+- Safety sweep running: 22 pool + 3 non-pool maps both seats vs self.
+- Freeze ops 05:30-45 UTC: API-confirm active, FREEZE.md id+hash, push. Nothing after 05:45.
